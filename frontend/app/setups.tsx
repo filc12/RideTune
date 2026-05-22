@@ -9,14 +9,7 @@ import { useT } from "@/src/i18n";
 import { deleteSetup, listSetups, saveSetup, type SavedSetup } from "@/src/utils/setups";
 import { calcSetup, getLoad } from "@/src/utils/suspension";
 import { storage } from "@/src/utils/storage";
-
-const BIKE_LABELS: Record<string, string> = {
-  "bmw-1250-gs": "BMW R 1250 GS",
-  "yamaha-tenere": "Yamaha Ténéré 700",
-  "ktm-890-adv": "KTM 890 Adventure",
-  "honda-africa": "Honda Africa Twin",
-  "ducati-multi": "Ducati Multistrada V4",
-};
+import { bikeLabel } from "@/src/data/bikes";
 
 export default function SetupsScreen() {
   const { t } = useT();
@@ -31,10 +24,9 @@ export default function SetupsScreen() {
     const trimmed = name.trim();
     if (!trimmed) return;
     const bikeId = (await storage.getItem<string>("ridetune.bike", "")) || "";
-    const bikeLabel = BIKE_LABELS[bikeId] || "—";
     const lo = await getLoad();
     const setup = calcSetup(lo);
-    await saveSetup({ name: trimmed, bikeId, bikeLabel, load: lo, setup });
+    await saveSetup({ name: trimmed, bikeId, bikeLabel: bikeLabel(bikeId), load: lo, setup });
     setName("");
     setOpen(false);
     load();

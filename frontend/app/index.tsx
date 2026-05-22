@@ -19,6 +19,7 @@ import { useFocusEffect, useRouter } from "expo-router";
 import { storage } from "@/src/utils/storage";
 import { useT } from "@/src/i18n";
 import { calcSetup, deriveMode, getLoad, saveLoad, type Load } from "@/src/utils/suspension";
+import { BIKES, BIKE_BY_ID, BIKE_CATEGORIES, type Bike } from "@/src/data/bikes";
 
 const C = {
   bg: "#070A0F",
@@ -38,15 +39,6 @@ const C = {
 };
 
 type LoadMode = "solo" | "malas" | "duo" | "duo_malas";
-type Bike = { id: string; brand: string; model: string; cc: string };
-
-const BIKES: Bike[] = [
-  { id: "bmw-1250-gs", brand: "BMW", model: "R 1250 GS", cc: "1254cc" },
-  { id: "yamaha-tenere", brand: "Yamaha", model: "Ténéré 700", cc: "689cc" },
-  { id: "ktm-890-adv", brand: "KTM", model: "890 Adventure", cc: "889cc" },
-  { id: "honda-africa", brand: "Honda", model: "Africa Twin", cc: "1084cc" },
-  { id: "ducati-multi", brand: "Ducati", model: "Multistrada V4", cc: "1158cc" },
-];
 
 const K_BIKE = "ridetune.bike";
 
@@ -61,7 +53,7 @@ export default function HomeScreen() {
   const refresh = useCallback(async () => {
     const id = await storage.getItem<string>(K_BIKE, "");
     if (id) {
-      const found = BIKES.find((b) => b.id === id);
+      const found = BIKE_BY_ID[id];
       if (found) setBike(found);
     }
     setLoad(await getLoad());
@@ -362,20 +354,33 @@ function BikePicker({ open, onClose, onPick, selectedId, t }: { open: boolean; o
         <View style={styles.sheetHandle} />
         <Text style={styles.sheetTitle}>{t("picker.title" as never)}</Text>
         <Text style={styles.sheetSub}>{t("picker.sub" as never)}</Text>
-        <ScrollView style={{ maxHeight: 420 }}>
-          {BIKES.map((b) => {
-            const active = b.id === selectedId;
+        <ScrollView style={{ maxHeight: 540 }} showsVerticalScrollIndicator={false}>
+          {BIKE_CATEGORIES.map((cat) => {
+            const bikes = BIKES.filter((b) => b.category === cat);
+            if (bikes.length === 0) return null;
             return (
-              <TouchableOpacity key={b.id} activeOpacity={0.85} onPress={() => onPick(b)} style={[styles.bikeRow, active && styles.bikeRowActive]} testID={`bike-${b.id}`}>
-                <View style={styles.bikeIcon}>
-                  <MaterialCommunityIcons name="motorbike" size={22} color={C.accent} />
+              <View key={cat} style={{ marginBottom: 8 }}>
+                <View style={styles.catHeader}>
+                  <Text style={styles.catLabel}>{t(`bike.cat.${cat}` as never)}</Text>
+                  <View style={styles.catLine} />
+                  <Text style={styles.catCount}>{bikes.length}</Text>
                 </View>
-                <View style={{ flex: 1 }}>
-                  <Text style={styles.bikeBrand}>{b.brand}</Text>
-                  <Text style={styles.bikeModel}>{b.model} · {b.cc}</Text>
-                </View>
-                {active ? <Ionicons name="checkmark-circle" size={20} color={C.ok} /> : <Ionicons name="chevron-forward" size={18} color={C.textMute} />}
-              </TouchableOpacity>
+                {bikes.map((b) => {
+                  const active = b.id === selectedId;
+                  return (
+                    <TouchableOpacity key={b.id} activeOpacity={0.85} onPress={() => onPick(b)} style={[styles.bikeRow, active && styles.bikeRowActive]} testID={`bike-${b.id}`}>
+                      <View style={styles.bikeIcon}>
+                        <MaterialCommunityIcons name="motorbike" size={22} color={C.accent} />
+                      </View>
+                      <View style={{ flex: 1 }}>
+                        <Text style={styles.bikeBrand}>{b.brand}</Text>
+                        <Text style={styles.bikeModel}>{b.model} · {b.cc}</Text>
+                      </View>
+                      {active ? <Ionicons name="checkmark-circle" size={20} color={C.ok} /> : <Ionicons name="chevron-forward" size={18} color={C.textMute} />}
+                    </TouchableOpacity>
+                  );
+                })}
+              </View>
             );
           })}
         </ScrollView>
@@ -466,4 +471,8 @@ const styles = StyleSheet.create({
   bikeIcon: { width: 38, height: 38, borderRadius: 10, backgroundColor: C.accentSoft, alignItems: "center", justifyContent: "center" },
   bikeBrand: { color: C.text, fontWeight: "700", fontSize: 14 },
   bikeModel: { color: C.textDim, fontSize: 12, marginTop: 2 },
+  catHeader: { flexDirection: "row", alignItems: "center", gap: 10, marginTop: 14, marginBottom: 8, paddingHorizontal: 2 },
+  catLabel: { color: C.accent, fontSize: 10.5, fontWeight: "800", letterSpacing: 1.6, textTransform: "uppercase" },
+  catLine: { flex: 1, height: 1, backgroundColor: C.border },
+  catCount: { color: C.textMute, fontSize: 11, fontWeight: "700", letterSpacing: 0.4 },
 });
