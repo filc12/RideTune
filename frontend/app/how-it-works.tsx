@@ -47,6 +47,45 @@ export default function HowItWorks() {
             <MaterialCommunityIcons name="information-outline" size={16} color={C.accent} />
             <Text style={st.noteText}>{t("hiw.note")}</Text>
           </View>
+
+          {/* Clicks explainer */}
+          <View style={st.clicksHeader}>
+            <View style={st.clicksIcon}>
+              <MaterialCommunityIcons name="cog-outline" size={18} color={C.accent} />
+            </View>
+            <Text style={st.clicksTitle}>{t("hiw.clicks.title")}</Text>
+          </View>
+          <Text style={st.clicksIntro}>{t("hiw.clicks.intro")}</Text>
+
+          <View style={{ gap: 10, marginTop: 14 }}>
+            <ClickBlock
+              icon="arrow-collapse-vertical"
+              title={t("hiw.clicks.preload.t")}
+              desc={t("hiw.clicks.preload.d")}
+              testID="clicks-preload"
+            />
+            <ClickBlock
+              icon="arrow-up-bold"
+              title={t("hiw.clicks.rebound.t")}
+              desc={t("hiw.clicks.rebound.d")}
+              testID="clicks-rebound"
+            />
+            <ClickBlock
+              icon="arrow-down-bold"
+              title={t("hiw.clicks.compression.t")}
+              desc={t("hiw.clicks.compression.d")}
+              testID="clicks-compression"
+            />
+          </View>
+
+          <View style={st.howto}>
+            <View style={st.howtoHead}>
+              <MaterialCommunityIcons name="lightbulb-on-outline" size={16} color={C.ok} />
+              <Text style={st.howtoTitle}>{t("hiw.clicks.howto.t")}</Text>
+            </View>
+            <Text style={st.howtoText}>{t("hiw.clicks.howto.d")}</Text>
+          </View>
+
           <TouchableOpacity onPress={() => router.back()} activeOpacity={0.9} style={st.cta} testID="how-it-works-cta">
             <Text style={st.ctaLabel}>{t("hiw.cta")}</Text>
             <Ionicons name="arrow-forward" size={16} color="#04111E" />
@@ -56,6 +95,31 @@ export default function HowItWorks() {
     </View>
   );
 }
+
+function ClickBlock({
+  icon,
+  title,
+  desc,
+  testID,
+}: {
+  icon: keyof typeof MaterialCommunityIcons.glyphMap;
+  title: string;
+  desc: string;
+  testID?: string;
+}) {
+  return (
+    <View style={st.clickBlock} testID={testID}>
+      <View style={st.clickIcon}>
+        <MaterialCommunityIcons name={icon} size={16} color={C.accent} />
+      </View>
+      <View style={{ flex: 1 }}>
+        <Text style={st.clickTitle}>{title}</Text>
+        <Text style={st.clickDesc}>{desc}</Text>
+      </View>
+    </View>
+  );
+}
+
 
 const st = StyleSheet.create({
   root: { flex: 1, backgroundColor: C.bg },
@@ -70,6 +134,19 @@ const st = StyleSheet.create({
   stepDesc: { color: C.textMute, fontSize: 13, lineHeight: 18, marginTop: 4 },
   note: { flexDirection: "row", gap: 10, padding: 14, borderRadius: 12, backgroundColor: C.accentSoft, borderWidth: 1, borderColor: C.accentLine, marginTop: 24, alignItems: "flex-start" },
   noteText: { color: C.textDim, fontSize: 12.5, lineHeight: 18, flex: 1 },
+  // Clicks explainer
+  clicksHeader: { flexDirection: "row", alignItems: "center", gap: 12, marginTop: 32 },
+  clicksIcon: { width: 38, height: 38, borderRadius: 10, backgroundColor: C.accentSoft, borderWidth: 1, borderColor: C.accentLine, alignItems: "center", justifyContent: "center" },
+  clicksTitle: { color: C.text, fontSize: 18, fontWeight: "800", flex: 1, letterSpacing: -0.2 },
+  clicksIntro: { color: C.textDim, fontSize: 13.5, lineHeight: 20, marginTop: 12 },
+  clickBlock: { flexDirection: "row", gap: 12, padding: 14, borderRadius: 14, backgroundColor: C.surface, borderWidth: 1, borderColor: C.border },
+  clickIcon: { width: 34, height: 34, borderRadius: 10, backgroundColor: C.accentSoft, borderWidth: 1, borderColor: C.accentLine, alignItems: "center", justifyContent: "center" },
+  clickTitle: { color: C.text, fontSize: 14, fontWeight: "700" },
+  clickDesc: { color: C.textMute, fontSize: 12.5, lineHeight: 17, marginTop: 4 },
+  howto: { marginTop: 14, padding: 14, borderRadius: 12, backgroundColor: "rgba(34,208,138,0.10)", borderWidth: 1, borderColor: "rgba(34,208,138,0.35)" },
+  howtoHead: { flexDirection: "row", alignItems: "center", gap: 8 },
+  howtoTitle: { color: C.ok, fontSize: 11, fontWeight: "800", letterSpacing: 1.4, textTransform: "uppercase" },
+  howtoText: { color: C.text, fontSize: 13, lineHeight: 19, marginTop: 8 },
   cta: { flexDirection: "row", alignItems: "center", justifyContent: "center", gap: 8, marginTop: 28, paddingVertical: 15, borderRadius: 14, backgroundColor: C.accent },
   ctaLabel: { color: "#04111E", fontWeight: "700", fontSize: 15 },
 });
