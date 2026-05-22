@@ -3,38 +3,41 @@
 ## Visão
 App mobile premium para sugerir um ponto de partida seguro de afinação de suspensão a motociclistas, em função da carga real (piloto, passageiro, bagagem).
 
-## Estado atual (Home redesenhado)
-Redesign completo do ecrã inicial em PT-PT.
+## Estrutura
+- `app/_layout.tsx` — `LanguageProvider` + Stack (headers ocultos)
+- `app/index.tsx` — Home
+- `app/how-it-works.tsx` — Como funciona (4 passos)
+- `app/carga.tsx` — Inserção de pesos (piloto/passageiro/bagagem)
+- `app/sag.tsx` — Guia de medição de sag (4 passos)
+- `app/diagnostico.tsx` — Questionário + Sintomas
+- `app/setups.tsx` — Setups guardados (CRUD local)
+- `app/settings.tsx` — Idioma + acesso a Informações
+- `app/informacoes.tsx` — Sobre, Termos, Privacidade, Avisos legais (colapsáveis)
 
-### Ecrã Home (`app/index.tsx`)
-- **Header**: logo tipográfico "RideTune" (Ride + Tune accent) com barra neon · ícone settings pequeno e discreto.
-- **Hero**: headline "Afina a suspensão à tua carga real" + subheadline.
-- **CTAs**: primário "Escolher mota" (gradient electric blue) + secundário "Como funciona" (ghost).
-- **Dashboard card (glass)**:
-  - Estado vazio: "Sem mota selecionada" · badge "Por configurar" (âmbar) · "Ainda não escolheste uma mota." + botão inline.
-  - Estado ativo: nome da mota · badge "Ativo" (verde) · Modo de carga · Setup "Pronto" · Suspensão Frente (Preload/Rebound/Compression) · Suspensão Trás (idem) · Sag recomendado com badge "Dentro da gama".
-- **Cenários rápidos** (chips): Solo · Com malas · 2 pessoas · 2 pessoas + malas. Activo a verde, restantes a glass.
-- **Ferramentas**: 3 feature cards — Guia de Sag · Diagnóstico · Setups guardados.
-- **Bottom nav** (blur glass): Home (activo, azul) · Carga · Diagnóstico · Sag.
+## Utils
+- `src/i18n/index.tsx` — PT/EN/ES/FR via Context
+- `src/utils/suspension.ts` — `calcSetup(load)` heurística + getLoad/saveLoad + deriveMode
+- `src/utils/setups.ts` — list/save/delete em AsyncStorage
+- `src/utils/storage` — wrapper já existente
+- `src/components/ScreenHeader.tsx` — header partilhado com back
 
-### Ecrã "Como funciona" (`app/how-it-works.tsx`)
-4 passos do método RideTune + nota informativa + CTA "Começar agora".
+## Persistência (AsyncStorage)
+- `ridetune.bike` — id da mota selecionada
+- `ridetune.load` — { rider, passenger, luggage }
+- `ridetune.lang` — pt/en/es/fr
+- `ridetune.setups` — array de SavedSetup
 
-## Persistência
-- AsyncStorage via `@/src/utils/storage`:
-  - `ridetune.bike` — id da mota selecionada
-  - `ridetune.loadMode` — cenário de carga
+## Funcionalidades principais
+1. **Home**: dashboard glass com setup atual derivado da carga via fórmula heurística; cenários rápidos pré-preenchem a carga; bottom nav navega para Carga/Diagnóstico/Sag; ícone settings → /settings; feature cards → ecrãs respetivos.
+2. **Carga**: 3 linhas (piloto/passageiro/bagagem) com barra de progresso, botões ±1/±5, total kg + preview Sag e Preload Frente/Trás em tempo real. Botão "Guardar carga" persiste e volta ao Home.
+3. **Fórmula heurística**: baseline 75kg solo → ajustes lineares por delta peso e bias traseiro (passageiro+bagagem). Preload, Rebound, Compression e Sag em ranges seguros.
+4. **Sag**: 4 passos guiados de medição estática/dinâmica.
+5. **Diagnóstico**: tab Questionário (5 perguntas Sim/Não → recomendações específicas) + tab Sintomas (lista visual com fix sugerido).
+6. **Setups guardados**: guardar setup atual com nome + bike + load + valores calculados; lista persistida; apagar.
+7. **Settings + Informações**: troca de idioma instantânea (PT/EN/ES/FR); Informações com 4 secções colapsáveis (Sobre, Termos, Privacidade, Avisos legais) em todas as línguas.
 
 ## Design system
-- BG: `#070A0F` com gradient azulado e ambient glows
-- Accent principal: electric blue `#3DA9FF`
-- Active/positive only: green `#22D08A`
-- Warning: amber `#F4B23E`
-- Glassmorphism com `expo-blur` em iOS, surface translúcida com border `rgba(255,255,255,0.08)`
-- Tipografia: pesos 700/800 para headlines, kickers uppercase letter-spaced
-
-## Próximos passos sugeridos
-- Implementar ecrãs Carga, Diagnóstico, Sag e ligá-los ao bottom nav
-- Catálogo real de motos (backend MongoDB)
-- Cálculo real de valores de suspensão por modelo + carga
-- Guardar múltiplos setups por viagem/utilizador
+- BG: `#070A0F` com gradient + ambient glows
+- Accent: electric blue `#3DA9FF` · Verde só para activo/positivo `#22D08A` · Âmbar para pendente `#F4B23E`
+- Glassmorphism: surfaces `rgba(255,255,255,0.04)`, borders `rgba(255,255,255,0.08)`, blur via `expo-blur`
+- Tipografia: 700/800 para headlines, kickers uppercase letter-spaced
