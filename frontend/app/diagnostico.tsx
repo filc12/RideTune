@@ -61,7 +61,6 @@ export default function DiagScreen() {
       <SafeAreaView style={{ flex: 1 }} edges={["top"]}>
         <ScreenHeader title={t("diag.title")} />
         <ScrollView contentContainerStyle={{ padding: 20, paddingBottom: 40 }}>
-          <Text style={st.kicker}>{t("diag.title").toUpperCase()}</Text>
           <Text style={st.sub}>{t("diag.sub")}</Text>
 
           <View style={st.tabs}>
@@ -104,7 +103,7 @@ export default function DiagScreen() {
               {recs.length === 0 ? (
                 <View style={st.okCard}>
                   <Ionicons name="checkmark-circle" size={20} color={C.ok} />
-                  <Text style={st.okText}>Sem sintomas detetados. O teu setup parece equilibrado.</Text>
+                  <Text style={st.okText}>{t("diag.ok" as never)}</Text>
                 </View>
               ) : (
                 recs.map((r, i) => (
