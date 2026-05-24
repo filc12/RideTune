@@ -201,13 +201,15 @@ function formatDisplay(value: number | string | null, type: VType, label?: strin
 
 function formatTurns(v: number): string {
   const r = roundQuarter(v);
-  if (Math.abs(r - 1.25) < 0.01) return '1-1/4';
-  if (Math.abs(r - 1.5) < 0.01)  return '1-1/2';
-  if (Math.abs(r - 1.75) < 0.01) return '1-3/4';
-  if (Math.abs(r - 2.25) < 0.01) return '2-1/4';
-  if (Math.abs(r - 2.5) < 0.01)  return '2-1/2';
-  if (Math.abs(r - 2.75) < 0.01) return '2-3/4';
-  return String(r);
+  const map: Record<number, string> = {
+    0.25: '1/4',    0.5: '1/2',    0.75: '3/4',
+    1.0:  '1',      1.25: '1-1/4', 1.5:  '1-1/2',
+    1.75: '1-3/4',  2.0:  '2',     2.25: '2-1/4',
+    2.5:  '2-1/2',  2.75: '2-3/4', 3.0:  '3',
+    3.25: '3-1/4',  3.5:  '3-1/2', 3.75: '3-3/4',
+    4.0:  '4',
+  };
+  return map[r] ?? String(r);
 }
 
 function buildAdjResult(sv: SuspVal, adjustedValue?: number): AdjResult {

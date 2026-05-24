@@ -59,7 +59,7 @@ export const BIKES: Bike[] = [
 
   // ===== CF Moto =====
   // 800MT Sport/Explore: KYB fully adjustable front (preload+compression+rebound), rear (preload+rebound)
-  { id: "cfmoto-800mt-sport",   brand: "CF Moto", model: "800 MT Sport",   cc: "799cc", category: "adventure", adj: "full",    mfzProfileId: "cfmoto_800mtx" },
+  { id: "cfmoto-800mt-sport",   brand: "CF Moto", model: "800 MT Sport",   cc: "799cc", category: "adventure", adj: "full",    mfzProfileId: "cfmoto_800mt"  },
   { id: "cfmoto-800mt-explore", brand: "CF Moto", model: "800 MT Explore", cc: "799cc", category: "adventure", adj: "full",    mfzProfileId: "cfmoto_800mt"  },
   // 700MT: front rebound only (fixed compression & preload), rear preload+rebound
   { id: "cfmoto-700mt",         brand: "CF Moto", model: "700 MT",         cc: "693cc", category: "adventure", adj: "partial", mfzProfileId: "cfmoto_700mt"  },
@@ -131,10 +131,10 @@ export const BIKES: Bike[] = [
   { id: "qj-srt800x",   brand: "QJ Motor", model: "SRT 800 X",  cc: "778cc", category: "adventure",     adj: "partial" },
   { id: "qj-srt750sx",  brand: "QJ Motor", model: "SRT 750 SX", cc: "744cc", category: "sport_touring", adj: "partial" },
   // SRK921: Marzocchi fully adjustable (2026 spec confirmed)
-  { id: "qj-srk921",    brand: "QJ Motor", model: "SRK 921",    cc: "904cc", category: "naked",         adj: "full"    },
+  { id: "qj-srk921",    brand: "QJ Motor", model: "SRK 921",    cc: "921cc", category: "naked",         adj: "full"    },
   { id: "qj-srk600",    brand: "QJ Motor", model: "SRK 600",    cc: "598cc", category: "naked",         adj: "partial" },
   { id: "qj-srk800",   brand: "QJ Motor", model: "SRK 800",    cc: "778cc", category: "naked",     adj: "full" },
-  { id: "qj-srk900",   brand: "QJ Motor", model: "SRK 900",    cc: "904cc", category: "naked",     adj: "full" },
+  { id: "qj-srk900",   brand: "QJ Motor", model: "SRK 900",    cc: "900cc", category: "naked",     adj: "full" },
   { id: "qj-srt450rx", brand: "QJ Motor", model: "SRT 450 RX", cc: "449cc", category: "adventure", adj: "full" },
   { id: "qj-srt900sx", brand: "QJ Motor", model: "SRT 900 SX", cc: "904cc", category: "adventure", adj: "full" },
 
