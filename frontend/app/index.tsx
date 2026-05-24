@@ -302,7 +302,7 @@ function CountNote({ profileId, frontVType, rearVType }: { profileId?: string; f
   const sameDir  = frontDir && rearDir && frontDir === rearDir;
   return (
     <View style={{ marginTop: 12, padding: 12, borderRadius: 12, backgroundColor: "rgba(61,169,255,0.07)", borderWidth: 1, borderColor: "rgba(61,169,255,0.16)", gap: 6 }}>
-      <Text style={{ color: "#3DA9FF", fontSize: 10, fontWeight: "700", letterSpacing: 0.8, textTransform: "uppercase" }}>Como regular</Text>
+      <Text style={{ color: "#3DA9FF", fontSize: 10, fontWeight: "700", letterSpacing: 0.8, textTransform: "uppercase" }}>{t("card.how_to_set" as never)}</Text>
       {hasModelNote && <Text style={{ color: "#CBD5E1", fontSize: 11.5, lineHeight: 17 }}>{modelNote}</Text>}
       {!hasModelNote && sameDir && <Text style={{ color: "#94A3B8", fontSize: 11.5, lineHeight: 17 }}>{frontDir}</Text>}
       {!hasModelNote && !sameDir && frontDir && <Text style={{ color: "#94A3B8", fontSize: 11.5, lineHeight: 17 }}>🔵 {t("susp.dir.label.front" as never)}: {frontDir}</Text>}
