@@ -52,7 +52,6 @@ export default function CargaScreen() {
         <ScreenHeader title={t("carga.title")} />
         <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === "ios" ? "padding" : undefined}>
           <ScrollView contentContainerStyle={{ padding: 20, paddingBottom: 40 }}>
-            <Text style={st.kicker}>{t("carga.title").toUpperCase()}</Text>
             <Text style={st.h1}>{t("carga.sub")}</Text>
 
             <WeightRow
@@ -92,8 +91,8 @@ export default function CargaScreen() {
             </View>
 
             <View style={st.previewRow}>
-              <PreviewCell label={t("card.front") + " · " + t("card.preload")} value={`${preview.front.preload}`} />
-              <PreviewCell label={t("card.rear") + " · " + t("card.preload")} value={`${preview.rear.preload}`} />
+              <PreviewCell label={t("card.front") + " · " + t("card.preload")} value={preview.adjDetails ? (preview.adjDetails.front.preload.match(/^[0-9.]+/) || [String(preview.front.preload)])[0] : String(preview.front.preload)} unit={preview.adjDetails ? (preview.adjDetails.front.preload.indexOf('mm') >= 0 ? 'mm' : 'clks') : 'clks'} />
+              <PreviewCell label={t("card.rear") + " · " + t("card.preload")} value={preview.adjDetails ? (preview.adjDetails.rear.preload.match(/^[0-9.]+/) || [String(preview.rear.preload)])[0] : String(preview.rear.preload)} unit={preview.adjDetails ? (preview.adjDetails.rear.preload.indexOf('mm') >= 0 ? 'mm' : 'clks') : 'clks'} />
             </View>
 
             <TouchableOpacity
@@ -186,11 +185,11 @@ function WeightRow({
   );
 }
 
-function PreviewCell({ label, value }: { label: string; value: string }) {
+function PreviewCell({ label, value, unit }: { label: string; value: string; unit?: string }) {
   return (
     <View style={st.previewCell}>
       <Text style={st.previewCellLabel}>{label}</Text>
-      <Text style={st.previewCellValue}>{value} <Text style={st.previewCellUnit}>val</Text></Text>
+      <Text style={st.previewCellValue}>{value}{unit ? <Text style={st.previewCellUnit}> {unit}</Text> : null}</Text>
     </View>
   );
 }
