@@ -199,9 +199,9 @@ export default function HomeScreen() {
               ) : (
                 <>
                   {setup.noData && <NoDataBadge />}
-                  <SuspensionBlock title={t("card.front")} icon="arrow-up-bold-circle-outline" values={setup.front} t={t} />
+                  <SuspensionBlock title={t("card.front")} icon="arrow-up-bold-circle-outline" values={setup.front} adj={setup.adjDetails?.front} t={t} />
                   <View style={styles.hairline} />
-                  <SuspensionBlock title={t("card.rear")} icon="arrow-down-bold-circle-outline" values={setup.rear} t={t} />
+                  <SuspensionBlock title={t("card.rear")} icon="arrow-down-bold-circle-outline" values={setup.rear} adj={setup.adjDetails?.rear} t={t} />
                   <View style={styles.hairline} />
                   <View style={styles.sagRow}>
                     <View style={{ flex: 1 }}>
@@ -257,13 +257,17 @@ export default function HomeScreen() {
 }
 
 function SuspensionBlock({
-  title, icon, values, t,
+  title, icon, values, adj, t,
 }: {
   title: string;
   icon: keyof typeof MaterialCommunityIcons.glyphMap;
   values: { preload: number; rebound: number; compression: number };
+  adj?: { preload: string; comp: string; reb: string; hsComp?: string };
   t: (k: never) => string;
 }) {
+  const preloadDisplay = adj?.preload ?? String(values.preload);
+  const rebDisplay     = adj?.reb     ?? String(values.rebound);
+  const compDisplay    = adj?.comp    ?? String(values.compression);
   return (
     <View style={styles.suspBlock}>
       <View style={styles.suspHeader}>
@@ -271,14 +275,13 @@ function SuspensionBlock({
         <Text style={styles.suspTitle}>{title}</Text>
       </View>
       <View style={styles.suspGrid}>
-        <DataCell label={t("card.preload" as never)} value={String(values.preload)} unit={t("common.clicks" as never)} />
-        <DataCell label={t("card.rebound" as never)} value={String(values.rebound)} unit={t("common.clicks" as never)} />
-        <DataCell label={t("card.compression" as never)} value={String(values.compression)} unit={t("common.clicks" as never)} />
+        <DataCell label={t(chr(34)card.preload chr(34) as never)} value={preloadDisplay} />
+        <DataCell label={t(chr(34)card.rebound chr(34) as never)} value={rebDisplay} />
+        <DataCell label={t(chr(34)card.compression chr(34) as never)} value={compDisplay} />
       </View>
     </View>
   );
 }
-
 function CountNote({ profileId, frontVType, rearVType }: { profileId?: string; frontVType?: string; rearVType?: string }) {
   const { t } = useT();
   if (!frontVType && !rearVType && !profileId) return null;
