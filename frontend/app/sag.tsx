@@ -22,7 +22,6 @@ export default function SagScreen() {
       <SafeAreaView style={{ flex: 1 }} edges={["top"]}>
         <ScreenHeader title={t("sag.title")} />
         <ScrollView contentContainerStyle={{ padding: 20, paddingBottom: 40 }}>
-          <Text style={st.kicker}>{t("sag.title").toUpperCase()}</Text>
           <Text style={st.sub}>{t("sag.sub")}</Text>
 
           <View style={{ marginTop: 20, gap: 12 }}>

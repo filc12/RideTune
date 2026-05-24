@@ -59,7 +59,6 @@ export default function SetupsScreen() {
       <SafeAreaView style={{ flex: 1 }} edges={["top"]}>
         <ScreenHeader title={t("setups.title")} />
         <ScrollView contentContainerStyle={{ padding: 20, paddingBottom: 40 }}>
-          <Text style={st.kicker}>{t("setups.title").toUpperCase()}</Text>
           <Text style={st.sub}>{t("setups.sub")}</Text>
 
           <TouchableOpacity
@@ -87,7 +86,7 @@ export default function SetupsScreen() {
                   <View style={{ flex: 1 }}>
                     <Text style={st.rowTitle}>{s.name}</Text>
                     <Text style={st.rowMeta}>
-                      {s.bikeLabel} · {s.load.rider + s.load.passenger + s.load.luggage}kg · Sag {s.setup.sag}mm
+                      {s.bikeLabel} · {s.load.rider + s.load.passenger + s.load.luggage}kg · {t("card.sag" as never)} {s.setup.sag}mm
                     </Text>
                   </View>
                   <TouchableOpacity
@@ -119,17 +118,17 @@ export default function SetupsScreen() {
           <View style={{ width: 44, height: 44, borderRadius: 22, backgroundColor: "rgba(244,178,62,0.15)", borderWidth: 1, borderColor: "rgba(244,178,62,0.3)", alignItems: "center", justifyContent: "center", alignSelf: "center", marginBottom: 14 }}>
             <Ionicons name="trash-outline" size={22} color="#F4B23E" />
           </View>
-          <Text style={[st.modalTitle, { textAlign: "center" }]}>Apagar setup</Text>
+          <Text style={[st.modalTitle, { textAlign: "center" }]}>{t("setups.delete.title" as never)}</Text>
           <Text style={{ color: "#94A3B8", fontSize: 13, textAlign: "center", marginTop: 8, marginBottom: 20, lineHeight: 19 }}>
-            Tens a certeza que queres apagar{"\n"}
+            {t("setups.delete.confirm" as never)}{"\n"}
             <Text style={{ color: "#F1F5F9", fontWeight: "700" }}>{deleteTarget?.name}</Text>?
           </Text>
           <View style={{ flexDirection: "row", gap: 10 }}>
             <TouchableOpacity onPress={() => setDeleteTarget(null)} style={st.cancel} activeOpacity={0.8}>
-              <Text style={st.cancelLabel}>Cancelar</Text>
+              <Text style={st.cancelLabel}>{t("common.cancel" as never)}</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={confirmDelete} style={[st.confirm, { backgroundColor: "#F4B23E" }]} activeOpacity={0.9}>
-              <Text style={[st.confirmLabel, { color: "#04111E" }]}>Apagar</Text>
+              <Text style={[st.confirmLabel, { color: "#04111E" }]}>{t("setups.delete.btn" as never)}</Text>
             </TouchableOpacity>
           </View>
         </View>
