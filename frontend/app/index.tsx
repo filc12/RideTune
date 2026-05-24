@@ -265,6 +265,17 @@ export default function HomeScreen() {
   );
 }
 
+function getVType(s) {
+  if (!s) return undefined;
+  if (s.indexOf('mm') >= 0) return 'mm';
+  if (s.indexOf('turns') >= 0) return s.indexOf('hard') >= 0 ? 'tu_hard' : 'tu_soft';
+  return s.indexOf('hard') >= 0 ? 'cl_hard' : 'cl_soft';
+}
+function getNum(s, fallback) {
+  if (!s) return String(fallback);
+  const m = s.match(/^[0-9.]+/);
+  return m ? m[0] : String(fallback);
+}
 function SuspensionBlock({
   title, icon, values, adj, t,
 }: {
@@ -274,9 +285,6 @@ function SuspensionBlock({
   adj?: { preload: string; comp: string; reb: string; hsComp?: string };
   t: (k: never) => string;
 }) {
-  const preloadDisplay = adj?.preload ?? String(values.preload);
-  const rebDisplay     = adj?.reb     ?? String(values.rebound);
-  const compDisplay    = adj?.comp    ?? String(values.compression);
   return (
     <View style={styles.suspBlock}>
       <View style={styles.suspHeader}>
@@ -284,9 +292,9 @@ function SuspensionBlock({
         <Text style={styles.suspTitle}>{title}</Text>
       </View>
       <View style={styles.suspGrid}>
-        <DataCell label={t("card.preload" as never)} value={preloadDisplay} />
-        <DataCell label={t("card.rebound" as never)} value={rebDisplay} />
-        <DataCell label={t("card.compression" as never)} value={compDisplay} />
+        <DataCell label={t("card.preload" as never)} value={getNum(adj?.preload, values.preload)} vtype={getVType(adj?.preload)} t={t} />
+        <DataCell label={t("card.rebound" as never)} value={getNum(adj?.reb, values.rebound)} vtype={getVType(adj?.reb)} t={t} />
+        <DataCell label={t("card.compression" as never)} value={getNum(adj?.comp, values.compression)} vtype={getVType(adj?.comp)} t={t} />
       </View>
     </View>
   );
@@ -320,14 +328,13 @@ function NoDataBadge() {
     </View>
   );
 }
-function DataCell({ label, value, unit }: { label: string; value: string; unit?: string }) {
+function DataCell({ label, value, vtype, t }: { label: string; value: string; vtype?: string; t?: (k: never) => string }) {
+  const unit = vtype && t ? t(("susp.unit." + vtype) as never) : undefined;
   return (
     <View style={styles.dataCell}>
       <Text style={styles.dataLabel}>{label}</Text>
-      <View style={styles.dataValueRow}>
-        <Text style={styles.dataValue}>{value}</Text>
-        {unit ? <Text style={styles.dataUnit}> {unit}</Text> : null}
-      </View>
+      <Text style={styles.dataValue}>{value}</Text>
+      {unit ? <Text style={styles.dataUnit}>{unit}</Text> : null}
     </View>
   );
 }
@@ -511,7 +518,7 @@ const styles = StyleSheet.create({
   cardInner: { padding: 18 },
   cardHeader: { flexDirection: "row", justifyContent: "space-between", alignItems: "flex-start" },
   kicker: { color: C.accent, fontSize: 10, fontWeight: "700", letterSpacing: 1.8 },
-  cardTitle: { color: C.text, fontSize: 18, fontWeight: "700", marginTop: 4, maxWidth: 220 },
+  cardTitle: { color: C.text, fontSize: 15, fontWeight: "700", marginTop: 4, maxWidth: 220 },
   badge: { flexDirection: "row", alignItems: "center", gap: 6, paddingHorizontal: 10, paddingVertical: 6, borderRadius: 999, borderWidth: 1 },
   badgeOk: { borderColor: "rgba(34,208,138,0.35)", backgroundColor: C.okSoft },
   badgeWarn: { borderColor: "rgba(244,178,62,0.35)", backgroundColor: C.warnSoft },
@@ -531,10 +538,10 @@ const styles = StyleSheet.create({
   suspHeader: { flexDirection: "row", alignItems: "center", gap: 6, marginBottom: 10 },
   suspTitle: { color: C.textDim, fontSize: 12, fontWeight: "600", letterSpacing: 0.6, textTransform: "uppercase" },
   suspGrid: { flexDirection: "row", gap: 8 },
-  dataCell: { flex: 1, paddingVertical: 10, paddingHorizontal: 10, backgroundColor: "rgba(255,255,255,0.025)", borderRadius: 10, borderWidth: 1, borderColor: C.border },
-  dataLabel: { color: C.textMute, fontSize: 10.5, letterSpacing: 0.4, textTransform: "uppercase" },
+  dataCell: { flex: 1, paddingVertical: 6, paddingHorizontal: 8, backgroundColor: "rgba(255,255,255,0.025)", borderRadius: 10, borderWidth: 1, borderColor: C.border },
+  dataLabel: { color: C.textMute, fontSize: 9.5, letterSpacing: 0.3, textTransform: "uppercase" },
   dataValueRow: { flexDirection: "row", alignItems: "baseline", marginTop: 4 },
-  dataValue: { color: C.text, fontSize: 18, fontWeight: "700" },
+  dataValue: { color: C.text, fontSize: 15, fontWeight: "700" },
   dataUnit: { color: C.textMute, fontSize: 11, fontWeight: "500" },
   sagRow: { flexDirection: "row", alignItems: "center" },
   sagValue: { color: C.text, fontSize: 22, fontWeight: "700", marginTop: 4 },
@@ -562,7 +569,7 @@ const styles = StyleSheet.create({
   modalBackdrop: { ...StyleSheet.absoluteFillObject, backgroundColor: "rgba(0,0,0,0.6)" },
   sheet: { position: "absolute", bottom: 0, left: 0, right: 0, backgroundColor: "#0E141C", borderTopLeftRadius: 24, borderTopRightRadius: 24, paddingHorizontal: 20, paddingTop: 10, paddingBottom: 28, borderTopWidth: 1, borderColor: C.borderHi },
   sheetHandle: { alignSelf: "center", width: 40, height: 4, borderRadius: 2, backgroundColor: C.borderHi, marginBottom: 14 },
-  sheetTitle: { color: C.text, fontSize: 18, fontWeight: "700" },
+  sheetTitle: { color: C.text, fontSize: 15, fontWeight: "700" },
   sheetSub: { color: C.textDim, fontSize: 13, marginTop: 4, marginBottom: 16 },
   bikeRow: { flexDirection: "row", alignItems: "center", gap: 12, padding: 14, borderRadius: 14, backgroundColor: C.surface, borderWidth: 1, borderColor: C.border, marginBottom: 8 },
   bikeRowActive: { borderColor: "rgba(34,208,138,0.45)", backgroundColor: C.okSoft },
