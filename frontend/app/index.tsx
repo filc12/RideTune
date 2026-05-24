@@ -222,7 +222,6 @@ export default function HomeScreen() {
                       );
                     })()}
                   </View>
-                  </View>
                   <CountNote profileId={setup.mfzProfileId} frontVType={setup.frontVType} rearVType={setup.rearVType} />
                 </>
               )}
@@ -285,9 +284,9 @@ function SuspensionBlock({
         <Text style={styles.suspTitle}>{title}</Text>
       </View>
       <View style={styles.suspGrid}>
-        <DataCell label={t(chr(34)card.preload chr(34) as never)} value={preloadDisplay} />
-        <DataCell label={t(chr(34)card.rebound chr(34) as never)} value={rebDisplay} />
-        <DataCell label={t(chr(34)card.compression chr(34) as never)} value={compDisplay} />
+        <DataCell label={t("card.preload" as never)} value={preloadDisplay} />
+        <DataCell label={t("card.rebound" as never)} value={rebDisplay} />
+        <DataCell label={t("card.compression" as never)} value={compDisplay} />
       </View>
     </View>
   );
