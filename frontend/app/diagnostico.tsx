@@ -12,22 +12,18 @@ type Tab = "quiz" | "symptoms";
 const QUIZ_KEYS = ["diag.q1", "diag.q2", "diag.q3", "diag.q4", "diag.q5"] as const;
 
 // Map question index → recommendation text
-const QUIZ_FIX: Record<number, { title: string; tip: string }> = {
-  0: { title: "Frente afunda nas travagens", tip: "Aumenta preload frente em 1-2 cliques ou aumenta compression em 2 cliques." },
-  1: { title: "Trás salta em piso irregular", tip: "Abre rebound trás 1-2 cliques. Reduz compression alta 1 clique." },
-  2: { title: "Mota pesada em curva", tip: "Verifica sag trás (alvo 30-35mm). Reduz preload trás 1-2 cliques se sag < 25mm." },
-  3: { title: "Mota baloiça após obstáculo", tip: "Fecha rebound trás 1-2 cliques para amortecer mais o ressalto." },
-  4: { title: "Trás afunda com passageiro", tip: "Aumenta preload trás 3-5 cliques. Adiciona +1 clique de compression." },
+const QUIZ_FIX_KEYS: Record<number, { t: string; d: string }> = {
+  0: { t: "diag.fix0.t", d: "diag.fix0.d" },
+  1: { t: "diag.fix1.t", d: "diag.fix1.d" },
+  2: { t: "diag.fix2.t", d: "diag.fix2.d" },
+  3: { t: "diag.fix3.t", d: "diag.fix3.d" },
+  4: { t: "diag.fix4.t", d: "diag.fix4.d" },
 };
 
-const SYMPTOMS: { icon: keyof typeof MaterialCommunityIcons.glyphMap; title: string; fix: string }[] = [
-  { icon: "arrow-down-bold", title: "Frente mergulha em travagens", fix: "Aumenta preload frente (+1-2 clks) ou compression (+2 clks)." },
-  { icon: "vibrate", title: "Trás salta em piso irregular", fix: "Abre rebound trás (+1-2 clks). Reduz compression alta (-1 clk)." },
-  { icon: "rotate-3d-variant", title: "Direção vaga em curva", fix: "Verifica sag (30-35mm). Considera preload frente +1 clk." },
-  { icon: "wave", title: "Mota baloiça após bumps", fix: "Fecha rebound trás (-1-2 clks). Sobe compression baixa (+1 clk)." },
-  { icon: "account-multiple", title: "Trás afunda com passageiro", fix: "Preload trás +3-5 clks. Compression +1 clk." },
-  { icon: "bag-suitcase", title: "Mota instável com bagagem alta", fix: "Distribui peso para baixo. Preload trás +2 clks." },
+const SYMPTOM_ICONS: (keyof typeof MaterialCommunityIcons.glyphMap)[] = [
+  "arrow-down-bold", "vibrate", "rotate-3d-variant", "wave", "account-multiple", "bag-suitcase",
 ];
+const SYMPTOM_KEYS = [0,1,2,3,4,5];
 
 export default function DiagScreen() {
   const { t } = useT();
@@ -40,7 +36,7 @@ export default function DiagScreen() {
     () =>
       Object.entries(answers)
         .filter(([, v]) => v)
-        .map(([k]) => QUIZ_FIX[Number(k)])
+        .map(([k]) => QUIZ_FIX_KEYS[Number(k)])
         .filter(Boolean),
     [answers],
   );
@@ -117,8 +113,8 @@ export default function DiagScreen() {
                       <MaterialCommunityIcons name="wrench" size={16} color={C.accent} />
                     </View>
                     <View style={{ flex: 1 }}>
-                      <Text style={st.symTitle}>{r.title}</Text>
-                      <Text style={st.symFix}>{r.tip}</Text>
+                      <Text style={st.symTitle}>{t(r.t as never)}</Text>
+                      <Text style={st.symFix}>{t(r.d as never)}</Text>
                     </View>
                   </View>
                 ))
@@ -132,14 +128,14 @@ export default function DiagScreen() {
 
           {tab === "symptoms" && (
             <View style={{ gap: 10, marginTop: 6 }} testID="symptoms-list">
-              {SYMPTOMS.map((s, i) => (
+              {SYMPTOM_KEYS.map((i) => (
                 <View key={i} style={st.symptom}>
                   <View style={st.symIcon}>
-                    <MaterialCommunityIcons name={s.icon} size={18} color={C.accent} />
+                    <MaterialCommunityIcons name={SYMPTOM_ICONS[i]} size={18} color={C.accent} />
                   </View>
                   <View style={{ flex: 1 }}>
-                    <Text style={st.symTitle}>{s.title}</Text>
-                    <Text style={st.symFix}>{s.fix}</Text>
+                    <Text style={st.symTitle}>{t(`diag.sym${i}.t` as never)}</Text>
+                    <Text style={st.symFix}>{t(`diag.sym${i}.d` as never)}</Text>
                   </View>
                 </View>
               ))}

@@ -18,7 +18,7 @@ import { useFocusEffect, useRouter } from "expo-router";
 
 import { storage } from "@/src/utils/storage";
 import { useT } from "@/src/i18n";
-import { calcSetup, deriveMode, getLoad, saveLoad, type Load } from "@/src/utils/suspension";
+import { calcSetup, calcSetupById, deriveMode, getLoad, saveLoad, type Load } from "@/src/utils/suspension";
 import { BIKES, BIKE_BY_ID, BIKE_CATEGORIES, type Bike } from "@/src/data/bikes";
 
 const C = {
@@ -69,19 +69,19 @@ export default function HomeScreen() {
   }, []);
 
   const onPickScenario = useCallback(async (m: LoadMode) => {
-    const presets: Record<LoadMode, Load> = {
-      solo: { rider: 75, passenger: 0, luggage: 0 },
-      malas: { rider: 75, passenger: 0, luggage: 20 },
-      duo: { rider: 75, passenger: 65, luggage: 0 },
-      duo_malas: { rider: 75, passenger: 65, luggage: 20 },
+    const presets: Record<LoadMode, Pick<Load, "passenger" | "luggage">> = {
+      solo:      { passenger: 0,  luggage: 0  },
+      malas:     { passenger: 0,  luggage: 20 },
+      duo:       { passenger: 65, luggage: 0  },
+      duo_malas: { passenger: 65, luggage: 20 },
     };
-    const next = presets[m];
+    const next: Load = { ...load, ...presets[m] };
     setLoad(next);
     await saveLoad(next);
-  }, []);
+  }, [load]);
 
   const mode: LoadMode = deriveMode(load);
-  const setup = calcSetup(load);
+  const setup = calcSetupById(bike?.id ?? null, load);
 
   const scenarios: { id: LoadMode; labelKey: string; icon: keyof typeof MaterialCommunityIcons.glyphMap }[] = [
     { id: "solo", labelKey: "scenario.solo", icon: "account" },
@@ -198,6 +198,7 @@ export default function HomeScreen() {
                 </View>
               ) : (
                 <>
+                  {setup.noData && <NoDataBadge />}
                   <SuspensionBlock title={t("card.front")} icon="arrow-up-bold-circle-outline" values={setup.front} t={t} />
                   <View style={styles.hairline} />
                   <SuspensionBlock title={t("card.rear")} icon="arrow-down-bold-circle-outline" values={setup.rear} t={t} />
@@ -212,6 +213,7 @@ export default function HomeScreen() {
                       <Text style={styles.sagBadgeLabel}>{t("card.sag.ok")}</Text>
                     </View>
                   </View>
+                  <CountNote profileId={setup.mfzProfileId} frontVType={setup.frontVType} rearVType={setup.rearVType} />
                 </>
               )}
             </View>
@@ -273,6 +275,35 @@ function SuspensionBlock({
         <DataCell label={t("card.rebound" as never)} value={String(values.rebound)} unit={t("common.clicks" as never)} />
         <DataCell label={t("card.compression" as never)} value={String(values.compression)} unit={t("common.clicks" as never)} />
       </View>
+    </View>
+  );
+}
+
+function CountNote({ profileId, frontVType, rearVType }: { profileId?: string; frontVType?: string; rearVType?: string }) {
+  const { t } = useT();
+  if (!frontVType && !rearVType && !profileId) return null;
+  const modelKey = profileId ? `count.${profileId}` : null;
+  const modelNote = modelKey ? t(modelKey as never) : null;
+  const hasModelNote = modelNote && !modelNote.startsWith("count.");
+  const frontDir = frontVType && frontVType !== "na" ? t(`susp.dir.${frontVType}` as never) : null;
+  const rearDir  = rearVType  && rearVType  !== "na" ? t(`susp.dir.${rearVType}`  as never) : null;
+  const sameDir  = frontDir && rearDir && frontDir === rearDir;
+  return (
+    <View style={{ marginTop: 12, padding: 12, borderRadius: 12, backgroundColor: "rgba(61,169,255,0.07)", borderWidth: 1, borderColor: "rgba(61,169,255,0.16)", gap: 6 }}>
+      <Text style={{ color: "#3DA9FF", fontSize: 10, fontWeight: "700", letterSpacing: 0.8, textTransform: "uppercase" }}>Como regular</Text>
+      {hasModelNote && <Text style={{ color: "#CBD5E1", fontSize: 11.5, lineHeight: 17 }}>{modelNote}</Text>}
+      {!hasModelNote && sameDir && <Text style={{ color: "#94A3B8", fontSize: 11.5, lineHeight: 17 }}>{frontDir}</Text>}
+      {!hasModelNote && !sameDir && frontDir && <Text style={{ color: "#94A3B8", fontSize: 11.5, lineHeight: 17 }}>🔵 {t("susp.dir.label.front" as never)}: {frontDir}</Text>}
+      {!hasModelNote && !sameDir && rearDir  && <Text style={{ color: "#94A3B8", fontSize: 11.5, lineHeight: 17, marginTop: 2 }}>🔴 {t("susp.dir.label.rear" as never)}: {rearDir}</Text>}
+    </View>
+  );
+}
+
+function NoDataBadge() {
+  return (
+    <View style={{ padding: 12, borderRadius: 12, backgroundColor: "rgba(255,255,255,0.04)", borderWidth: 1, borderColor: "rgba(255,255,255,0.08)", alignItems: "center", marginTop: 8, gap: 4 }}>
+      <Text style={{ color: "#64748B", fontSize: 11, fontWeight: "700", letterSpacing: 0.4, textTransform: "uppercase" }}>Dados de fábrica não disponíveis</Text>
+      <Text style={{ color: "#475569", fontSize: 11, textAlign: "center" }}>Ajusta a suspensão pelo sag</Text>
     </View>
   );
 }
@@ -347,40 +378,94 @@ function BottomNav({ insets, active }: { insets: { bottom: number }; active: "ho
 }
 
 function BikePicker({ open, onClose, onPick, selectedId, t }: { open: boolean; onClose: () => void; onPick: (b: Bike) => void; selectedId?: string; t: (k: never) => string }) {
+  const [step, setStep] = React.useState<"cat" | "brand" | "model">("cat");
+  const [selCat, setSelCat] = React.useState<string | null>(null);
+  const [selBrand, setSelBrand] = React.useState<string | null>(null);
+
+  const reset = () => { setStep("cat"); setSelCat(null); setSelBrand(null); };
+  const handleClose = () => { reset(); onClose(); };
+  const handlePick = (b: Bike) => { reset(); onPick(b); };
+
+  const brandsInCat = selCat
+    ? [...new Set(BIKES.filter((b) => b.category === selCat).map((b) => b.brand))].sort()
+    : [];
+  const modelsInBrandCat = selCat && selBrand
+    ? BIKES.filter((b) => b.category === selCat && b.brand === selBrand)
+    : [];
+
+  const stepTitle =
+    step === "cat"   ? t("picker.title" as never) :
+    step === "brand" ? t(`bike.cat.${selCat}` as never) :
+    selBrand ?? "";
+
   return (
-    <Modal visible={open} animationType="slide" transparent onRequestClose={onClose}>
-      <Pressable style={styles.modalBackdrop} onPress={onClose} />
+    <Modal visible={open} animationType="slide" transparent onRequestClose={handleClose}>
+      <Pressable style={styles.modalBackdrop} onPress={handleClose} />
       <View style={styles.sheet} testID="bike-picker">
         <View style={styles.sheetHandle} />
-        <Text style={styles.sheetTitle}>{t("picker.title" as never)}</Text>
-        <Text style={styles.sheetSub}>{t("picker.sub" as never)}</Text>
+        <View style={{ flexDirection: "row", alignItems: "center", gap: 8, marginBottom: 2 }}>
+          {step !== "cat" && (
+            <TouchableOpacity onPress={() => setStep(step === "model" ? "brand" : "cat")} style={{ padding: 4, marginLeft: -4 }}>
+              <Ionicons name="chevron-back" size={20} color={C.accent} />
+            </TouchableOpacity>
+          )}
+          <Text style={styles.sheetTitle}>{stepTitle}</Text>
+        </View>
+        <Text style={styles.sheetSub}>
+          {step === "cat"   ? t("picker.sub" as never) :
+           step === "brand" ? `${brandsInCat.length} marcas disponíveis` :
+           `${modelsInBrandCat.length} ${modelsInBrandCat.length === 1 ? "modelo" : "modelos"}`}
+        </Text>
         <ScrollView style={{ maxHeight: 540 }} showsVerticalScrollIndicator={false}>
-          {BIKE_CATEGORIES.map((cat) => {
-            const bikes = BIKES.filter((b) => b.category === cat);
-            if (bikes.length === 0) return null;
+          {step === "cat" && BIKE_CATEGORIES.map((cat) => {
+            const count = BIKES.filter((b) => b.category === cat).length;
+            if (count === 0) return null;
             return (
-              <View key={cat} style={{ marginBottom: 8 }}>
-                <View style={styles.catHeader}>
-                  <Text style={styles.catLabel}>{t(`bike.cat.${cat}` as never)}</Text>
-                  <View style={styles.catLine} />
-                  <Text style={styles.catCount}>{bikes.length}</Text>
+              <TouchableOpacity key={cat} activeOpacity={0.85} style={styles.bikeRow}
+                onPress={() => { setSelCat(cat); setStep("brand"); }}>
+                <View style={styles.bikeIcon}>
+                  <MaterialCommunityIcons name="motorbike" size={22} color={C.accent} />
                 </View>
-                {bikes.map((b) => {
-                  const active = b.id === selectedId;
-                  return (
-                    <TouchableOpacity key={b.id} activeOpacity={0.85} onPress={() => onPick(b)} style={[styles.bikeRow, active && styles.bikeRowActive]} testID={`bike-${b.id}`}>
-                      <View style={styles.bikeIcon}>
-                        <MaterialCommunityIcons name="motorbike" size={22} color={C.accent} />
-                      </View>
-                      <View style={{ flex: 1 }}>
-                        <Text style={styles.bikeBrand}>{b.brand}</Text>
-                        <Text style={styles.bikeModel}>{b.model} · {b.cc}</Text>
-                      </View>
-                      {active ? <Ionicons name="checkmark-circle" size={20} color={C.ok} /> : <Ionicons name="chevron-forward" size={18} color={C.textMute} />}
-                    </TouchableOpacity>
-                  );
-                })}
-              </View>
+                <View style={{ flex: 1 }}>
+                  <Text style={styles.bikeBrand}>{t(`bike.cat.${cat}` as never)}</Text>
+                  <Text style={styles.bikeModel}>{count} motos</Text>
+                </View>
+                <Ionicons name="chevron-forward" size={18} color={C.textMute} />
+              </TouchableOpacity>
+            );
+          })}
+          {step === "brand" && brandsInCat.map((brand) => {
+            const count = BIKES.filter((b) => b.category === selCat && b.brand === brand).length;
+            return (
+              <TouchableOpacity key={brand} activeOpacity={0.85} style={styles.bikeRow}
+                onPress={() => { setSelBrand(brand); setStep("model"); }}>
+                <View style={styles.bikeIcon}>
+                  <MaterialCommunityIcons name="motorbike" size={22} color={C.accent} />
+                </View>
+                <View style={{ flex: 1 }}>
+                  <Text style={styles.bikeBrand}>{brand}</Text>
+                  <Text style={styles.bikeModel}>{count} {count === 1 ? "modelo" : "modelos"}</Text>
+                </View>
+                <Ionicons name="chevron-forward" size={18} color={C.textMute} />
+              </TouchableOpacity>
+            );
+          })}
+          {step === "model" && modelsInBrandCat.map((b) => {
+            const active = b.id === selectedId;
+            return (
+              <TouchableOpacity key={b.id} activeOpacity={0.85} onPress={() => handlePick(b)}
+                style={[styles.bikeRow, active && styles.bikeRowActive]} testID={`bike-${b.id}`}>
+                <View style={styles.bikeIcon}>
+                  <MaterialCommunityIcons name="motorbike" size={22} color={C.accent} />
+                </View>
+                <View style={{ flex: 1 }}>
+                  <Text style={styles.bikeBrand}>{b.model}</Text>
+                  <Text style={styles.bikeModel}>{b.cc}</Text>
+                </View>
+                {active
+                  ? <Ionicons name="checkmark-circle" size={20} color={C.ok} />
+                  : <Ionicons name="chevron-forward" size={18} color={C.textMute} />}
+              </TouchableOpacity>
             );
           })}
         </ScrollView>
@@ -388,6 +473,7 @@ function BikePicker({ open, onClose, onPick, selectedId, t }: { open: boolean; o
     </Modal>
   );
 }
+
 
 const styles = StyleSheet.create({
   root: { flex: 1, backgroundColor: C.bg },

@@ -5,9 +5,10 @@ import { LinearGradient } from "expo-linear-gradient";
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 
+import { storage } from "@/src/utils/storage";
 import { C, ScreenHeader } from "@/src/components/ScreenHeader";
 import { useT } from "@/src/i18n";
-import { calcSetup, getLoad, saveLoad, type Load } from "@/src/utils/suspension";
+import { calcSetup, calcSetupById, getLoad, saveLoad, type Load } from "@/src/utils/suspension";
 
 const RIDER_BOUNDS = { min: 40, max: 130, step: 1 };
 const PASSENGER_BOUNDS = { min: 0, max: 120, step: 1 };
@@ -17,14 +18,19 @@ export default function CargaScreen() {
   const { t } = useT();
   const router = useRouter();
   const [load, setLoad] = useState<Load>({ rider: 75, passenger: 0, luggage: 0 });
+  const [bikeId, setBikeId] = useState<string | null>(null);
   const [saved, setSaved] = useState(false);
 
   useEffect(() => {
-    (async () => setLoad(await getLoad()))();
+    (async () => {
+      setLoad(await getLoad());
+      const id = await storage.getItem<string>("ridetune.bike", "");
+      if (id) setBikeId(id);
+    })();
   }, []);
 
   const total = load.rider + load.passenger + load.luggage;
-  const preview = calcSetup(load);
+  const preview = calcSetupById(bikeId, load);
 
   const update = (k: keyof Load, v: number, b: typeof RIDER_BOUNDS) => {
     const nv = Math.max(b.min, Math.min(b.max, v));
@@ -184,7 +190,7 @@ function PreviewCell({ label, value }: { label: string; value: string }) {
   return (
     <View style={st.previewCell}>
       <Text style={st.previewCellLabel}>{label}</Text>
-      <Text style={st.previewCellValue}>{value} <Text style={st.previewCellUnit}>clks</Text></Text>
+      <Text style={st.previewCellValue}>{value} <Text style={st.previewCellUnit}>val</Text></Text>
     </View>
   );
 }

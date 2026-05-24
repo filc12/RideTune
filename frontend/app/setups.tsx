@@ -7,15 +7,18 @@ import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import { C, ScreenHeader } from "@/src/components/ScreenHeader";
 import { useT } from "@/src/i18n";
 import { deleteSetup, listSetups, saveSetup, type SavedSetup } from "@/src/utils/setups";
-import { calcSetup, getLoad } from "@/src/utils/suspension";
+import { useRouter } from "expo-router";
+import { calcSetupById, getLoad, saveLoad } from "@/src/utils/suspension";
 import { storage } from "@/src/utils/storage";
 import { bikeLabel } from "@/src/data/bikes";
 
 export default function SetupsScreen() {
   const { t } = useT();
+  const router = useRouter();
   const [items, setItems] = useState<SavedSetup[]>([]);
   const [open, setOpen] = useState(false);
   const [name, setName] = useState("");
+  const [deleteTarget, setDeleteTarget] = useState<{ id: string; name: string } | null>(null);
 
   const load = useCallback(async () => setItems(await listSetups()), []);
   useEffect(() => { load(); }, [load]);
@@ -25,15 +28,27 @@ export default function SetupsScreen() {
     if (!trimmed) return;
     const bikeId = (await storage.getItem<string>("ridetune.bike", "")) || "";
     const lo = await getLoad();
-    const setup = calcSetup(lo);
+    const setup = calcSetupById(bikeId || null, lo);
     await saveSetup({ name: trimmed, bikeId, bikeLabel: bikeLabel(bikeId), load: lo, setup });
     setName("");
     setOpen(false);
     load();
   };
 
-  const onDelete = async (id: string) => {
-    await deleteSetup(id);
+  const onApply = async (s: SavedSetup) => {
+    await storage.setItem("ridetune.bike", s.bikeId);
+    await saveLoad(s.load);
+    router.push("/");
+  };
+
+  const onDelete = (id: string, name: string) => {
+    setDeleteTarget({ id, name });
+  };
+
+  const confirmDelete = async () => {
+    if (!deleteTarget) return;
+    await deleteSetup(deleteTarget.id);
+    setDeleteTarget(null);
     load();
   };
 
@@ -76,8 +91,16 @@ export default function SetupsScreen() {
                     </Text>
                   </View>
                   <TouchableOpacity
+                    activeOpacity={0.8}
+                    onPress={() => onApply(s)}
+                    style={st.apply}
+                    testID={`apply-${s.id}`}
+                  >
+                    <Ionicons name="checkmark-circle-outline" size={16} color={C.ok} />
+                  </TouchableOpacity>
+                  <TouchableOpacity
                     activeOpacity={0.7}
-                    onPress={() => onDelete(s.id)}
+                    onPress={() => onDelete(s.id, s.name)}
                     style={st.del}
                     testID={`delete-${s.id}`}
                   >
@@ -89,6 +112,28 @@ export default function SetupsScreen() {
           )}
         </ScrollView>
       </SafeAreaView>
+
+      <Modal transparent visible={!!deleteTarget} animationType="fade" onRequestClose={() => setDeleteTarget(null)}>
+        <Pressable style={st.backdrop} onPress={() => setDeleteTarget(null)} />
+        <View style={st.modal}>
+          <View style={{ width: 44, height: 44, borderRadius: 22, backgroundColor: "rgba(244,178,62,0.15)", borderWidth: 1, borderColor: "rgba(244,178,62,0.3)", alignItems: "center", justifyContent: "center", alignSelf: "center", marginBottom: 14 }}>
+            <Ionicons name="trash-outline" size={22} color="#F4B23E" />
+          </View>
+          <Text style={[st.modalTitle, { textAlign: "center" }]}>Apagar setup</Text>
+          <Text style={{ color: "#94A3B8", fontSize: 13, textAlign: "center", marginTop: 8, marginBottom: 20, lineHeight: 19 }}>
+            Tens a certeza que queres apagar{"\n"}
+            <Text style={{ color: "#F1F5F9", fontWeight: "700" }}>{deleteTarget?.name}</Text>?
+          </Text>
+          <View style={{ flexDirection: "row", gap: 10 }}>
+            <TouchableOpacity onPress={() => setDeleteTarget(null)} style={st.cancel} activeOpacity={0.8}>
+              <Text style={st.cancelLabel}>Cancelar</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={confirmDelete} style={[st.confirm, { backgroundColor: "#F4B23E" }]} activeOpacity={0.9}>
+              <Text style={[st.confirmLabel, { color: "#04111E" }]}>Apagar</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
 
       <Modal transparent visible={open} animationType="fade" onRequestClose={() => setOpen(false)}>
         <Pressable style={st.backdrop} onPress={() => setOpen(false)} />
@@ -155,6 +200,17 @@ const st = StyleSheet.create({
   },
   rowTitle: { color: C.text, fontWeight: "700", fontSize: 14 },
   rowMeta: { color: C.textMute, fontSize: 12, marginTop: 2 },
+  apply: {
+    width: 36,
+    height: 36,
+    borderRadius: 10,
+    backgroundColor: "rgba(34,208,138,0.12)",
+    borderWidth: 1,
+    borderColor: "rgba(34,208,138,0.3)",
+    alignItems: "center",
+    justifyContent: "center",
+    marginRight: 6,
+  },
   del: {
     width: 36,
     height: 36,
