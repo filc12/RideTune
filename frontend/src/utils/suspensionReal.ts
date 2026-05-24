@@ -119,16 +119,16 @@ function adjustYamaha(base: number, total: number, type: VType): number {
  * Honda formula — same damping as KTM, preload turns same as KTM
  */
 function adjustHonda(base: number, total: number, type: VType): number {
-  return adjustKtm(base, total, type);
-}
-
-/**
- * Kove — damping only, same as KTM. No preload numeric adjustment.
- */
-function adjustKove(base: number, total: number, type: VType): number {
-  if (type === 'cl_hard') {
-    return clamp(base - Math.round((total - 75) / 20), 1, 30);
+  const delta = total - 75;
+  switch (type) {
+    case "cl_hard": return clamp(base - Math.round(delta / 20), 1, 30);
+    case "tu_hard": return clamp(roundQuarter(base - Math.round(delta / 25) * 0.25), 0.25, 4);
+    case "cl_soft": return clamp(base + Math.round(delta / 20), 0, 30);
+    case "tu_soft": return clamp(roundQuarter(base + Math.round(delta / 25) * 0.25), 0, 20);
+    case "mm":      return clamp(base + Math.round(delta / 18), 0, 40);
+    default:        return base;
   }
+}
   return base;
 }
 
@@ -136,17 +136,17 @@ function adjustKove(base: number, total: number, type: VType): number {
  * Suzuki — same as KTM damping, preload same direction
  */
 function adjustSuzuki(base: number, total: number, type: VType): number {
-  return adjustKtm(base, total, type);
+function adjustSuzuki(base: number, total: number, type: VType): number {
+  const delta = total - 75;
+  switch (type) {
+    case "cl_hard": return clamp(base - Math.round(delta / 20), 1, 30);
+    case "tu_hard": return clamp(roundQuarter(base - Math.round(delta / 25) * 0.25), 0.25, 4);
+    case "cl_soft": return clamp(base + Math.round(delta / 20), 0, 30);
+    case "tu_soft": return clamp(roundQuarter(base + Math.round(delta / 25) * 0.25), 0, 20);
+    case "mm":      return clamp(base + Math.round(delta / 18), 0, 40);
+    default:        return base;
+  }
 }
-
-function applyFormula(
-  profile: MfzProfile,
-  base: number,
-  total: number,
-  type: VType
-): number {
-  switch (profile.formula) {
-    case 'ktm':     return adjustKtm(base, total, type);
     case 'yamaha':  return adjustYamaha(base, total, type);
     case 'honda':   return adjustHonda(base, total, type);
     case 'kove':    return adjustKove(base, total, type);
