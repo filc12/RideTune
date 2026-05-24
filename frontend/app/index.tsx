@@ -208,10 +208,20 @@ export default function HomeScreen() {
                       <Text style={styles.metricLabel}>{t("card.sag")}</Text>
                       <Text style={styles.sagValue}>{setup.sag} mm</Text>
                     </View>
-                    <View style={styles.sagBadge}>
-                      <View style={[styles.dot, { backgroundColor: C.ok }]} />
-                      <Text style={styles.sagBadgeLabel}>{t("card.sag.ok")}</Text>
-                    </View>
+                    {(() => {
+                      const sagOk = setup.sag >= 20 && setup.sag <= 50;
+                      const color = sagOk ? C.ok : C.warn;
+                      const bg    = sagOk ? C.okSoft : C.warnSoft;
+                      const bc    = sagOk ? "rgba(34,208,138,0.35)" : "rgba(244,178,62,0.35)";
+                      const label = sagOk ? t("card.sag.ok" as never) : t("card.sag.warn" as never);
+                      return (
+                        <View style={[styles.sagBadge, { backgroundColor: bg, borderColor: bc }]}>
+                          <View style={[styles.dot, { backgroundColor: color }]} />
+                          <Text style={[styles.sagBadgeLabel, { color }]}>{label}</Text>
+                        </View>
+                      );
+                    })()}
+                  </View>
                   </View>
                   <CountNote profileId={setup.mfzProfileId} frontVType={setup.frontVType} rearVType={setup.rearVType} />
                 </>
@@ -303,14 +313,14 @@ function CountNote({ profileId, frontVType, rearVType }: { profileId?: string; f
 }
 
 function NoDataBadge() {
+  const { t } = useT();
   return (
     <View style={{ padding: 12, borderRadius: 12, backgroundColor: "rgba(255,255,255,0.04)", borderWidth: 1, borderColor: "rgba(255,255,255,0.08)", alignItems: "center", marginTop: 8, gap: 4 }}>
-      <Text style={{ color: "#64748B", fontSize: 11, fontWeight: "700", letterSpacing: 0.4, textTransform: "uppercase" }}>Dados de fábrica não disponíveis</Text>
-      <Text style={{ color: "#475569", fontSize: 11, textAlign: "center" }}>Ajusta a suspensão pelo sag</Text>
+      <Text style={{ color: "#64748B", fontSize: 11, fontWeight: "700", letterSpacing: 0.4, textTransform: "uppercase" }}>{t("card.nodata.title" as never)}</Text>
+      <Text style={{ color: "#475569", fontSize: 11, textAlign: "center" }}>{t("card.nodata.sub" as never)}</Text>
     </View>
   );
 }
-
 function DataCell({ label, value, unit }: { label: string; value: string; unit?: string }) {
   return (
     <View style={styles.dataCell}>
