@@ -129,13 +129,10 @@ function adjustHonda(base: number, total: number, type: VType): number {
     default:        return base;
   }
 }
-  return base;
-}
 
 /**
  * Suzuki — same as KTM damping, preload same direction
  */
-function adjustSuzuki(base: number, total: number, type: VType): number {
 function adjustSuzuki(base: number, total: number, type: VType): number {
   const delta = total - 75;
   switch (type) {
@@ -147,6 +144,14 @@ function adjustSuzuki(base: number, total: number, type: VType): number {
     default:        return base;
   }
 }
+function applyFormula(
+  profile: MfzProfile,
+  base: number,
+  total: number,
+  type: VType
+): number {
+  switch (profile.formula) {
+    case 'ktm':     return adjustKtm(base, total, type);
     case 'yamaha':  return adjustYamaha(base, total, type);
     case 'honda':   return adjustHonda(base, total, type);
     case 'kove':    return adjustKove(base, total, type);
