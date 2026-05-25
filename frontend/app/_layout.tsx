@@ -5,7 +5,7 @@ import { LanguageProvider } from "@/src/i18n";
 export default function RootLayout() {
   return (
     <LanguageProvider>
-      <Stack screenOptions={{ headerShown: false, animation: "slide_from_right" }} />
+      <Stack screenOptions={{ headerShown: false, animation: "fade", animationDuration: 180, contentStyle: { backgroundColor: "#070A0F" } }} />
     </LanguageProvider>
   );
 }

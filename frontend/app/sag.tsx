@@ -5,6 +5,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import { C, ScreenHeader } from "@/src/components/ScreenHeader";
+import { BottomNav } from "@/src/components/BottomNav";
 import { useT } from "@/src/i18n";
 
 export default function SagScreen() {
@@ -21,7 +22,7 @@ export default function SagScreen() {
       <LinearGradient colors={["#0B1220", "#070A0F"]} style={StyleSheet.absoluteFill} />
       <SafeAreaView style={{ flex: 1 }} edges={["top"]}>
         <ScreenHeader title={t("sag.title")} />
-        <ScrollView contentContainerStyle={{ padding: 20, paddingBottom: 40 }}>
+        <ScrollView contentContainerStyle={{ padding: 20, paddingBottom: 100 }}>
           <Text style={st.sub}>{t("sag.sub")}</Text>
 
           <View style={{ marginTop: 20, gap: 12 }}>
@@ -43,6 +44,7 @@ export default function SagScreen() {
             <Text style={st.tipText}>{t("sag.tip")}</Text>
           </View>
         </ScrollView>
+              <BottomNav active="sag" />
       </SafeAreaView>
     </View>
   );

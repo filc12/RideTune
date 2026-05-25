@@ -21,6 +21,7 @@ import { useT } from "@/src/i18n";
 import { calcSetup, calcSetupById, deriveMode, getLoad, saveLoad, type Load } from "@/src/utils/suspension";
 import { BIKES, BIKE_BY_ID, BIKE_CATEGORIES, type Bike } from "@/src/data/bikes";
 import { ConfidenceBadge } from "@/src/components/ConfidenceBadge";
+import { BottomNav } from "@/src/components/BottomNav";
 
 const C = {
   bg: "#070A0F",
@@ -259,7 +260,7 @@ export default function HomeScreen() {
           </View>
         </ScrollView>
 
-        <BottomNav insets={insets} active="home" />
+        <BottomNav active="home" />
       </SafeAreaView>
 
       <BikePicker open={pickerOpen} onClose={() => setPickerOpen(false)} onPick={onPickBike} selectedId={bike?.id} t={t} />
@@ -386,38 +387,7 @@ function FeatureCard({ icon, title, desc, onPress, testID }: { icon: keyof typeo
   );
 }
 
-function BottomNav({ insets, active }: { insets: { bottom: number }; active: "home" | "carga" | "diag" | "sag" }) {
-  const router = useRouter();
-  const { t } = useT();
-  const items: { id: typeof active; label: string; icon: keyof typeof MaterialCommunityIcons.glyphMap; href: string }[] = [
-    { id: "home", label: t("nav.home"), icon: "home-variant", href: "/" },
-    { id: "carga", label: t("nav.carga"), icon: "weight-kilogram", href: "/carga" },
-    { id: "diag", label: t("nav.diag"), icon: "stethoscope", href: "/diagnostico" },
-    { id: "sag", label: t("nav.sag"), icon: "speedometer", href: "/sag" },
-  ];
-  return (
-    <View style={[styles.bottomNavWrap, { paddingBottom: Math.max(insets.bottom, 8) }]}>
-      <BlurView intensity={Platform.OS === "ios" ? 40 : 0} tint="dark" style={StyleSheet.absoluteFill} />
-      <View style={styles.bottomNavInner}>
-        {items.map((it) => {
-          const isActive = it.id === active;
-          return (
-            <Pressable
-              key={it.id}
-              style={styles.navItem}
-              onPress={() => router.push(it.href as never)}
-              testID={`nav-${it.id}`}
-            >
-              <MaterialCommunityIcons name={it.icon} size={22} color={isActive ? C.accent : C.textMute} />
-              <Text style={[styles.navLabel, isActive && styles.navLabelActive]}>{it.label}</Text>
-              {isActive && <View style={styles.navActiveDot} />}
-            </Pressable>
-          );
-        })}
-      </View>
-    </View>
-  );
-}
+
 
 function BikePicker({ open, onClose, onPick, selectedId, t }: { open: boolean; onClose: () => void; onPick: (b: Bike) => void; selectedId?: string; t: (k: never) => string }) {
   const [step, setStep] = React.useState<"cat" | "brand" | "model">("cat");

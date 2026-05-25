@@ -5,6 +5,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 
 import { C, ScreenHeader } from "@/src/components/ScreenHeader";
+import { BottomNav } from "@/src/components/BottomNav";
 import { useT } from "@/src/i18n";
 import { deleteSetup, listSetups, saveSetup, type SavedSetup } from "@/src/utils/setups";
 import { useRouter } from "expo-router";
@@ -59,7 +60,7 @@ export default function SetupsScreen() {
       <LinearGradient colors={["#0B1220", "#070A0F"]} style={StyleSheet.absoluteFill} />
       <SafeAreaView style={{ flex: 1 }} edges={["top"]}>
         <ScreenHeader title={t("setups.title")} />
-        <ScrollView contentContainerStyle={{ padding: 20, paddingBottom: 40 }}>
+        <ScrollView contentContainerStyle={{ padding: 20, paddingBottom: 100 }}>
           <Text style={st.sub}>{t("setups.sub")}</Text>
 
           <TouchableOpacity
@@ -112,6 +113,7 @@ export default function SetupsScreen() {
             </View>
           )}
         </ScrollView>
+              <BottomNav active="home" />
       </SafeAreaView>
 
       <Modal transparent visible={!!deleteTarget} animationType="fade" onRequestClose={() => setDeleteTarget(null)}>

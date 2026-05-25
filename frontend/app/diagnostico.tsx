@@ -5,6 +5,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 
 import { C, ScreenHeader } from "@/src/components/ScreenHeader";
+import { BottomNav } from "@/src/components/BottomNav";
 import { useT } from "@/src/i18n";
 
 type Tab = "quiz" | "symptoms";
@@ -60,7 +61,7 @@ export default function DiagScreen() {
       <LinearGradient colors={["#0B1220", "#070A0F"]} style={StyleSheet.absoluteFill} />
       <SafeAreaView style={{ flex: 1 }} edges={["top"]}>
         <ScreenHeader title={t("diag.title")} />
-        <ScrollView contentContainerStyle={{ padding: 20, paddingBottom: 40 }}>
+        <ScrollView contentContainerStyle={{ padding: 20, paddingBottom: 100 }}>
           <Text style={st.sub}>{t("diag.sub")}</Text>
 
           <View style={st.tabs}>
@@ -141,6 +142,7 @@ export default function DiagScreen() {
             </View>
           )}
         </ScrollView>
+              <BottomNav active="diag" />
       </SafeAreaView>
     </View>
   );
