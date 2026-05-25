@@ -45,6 +45,8 @@
       "eas": {
         "projectId": "4e271bf2-0656-41dd-96cc-0d55adc09b0e"
       }
-    }
+    },
+    "privacy": "public",
+    "privacyPolicyUrl": "https://sites.google.com/view/ridetune-privacy/p%C3%A1gina-inicial"
   }
 }
