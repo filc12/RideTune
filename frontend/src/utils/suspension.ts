@@ -260,7 +260,27 @@ export function calcSetupById(bikeId: string | null, load: Load): SetupResult {
   // Fallback: category-based heuristic
   const category = bikeId ? BIKE_BY_ID[bikeId]?.category : undefined;
   // noData: always true in fallback — real data was unavailable
-  return { ...calcSetup(load, category), confidence: 'category_estimate', isRealData: false, noData: true };
+  const heuristic = calcSetup(load, category);
+  return {
+    ...heuristic,
+    confidence: 'category_estimate',
+    isRealData: false,
+    noData: true,
+    frontVType: 'cl_hard',
+    rearVType: 'cl_hard',
+    adjDetails: {
+      front: {
+        preload: `${heuristic.front.preload} clicks up (from fully soft)`,
+        comp:    `${heuristic.front.compression} clicks out (from fully hard)`,
+        reb:     `${heuristic.front.rebound} clicks out (from fully hard)`,
+      },
+      rear: {
+        preload: `${heuristic.rear.preload} clicks up (from fully soft)`,
+        comp:    `${heuristic.rear.compression} clicks out (from fully hard)`,
+        reb:     `${heuristic.rear.rebound} clicks out (from fully hard)`,
+      },
+    },
+  };
 }
 
 export async function getLoad(): Promise<Load> {
