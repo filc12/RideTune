@@ -9,6 +9,7 @@ import { useT } from "@/src/i18n";
 import { deleteSetup, listSetups, saveSetup, type SavedSetup } from "@/src/utils/setups";
 import { useRouter } from "expo-router";
 import { calcSetupById, getLoad, saveLoad } from "@/src/utils/suspension";
+import { ConfidenceBadge } from "@/src/components/ConfidenceBadge";
 import { storage } from "@/src/utils/storage";
 import { bikeLabel } from "@/src/data/bikes";
 
@@ -29,7 +30,7 @@ export default function SetupsScreen() {
     const bikeId = (await storage.getItem<string>("ridetune.bike", "")) || "";
     const lo = await getLoad();
     const setup = calcSetupById(bikeId || null, lo);
-    await saveSetup({ name: trimmed, bikeId, bikeLabel: bikeLabel(bikeId), load: lo, setup });
+    await saveSetup({ name: trimmed, bikeId, bikeLabel: bikeLabel(bikeId), load: lo, setup, confidence: setup.confidence });
     setName("");
     setOpen(false);
     load();
@@ -85,6 +86,7 @@ export default function SetupsScreen() {
                   </View>
                   <View style={{ flex: 1 }}>
                     <Text style={st.rowTitle}>{s.name}</Text>
+                    {s.confidence && <ConfidenceBadge level={s.confidence} compact />}
                     <Text style={st.rowMeta}>
                       {s.bikeLabel} · {s.load.rider + s.load.passenger + s.load.luggage}kg · {t("card.sag" as never)} {s.setup.sag}mm
                     </Text>

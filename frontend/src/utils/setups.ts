@@ -1,5 +1,6 @@
 import { storage } from "@/src/utils/storage";
-import type { Setup, Load } from "./suspension";
+import type { Setup, Load, SetupResult } from "./suspension";
+import type { ConfidenceLevel } from "./suspensionReal";
 
 export type SavedSetup = {
   id: string;
@@ -8,6 +9,7 @@ export type SavedSetup = {
   bikeLabel: string;
   load: Load;
   setup: Setup;
+  confidence?: ConfidenceLevel;
   createdAt: number;
 };
 
