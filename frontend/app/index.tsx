@@ -337,9 +337,9 @@ function NoDataBadge() {
       borderLeftColor: "#F4B23E",
       gap: 6,
     }}>
-      <View style={{ flexDirection: "row", alignItems: "center", gap: 8 }}>
+      <View style={{ flexDirection: "row", alignItems: "center", gap: 8, flexWrap: "wrap" }}>
         <MaterialCommunityIcons name="alert-outline" size={15} color="#F4B23E" />
-        <Text style={{ color: "#F4B23E", fontSize: 12, fontWeight: "700", letterSpacing: 0.3 }}>
+        <Text style={{ color: "#F4B23E", fontSize: 12, fontWeight: "700", letterSpacing: 0.3, flexShrink: 1 }}>
           {t("card.nodata.title" as never)}
         </Text>
       </View>
@@ -356,7 +356,7 @@ function DataCell({ label, value, vtype, t }: { label: string; value: string; vt
   const unit = vtype && t ? t(("susp.unit." + vtype) as never) : undefined;
   return (
     <View style={styles.dataCell}>
-      <Text style={styles.dataLabel}>{label}</Text>
+      <Text style={styles.dataLabel} numberOfLines={1} adjustsFontSizeToFit minimumFontScale={0.6}>{label}</Text>
       <Text style={styles.dataValue}>{value}</Text>
       {unit ? <Text style={styles.dataUnit}>{unit}</Text> : null}
     </View>
@@ -512,10 +512,10 @@ const styles = StyleSheet.create({
   cardHeader: { flexDirection: "row", justifyContent: "space-between", alignItems: "flex-start" },
   kicker: { color: C.accent, fontSize: 10, fontWeight: "700", letterSpacing: 1.8 },
   cardTitle: { color: C.text, fontSize: 15, fontWeight: "700", marginTop: 4, maxWidth: 220 },
-  badge: { flexDirection: "row", alignItems: "center", gap: 6, paddingHorizontal: 10, paddingVertical: 6, borderRadius: 999, borderWidth: 1 },
+  badge: { flexDirection: "row", alignItems: "center", gap: 6, paddingHorizontal: 8, paddingVertical: 5, borderRadius: 999, borderWidth: 1, maxWidth: 130, flexShrink: 1 },
   badgeOk: { borderColor: "rgba(34,208,138,0.35)", backgroundColor: C.okSoft },
   badgeWarn: { borderColor: "rgba(244,178,62,0.35)", backgroundColor: C.warnSoft },
-  badgeLabel: { fontSize: 11, fontWeight: "600", letterSpacing: 0.2 },
+  badgeLabel: { fontSize: 10, fontWeight: "600", letterSpacing: 0.1, flexShrink: 1 },
   dot: { width: 6, height: 6, borderRadius: 3 },
   miniRow: { flexDirection: "row", marginTop: 16, backgroundColor: "rgba(255,255,255,0.025)", borderRadius: 12, borderWidth: 1, borderColor: C.border, paddingVertical: 12, paddingHorizontal: 14, alignItems: "center" },
   miniDivider: { width: 1, height: 28, backgroundColor: C.border, marginHorizontal: 10 },
