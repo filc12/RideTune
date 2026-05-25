@@ -20,6 +20,12 @@ import {
 // Output types
 // ─────────────────────────────────────────────
 
+export type ConfidenceLevel =
+  | 'real_oem'         // Official manufacturer manual — weight at stated value
+  | 'real_mfz'         // Verified factory baseline from mfzstudio.com
+  | 'brand_formula'    // Real base data + brand weight formula applied
+  | 'category_estimate'; // No factory data — heuristic by bike category
+
 export interface AdjResult {
   value: number | string | null;
   type: VType;
@@ -53,6 +59,7 @@ export interface SuspensionResult {
   countNote?: string;
   source: string;
   dataSource: 'real_factory' | 'interpolated';
+  confidence: ConfidenceLevel;
 }
 
 // ─────────────────────────────────────────────
@@ -144,6 +151,17 @@ function adjustSuzuki(base: number, total: number, type: VType): number {
     default:        return base;
   }
 }
+/**
+ * Kove formula — cl_hard damping only (preload is always pos/na on Kove models)
+ */
+function adjustKove(base: number, total: number, type: VType): number {
+  const delta = total - 75;
+  switch (type) {
+    case 'cl_hard': return clamp(base - Math.round(delta / 20), 1, 30);
+    default:        return base;
+  }
+}
+
 function applyFormula(
   profile: MfzProfile,
   base: number,
@@ -236,6 +254,27 @@ function buildAdjResult(sv: SuspVal, adjustedValue?: number): AdjResult {
 // MAIN FUNCTION
 // ─────────────────────────────────────────────
 
+// ─────────────────────────────────────────────
+// Confidence level calculation
+// ─────────────────────────────────────────────
+
+function calcConfidence(profile: MfzProfile, total: number): ConfidenceLevel {
+  const atBase = Math.abs(total - profile.baseKg) <= 5;
+
+  // Honda profiles sourced directly from official service manual
+  if (profile.dataQuality === 'oem_manual') {
+    return atBase ? 'real_oem' : 'brand_formula';
+  }
+
+  // CFMOTO: real multi-weight breakpoints, linear interpolation — always real
+  if (profile.formula === 'cfmoto_interp') {
+    return 'real_mfz';
+  }
+
+  // All other brands: mfzstudio verified baseline + formula
+  return atBase ? 'real_mfz' : 'brand_formula';
+}
+
 /**
  * Get suspension settings for a specific model and load.
  *
@@ -298,6 +337,7 @@ export function getRealSuspension(
     countNote:  profile.countNote,
     source:     profile.source,
     dataSource: isInterp ? 'interpolated' : 'real_factory',
+    confidence: calcConfidence(profile, total),
   };
 
   // Optional: high-speed and low-speed compression

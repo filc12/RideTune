@@ -24,6 +24,9 @@ export type VType =
   | 'pos'       // named position
   | 'na';       // not applicable
 
+export type DataQuality = 'oem_manual' | 'mfz_verified';
+
+
 export interface SuspVal {
   v: number | null;
   type: VType;
@@ -72,6 +75,7 @@ export interface MfzProfile {
   weightPoints?: WeightPoint[];
   countNote?: string;
   notes?: string;
+  dataQuality?: DataQuality;
 }
 
 // ─────────────────────────────────────────────
@@ -248,6 +252,7 @@ const HONDA: MfzProfile[] = [
   },
   {
     id: 'honda_at_1000l_2016_manual',
+    dataQuality: 'oem_manual',
     brand: 'Honda', model: 'Africa Twin CRF1000L Manual', year: '2016-2017',
     baseKg: 75, source: 'mfzstudio.com/moto/honda/', formula: 'honda',
     front: {
@@ -263,6 +268,7 @@ const HONDA: MfzProfile[] = [
   },
   {
     id: 'honda_at_1000l_2016_dct',
+    dataQuality: 'oem_manual',
     brand: 'Honda', model: 'Africa Twin CRF1000L DCT', year: '2016-2017',
     baseKg: 75, source: 'mfzstudio.com/moto/honda/', formula: 'honda',
     front: {
@@ -279,6 +285,7 @@ const HONDA: MfzProfile[] = [
   },
   {
     id: 'honda_at_1000l_2018_manual',
+    dataQuality: 'oem_manual',
     brand: 'Honda', model: 'Africa Twin CRF1000L Manual', year: '2018-2019',
     baseKg: 75, source: 'mfzstudio.com/moto/honda/', formula: 'honda',
     front: {
@@ -294,6 +301,7 @@ const HONDA: MfzProfile[] = [
   },
   {
     id: 'honda_at_1000l_advsports_2018',
+    dataQuality: 'oem_manual',
     brand: 'Honda', model: 'Africa Twin Adventure Sports Manual', year: '2018-2019',
     baseKg: 75, source: 'mfzstudio.com/moto/honda/', formula: 'honda',
     front: {
@@ -310,6 +318,7 @@ const HONDA: MfzProfile[] = [
   },
   {
     id: 'honda_at_1100l_2020_manual',
+    dataQuality: 'oem_manual',
     brand: 'Honda', model: 'Africa Twin CRF1100L Manual', year: '2020+',
     baseKg: 75, source: 'mfzstudio.com/moto/honda/', formula: 'honda',
     front: {
@@ -325,6 +334,7 @@ const HONDA: MfzProfile[] = [
   },
   {
     id: 'honda_at_1100l_2020_dct',
+    dataQuality: 'oem_manual',
     brand: 'Honda', model: 'Africa Twin CRF1100L DCT', year: '2020+',
     baseKg: 75, source: 'mfzstudio.com/moto/honda/', formula: 'honda',
     front: {

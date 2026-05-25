@@ -3,7 +3,7 @@
 import { storage } from "@/src/utils/storage";
 import type { BikeCategory } from "@/src/data/bikes";
 import { BIKE_BY_ID } from "@/src/data/bikes";
-import { getRealSuspension, type AdjResult } from "@/src/utils/suspensionReal";
+import { getRealSuspension, type AdjResult, type ConfidenceLevel } from "@/src/utils/suspensionReal";
 
 export type Setup = {
   front: { preload: number; rebound: number; compression: number };
@@ -13,6 +13,9 @@ export type Setup = {
 
 /** Extended result — includes real factory data when available. */
 export type SetupResult = Setup & {
+  /** Data confidence: how trustworthy is this result. */
+  confidence: ConfidenceLevel;
+  /** Derived: true when confidence !== 'category_estimate'. */
   isRealData: boolean;
   noData?: boolean;
   mfzProfileId?: string;
@@ -229,7 +232,8 @@ export function calcSetupById(bikeId: string | null, load: Load): SetupResult {
             compression: num(real.rear.compression),
           },
           sag: sagSetup.sag,
-          isRealData:    true,
+          confidence:    real.confidence,
+          isRealData:    real.confidence !== 'category_estimate',
           mfzProfileId:  bike.mfzProfileId,
           countNote:     real.countNote,
           frontVType:    real.front.rebound.type,
@@ -256,7 +260,7 @@ export function calcSetupById(bikeId: string | null, load: Load): SetupResult {
   // Fallback: category-based heuristic
   const category = bikeId ? BIKE_BY_ID[bikeId]?.category : undefined;
   // noData: always true in fallback — real data was unavailable
-  return { ...calcSetup(load, category), isRealData: false, noData: true };
+  return { ...calcSetup(load, category), confidence: 'category_estimate', isRealData: false, noData: true };
 }
 
 export async function getLoad(): Promise<Load> {

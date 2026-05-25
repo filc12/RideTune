@@ -265,13 +265,13 @@ export default function HomeScreen() {
   );
 }
 
-function getVType(s) {
+function getVType(s: string | undefined) {
   if (!s) return undefined;
   if (s.indexOf('mm') >= 0) return 'mm';
   if (s.indexOf('turns') >= 0) return s.indexOf('hard') >= 0 ? 'tu_hard' : 'tu_soft';
   return s.indexOf('hard') >= 0 ? 'cl_hard' : 'cl_soft';
 }
-function getNum(s, fallback) {
+function getNum(s: string | undefined, fallback: number) {
   if (!s) return String(fallback);
   const m = s.match(/^[0-9.]+/);
   return m ? m[0] : String(fallback);
