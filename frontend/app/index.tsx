@@ -324,9 +324,30 @@ function CountNote({ profileId, frontVType, rearVType }: { profileId?: string; f
 function NoDataBadge() {
   const { t } = useT();
   return (
-    <View style={{ padding: 12, borderRadius: 12, backgroundColor: "rgba(255,255,255,0.04)", borderWidth: 1, borderColor: "rgba(255,255,255,0.08)", alignItems: "center", marginTop: 8, gap: 4 }}>
-      <Text style={{ color: "#64748B", fontSize: 11, fontWeight: "700", letterSpacing: 0.4, textTransform: "uppercase" }}>{t("card.nodata.title" as never)}</Text>
-      <Text style={{ color: "#475569", fontSize: 11, textAlign: "center" }}>{t("card.nodata.sub" as never)}</Text>
+    <View style={{
+      marginTop: 10,
+      marginBottom: 4,
+      padding: 14,
+      borderRadius: 14,
+      backgroundColor: "rgba(244,178,62,0.08)",
+      borderWidth: 1,
+      borderColor: "rgba(244,178,62,0.30)",
+      borderLeftWidth: 3,
+      borderLeftColor: "#F4B23E",
+      gap: 6,
+    }}>
+      <View style={{ flexDirection: "row", alignItems: "center", gap: 8 }}>
+        <MaterialCommunityIcons name="alert-outline" size={15} color="#F4B23E" />
+        <Text style={{ color: "#F4B23E", fontSize: 12, fontWeight: "700", letterSpacing: 0.3 }}>
+          {t("card.nodata.title" as never)}
+        </Text>
+      </View>
+      <Text style={{ color: "#94A3B8", fontSize: 12, lineHeight: 18, marginLeft: 23 }}>
+        {t("card.nodata.sub" as never)}
+      </Text>
+      <Text style={{ color: "#64748B", fontSize: 11, lineHeight: 16, marginLeft: 23, marginTop: 2 }}>
+        {t("card.nodata.verify" as never)}
+      </Text>
     </View>
   );
 }
