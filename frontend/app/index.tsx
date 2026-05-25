@@ -20,6 +20,7 @@ import { storage } from "@/src/utils/storage";
 import { useT } from "@/src/i18n";
 import { calcSetup, calcSetupById, deriveMode, getLoad, saveLoad, type Load } from "@/src/utils/suspension";
 import { BIKES, BIKE_BY_ID, BIKE_CATEGORIES, type Bike } from "@/src/data/bikes";
+import { ConfidenceBadge } from "@/src/components/ConfidenceBadge";
 
 const C = {
   bg: "#070A0F",
@@ -198,6 +199,7 @@ export default function HomeScreen() {
                 </View>
               ) : (
                 <>
+                  <ConfidenceBadge level={setup.confidence} compact />
                   {setup.noData && <NoDataBadge />}
                   <SuspensionBlock title={t("card.front")} icon="arrow-up-bold-circle-outline" values={setup.front} adj={setup.adjDetails?.front} t={t} />
                   <View style={styles.hairline} />
