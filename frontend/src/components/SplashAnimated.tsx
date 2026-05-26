@@ -47,7 +47,7 @@ export function SplashAnimated({ onFinish }: Props) {
     <Animated.View style={[styles.root, { opacity: fadeOut }]}>
       <Animated.View style={{ opacity, transform: [{ scale }], alignItems: "center" }}>
         <Animated.View style={{ opacity: glowOpacity }}>
-          <Svg width={SIZE} height={SIZE * 0.62} viewBox="150 120 360 260">
+          <Svg width={SIZE} height={SIZE * 0.62} viewBox="90 105 450 340">
             <Defs>
               <LinearGradient id="shock-grad" x1="0%" y1="100%" x2="100%" y2="0%">
                 <Stop offset="0%" stopColor="#00f3ff" />
@@ -57,7 +57,7 @@ export function SplashAnimated({ onFinish }: Props) {
 
             {/* R */}
             <Path
-              d="M 125,120 L 125,320 M 125,125 L 245,125 A 65,65 0 0,1 310,190 A 65,65 0 0,1 245,255 L 125,255"
+              d="M 125,120 L 125,320 M 125,125 L 245,125 A 65,65 0 0,1 310,190 A 65,65 0 0,1 245,255 L 125,255 M 220,255 L 320,320"
               fill="none" stroke="#00f3ff" strokeWidth="18"
               strokeLinecap="round" strokeLinejoin="round"
             />
