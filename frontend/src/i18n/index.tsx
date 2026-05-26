@@ -905,14 +905,14 @@ const DICTS: Record<Lang, Dict> = { pt: PT, en: EN, es: ES, fr: FR };
 const K_LANG = "ridetune.lang";
 
 type Ctx = { lang: Lang; setLang: (l: Lang) => void; t: (k: keyof typeof PT) => string };
-const LangContext = createContext<Ctx>({ lang: "pt", setLang: () => {}, t: (k) => String(k) });
+const LangContext = createContext<Ctx>({ lang: "en", setLang: () => {}, t: (k) => String(k) });
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const [lang, setLangState] = useState<Lang>("pt");
+  const [lang, setLangState] = useState<Lang>("en");
 
   useEffect(() => {
     (async () => {
-      const stored = await storage.getItem<string>(K_LANG, "pt");
+      const stored = await storage.getItem<string>(K_LANG, "en");
       if (stored && (["pt", "en", "es", "fr"] as Lang[]).includes(stored as Lang)) {
         setLangState(stored as Lang);
       }
