@@ -33,7 +33,14 @@ export default function RootLayout() {
 
   return (
     <LanguageProvider>
-      <Stack screenOptions={{ headerShown: false, animation: "slide_from_right", animationDuration: 300, contentStyle: { backgroundColor: "#070A0F" } }} />
+      {(!splashDone || showOnboarding) && (
+        <Stack screenOptions={{ headerShown: false, animation: "none", contentStyle: { backgroundColor: "#070A0F" } }}>
+          <Stack.Screen name="index" options={{ headerShown: false }} />
+        </Stack>
+      )}
+      {splashDone && !showOnboarding && (
+        <Stack screenOptions={{ headerShown: false, animation: "slide_from_right", animationDuration: 300, contentStyle: { backgroundColor: "#070A0F" } }} />
+      )}
       {!splashDone && <SplashAnimated onFinish={() => setSplashDone(true)} />}
       {splashDone && (
         <OnboardingModal
