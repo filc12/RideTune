@@ -10,6 +10,8 @@ import { useT } from "@/src/i18n";
 import { deleteSetup, listSetups, saveSetup, type SavedSetup } from "@/src/utils/setups";
 import { useRouter } from "expo-router";
 import { calcSetupById, getLoad, saveLoad } from "@/src/utils/suspension";
+import { PremiumModal } from "@/src/components/PremiumModal";
+import { canSaveSetup } from "@/src/services/premium";
 import { ConfidenceBadge } from "@/src/components/ConfidenceBadge";
 import { storage } from "@/src/utils/storage";
 import { bikeLabel } from "@/src/data/bikes";
@@ -19,6 +21,7 @@ export default function SetupsScreen() {
   const router = useRouter();
   const [items, setItems] = useState<SavedSetup[]>([]);
   const [open, setOpen] = useState(false);
+  const [premiumModal, setPremiumModal] = useState(false);
   const [name, setName] = useState("");
   const [deleteTarget, setDeleteTarget] = useState<{ id: string; name: string } | null>(null);
 
@@ -66,7 +69,11 @@ export default function SetupsScreen() {
           <TouchableOpacity
             activeOpacity={0.9}
             style={st.saveBtn}
-            onPress={() => setOpen(true)}
+            onPress={async () => {
+              const allowed = await canSaveSetup();
+              if (!allowed) { setPremiumModal(true); return; }
+              setOpen(true);
+            }}
             testID="open-save-modal"
           >
             <Ionicons name="add-circle" size={18} color="#04111E" />
@@ -115,6 +122,8 @@ export default function SetupsScreen() {
         </ScrollView>
               <BottomNav active="home" />
       </SafeAreaView>
+
+      <PremiumModal visible={premiumModal} feature="Saved setups" onClose={() => setPremiumModal(false)} />
 
       <Modal transparent visible={!!deleteTarget} animationType="fade" onRequestClose={() => setDeleteTarget(null)}>
         <Pressable style={st.backdrop} onPress={() => setDeleteTarget(null)} />

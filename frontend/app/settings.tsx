@@ -6,11 +6,14 @@ import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 
 import { C, ScreenHeader } from "@/src/components/ScreenHeader";
+import { PremiumModal } from "@/src/components/PremiumModal";
+import { canUseLanguage } from "@/src/services/premium";
 import { LANGS, useT, type Lang } from "@/src/i18n";
 
 export default function SettingsScreen() {
   const { t, lang, setLang } = useT();
   const router = useRouter();
+  const [premiumModal, setPremiumModal] = React.useState(false);
   return (
     <View style={st.root} testID="settings-screen">
       <StatusBar barStyle="light-content" />
@@ -26,7 +29,11 @@ export default function SettingsScreen() {
                 <TouchableOpacity
                   key={l.code}
                   activeOpacity={0.85}
-                  onPress={() => setLang(l.code as Lang)}
+                  onPress={async () => {
+                    const allowed = await canUseLanguage(l.code);
+                    if (!allowed) { setPremiumModal(true); return; }
+                    setLang(l.code as Lang);
+                  }}
                   style={[st.row, active && st.rowActive]}
                   testID={`lang-${l.code}`}
                 >
@@ -82,6 +89,7 @@ export default function SettingsScreen() {
           </View>
         </ScrollView>
       </SafeAreaView>
+      <PremiumModal visible={premiumModal} feature="Multiple languages" onClose={() => setPremiumModal(false)} />
     </View>
   );
 }

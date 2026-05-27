@@ -21,6 +21,8 @@ import { useT } from "@/src/i18n";
 import { calcSetup, calcSetupById, deriveMode, getLoad, saveLoad, type Load } from "@/src/utils/suspension";
 import { BIKES, BIKE_BY_ID, BIKE_CATEGORIES, type Bike } from "@/src/data/bikes";
 import { ConfidenceBadge } from "@/src/components/ConfidenceBadge";
+import { PremiumModal } from "@/src/components/PremiumModal";
+import { canUseLoadMode, canAddBike } from "@/src/services/premium";
 import { BottomNav } from "@/src/components/BottomNav";
 
 const C = {
@@ -51,6 +53,7 @@ export default function HomeScreen() {
   const [bike, setBike] = useState<Bike | null>(null);
   const [load, setLoad] = useState<Load>({ rider: 75, passenger: 0, luggage: 0 });
   const [pickerOpen, setPickerOpen] = useState(false);
+  const [premiumModal, setPremiumModal] = useState<{ visible: boolean; feature?: string }>({ visible: false });
 
   const refresh = useCallback(async () => {
     const id = await storage.getItem<string>(K_BIKE, "");
@@ -65,12 +68,25 @@ export default function HomeScreen() {
   useFocusEffect(useCallback(() => { refresh(); }, [refresh]));
 
   const onPickBike = useCallback(async (b: Bike) => {
+    if (bike && bike.id !== b.id) {
+      const allowed = await canAddBike(1);
+      if (!allowed) {
+        setPremiumModal({ visible: true, feature: "Multiple bikes" });
+        setPickerOpen(false);
+        return;
+      }
+    }
     setBike(b);
     await storage.setItem(K_BIKE, b.id);
     setPickerOpen(false);
-  }, []);
+  }, [bike]);
 
   const onPickScenario = useCallback(async (m: LoadMode) => {
+    const allowed = await canUseLoadMode(m);
+    if (!allowed) {
+      setPremiumModal({ visible: true, feature: "Load modes (luggage, passenger, duo)" });
+      return;
+    }
     const presets: Record<LoadMode, Pick<Load, "passenger" | "luggage">> = {
       solo:      { passenger: 0,  luggage: 0  },
       malas:     { passenger: 0,  luggage: 20 },
@@ -264,6 +280,7 @@ export default function HomeScreen() {
       </SafeAreaView>
 
       <BikePicker open={pickerOpen} onClose={() => setPickerOpen(false)} onPick={onPickBike} selectedId={bike?.id} t={t} />
+      <PremiumModal visible={premiumModal.visible} feature={premiumModal.feature} onClose={() => setPremiumModal({ visible: false })} />
     </View>
   );
 }
