@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Stack, useRouter } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { LanguageProvider } from "@/src/i18n";
@@ -13,18 +13,32 @@ const K_ONBOARDED = "ridetune.onboarded";
 function AppWithSplash() {
   const router = useRouter();
   const [splashDone, setSplashDone] = useState(false);
+  const [onboarded, setOnboarded] = useState<boolean | null>(null);
 
-  const handleSplashFinish = async () => {
+  useEffect(() => {
+    storage.getItem<string>(K_ONBOARDED, "").then((val) => {
+      setOnboarded(!!val);
+    });
+  }, []);
+
+  const handleSplashFinish = () => {
     setSplashDone(true);
-    const onboarded = await storage.getItem<string>(K_ONBOARDED, "");
-    if (!onboarded) {
+    if (onboarded === false) {
       router.replace("/onboarding" as never);
     }
   };
 
+  // Don't render Stack until we know onboarding status
+  if (onboarded === null) return null;
+
   return (
     <>
-      <Stack screenOptions={{ headerShown: false, animation: "slide_from_right", animationDuration: 300, contentStyle: { backgroundColor: "#070A0F" } }} />
+      <Stack screenOptions={{
+        headerShown: false,
+        animation: "slide_from_right",
+        animationDuration: 300,
+        contentStyle: { backgroundColor: "#070A0F" }
+      }} />
       {!splashDone && <SplashAnimated onFinish={handleSplashFinish} />}
     </>
   );
