@@ -47,6 +47,22 @@ export default function SettingsScreen() {
           <Text style={[st.section, { marginTop: 28 }]}>{t("settings.about").toUpperCase()}</Text>
           <TouchableOpacity
             activeOpacity={0.85}
+            onPress={() => router.push("/profiles" as never)}
+            style={st.row}
+            testID="open-profiles"
+          >
+            <View style={st.iconBox}>
+              <Ionicons name="person-outline" size={18} color={C.accent} />
+            </View>
+            <View style={{ flex: 1 }}>
+              <Text style={st.rowLabel}>Rider Profiles</Text>
+              <Text style={st.rowSub}>Manage saved rider profiles</Text>
+            </View>
+            <Ionicons name="chevron-forward" size={16} color={C.textMute} />
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            activeOpacity={0.85}
             onPress={() => router.push("/informacoes" as never)}
             style={st.row}
             testID="open-info"

@@ -10,6 +10,7 @@ import { C, ScreenHeader } from "@/src/components/ScreenHeader";
 import { BottomNav } from "@/src/components/BottomNav";
 import { useT } from "@/src/i18n";
 import { calcSetup, calcSetupById, getLoad, saveLoad, type Load } from "@/src/utils/suspension";
+import { getActiveProfile } from "@/src/utils/profiles";
 
 const RIDER_BOUNDS = { min: 40, max: 130, step: 1 };
 const PASSENGER_BOUNDS = { min: 0, max: 120, step: 1 };
@@ -24,7 +25,13 @@ export default function CargaScreen() {
 
   useEffect(() => {
     (async () => {
-      setLoad(await getLoad());
+      const active = await getActiveProfile();
+      const stored = await getLoad();
+      if (active && stored.rider === 75) {
+        setLoad({ ...stored, rider: active.weightKg });
+      } else {
+        setLoad(stored);
+      }
       const id = await storage.getItem<string>("ridetune.bike", "");
       if (id) setBikeId(id);
     })();
