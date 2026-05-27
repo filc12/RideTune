@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { KeyboardAvoidingView, Platform, ScrollView, StatusBar, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { KeyboardAvoidingView, Modal, Platform, Pressable, ScrollView, StatusBar, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { LinearGradient } from "expo-linear-gradient";
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
@@ -10,7 +10,7 @@ import { C, ScreenHeader } from "@/src/components/ScreenHeader";
 import { BottomNav } from "@/src/components/BottomNav";
 import { useT } from "@/src/i18n";
 import { calcSetup, calcSetupById, getLoad, saveLoad, type Load } from "@/src/utils/suspension";
-import { getActiveProfile } from "@/src/utils/profiles";
+import { getActiveProfile, updateProfile, type RiderProfile } from "@/src/utils/profiles";
 
 const RIDER_BOUNDS = { min: 40, max: 130, step: 1 };
 const PASSENGER_BOUNDS = { min: 0, max: 120, step: 1 };
@@ -22,10 +22,13 @@ export default function CargaScreen() {
   const [load, setLoad] = useState<Load>({ rider: 75, passenger: 0, luggage: 0 });
   const [bikeId, setBikeId] = useState<string | null>(null);
   const [saved, setSaved] = useState(false);
+  const [activeProfile, setActiveProfile] = useState<RiderProfile | null>(null);
+  const [confirmProfile, setConfirmProfile] = useState(false);
 
   useEffect(() => {
     (async () => {
       const active = await getActiveProfile();
+      if (active) setActiveProfile(active);
       const stored = await getLoad();
       if (active && stored.rider === 75) {
         setLoad({ ...stored, rider: active.weightKg });
@@ -46,10 +49,22 @@ export default function CargaScreen() {
     setSaved(false);
   };
 
-  const onSave = async () => {
+  const doSave = async (updateProf: boolean) => {
     await saveLoad(load);
+    if (updateProf && activeProfile && load.rider !== activeProfile.weightKg) {
+      await updateProfile(activeProfile.id, { weightKg: load.rider });
+      setActiveProfile({ ...activeProfile, weightKg: load.rider });
+    }
     setSaved(true);
     setTimeout(() => router.back(), 600);
+  };
+
+  const onSave = async () => {
+    if (activeProfile && load.rider !== activeProfile.weightKg) {
+      setConfirmProfile(true);
+    } else {
+      await doSave(false);
+    }
   };
 
   return (
@@ -119,6 +134,24 @@ export default function CargaScreen() {
           </ScrollView>
         </KeyboardAvoidingView>
               <BottomNav active="carga" />
+
+      <Modal transparent visible={confirmProfile} animationType="fade" onRequestClose={() => setConfirmProfile(false)}>
+        <Pressable style={st.backdrop} onPress={() => setConfirmProfile(false)} />
+        <View style={st.modal}>
+          <Text style={st.modalTitle}>Update profile?</Text>
+          <Text style={{ color: "#94A3B8", fontSize: 13, marginTop: 8, marginBottom: 20, lineHeight: 19 }}>
+            Update <Text style={{ color: "#F1F5F9", fontWeight: "700" }}>{activeProfile?.name}</Text> profile weight to <Text style={{ color: "#F1F5F9", fontWeight: "700" }}>{load.rider} kg</Text>?
+          </Text>
+          <View style={{ flexDirection: "row", gap: 10 }}>
+            <TouchableOpacity onPress={() => { setConfirmProfile(false); doSave(false); }} style={st.cancel} activeOpacity={0.8}>
+              <Text style={st.cancelLabel}>No</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => { setConfirmProfile(false); doSave(true); }} style={st.confirm} activeOpacity={0.9}>
+              <Text style={st.confirmLabel}>Yes, update</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
       </SafeAreaView>
     </View>
   );
@@ -287,5 +320,12 @@ const st = StyleSheet.create({
     backgroundColor: C.accent,
   },
   saveOk: { backgroundColor: C.ok },
+  backdrop: { ...StyleSheet.absoluteFillObject, backgroundColor: "rgba(0,0,0,0.6)" },
+  modal: { position: "absolute", left: 20, right: 20, top: "35%", backgroundColor: "#0E141C", borderRadius: 18, padding: 20, borderWidth: 1, borderColor: "rgba(255,255,255,0.14)" },
+  modalTitle: { color: "#F1F5F9", fontSize: 16, fontWeight: "700" },
+  cancel: { flex: 1, paddingVertical: 12, borderRadius: 12, borderWidth: 1, borderColor: "rgba(255,255,255,0.08)", alignItems: "center", backgroundColor: "rgba(255,255,255,0.04)" },
+  cancelLabel: { color: "#F1F5F9", fontWeight: "600" },
+  confirm: { flex: 1, paddingVertical: 12, borderRadius: 12, backgroundColor: "#3DA9FF", alignItems: "center" },
+  confirmLabel: { color: "#04111E", fontWeight: "700" },
   saveLabel: { color: "#04111E", fontWeight: "700", fontSize: 15 },
 });
