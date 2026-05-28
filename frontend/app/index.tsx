@@ -49,13 +49,25 @@ const K_BIKE = "ridetune.bike";
 export default function HomeScreen() {
   const router = useRouter();
   const insets = useSafeAreaInsets();
+  const [onboardingChecked, setOnboardingChecked] = React.useState(false);
 
+  React.useEffect(() => {
+    storage.getItem<string>("ridetune.onboarded", "").then((val) => {
+      if (!val) {
+        router.replace("/onboarding" as never);
+      } else {
+        setOnboardingChecked(true);
+      }
+    });
+  }, []);
 
   const { t } = useT();
   const [bike, setBike] = useState<Bike | null>(null);
   const [load, setLoad] = useState<Load>({ rider: 75, passenger: 0, luggage: 0 });
   const [pickerOpen, setPickerOpen] = useState(false);
   const [premiumModal, setPremiumModal] = useState<{ visible: boolean; feature?: string }>({ visible: false });
+
+  if (!onboardingChecked) return null;
 
   const refresh = useCallback(async () => {
     const id = await storage.getItem<string>(K_BIKE, "");
