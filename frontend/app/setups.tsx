@@ -121,7 +121,7 @@ export default function SetupsScreen() {
             </View>
           )}
         </ScrollView>
-              <BottomNav active="home" />
+              <BottomNav active="none" />
       </SafeAreaView>
 
       <PremiumModal visible={premiumModal} feature="Saved setups" onClose={() => setPremiumModal(false)} />

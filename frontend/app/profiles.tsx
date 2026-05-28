@@ -148,7 +148,7 @@ export default function ProfilesScreen() {
             </View>
           )}
         </ScrollView>
-        <BottomNav active="home" />
+        <BottomNav active="none" />
       </SafeAreaView>
 
       {/* Add/Edit Modal */}

@@ -9,6 +9,7 @@ import { C, ScreenHeader } from "@/src/components/ScreenHeader";
 import { PremiumModal } from "@/src/components/PremiumModal";
 import { canUseLanguage } from "@/src/services/premium";
 import { LANGS, useT, type Lang } from "@/src/i18n";
+import { BottomNav } from "@/src/components/BottomNav";
 import { HapticButton } from "@/src/components/HapticButton";
 
 export default function SettingsScreen() {
@@ -89,6 +90,7 @@ export default function SettingsScreen() {
             <Text style={st.version}>{t("settings.version")} 1.0.0</Text>
           </View>
         </ScrollView>
+        <BottomNav active="none" />
       </SafeAreaView>
       <PremiumModal visible={premiumModal} feature="Multiple languages" onClose={() => setPremiumModal(false)} />
     </View>

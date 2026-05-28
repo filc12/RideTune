@@ -19,7 +19,7 @@ const C = {
   accent: "#3DA9FF",
 };
 
-export type NavActive = "home" | "carga" | "diag" | "sag";
+export type NavActive = "home" | "carga" | "diag" | "sag" | "none";
 
 export function BottomNav({ active }: { active: NavActive }) {
   const router = useRouter();
@@ -43,7 +43,7 @@ export function BottomNav({ active }: { active: NavActive }) {
             <Pressable
               key={it.id}
               style={st.item}
-              onPress={() => { tapLight(); if (!isActive) router.push(it.href as never); }}
+              onPress={() => { tapLight(); if (!isActive) router.replace(it.href as never); }}
               testID={`nav-${it.id}`}
             >
               <MaterialCommunityIcons name={it.icon} size={22} color={isActive ? C.accent : C.textMute} />

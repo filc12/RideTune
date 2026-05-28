@@ -6,6 +6,7 @@ import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 
 import { C, ScreenHeader } from "@/src/components/ScreenHeader";
 import { useT } from "@/src/i18n";
+import { BottomNav } from "@/src/components/BottomNav";
 
 if (Platform.OS === "android" && UIManager.setLayoutAnimationEnabledExperimental) {
   UIManager.setLayoutAnimationEnabledExperimental(true);
@@ -74,6 +75,7 @@ export default function InfoScreen() {
             })}
           </View>
         </ScrollView>
+        <BottomNav active="none" />
       </SafeAreaView>
     </View>
   );
