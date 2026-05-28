@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { ScrollView, StatusBar, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { ScrollView, StatusBar, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { LinearGradient } from "expo-linear-gradient";
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
@@ -9,6 +9,7 @@ import { BottomNav } from "@/src/components/BottomNav";
 import { PremiumModal } from "@/src/components/PremiumModal";
 import { useT } from "@/src/i18n";
 import { isPremium } from "@/src/services/premium";
+import { HapticButton } from "@/src/components/HapticButton";
 
 const QUIZ_KEYS = ["diag.q1", "diag.q2", "diag.q3", "diag.q4", "diag.q5"] as const;
 
@@ -68,12 +69,12 @@ export default function DiagScreen() {
               <Text style={st.qNum}>{idx + 1} / {QUIZ_KEYS.length}</Text>
               <Text style={st.qText}>{t(QUIZ_KEYS[idx])}</Text>
               <View style={st.qButtons}>
-                <TouchableOpacity onPress={() => onAnswer(false)} style={st.qNo} activeOpacity={0.85} testID="answer-no">
+                <HapticButton onPress={() => onAnswer(false)} haptic="medium" style={st.qNo} activeOpacity={0.85} testID="answer-no">
                   <Text style={st.qNoLabel}>{t("diag.no")}</Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => onAnswer(true)} style={st.qYes} activeOpacity={0.85} testID="answer-yes">
+                </HapticButton>
+                <HapticButton onPress={() => onAnswer(true)} haptic="medium" style={st.qYes} activeOpacity={0.85} testID="answer-yes">
                   <Text style={st.qYesLabel}>{t("diag.yes")}</Text>
-                </TouchableOpacity>
+                </HapticButton>
               </View>
             </View>
           )}
@@ -84,7 +85,7 @@ export default function DiagScreen() {
 
               {/* Free users: show lock */}
               {!premium && recs.length > 0 && (
-                <TouchableOpacity style={st.lockCard} onPress={() => setPremiumModal(true)} activeOpacity={0.85}>
+                <HapticButton style={st.lockCard} onPress={() => setPremiumModal(true)} activeOpacity={0.85}>
                   <View style={st.lockIcon}>
                     <MaterialCommunityIcons name="lock" size={20} color="#F4B23E" />
                   </View>
@@ -93,7 +94,7 @@ export default function DiagScreen() {
                     <Text style={st.lockSub}>Upgrade to see personalised recommendations based on your answers.</Text>
                   </View>
                   <MaterialCommunityIcons name="chevron-right" size={18} color="#F4B23E" />
-                </TouchableOpacity>
+                </HapticButton>
               )}
 
               {/* All clear */}
@@ -117,10 +118,10 @@ export default function DiagScreen() {
                 </View>
               ))}
 
-              <TouchableOpacity onPress={restart} activeOpacity={0.85} style={st.restart} testID="restart-quiz">
+              <HapticButton onPress={restart} activeOpacity={0.85} style={st.restart} testID="restart-quiz">
                 <Ionicons name="refresh" size={16} color={C.text} />
                 <Text style={st.restartLabel}>{t("diag.restart")}</Text>
-              </TouchableOpacity>
+              </HapticButton>
             </View>
           )}
         </ScrollView>

@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { Modal, Pressable, ScrollView, StatusBar, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { Modal, Pressable, ScrollView, StatusBar, StyleSheet, Text, TextInput, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { LinearGradient } from "expo-linear-gradient";
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
@@ -15,6 +15,7 @@ import { canSaveSetup } from "@/src/services/premium";
 import { ConfidenceBadge } from "@/src/components/ConfidenceBadge";
 import { storage } from "@/src/utils/storage";
 import { bikeLabel } from "@/src/data/bikes";
+import { HapticButton } from "@/src/components/HapticButton";
 
 export default function SetupsScreen() {
   const { t } = useT();
@@ -66,7 +67,7 @@ export default function SetupsScreen() {
         <ScrollView contentContainerStyle={{ padding: 20, paddingBottom: 120 }}>
           <Text style={st.sub}>{t("setups.sub")}</Text>
 
-          <TouchableOpacity
+          <HapticButton
             activeOpacity={0.9}
             style={st.saveBtn}
             onPress={async () => {
@@ -78,7 +79,7 @@ export default function SetupsScreen() {
           >
             <Ionicons name="add-circle" size={18} color="#04111E" />
             <Text style={st.saveLabel}>{t("setups.save_current")}</Text>
-          </TouchableOpacity>
+          </HapticButton>
 
           {items.length === 0 ? (
             <View style={st.empty}>
@@ -99,22 +100,22 @@ export default function SetupsScreen() {
                       {s.bikeLabel} · {s.load.rider + s.load.passenger + s.load.luggage}kg · {t("card.sag" as never)} {s.setup.sag}mm
                     </Text>
                   </View>
-                  <TouchableOpacity
+                  <HapticButton
                     activeOpacity={0.8}
-                    onPress={() => onApply(s)}
+                    onPress={() => onApply(s)} haptic="medium"
                     style={st.apply}
                     testID={`apply-${s.id}`}
                   >
                     <Ionicons name="checkmark-circle-outline" size={16} color={C.ok} />
-                  </TouchableOpacity>
-                  <TouchableOpacity
+                  </HapticButton>
+                  <HapticButton
                     activeOpacity={0.7}
-                    onPress={() => onDelete(s.id, s.name)}
+                    onPress={() => onDelete(s.id, s.name)} haptic="warning"
                     style={st.del}
                     testID={`delete-${s.id}`}
                   >
                     <Ionicons name="trash-outline" size={16} color={C.warn} />
-                  </TouchableOpacity>
+                  </HapticButton>
                 </View>
               ))}
             </View>
@@ -137,12 +138,12 @@ export default function SetupsScreen() {
             <Text style={{ color: "#F1F5F9", fontWeight: "700" }}>{deleteTarget?.name}</Text>?
           </Text>
           <View style={{ flexDirection: "row", gap: 10 }}>
-            <TouchableOpacity onPress={() => setDeleteTarget(null)} style={st.cancel} activeOpacity={0.8}>
+            <HapticButton onPress={() => setDeleteTarget(null)} style={st.cancel} activeOpacity={0.8}>
               <Text style={st.cancelLabel}>{t("common.cancel" as never)}</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={confirmDelete} style={[st.confirm, { backgroundColor: "#F4B23E" }]} activeOpacity={0.9}>
+            </HapticButton>
+            <HapticButton onPress={confirmDelete} haptic="success" style={[st.confirm, { backgroundColor: "#F4B23E" }]} activeOpacity={0.9}>
               <Text style={[st.confirmLabel, { color: "#04111E" }]}>{t("setups.delete.btn" as never)}</Text>
-            </TouchableOpacity>
+            </HapticButton>
           </View>
         </View>
       </Modal>
@@ -161,12 +162,12 @@ export default function SetupsScreen() {
             autoFocus
           />
           <View style={{ flexDirection: "row", gap: 10 }}>
-            <TouchableOpacity onPress={() => setOpen(false)} style={st.cancel} activeOpacity={0.8} testID="cancel-save">
+            <HapticButton onPress={() => setOpen(false)} style={st.cancel} activeOpacity={0.8} testID="cancel-save">
               <Text style={st.cancelLabel}>{t("common.cancel")}</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={onSave} style={st.confirm} activeOpacity={0.9} testID="confirm-save">
+            </HapticButton>
+            <HapticButton onPress={onSave} haptic="success" style={st.confirm} activeOpacity={0.9} testID="confirm-save">
               <Text style={st.confirmLabel}>{t("common.save")}</Text>
-            </TouchableOpacity>
+            </HapticButton>
           </View>
         </View>
       </Modal>

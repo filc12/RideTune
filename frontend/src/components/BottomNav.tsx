@@ -9,6 +9,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useRouter } from "expo-router";
 import { useT } from "@/src/i18n";
+import { tapLight } from "@/src/utils/haptics";
 
 const C = {
   bg: "#070A0F",
@@ -42,7 +43,7 @@ export function BottomNav({ active }: { active: NavActive }) {
             <Pressable
               key={it.id}
               style={st.item}
-              onPress={() => router.push(it.href as never)}
+              onPress={() => { tapLight(); if (!isActive) router.push(it.href as never); }}
               testID={`nav-${it.id}`}
             >
               <MaterialCommunityIcons name={it.icon} size={22} color={isActive ? C.accent : C.textMute} />

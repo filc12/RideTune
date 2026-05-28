@@ -1,5 +1,5 @@
 import React from "react";
-import { ScrollView, StatusBar, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { ScrollView, StatusBar, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { LinearGradient } from "expo-linear-gradient";
 import { Ionicons } from "@expo/vector-icons";
@@ -9,6 +9,7 @@ import { C, ScreenHeader } from "@/src/components/ScreenHeader";
 import { PremiumModal } from "@/src/components/PremiumModal";
 import { canUseLanguage } from "@/src/services/premium";
 import { LANGS, useT, type Lang } from "@/src/i18n";
+import { HapticButton } from "@/src/components/HapticButton";
 
 export default function SettingsScreen() {
   const { t, lang, setLang } = useT();
@@ -26,7 +27,7 @@ export default function SettingsScreen() {
             {LANGS.map((l) => {
               const active = l.code === lang;
               return (
-                <TouchableOpacity
+                <HapticButton
                   key={l.code}
                   activeOpacity={0.85}
                   onPress={async () => {
@@ -46,13 +47,13 @@ export default function SettingsScreen() {
                   ) : (
                     <Ionicons name="ellipse-outline" size={18} color={C.textMute} />
                   )}
-                </TouchableOpacity>
+                </HapticButton>
               );
             })}
           </View>
 
           <Text style={[st.section, { marginTop: 28 }]}>{t("settings.about").toUpperCase()}</Text>
-          <TouchableOpacity
+          <HapticButton
             activeOpacity={0.85}
             onPress={() => router.push("/profiles" as never)}
             style={st.row}
@@ -66,9 +67,9 @@ export default function SettingsScreen() {
               <Text style={st.rowSub}>Manage saved rider profiles</Text>
             </View>
             <Ionicons name="chevron-forward" size={16} color={C.textMute} />
-          </TouchableOpacity>
+          </HapticButton>
 
-          <TouchableOpacity
+          <HapticButton
             activeOpacity={0.85}
             onPress={() => router.push("/informacoes" as never)}
             style={st.row}
@@ -82,7 +83,7 @@ export default function SettingsScreen() {
               <Text style={st.rowSub}>{t("settings.about.sub")}</Text>
             </View>
             <Ionicons name="chevron-forward" size={16} color={C.textMute} />
-          </TouchableOpacity>
+          </HapticButton>
 
           <View style={st.versionWrap}>
             <Text style={st.version}>{t("settings.version")} 1.0.0</Text>
