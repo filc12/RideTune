@@ -93,6 +93,7 @@ export const BIKES: Bike[] = [
   { id: "honda-xadv",        brand: "Honda", model: "X-ADV",                        cc: "745cc",  category: "adventure", adj: "fixed"   },
   { id: "honda-fireblade",   brand: "Honda", model: "CBR1000RR-R Fireblade",        cc: "999cc",  category: "sport",     adj: "full"    },
   // CB1000R: front compression only, rear preload+rebound (no front rebound, no rear compression)
+  { id: "honda-nt1100",      brand: "Honda", model: "NT1100",                        cc: "1084cc", category: "sport_touring", adj: "partial", mfzProfileId: "honda_nt1100_2022" },
   { id: "honda-cb1000r",     brand: "Honda", model: "CB1000R",                      cc: "998cc",  category: "naked",     adj: "partial" },
   // CB650R 2021+: Showa SFF-BP fully adjustable
   { id: "honda-cb650r",      brand: "Honda", model: "CB650R",                       cc: "649cc",  category: "naked",     adj: "full"    },
