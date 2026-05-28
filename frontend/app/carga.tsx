@@ -10,6 +10,7 @@ import { C, ScreenHeader } from "@/src/components/ScreenHeader";
 import { BottomNav } from "@/src/components/BottomNav";
 import { useT } from "@/src/i18n";
 import { calcSetup, calcSetupById, getLoad, saveLoad, type Load } from "@/src/utils/suspension";
+import { PremiumModal } from "@/src/components/PremiumModal";
 import { getActiveProfile, updateProfile, type RiderProfile } from "@/src/utils/profiles";
 
 const RIDER_BOUNDS = { min: 40, max: 130, step: 1 };
@@ -22,6 +23,7 @@ export default function CargaScreen() {
   const [load, setLoad] = useState<Load>({ rider: 75, passenger: 0, luggage: 0 });
   const [bikeId, setBikeId] = useState<string | null>(null);
   const [saved, setSaved] = useState(false);
+  const [premiumModal, setPremiumModal] = useState(false);
   const [activeProfile, setActiveProfile] = useState<RiderProfile | null>(null);
   const [confirmProfile, setConfirmProfile] = useState(false);
 
@@ -90,7 +92,12 @@ export default function CargaScreen() {
               label={t("carga.passenger")}
               value={load.passenger}
               bounds={PASSENGER_BOUNDS}
-              onChange={(v) => update("passenger", v, PASSENGER_BOUNDS)}
+              onChange={async (v) => {
+              const { canUseLoadMode } = await import("@/src/services/premium");
+              const allowed = await canUseLoadMode("duo");
+              if (!allowed) { setPremiumModal(true); return; }
+              update("passenger", v, PASSENGER_BOUNDS);
+            }}
               testID="passenger-row"
             />
             <WeightRow
@@ -98,7 +105,12 @@ export default function CargaScreen() {
               label={t("carga.luggage")}
               value={load.luggage}
               bounds={LUGGAGE_BOUNDS}
-              onChange={(v) => update("luggage", v, LUGGAGE_BOUNDS)}
+              onChange={async (v) => {
+              const { canUseLoadMode } = await import("@/src/services/premium");
+              const allowed = await canUseLoadMode("malas");
+              if (!allowed) { setPremiumModal(true); return; }
+              update("luggage", v, LUGGAGE_BOUNDS);
+            }}
               testID="luggage-row"
             />
 
@@ -153,6 +165,7 @@ export default function CargaScreen() {
         </View>
       </Modal>
       </SafeAreaView>
+      <PremiumModal visible={premiumModal} feature="Passenger and luggage" onClose={() => setPremiumModal(false)} />
     </View>
   );
 }

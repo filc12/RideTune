@@ -49,6 +49,15 @@ const K_BIKE = "ridetune.bike";
 export default function HomeScreen() {
   const router = useRouter();
   const insets = useSafeAreaInsets();
+
+  // Redirect to onboarding if not completed
+  React.useEffect(() => {
+    (async () => {
+      const { storage } = await import("@/src/utils/storage");
+      const onboarded = await storage.getItem<string>("ridetune.onboarded", "");
+      if (!onboarded) router.replace("/onboarding" as never);
+    })();
+  }, []);
   const { t } = useT();
   const [bike, setBike] = useState<Bike | null>(null);
   const [load, setLoad] = useState<Load>({ rider: 75, passenger: 0, luggage: 0 });
