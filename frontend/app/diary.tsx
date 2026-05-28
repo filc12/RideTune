@@ -8,7 +8,7 @@ import { C, ScreenHeader } from "@/src/components/ScreenHeader";
 import { BottomNav } from "@/src/components/BottomNav";
 import { PremiumModal } from "@/src/components/PremiumModal";
 import { isPremium } from "@/src/services/premium";
-import { listEntries, saveEntry, deleteEntry, formatEntry, FREE_DIARY_LIMIT, type DiaryEntry } from "@/src/utils/diary";
+import { listEntries, saveEntry, updateEntry, deleteEntry, formatEntry, FREE_DIARY_LIMIT, type DiaryEntry } from "@/src/utils/diary";
 import { storage } from "@/src/utils/storage";
 
 const RATINGS = [1,2,3,4,5];
@@ -22,6 +22,7 @@ export default function DiaryScreen() {
   const [rating, setRating] = useState(4);
   const [bikeLabel, setBikeLabel] = useState("Unknown bike");
   const [setup, setSetup] = useState("");
+  const [editTarget, setEditTarget] = useState<DiaryEntry | null>(null);
 
   const load = useCallback(async () => {
     const [all, prem] = await Promise.all([listEntries(), isPremium()]);
@@ -61,9 +62,22 @@ export default function DiaryScreen() {
     setModalOpen(true);
   };
 
+  const onEdit = (e: DiaryEntry) => {
+    setEditTarget(e);
+    setNotes(e.notes);
+    setRating(e.rating);
+    setSetup(e.setup);
+    setModalOpen(true);
+  };
+
   const onSave = async () => {
     if (!notes.trim()) return;
-    await saveEntry({ bikeLabel, setup: setup.trim() || "No setup noted", rating, notes: notes.trim() });
+    if (editTarget) {
+      await updateEntry(editTarget.id, { setup: setup.trim() || "No setup noted", rating, notes: notes.trim() });
+    } else {
+      await saveEntry({ bikeLabel, setup: setup.trim() || "No setup noted", rating, notes: notes.trim() });
+    }
+    setEditTarget(null);
     setModalOpen(false);
     load();
   };
@@ -118,6 +132,9 @@ export default function DiaryScreen() {
                       <TouchableOpacity onPress={() => onShare(e)} style={st.actionBtn}>
                         <Ionicons name="share-outline" size={16} color={C.accent} />
                       </TouchableOpacity>
+                      <TouchableOpacity onPress={() => onEdit(e)} style={[st.actionBtn, { borderColor: "rgba(61,169,255,0.3)" }]}>
+                        <Ionicons name="pencil-outline" size={16} color={C.accent} />
+                      </TouchableOpacity>
                       <TouchableOpacity onPress={() => onDelete(e.id)} style={[st.actionBtn, { borderColor: "rgba(244,178,62,0.3)" }]}>
                         <Ionicons name="trash-outline" size={16} color={C.warn} />
                       </TouchableOpacity>
@@ -139,10 +156,10 @@ export default function DiaryScreen() {
       </SafeAreaView>
 
       {/* New entry modal */}
-      <Modal transparent visible={modalOpen} animationType="slide" onRequestClose={() => setModalOpen(false)}>
-        <Pressable style={st.backdrop} onPress={() => setModalOpen(false)} />
+      <Modal transparent visible={modalOpen} animationType="slide" onRequestClose={() => { setModalOpen(false); setEditTarget(null); }}>
+        <Pressable style={st.backdrop} onPress={() => { setModalOpen(false); setEditTarget(null); }} />
         <View style={st.sheet}>
-          <Text style={st.sheetTitle}>New diary entry</Text>
+          <Text style={st.sheetTitle}>{editTarget ? "Edit entry" : "New diary entry"}</Text>
           <Text style={st.sheetLabel}>Rating</Text>
           <View style={st.starsRow}>
             {RATINGS.map(r => (
@@ -153,7 +170,7 @@ export default function DiaryScreen() {
           </View>
           <Text style={st.sheetLabel}>Setup changes (optional)</Text>
           <TextInput
-            value={setup}
+            value={setup ?? ""}
             onChangeText={setSetup}
             placeholder="e.g. -2 clicks rear compression"
             placeholderTextColor={C.textMute}
@@ -170,7 +187,7 @@ export default function DiaryScreen() {
             autoFocus
           />
           <View style={{ flexDirection: "row", gap: 10, marginTop: 4 }}>
-            <TouchableOpacity onPress={() => setModalOpen(false)} style={st.cancel}>
+            <TouchableOpacity onPress={() => { setModalOpen(false); setEditTarget(null); }} style={st.cancel}>
               <Text style={st.cancelLabel}>Cancel</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={onSave} style={[st.confirm, !notes.trim() && { opacity: 0.4 }]}>

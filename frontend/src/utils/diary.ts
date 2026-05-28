@@ -30,6 +30,15 @@ export async function saveEntry(e: Omit<DiaryEntry, "id" | "createdAt">): Promis
   return next;
 }
 
+export async function updateEntry(id: string, e: Partial<Omit<DiaryEntry, "id" | "createdAt">>): Promise<void> {
+  const all = await listEntries();
+  const idx = all.findIndex(x => x.id === id);
+  if (idx >= 0) {
+    all[idx] = { ...all[idx], ...e };
+    await storage.setItem(K_DIARY, JSON.stringify(all));
+  }
+}
+
 export async function deleteEntry(id: string): Promise<void> {
   const all = await listEntries();
   await storage.setItem(K_DIARY, JSON.stringify(all.filter(x => x.id !== id)));
