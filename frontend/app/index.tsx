@@ -67,8 +67,6 @@ export default function HomeScreen() {
   const [pickerOpen, setPickerOpen] = useState(false);
   const [premiumModal, setPremiumModal] = useState<{ visible: boolean; feature?: string }>({ visible: false });
 
-  if (!onboardingChecked) return null;
-
   const refresh = useCallback(async () => {
     const id = await storage.getItem<string>(K_BIKE, "");
     if (id) {
@@ -114,6 +112,8 @@ export default function HomeScreen() {
 
   const mode: LoadMode = deriveMode(load);
   const setup = calcSetupById(bike?.id ?? null, load);
+
+  if (!onboardingChecked) return null;
 
   const scenarios: { id: LoadMode; labelKey: string; icon: keyof typeof MaterialCommunityIcons.glyphMap }[] = [
     { id: "solo", labelKey: "scenario.solo", icon: "account" },
