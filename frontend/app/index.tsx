@@ -406,15 +406,15 @@ function SectionTitle({ title }: { title: string }) {
 
 function FeatureCard({ icon, title, desc, onPress, testID, highlight }: { icon: keyof typeof MaterialCommunityIcons.glyphMap; title: string; desc: string; onPress: () => void; testID?: string; highlight?: boolean }) {
   return (
-    <TouchableOpacity activeOpacity={0.85} style={styles.feature} onPress={onPress} testID={testID}>
-      <View style={styles.featureIcon}>
-        <MaterialCommunityIcons name={icon} size={18} color={C.accent} />
+    <TouchableOpacity activeOpacity={0.85} style={[styles.feature, highlight && { borderColor: "rgba(244,178,62,0.5)", backgroundColor: "rgba(244,178,62,0.07)" }]} onPress={onPress} testID={testID}>
+      <View style={[styles.featureIcon, highlight && { backgroundColor: "rgba(244,178,62,0.18)", borderColor: "rgba(244,178,62,0.4)" }]}>
+        <MaterialCommunityIcons name={icon} size={18} color={highlight ? "#F4B23E" : C.accent} />
       </View>
       <View style={{ flex: 1 }}>
-        <Text style={styles.featureTitle}>{title}</Text>
+        <Text style={[styles.featureTitle, highlight && { color: "#F4B23E" }]}>{title}</Text>
         <Text style={styles.featureDesc}>{desc}</Text>
       </View>
-      <Ionicons name="chevron-forward" size={16} color={C.textMute} />
+      <Ionicons name="chevron-forward" size={16} color={highlight ? "#F4B23E" : C.textMute} />
     </TouchableOpacity>
   );
 }

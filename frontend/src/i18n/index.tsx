@@ -465,6 +465,8 @@ const EN: Dict = {
   "common.cancel": "Cancel",
   "common.save": "Save",
   "common.clicks": "clks",
+  "tools.diary": "Ride Diary",
+  "tools.diary.desc": "Record ride sensations and setup changes",
 };
 
 const ES: Dict = {
@@ -687,7 +689,8 @@ const ES: Dict = {
   "common.cancel": "Cancelar",
   "common.save": "Guardar",
   "common.clicks": "clks",
-
+  "tools.diary": "Diario de Ruta",
+  "tools.diary.desc": "Registra sensaciones y cambios de setup",
 };
 
 const FR: Dict = {
