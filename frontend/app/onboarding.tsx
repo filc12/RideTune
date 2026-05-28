@@ -16,13 +16,17 @@ export default function OnboardingScreen() {
   const [weight, setWeight] = useState("75");
 
   const handleFinish = async () => {
-    const w = parseInt(weight) || 75;
-    const n = name.trim() || "Rider";
-    await saveProfile({ name: n, weightKg: w });
-    const lo = await getLoad();
-    await saveLoad({ ...lo, rider: w });
+    try {
+      const w = parseInt(weight) || 75;
+      const n = name.trim() || "Rider";
+      await saveProfile({ name: n, weightKg: w });
+      const lo = await getLoad();
+      await saveLoad({ ...lo, rider: w });
+    } catch (e) {
+      // ignore profile save errors
+    }
     await storage.setItem(K_ONBOARDED, "true");
-    router.replace("/");
+    router.replace("/" as never);
   };
 
   return (
