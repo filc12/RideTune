@@ -284,7 +284,7 @@ export default function HomeScreen() {
           {/* Tools */}
           <SectionTitle title={t("section.tools")} />
           <View style={styles.featuresCol}>
-            <FeatureCard icon="notebook-outline" title={t("tools.diary")} desc={t("tools.diary.desc")} onPress={() => router.push("/diary" as never)} testID="feature-diary" />
+            <FeatureCard icon="notebook-outline" title={t("tools.diary")} desc={t("tools.diary.desc")} onPress={() => router.push("/diary" as never)} testID="feature-diary" highlight />
             <FeatureCard icon="speedometer" title={t("tools.sag")} desc={t("tools.sag.desc")} onPress={() => router.push("/sag" as never)} testID="feature-sag" />
             <FeatureCard icon="stethoscope" title={t("tools.diag")} desc={t("tools.diag.desc")} onPress={() => router.push("/diagnostico" as never)} testID="feature-diagnostico" />
             <FeatureCard icon="content-save-cog-outline" title={t("tools.setups")} desc={t("tools.setups.desc")} onPress={() => router.push("/setups" as never)} testID="feature-setups" />
@@ -404,7 +404,7 @@ function SectionTitle({ title }: { title: string }) {
   );
 }
 
-function FeatureCard({ icon, title, desc, onPress, testID }: { icon: keyof typeof MaterialCommunityIcons.glyphMap; title: string; desc: string; onPress: () => void; testID?: string }) {
+function FeatureCard({ icon, title, desc, onPress, testID, highlight }: { icon: keyof typeof MaterialCommunityIcons.glyphMap; title: string; desc: string; onPress: () => void; testID?: string; highlight?: boolean }) {
   return (
     <TouchableOpacity activeOpacity={0.85} style={styles.feature} onPress={onPress} testID={testID}>
       <View style={styles.featureIcon}>

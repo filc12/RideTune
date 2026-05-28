@@ -245,8 +245,8 @@ const PT: Dict = {
   "common.cancel": "Cancelar",
   "common.save": "Guardar",
   "common.clicks": "clks",
-  "tools.diary": "Diario de Ruta",
-  "tools.diary.desc": "Registra sensaciones y cambios de setup",
+  "tools.diary": "Diário de Viagem",
+  "tools.diary.desc": "Regista sensações e alterações ao setup",
 };
 
 const EN: Dict = {
@@ -908,8 +908,8 @@ const FR: Dict = {
   "common.cancel": "Annuler",
   "common.save": "Enregistrer",
   "common.clicks": "clks",
-  "tools.diary": "Ride Diary",
-  "tools.diary.desc": "Record ride sensations and setup changes",
+  "tools.diary": "Journal de Ride",
+  "tools.diary.desc": "Notez vos sensations et réglages",
 };
 
 const DE: Dict = {
