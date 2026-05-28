@@ -243,6 +243,8 @@ const PT: Dict = {
   "common.cancel": "Cancelar",
   "common.save": "Guardar",
   "common.clicks": "clks",
+  "tools.diary": "Diario de Ruta",
+  "tools.diary.desc": "Registra sensaciones y cambios de setup",
 };
 
 const EN: Dict = {
@@ -681,6 +683,8 @@ const ES: Dict = {
   "common.cancel": "Cancelar",
   "common.save": "Guardar",
   "common.clicks": "clks",
+  "tools.diary": "Diario de Ruta",
+  "tools.diary.desc": "Registra sensaciones y cambios de setup",
 };
 
 const FR: Dict = {
@@ -900,6 +904,8 @@ const FR: Dict = {
   "common.cancel": "Annuler",
   "common.save": "Enregistrer",
   "common.clicks": "clks",
+  "tools.diary": "Ride Diary",
+  "tools.diary.desc": "Record ride sensations and setup changes",
 };
 
 const DE: Dict = {
@@ -1061,6 +1067,8 @@ const DE: Dict = {
   "common.cancel": "Abbrechen",
   "common.save": "Speichern",
   "common.clicks": "Klicks",
+  "tools.diary": "Fahrttagebuch",
+  "tools.diary.desc": "Fahrgefühle und Setup-Änderungen aufzeichnen",
   "count.cfmoto_800mtx": "⚠️ CFMoto 800MT-X / 800MT / 800NK: Start von WEICH (gegen den Uhrzeigersinn bis zum Anschlag), dann Klicks im Uhrzeigersinn zählen.",
   "count.cfmoto_1000mtx": "⚠️ 1000MT-X ist UMGEKEHRT zu anderen CFMoto — Start von HART (im Uhrzeigersinn bis zum Anschlag), dann Klicks gegen den Uhrzeigersinn. Vordere Vorspannung in mm.",
   "count.cfmoto_700mt": "⚠️ 700MT hat gemischte Richtungen: vordere Druckstufe von weich (gegen UZS); hintere Zugstufe von hart (UZS). Kein hinterer Druckstufen-Einsteller.",
