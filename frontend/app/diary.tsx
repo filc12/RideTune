@@ -44,16 +44,26 @@ export default function DiaryScreen() {
     setRating(4);
     // Load current app setup as starting point
     try {
-      const { getLoad } = await import("@/src/utils/suspension");
-      const { calcSetupById } = await import("@/src/utils/suspension");
+      const { getLoad, calcSetupById } = await import("@/src/utils/suspension");
       const bikeId = await storage.getItem<string>("ridetune.bike", "");
       const lo = await getLoad();
       if (bikeId) {
         const s = calcSetupById(bikeId, lo);
-        if (s?.front?.preload) {
+        if (s) {
           const fp = s.front.preload;
-          const rp = s.rear?.preload;
-          setSetup(`F.Preload: ${fp}  |  R.Preload: ${rp ?? "—"}`);
+          const fr = s.front.rebound;
+          const fc = s.front.compression;
+          const rp = s.rear.preload;
+          const rr = s.rear.rebound;
+          const rc = s.rear.compression;
+          const parts = [];
+          if (fp) parts.push(`F.Pre: ${fp}`);
+          if (fr) parts.push(`F.Reb: ${fr}`);
+          if (fc) parts.push(`F.Comp: ${fc}`);
+          if (rp) parts.push(`R.Pre: ${rp}`);
+          if (rr) parts.push(`R.Reb: ${rr}`);
+          if (rc) parts.push(`R.Comp: ${rc}`);
+          setSetup(parts.join(" | "));
         } else {
           setSetup("");
         }
