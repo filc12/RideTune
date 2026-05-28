@@ -23,7 +23,7 @@ export default function HowItWorks() {
       <LinearGradient colors={["#0B1220", "#070A0F"]} style={StyleSheet.absoluteFill} />
       <SafeAreaView style={{ flex: 1 }} edges={["top"]}>
         <ScreenHeader title={t("cta.how_it_works")} />
-        <ScrollView contentContainerStyle={{ padding: 20, paddingBottom: 40 }}>
+        <ScrollView contentContainerStyle={{ padding: 20, paddingBottom: 120 }}>
           <Text style={st.kicker}>{t("hiw.kicker")}</Text>
           <Text style={st.title}>
             {t("hiw.title.l1")} <Text style={st.accent}>{t("hiw.title.l2")}</Text>.

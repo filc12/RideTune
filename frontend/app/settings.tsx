@@ -20,7 +20,7 @@ export default function SettingsScreen() {
       <LinearGradient colors={["#0B1220", "#070A0F"]} style={StyleSheet.absoluteFill} />
       <SafeAreaView style={{ flex: 1 }} edges={["top"]}>
         <ScreenHeader title={t("settings.title")} />
-        <ScrollView contentContainerStyle={{ padding: 20, paddingBottom: 40 }}>
+        <ScrollView contentContainerStyle={{ padding: 20, paddingBottom: 120 }}>
           <Text style={st.section}>{t("settings.language").toUpperCase()}</Text>
           <View style={{ gap: 8 }}>
             {LANGS.map((l) => {

@@ -63,7 +63,7 @@ export default function SetupsScreen() {
       <LinearGradient colors={["#0B1220", "#070A0F"]} style={StyleSheet.absoluteFill} />
       <SafeAreaView style={{ flex: 1 }} edges={["top"]}>
         <ScreenHeader title={t("setups.title")} />
-        <ScrollView contentContainerStyle={{ padding: 20, paddingBottom: 100 }}>
+        <ScrollView contentContainerStyle={{ padding: 20, paddingBottom: 120 }}>
           <Text style={st.sub}>{t("setups.sub")}</Text>
 
           <TouchableOpacity
