@@ -349,6 +349,24 @@ const HONDA: MfzProfile[] = [
     },
     notes: 'DCT version — heavier front preload vs Manual.',
   },
+  {
+    id: 'honda_nt1100_2022',
+    brand: 'Honda', model: 'NT1100', year: '2022-2024',
+    baseKg: 75,
+    source: 'oem_manual',
+    formula: 'honda',
+    front: {
+      preload: tu_s(3),
+      comp:    na(),
+      reb:     na(),
+    },
+    rear: {
+      preload: cl_s(7),
+      comp:    na(),
+      reb:     tu_h(2),
+    },
+    notes: 'NT1100 2022-2024: front preload only (dial adjuster). Rear: preload (7 clicks from min) + stepless rebound. No compression adjusters.',
+  },
 ];
 
 // ─────────────────────────────────────────────

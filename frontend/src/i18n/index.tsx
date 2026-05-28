@@ -2,13 +2,14 @@
 import React, { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
 import { storage } from "@/src/utils/storage";
 
-export type Lang = "pt" | "en" | "es" | "fr" | "de";
+export type Lang = "pt" | "en" | "es" | "fr" | "de" | "it";
 export const LANGS: { code: Lang; label: string; flag: string }[] = [
   { code: "pt", label: "Português", flag: "PT" },
   { code: "en", label: "English", flag: "EN" },
   { code: "es", label: "Español", flag: "ES" },
   { code: "fr", label: "Français", flag: "FR" },
   { code: "de", label: "Deutsch", flag: "DE" },
+  { code: "it", label: "Italiano", flag: "IT" },
 ];
 
 type Dict = Record<string, string>;
@@ -683,8 +684,7 @@ const ES: Dict = {
   "common.cancel": "Cancelar",
   "common.save": "Guardar",
   "common.clicks": "clks",
-  "tools.diary": "Diario de Ruta",
-  "tools.diary.desc": "Registra sensaciones y cambios de setup",
+
 };
 
 const FR: Dict = {
@@ -1110,7 +1110,78 @@ const DE: Dict = {
   "count.yamaha_t700_2025": "↻ Im Uhrzeigersinn bis hart (0), Klicks gegen UZS zählen. Vordere Vorspannung: Abstand A in mm (beide Gabelbeine gleich halten). Hintere Vorspannung: ↺ gegen UZS, Klicks UZS zählen.",
 };
 
-const DICTS: Record<Lang, Dict> = { pt: PT, en: EN, es: ES, fr: FR, de: DE };
+
+const IT: Dict = {
+  ...EN,
+  "home.headline.l1": "Ottimizza la tua",
+  "home.headline.l2": "sospensione al carico reale",
+  "home.sub": "Scegli la moto, aggiungi peso, bagagli o passeggero e ottieni un punto di partenza pratico per il tuo setup.",
+  "cta.choose_bike": "Scegli moto",
+  "cta.how_it_works": "Come funziona",
+  "card.active": "Attivo",
+  "card.todo": "Configura",
+  "card.no_bike": "Nessuna moto selezionata",
+  "card.load_mode": "MODALITÀ CARICO",
+  "card.setup": "SETUP",
+  "card.setup.ready": "Pronto",
+  "card.setup.waiting": "In attesa moto",
+  "card.empty": "Nessuna moto selezionata.",
+  "card.front": "SOSPENSIONE ANTERIORE",
+  "card.rear": "SOSPENSIONE POSTERIORE",
+  "card.preload": "PRECARICO",
+  "card.rebound": "ESTENSIONE",
+  "card.compression": "COMPRESSIONE",
+  "card.sag": "SAG",
+  "card.how_to_set": "Come impostare",
+  "card.nodata.title": "Nessun dato di fabbrica",
+  "card.nodata.sub": "Imposta la sospensione tramite sag",
+  "card.nodata.verify": "Verifica sempre con una misurazione del sag prima di partire.",
+  "scenario.solo": "Solo",
+  "scenario.malas": "Con bagagli",
+  "scenario.duo": "Con passeggero",
+  "scenario.duo_malas": "Passeggero + bagagli",
+  "section.scenarios": "SCENARI RAPIDI",
+  "section.tools": "STRUMENTI",
+  "tools.sag": "Guida Sag",
+  "tools.sag.desc": "Misura e imposta correttamente il sag",
+  "tools.diag": "Diagnosi",
+  "tools.diag.desc": "Identifica e risolvi i problemi",
+  "tools.setups": "Setup salvati",
+  "tools.setups.desc": "Salva e riutilizza i tuoi setup",
+  "tools.diary": "Diario di Viaggio",
+  "tools.diary.desc": "Registra sensazioni e modifiche al setup",
+  "nav.home": "Home",
+  "nav.carga": "Carico",
+  "nav.diag": "Diagnosi",
+  "nav.sag": "Sag",
+  "carga.title": "Impostazione carico",
+  "carga.sub": "Inserisci il tuo peso, bagagli e passeggero.",
+  "carga.rider": "Pilota (con equipaggiamento)",
+  "carga.passenger": "Passeggero",
+  "carga.luggage": "Bagagli",
+  "carga.total": "CARICO TOTALE",
+  "carga.kg": "kg",
+  "carga.save": "Salva carico",
+  "carga.saved": "Salvato!",
+  "sag.title": "Guida Sag",
+  "sag.sub": "Misura e imposta correttamente il sag.",
+  "diag.title": "Diagnosi",
+  "diag.sub": "Identifica e risolvi i problemi di sospensione.",
+  "diag.yes": "Sì",
+  "diag.no": "No",
+  "diag.result": "RACCOMANDAZIONI",
+  "diag.ok": "Tutto a posto! La tua sospensione sembra ben impostata.",
+  "diag.restart": "Ricomincia",
+  "settings.title": "Impostazioni",
+  "settings.language": "Lingua",
+  "settings.about": "Informazioni sull'app",
+  "settings.version": "Versione",
+  "common.cancel": "Annulla",
+  "common.save": "Salva",
+  "common.clicks": "click",
+};
+
+const DICTS: Record<Lang, Dict> = { pt: PT, en: EN, es: ES, fr: FR, de: DE, it: IT };
 const K_LANG = "ridetune.lang";
 
 type Ctx = { lang: Lang; setLang: (l: Lang) => void; t: (k: keyof typeof PT) => string };
@@ -1122,7 +1193,7 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     (async () => {
       const stored = await storage.getItem<string>(K_LANG, "en");
-      if (stored && (["pt", "en", "es", "fr", "de"] as Lang[]).includes(stored as Lang)) {
+      if (stored && (["pt", "en", "es", "fr", "de", "it"] as Lang[]).includes(stored as Lang)) {
         setLangState(stored as Lang);
       }
     })();

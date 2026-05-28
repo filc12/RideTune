@@ -284,10 +284,10 @@ export default function HomeScreen() {
           {/* Tools */}
           <SectionTitle title={t("section.tools")} />
           <View style={styles.featuresCol}>
+            <FeatureCard icon="notebook-outline" title={t("tools.diary")} desc={t("tools.diary.desc")} onPress={() => router.push("/diary" as never)} testID="feature-diary" />
             <FeatureCard icon="speedometer" title={t("tools.sag")} desc={t("tools.sag.desc")} onPress={() => router.push("/sag" as never)} testID="feature-sag" />
             <FeatureCard icon="stethoscope" title={t("tools.diag")} desc={t("tools.diag.desc")} onPress={() => router.push("/diagnostico" as never)} testID="feature-diagnostico" />
             <FeatureCard icon="content-save-cog-outline" title={t("tools.setups")} desc={t("tools.setups.desc")} onPress={() => router.push("/setups" as never)} testID="feature-setups" />
-            <FeatureCard icon="notebook-outline" title={t("tools.diary")} desc={t("tools.diary.desc")} onPress={() => router.push("/diary" as never)} testID="feature-diary" />
           </View>
         </ScrollView>
 

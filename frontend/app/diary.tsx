@@ -19,7 +19,7 @@ export default function DiaryScreen() {
   const [modalOpen, setModalOpen] = useState(false);
   const [premiumModal, setPremiumModal] = useState(false);
   const [notes, setNotes] = useState("");
-  const [rating, setRating] = useState(3);
+  const [rating, setRating] = useState(4);
   const [bikeLabel, setBikeLabel] = useState("Unknown bike");
   const [setup, setSetup] = useState("");
 
@@ -40,8 +40,24 @@ export default function DiaryScreen() {
       return;
     }
     setNotes("");
-    setRating(3);
-    setSetup("");
+    setRating(4);
+    // Load current app setup as starting point
+    try {
+      const { getLoad } = await import("@/src/utils/suspension");
+      const { calcSetupById } = await import("@/src/utils/suspension");
+      const bikeId = await storage.getItem<string>("ridetune.bike", "");
+      const lo = await getLoad();
+      if (bikeId) {
+        const s = calcSetupById(bikeId, lo);
+        if (s?.front?.preload) {
+          const fp = s.front.preload;
+          const rp = s.rear?.preload;
+          setSetup(`F.Preload: ${fp}  |  R.Preload: ${rp ?? "—"}`);
+        } else {
+          setSetup("");
+        }
+      }
+    } catch { setSetup(""); }
     setModalOpen(true);
   };
 
