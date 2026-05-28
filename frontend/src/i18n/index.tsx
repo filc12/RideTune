@@ -243,7 +243,7 @@ const PT: Dict = {
   "hiw.clicks.howto.d": "1) Fecha o parafuso até ao fim (sem forçar). 2) Abre o número de cliques recomendado, contando um a um. 3) Anota o valor. Ajusta 1 clique de cada vez e testa em condução.",
   // common
   "common.cancel": "Cancelar",
-  "common.save": "Guardar",
+  "common.save": "Salvar",
   "common.clicks": "clks",
   "tools.diary": "Diário de Viagem",
   "tools.diary.desc": "Regista sensações e alterações ao setup",
