@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { KeyboardAvoidingView, Modal, Platform, Pressable, ScrollView, StatusBar, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { KeyboardAvoidingView, Modal, Platform, Pressable, ScrollView, StatusBar, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { LinearGradient } from "expo-linear-gradient";
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
@@ -12,6 +12,8 @@ import { useT } from "@/src/i18n";
 import { calcSetup, calcSetupById, getLoad, saveLoad, type Load } from "@/src/utils/suspension";
 import { PremiumModal } from "@/src/components/PremiumModal";
 import { getActiveProfile, updateProfile, type RiderProfile } from "@/src/utils/profiles";
+import { tapSuccess } from "@/src/utils/haptics";
+import { HapticButton } from "@/src/components/HapticButton";
 
 const RIDER_BOUNDS = { min: 40, max: 130, step: 1 };
 const PASSENGER_BOUNDS = { min: 0, max: 120, step: 1 };
@@ -52,6 +54,7 @@ export default function CargaScreen() {
   };
 
   const doSave = async (updateProf: boolean) => {
+    tapSuccess();
     await saveLoad(load);
     if (updateProf && activeProfile && load.rider !== activeProfile.weightKg) {
       await updateProfile(activeProfile.id, { weightKg: load.rider });
@@ -130,10 +133,10 @@ export default function CargaScreen() {
               <PreviewCell label={t("card.rear") + " · " + t("card.preload")} value={preview.adjDetails ? (preview.adjDetails.rear.preload.match(/^[0-9.]+/) || [String(preview.rear.preload)])[0] : String(preview.rear.preload)} unit={preview.adjDetails ? (preview.adjDetails.rear.preload.indexOf('mm') >= 0 ? 'mm' : 'clks') : 'clks'} />
             </View>
 
-            <TouchableOpacity
+            <HapticButton
               activeOpacity={0.9}
               style={[st.save, saved && st.saveOk]}
-              onPress={onSave}
+              onPress={onSave} haptic="none"
               testID="save-load"
             >
               <Ionicons
@@ -142,7 +145,7 @@ export default function CargaScreen() {
                 color={saved ? "#04111E" : "#04111E"}
               />
               <Text style={st.saveLabel}>{saved ? t("carga.saved") : t("carga.save")}</Text>
-            </TouchableOpacity>
+            </HapticButton>
           </ScrollView>
         </KeyboardAvoidingView>
               <BottomNav active="carga" />
@@ -155,12 +158,12 @@ export default function CargaScreen() {
             Update <Text style={{ color: "#F1F5F9", fontWeight: "700" }}>{activeProfile?.name}</Text> profile weight to <Text style={{ color: "#F1F5F9", fontWeight: "700" }}>{load.rider} kg</Text>?
           </Text>
           <View style={{ flexDirection: "row", gap: 10 }}>
-            <TouchableOpacity onPress={() => { setConfirmProfile(false); doSave(false); }} style={st.cancel} activeOpacity={0.8}>
+            <HapticButton onPress={() => { setConfirmProfile(false); doSave(false); }} haptic="none" style={st.cancel} activeOpacity={0.8}>
               <Text style={st.cancelLabel}>No</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => { setConfirmProfile(false); doSave(true); }} style={st.confirm} activeOpacity={0.9}>
+            </HapticButton>
+            <HapticButton onPress={() => { setConfirmProfile(false); doSave(true); }} haptic="none" style={st.confirm} activeOpacity={0.9}>
               <Text style={st.confirmLabel}>Yes, update</Text>
-            </TouchableOpacity>
+            </HapticButton>
           </View>
         </View>
       </Modal>
@@ -202,39 +205,39 @@ function WeightRow({
         <View style={[st.barFill, { width: `${Math.max(2, pct)}%` }]} />
       </View>
       <View style={st.stepRow}>
-        <TouchableOpacity
+        <HapticButton
           activeOpacity={0.8}
           style={st.stepBtn}
           onPress={() => onChange(value - 5)}
           testID={`${testID}-minus5`}
         >
           <Text style={st.stepLabel}>−5</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
+        </HapticButton>
+        <HapticButton
           activeOpacity={0.8}
           style={st.stepBtn}
           onPress={() => onChange(value - 1)}
           testID={`${testID}-minus1`}
         >
           <Text style={st.stepLabel}>−1</Text>
-        </TouchableOpacity>
+        </HapticButton>
         <View style={{ flex: 1 }} />
-        <TouchableOpacity
+        <HapticButton
           activeOpacity={0.8}
           style={st.stepBtn}
           onPress={() => onChange(value + 1)}
           testID={`${testID}-plus1`}
         >
           <Text style={st.stepLabel}>+1</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
+        </HapticButton>
+        <HapticButton
           activeOpacity={0.8}
           style={st.stepBtn}
           onPress={() => onChange(value + 5)}
           testID={`${testID}-plus5`}
         >
           <Text style={st.stepLabel}>+5</Text>
-        </TouchableOpacity>
+        </HapticButton>
       </View>
     </View>
   );

@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { Alert, Modal, Pressable, ScrollView, Share, StatusBar, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { Alert, KeyboardAvoidingView, Modal, Platform, Pressable, ScrollView, Share, StatusBar, StyleSheet, Text, TextInput, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { LinearGradient } from "expo-linear-gradient";
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
@@ -10,6 +10,8 @@ import { PremiumModal } from "@/src/components/PremiumModal";
 import { isPremium } from "@/src/services/premium";
 import { listEntries, saveEntry, updateEntry, deleteEntry, formatEntry, FREE_DIARY_LIMIT, type DiaryEntry } from "@/src/utils/diary";
 import { storage } from "@/src/utils/storage";
+import { tapSuccess } from "@/src/utils/haptics";
+import { HapticButton } from "@/src/components/HapticButton";
 
 const RATINGS = [1,2,3,4,5];
 
@@ -82,6 +84,7 @@ export default function DiaryScreen() {
 
   const onSave = async () => {
     if (!notes.trim()) return;
+    tapSuccess();
     if (editTarget) {
       await updateEntry(editTarget.id, { setup: setup.trim() || "No setup noted", rating, notes: notes.trim() });
     } else {
@@ -119,10 +122,10 @@ export default function DiaryScreen() {
             </View>
           )}
 
-          <TouchableOpacity style={[st.addBtn, (!premium && entries.length >= FREE_DIARY_LIMIT) && st.addBtnLocked]} onPress={onAdd} activeOpacity={0.9}>
+          <HapticButton style={[st.addBtn, (!premium && entries.length >= FREE_DIARY_LIMIT) && st.addBtnLocked]} onPress={onAdd} activeOpacity={0.9}>
             <Ionicons name="add-circle" size={18} color={(!premium && entries.length >= FREE_DIARY_LIMIT) ? C.textMute : "#04111E"} />
             <Text style={[st.addLabel, (!premium && entries.length >= FREE_DIARY_LIMIT) && { color: C.textMute }]}>New entry</Text>
-          </TouchableOpacity>
+          </HapticButton>
 
           {entries.length === 0 ? (
             <View style={st.empty}>
@@ -139,15 +142,15 @@ export default function DiaryScreen() {
                       <Text style={st.cardDate}>{new Date(e.createdAt).toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" })}</Text>
                     </View>
                     <View style={st.cardActions}>
-                      <TouchableOpacity onPress={() => onShare(e)} style={st.actionBtn}>
+                      <HapticButton onPress={() => onShare(e)} style={st.actionBtn}>
                         <Ionicons name="share-outline" size={16} color={C.accent} />
-                      </TouchableOpacity>
-                      <TouchableOpacity onPress={() => onEdit(e)} style={[st.actionBtn, { borderColor: "rgba(61,169,255,0.3)" }]}>
+                      </HapticButton>
+                      <HapticButton onPress={() => onEdit(e)} style={[st.actionBtn, { borderColor: "rgba(61,169,255,0.3)" }]}>
                         <Ionicons name="pencil-outline" size={16} color={C.accent} />
-                      </TouchableOpacity>
-                      <TouchableOpacity onPress={() => onDelete(e.id)} style={[st.actionBtn, { borderColor: "rgba(244,178,62,0.3)" }]}>
+                      </HapticButton>
+                      <HapticButton onPress={() => onDelete(e.id)} style={[st.actionBtn, { borderColor: "rgba(244,178,62,0.3)" }]}>
                         <Ionicons name="trash-outline" size={16} color={C.warn} />
-                      </TouchableOpacity>
+                      </HapticButton>
                     </View>
                   </View>
                   <View style={st.stars}>
@@ -168,14 +171,15 @@ export default function DiaryScreen() {
       {/* New entry modal */}
       <Modal transparent visible={modalOpen} animationType="slide" onRequestClose={() => { setModalOpen(false); setEditTarget(null); }}>
         <Pressable style={st.backdrop} onPress={() => { setModalOpen(false); setEditTarget(null); }} />
+        <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : undefined} style={st.kav} pointerEvents="box-none">
         <View style={st.sheet}>
           <Text style={st.sheetTitle}>{editTarget ? "Edit entry" : "New diary entry"}</Text>
           <Text style={st.sheetLabel}>Rating</Text>
           <View style={st.starsRow}>
             {RATINGS.map(r => (
-              <TouchableOpacity key={r} onPress={() => setRating(r)}>
+              <HapticButton key={r} onPress={() => setRating(r)}>
                 <Text style={[st.starPick, r <= rating && st.starPickActive]}>★</Text>
-              </TouchableOpacity>
+              </HapticButton>
             ))}
           </View>
           <Text style={st.sheetLabel}>Setup changes (optional)</Text>
@@ -197,14 +201,15 @@ export default function DiaryScreen() {
             autoFocus
           />
           <View style={{ flexDirection: "row", gap: 10, marginTop: 4 }}>
-            <TouchableOpacity onPress={() => { setModalOpen(false); setEditTarget(null); }} style={st.cancel}>
+            <HapticButton onPress={() => { setModalOpen(false); setEditTarget(null); }} style={st.cancel}>
               <Text style={st.cancelLabel}>Cancel</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={onSave} style={[st.confirm, !notes.trim() && { opacity: 0.4 }]}>
+            </HapticButton>
+            <HapticButton onPress={onSave} haptic="none" style={[st.confirm, !notes.trim() && { opacity: 0.4 }]}>
               <Text style={st.confirmLabel}>Save</Text>
-            </TouchableOpacity>
+            </HapticButton>
           </View>
         </View>
+        </KeyboardAvoidingView>
       </Modal>
 
       <PremiumModal visible={premiumModal} feature="Unlimited diary entries" onClose={() => setPremiumModal(false)} />
@@ -234,7 +239,8 @@ const st = StyleSheet.create({
   cardSetup: { color: C.textDim, fontSize: 12, marginBottom: 6 },
   cardNotes: { color: C.text, fontSize: 13.5, lineHeight: 20 },
   backdrop: { ...StyleSheet.absoluteFillObject, backgroundColor: "rgba(0,0,0,0.5)" },
-  sheet: { position: "absolute", left: 0, right: 0, bottom: 0, backgroundColor: "#0E141C", borderTopLeftRadius: 20, borderTopRightRadius: 20, padding: 24, borderWidth: 1, borderColor: C.borderHi },
+  kav: { ...StyleSheet.absoluteFillObject, justifyContent: "flex-end" },
+  sheet: { backgroundColor: "#0E141C", borderTopLeftRadius: 20, borderTopRightRadius: 20, padding: 24, borderWidth: 1, borderColor: C.borderHi },
   sheetTitle: { color: C.text, fontSize: 17, fontWeight: "700", marginBottom: 20 },
   sheetLabel: { color: C.textDim, fontSize: 12, fontWeight: "600", letterSpacing: 0.8, marginBottom: 8, marginTop: 14 },
   starsRow: { flexDirection: "row", gap: 8 },

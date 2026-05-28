@@ -7,7 +7,6 @@ import {
   StatusBar,
   StyleSheet,
   Text,
-  TouchableOpacity,
   View,
 } from "react-native";
 import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
@@ -23,6 +22,8 @@ import { BIKES, BIKE_BY_ID, BIKE_CATEGORIES, type Bike } from "@/src/data/bikes"
 import { ConfidenceBadge } from "@/src/components/ConfidenceBadge";
 import { PremiumModal } from "@/src/components/PremiumModal";
 import { canUseLoadMode, canAddBike } from "@/src/services/premium";
+import { tapMedium } from "@/src/utils/haptics";
+import { HapticButton } from "@/src/components/HapticButton";
 import { BottomNav } from "@/src/components/BottomNav";
 
 const C = {
@@ -80,6 +81,7 @@ export default function HomeScreen() {
   useFocusEffect(useCallback(() => { refresh(); }, [refresh]));
 
   const onPickBike = useCallback(async (b: Bike) => {
+    tapMedium();
     if (bike && bike.id !== b.id) {
       const allowed = await canAddBike(1);
       if (!allowed) {
@@ -94,6 +96,7 @@ export default function HomeScreen() {
   }, [bike]);
 
   const onPickScenario = useCallback(async (m: LoadMode) => {
+    tapMedium();
     const allowed = await canUseLoadMode(m);
     if (!allowed) {
       setPremiumModal({ visible: true, feature: "Load modes (luggage, passenger, duo)" });
@@ -139,14 +142,14 @@ export default function HomeScreen() {
                 Ride<Text style={styles.logoTextAccent}>Tune</Text>
               </Text>
             </View>
-            <TouchableOpacity
+            <HapticButton
               style={styles.settingsBtn}
               activeOpacity={0.7}
               onPress={() => router.push("/settings" as never)}
               testID="settings-btn"
             >
               <Feather name="settings" size={16} color={C.textDim} />
-            </TouchableOpacity>
+            </HapticButton>
           </View>
 
           {/* Hero */}
@@ -160,7 +163,7 @@ export default function HomeScreen() {
 
           {/* CTAs */}
           <View style={styles.ctaRow}>
-            <TouchableOpacity
+            <HapticButton
               onPress={() => setPickerOpen(true)}
               activeOpacity={0.9}
               style={styles.primaryCtaWrap}
@@ -171,15 +174,15 @@ export default function HomeScreen() {
                 <Text style={styles.primaryCtaLabel}>{t("cta.choose_bike")}</Text>
                 <Ionicons name="arrow-forward" size={16} color="#04111E" />
               </LinearGradient>
-            </TouchableOpacity>
-            <TouchableOpacity
+            </HapticButton>
+            <HapticButton
               onPress={() => router.push("/how-it-works" as never)}
               activeOpacity={0.85}
               style={styles.secondaryCta}
               testID="cta-how-it-works"
             >
               <Text style={styles.secondaryCtaLabel}>{t("cta.how_it_works")}</Text>
-            </TouchableOpacity>
+            </HapticButton>
           </View>
 
           {/* Dashboard card */}
@@ -223,10 +226,10 @@ export default function HomeScreen() {
                     <MaterialCommunityIcons name="motorbike" size={22} color={C.accent} />
                   </View>
                   <Text style={styles.emptyText}>{t("card.empty")}</Text>
-                  <TouchableOpacity activeOpacity={0.85} onPress={() => setPickerOpen(true)} style={styles.emptyBtn} testID="empty-choose-bike">
+                  <HapticButton activeOpacity={0.85} onPress={() => setPickerOpen(true)} style={styles.emptyBtn} testID="empty-choose-bike">
                     <Text style={styles.emptyBtnLabel}>{t("cta.choose_bike")}</Text>
                     <Ionicons name="arrow-forward" size={14} color={C.accent} />
-                  </TouchableOpacity>
+                  </HapticButton>
                 </View>
               ) : (
                 <>
@@ -267,16 +270,16 @@ export default function HomeScreen() {
             {scenarios.map((m) => {
               const active = m.id === mode;
               return (
-                <TouchableOpacity
+                <HapticButton
                   key={m.id}
                   activeOpacity={0.85}
-                  onPress={() => onPickScenario(m.id)}
+                  onPress={() => onPickScenario(m.id)} haptic="none"
                   style={[styles.chip, active && styles.chipActive]}
                   testID={`scenario-${m.id}`}
                 >
                   <MaterialCommunityIcons name={m.icon} size={16} color={active ? C.ok : C.textDim} />
                   <Text style={[styles.chipLabel, active && styles.chipLabelActive]}>{t(m.labelKey as never)}</Text>
-                </TouchableOpacity>
+                </HapticButton>
               );
             })}
           </View>
@@ -406,7 +409,7 @@ function SectionTitle({ title }: { title: string }) {
 
 function FeatureCard({ icon, title, desc, onPress, testID, highlight }: { icon: keyof typeof MaterialCommunityIcons.glyphMap; title: string; desc: string; onPress: () => void; testID?: string; highlight?: boolean }) {
   return (
-    <TouchableOpacity activeOpacity={0.85} style={[styles.feature, highlight && { borderColor: "rgba(244,178,62,0.5)", backgroundColor: "rgba(244,178,62,0.07)" }]} onPress={onPress} testID={testID}>
+    <HapticButton activeOpacity={0.85} style={[styles.feature, highlight && { borderColor: "rgba(244,178,62,0.5)", backgroundColor: "rgba(244,178,62,0.07)" }]} onPress={onPress} testID={testID}>
       <View style={[styles.featureIcon, highlight && { backgroundColor: "rgba(244,178,62,0.18)", borderColor: "rgba(244,178,62,0.4)" }]}>
         <MaterialCommunityIcons name={icon} size={18} color={highlight ? "#F4B23E" : C.accent} />
       </View>
@@ -415,7 +418,7 @@ function FeatureCard({ icon, title, desc, onPress, testID, highlight }: { icon: 
         <Text style={styles.featureDesc}>{desc}</Text>
       </View>
       <Ionicons name="chevron-forward" size={16} color={highlight ? "#F4B23E" : C.textMute} />
-    </TouchableOpacity>
+    </HapticButton>
   );
 }
 
@@ -449,9 +452,9 @@ function BikePicker({ open, onClose, onPick, selectedId, t }: { open: boolean; o
         <View style={styles.sheetHandle} />
         <View style={{ flexDirection: "row", alignItems: "center", gap: 8, marginBottom: 2 }}>
           {step !== "cat" && (
-            <TouchableOpacity onPress={() => setStep(step === "model" ? "brand" : "cat")} style={{ padding: 4, marginLeft: -4 }}>
+            <HapticButton onPress={() => setStep(step === "model" ? "brand" : "cat")} style={{ padding: 4, marginLeft: -4 }}>
               <Ionicons name="chevron-back" size={20} color={C.accent} />
-            </TouchableOpacity>
+            </HapticButton>
           )}
           <Text style={styles.sheetTitle}>{stepTitle}</Text>
         </View>
@@ -465,7 +468,7 @@ function BikePicker({ open, onClose, onPick, selectedId, t }: { open: boolean; o
             const count = BIKES.filter((b) => b.category === cat).length;
             if (count === 0) return null;
             return (
-              <TouchableOpacity key={cat} activeOpacity={0.85} style={styles.bikeRow}
+              <HapticButton key={cat} activeOpacity={0.85} style={styles.bikeRow}
                 onPress={() => { setSelCat(cat); setStep("brand"); }}>
                 <View style={styles.bikeIcon}>
                   <MaterialCommunityIcons name="motorbike" size={22} color={C.accent} />
@@ -475,13 +478,13 @@ function BikePicker({ open, onClose, onPick, selectedId, t }: { open: boolean; o
                   <Text style={styles.bikeModel}>{count} motos</Text>
                 </View>
                 <Ionicons name="chevron-forward" size={18} color={C.textMute} />
-              </TouchableOpacity>
+              </HapticButton>
             );
           })}
           {step === "brand" && brandsInCat.map((brand) => {
             const count = BIKES.filter((b) => b.category === selCat && b.brand === brand).length;
             return (
-              <TouchableOpacity key={brand} activeOpacity={0.85} style={styles.bikeRow}
+              <HapticButton key={brand} activeOpacity={0.85} style={styles.bikeRow}
                 onPress={() => { setSelBrand(brand); setStep("model"); }}>
                 <View style={styles.bikeIcon}>
                   <MaterialCommunityIcons name="motorbike" size={22} color={C.accent} />
@@ -491,13 +494,13 @@ function BikePicker({ open, onClose, onPick, selectedId, t }: { open: boolean; o
                   <Text style={styles.bikeModel}>{count} {count === 1 ? "modelo" : "modelos"}</Text>
                 </View>
                 <Ionicons name="chevron-forward" size={18} color={C.textMute} />
-              </TouchableOpacity>
+              </HapticButton>
             );
           })}
           {step === "model" && modelsInBrandCat.map((b) => {
             const active = b.id === selectedId;
             return (
-              <TouchableOpacity key={b.id} activeOpacity={0.85} onPress={() => handlePick(b)}
+              <HapticButton key={b.id} activeOpacity={0.85} onPress={() => handlePick(b)} haptic="none"
                 style={[styles.bikeRow, active && styles.bikeRowActive]} testID={`bike-${b.id}`}>
                 <View style={styles.bikeIcon}>
                   <MaterialCommunityIcons name="motorbike" size={22} color={C.accent} />
@@ -509,7 +512,7 @@ function BikePicker({ open, onClose, onPick, selectedId, t }: { open: boolean; o
                 {active
                   ? <Ionicons name="checkmark-circle" size={20} color={C.ok} />
                   : <Ionicons name="chevron-forward" size={18} color={C.textMute} />}
-              </TouchableOpacity>
+              </HapticButton>
             );
           })}
         </ScrollView>
