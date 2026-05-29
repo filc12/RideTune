@@ -7,15 +7,37 @@ import { useRouter } from "expo-router";
 
 import { C, ScreenHeader } from "@/src/components/ScreenHeader";
 import { PremiumModal } from "@/src/components/PremiumModal";
-import { canUseLanguage } from "@/src/services/premium";
+import { canUseLanguage, getPremiumStatus, setPremiumStatusForTesting } from "@/src/services/premium";
 import { LANGS, useT, type Lang } from "@/src/i18n";
 import { BottomNav } from "@/src/components/BottomNav";
 import { HapticButton } from "@/src/components/HapticButton";
+import { tapSuccess } from "@/src/utils/haptics";
 
 export default function SettingsScreen() {
   const { t, lang, setLang } = useT();
   const router = useRouter();
   const [premiumModal, setPremiumModal] = React.useState(false);
+  const [tapCount, setTapCount] = React.useState(0);
+  const [devOpen, setDevOpen] = React.useState(false);
+  const [devPremium, setDevPremium] = React.useState(false);
+
+  React.useEffect(() => {
+    getPremiumStatus().then(setDevPremium);
+  }, []);
+
+  const onVersionTap = () => {
+    const next = tapCount + 1;
+    setTapCount(next);
+    if (next >= 7) { setDevOpen(true); setTapCount(0); }
+  };
+
+  const onToggleDevPremium = async () => {
+    const next = !devPremium;
+    await setPremiumStatusForTesting(next);
+    setDevPremium(next);
+    tapSuccess();
+  };
+
   return (
     <View style={st.root} testID="settings-screen">
       <StatusBar barStyle="light-content" />
@@ -87,8 +109,33 @@ export default function SettingsScreen() {
           </HapticButton>
 
           <View style={st.versionWrap}>
-            <Text style={st.version}>{t("settings.version")} 1.0.0</Text>
+            <Text style={st.version} onPress={onVersionTap} suppressHighlighting>
+              {t("settings.version")} 1.0.0
+            </Text>
           </View>
+
+          {devOpen && (
+            <View style={st.devPanel} testID="dev-panel">
+              <Text style={st.devTitle}>DEV / TESTING</Text>
+              <HapticButton
+                haptic="none"
+                activeOpacity={0.85}
+                onPress={onToggleDevPremium}
+                style={[st.row, devPremium && st.rowActive]}
+                testID="dev-premium-toggle"
+              >
+                <View style={st.iconBox}>
+                  <Ionicons name={devPremium ? "star" : "star-outline"} size={18} color={devPremium ? C.ok : C.accent} />
+                </View>
+                <View style={{ flex: 1 }}>
+                  <Text style={st.rowLabel}>Premium</Text>
+                  <Text style={st.rowSub}>{devPremium ? "ON — all features unlocked" : "OFF — free plan limits"}</Text>
+                </View>
+                <Text style={[st.devState, { color: devPremium ? C.ok : C.textMute }]}>{devPremium ? "ON" : "OFF"}</Text>
+              </HapticButton>
+              <Text style={st.devHint}>Tap to toggle. Restart screens to see limits apply.</Text>
+            </View>
+          )}
         </ScrollView>
         <BottomNav active="none" />
       </SafeAreaView>
@@ -136,6 +183,10 @@ const st = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+  devPanel: { marginTop: 20, padding: 14, borderRadius: 14, backgroundColor: "rgba(244,178,62,0.07)", borderWidth: 1, borderColor: "rgba(244,178,62,0.3)", gap: 10 },
+  devTitle: { color: C.warn, fontSize: 10, fontWeight: "800", letterSpacing: 1.6 },
+  devState: { fontSize: 14, fontWeight: "800", letterSpacing: 0.5 },
+  devHint: { color: C.textMute, fontSize: 11, lineHeight: 15, textAlign: "center" },
   versionWrap: { marginTop: 30, alignItems: "center" },
   version: { color: C.textMute, fontSize: 12, letterSpacing: 0.6 },
 });

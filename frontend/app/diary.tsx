@@ -25,6 +25,7 @@ export default function DiaryScreen() {
   const [bikeLabel, setBikeLabel] = useState("Unknown bike");
   const [setup, setSetup] = useState("");
   const [editTarget, setEditTarget] = useState<DiaryEntry | null>(null);
+  const [deleteTarget, setDeleteTarget] = useState<DiaryEntry | null>(null);
 
   const load = useCallback(async () => {
     const [all, prem] = await Promise.all([listEntries(), isPremium()]);
@@ -95,11 +96,16 @@ export default function DiaryScreen() {
     load();
   };
 
-  const onDelete = (id: string) => {
-    Alert.alert("Delete entry?", "This cannot be undone.", [
-      { text: "Cancel", style: "cancel" },
-      { text: "Delete", style: "destructive", onPress: async () => { await deleteEntry(id); load(); } },
-    ]);
+  const onDelete = (e: DiaryEntry) => {
+    setDeleteTarget(e);
+  };
+
+  const confirmDelete = async () => {
+    if (!deleteTarget) return;
+    tapSuccess();
+    await deleteEntry(deleteTarget.id);
+    setDeleteTarget(null);
+    load();
   };
 
   const onShare = async (e: DiaryEntry) => {
@@ -148,7 +154,7 @@ export default function DiaryScreen() {
                       <HapticButton onPress={() => onEdit(e)} style={[st.actionBtn, { borderColor: "rgba(61,169,255,0.3)" }]}>
                         <Ionicons name="pencil-outline" size={16} color={C.accent} />
                       </HapticButton>
-                      <HapticButton onPress={() => onDelete(e.id)} style={[st.actionBtn, { borderColor: "rgba(244,178,62,0.3)" }]}>
+                      <HapticButton onPress={() => onDelete(e)} haptic="warning" style={[st.actionBtn, { borderColor: "rgba(244,178,62,0.3)" }]}>
                         <Ionicons name="trash-outline" size={16} color={C.warn} />
                       </HapticButton>
                     </View>
@@ -212,6 +218,25 @@ export default function DiaryScreen() {
         </KeyboardAvoidingView>
       </Modal>
 
+      <Modal transparent visible={!!deleteTarget} animationType="fade" onRequestClose={() => setDeleteTarget(null)}>
+        <Pressable style={st.delBackdrop} onPress={() => setDeleteTarget(null)} />
+        <View style={st.delModal}>
+          <View style={st.delIconWrap}>
+            <Ionicons name="trash-outline" size={22} color="#F4B23E" />
+          </View>
+          <Text style={st.delTitle}>Delete entry?</Text>
+          <Text style={st.delSub}>This cannot be undone.</Text>
+          <View style={{ flexDirection: "row", gap: 10, marginTop: 4 }}>
+            <HapticButton onPress={() => setDeleteTarget(null)} style={st.delCancel} activeOpacity={0.8}>
+              <Text style={st.delCancelLabel}>Cancel</Text>
+            </HapticButton>
+            <HapticButton onPress={confirmDelete} haptic="none" style={st.delConfirm} activeOpacity={0.9}>
+              <Text style={st.delConfirmLabel}>Delete</Text>
+            </HapticButton>
+          </View>
+        </View>
+      </Modal>
+
       <PremiumModal visible={premiumModal} feature="Unlimited diary entries" onClose={() => setPremiumModal(false)} />
     </View>
   );
@@ -251,4 +276,13 @@ const st = StyleSheet.create({
   cancelLabel: { color: C.text, fontWeight: "600" },
   confirm: { flex: 1, paddingVertical: 13, borderRadius: 12, backgroundColor: C.accent, alignItems: "center" },
   confirmLabel: { color: "#04111E", fontWeight: "700" },
+  delBackdrop: { ...StyleSheet.absoluteFillObject, backgroundColor: "rgba(0,0,0,0.6)" },
+  delModal: { position: "absolute", left: 20, right: 20, top: "35%", backgroundColor: "#0E141C", borderRadius: 18, padding: 20, borderWidth: 1, borderColor: C.borderHi },
+  delIconWrap: { width: 44, height: 44, borderRadius: 22, backgroundColor: "rgba(244,178,62,0.15)", borderWidth: 1, borderColor: "rgba(244,178,62,0.3)", alignItems: "center", justifyContent: "center", alignSelf: "center", marginBottom: 14 },
+  delTitle: { color: C.text, fontSize: 16, fontWeight: "700", textAlign: "center" },
+  delSub: { color: C.textDim, fontSize: 13, textAlign: "center", marginTop: 8, marginBottom: 20, lineHeight: 19 },
+  delCancel: { flex: 1, paddingVertical: 12, borderRadius: 12, borderWidth: 1, borderColor: C.border, alignItems: "center", backgroundColor: C.surface },
+  delCancelLabel: { color: C.text, fontWeight: "600" },
+  delConfirm: { flex: 1, paddingVertical: 12, borderRadius: 12, backgroundColor: "#F4B23E", alignItems: "center" },
+  delConfirmLabel: { color: "#04111E", fontWeight: "700" },
 });
