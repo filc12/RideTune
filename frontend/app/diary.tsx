@@ -179,7 +179,7 @@ export default function DiaryScreen() {
       {/* New entry modal */}
       <Modal transparent visible={modalOpen} animationType="slide" onRequestClose={() => { setModalOpen(false); setEditTarget(null); }}>
         <Pressable style={st.backdrop} onPress={() => { setModalOpen(false); setEditTarget(null); }} />
-        <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : undefined} style={st.kav} pointerEvents="box-none">
+        <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} style={st.kav} pointerEvents="box-none">
         <View style={st.sheet}>
           <Text style={st.sheetTitle}>{editTarget ? t("diary.modal.edit") : t("diary.modal.new")}</Text>
           <Text style={st.sheetLabel}>{t("diary.rating")}</Text>
