@@ -14,8 +14,8 @@ export default function RootLayout() {
     <LanguageProvider>
       <Stack screenOptions={{
         headerShown: false,
-        animation: "slide_from_right",
-        animationDuration: 300,
+        animation: "fade_from_bottom",
+        animationDuration: 350,
         contentStyle: { backgroundColor: "#070A0F" }
       }} />
       {!splashDone && <SplashAnimated onFinish={() => setSplashDone(true)} />}
