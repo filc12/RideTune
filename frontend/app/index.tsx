@@ -207,7 +207,7 @@ export default function HomeScreen() {
               <View style={styles.miniRow}>
                 <View style={{ flex: 1 }}>
                   <Text style={styles.metricLabel}>{t("card.load_mode")}</Text>
-                  <Text style={[styles.metricValue, { color: bike ? C.text : C.textDim }]} numberOfLines={1}>
+                  <Text style={[styles.metricValue, { color: bike ? C.text : C.textDim }]} numberOfLines={2}>
                     {t(`scenario.${mode}` as never)}
                   </Text>
                 </View>
@@ -395,7 +395,7 @@ function DataCell({ label, value, vtype, t }: { label: string; value: string; vt
   const shown = isNa ? 'N/A' : isPos ? 'SET' : value;
   return (
     <View style={styles.dataCell}>
-      <Text style={styles.dataLabel} numberOfLines={1} adjustsFontSizeToFit minimumFontScale={0.6}>{label}</Text>
+      <Text style={styles.dataLabel} numberOfLines={2} adjustsFontSizeToFit minimumFontScale={0.75}>{label}</Text>
       <Text style={[styles.dataValue, (isNa || isPos) && { fontSize: 13, color: C.textMute }]}>{shown}</Text>
       {unit ? <Text style={styles.dataUnit}>{unit}</Text> : null}
     </View>
@@ -540,12 +540,12 @@ const styles = StyleSheet.create({
   headline: { color: C.text, fontSize: 30, fontWeight: "800", lineHeight: 36, letterSpacing: -0.5 },
   headlineAccent: { color: C.accent },
   subheadline: { marginTop: 10, color: C.textDim, fontSize: 14.5, lineHeight: 21, maxWidth: 340 },
-  ctaRow: { flexDirection: "row", gap: 10, paddingHorizontal: 20, marginTop: 22 },
+  ctaRow: { flexDirection: "row", gap: 10, paddingHorizontal: 20, marginTop: 22, alignItems: "stretch" },
   primaryCtaWrap: { flex: 1.4, borderRadius: 14, overflow: "hidden" },
-  primaryCta: { flexDirection: "row", alignItems: "center", justifyContent: "center", gap: 8, paddingVertical: 15, paddingHorizontal: 18 },
-  primaryCtaLabel: { color: "#04111E", fontWeight: "700", fontSize: 15, letterSpacing: 0.2 },
+  primaryCta: { flex: 1, flexDirection: "row", alignItems: "center", justifyContent: "center", gap: 8, paddingVertical: 15, paddingHorizontal: 18 },
+  primaryCtaLabel: { flex: 1, textAlign: "center", color: "#04111E", fontWeight: "700", fontSize: 15, letterSpacing: 0.2 },
   secondaryCta: { flex: 1, paddingVertical: 15, borderRadius: 14, borderWidth: 1, borderColor: C.border, backgroundColor: C.surface, alignItems: "center", justifyContent: "center" },
-  secondaryCtaLabel: { color: C.text, fontWeight: "600", fontSize: 14 },
+  secondaryCtaLabel: { color: C.text, fontWeight: "600", fontSize: 14, textAlign: "center" },
   card: { marginHorizontal: 20, marginTop: 24, borderRadius: 20, overflow: "hidden", backgroundColor: C.surface, borderWidth: 1, borderColor: C.border },
   cardInner: { padding: 18 },
   cardHeader: { flexDirection: "row", justifyContent: "space-between", alignItems: "flex-start" },
