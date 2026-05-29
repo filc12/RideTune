@@ -129,8 +129,8 @@ export default function CargaScreen() {
             </View>
 
             <View style={st.previewRow}>
-              <PreviewCell label={t("card.front") + " · " + t("card.preload")} value={preview.adjDetails ? (preview.adjDetails.front.preload.match(/^[0-9.]+/) || [String(preview.front.preload)])[0] : String(preview.front.preload)} unit={preview.adjDetails ? (preview.adjDetails.front.preload.indexOf('mm') >= 0 ? 'mm' : 'clks') : 'clks'} />
-              <PreviewCell label={t("card.rear") + " · " + t("card.preload")} value={preview.adjDetails ? (preview.adjDetails.rear.preload.match(/^[0-9.]+/) || [String(preview.rear.preload)])[0] : String(preview.rear.preload)} unit={preview.adjDetails ? (preview.adjDetails.rear.preload.indexOf('mm') >= 0 ? 'mm' : 'clks') : 'clks'} />
+              {(() => { const p = previewPreload(preview.frontTypes?.preload, preview.adjDetails?.front.preload, preview.front.preload); return <PreviewCell label={t("card.front") + " · " + t("card.preload")} value={p.value} unit={p.unit} />; })()}
+              {(() => { const p = previewPreload(preview.rearTypes?.preload, preview.adjDetails?.rear.preload, preview.rear.preload); return <PreviewCell label={t("card.rear") + " · " + t("card.preload")} value={p.value} unit={p.unit} />; })()}
             </View>
 
             <HapticButton
@@ -241,6 +241,14 @@ function WeightRow({
       </View>
     </View>
   );
+}
+
+function previewPreload(typeStr: string | undefined, display: string | undefined, num: number): { value: string; unit?: string } {
+  if (typeStr === 'na')  return { value: 'N/A' };
+  if (typeStr === 'pos') return { value: 'SET' };
+  const m = display ? display.match(/^[0-9.]+/) : null;
+  const unit = display && display.indexOf('mm') >= 0 ? 'mm' : 'clks';
+  return { value: m ? m[0] : String(num), unit };
 }
 
 function PreviewCell({ label, value, unit }: { label: string; value: string; unit?: string }) {

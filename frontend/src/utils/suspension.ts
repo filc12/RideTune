@@ -22,6 +22,9 @@ export type SetupResult = Setup & {
   countNote?: string;
   frontVType?: string;
   rearVType?: string;
+  /** Per-adjuster value type (na, pos, clicks, turns, mm) so the UI can show N/A or SET. */
+  frontTypes?: { preload: string; reb: string; comp: string };
+  rearTypes?:  { preload: string; reb: string; comp: string };
   /** Full human-readable adjuster instructions from the factory profile. */
   adjDetails?: {
     front: { preload: string; comp: string; reb: string };
@@ -238,6 +241,16 @@ export function calcSetupById(bikeId: string | null, load: Load): SetupResult {
           countNote:     real.countNote,
           frontVType:    real.front.rebound.type,
           rearVType:     real.rear.rebound.type,
+          frontTypes: {
+            preload: real.front.preload.type,
+            reb:     real.front.rebound.type,
+            comp:    real.front.compression.type,
+          },
+          rearTypes: {
+            preload: real.rear.preload.type,
+            reb:     real.rear.rebound.type,
+            comp:    real.rear.compression.type,
+          },
           adjDetails: {
             front: {
               preload: real.front.preload.display,
@@ -268,6 +281,8 @@ export function calcSetupById(bikeId: string | null, load: Load): SetupResult {
     noData: true,
     frontVType: 'cl_hard',
     rearVType: 'cl_hard',
+    frontTypes: { preload: 'cl_soft', reb: 'cl_hard', comp: 'cl_hard' },
+    rearTypes:  { preload: 'cl_soft', reb: 'cl_hard', comp: 'cl_hard' },
     adjDetails: {
       front: {
         preload: `${heuristic.front.preload} clicks up (from fully soft)`,

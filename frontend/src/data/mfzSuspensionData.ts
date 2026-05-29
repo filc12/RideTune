@@ -353,7 +353,8 @@ const HONDA: MfzProfile[] = [
     id: 'honda_nt1100_2022',
     brand: 'Honda', model: 'NT1100', year: '2022-2024',
     baseKg: 75,
-    source: 'oem_manual',
+    source: 'mfzstudio.com/moto/honda/',
+    dataQuality: 'oem_manual',
     formula: 'honda',
     front: {
       preload: tu_s(3),

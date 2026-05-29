@@ -233,11 +233,11 @@ export default function HomeScreen() {
                 </View>
               ) : (
                 <>
-                  <ConfidenceBadge level={setup.confidence} compact />
+                  {!setup.noData && <ConfidenceBadge level={setup.confidence} compact />}
                   {setup.noData && <NoDataBadge />}
-                  <SuspensionBlock title={t("card.front")} icon="arrow-up-bold-circle-outline" values={setup.front} adj={setup.adjDetails?.front} t={t} />
+                  <SuspensionBlock title={t("card.front")} icon="arrow-up-bold-circle-outline" values={setup.front} adj={setup.adjDetails?.front} types={setup.frontTypes} t={t} />
                   <View style={styles.hairline} />
-                  <SuspensionBlock title={t("card.rear")} icon="arrow-down-bold-circle-outline" values={setup.rear} adj={setup.adjDetails?.rear} t={t} />
+                  <SuspensionBlock title={t("card.rear")} icon="arrow-down-bold-circle-outline" values={setup.rear} adj={setup.adjDetails?.rear} types={setup.rearTypes} t={t} />
                   <View style={styles.hairline} />
                   <View style={styles.sagRow}>
                     <View style={{ flex: 1 }}>
@@ -315,12 +315,13 @@ function getNum(s: string | undefined, fallback: number) {
   return m ? m[0] : String(fallback);
 }
 function SuspensionBlock({
-  title, icon, values, adj, t,
+  title, icon, values, adj, types, t,
 }: {
   title: string;
   icon: keyof typeof MaterialCommunityIcons.glyphMap;
   values: { preload: number; rebound: number; compression: number };
   adj?: { preload: string; comp: string; reb: string; hsComp?: string };
+  types?: { preload: string; reb: string; comp: string };
   t: (k: never) => string;
 }) {
   return (
@@ -330,9 +331,9 @@ function SuspensionBlock({
         <Text style={styles.suspTitle}>{title}</Text>
       </View>
       <View style={styles.suspGrid}>
-        <DataCell label={t("card.preload" as never)} value={getNum(adj?.preload, values.preload)} vtype={getVType(adj?.preload)} t={t} />
-        <DataCell label={t("card.rebound" as never)} value={getNum(adj?.reb, values.rebound)} vtype={getVType(adj?.reb)} t={t} />
-        <DataCell label={t("card.compression" as never)} value={getNum(adj?.comp, values.compression)} vtype={getVType(adj?.comp)} t={t} />
+        <DataCell label={t("card.preload" as never)} value={getNum(adj?.preload, values.preload)} vtype={types?.preload ?? getVType(adj?.preload)} t={t} />
+        <DataCell label={t("card.rebound" as never)} value={getNum(adj?.reb, values.rebound)} vtype={types?.reb ?? getVType(adj?.reb)} t={t} />
+        <DataCell label={t("card.compression" as never)} value={getNum(adj?.comp, values.compression)} vtype={types?.comp ?? getVType(adj?.comp)} t={t} />
       </View>
     </View>
   );
@@ -388,11 +389,14 @@ function NoDataBadge() {
   );
 }
 function DataCell({ label, value, vtype, t }: { label: string; value: string; vtype?: string; t?: (k: never) => string }) {
-  const unit = vtype && t ? t(("susp.unit." + vtype) as never) : undefined;
+  const isNa  = vtype === 'na';
+  const isPos = vtype === 'pos';
+  const unit = (!isNa && !isPos && vtype && t) ? t(("susp.unit." + vtype) as never) : undefined;
+  const shown = isNa ? 'N/A' : isPos ? 'SET' : value;
   return (
     <View style={styles.dataCell}>
       <Text style={styles.dataLabel} numberOfLines={1} adjustsFontSizeToFit minimumFontScale={0.6}>{label}</Text>
-      <Text style={styles.dataValue}>{value}</Text>
+      <Text style={[styles.dataValue, (isNa || isPos) && { fontSize: 13, color: C.textMute }]}>{shown}</Text>
       {unit ? <Text style={styles.dataUnit}>{unit}</Text> : null}
     </View>
   );
