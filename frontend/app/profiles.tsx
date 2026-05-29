@@ -85,14 +85,14 @@ export default function ProfilesScreen() {
       <StatusBar barStyle="light-content" />
       <LinearGradient colors={["#0B1220", "#070A0F"]} style={StyleSheet.absoluteFill} />
       <SafeAreaView style={{ flex: 1 }} edges={["top"]}>
-        <ScreenHeader title="Rider Profiles" />
+        <ScreenHeader title={t("profiles.title")} />
         <ScrollView contentContainerStyle={{ padding: 20, paddingBottom: 120 }}>
-          <Text style={st.sub}>Save your rider weight for quick setup loading.</Text>
+          <Text style={st.sub}>{t("profiles.sub")}</Text>
 
           {atLimit && (
             <View style={st.limitBanner}>
               <MaterialCommunityIcons name="lock-outline" size={15} color={C.warn} />
-              <Text style={st.limitText}>Free plan: 1 profile. Upgrade to Premium for unlimited profiles.</Text>
+              <Text style={st.limitText}>{t("profiles.limit")}</Text>
             </View>
           )}
 
@@ -103,13 +103,13 @@ export default function ProfilesScreen() {
             testID="add-profile"
           >
             <Ionicons name="add-circle" size={18} color={atLimit ? C.textMute : "#04111E"} />
-            <Text style={[st.addLabel, atLimit && { color: C.textMute }]}>Add profile</Text>
+            <Text style={[st.addLabel, atLimit && { color: C.textMute }]}>{t("profiles.add")}</Text>
           </TouchableOpacity>
 
           {profiles.length === 0 ? (
             <View style={st.empty}>
               <MaterialCommunityIcons name="account-outline" size={28} color={C.textMute} />
-              <Text style={st.emptyText}>No profiles yet.</Text>
+              <Text style={st.emptyText}>{t("profiles.empty")}</Text>
             </View>
           ) : (
             <View style={{ marginTop: 18, gap: 10 }}>
@@ -133,7 +133,7 @@ export default function ProfilesScreen() {
                     )}
                     {isActive && (
                       <View style={st.activeBadge}>
-                        <Text style={st.activeBadgeText}>Active</Text>
+                        <Text style={st.activeBadgeText}>{t("profiles.active")}</Text>
                       </View>
                     )}
                     <TouchableOpacity onPress={() => onEdit(p)} style={st.editBtn}>
@@ -155,11 +155,11 @@ export default function ProfilesScreen() {
       <Modal transparent visible={modalOpen} animationType="fade" onRequestClose={() => setModalOpen(false)}>
         <Pressable style={st.backdrop} onPress={() => setModalOpen(false)} />
         <View style={st.modal}>
-          <Text style={st.modalTitle}>{editTarget ? "Edit profile" : "New profile"}</Text>
+          <Text style={st.modalTitle}>{editTarget ? t("profiles.modal.edit") : t("profiles.modal.new")}</Text>
           <TextInput
             value={name}
             onChangeText={setName}
-            placeholder="Name (e.g. Filipe)"
+            placeholder={t("profiles.name_ph")}
             placeholderTextColor={C.textMute}
             style={st.input}
             autoFocus
@@ -167,17 +167,17 @@ export default function ProfilesScreen() {
           <TextInput
             value={weight}
             onChangeText={setWeight}
-            placeholder="Weight with gear (kg)"
+            placeholder={t("profiles.weight_ph")}
             placeholderTextColor={C.textMute}
             keyboardType="numeric"
             style={st.input}
           />
           <View style={{ flexDirection: "row", gap: 10 }}>
             <TouchableOpacity onPress={() => setModalOpen(false)} style={st.cancel}>
-              <Text style={st.cancelLabel}>Cancel</Text>
+              <Text style={st.cancelLabel}>{t("common.cancel")}</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={onSave} style={st.confirm}>
-              <Text style={st.confirmLabel}>Save</Text>
+              <Text style={st.confirmLabel}>{t("common.save")}</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -187,16 +187,16 @@ export default function ProfilesScreen() {
       <Modal transparent visible={!!deleteTarget} animationType="fade" onRequestClose={() => setDeleteTarget(null)}>
         <Pressable style={st.backdrop} onPress={() => setDeleteTarget(null)} />
         <View style={st.modal}>
-          <Text style={st.modalTitle}>Delete profile?</Text>
+          <Text style={st.modalTitle}>{t("profiles.delete.title")}</Text>
           <Text style={{ color: C.textDim, fontSize: 13, marginBottom: 20, marginTop: 8 }}>
-            Delete <Text style={{ color: C.text, fontWeight: "700" }}>{deleteTarget?.name}</Text>?
+            {t("profiles.delete.confirm").replace("{name}", deleteTarget?.name ?? "")}
           </Text>
           <View style={{ flexDirection: "row", gap: 10 }}>
             <TouchableOpacity onPress={() => setDeleteTarget(null)} style={st.cancel}>
-              <Text style={st.cancelLabel}>Cancel</Text>
+              <Text style={st.cancelLabel}>{t("common.cancel")}</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={confirmDelete} style={[st.confirm, { backgroundColor: C.warn }]}>
-              <Text style={[st.confirmLabel, { color: "#04111E" }]}>Delete</Text>
+              <Text style={[st.confirmLabel, { color: "#04111E" }]}>{t("setups.delete")}</Text>
             </TouchableOpacity>
           </View>
         </View>

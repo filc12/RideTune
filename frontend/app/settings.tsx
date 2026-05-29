@@ -86,8 +86,8 @@ export default function SettingsScreen() {
               <Ionicons name="person-outline" size={18} color={C.accent} />
             </View>
             <View style={{ flex: 1 }}>
-              <Text style={st.rowLabel}>Rider Profiles</Text>
-              <Text style={st.rowSub}>Manage saved rider profiles</Text>
+              <Text style={st.rowLabel}>{t("settings.profiles")}</Text>
+              <Text style={st.rowSub}>{t("settings.profiles.sub")}</Text>
             </View>
             <Ionicons name="chevron-forward" size={16} color={C.textMute} />
           </HapticButton>
