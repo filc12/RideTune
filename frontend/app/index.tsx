@@ -85,7 +85,7 @@ export default function HomeScreen() {
     if (bike && bike.id !== b.id) {
       const allowed = await canAddBike(1);
       if (!allowed) {
-        setPremiumModal({ visible: true, feature: "Multiple bikes" });
+        setPremiumModal({ visible: true, feature: "premium.feature.bikes" });
         setPickerOpen(false);
         return;
       }
@@ -99,7 +99,7 @@ export default function HomeScreen() {
     tapMedium();
     const allowed = await canUseLoadMode(m);
     if (!allowed) {
-      setPremiumModal({ visible: true, feature: "Load modes (luggage, passenger, duo)" });
+      setPremiumModal({ visible: true, feature: "premium.feature.loadmodes" });
       return;
     }
     const presets: Record<LoadMode, Pick<Load, "passenger" | "luggage">> = {

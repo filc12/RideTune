@@ -168,7 +168,7 @@ export default function CargaScreen() {
         </View>
       </Modal>
       </SafeAreaView>
-      <PremiumModal visible={premiumModal} feature="Passenger and luggage" onClose={() => setPremiumModal(false)} />
+      <PremiumModal visible={premiumModal} feature="premium.feature.load" onClose={() => setPremiumModal(false)} />
     </View>
   );
 }

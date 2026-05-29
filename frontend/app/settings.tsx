@@ -139,7 +139,7 @@ export default function SettingsScreen() {
         </ScrollView>
         <BottomNav active="none" />
       </SafeAreaView>
-      <PremiumModal visible={premiumModal} feature="Multiple languages" onClose={() => setPremiumModal(false)} />
+      <PremiumModal visible={premiumModal} feature="premium.feature.languages" onClose={() => setPremiumModal(false)} />
     </View>
   );
 }

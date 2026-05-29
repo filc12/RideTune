@@ -124,7 +124,7 @@ export default function SetupsScreen() {
               <BottomNav active="none" />
       </SafeAreaView>
 
-      <PremiumModal visible={premiumModal} feature="Saved setups" onClose={() => setPremiumModal(false)} />
+      <PremiumModal visible={premiumModal} feature="premium.feature.setups" onClose={() => setPremiumModal(false)} />
 
       <Modal transparent visible={!!deleteTarget} animationType="fade" onRequestClose={() => setDeleteTarget(null)}>
         <Pressable style={st.backdrop} onPress={() => setDeleteTarget(null)} />

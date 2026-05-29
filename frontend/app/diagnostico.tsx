@@ -90,8 +90,8 @@ export default function DiagScreen() {
                     <MaterialCommunityIcons name="lock" size={20} color="#F4B23E" />
                   </View>
                   <View style={{ flex: 1 }}>
-                    <Text style={st.lockTitle}>Premium feature</Text>
-                    <Text style={st.lockSub}>Upgrade to see personalised recommendations based on your answers.</Text>
+                    <Text style={st.lockTitle}>{t("diag.locked.title")}</Text>
+                    <Text style={st.lockSub}>{t("diag.locked.sub")}</Text>
                   </View>
                   <MaterialCommunityIcons name="chevron-right" size={18} color="#F4B23E" />
                 </HapticButton>
@@ -127,7 +127,7 @@ export default function DiagScreen() {
         </ScrollView>
         <BottomNav active="diag" />
       </SafeAreaView>
-      <PremiumModal visible={premiumModal} feature="Diagnostics recommendations" onClose={() => setPremiumModal(false)} />
+      <PremiumModal visible={premiumModal} feature="premium.feature.diagnostics" onClose={() => setPremiumModal(false)} />
     </View>
   );
 }

@@ -239,7 +239,7 @@ export default function DiaryScreen() {
         </View>
       </Modal>
 
-      <PremiumModal visible={premiumModal} feature="Unlimited diary entries" onClose={() => setPremiumModal(false)} />
+      <PremiumModal visible={premiumModal} feature="premium.feature.diary" onClose={() => setPremiumModal(false)} />
     </View>
   );
 }

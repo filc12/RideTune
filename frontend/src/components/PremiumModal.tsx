@@ -2,6 +2,7 @@ import React from "react";
 import { Modal, Pressable, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { C } from "@/src/components/ScreenHeader";
+import { useT } from "@/src/i18n";
 
 interface PremiumModalProps {
   visible: boolean;
@@ -10,13 +11,18 @@ interface PremiumModalProps {
 }
 
 export function PremiumModal({ visible, onClose, feature }: PremiumModalProps) {
+  const { t } = useT();
   const perks = [
-    "All bikes and brands",
-    "All load modes (luggage, passenger, duo)",
-    "Unlimited saved setups",
-    "Unlimited rider profiles",
-    "5 languages (EN, PT, ES, FR, DE)",
+    t("premium.perk.bikes"),
+    t("premium.perk.loadmodes"),
+    t("premium.perk.setups"),
+    t("premium.perk.profiles"),
+    t("premium.perk.languages"),
   ];
+  // feature pode chegar como chave de tradução ou texto cru (legado em inglês)
+  const featureText = feature
+    ? (t(feature as never) !== feature ? t(feature as never) : feature)
+    : null;
 
   return (
     <Modal transparent visible={visible} animationType="fade" onRequestClose={onClose}>
@@ -25,9 +31,11 @@ export function PremiumModal({ visible, onClose, feature }: PremiumModalProps) {
         <View style={st.iconWrap}>
           <MaterialCommunityIcons name="star-circle" size={36} color="#F4B23E" />
         </View>
-        <Text style={st.title}>Unlock Premium</Text>
+        <Text style={st.title}>{t("premium.title")}</Text>
         <Text style={st.sub}>
-          {feature ? `${feature} is a Premium feature.` : "Upgrade to access all RideTune features."}
+          {featureText
+            ? t("premium.sub.feature").replace("{feature}", featureText)
+            : t("premium.sub.generic")}
         </Text>
         <View style={st.perks}>
           {perks.map((p) => (
@@ -39,10 +47,10 @@ export function PremiumModal({ visible, onClose, feature }: PremiumModalProps) {
         </View>
         <TouchableOpacity style={st.upgradeBtn} activeOpacity={0.9} onPress={onClose}>
           <MaterialCommunityIcons name="star" size={16} color="#04111E" />
-          <Text style={st.upgradeBtnLabel}>Upgrade to Premium</Text>
+          <Text style={st.upgradeBtnLabel}>{t("premium.upgrade")}</Text>
         </TouchableOpacity>
         <TouchableOpacity style={st.laterBtn} activeOpacity={0.8} onPress={onClose}>
-          <Text style={st.laterLabel}>Maybe later</Text>
+          <Text style={st.laterLabel}>{t("premium.later")}</Text>
         </TouchableOpacity>
       </View>
     </Modal>
