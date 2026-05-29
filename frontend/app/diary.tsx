@@ -173,7 +173,7 @@ export default function DiaryScreen() {
             </View>
           )}
         </ScrollView>
-        <BottomNav active="home" />
+        <BottomNav active="none" />
       </SafeAreaView>
 
       {/* New entry modal */}
