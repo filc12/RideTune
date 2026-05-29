@@ -1409,6 +1409,31 @@ const DE: Dict = {
 
 const IT: Dict = {
   ...EN,
+  // --- diary (IT) ---
+  "diary.title": "Diario di Viaggio",
+  "diary.sub": "Registra le tue sensazioni di guida e le modifiche al setup.",
+  "diary.new": "Nuova voce",
+  "diary.empty": "Ancora nessuna voce.\nRegistra la tua prima sensazione di guida.",
+  "diary.limit": "Piano gratuito: {n}/{max} voci. Passa a illimitate con Premium.",
+  "diary.modal.new": "Nuova voce nel diario",
+  "diary.modal.edit": "Modifica voce",
+  "diary.rating": "Valutazione",
+  "diary.setup_label": "Modifiche al setup (opzionale)",
+  "diary.setup_ph": "es: -2 clic compressione posteriore",
+  "diary.notes_label": "Sensazioni e note",
+  "diary.notes_ph": "Come si è comportata la moto?",
+  "diary.delete.title": "Eliminare la voce?",
+  "diary.delete.confirm": "Questa azione non può essere annullata.",
+  "diary.delete.btn": "Elimina",
+  "diary.bike_unknown": "Moto sconosciuta",
+  // --- susp.unit (IT) ---
+  "susp.unit.cl_hard": "clic (dal duro)",
+  "susp.unit.cl_soft": "clic (dal morbido)",
+  "susp.unit.tu_hard": "giri (dal duro)",
+  "susp.unit.tu_soft": "giri (dal morbido)",
+  "susp.unit.mm": "mm",
+  "susp.unit.pos": "",
+  "susp.unit.na": "—",
   // --- Lote C2: count.* restantes (IT) ---
   "count.honda_nt1100_2022": "Anteriore: solo precarico (registro a manopola). ↺ Antiorario fino al minimo, conta i giri in senso orario. Posteriore: precarico standard = 7 clic dal minimo. Estensione stepless (senza clic — regolazione progressiva).",
   "count.honda_transalp_2023": "Nessuna regolazione dell'idraulica. Solo precarico: ↺ antiorario fino al fermo, conta i giri in senso orario.",
