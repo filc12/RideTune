@@ -12,17 +12,19 @@ import { listEntries, saveEntry, updateEntry, deleteEntry, formatEntry, FREE_DIA
 import { storage } from "@/src/utils/storage";
 import { tapSuccess } from "@/src/utils/haptics";
 import { HapticButton } from "@/src/components/HapticButton";
+import { useT } from "@/src/i18n";
 
 const RATINGS = [1,2,3,4,5];
 
 export default function DiaryScreen() {
+  const { t } = useT();
   const [entries, setEntries] = useState<DiaryEntry[]>([]);
   const [premium, setPremium] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [premiumModal, setPremiumModal] = useState(false);
   const [notes, setNotes] = useState("");
   const [rating, setRating] = useState(4);
-  const [bikeLabel, setBikeLabel] = useState("Unknown bike");
+  const [bikeLabel, setBikeLabel] = useState(t("diary.bike_unknown"));
   const [setup, setSetup] = useState("");
   const [editTarget, setEditTarget] = useState<DiaryEntry | null>(null);
   const [deleteTarget, setDeleteTarget] = useState<DiaryEntry | null>(null);
@@ -117,26 +119,26 @@ export default function DiaryScreen() {
       <StatusBar barStyle="light-content" />
       <LinearGradient colors={["#0B1220", "#070A0F"]} style={StyleSheet.absoluteFill} />
       <SafeAreaView style={{ flex: 1 }} edges={["top"]}>
-        <ScreenHeader title="Ride Diary" />
+        <ScreenHeader title={t("diary.title")} />
         <ScrollView contentContainerStyle={{ padding: 20, paddingBottom: 120 }}>
-          <Text style={st.sub}>Record your ride sensations and setup changes.</Text>
+          <Text style={st.sub}>{t("diary.sub")}</Text>
 
           {!premium && (
             <View style={st.limitBanner}>
               <MaterialCommunityIcons name="lock-outline" size={15} color={C.warn} />
-              <Text style={st.limitText}>Free plan: {entries.length}/{FREE_DIARY_LIMIT} entries. Upgrade for unlimited.</Text>
+              <Text style={st.limitText}>{t("diary.limit").replace("{n}", String(entries.length)).replace("{max}", String(FREE_DIARY_LIMIT))}</Text>
             </View>
           )}
 
           <HapticButton style={[st.addBtn, (!premium && entries.length >= FREE_DIARY_LIMIT) && st.addBtnLocked]} onPress={onAdd} activeOpacity={0.9}>
             <Ionicons name="add-circle" size={18} color={(!premium && entries.length >= FREE_DIARY_LIMIT) ? C.textMute : "#04111E"} />
-            <Text style={[st.addLabel, (!premium && entries.length >= FREE_DIARY_LIMIT) && { color: C.textMute }]}>New entry</Text>
+            <Text style={[st.addLabel, (!premium && entries.length >= FREE_DIARY_LIMIT) && { color: C.textMute }]}>{t("diary.new")}</Text>
           </HapticButton>
 
           {entries.length === 0 ? (
             <View style={st.empty}>
               <MaterialCommunityIcons name="notebook-outline" size={32} color={C.textMute} />
-              <Text style={st.emptyText}>{"No entries yet.\nRecord your first ride sensation."}</Text>
+              <Text style={st.emptyText}>{t("diary.empty")}</Text>
             </View>
           ) : (
             <View style={{ marginTop: 18, gap: 12 }}>
@@ -179,8 +181,8 @@ export default function DiaryScreen() {
         <Pressable style={st.backdrop} onPress={() => { setModalOpen(false); setEditTarget(null); }} />
         <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : undefined} style={st.kav} pointerEvents="box-none">
         <View style={st.sheet}>
-          <Text style={st.sheetTitle}>{editTarget ? "Edit entry" : "New diary entry"}</Text>
-          <Text style={st.sheetLabel}>Rating</Text>
+          <Text style={st.sheetTitle}>{editTarget ? t("diary.modal.edit") : t("diary.modal.new")}</Text>
+          <Text style={st.sheetLabel}>{t("diary.rating")}</Text>
           <View style={st.starsRow}>
             {RATINGS.map(r => (
               <HapticButton key={r} onPress={() => setRating(r)}>
@@ -188,19 +190,19 @@ export default function DiaryScreen() {
               </HapticButton>
             ))}
           </View>
-          <Text style={st.sheetLabel}>Setup changes (optional)</Text>
+          <Text style={st.sheetLabel}>{t("diary.setup_label")}</Text>
           <TextInput
             value={setup ?? ""}
             onChangeText={setSetup}
-            placeholder="e.g. -2 clicks rear compression"
+            placeholder={t("diary.setup_ph")}
             placeholderTextColor={C.textMute}
             style={st.input}
           />
-          <Text style={st.sheetLabel}>Sensations & notes</Text>
+          <Text style={st.sheetLabel}>{t("diary.notes_label")}</Text>
           <TextInput
             value={notes}
             onChangeText={setNotes}
-            placeholder="How did the bike feel?"
+            placeholder={t("diary.notes_ph")}
             placeholderTextColor={C.textMute}
             style={[st.input, { height: 100, textAlignVertical: "top" }]}
             multiline
@@ -208,10 +210,10 @@ export default function DiaryScreen() {
           />
           <View style={{ flexDirection: "row", gap: 10, marginTop: 4 }}>
             <HapticButton onPress={() => { setModalOpen(false); setEditTarget(null); }} style={st.cancel}>
-              <Text style={st.cancelLabel}>Cancel</Text>
+              <Text style={st.cancelLabel}>{t("common.cancel")}</Text>
             </HapticButton>
             <HapticButton onPress={onSave} haptic="none" style={[st.confirm, !notes.trim() && { opacity: 0.4 }]}>
-              <Text style={st.confirmLabel}>Save</Text>
+              <Text style={st.confirmLabel}>{t("common.save")}</Text>
             </HapticButton>
           </View>
         </View>
@@ -224,14 +226,14 @@ export default function DiaryScreen() {
           <View style={st.delIconWrap}>
             <Ionicons name="trash-outline" size={22} color="#F4B23E" />
           </View>
-          <Text style={st.delTitle}>Delete entry?</Text>
-          <Text style={st.delSub}>This cannot be undone.</Text>
+          <Text style={st.delTitle}>{t("diary.delete.title")}</Text>
+          <Text style={st.delSub}>{t("diary.delete.confirm")}</Text>
           <View style={{ flexDirection: "row", gap: 10, marginTop: 4 }}>
             <HapticButton onPress={() => setDeleteTarget(null)} style={st.delCancel} activeOpacity={0.8}>
-              <Text style={st.delCancelLabel}>Cancel</Text>
+              <Text style={st.delCancelLabel}>{t("common.cancel")}</Text>
             </HapticButton>
             <HapticButton onPress={confirmDelete} haptic="none" style={st.delConfirm} activeOpacity={0.9}>
-              <Text style={st.delConfirmLabel}>Delete</Text>
+              <Text style={st.delConfirmLabel}>{t("diary.delete.btn")}</Text>
             </HapticButton>
           </View>
         </View>
