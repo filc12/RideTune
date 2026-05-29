@@ -14,6 +14,7 @@ import {
   type RiderProfile,
 } from "@/src/utils/profiles";
 import { saveLoad, getLoad } from "@/src/utils/suspension";
+import { isPremium } from "@/src/services/premium";
 
 export default function ProfilesScreen() {
   const { t } = useT();
@@ -25,12 +26,13 @@ export default function ProfilesScreen() {
   const [name, setName] = useState("");
   const [weight, setWeight] = useState("75");
   const [deleteTarget, setDeleteTarget] = useState<RiderProfile | null>(null);
+  const [premium, setPremium] = useState(false);
 
   const load = useCallback(async () => {
-    const all = await listProfiles();
-    const active = await getActiveProfile();
+    const [all, active, prem] = await Promise.all([listProfiles(), getActiveProfile(), isPremium()]);
     setProfiles(all);
     setActiveId(active?.id ?? "");
+    setPremium(prem);
   }, []);
 
   useEffect(() => { load(); }, [load]);
@@ -78,7 +80,7 @@ export default function ProfilesScreen() {
     load();
   };
 
-  const atLimit = profiles.length >= FREE_PROFILE_LIMIT;
+  const atLimit = !premium && profiles.length >= FREE_PROFILE_LIMIT;
 
   return (
     <View style={st.root}>
