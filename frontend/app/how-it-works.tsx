@@ -86,7 +86,7 @@ export default function HowItWorks() {
             <Text style={st.howtoText}>{t("hiw.clicks.howto.d")}</Text>
           </View>
 
-          <TouchableOpacity onPress={() => router.back()} activeOpacity={0.9} style={st.cta} testID="how-it-works-cta">
+          <TouchableOpacity onPress={() => { if (router.canGoBack()) router.back(); else router.replace("/" as never); }} activeOpacity={0.9} style={st.cta} testID="how-it-works-cta">
             <Text style={st.ctaLabel}>{t("hiw.cta")}</Text>
             <Ionicons name="arrow-forward" size={16} color="#04111E" />
           </TouchableOpacity>

@@ -61,7 +61,7 @@ export default function CargaScreen() {
       setActiveProfile({ ...activeProfile, weightKg: load.rider });
     }
     setSaved(true);
-    setTimeout(() => router.back(), 600);
+    setTimeout(() => { if (router.canGoBack()) router.back(); else router.replace("/" as never); }, 600);
   };
 
   const onSave = async () => {

@@ -26,7 +26,7 @@ export function ScreenHeader({ title, right }: { title: string; right?: React.Re
   return (
     <View style={s.header}>
       <TouchableOpacity
-        onPress={() => router.back()}
+        onPress={() => { if (router.canGoBack()) router.back(); else router.replace("/" as never); }}
         style={s.back}
         activeOpacity={0.8}
         testID="header-back"
