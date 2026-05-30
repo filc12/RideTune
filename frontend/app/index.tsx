@@ -243,7 +243,10 @@ export default function HomeScreen() {
                   <View style={styles.sagRow}>
                     <View style={{ flex: 1 }}>
                       <Text style={styles.metricLabel}>{t("card.sag")}</Text>
-                      <Text style={styles.sagValue}>{setup.sag} mm</Text>
+                      <View style={{ flexDirection: "row", alignItems: "baseline" }}>
+                        <AnimatedNumber value={String(setup.sag)} style={styles.sagValue} duration={500} />
+                        <Text style={[styles.sagValue, { fontSize: 14, marginLeft: 4 }]}>mm</Text>
+                      </View>
                     </View>
                     {(() => {
                       const sagOk = setup.sag >= 20 && setup.sag <= 50;
