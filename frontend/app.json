@@ -36,7 +36,6 @@
           "backgroundColor": "#070A0F"
         }
       ],
-      "expo-video",
       "expo-font"
     ],
     "experiments": {
