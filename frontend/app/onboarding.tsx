@@ -36,9 +36,6 @@ export default function OnboardingScreen() {
       <KeyboardAvoidingView style={st.inner} behavior={Platform.OS === "ios" ? "padding" : undefined}>
         {step === "welcome" && (
           <View style={st.step}>
-            <View style={st.iconWrap}>
-              <MaterialCommunityIcons name="motorbike" size={48} color={C.accent} />
-            </View>
             <Text style={st.title}>{"Welcome to\n"}<Text style={st.accent}>RideTune</Text></Text>
             <Text style={st.sub}>Your motorcycle suspension setup assistant. Let us set up your rider profile in 2 steps.</Text>
             <TouchableOpacity style={st.btn} onPress={() => setStep("name")} activeOpacity={0.9}>
@@ -98,7 +95,6 @@ const st = StyleSheet.create({
   inner: { flex: 1, alignItems: "center", justifyContent: "center", padding: 28 },
   step: { width: "100%", alignItems: "center" },
   stepNum: { color: C.accent, fontSize: 12, fontWeight: "700", letterSpacing: 1.4, marginBottom: 24 },
-  iconWrap: { width: 80, height: 80, borderRadius: 24, backgroundColor: "rgba(61,169,255,0.14)", borderWidth: 1, borderColor: "rgba(61,169,255,0.35)", alignItems: "center", justifyContent: "center", marginBottom: 28 },
   title: { color: C.text, fontSize: 32, fontWeight: "800", textAlign: "center", lineHeight: 40, letterSpacing: -0.5 },
   accent: { color: C.accent },
   sub: { color: "#64748B", fontSize: 15, textAlign: "center", lineHeight: 22, marginTop: 12, marginBottom: 32 },

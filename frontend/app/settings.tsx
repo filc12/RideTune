@@ -12,6 +12,7 @@ import { LANGS, useT, type Lang } from "@/src/i18n";
 import { BottomNav } from "@/src/components/BottomNav";
 import { HapticButton } from "@/src/components/HapticButton";
 import { tapSuccess } from "@/src/utils/haptics";
+import { storage } from "@/src/utils/storage";
 
 export default function SettingsScreen() {
   const { t, lang, setLang } = useT();
@@ -29,6 +30,11 @@ export default function SettingsScreen() {
     const next = tapCount + 1;
     setTapCount(next);
     if (next >= 7) { setDevOpen(true); setTapCount(0); }
+  };
+
+  const onReplayOnboarding = async () => {
+    await storage.removeItem("ridetune.onboarded");
+    router.replace("/onboarding" as never);
   };
 
   const onToggleDevPremium = async () => {
@@ -104,6 +110,22 @@ export default function SettingsScreen() {
             <View style={{ flex: 1 }}>
               <Text style={st.rowLabel}>{t("settings.about")}</Text>
               <Text style={st.rowSub}>{t("settings.about.sub")}</Text>
+            </View>
+            <Ionicons name="chevron-forward" size={16} color={C.textMute} />
+          </HapticButton>
+
+          <HapticButton
+            activeOpacity={0.85}
+            onPress={onReplayOnboarding}
+            style={st.row}
+            testID="replay-onboarding"
+          >
+            <View style={st.iconBox}>
+              <Ionicons name="refresh-outline" size={18} color={C.accent} />
+            </View>
+            <View style={{ flex: 1 }}>
+              <Text style={st.rowLabel}>{t("settings.replay_onboarding")}</Text>
+              <Text style={st.rowSub}>{t("settings.replay_onboarding.sub")}</Text>
             </View>
             <Ionicons name="chevron-forward" size={16} color={C.textMute} />
           </HapticButton>
