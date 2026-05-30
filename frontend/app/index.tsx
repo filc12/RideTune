@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 import {
+  Animated,
   Modal,
   Platform,
   Pressable,
@@ -388,6 +389,25 @@ function NoDataBadge() {
     </View>
   );
 }
+function AnimatedNumber({ value, style, duration = 500 }: { value: string; style?: any; duration?: number }) {
+  const isNumeric = /^[0-9]+(\.[0-9]+)?$/.test(value);
+  const target = parseFloat(value);
+  const decimals = value.indexOf(".") >= 0 ? (value.split(".")[1]?.length ?? 0) : 0;
+  const anim = React.useRef(new Animated.Value(isNumeric ? target : 0)).current;
+  const [display, setDisplay] = React.useState(value);
+
+  React.useEffect(() => {
+    if (!isNumeric) { setDisplay(value); return; }
+    const id = anim.addListener(({ value: v }) => {
+      setDisplay(decimals > 0 ? v.toFixed(decimals) : String(Math.round(v)));
+    });
+    Animated.timing(anim, { toValue: target, duration, useNativeDriver: false }).start();
+    return () => anim.removeListener(id);
+  }, [value]);
+
+  return <Text style={style}>{isNumeric ? display : value}</Text>;
+}
+
 function DataCell({ label, value, vtype, t }: { label: string; value: string; vtype?: string; t?: (k: never) => string }) {
   const isNa  = vtype === 'na';
   const isPos = vtype === 'pos';
@@ -396,7 +416,9 @@ function DataCell({ label, value, vtype, t }: { label: string; value: string; vt
   return (
     <View style={styles.dataCell}>
       <Text style={styles.dataLabel} numberOfLines={2} adjustsFontSizeToFit minimumFontScale={0.75}>{label}</Text>
-      <Text style={[styles.dataValue, (isNa || isPos) && { fontSize: 13, color: C.textMute }]}>{shown}</Text>
+      {(isNa || isPos)
+        ? <Text style={[styles.dataValue, { fontSize: 13, color: C.textMute }]}>{shown}</Text>
+        : <AnimatedNumber value={value} style={styles.dataValue} duration={500} />}
       {unit ? <Text style={styles.dataUnit}>{unit}</Text> : null}
     </View>
   );
