@@ -10,14 +10,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useRouter } from "expo-router";
 import { useT } from "@/src/i18n";
 import { tapLight } from "@/src/utils/haptics";
-
-const C = {
-  bg: "#070A0F",
-  border: "rgba(255,255,255,0.08)",
-  text: "#F1F5F9",
-  textMute: "#64748B",
-  accent: "#3DA9FF",
-};
+import { C } from "@/src/theme";
 
 export type NavActive = "home" | "carga" | "diag" | "sag" | "none";
 

@@ -52,7 +52,6 @@ export default function SagScreen() {
 
 const st = StyleSheet.create({
   root: { flex: 1, backgroundColor: C.bg },
-  kicker: { color: C.accent, fontSize: 11, fontWeight: "700", letterSpacing: 1.8 },
   sub: { color: C.textDim, fontSize: 14, marginTop: 6 },
   step: {
     flexDirection: "row",

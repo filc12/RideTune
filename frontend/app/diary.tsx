@@ -224,7 +224,7 @@ export default function DiaryScreen() {
         <Pressable style={st.delBackdrop} onPress={() => setDeleteTarget(null)} />
         <View style={st.delModal}>
           <View style={st.delIconWrap}>
-            <Ionicons name="trash-outline" size={22} color="#F4B23E" />
+            <Ionicons name="trash-outline" size={22} color={C.warn} />
           </View>
           <Text style={st.delTitle}>{t("diary.delete.title")}</Text>
           <Text style={st.delSub}>{t("diary.delete.confirm")}</Text>
@@ -262,7 +262,7 @@ const st = StyleSheet.create({
   actionBtn: { width: 34, height: 34, borderRadius: 10, backgroundColor: C.accentSoft, borderWidth: 1, borderColor: C.accentLine, alignItems: "center", justifyContent: "center" },
   stars: { flexDirection: "row", gap: 4, marginBottom: 8 },
   star: { fontSize: 16, color: C.border },
-  starActive: { color: "#F4B23E" },
+  starActive: { color: C.warn },
   cardSetup: { color: C.textDim, fontSize: 12, marginBottom: 6 },
   cardNotes: { color: C.text, fontSize: 13.5, lineHeight: 20 },
   backdrop: { ...StyleSheet.absoluteFillObject, backgroundColor: "rgba(0,0,0,0.5)" },
@@ -272,7 +272,7 @@ const st = StyleSheet.create({
   sheetLabel: { color: C.textDim, fontSize: 12, fontWeight: "600", letterSpacing: 0.8, marginBottom: 8, marginTop: 14 },
   starsRow: { flexDirection: "row", gap: 8 },
   starPick: { fontSize: 28, color: C.border },
-  starPickActive: { color: "#F4B23E" },
+  starPickActive: { color: C.warn },
   input: { backgroundColor: C.surface, borderWidth: 1, borderColor: C.border, borderRadius: 12, paddingHorizontal: 14, paddingVertical: 12, color: C.text, fontSize: 14, marginBottom: 4 },
   cancel: { flex: 1, paddingVertical: 13, borderRadius: 12, borderWidth: 1, borderColor: C.border, alignItems: "center", backgroundColor: C.surface },
   cancelLabel: { color: C.text, fontWeight: "600" },
@@ -285,6 +285,6 @@ const st = StyleSheet.create({
   delSub: { color: C.textDim, fontSize: 13, textAlign: "center", marginTop: 8, marginBottom: 20, lineHeight: 19 },
   delCancel: { flex: 1, paddingVertical: 12, borderRadius: 12, borderWidth: 1, borderColor: C.border, alignItems: "center", backgroundColor: C.surface },
   delCancelLabel: { color: C.text, fontWeight: "600" },
-  delConfirm: { flex: 1, paddingVertical: 12, borderRadius: 12, backgroundColor: "#F4B23E", alignItems: "center" },
+  delConfirm: { flex: 1, paddingVertical: 12, borderRadius: 12, backgroundColor: C.warn, alignItems: "center" },
   delConfirmLabel: { color: "#04111E", fontWeight: "700" },
 });
