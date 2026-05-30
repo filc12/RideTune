@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { useT } from "@/src/i18n";
-import { KeyboardAvoidingView, Platform, StatusBar, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { useT, LANGS } from "@/src/i18n";
+import { PLAN_LIMITS } from "@/src/services/premium";
+import { Image, KeyboardAvoidingView, Platform, StatusBar, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import { saveProfile } from "@/src/utils/profiles";
@@ -9,12 +10,12 @@ import { storage } from "@/src/utils/storage";
 import { C } from "@/src/theme";
 
 const K_ONBOARDED = "ridetune.onboarded";
-type Step = "welcome" | "name" | "weight";
+type Step = "lang" | "welcome" | "name" | "weight";
 
 export default function OnboardingScreen() {
   const router = useRouter();
-  const { t } = useT();
-  const [step, setStep] = useState<Step>("welcome");
+  const { t, setLang } = useT();
+  const [step, setStep] = useState<Step>("lang");
   const [name, setName] = useState("");
   const [weight, setWeight] = useState("75");
 
@@ -36,6 +37,26 @@ export default function OnboardingScreen() {
     <View style={st.root}>
       <StatusBar barStyle="light-content" />
       <KeyboardAvoidingView style={st.inner} behavior={Platform.OS === "ios" ? "padding" : undefined}>
+        {step === "lang" && (
+          <View style={st.step}>
+            <Image source={require("../assets/images/icon.png")} style={st.appIcon} resizeMode="contain" />
+            <View style={st.langList}>
+              {LANGS.filter((l) => PLAN_LIMITS.free.languages.includes(l.code)).map((l) => (
+                <TouchableOpacity
+                  key={l.code}
+                  style={st.langRow}
+                  activeOpacity={0.85}
+                  onPress={() => { setLang(l.code as any); setStep("welcome"); }}
+                  testID={"onb-lang-" + l.code}
+                >
+                  <View style={st.langFlag}><Text style={st.langFlagText}>{l.flag}</Text></View>
+                  <Text style={st.langLabel}>{l.label}</Text>
+                  <MaterialCommunityIcons name="chevron-right" size={20} color={C.textMute} />
+                </TouchableOpacity>
+              ))}
+            </View>
+          </View>
+        )}
         {step === "welcome" && (
           <View style={st.step}>
             <Text style={st.title}>{t("onb.welcome.title")}<Text style={st.accent}>RideTune</Text></Text>
@@ -95,6 +116,12 @@ export default function OnboardingScreen() {
 const st = StyleSheet.create({
   root: { flex: 1, backgroundColor: C.bg },
   inner: { flex: 1, alignItems: "center", justifyContent: "center", padding: 28 },
+  appIcon: { width: 88, height: 88, borderRadius: 20, marginBottom: 28 },
+  langList: { width: "100%", gap: 16 },
+  langRow: { flexDirection: "row", alignItems: "center", gap: 16, paddingVertical: 22, paddingHorizontal: 18, borderRadius: 16, backgroundColor: C.surface, borderWidth: 1, borderColor: C.border },
+  langFlag: { width: 48, height: 36, borderRadius: 10, backgroundColor: C.surfaceHi, borderWidth: 1, borderColor: C.border, alignItems: "center", justifyContent: "center" },
+  langFlagText: { color: C.textDim, fontWeight: "800", fontSize: 13, letterSpacing: 0.5 },
+  langLabel: { color: C.text, fontSize: 18, fontWeight: "600", flex: 1 },
   step: { width: "100%", alignItems: "center" },
   stepNum: { color: C.accent, fontSize: 12, fontWeight: "700", letterSpacing: 1.4, marginBottom: 24 },
   title: { color: C.text, fontSize: 32, fontWeight: "800", textAlign: "center", lineHeight: 40, letterSpacing: -0.5 },

@@ -11,14 +11,14 @@ export const PLAN_LIMITS = {
     maxProfiles: 1,
     maxSetups:   0,
     loadModes:   ["solo"] as string[],
-    languages:   ["en"] as string[],
+    languages:   ["en", "es"] as string[],
   },
   premium: {
     maxBikes:    Infinity,
     maxProfiles: Infinity,
     maxSetups:   Infinity,
     loadModes:   ["solo", "malas", "duo", "duo_malas"] as string[],
-    languages:   ["en", "pt", "es", "fr", "de"] as string[],
+    languages:   ["en", "pt", "es", "fr", "de", "it"] as string[],
   },
 } as const;
 
