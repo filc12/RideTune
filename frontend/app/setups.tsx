@@ -130,18 +130,18 @@ export default function SetupsScreen() {
         <Pressable style={st.backdrop} onPress={() => setDeleteTarget(null)} />
         <View style={st.modal}>
           <View style={{ width: 44, height: 44, borderRadius: 22, backgroundColor: "rgba(244,178,62,0.15)", borderWidth: 1, borderColor: "rgba(244,178,62,0.3)", alignItems: "center", justifyContent: "center", alignSelf: "center", marginBottom: 14 }}>
-            <Ionicons name="trash-outline" size={22} color="#F4B23E" />
+            <Ionicons name="trash-outline" size={22} color={C.warn} />
           </View>
           <Text style={[st.modalTitle, { textAlign: "center" }]}>{t("setups.delete.title" as never)}</Text>
           <Text style={{ color: "#94A3B8", fontSize: 13, textAlign: "center", marginTop: 8, marginBottom: 20, lineHeight: 19 }}>
             {t("setups.delete.confirm" as never)}{"\n"}
-            <Text style={{ color: "#F1F5F9", fontWeight: "700" }}>{deleteTarget?.name}</Text>?
+            <Text style={{ color: C.text, fontWeight: "700" }}>{deleteTarget?.name}</Text>?
           </Text>
           <View style={{ flexDirection: "row", gap: 10 }}>
             <HapticButton onPress={() => setDeleteTarget(null)} style={st.cancel} activeOpacity={0.8}>
               <Text style={st.cancelLabel}>{t("common.cancel" as never)}</Text>
             </HapticButton>
-            <HapticButton onPress={confirmDelete} haptic="success" style={[st.confirm, { backgroundColor: "#F4B23E" }]} activeOpacity={0.9}>
+            <HapticButton onPress={confirmDelete} haptic="success" style={[st.confirm, { backgroundColor: C.warn }]} activeOpacity={0.9}>
               <Text style={[st.confirmLabel, { color: "#04111E" }]}>{t("setups.delete.btn" as never)}</Text>
             </HapticButton>
           </View>

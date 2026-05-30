@@ -155,7 +155,7 @@ export default function CargaScreen() {
         <View style={st.modal}>
           <Text style={st.modalTitle}>Update profile?</Text>
           <Text style={{ color: "#94A3B8", fontSize: 13, marginTop: 8, marginBottom: 20, lineHeight: 19 }}>
-            Update <Text style={{ color: "#F1F5F9", fontWeight: "700" }}>{activeProfile?.name}</Text> profile weight to <Text style={{ color: "#F1F5F9", fontWeight: "700" }}>{load.rider} kg</Text>?
+            Update <Text style={{ color: C.text, fontWeight: "700" }}>{activeProfile?.name}</Text> profile weight to <Text style={{ color: C.text, fontWeight: "700" }}>{load.rider} kg</Text>?
           </Text>
           <View style={{ flexDirection: "row", gap: 10 }}>
             <HapticButton onPress={() => { setConfirmProfile(false); doSave(false); }} haptic="none" style={st.cancel} activeOpacity={0.8}>
@@ -346,10 +346,10 @@ const st = StyleSheet.create({
   saveOk: { backgroundColor: C.ok },
   backdrop: { ...StyleSheet.absoluteFillObject, backgroundColor: "rgba(0,0,0,0.6)" },
   modal: { position: "absolute", left: 20, right: 20, top: "35%", backgroundColor: "#0E141C", borderRadius: 18, padding: 20, borderWidth: 1, borderColor: "rgba(255,255,255,0.14)" },
-  modalTitle: { color: "#F1F5F9", fontSize: 16, fontWeight: "700" },
+  modalTitle: { color: C.text, fontSize: 16, fontWeight: "700" },
   cancel: { flex: 1, paddingVertical: 12, borderRadius: 12, borderWidth: 1, borderColor: "rgba(255,255,255,0.08)", alignItems: "center", backgroundColor: "rgba(255,255,255,0.04)" },
-  cancelLabel: { color: "#F1F5F9", fontWeight: "600" },
-  confirm: { flex: 1, paddingVertical: 12, borderRadius: 12, backgroundColor: "#3DA9FF", alignItems: "center" },
+  cancelLabel: { color: C.text, fontWeight: "600" },
+  confirm: { flex: 1, paddingVertical: 12, borderRadius: 12, backgroundColor: C.accent, alignItems: "center" },
   confirmLabel: { color: "#04111E", fontWeight: "700" },
   saveLabel: { color: "#04111E", fontWeight: "700", fontSize: 15 },
 });

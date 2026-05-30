@@ -29,7 +29,7 @@ export function PremiumModal({ visible, onClose, feature }: PremiumModalProps) {
       <Pressable style={st.backdrop} onPress={onClose} />
       <View style={st.sheet}>
         <View style={st.iconWrap}>
-          <MaterialCommunityIcons name="star-circle" size={36} color="#F4B23E" />
+          <MaterialCommunityIcons name="star-circle" size={36} color={C.warn} />
         </View>
         <Text style={st.title}>{t("premium.title")}</Text>
         <Text style={st.sub}>
@@ -40,7 +40,7 @@ export function PremiumModal({ visible, onClose, feature }: PremiumModalProps) {
         <View style={st.perks}>
           {perks.map((p) => (
             <View key={p} style={st.perk}>
-              <MaterialCommunityIcons name="check-circle" size={16} color="#22D08A" />
+              <MaterialCommunityIcons name="check-circle" size={16} color={C.ok} />
               <Text style={st.perkText}>{p}</Text>
             </View>
           ))}
@@ -65,14 +65,14 @@ const st = StyleSheet.create({
     borderWidth: 1, borderColor: "rgba(244,178,62,0.3)",
   },
   iconWrap: { alignItems: "center", marginBottom: 16 },
-  title: { color: "#F1F5F9", fontSize: 22, fontWeight: "800", textAlign: "center", letterSpacing: -0.3 },
+  title: { color: C.text, fontSize: 22, fontWeight: "800", textAlign: "center", letterSpacing: -0.3 },
   sub: { color: "#94A3B8", fontSize: 14, textAlign: "center", marginTop: 8, marginBottom: 20, lineHeight: 20 },
   perks: { gap: 10, marginBottom: 24 },
   perk: { flexDirection: "row", alignItems: "center", gap: 10 },
   perkText: { color: "#CBD5E1", fontSize: 13.5 },
   upgradeBtn: {
     flexDirection: "row", alignItems: "center", justifyContent: "center",
-    gap: 8, paddingVertical: 15, borderRadius: 14, backgroundColor: "#F4B23E",
+    gap: 8, paddingVertical: 15, borderRadius: 14, backgroundColor: C.warn,
   },
   upgradeBtnLabel: { color: "#04111E", fontWeight: "700", fontSize: 15 },
   laterBtn: { alignItems: "center", paddingVertical: 12, marginTop: 8 },

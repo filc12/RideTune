@@ -87,13 +87,13 @@ export default function DiagScreen() {
               {!premium && recs.length > 0 && (
                 <HapticButton style={st.lockCard} onPress={() => setPremiumModal(true)} activeOpacity={0.85}>
                   <View style={st.lockIcon}>
-                    <MaterialCommunityIcons name="lock" size={20} color="#F4B23E" />
+                    <MaterialCommunityIcons name="lock" size={20} color={C.warn} />
                   </View>
                   <View style={{ flex: 1 }}>
                     <Text style={st.lockTitle}>{t("diag.locked.title")}</Text>
                     <Text style={st.lockSub}>{t("diag.locked.sub")}</Text>
                   </View>
-                  <MaterialCommunityIcons name="chevron-right" size={18} color="#F4B23E" />
+                  <MaterialCommunityIcons name="chevron-right" size={18} color={C.warn} />
                 </HapticButton>
               )}
 
@@ -146,7 +146,7 @@ const st = StyleSheet.create({
   resultTitle: { color: C.accent, fontWeight: "700", letterSpacing: 1.4, fontSize: 11, marginBottom: 10 },
   lockCard: { flexDirection: "row", alignItems: "center", gap: 12, padding: 16, borderRadius: 14, backgroundColor: "rgba(244,178,62,0.08)", borderWidth: 1, borderColor: "rgba(244,178,62,0.3)", marginBottom: 12 },
   lockIcon: { width: 40, height: 40, borderRadius: 12, backgroundColor: "rgba(244,178,62,0.15)", borderWidth: 1, borderColor: "rgba(244,178,62,0.3)", alignItems: "center", justifyContent: "center" },
-  lockTitle: { color: "#F4B23E", fontWeight: "700", fontSize: 14 },
+  lockTitle: { color: C.warn, fontWeight: "700", fontSize: 14 },
   lockSub: { color: "#94A3B8", fontSize: 12.5, marginTop: 3, lineHeight: 17 },
   symptom: { flexDirection: "row", gap: 12, padding: 14, borderRadius: 14, backgroundColor: C.surface, borderWidth: 1, borderColor: C.border, marginBottom: 8 },
   symIcon: { width: 34, height: 34, borderRadius: 10, backgroundColor: C.accentSoft, borderWidth: 1, borderColor: C.accentLine, alignItems: "center", justifyContent: "center" },
