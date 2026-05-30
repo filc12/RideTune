@@ -339,7 +339,7 @@ function CountNote({ profileId, frontVType, rearVType }: { profileId?: string; f
   const sameDir  = frontDir && rearDir && frontDir === rearDir;
   return (
     <View style={{ marginTop: 12, padding: 12, borderRadius: 12, backgroundColor: "rgba(61,169,255,0.07)", borderWidth: 1, borderColor: "rgba(61,169,255,0.16)", gap: 6 }}>
-      <Text style={{ color: "#3DA9FF", fontSize: 10, fontWeight: "700", letterSpacing: 0.8, textTransform: "uppercase" }}>{t("card.how_to_set" as never)}</Text>
+      <Text style={{ color: C.accent, fontSize: 10, fontWeight: "700", letterSpacing: 0.8, textTransform: "uppercase" }}>{t("card.how_to_set" as never)}</Text>
       {hasModelNote && <Text style={{ color: "#CBD5E1", fontSize: 11.5, lineHeight: 17 }}>{modelNote}</Text>}
       {!hasModelNote && sameDir && <Text style={{ color: "#94A3B8", fontSize: 11.5, lineHeight: 17 }}>{frontDir}</Text>}
       {!hasModelNote && !sameDir && frontDir && <Text style={{ color: "#94A3B8", fontSize: 11.5, lineHeight: 17 }}>🔵 {t("susp.dir.label.front" as never)}: {frontDir}</Text>}
@@ -360,12 +360,12 @@ function NoDataBadge() {
       borderWidth: 1,
       borderColor: "rgba(244,178,62,0.30)",
       borderLeftWidth: 3,
-      borderLeftColor: "#F4B23E",
+      borderLeftColor: C.warn,
       gap: 6,
     }}>
       <View style={{ flexDirection: "row", alignItems: "center", gap: 8, flexWrap: "wrap" }}>
-        <MaterialCommunityIcons name="alert-outline" size={15} color="#F4B23E" />
-        <Text style={{ color: "#F4B23E", fontSize: 12, fontWeight: "700", letterSpacing: 0.3, flexShrink: 1 }}>
+        <MaterialCommunityIcons name="alert-outline" size={15} color={C.warn} />
+        <Text style={{ color: C.warn, fontSize: 12, fontWeight: "700", letterSpacing: 0.3, flexShrink: 1 }}>
           {t("card.nodata.title" as never)}
         </Text>
       </View>
@@ -426,13 +426,13 @@ function FeatureCard({ icon, title, desc, onPress, testID, highlight }: { icon: 
   return (
     <HapticButton activeOpacity={0.85} style={[styles.feature, highlight && { borderColor: "rgba(244,178,62,0.5)", backgroundColor: "rgba(244,178,62,0.07)" }]} onPress={onPress} testID={testID}>
       <View style={[styles.featureIcon, highlight && { backgroundColor: "rgba(244,178,62,0.18)", borderColor: "rgba(244,178,62,0.4)" }]}>
-        <MaterialCommunityIcons name={icon} size={18} color={highlight ? "#F4B23E" : C.accent} />
+        <MaterialCommunityIcons name={icon} size={18} color={highlight ? C.warn : C.accent} />
       </View>
       <View style={{ flex: 1 }}>
-        <Text style={[styles.featureTitle, highlight && { color: "#F4B23E" }]}>{title}</Text>
+        <Text style={[styles.featureTitle, highlight && { color: C.warn }]}>{title}</Text>
         <Text style={styles.featureDesc}>{desc}</Text>
       </View>
-      <Ionicons name="chevron-forward" size={16} color={highlight ? "#F4B23E" : C.textMute} />
+      <Ionicons name="chevron-forward" size={16} color={highlight ? C.warn : C.textMute} />
     </HapticButton>
   );
 }

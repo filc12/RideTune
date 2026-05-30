@@ -5,6 +5,7 @@ import { useRouter } from "expo-router";
 import { saveProfile } from "@/src/utils/profiles";
 import { saveLoad, getLoad } from "@/src/utils/suspension";
 import { storage } from "@/src/utils/storage";
+import { C } from "@/src/theme";
 
 const K_ONBOARDED = "ridetune.onboarded";
 type Step = "welcome" | "name" | "weight";
@@ -36,7 +37,7 @@ export default function OnboardingScreen() {
         {step === "welcome" && (
           <View style={st.step}>
             <View style={st.iconWrap}>
-              <MaterialCommunityIcons name="motorbike" size={48} color="#3DA9FF" />
+              <MaterialCommunityIcons name="motorbike" size={48} color={C.accent} />
             </View>
             <Text style={st.title}>{"Welcome to\n"}<Text style={st.accent}>RideTune</Text></Text>
             <Text style={st.sub}>Your motorcycle suspension setup assistant. Let us set up your rider profile in 2 steps.</Text>
@@ -93,23 +94,23 @@ export default function OnboardingScreen() {
 }
 
 const st = StyleSheet.create({
-  root: { flex: 1, backgroundColor: "#070A0F" },
+  root: { flex: 1, backgroundColor: C.bg },
   inner: { flex: 1, alignItems: "center", justifyContent: "center", padding: 28 },
   step: { width: "100%", alignItems: "center" },
-  stepNum: { color: "#3DA9FF", fontSize: 12, fontWeight: "700", letterSpacing: 1.4, marginBottom: 24 },
+  stepNum: { color: C.accent, fontSize: 12, fontWeight: "700", letterSpacing: 1.4, marginBottom: 24 },
   iconWrap: { width: 80, height: 80, borderRadius: 24, backgroundColor: "rgba(61,169,255,0.14)", borderWidth: 1, borderColor: "rgba(61,169,255,0.35)", alignItems: "center", justifyContent: "center", marginBottom: 28 },
-  title: { color: "#F1F5F9", fontSize: 32, fontWeight: "800", textAlign: "center", lineHeight: 40, letterSpacing: -0.5 },
-  accent: { color: "#3DA9FF" },
+  title: { color: C.text, fontSize: 32, fontWeight: "800", textAlign: "center", lineHeight: 40, letterSpacing: -0.5 },
+  accent: { color: C.accent },
   sub: { color: "#64748B", fontSize: 15, textAlign: "center", lineHeight: 22, marginTop: 12, marginBottom: 32 },
-  input: { width: "100%", paddingHorizontal: 18, paddingVertical: 16, borderRadius: 14, borderWidth: 1, borderColor: "rgba(255,255,255,0.1)", backgroundColor: "rgba(255,255,255,0.05)", color: "#F1F5F9", fontSize: 18, marginBottom: 20, textAlign: "center" },
-  btn: { width: "100%", flexDirection: "row", alignItems: "center", justifyContent: "center", gap: 8, paddingVertical: 16, borderRadius: 14, backgroundColor: "#3DA9FF", marginBottom: 12 },
+  input: { width: "100%", paddingHorizontal: 18, paddingVertical: 16, borderRadius: 14, borderWidth: 1, borderColor: "rgba(255,255,255,0.1)", backgroundColor: "rgba(255,255,255,0.05)", color: C.text, fontSize: 18, marginBottom: 20, textAlign: "center" },
+  btn: { width: "100%", flexDirection: "row", alignItems: "center", justifyContent: "center", gap: 8, paddingVertical: 16, borderRadius: 14, backgroundColor: C.accent, marginBottom: 12 },
   btnDisabled: { backgroundColor: "#1e3a4f" },
   btnLabel: { color: "#04111E", fontWeight: "700", fontSize: 16 },
   weightRow: { flexDirection: "row", alignItems: "center", gap: 8, marginBottom: 32, width: "100%" },
   weightBtn: { flex: 1, paddingVertical: 14, borderRadius: 12, backgroundColor: "rgba(255,255,255,0.05)", borderWidth: 1, borderColor: "rgba(255,255,255,0.08)", alignItems: "center" },
-  weightBtnLabel: { color: "#F1F5F9", fontWeight: "700", fontSize: 14 },
+  weightBtnLabel: { color: C.text, fontWeight: "700", fontSize: 14 },
   weightDisplay: { flex: 2, alignItems: "center" },
-  weightValue: { color: "#F1F5F9", fontSize: 36, fontWeight: "800" },
+  weightValue: { color: C.text, fontSize: 36, fontWeight: "800" },
   weightUnit: { color: "#64748B", fontSize: 13 },
   skip: { paddingVertical: 8 },
   skipLabel: { color: "#475569", fontSize: 13 },
