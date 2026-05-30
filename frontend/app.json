@@ -18,8 +18,7 @@
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#070A0F"
       },
-      "edgeToEdgeEnabled": true,
-      "privacyPolicyUrl": "https://sites.google.com/view/ridetune-privacy/p%C3%A1gina-inicial"
+      "edgeToEdgeEnabled": true
     },
     "web": {
       "bundler": "metro",
@@ -37,7 +36,8 @@
           "backgroundColor": "#070A0F"
         }
       ],
-      "expo-video"
+      "expo-video",
+      "expo-font"
     ],
     "experiments": {
       "typedRoutes": true
