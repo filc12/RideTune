@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useT } from "@/src/i18n";
 import { KeyboardAvoidingView, Platform, StatusBar, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
@@ -12,6 +13,7 @@ type Step = "welcome" | "name" | "weight";
 
 export default function OnboardingScreen() {
   const router = useRouter();
+  const { t } = useT();
   const [step, setStep] = useState<Step>("welcome");
   const [name, setName] = useState("");
   const [weight, setWeight] = useState("75");
@@ -36,10 +38,10 @@ export default function OnboardingScreen() {
       <KeyboardAvoidingView style={st.inner} behavior={Platform.OS === "ios" ? "padding" : undefined}>
         {step === "welcome" && (
           <View style={st.step}>
-            <Text style={st.title}>{"Welcome to\n"}<Text style={st.accent}>RideTune</Text></Text>
-            <Text style={st.sub}>Your motorcycle suspension setup assistant. Let us set up your rider profile in 2 steps.</Text>
+            <Text style={st.title}>{t("onb.welcome.title")}<Text style={st.accent}>RideTune</Text></Text>
+            <Text style={st.sub}>{t("onb.welcome.sub")}</Text>
             <TouchableOpacity style={st.btn} onPress={() => setStep("name")} activeOpacity={0.9}>
-              <Text style={st.btnLabel}>Get started</Text>
+              <Text style={st.btnLabel}>{t("onb.welcome.cta")}</Text>
               <MaterialCommunityIcons name="arrow-right" size={18} color="#04111E" />
             </TouchableOpacity>
           </View>
@@ -47,16 +49,16 @@ export default function OnboardingScreen() {
         {step === "name" && (
           <View style={st.step}>
             <Text style={st.stepNum}>1 / 2</Text>
-            <Text style={st.title}>{"What is your\n"}<Text style={st.accent}>name?</Text></Text>
-            <Text style={st.sub}>This helps personalise your setup profiles.</Text>
+            <Text style={st.title}>{t("onb.name.title")}<Text style={st.accent}>{t("onb.name.accent")}</Text></Text>
+            <Text style={st.sub}>{t("onb.name.sub")}</Text>
             <TextInput
               value={name} onChangeText={setName}
-              placeholder="Your name" placeholderTextColor="#475569"
+              placeholder={t("onb.name.ph")} placeholderTextColor="#475569"
               style={st.input} autoFocus returnKeyType="next"
               onSubmitEditing={() => setStep("weight")}
             />
             <TouchableOpacity style={[st.btn, !name.trim() && st.btnDisabled]} onPress={() => name.trim() && setStep("weight")} activeOpacity={0.9}>
-              <Text style={st.btnLabel}>Next</Text>
+              <Text style={st.btnLabel}>{t("onb.next")}</Text>
               <MaterialCommunityIcons name="arrow-right" size={18} color="#04111E" />
             </TouchableOpacity>
           </View>
@@ -64,8 +66,8 @@ export default function OnboardingScreen() {
         {step === "weight" && (
           <View style={st.step}>
             <Text style={st.stepNum}>2 / 2</Text>
-            <Text style={st.title}>{"Your weight\n"}<Text style={st.accent}>with gear?</Text></Text>
-            <Text style={st.sub}>Include helmet, jacket and boots.</Text>
+            <Text style={st.title}>{t("onb.weight.title")}<Text style={st.accent}>{t("onb.weight.accent")}</Text></Text>
+            <Text style={st.sub}>{t("onb.weight.sub")}</Text>
             <View style={st.weightRow}>
               <TouchableOpacity style={st.weightBtn} onPress={() => setWeight(String(Math.max(40, parseInt(weight) - 5)))}><Text style={st.weightBtnLabel}>-5</Text></TouchableOpacity>
               <TouchableOpacity style={st.weightBtn} onPress={() => setWeight(String(Math.max(40, parseInt(weight) - 1)))}><Text style={st.weightBtnLabel}>-1</Text></TouchableOpacity>
@@ -77,11 +79,11 @@ export default function OnboardingScreen() {
               <TouchableOpacity style={st.weightBtn} onPress={() => setWeight(String(Math.min(130, parseInt(weight) + 5)))}><Text style={st.weightBtnLabel}>+5</Text></TouchableOpacity>
             </View>
             <TouchableOpacity style={st.btn} onPress={handleFinish} activeOpacity={0.9}>
-              <Text style={st.btnLabel}>Start riding</Text>
+              <Text style={st.btnLabel}>{t("onb.weight.cta")}</Text>
               <MaterialCommunityIcons name="check" size={18} color="#04111E" />
             </TouchableOpacity>
             <TouchableOpacity style={st.skip} onPress={handleFinish}>
-              <Text style={st.skipLabel}>Skip for now</Text>
+              <Text style={st.skipLabel}>{t("onb.skip")}</Text>
             </TouchableOpacity>
           </View>
         )}
