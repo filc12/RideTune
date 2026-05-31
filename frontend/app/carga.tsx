@@ -153,9 +153,9 @@ export default function CargaScreen() {
       <Modal transparent visible={confirmProfile} animationType="fade" onRequestClose={() => setConfirmProfile(false)}>
         <Pressable style={st.backdrop} onPress={() => setConfirmProfile(false)} />
         <View style={st.modal}>
-          <Text style={st.modalTitle}>Update profile?</Text>
+          <Text style={st.modalTitle}>{t("carga.update_title")}</Text>
           <Text style={{ color: "#94A3B8", fontSize: 13, marginTop: 8, marginBottom: 20, lineHeight: 19 }}>
-            Update <Text style={{ color: C.text, fontWeight: "700" }}>{activeProfile?.name}</Text> profile weight to <Text style={{ color: C.text, fontWeight: "700" }}>{load.rider} kg</Text>?
+            {t("carga.update_msg").replace("{name}", activeProfile?.name ?? "").replace("{load}", String(load.rider))}
           </Text>
           <View style={{ flexDirection: "row", gap: 10 }}>
             <HapticButton onPress={() => { setConfirmProfile(false); doSave(false); }} haptic="none" style={st.cancel} activeOpacity={0.8}>
