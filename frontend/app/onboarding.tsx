@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useT, LANGS } from "@/src/i18n";
 import { PLAN_LIMITS } from "@/src/services/premium";
-import { Image, KeyboardAvoidingView, Platform, StatusBar, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { Animated, Dimensions, Easing, Image, KeyboardAvoidingView, Platform, StatusBar, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import { saveProfile } from "@/src/utils/profiles";
@@ -11,6 +11,39 @@ import { C } from "@/src/theme";
 
 const K_ONBOARDED = "ridetune.onboarded";
 type Step = "lang" | "welcome" | "name" | "weight";
+
+const { width: SCREEN_W, height: SCREEN_H } = Dimensions.get("window");
+const ICON_SIZE = Math.min(SCREEN_W * 0.32, 150);
+
+function LangStep({ langs, onPick }: { langs: { code: string; label: string; flag: string }[]; onPick: (code: string) => void }) {
+  const anims = useRef(langs.map(() => new Animated.Value(0))).current;
+  useEffect(() => {
+    Animated.stagger(160, anims.map((a) =>
+      Animated.timing(a, { toValue: 1, duration: 420, easing: Easing.out(Easing.cubic), useNativeDriver: true })
+    )).start();
+  }, []);
+  return (
+    <View style={st.langStep}>
+      <Image source={require("../assets/images/icon_t.png")} style={st.langIcon} resizeMode="contain" />
+      <View style={st.langBottom}>
+        {langs.map((l, i) => (
+          <Animated.View
+            key={l.code}
+            style={{
+              alignSelf: "center",
+              opacity: anims[i],
+              transform: [{ translateY: anims[i].interpolate({ inputRange: [0, 1], outputRange: [24, 0] }) }],
+            }}
+          >
+            <TouchableOpacity style={st.langRow} activeOpacity={0.85} onPress={() => onPick(l.code)} testID={"onb-lang-" + l.code}>
+              <Text style={st.langLabel}>{l.label}</Text>
+            </TouchableOpacity>
+          </Animated.View>
+        ))}
+      </View>
+    </View>
+  );
+}
 
 export default function OnboardingScreen() {
   const router = useRouter();
@@ -38,24 +71,10 @@ export default function OnboardingScreen() {
       <StatusBar barStyle="light-content" />
       <KeyboardAvoidingView style={st.inner} behavior={Platform.OS === "ios" ? "padding" : undefined}>
         {step === "lang" && (
-          <View style={st.step}>
-            <Image source={require("../assets/images/icon.png")} style={st.appIcon} resizeMode="contain" />
-            <View style={st.langList}>
-              {LANGS.filter((l) => PLAN_LIMITS.free.languages.includes(l.code)).map((l) => (
-                <TouchableOpacity
-                  key={l.code}
-                  style={st.langRow}
-                  activeOpacity={0.85}
-                  onPress={() => { setLang(l.code as any); setStep("welcome"); }}
-                  testID={"onb-lang-" + l.code}
-                >
-                  <View style={st.langFlag}><Text style={st.langFlagText}>{l.flag}</Text></View>
-                  <Text style={st.langLabel}>{l.label}</Text>
-                  <MaterialCommunityIcons name="chevron-right" size={20} color={C.textMute} />
-                </TouchableOpacity>
-              ))}
-            </View>
-          </View>
+          <LangStep
+            langs={LANGS.filter((l) => PLAN_LIMITS.free.languages.includes(l.code))}
+            onPick={(code) => { setLang(code as any); setStep("welcome"); }}
+          />
         )}
         {step === "welcome" && (
           <View style={st.step}>
@@ -117,11 +136,12 @@ const st = StyleSheet.create({
   root: { flex: 1, backgroundColor: C.bg },
   inner: { flex: 1, alignItems: "center", justifyContent: "center", padding: 28 },
   appIcon: { width: 88, height: 88, borderRadius: 20, marginBottom: 28 },
+  langStep: { ...StyleSheet.absoluteFillObject, paddingHorizontal: 28 },
+  langIcon: { position: "absolute", top: SCREEN_H / 2 - ICON_SIZE / 2, alignSelf: "center", width: ICON_SIZE, height: ICON_SIZE },
+  langBottom: { position: "absolute", left: 28, right: 28, top: SCREEN_H / 2 + ICON_SIZE / 2 + 64, gap: 16, alignItems: "center" },
   langList: { width: "100%", gap: 16 },
-  langRow: { flexDirection: "row", alignItems: "center", gap: 16, paddingVertical: 22, paddingHorizontal: 18, borderRadius: 16, backgroundColor: C.surface, borderWidth: 1, borderColor: C.border },
-  langFlag: { width: 48, height: 36, borderRadius: 10, backgroundColor: C.surfaceHi, borderWidth: 1, borderColor: C.border, alignItems: "center", justifyContent: "center" },
-  langFlagText: { color: C.textDim, fontWeight: "800", fontSize: 13, letterSpacing: 0.5 },
-  langLabel: { color: C.text, fontSize: 18, fontWeight: "600", flex: 1 },
+  langRow: { alignSelf: "center", flexDirection: "row", alignItems: "center", justifyContent: "center", paddingVertical: 11, paddingHorizontal: 32, borderRadius: 999, backgroundColor: C.surface, borderWidth: 1, borderColor: C.border },
+  langLabel: { color: C.text, fontSize: 16, fontWeight: "600", textAlign: "center" },
   step: { width: "100%", alignItems: "center" },
   stepNum: { color: C.accent, fontSize: 12, fontWeight: "700", letterSpacing: 1.4, marginBottom: 24 },
   title: { color: C.text, fontSize: 32, fontWeight: "800", textAlign: "center", lineHeight: 40, letterSpacing: -0.5 },

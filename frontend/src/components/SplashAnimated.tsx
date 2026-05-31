@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import { Animated, Dimensions, Easing, StyleSheet } from "react-native";
 
 const { width } = Dimensions.get("window");
-const ICON_SIZE = Math.min(width * 0.45, 200);
+const ICON_SIZE = Math.min(width * 0.32, 150);
 
 interface Props {
   onFinish: () => void;
@@ -49,7 +49,7 @@ export function SplashAnimated({ onFinish }: Props) {
   return (
     <Animated.View style={[styles.root, { opacity: rootFade }]}>
       <Animated.Image
-        source={require("../../assets/images/icon.png")}
+        source={require("../../assets/images/icon_t.png")}
         style={[styles.icon, { opacity, transform: [{ scale }] }]}
         resizeMode="contain"
       />
