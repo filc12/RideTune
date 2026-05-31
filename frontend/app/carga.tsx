@@ -157,12 +157,12 @@ export default function CargaScreen() {
           <Text style={{ color: "#94A3B8", fontSize: 13, marginTop: 8, marginBottom: 20, lineHeight: 19 }}>
             {t("carga.update_msg").replace("{name}", activeProfile?.name ?? "").replace("{load}", String(load.rider))}
           </Text>
-          <View style={{ flexDirection: "row", gap: 10 }}>
+          <View style={{ flexDirection: "row", gap: 10, alignItems: "stretch" }}>
             <HapticButton onPress={() => { setConfirmProfile(false); doSave(false); }} haptic="none" style={st.cancel} activeOpacity={0.8}>
-              <Text style={st.cancelLabel}>No</Text>
+              <Text style={st.cancelLabel}>{t("carga.update_no")}</Text>
             </HapticButton>
             <HapticButton onPress={() => { setConfirmProfile(false); doSave(true); }} haptic="none" style={st.confirm} activeOpacity={0.9}>
-              <Text style={st.confirmLabel}>Yes, update</Text>
+              <Text style={st.confirmLabel}>{t("carga.update_yes")}</Text>
             </HapticButton>
           </View>
         </View>
@@ -347,9 +347,9 @@ const st = StyleSheet.create({
   backdrop: { ...StyleSheet.absoluteFillObject, backgroundColor: "rgba(0,0,0,0.6)" },
   modal: { position: "absolute", left: 20, right: 20, top: "35%", backgroundColor: "#0E141C", borderRadius: 18, padding: 20, borderWidth: 1, borderColor: "rgba(255,255,255,0.14)" },
   modalTitle: { color: C.text, fontSize: 16, fontWeight: "700" },
-  cancel: { flex: 1, paddingVertical: 12, borderRadius: 12, borderWidth: 1, borderColor: "rgba(255,255,255,0.08)", alignItems: "center", backgroundColor: "rgba(255,255,255,0.04)" },
-  cancelLabel: { color: C.text, fontWeight: "600" },
-  confirm: { flex: 1, paddingVertical: 12, borderRadius: 12, backgroundColor: C.accent, alignItems: "center" },
-  confirmLabel: { color: "#04111E", fontWeight: "700" },
+  cancel: { flex: 1, paddingVertical: 12, borderRadius: 12, borderWidth: 1, borderColor: "rgba(255,255,255,0.08)", alignItems: "center", justifyContent: "center", backgroundColor: "rgba(255,255,255,0.04)" },
+  cancelLabel: { color: C.text, fontWeight: "600", textAlign: "center" },
+  confirm: { flex: 1, paddingVertical: 12, borderRadius: 12, backgroundColor: C.accent, alignItems: "center", justifyContent: "center" },
+  confirmLabel: { color: "#04111E", fontWeight: "700", textAlign: "center" },
   saveLabel: { color: "#04111E", fontWeight: "700", fontSize: 15 },
 });
