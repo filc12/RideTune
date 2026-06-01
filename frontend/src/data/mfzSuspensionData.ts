@@ -196,18 +196,24 @@ const CFMOTO: MfzProfile[] = [
     id: 'cfmoto_450mt',
     brand: 'CFMOTO', model: '450MT', year: '2023+',
     baseKg: 75, source: 'mfzstudio.com/moto/cfmoto/', formula: 'cfmoto_interp',
-    countNote: 'Front preload: spring length measurement. Rear: spring marking via seat height.',
+    countNote: 'Damping: anticlockwise to soft (0), then clockwise to count. Rear preload: ring collar, clockwise adds preload.',
     front: {
       preload: pos('Standard seat: position 10 (spring length)'),
       comp: cl_s(10),
       reb: cl_s(10),
     },
     rear: {
-      preload: pos('Standard seat marking'),
+      preload: tu_s(0),
       comp: na('No rear compression adjuster'),
       reb: cl_s(10),
     },
-    notes: '450MT uses spring length / seat marking for preload (no click adjuster). Confirm preload via sag. Damping has click adjusters.',
+    weightPoints: [
+      { kg: 75,  fComp: 10, fReb: 10, rPre: 0, rReb: 10 },
+      { kg: 80,  fComp: 11, fReb: 11, rPre: 1, rReb: 11 },
+      { kg: 105, fComp: 12, fReb: 12, rPre: 4, rReb: 12 },
+      { kg: 155, fComp: 14, fReb: 14, rPre: 4, rReb: 14 },
+    ],
+    notes: 'Rear preload shown in turns (≈ visible rings on the collar; turn clockwise to add). Rear has no compression adjuster; damping uses click adjusters. Starting point only — confirm by sag (~30% / ~60mm of 200mm travel). If heavy loads need a lot of preload to reach target sag, fit a stiffer rear spring: preload does not replace correct spring rate.',
   },
 ];
 
