@@ -807,9 +807,9 @@ const SUZUKI: MfzProfile[] = [
   {
     id: 'suzuki_vstrom_1050de',
     brand: 'Suzuki', model: 'V-Strom 1050DE', year: '2022+',
-    baseKg: 75, source: 'mfzstudio.com/moto/suzuki/', formula: 'suzuki',
+    baseKg: 75, source: 'mfzstudio.com/moto/suzuki/', formula: 'cfmoto_interp',
     front: {
-      preload: pos('Groove 4 of 5 (1=soft, 5=hard)'),
+      preload: pos('Groove position (1=soft ... 7=hard)'),
       comp:    cl_h(8),
       reb:     cl_h(8),
     },
@@ -818,12 +818,18 @@ const SUZUKI: MfzProfile[] = [
       comp:    na('KYB shock — compression not adjustable'),
       reb:     tu_h(1.25),
     },
-    notes: 'Front preload uses a 5-groove stepped adjuster (not clicks). Rear shock (KYB) has no compression adjuster.',
+    weightPoints: [
+      { kg: 80,  fPre: 4, fComp: 8, fReb: 8, rPre: 11, rReb: 1.25 },
+      { kg: 100, fPre: 5, fComp: 7, fReb: 7, rPre: 13, rReb: 1 },
+      { kg: 155, fPre: 7, fComp: 4, fReb: 4, rPre: 16, rReb: 0.25 },
+      { kg: 175, fPre: 7, fComp: 3, fReb: 3, rPre: 18, rReb: 0.25 },
+    ],
+    notes: 'Front preload is a stepped groove adjuster (positions 1-7, not clicks); position estimated from load. Damping counts turns/clicks OUT from fully hard. Rear shock (KYB) has no compression adjuster. Starting point — confirm by sag.',
   },
   {
     id: 'suzuki_vstrom_800de',
     brand: 'Suzuki', model: 'V-Strom 800DE', year: '2023+',
-    baseKg: 75, source: 'mfzstudio.com/moto/suzuki/', formula: 'suzuki',
+    baseKg: 75, source: 'mfzstudio.com/moto/suzuki/', formula: 'cfmoto_interp',
     front: {
       preload: tu_s(6),
       comp:    tu_h(1.5),
@@ -834,6 +840,13 @@ const SUZUKI: MfzProfile[] = [
       comp:    tu_h(1.5),
       reb:     tu_h(1.75),
     },
+    weightPoints: [
+      { kg: 80,  fPre: 6,  fComp: 1.5,  fReb: 1.5,  rPre: 12, rComp: 1.5,  rReb: 1.75 },
+      { kg: 100, fPre: 8,  fComp: 1.25, fReb: 1.25, rPre: 14, rComp: 1.25, rReb: 1.5 },
+      { kg: 155, fPre: 11, fComp: 0.5,  fReb: 0.5,  rPre: 17, rComp: 0.5,  rReb: 0.75 },
+      { kg: 175, fPre: 13, fComp: 0.25, fReb: 0.25, rPre: 19, rComp: 0.25, rReb: 0.5 },
+    ],
+    notes: 'Front preload in turns; rear preload in clicks. Damping counts turns OUT from fully hard (fewer turns = more damping). All six adjusters active. Starting point — confirm by sag.',
   },
 ];
 
