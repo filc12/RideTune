@@ -301,7 +301,9 @@ function getVType(s: string | undefined) {
 }
 function getNum(s: string | undefined, fallback: number) {
   if (!s) return String(fallback);
-  const m = s.match(/^[0-9.]+/);
+  // Capture the full leading value token: integers (8), decimals (1.5),
+  // fractions (1/4, 3/4) and mixed fractions (1-1/2). Stops before the unit word.
+  const m = s.match(/^[0-9]+(?:[.\/-][0-9]+)*/);
   return m ? m[0] : String(fallback);
 }
 function SuspensionBlock({
