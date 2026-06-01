@@ -53,6 +53,21 @@ export default function CargaScreen() {
     setSaved(false);
   };
 
+  // Auto-save: persist load while on screen (debounced), AND flush on unmount.
+  // Only saves the load itself — never the rider profile, never navigates.
+  const didMount = React.useRef(false);
+  const latestLoad = React.useRef(load);
+  latestLoad.current = load;            // always hold the newest value
+  useEffect(() => {
+    if (!didMount.current) { didMount.current = true; return; }
+    const id = setTimeout(() => { saveLoad(load); }, 500);
+    return () => clearTimeout(id);      // debounce only; final write on unmount below
+  }, [load]);
+  useEffect(() => {
+    // On unmount, write whatever the latest value is — covers fast exits.
+    return () => { saveLoad(latestLoad.current); };
+  }, []);
+
   const doSave = async (updateProf: boolean) => {
     tapSuccess();
     await saveLoad(load);
