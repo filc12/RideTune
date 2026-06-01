@@ -197,7 +197,7 @@ function interpolateWps(wps: WeightPoint[], total: number, field: keyof WeightPo
       const lo = vals[i], hi = vals[i + 1];
       if (lo.v == null || hi.v == null) return lo.v ?? null;
       const ratio = (total - lo.kg) / (hi.kg - lo.kg);
-      return Math.round(lo.v + ratio * (hi.v - lo.v));
+      return roundQuarter(lo.v + ratio * (hi.v - lo.v));
     }
   }
   return null;
