@@ -87,7 +87,9 @@ export const BIKES: Bike[] = [
   { id: "honda-africa-as",   brand: "Honda", model: "Africa Twin Adventure Sports", cc: "1084cc", category: "adventure", adj: "full",  mfzProfileId: "honda_at_1100l_2020_manual" },
   { id: "honda-africa",      brand: "Honda", model: "Africa Twin",                  cc: "1084cc", category: "adventure", adj: "full",  mfzProfileId: "honda_at_1100l_2020_manual" },
   // Transalp XL750: Showa SFF front + Showa rear — preload only both ends, no rebound/compression
-  { id: "honda-transalp",    brand: "Honda", model: "XL750 Transalp",              cc: "755cc",  category: "adventure", adj: "fixed", mfzProfileId: "honda_transalp_2023"        },
+  { id: "honda-transalp",      brand: "Honda", model: "XL750 Transalp (2023-2024)", cc: "755cc",  category: "adventure", adj: "fixed", mfzProfileId: "honda_transalp_2023" },
+  { id: "honda-transalp-2025", brand: "Honda", model: "XL750 Transalp (2025)",      cc: "755cc",  category: "adventure", adj: "fixed", mfzProfileId: "honda_transalp_2025" },
+  { id: "honda-transalp-2026", brand: "Honda", model: "XL750 Transalp (2026+)",     cc: "755cc",  category: "adventure", adj: "full",  mfzProfileId: "honda_transalp_2026" },
   // NC750X: front non-adjustable, rear preload ring only
   { id: "honda-nc750x",      brand: "Honda", model: "NC750X",                       cc: "745cc",  category: "adventure", adj: "fixed"   },
   { id: "honda-xadv",        brand: "Honda", model: "X-ADV",                        cc: "745cc",  category: "adventure", adj: "fixed"   },
