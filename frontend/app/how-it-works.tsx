@@ -86,6 +86,20 @@ export default function HowItWorks() {
             <Text style={st.howtoText}>{t("hiw.clicks.howto.d")}</Text>
           </View>
 
+          {/* Symbol legend */}
+          <View style={[st.clicksHeader, { marginTop: 28 }]}>
+            <View style={st.clicksIcon}>
+              <MaterialCommunityIcons name="format-list-bulleted" size={18} color={C.accent} />
+            </View>
+            <Text style={st.clicksTitle}>{t("hiw.legend.title")}</Text>
+          </View>
+          <Text style={st.clicksIntro}>{t("hiw.legend.intro")}</Text>
+          <View style={{ gap: 8, marginTop: 14 }}>
+            {(["set","na","clks","turns","mm","hsclsc","sag"] as const).map((k) => (
+              <Text key={k} style={st.legendItem}>{t(("hiw.legend." + k) as never)}</Text>
+            ))}
+          </View>
+
           <TouchableOpacity onPress={() => { if (router.canGoBack()) router.back(); else router.replace("/" as never); }} activeOpacity={0.9} style={st.cta} testID="how-it-works-cta">
             <Text style={st.ctaLabel}>{t("hiw.cta")}</Text>
             <Ionicons name="arrow-forward" size={16} color="#04111E" />
@@ -146,6 +160,7 @@ const st = StyleSheet.create({
   howto: { marginTop: 14, padding: 14, borderRadius: 12, backgroundColor: "rgba(34,208,138,0.10)", borderWidth: 1, borderColor: "rgba(34,208,138,0.35)" },
   howtoHead: { flexDirection: "row", alignItems: "center", gap: 8 },
   howtoTitle: { color: C.ok, fontSize: 11, fontWeight: "800", letterSpacing: 1.4, textTransform: "uppercase" },
+  legendItem: { color: C.textDim, fontSize: 12.5, lineHeight: 19 },
   howtoText: { color: C.text, fontSize: 13, lineHeight: 19, marginTop: 8 },
   cta: { flexDirection: "row", alignItems: "center", justifyContent: "center", gap: 8, marginTop: 28, paddingVertical: 15, borderRadius: 14, backgroundColor: C.accent },
   ctaLabel: { color: "#04111E", fontWeight: "700", fontSize: 15 },
