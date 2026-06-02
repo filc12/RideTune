@@ -110,14 +110,14 @@ function adjustKtm(base: number, total: number, type: VType): number {
  * Yamaha formula (from mfzstudio.com/moto/yamaha/ JS):
  *   damping clicks: base - round(delta/20), clamped 1-30
  *   preload clicks: base + round(delta/15), clamped 0-30
- *   preload mm (T7 2025+ front): base + round(delta/10), practical range
+ *   preload mm (T7 2025+/World Raid front, Distance A): base - round(delta/10) — more load = less distance = more preload (firmer)
  */
 function adjustYamaha(base: number, total: number, type: VType): number {
   const delta = total - 75;
   switch (type) {
     case 'cl_hard': return clamp(base - Math.round(delta / 20), 1, 30);
     case 'cl_soft': return clamp(base + Math.round(delta / 15), 0, 30);
-    case 'mm':      return clamp(base + Math.round(delta / 10), 0, 40);
+    case 'mm':      return clamp(base - Math.round(delta / 10), 0, 40); // mm = Distance A: more load -> LESS distance -> MORE preload (firmer)
     default:        return base;
   }
 }

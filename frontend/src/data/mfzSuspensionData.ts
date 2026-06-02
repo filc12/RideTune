@@ -875,6 +875,23 @@ const SUZUKI: MfzProfile[] = [
 // ─────────────────────────────────────────────
 const YAMAHA: MfzProfile[] = [
   {
+    id: 'yamaha_t700_world_raid_2026',
+    brand: 'Yamaha', model: 'Ténéré 700 World Raid', year: '2026+',
+    baseKg: 75, source: 'Yamaha XTZ690D owner manual (official)', formula: 'yamaha',
+    front: {
+      preload: mm(19.0),
+      comp:    cl_h(11),
+      reb:     cl_h(18),
+    },
+    rear: {
+      preload: cl_s(10),
+      comp:    cl_s(14),
+      reb:     cl_s(11),
+    },
+    notes: 'Ténéré 700 World Raid (XTZ690D). Factory-standard values from the official Yamaha owner manual. Fully adjustable KYB suspension (46mm Kashima fork). Front: preload Distance A = 19.0mm (4mm hard – 19mm soft), compression 11 clicks from hard (range 19), rebound 18 clicks from hard (range 23). Rear: preload knob position 10 (range 0-24), compression 14 clicks from soft, rebound 11 clicks from soft (rear scale counts from soft: 0 = soft, 21 = hard). Keep both fork legs equal. Confirm by sag.',
+    dataQuality: 'oem_manual',
+  },
+  {
     id: 'yamaha_t700_2019',
     brand: 'Yamaha', model: 'Ténéré 700', year: '2019-2024',
     baseKg: 75, source: 'mfzstudio.com/moto/yamaha/', formula: 'yamaha',

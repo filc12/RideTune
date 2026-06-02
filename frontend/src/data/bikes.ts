@@ -172,7 +172,7 @@ export const BIKES: Bike[] = [
   { id: "voge-ac525x",       brand: "Voge", model: "AC 525X",       cc: "494cc", category: "scrambler", adj: "partial" },
 
   // ===== Yamaha =====
-  { id: "yamaha-tenere-w",   brand: "Yamaha", model: "Ténéré 700 World Raid", cc: "689cc", category: "adventure",     adj: "full"    }, // Öhlins — no manual click profile
+  { id: "yamaha-tenere-w",   brand: "Yamaha", model: "Ténéré 700 World Raid", cc: "689cc", category: "adventure",     adj: "full",    mfzProfileId: "yamaha_t700_world_raid_2026" }, // KYB fully adjustable (Ohlins is only the steering damper)
   // Ténéré 700 base: KYB preload+rebound both ends, no compression
   { id: "yamaha-tenere-2019", brand: "Yamaha", model: "Ténéré 700 (2019-2024)", cc: "689cc", category: "adventure", adj: "partial", mfzProfileId: "yamaha_t700_2019" },
   { id: "yamaha-tenere-2025", brand: "Yamaha", model: "Ténéré 700 (2025+)",      cc: "689cc", category: "adventure", adj: "full",    mfzProfileId: "yamaha_t700_2025" },
