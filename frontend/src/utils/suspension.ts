@@ -25,6 +25,9 @@ export type SetupResult = Setup & {
   /** Per-adjuster value type (na, pos, clicks, turns, mm) so the UI can show N/A or SET. */
   frontTypes?: { preload: string; reb: string; comp: string };
   rearTypes?:  { preload: string; reb: string; comp: string };
+  /** Rear high/low-speed compression (rally shocks): value + type for translated display. */
+  rearHs?: { value: number | string | null; type: string };
+  rearLs?: { value: number | string | null; type: string };
   /** Full human-readable adjuster instructions from the factory profile. */
   adjDetails?: {
     front: { preload: string; comp: string; reb: string };
@@ -251,6 +254,12 @@ export function calcSetupById(bikeId: string | null, load: Load): SetupResult {
             reb:     real.rear.rebound.type,
             comp:    real.rear.compression.type,
           },
+          rearHs: real.rear.highSpeedCompression
+            ? { value: real.rear.highSpeedCompression.value, type: real.rear.highSpeedCompression.type }
+            : undefined,
+          rearLs: real.rear.lowSpeedCompression
+            ? { value: real.rear.lowSpeedCompression.value, type: real.rear.lowSpeedCompression.type }
+            : undefined,
           adjDetails: {
             front: {
               preload: real.front.preload.display,

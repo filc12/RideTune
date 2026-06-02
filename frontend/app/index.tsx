@@ -224,7 +224,7 @@ export default function HomeScreen() {
                   {setup.noData && <NoDataBadge />}
                   <SuspensionBlock title={t("card.front")} icon="arrow-up-bold-circle-outline" values={setup.front} adj={setup.adjDetails?.front} types={setup.frontTypes} t={t} />
                   <View style={styles.hairline} />
-                  <SuspensionBlock title={t("card.rear")} icon="arrow-down-bold-circle-outline" values={setup.rear} adj={setup.adjDetails?.rear} types={setup.rearTypes} t={t} />
+                  <SuspensionBlock title={t("card.rear")} icon="arrow-down-bold-circle-outline" values={setup.rear} adj={setup.adjDetails?.rear} types={setup.rearTypes} t={t} hasHsLs={!!(setup.rearHs || setup.rearLs)} />
                   <View style={styles.hairline} />
                   <View style={styles.sagRow}>
                     <View style={{ flex: 1 }}>
@@ -248,7 +248,7 @@ export default function HomeScreen() {
                       );
                     })()}
                   </View>
-                  <CountNote profileId={setup.mfzProfileId} frontVType={setup.frontVType} rearVType={setup.rearVType} />
+                  <CountNote profileId={setup.mfzProfileId} frontVType={setup.frontVType} rearVType={setup.rearVType} rearHs={setup.rearHs} rearLs={setup.rearLs} />
                 </>
               )}
             </View>
@@ -307,7 +307,7 @@ function getNum(s: string | undefined, fallback: number) {
   return m ? m[0] : String(fallback);
 }
 function SuspensionBlock({
-  title, icon, values, adj, types, t,
+  title, icon, values, adj, types, t, hasHsLs,
 }: {
   title: string;
   icon: keyof typeof MaterialCommunityIcons.glyphMap;
@@ -315,6 +315,7 @@ function SuspensionBlock({
   adj?: { preload: string; comp: string; reb: string; hsComp?: string };
   types?: { preload: string; reb: string; comp: string };
   t: (k: never) => string;
+  hasHsLs?: boolean;
 }) {
   return (
     <View style={styles.suspBlock}>
@@ -325,12 +326,12 @@ function SuspensionBlock({
       <View style={styles.suspGrid}>
         <DataCell label={t("card.preload" as never)} value={getNum(adj?.preload, values.preload)} vtype={types?.preload ?? getVType(adj?.preload)} t={t} />
         <DataCell label={t("card.rebound" as never)} value={getNum(adj?.reb, values.rebound)} vtype={types?.reb ?? getVType(adj?.reb)} t={t} />
-        <DataCell label={t("card.compression" as never)} value={getNum(adj?.comp, values.compression)} vtype={types?.comp ?? getVType(adj?.comp)} t={t} />
+        <DataCell label={t("card.compression" as never)} value={getNum(adj?.comp, values.compression)} vtype={types?.comp ?? getVType(adj?.comp)} t={t} forceSet={hasHsLs} />
       </View>
     </View>
   );
 }
-function CountNote({ profileId, frontVType, rearVType }: { profileId?: string; frontVType?: string; rearVType?: string }) {
+function CountNote({ profileId, frontVType, rearVType, rearHs, rearLs }: { profileId?: string; frontVType?: string; rearVType?: string; rearHs?: { value: number | string | null; type: string }; rearLs?: { value: number | string | null; type: string } }) {
   const { t } = useT();
   if (!frontVType && !rearVType && !profileId) return null;
   const modelKey = profileId ? `count.${profileId}` : null;
@@ -346,6 +347,11 @@ function CountNote({ profileId, frontVType, rearVType }: { profileId?: string; f
       {!hasModelNote && sameDir && <Text style={{ color: "#94A3B8", fontSize: 11.5, lineHeight: 17 }}>{frontDir}</Text>}
       {!hasModelNote && !sameDir && frontDir && <Text style={{ color: "#94A3B8", fontSize: 11.5, lineHeight: 17 }}>🔵 {t("susp.dir.label.front" as never)}: {frontDir}</Text>}
       {!hasModelNote && !sameDir && rearDir  && <Text style={{ color: "#94A3B8", fontSize: 11.5, lineHeight: 17, marginTop: 2 }}>🔴 {t("susp.dir.label.rear" as never)}: {rearDir}</Text>}
+      {(rearHs || rearLs) && (
+        <Text style={{ color: "#CBD5E1", fontSize: 11.5, lineHeight: 17, marginTop: 2 }}>
+          🔴 {t("card.compression" as never)}:{rearLs && rearLs.value != null ? ` LSC ${rearLs.value} ${t(("susp.unit." + rearLs.type) as never)}` : ""}{rearHs && rearHs.value != null ? ` · HSC ${rearHs.value} ${t(("susp.unit." + rearHs.type) as never)}` : ""}
+        </Text>
+      )}
     </View>
   );
 }
@@ -399,9 +405,9 @@ function AnimatedNumber({ value, style, duration = 500 }: { value: string; style
   return <Text style={style}>{isNumeric ? display : value}</Text>;
 }
 
-function DataCell({ label, value, vtype, t }: { label: string; value: string; vtype?: string; t?: (k: never) => string }) {
-  const isNa  = vtype === 'na';
-  const isPos = vtype === 'pos';
+function DataCell({ label, value, vtype, t, forceSet }: { label: string; value: string; vtype?: string; t?: (k: never) => string; forceSet?: boolean }) {
+  const isNa  = vtype === 'na' && !forceSet;
+  const isPos = vtype === 'pos' || (vtype === 'na' && forceSet);
   const unit = (!isNa && !isPos && vtype && t) ? t(("susp.unit." + vtype) as never) : undefined;
   const shown = isNa ? 'N/A' : isPos ? 'SET' : value;
   return (

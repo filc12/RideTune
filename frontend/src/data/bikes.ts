@@ -119,7 +119,10 @@ export const BIKES: Bike[] = [
   // ===== KTM =====
   { id: "ktm-1290-sadv",     brand: "KTM", model: "1290 Super Adventure S", cc: "1301cc", category: "adventure", adj: "full",    mfzProfileId: "ktm_1290_sadv_s_electronic" }, // semi-active electronic
   { id: "ktm-1290-sadv-r",   brand: "KTM", model: "1290 Super Adventure R", cc: "1301cc", category: "adventure", adj: "full",    mfzProfileId: "ktm_1290_adv_r_2021" },
+  { id: "ktm-1190-adv-r",   brand: "KTM", model: "1190 Adventure R",       cc: "1195cc", category: "adventure", adj: "full",    mfzProfileId: "ktm_1190_adv_r_2013" },
   { id: "ktm-890-adv-r",     brand: "KTM", model: "890 Adventure R",        cc: "889cc",  category: "adventure", adj: "full",    mfzProfileId: "ktm_890_adv_r_2021"  },
+  { id: "ktm-790-adv-r",     brand: "KTM", model: "790 Adventure R",        cc: "799cc",  category: "adventure", adj: "full",    mfzProfileId: "ktm_790_adv_r_2019" },
+  { id: "ktm-790-adv",       brand: "KTM", model: "790 Adventure (2025+)",    cc: "799cc",  category: "adventure", adj: "full",    mfzProfileId: "ktm_790_adv_std_2025" },
   // 890 Adventure (non-R): WP APEX 43 with preload+rebound both ends, no compression
   { id: "ktm-890-adv",       brand: "KTM", model: "890 Adventure",          cc: "889cc",  category: "adventure", adj: "partial" },
   // 390 Adventure: WP non-adjustable front + rear preload cam only
