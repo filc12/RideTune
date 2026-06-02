@@ -377,6 +377,23 @@ const HONDA: MfzProfile[] = [
     },
   },
   {
+    id: 'honda_at_1100l_advsports_eera',
+    brand: 'Honda', model: 'Africa Twin Adventure Sports (Showa EERA)', year: '2020+',
+    baseKg: 75, source: 'Honda official specs', formula: 'honda',
+    front: {
+      preload: na('Electronic — EERA menu'),
+      comp:    na('Electronic — EERA menu'),
+      reb:     na('Electronic — EERA menu'),
+    },
+    rear: {
+      preload: na('Electronic — EERA menu'),
+      comp:    na('Electronic — EERA menu'),
+      reb:     na('Electronic — EERA menu'),
+    },
+    notes: 'Showa EERA semi-active electronic suspension — no manual click adjusters. Everything is set via the screen/buttons. Damping modes: Hard / Mid / Soft / Off-Road / User. Electronic rear preload with load presets (Rider / Rider+luggage / 2-up / 2-up+luggage) plus a manual 24-step mode. Always confirm by sag.',
+    dataQuality: 'oem_manual',
+  },
+  {
     id: 'honda_at_1100l_2020_dct',
     dataQuality: 'oem_manual',
     brand: 'Honda', model: 'Africa Twin CRF1100L DCT', year: '2020+',

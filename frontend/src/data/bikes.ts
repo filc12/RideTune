@@ -84,7 +84,7 @@ export const BIKES: Bike[] = [
   { id: "ducati-hyper-698",       brand: "Ducati", model: "Hypermotard 698 Mono",   cc: "659cc",  category: "supermoto", adj: "full"    },
 
   // ===== Honda =====
-  { id: "honda-africa-as",   brand: "Honda", model: "Africa Twin Adventure Sports", cc: "1084cc", category: "adventure", adj: "full",  mfzProfileId: "honda_at_1100l_2020_manual" },
+  { id: "honda-africa-as",   brand: "Honda", model: "Africa Twin Adventure Sports", cc: "1084cc", category: "adventure", adj: "full",  mfzProfileId: "honda_at_1100l_advsports_eera" }, // Showa EERA electronic
   { id: "honda-africa",      brand: "Honda", model: "Africa Twin",                  cc: "1084cc", category: "adventure", adj: "full",  mfzProfileId: "honda_at_1100l_2020_manual" },
   // Transalp XL750: Showa SFF front + Showa rear — preload only both ends, no rebound/compression
   { id: "honda-transalp",      brand: "Honda", model: "XL750 Transalp (2023-2024)", cc: "755cc",  category: "adventure", adj: "fixed", mfzProfileId: "honda_transalp_2023" },
