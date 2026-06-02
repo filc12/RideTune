@@ -562,6 +562,22 @@ const KTM: MfzProfile[] = [
     notes: 'Rear preload has two baseline modes: Street (5 turns) and Offroad (1 turn). 1290 Super Adventure S uses semi-active suspension and is NOT included.',
   },
   {
+    id: 'ktm_1290_sadv_s_electronic',
+    brand: 'KTM', model: '1290 Super Adventure S', year: '2021+',
+    baseKg: 75, source: 'mfzstudio.com/moto/ktm/', formula: 'ktm',
+    front: {
+      preload: na('Electronic — TFT menu'),
+      comp:    na('Electronic — TFT menu'),
+      reb:     na('Electronic — TFT menu'),
+    },
+    rear: {
+      preload: na('Electronic — TFT menu'),
+      comp:    na('Electronic — TFT menu'),
+      reb:     na('Electronic — TFT menu'),
+    },
+    notes: 'WP APEX semi-active (SAT) electronic suspension — no manual click adjusters. Everything is set via the TFT screen and handlebar buttons. Damping modes: Comfort / Street / Sport (with Suspension Pro pack: Offroad / Auto / Advanced 1-8). Rear preload is electronic, 10 levels (0-100%), with load presets (solo / solo + luggage / 2-up / 2-up + luggage) and self-adjusts to weight. Always confirm by sag.',
+  },
+  {
     id: 'ktm_1190_adv_r_2013',
     brand: 'KTM', model: '1190 Adventure R', year: '2013-2016',
     baseKg: 75, source: 'mfzstudio.com/moto/ktm/', formula: 'ktm',
