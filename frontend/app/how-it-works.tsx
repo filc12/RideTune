@@ -95,7 +95,7 @@ export default function HowItWorks() {
           </View>
           <Text style={st.clicksIntro}>{t("hiw.legend.intro")}</Text>
           <View style={{ gap: 8, marginTop: 14 }}>
-            {(["set","na","clks","turns","mm","hsclsc","sag"] as const).map((k) => (
+            {(["set","na","clks","turns","mm","hsclsc","sag","loadscale"] as const).map((k) => (
               <Text key={k} style={st.legendItem}>{t(("hiw.legend." + k) as never)}</Text>
             ))}
           </View>

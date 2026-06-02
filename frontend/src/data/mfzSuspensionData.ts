@@ -273,16 +273,16 @@ const HONDA: MfzProfile[] = [
   {
     id: 'honda_transalp_2026',
     brand: 'Honda', model: 'XL750 Transalp', year: '2026+',
-    baseKg: 75, source: 'mfzstudio.com/moto/honda/', formula: 'cfmoto_interp',
+    baseKg: 75, source: 'Honda XL750 owner manual (official)', formula: 'cfmoto_interp',
     front: {
       preload: tu_s(6),
-      comp:    cl_s(8),
-      reb:     cl_s(8),
+      comp:    cl_h(11),
+      reb:     tu_h(1),
     },
     rear: {
       preload: tu_s(2),
-      comp:    cl_s(8),
-      reb:     cl_s(8),
+      comp:    tu_h(2.5),
+      reb:     tu_h(1.25),
     },
     weightPoints: [
       { kg: 75,  rPre: 2 },
@@ -291,8 +291,8 @@ const HONDA: MfzProfile[] = [
       { kg: 150, rPre: 5 },
       { kg: 190, rPre: 7 },
     ],
-    notes: 'Transalp 2026: now FULLY adjustable (added compression + rebound front and rear). DAMPING CLICK VALUES ARE PLACEHOLDERS (8) — TO BE CONFIRMED from mfzstudio/manual. Rear preload 7-position step adjuster, estimated from load. Confirm by sag.',
-    dataQuality: 'mfz_verified',
+    notes: 'Transalp 2026: fully adjustable (Showa SFF-CA). Factory-standard values from the official Honda owner manual. Front: preload 6 turns from soft, compression 11 clicks from hard (12-click range), rebound 1 turn from hard (3-turn range). Rear: preload position 2 of 7, compression 2.5 turns from hard, rebound 1.25 turns from hard. Rear preload scales with load. Confirm by sag.',
+    dataQuality: 'oem_manual',
   },
   {
     id: 'honda_at_1000l_2016_manual',
