@@ -174,7 +174,7 @@ const PT: Dict = {
   "count.kove_800x_touring": "↻ Horário até ao duro (0), conta cliques anti-horário. Preload: define pela marcação do garfo e confirma com sag.",
   "count.kove_800x_rally": "↻ Horário até ao duro (0), conta cliques anti-horário. Compression trás separada em alta e baixa velocidade. Rebound frente diferente da Standard.",
   "count.yamaha_t700_2019": "↻ Horário até ao duro (0), conta cliques anti-horário. Preload trás: ↺ anti-horário até parar, conta cliques CW. Sem adjuster de preload frente.",
-  "count.yamaha_t700_2025": "↻ Horário até ao duro (0), conta cliques anti-horário. Preload frente: distância A em mm (mantém os dois lados iguais). Preload trás: ↺ anti-horário, conta cliques CW.",
+  "count.yamaha_t700_2025": "↻ Horário até ao duro (0), conta cliques anti-horário. Preload frente: distância A em mm, ≈15 mm de range (mantém os dois lados iguais). Preload trás: ↺ anti-horário, conta cliques CW.",
   // Quiz fixes
   "diag.fix0.t": "Frente afunda nas travagens",
   "diag.fix0.d": "Aumenta preload frente 1-2 cliques ou compression +2 cliques.",
@@ -499,7 +499,7 @@ const EN: Dict = {
   "count.kove_800x_touring": "↻ CW to fully hard (0), count ACW clicks. Preload: set to fork marking and confirm with sag.",
   "count.kove_800x_rally": "↻ CW to fully hard (0), count ACW clicks. Rear compression split into high and low speed. Front rebound differs from Standard.",
   "count.yamaha_t700_2019": "↻ CW to fully hard (0), count ACW clicks. Rear preload: ↺ ACW to stop, count CW clicks. No front preload adjuster.",
-  "count.yamaha_t700_2025": "↻ CW to fully hard (0), count ACW clicks. Front preload: Distance A in mm (keep both legs equal). Rear preload: ↺ ACW to stop, count CW clicks.",
+  "count.yamaha_t700_2025": "↻ CW to fully hard (0), count ACW clicks. Front preload: Distance A in mm, ~15 mm range (keep both legs equal). Rear preload: ↺ ACW to stop, count CW clicks.",
   // Quiz fixes
   "diag.fix0.t": "Front dives under braking",
   "diag.fix0.d": "Increase front preload 1-2 clicks or compression +2 clicks.",
@@ -817,7 +817,7 @@ const ES: Dict = {
   "count.kove_800x_touring": "↻ Horario hasta duro (0), cuenta clicks antihorario. Precarga: ajusta a la marca del amortiguador y confirma con sag.",
   "count.kove_800x_rally": "↻ Horario hasta duro (0), cuenta clicks antihorario. Compresión trasera separada en alta y baja velocidad. Rebote delantero distinto de Standard.",
   "count.yamaha_t700_2019": "↻ Horario hasta duro (0), cuenta clicks antihorario. Precarga trasera: ↺ antihorario hasta el tope, cuenta clicks CW. Sin adjuster de precarga delantera.",
-  "count.yamaha_t700_2025": "↻ Horario hasta duro (0), cuenta clicks antihorario. Precarga delantera: Distancia A en mm (mantén ambas patas iguales). Precarga trasera: ↺ antihorario, cuenta clicks CW.",
+  "count.yamaha_t700_2025": "↻ Horario hasta duro (0), cuenta clicks antihorario. Precarga delantera: Distancia A en mm, ~15 mm de rango (mantén ambas patas iguales). Precarga trasera: ↺ antihorario, cuenta clicks CW.",
 
 
   // Quiz fixes
@@ -1137,7 +1137,7 @@ const FR: Dict = {
   "count.kove_800x_touring": "↻ Horaire jusqu'au dur (0), compter les clics antihoraire. Précharge : régler sur le repère de fourche et confirmer avec le sag.",
   "count.kove_800x_rally": "↻ Horaire jusqu'au dur (0), compter les clics antihoraire. Compression arrière séparée haute et basse vitesse. Rebond avant différent du Standard.",
   "count.yamaha_t700_2019": "↻ Horaire jusqu'au dur (0), compter les clics antihoraire. Précharge arrière : ↺ antihoraire à fond, compter clics CW. Pas de régleur de précharge avant.",
-  "count.yamaha_t700_2025": "↻ Horaire jusqu'au dur (0), compter les clics antihoraire. Précharge avant : Distance A en mm (garder les deux branches égales). Précharge arrière : ↺ antihoraire, compter clics CW.",
+  "count.yamaha_t700_2025": "↻ Horaire jusqu'au dur (0), compter les clics antihoraire. Précharge avant : Distance A en mm, ~15 mm de plage (garder les deux branches égales). Précharge arrière : ↺ antihoraire, compter clics CW.",
   // Quiz fixes
   "diag.fix0.t": "L'avant plonge au freinage",
   "diag.fix0.d": "Augmente la précharge avant 1-2 clics ou compression +2 clics.",
@@ -1614,7 +1614,7 @@ const DE: Dict = {
   "count.kove_800x_touring": "↻ Im Uhrzeigersinn bis hart (0), Klicks gegen UZS zählen. Vorspannung: Gabelmarkierung einstellen und mit Sag bestätigen.",
   "count.kove_800x_rally": "↻ Im Uhrzeigersinn bis hart (0), Klicks gegen UZS zählen. Hintere Druckstufe in Hoch- und Niedriggeschwindigkeit aufgeteilt. Vordere Zugstufe unterscheidet sich von Standard.",
   "count.yamaha_t700_2019": "↻ Im Uhrzeigersinn bis hart (0), Klicks gegen UZS zählen. Hintere Vorspannung: ↺ gegen UZS bis Anschlag, Klicks UZS zählen. Kein vorderer Vorspannungs-Einsteller.",
-  "count.yamaha_t700_2025": "↻ Im Uhrzeigersinn bis hart (0), Klicks gegen UZS zählen. Vordere Vorspannung: Abstand A in mm (beide Gabelbeine gleich halten). Hintere Vorspannung: ↺ gegen UZS, Klicks UZS zählen.",
+  "count.yamaha_t700_2025": "↻ Im Uhrzeigersinn bis hart (0), Klicks gegen UZS zählen. Vordere Vorspannung: Abstand A in mm, ~15 mm Bereich (beide Gabelbeine gleich halten). Hintere Vorspannung: ↺ gegen UZS, Klicks UZS zählen.",
 };
 
 
@@ -1797,7 +1797,7 @@ const IT: Dict = {
   "count.kove_800x_touring": "↻ Orario fino al duro (0), conta i clic antiorario. Precarico: imposta sulla marcatura della forcella e conferma con il sag.",
   "count.kove_800x_rally": "↻ Orario fino al duro (0), conta i clic antiorario. Compressione posteriore separata in alta e bassa velocità. Estensione anteriore diversa dalla Standard.",
   "count.yamaha_t700_2019": "↻ Orario fino al duro (0), conta i clic antiorario. Precarico posteriore: ↺ antiorario fino al fermo, conta i clic orario. Nessun registro di precarico anteriore.",
-  "count.yamaha_t700_2025": "↻ Orario fino al duro (0), conta i clic antiorario. Precarico anteriore: distanza A in mm (mantieni i due steli uguali). Precarico posteriore: ↺ antiorario, conta i clic orario.",
+  "count.yamaha_t700_2025": "↻ Orario fino al duro (0), conta i clic antiorario. Precarico anteriore: distanza A in mm, ~15 mm di range (mantieni i due steli uguali). Precarico posteriore: ↺ antiorario, conta i clic orario.",
   // --- Lote C1: susp.dir + CFMoto (IT) ---
   "susp.dir.label.front": "Anteriore", "susp.dir.label.rear": "Posteriore",
   "susp.dir.cl_hard": "↻ Gira in senso orario fino al fermo (massimo duro). Poi conta i clic in senso antiorario per aprire.",

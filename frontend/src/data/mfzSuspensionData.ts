@@ -938,7 +938,7 @@ const YAMAHA: MfzProfile[] = [
       comp:    cl_h(14),
       reb:     cl_h(11),
     },
-    notes: 'Front preload: Distance A = 19.0mm at base. Keep both fork legs equal. Confirm with sag check.',
+    notes: 'New for 2025: fork gained front preload adjustment (the 2019-2024 model had none). Front preload: Distance A = 19.0mm at base, ~15mm range via fork-top adjusters. Keep both fork legs equal. Confirm with sag check.',
   },
 ];
 
