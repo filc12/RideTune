@@ -412,7 +412,7 @@ const HONDA: MfzProfile[] = [
   },
   {
     id: 'honda_nt1100_2022',
-    brand: 'Honda', model: 'NT1100', year: '2022-2024',
+    brand: 'Honda', model: 'NT1100 (standard / manual)', year: '2022+',
     baseKg: 75,
     source: 'mfzstudio.com/moto/honda/',
     dataQuality: 'oem_manual',
@@ -427,7 +427,7 @@ const HONDA: MfzProfile[] = [
       comp:    na(),
       reb:     tu_h(2),
     },
-    notes: 'NT1100 2022-2024: front preload only (dial adjuster). Rear: preload (7 clicks from min) + stepless rebound. No compression adjusters.',
+    notes: 'NT1100 standard/manual (2022+, unchanged on the 2025 update): front preload only (dial adjuster). Rear: preload (7 clicks from min) + stepless rebound. No compression adjusters. Note: a separate 2025+ NT1100 Electronic Suspension (Showa EERA) variant exists with no manual clicks.',
   },
 ];
 
