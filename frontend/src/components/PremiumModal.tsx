@@ -45,10 +45,10 @@ export function PremiumModal({ visible, onClose, feature }: PremiumModalProps) {
             </View>
           ))}
         </View>
-        <TouchableOpacity style={st.upgradeBtn} activeOpacity={0.9} onPress={onClose}>
-          <MaterialCommunityIcons name="star" size={16} color="#04111E" />
-          <Text style={st.upgradeBtnLabel}>{t("premium.upgrade")}</Text>
-        </TouchableOpacity>
+        <View style={st.comingSoonBtn}>
+          <MaterialCommunityIcons name="clock-outline" size={16} color={C.warn} />
+          <Text style={st.comingSoonLabel}>{t("premium.comingsoon")}</Text>
+        </View>
         <TouchableOpacity style={st.laterBtn} activeOpacity={0.8} onPress={onClose}>
           <Text style={st.laterLabel}>{t("premium.later")}</Text>
         </TouchableOpacity>
@@ -75,6 +75,12 @@ const st = StyleSheet.create({
     gap: 8, paddingVertical: 15, borderRadius: 14, backgroundColor: C.warn,
   },
   upgradeBtnLabel: { color: "#04111E", fontWeight: "700", fontSize: 15 },
+  comingSoonBtn: {
+    flexDirection: "row", alignItems: "center", justifyContent: "center",
+    gap: 8, paddingVertical: 15, borderRadius: 14,
+    backgroundColor: "rgba(244,178,62,0.12)", borderWidth: 1, borderColor: "rgba(244,178,62,0.35)",
+  },
+  comingSoonLabel: { color: C.warn, fontWeight: "700", fontSize: 15 },
   laterBtn: { alignItems: "center", paddingVertical: 12, marginTop: 8 },
   laterLabel: { color: "#64748B", fontSize: 13, fontWeight: "500" },
 });

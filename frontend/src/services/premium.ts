@@ -11,7 +11,7 @@ export const PLAN_LIMITS = {
     maxProfiles: 1,
     maxSetups:   0,
     loadModes:   ["solo"] as string[],
-    languages:   ["en", "es"] as string[],
+    languages:   ["en", "pt", "es", "fr", "de", "it"] as string[], // all languages free (lower entry barrier)
   },
   premium: {
     maxBikes:    Infinity,
