@@ -8,6 +8,7 @@ import {
   StatusBar,
   StyleSheet,
   Text,
+  TouchableOpacity,
   View,
 } from "react-native";
 import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
@@ -54,6 +55,7 @@ export default function HomeScreen() {
   const [load, setLoad] = useState<Load>({ rider: 75, passenger: 0, luggage: 0 });
   const [pickerOpen, setPickerOpen] = useState(false);
   const [premiumModal, setPremiumModal] = useState<{ visible: boolean; feature?: string }>({ visible: false });
+  const [safetyInfo, setSafetyInfo] = useState(false);
 
   const refresh = useCallback(async () => {
     const id = await storage.getItem<string>(K_BIKE, "");
@@ -254,6 +256,11 @@ export default function HomeScreen() {
             </View>
           </View>
 
+          <TouchableOpacity style={styles.safetyHint} activeOpacity={0.7} onPress={() => setSafetyInfo(true)}>
+            <MaterialCommunityIcons name="shield-alert-outline" size={13} color={C.textMute} />
+            <Text style={styles.safetyHintTxt}>{t("result.safety.hint")}</Text>
+          </TouchableOpacity>
+
           {/* Scenarios */}
           <SectionTitle title={t("section.scenarios")} />
           <View style={styles.chipsWrap}>
@@ -289,6 +296,25 @@ export default function HomeScreen() {
 
       <BikePicker open={pickerOpen} onClose={() => setPickerOpen(false)} onPick={onPickBike} selectedId={bike?.id} t={t} />
       <PremiumModal visible={premiumModal.visible} feature={premiumModal.feature} onClose={() => setPremiumModal({ visible: false })} />
+
+      <Modal transparent visible={safetyInfo} animationType="fade" onRequestClose={() => setSafetyInfo(false)}>
+        <Pressable style={styles.safetyBackdrop} onPress={() => setSafetyInfo(false)} />
+        <View style={styles.safetySheet}>
+          <View style={styles.safetySheetIcon}>
+            <MaterialCommunityIcons name="shield-alert" size={34} color={C.warn} />
+          </View>
+          <Text style={styles.safetySheetTitle}>{t("onb.safety.title")}</Text>
+          <Text style={styles.safetySheetBody}>{t("onb.safety.body")}</Text>
+          <View style={styles.safetySheetPoints}>
+            <View style={styles.safetySheetPoint}><MaterialCommunityIcons name="circle-small" size={20} color={C.warn} /><Text style={styles.safetySheetPointTxt}>{t("onb.safety.p1")}</Text></View>
+            <View style={styles.safetySheetPoint}><MaterialCommunityIcons name="circle-small" size={20} color={C.warn} /><Text style={styles.safetySheetPointTxt}>{t("onb.safety.p2")}</Text></View>
+            <View style={styles.safetySheetPoint}><MaterialCommunityIcons name="circle-small" size={20} color={C.warn} /><Text style={styles.safetySheetPointTxt}>{t("onb.safety.p3")}</Text></View>
+          </View>
+          <TouchableOpacity style={styles.safetySheetBtn} activeOpacity={0.85} onPress={() => setSafetyInfo(false)}>
+            <Text style={styles.safetySheetBtnTxt}>{t("onb.safety.accept")}</Text>
+          </TouchableOpacity>
+        </View>
+      </Modal>
     </View>
   );
 }
@@ -631,4 +657,16 @@ const styles = StyleSheet.create({
   catLabel: { color: C.accent, fontSize: 10.5, fontWeight: "800", letterSpacing: 1.6, textTransform: "uppercase" },
   catLine: { flex: 1, height: 1, backgroundColor: C.border },
   catCount: { color: C.textMute, fontSize: 11, fontWeight: "700", letterSpacing: 0.4 },
+  safetyHint: { flexDirection: "row", alignItems: "center", justifyContent: "center", gap: 6, paddingHorizontal: 24, paddingVertical: 10, marginTop: 4 },
+  safetyHintTxt: { color: C.textMute, fontSize: 11.5, textAlign: "center", flexShrink: 1 },
+  safetyBackdrop: { ...StyleSheet.absoluteFillObject, backgroundColor: "rgba(0,0,0,0.7)" },
+  safetySheet: { position: "absolute", left: 20, right: 20, top: "16%", maxWidth: 560, alignSelf: "center", width: undefined, backgroundColor: "#0E141C", borderRadius: 20, padding: 24, borderWidth: 1, borderColor: "rgba(244,178,62,0.3)" },
+  safetySheetIcon: { alignItems: "center", marginBottom: 14 },
+  safetySheetTitle: { color: C.text, fontSize: 20, fontWeight: "800", textAlign: "center" },
+  safetySheetBody: { color: "#94A3B8", fontSize: 13.5, textAlign: "center", lineHeight: 20, marginTop: 8, marginBottom: 18 },
+  safetySheetPoints: { gap: 10, marginBottom: 22 },
+  safetySheetPoint: { flexDirection: "row", alignItems: "flex-start", gap: 4 },
+  safetySheetPointTxt: { flex: 1, color: "#CBD5E1", fontSize: 13, lineHeight: 18 },
+  safetySheetBtn: { paddingVertical: 14, borderRadius: 14, backgroundColor: C.warn, alignItems: "center" },
+  safetySheetBtnTxt: { color: "#04111E", fontWeight: "700", fontSize: 15 },
 });
