@@ -1,5 +1,5 @@
 import React from "react";
-import { ScrollView, StatusBar, StyleSheet, Text, View } from "react-native";
+import { Modal, ScrollView, StatusBar, StyleSheet, Text, TextInput, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { LinearGradient } from "expo-linear-gradient";
 import { Ionicons } from "@expo/vector-icons";
@@ -21,15 +21,32 @@ export default function SettingsScreen() {
   const [tapCount, setTapCount] = React.useState(0);
   const [devOpen, setDevOpen] = React.useState(false);
   const [devPremium, setDevPremium] = React.useState(false);
+  const [askPw, setAskPw] = React.useState(false);
+  const [pwInput, setPwInput] = React.useState("");
+  const [pwError, setPwError] = React.useState(false);
 
   React.useEffect(() => {
     getPremiumStatus().then(setDevPremium);
   }, []);
 
+  const UNLOCK_PW = "121276"; // dev unlock password — change as needed
+
   const onVersionTap = () => {
     const next = tapCount + 1;
     setTapCount(next);
-    if (next >= 7) { setDevOpen(true); setTapCount(0); }
+    if (next >= 7) { setAskPw(true); setPwInput(""); setPwError(false); setTapCount(0); }
+  };
+
+  const onSubmitPw = () => {
+    if (pwInput === UNLOCK_PW) {
+      setAskPw(false);
+      setPwInput("");
+      setPwError(false);
+      setDevOpen(true);
+      tapSuccess();
+    } else {
+      setPwError(true);
+    }
   };
 
   const onReplayOnboarding = async () => {
@@ -161,6 +178,35 @@ export default function SettingsScreen() {
         </ScrollView>
         <BottomNav active="none" />
       </SafeAreaView>
+      <Modal visible={askPw} transparent animationType="fade" onRequestClose={() => setAskPw(false)}>
+        <View style={st.pwOverlay}>
+          <View style={st.pwCard}>
+            <Text style={st.pwTitle}>Developer unlock</Text>
+            <Text style={st.pwSub}>Enter password to continue.</Text>
+            <TextInput
+              style={[st.pwInput, pwError && st.pwInputError]}
+              value={pwInput}
+              onChangeText={(v) => { setPwInput(v); setPwError(false); }}
+              placeholder="Password"
+              placeholderTextColor={C.textMute}
+              secureTextEntry
+              autoCapitalize="none"
+              autoCorrect={false}
+              onSubmitEditing={onSubmitPw}
+            />
+            {pwError && <Text style={st.pwErr}>Wrong password</Text>}
+            <View style={st.pwBtns}>
+              <HapticButton style={st.pwBtnGhost} onPress={() => { setAskPw(false); setPwInput(""); setPwError(false); }}>
+                <Text style={st.pwBtnGhostTxt}>Cancel</Text>
+              </HapticButton>
+              <HapticButton style={st.pwBtnOk} onPress={onSubmitPw}>
+                <Text style={st.pwBtnOkTxt}>Unlock</Text>
+              </HapticButton>
+            </View>
+          </View>
+        </View>
+      </Modal>
+
       <PremiumModal visible={premiumModal} feature="premium.feature.languages" onClose={() => setPremiumModal(false)} />
     </View>
   );
@@ -211,4 +257,16 @@ const st = StyleSheet.create({
   devHint: { color: C.textMute, fontSize: 11, lineHeight: 15, textAlign: "center" },
   versionWrap: { marginTop: 30, alignItems: "center" },
   version: { color: C.textMute, fontSize: 12, letterSpacing: 0.6 },
+  pwOverlay: { flex: 1, backgroundColor: "rgba(0,0,0,0.7)", justifyContent: "center", alignItems: "center", padding: 24 },
+  pwCard: { width: "100%", maxWidth: 340, backgroundColor: "#0E1626", borderRadius: 16, borderWidth: 1, borderColor: C.border, padding: 20, gap: 10 },
+  pwTitle: { color: C.text, fontSize: 16, fontWeight: "800" },
+  pwSub: { color: C.textMute, fontSize: 12, lineHeight: 17 },
+  pwInput: { marginTop: 4, backgroundColor: "rgba(255,255,255,0.05)", borderWidth: 1, borderColor: C.border, borderRadius: 10, paddingHorizontal: 12, paddingVertical: 10, color: C.text, fontSize: 15 },
+  pwInputError: { borderColor: C.warn },
+  pwErr: { color: C.warn, fontSize: 12, fontWeight: "600" },
+  pwBtns: { flexDirection: "row", gap: 10, marginTop: 6 },
+  pwBtnGhost: { flex: 1, paddingVertical: 11, borderRadius: 10, borderWidth: 1, borderColor: C.border, alignItems: "center" },
+  pwBtnGhostTxt: { color: C.textMute, fontSize: 14, fontWeight: "700" },
+  pwBtnOk: { flex: 1, paddingVertical: 11, borderRadius: 10, backgroundColor: C.accent, alignItems: "center" },
+  pwBtnOkTxt: { color: "#06121F", fontSize: 14, fontWeight: "800" },
 });
