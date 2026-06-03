@@ -120,7 +120,7 @@ export default function DiaryScreen() {
       <LinearGradient colors={["#0B1220", "#070A0F"]} style={StyleSheet.absoluteFill} />
       <SafeAreaView style={{ flex: 1 }} edges={["top"]}>
         <ScreenHeader title={t("diary.title")} />
-        <ScrollView contentContainerStyle={{ padding: 20, paddingBottom: 120 }}>
+        <ScrollView contentContainerStyle={{ padding: 20, paddingBottom: 120, maxWidth: 600, alignSelf: "center", width: "100%" }}>
           <Text style={st.sub}>{t("diary.sub")}</Text>
 
           {!premium && (

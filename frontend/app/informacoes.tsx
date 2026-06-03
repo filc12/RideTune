@@ -35,7 +35,7 @@ export default function InfoScreen() {
       <LinearGradient colors={["#0B1220", "#070A0F"]} style={StyleSheet.absoluteFill} />
       <SafeAreaView style={{ flex: 1 }} edges={["top"]}>
         <ScreenHeader title={t("info.title")} />
-        <ScrollView contentContainerStyle={{ padding: 20, paddingBottom: 120 }}>
+        <ScrollView contentContainerStyle={{ padding: 20, paddingBottom: 120, maxWidth: 600, alignSelf: "center", width: "100%" }}>
           <View style={st.brand}>
             <View style={st.brandLogo}>
               <View style={st.logoBar} />

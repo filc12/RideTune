@@ -120,7 +120,7 @@ export default function HomeScreen() {
       <View style={styles.glowBottom} />
 
       <SafeAreaView edges={["top"]} style={{ flex: 1 }}>
-        <ScrollView contentContainerStyle={{ paddingBottom: 120 + insets.bottom }} showsVerticalScrollIndicator={false}>
+        <ScrollView contentContainerStyle={{ paddingBottom: 120 + insets.bottom, maxWidth: 600, alignSelf: "center", width: "100%" }} showsVerticalScrollIndicator={false}>
           {/* Header */}
           <View style={styles.header}>
             <View style={styles.logoWrap} testID="ridetune-logo">

@@ -22,7 +22,7 @@ export default function SagScreen() {
       <LinearGradient colors={["#0B1220", "#070A0F"]} style={StyleSheet.absoluteFill} />
       <SafeAreaView style={{ flex: 1 }} edges={["top"]}>
         <ScreenHeader title={t("sag.title")} />
-        <ScrollView contentContainerStyle={{ padding: 20, paddingBottom: 100 }}>
+        <ScrollView contentContainerStyle={{ padding: 20, paddingBottom: 100, maxWidth: 600, alignSelf: "center", width: "100%" }}>
           <Text style={st.sub}>{t("sag.sub")}</Text>
 
           <View style={{ marginTop: 20, gap: 12 }}>
