@@ -10,7 +10,7 @@ import { storage } from "@/src/utils/storage";
 import { C } from "@/src/theme";
 
 const K_ONBOARDED = "ridetune.onboarded";
-type Step = "lang" | "welcome" | "name" | "weight";
+type Step = "lang" | "welcome" | "name" | "weight" | "safety";
 
 const { width: SCREEN_W, height: SCREEN_H } = Dimensions.get("window");
 const ICON_SIZE = Math.min(SCREEN_W * 0.32, 150);
@@ -118,12 +118,28 @@ export default function OnboardingScreen() {
               <TouchableOpacity style={st.weightBtn} onPress={() => setWeight(String(Math.min(130, parseInt(weight) + 1)))}><Text style={st.weightBtnLabel}>+1</Text></TouchableOpacity>
               <TouchableOpacity style={st.weightBtn} onPress={() => setWeight(String(Math.min(130, parseInt(weight) + 5)))}><Text style={st.weightBtnLabel}>+5</Text></TouchableOpacity>
             </View>
-            <TouchableOpacity style={st.btn} onPress={handleFinish} activeOpacity={0.9}>
-              <Text style={st.btnLabel}>{t("onb.weight.cta")}</Text>
-              <MaterialCommunityIcons name="check" size={18} color="#04111E" />
+            <TouchableOpacity style={st.btn} onPress={() => setStep("safety")} activeOpacity={0.9}>
+              <Text style={st.btnLabel}>{t("onb.next")}</Text>
+              <MaterialCommunityIcons name="arrow-right" size={18} color="#04111E" />
             </TouchableOpacity>
-            <TouchableOpacity style={st.skip} onPress={handleFinish}>
-              <Text style={st.skipLabel}>{t("onb.skip")}</Text>
+          </View>
+        )}
+
+        {step === "safety" && (
+          <View style={st.step}>
+            <View style={st.safetyIcon}>
+              <MaterialCommunityIcons name="shield-alert" size={40} color={C.warn} />
+            </View>
+            <Text style={st.title}>{t("onb.safety.title")}</Text>
+            <Text style={st.safetyBody}>{t("onb.safety.body")}</Text>
+            <View style={st.safetyPoints}>
+              <View style={st.safetyPoint}><MaterialCommunityIcons name="circle-small" size={20} color={C.warn} /><Text style={st.safetyPointTxt}>{t("onb.safety.p1")}</Text></View>
+              <View style={st.safetyPoint}><MaterialCommunityIcons name="circle-small" size={20} color={C.warn} /><Text style={st.safetyPointTxt}>{t("onb.safety.p2")}</Text></View>
+              <View style={st.safetyPoint}><MaterialCommunityIcons name="circle-small" size={20} color={C.warn} /><Text style={st.safetyPointTxt}>{t("onb.safety.p3")}</Text></View>
+            </View>
+            <TouchableOpacity style={st.btn} onPress={handleFinish} activeOpacity={0.9}>
+              <Text style={st.btnLabel}>{t("onb.safety.accept")}</Text>
+              <MaterialCommunityIcons name="check" size={18} color="#04111E" />
             </TouchableOpacity>
           </View>
         )}
@@ -159,4 +175,9 @@ const st = StyleSheet.create({
   weightUnit: { color: "#64748B", fontSize: 13 },
   skip: { paddingVertical: 8 },
   skipLabel: { color: "#475569", fontSize: 13 },
+  safetyIcon: { alignItems: "center", marginBottom: 16 },
+  safetyBody: { color: "#94A3B8", fontSize: 14, textAlign: "center", lineHeight: 21, marginTop: 8, marginBottom: 20 },
+  safetyPoints: { width: "100%", gap: 10, marginBottom: 28 },
+  safetyPoint: { flexDirection: "row", alignItems: "flex-start", gap: 4 },
+  safetyPointTxt: { flex: 1, color: "#CBD5E1", fontSize: 13.5, lineHeight: 19 },
 });
