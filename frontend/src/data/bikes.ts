@@ -47,7 +47,7 @@ export const BIKES: Bike[] = [
   { id: "aprilia-tuono-660", brand: "Aprilia", model: "Tuono 660",     cc: "659cc",  category: "naked",     adj: "full" },
 
   // ===== BMW =====
-  { id: "bmw-r1300-gs-adv",  brand: "BMW", model: "R 1300 GS Adventure",  cc: "1300cc", category: "adventure",     adj: "full" },
+  { id: "bmw-r1300-gs-adv",  brand: "BMW", model: "R 1300 GS Adventure",  cc: "1300cc", category: "adventure",     adj: "full", mfzProfileId: "bmw_r1300gsa_dsa" }, // Dynamic ESA electronic
   { id: "bmw-r1300-gs",      brand: "BMW", model: "R 1300 GS",             cc: "1300cc", category: "adventure",     adj: "full" },
   { id: "bmw-1250-gs",       brand: "BMW", model: "R 1250 GS",             cc: "1254cc", category: "adventure",     adj: "full" },
   { id: "bmw-r1250-rt",      brand: "BMW", model: "R 1250 RT",             cc: "1254cc", category: "sport_touring", adj: "full" },
@@ -72,7 +72,7 @@ export const BIKES: Bike[] = [
 
   // ===== Ducati =====
   { id: "ducati-multi-v4-rally",  brand: "Ducati", model: "Multistrada V4 Rally",  cc: "1158cc", category: "adventure", adj: "full"    },
-  { id: "ducati-multi-v4",        brand: "Ducati", model: "Multistrada V4",         cc: "1158cc", category: "adventure", adj: "full"    },
+  { id: "ducati-multi-v4",        brand: "Ducati", model: "Multistrada V4",         cc: "1158cc", category: "adventure", adj: "full",    mfzProfileId: "ducati_multi_v4_skyhook" }, // Skyhook DSS (S/Rally)
   { id: "ducati-multi-v2",        brand: "Ducati", model: "Multistrada V2",         cc: "937cc",  category: "adventure", adj: "full"    },
   { id: "ducati-desertx",         brand: "Ducati", model: "DesertX",                cc: "937cc",  category: "adventure", adj: "full"    },
   { id: "ducati-desertx-rally",   brand: "Ducati", model: "DesertX Rally",          cc: "937cc",  category: "adventure", adj: "full"    },
@@ -101,7 +101,7 @@ export const BIKES: Bike[] = [
   { id: "honda-cb650r",      brand: "Honda", model: "CB650R",                       cc: "649cc",  category: "naked",     adj: "full"    },
 
   // ===== Kawasaki =====
-  { id: "kawasaki-versys-1000", brand: "Kawasaki", model: "Versys 1000 SE",  cc: "1043cc", category: "adventure",     adj: "full"    },
+  { id: "kawasaki-versys-1000", brand: "Kawasaki", model: "Versys 1000 SE",  cc: "1043cc", category: "adventure",     adj: "full",    mfzProfileId: "kawasaki_versys1000se_kecs" }, // KECS Skyhook electronic
   // Versys 650: front preload+rebound, rear preload+rebound — no compression either end
   { id: "kawasaki-versys-650",  brand: "Kawasaki", model: "Versys 650",      cc: "649cc",  category: "adventure",     adj: "partial" },
   { id: "kawasaki-1000sx",      brand: "Kawasaki", model: "Ninja 1000SX",    cc: "1043cc", category: "sport_touring", adj: "full"    },
@@ -153,7 +153,7 @@ export const BIKES: Bike[] = [
   { id: "suzuki-gsxr1000",      brand: "Suzuki", model: "GSX-R1000R",       cc: "999cc",  category: "sport",     adj: "full"    },
 
   // ===== Triumph =====
-  { id: "triumph-tiger-1200",       brand: "Triumph", model: "Tiger 1200 Rally Pro",  cc: "1160cc", category: "adventure",     adj: "full"    },
+  { id: "triumph-tiger-1200",       brand: "Triumph", model: "Tiger 1200 Rally Pro",  cc: "1160cc", category: "adventure",     adj: "full",    mfzProfileId: "triumph_tiger1200_showa" }, // Showa semi-active
   { id: "triumph-tiger-900-rally",  brand: "Triumph", model: "Tiger 900 Rally Pro",   cc: "888cc",  category: "adventure",     adj: "full"    },
   // Tiger 900 GT: Showa preload+rebound, no compression
   { id: "triumph-tiger-900-gt",     brand: "Triumph", model: "Tiger 900 GT",          cc: "888cc",  category: "adventure",     adj: "partial" },

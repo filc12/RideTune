@@ -945,6 +945,86 @@ const YAMAHA: MfzProfile[] = [
 // ─────────────────────────────────────────────
 // MAIN EXPORT
 // ─────────────────────────────────────────────
+const BMW: MfzProfile[] = [
+  {
+    id: 'bmw_r1300gsa_dsa',
+    brand: 'BMW', model: 'R 1300 GS Adventure', year: '2024+',
+    baseKg: 75, source: 'Manufacturer official specs', formula: 'honda',
+    front: {
+      preload: na('Electronic — menu'),
+      comp:    na('Electronic — menu'),
+      reb:     na('Electronic — menu'),
+    },
+    rear: {
+      preload: na('Electronic — menu'),
+      comp:    na('Electronic — menu'),
+      reb:     na('Electronic — menu'),
+    },
+    notes: 'BMW Dynamic ESA / DSA semi-active electronic suspension — standard, no manual click version. Set via menu: ride modes with automatic damping and spring rate, load compensation. Electronic preload (solo / 2-up / luggage). Confirm by sag.',
+    dataQuality: 'oem_manual',
+  },
+];
+
+const DUCATI: MfzProfile[] = [
+  {
+    id: 'ducati_multi_v4_skyhook',
+    brand: 'Ducati', model: 'Multistrada V4 (S / Rally)', year: '2021+',
+    baseKg: 75, source: 'Manufacturer official specs', formula: 'honda',
+    front: {
+      preload: na('Electronic — menu'),
+      comp:    na('Electronic — menu'),
+      reb:     na('Electronic — menu'),
+    },
+    rear: {
+      preload: na('Electronic — menu'),
+      comp:    na('Electronic — menu'),
+      reb:     na('Electronic — menu'),
+    },
+    notes: 'Multistrada V4 S / Rally: Marzocchi Ducati Skyhook (DSS Evolution) semi-active electronic suspension — no manual click adjusters. Compression, rebound and preload set on the screen, integrated in the Riding Modes (Auto mode). The base V4 (non-S) has manual suspension. Confirm by sag.',
+    dataQuality: 'oem_manual',
+  },
+];
+
+const KAWASAKI: MfzProfile[] = [
+  {
+    id: 'kawasaki_versys1000se_kecs',
+    brand: 'Kawasaki', model: 'Versys 1000 SE', year: '2021+',
+    baseKg: 75, source: 'Manufacturer official specs', formula: 'honda',
+    front: {
+      preload: na('Electronic — menu'),
+      comp:    na('Electronic — menu'),
+      reb:     na('Electronic — menu'),
+    },
+    rear: {
+      preload: na('Electronic — menu'),
+      comp:    na('Electronic — menu'),
+      reb:     na('Electronic — menu'),
+    },
+    notes: 'Versys 1000 SE: KECS semi-active electronic suspension with Showa Skyhook — no manual clicks. Damping self-adjusts; preload and modes set on the screen. The base Versys 1000 S does not have KECS. Confirm by sag.',
+    dataQuality: 'oem_manual',
+  },
+];
+
+const TRIUMPH: MfzProfile[] = [
+  {
+    id: 'triumph_tiger1200_showa',
+    brand: 'Triumph', model: 'Tiger 1200 Rally Pro', year: '2022+',
+    baseKg: 75, source: 'Manufacturer official specs', formula: 'honda',
+    front: {
+      preload: na('Electronic — menu'),
+      comp:    na('Electronic — menu'),
+      reb:     na('Electronic — menu'),
+    },
+    rear: {
+      preload: na('Electronic — menu'),
+      comp:    na('Electronic — menu'),
+      reb:     na('Electronic — menu'),
+    },
+    notes: 'Tiger 1200 Rally Pro: Showa semi-active suspension — no manual click adjusters. Damping adapts to the terrain; automatic electronic rear preload (plus Active Preload Reduction). Set modes on the screen. Confirm by sag.',
+    dataQuality: 'oem_manual',
+  },
+];
+
 export const MFZ_PROFILES: MfzProfile[] = [
   ...CFMOTO,
   ...HONDA,
@@ -952,6 +1032,10 @@ export const MFZ_PROFILES: MfzProfile[] = [
   ...KTM,
   ...SUZUKI,
   ...YAMAHA,
+  ...BMW,
+  ...DUCATI,
+  ...KAWASAKI,
+  ...TRIUMPH,
 ];
 
 /** Quick lookup by profile ID */
