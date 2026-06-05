@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useT, LANGS } from "@/src/i18n";
-import { PLAN_LIMITS } from "@/src/services/premium";
 import { Animated, Dimensions, Easing, Image, KeyboardAvoidingView, Platform, StatusBar, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
@@ -14,6 +13,16 @@ type Step = "lang" | "welcome" | "name" | "weight" | "safety";
 
 const { width: SCREEN_W, height: SCREEN_H } = Dimensions.get("window");
 const ICON_SIZE = Math.min(SCREEN_W * 0.32, 150);
+const CELL_W = (SCREEN_W - 56 - 12) / 2;
+
+const FLAGS: Record<string, any> = {
+  pt: require("../assets/flags/pt.png"),
+  en: require("../assets/flags/en.png"),
+  es: require("../assets/flags/es.png"),
+  fr: require("../assets/flags/fr.png"),
+  de: require("../assets/flags/de.png"),
+  it: require("../assets/flags/it.png"),
+};
 
 function LangStep({ langs, onPick }: { langs: { code: string; label: string; flag: string }[]; onPick: (code: string) => void }) {
   const anims = useRef(langs.map(() => new Animated.Value(0))).current;
@@ -30,13 +39,13 @@ function LangStep({ langs, onPick }: { langs: { code: string; label: string; fla
           <Animated.View
             key={l.code}
             style={{
-              alignSelf: "center",
+              width: CELL_W,
               opacity: anims[i],
               transform: [{ translateY: anims[i].interpolate({ inputRange: [0, 1], outputRange: [24, 0] }) }],
             }}
           >
-            <TouchableOpacity style={st.langRow} activeOpacity={0.85} onPress={() => onPick(l.code)} testID={"onb-lang-" + l.code}>
-              <Text style={st.langLabel}>{l.label}</Text>
+            <TouchableOpacity style={st.langCell} activeOpacity={0.85} onPress={() => onPick(l.code)} testID={"onb-lang-" + l.code}>
+              <Image source={FLAGS[l.code]} style={st.langFlagImg} resizeMode="contain" />
             </TouchableOpacity>
           </Animated.View>
         ))}
@@ -72,7 +81,7 @@ export default function OnboardingScreen() {
       <KeyboardAvoidingView style={st.inner} behavior={Platform.OS === "ios" ? "padding" : undefined}>
         {step === "lang" && (
           <LangStep
-            langs={LANGS.filter((l) => PLAN_LIMITS.free.languages.includes(l.code))}
+            langs={LANGS}
             onPick={(code) => { setLang(code as any); setStep("welcome"); }}
           />
         )}
@@ -154,10 +163,10 @@ const st = StyleSheet.create({
   appIcon: { width: 88, height: 88, borderRadius: 20, marginBottom: 28 },
   langStep: { ...StyleSheet.absoluteFillObject, paddingHorizontal: 28 },
   langIcon: { position: "absolute", top: SCREEN_H / 2 - ICON_SIZE / 2, alignSelf: "center", width: ICON_SIZE, height: ICON_SIZE },
-  langBottom: { position: "absolute", left: 28, right: 28, top: SCREEN_H / 2 + ICON_SIZE / 2 + 64, gap: 16, alignItems: "center" },
+  langBottom: { position: "absolute", left: 28, right: 28, top: SCREEN_H / 2 + ICON_SIZE / 2 + 48, flexDirection: "row", flexWrap: "wrap", justifyContent: "center", gap: 12 },
   langList: { width: "100%", gap: 16 },
-  langRow: { alignSelf: "center", flexDirection: "row", alignItems: "center", justifyContent: "center", paddingVertical: 11, paddingHorizontal: 32, borderRadius: 999, backgroundColor: C.surface, borderWidth: 1, borderColor: C.border },
-  langLabel: { color: C.text, fontSize: 16, fontWeight: "600", textAlign: "center" },
+  langCell: { alignItems: "center", justifyContent: "center", paddingVertical: 12 },
+  langFlagImg: { width: 36, height: 24, borderRadius: 4 },
   step: { width: "100%", alignItems: "center" },
   stepNum: { color: C.accent, fontSize: 12, fontWeight: "700", letterSpacing: 1.4, marginBottom: 24 },
   title: { color: C.text, fontSize: 32, fontWeight: "800", textAlign: "center", lineHeight: 40, letterSpacing: -0.5 },
