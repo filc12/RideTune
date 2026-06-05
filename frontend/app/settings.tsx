@@ -131,6 +131,7 @@ export default function SettingsScreen() {
             <Ionicons name="chevron-forward" size={16} color={C.textMute} />
           </HapticButton>
 
+          {__DEV__ && (
           <HapticButton
             activeOpacity={0.85}
             onPress={onReplayOnboarding}
@@ -146,6 +147,7 @@ export default function SettingsScreen() {
             </View>
             <Ionicons name="chevron-forward" size={16} color={C.textMute} />
           </HapticButton>
+          )}
 
           <View style={st.versionWrap}>
             <Text style={st.version} onPress={onVersionTap} suppressHighlighting>
