@@ -23,13 +23,10 @@ import { useFocusEffect, useRouter } from "expo-router";
 import { storage } from "@/src/utils/storage";
 import { useT } from "@/src/i18n";
 import { calcSetup, calcSetupById, deriveMode, getLoad, saveLoad, type Load } from "@/src/utils/suspension";
-import { BIKES, BIKE_BY_ID, BIKE_CATEGORIES, bikeLabel, type Bike } from "@/src/data/bikes";
+import { BIKES, BIKE_BY_ID, BIKE_CATEGORIES, type Bike } from "@/src/data/bikes";
 import { ConfidenceBadge } from "@/src/components/ConfidenceBadge";
 import { PremiumModal } from "@/src/components/PremiumModal";
-import { SwitchBikeModal } from "@/src/components/SwitchBikeModal";
-import { saveSetup } from "@/src/utils/setups";
-import { isPremium } from "@/src/services/premium";
-import { canUseLoadMode } from "@/src/services/premium";
+import { canUseLoadMode, canAddBike } from "@/src/services/premium";
 import { tapMedium } from "@/src/utils/haptics";
 import { HapticButton } from "@/src/components/HapticButton";
 import { BottomNav } from "@/src/components/BottomNav";
@@ -61,7 +58,6 @@ export default function HomeScreen() {
   const [load, setLoad] = useState<Load>({ rider: 75, passenger: 0, luggage: 0 });
   const [pickerOpen, setPickerOpen] = useState(false);
   const [premiumModal, setPremiumModal] = useState<{ visible: boolean; feature?: string }>({ visible: false });
-  const [switchModal, setSwitchModal] = useState<{ visible: boolean; target: Bike | null }>({ visible: false, target: null });
   const [safetyInfo, setSafetyInfo] = useState(false);
 
   const refresh = useCallback(async () => {
@@ -76,50 +72,20 @@ export default function HomeScreen() {
   useEffect(() => { refresh(); }, [refresh]);
   useFocusEffect(useCallback(() => { refresh(); }, [refresh]));
 
-  const doSwitchBike = useCallback(async (b: Bike) => {
+  const onPickBike = useCallback(async (b: Bike) => {
+    tapMedium();
+    if (bike && bike.id !== b.id) {
+      const allowed = await canAddBike(1);
+      if (!allowed) {
+        setPremiumModal({ visible: true, feature: "premium.feature.bikes" });
+        setPickerOpen(false);
+        return;
+      }
+    }
     setBike(b);
     await storage.setItem(K_BIKE, b.id);
     setPickerOpen(false);
-  }, []);
-
-  const onPickBike = useCallback(async (b: Bike) => {
-    tapMedium();
-    // Mesma mota ou primeira escolha -> troca direta, sem aviso.
-    if (!bike || bike.id === b.id) { await doSwitchBike(b); return; }
-    // Trocar para mota diferente -> abre o modal com o visual da app.
-    setSwitchModal({ visible: true, target: b });
-  }, [bike, doSwitchBike]);
-
-  const onSwitchSave = useCallback(async () => {
-    const target = switchModal.target;
-    if (!bike || !target) return;
-    const premium = await isPremium();
-    if (!premium) {
-      setSwitchModal({ visible: false, target: null });
-      setPremiumModal({ visible: true, feature: "premium.feature.setups" });
-      setPickerOpen(false);
-      return;
-    }
-    try {
-      const curSetup = calcSetupById(bike.id, load);
-      await saveSetup({
-        name: `${bikeLabel(bike.id)} — ${new Date().toLocaleDateString()}`,
-        bikeId: bike.id,
-        bikeLabel: bikeLabel(bike.id),
-        load,
-        setup: curSetup,
-        confidence: curSetup.confidence,
-      });
-    } catch {}
-    setSwitchModal({ visible: false, target: null });
-    await doSwitchBike(target);
-  }, [bike, load, switchModal.target, doSwitchBike]);
-
-  const onSwitchDiscard = useCallback(async () => {
-    const target = switchModal.target;
-    setSwitchModal({ visible: false, target: null });
-    if (target) await doSwitchBike(target);
-  }, [switchModal.target, doSwitchBike]);
+  }, [bike]);
 
   const onPickScenario = useCallback(async (m: LoadMode) => {
     tapMedium();
@@ -333,14 +299,6 @@ export default function HomeScreen() {
 
       <BikePicker open={pickerOpen} onClose={() => setPickerOpen(false)} onPick={onPickBike} selectedId={bike?.id} t={t} />
       <PremiumModal visible={premiumModal.visible} feature={premiumModal.feature} onClose={() => setPremiumModal({ visible: false })} />
-      <SwitchBikeModal
-        visible={switchModal.visible}
-        fromLabel={bike ? `${bike.brand} ${bike.model}` : undefined}
-        toLabel={switchModal.target ? `${switchModal.target.brand} ${switchModal.target.model}` : undefined}
-        onSave={onSwitchSave}
-        onDiscard={onSwitchDiscard}
-        onClose={() => setSwitchModal({ visible: false, target: null })}
-      />
 
       <Modal transparent visible={safetyInfo} animationType="fade" onRequestClose={() => setSafetyInfo(false)}>
         <Pressable style={styles.safetyBackdrop} onPress={() => setSafetyInfo(false)} />

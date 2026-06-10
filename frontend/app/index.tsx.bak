@@ -1,8 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 import {
   Animated,
-  Keyboard,
-  KeyboardAvoidingView,
   Modal,
   Platform,
   Pressable,
@@ -10,7 +8,6 @@ import {
   StatusBar,
   StyleSheet,
   Text,
-  TextInput,
   TouchableOpacity,
   View,
 } from "react-native";
@@ -23,13 +20,10 @@ import { useFocusEffect, useRouter } from "expo-router";
 import { storage } from "@/src/utils/storage";
 import { useT } from "@/src/i18n";
 import { calcSetup, calcSetupById, deriveMode, getLoad, saveLoad, type Load } from "@/src/utils/suspension";
-import { BIKES, BIKE_BY_ID, BIKE_CATEGORIES, bikeLabel, type Bike } from "@/src/data/bikes";
+import { BIKES, BIKE_BY_ID, BIKE_CATEGORIES, type Bike } from "@/src/data/bikes";
 import { ConfidenceBadge } from "@/src/components/ConfidenceBadge";
 import { PremiumModal } from "@/src/components/PremiumModal";
-import { SwitchBikeModal } from "@/src/components/SwitchBikeModal";
-import { saveSetup } from "@/src/utils/setups";
-import { isPremium } from "@/src/services/premium";
-import { canUseLoadMode } from "@/src/services/premium";
+import { canUseLoadMode, canAddBike } from "@/src/services/premium";
 import { tapMedium } from "@/src/utils/haptics";
 import { HapticButton } from "@/src/components/HapticButton";
 import { BottomNav } from "@/src/components/BottomNav";
@@ -61,7 +55,6 @@ export default function HomeScreen() {
   const [load, setLoad] = useState<Load>({ rider: 75, passenger: 0, luggage: 0 });
   const [pickerOpen, setPickerOpen] = useState(false);
   const [premiumModal, setPremiumModal] = useState<{ visible: boolean; feature?: string }>({ visible: false });
-  const [switchModal, setSwitchModal] = useState<{ visible: boolean; target: Bike | null }>({ visible: false, target: null });
   const [safetyInfo, setSafetyInfo] = useState(false);
 
   const refresh = useCallback(async () => {
@@ -76,50 +69,20 @@ export default function HomeScreen() {
   useEffect(() => { refresh(); }, [refresh]);
   useFocusEffect(useCallback(() => { refresh(); }, [refresh]));
 
-  const doSwitchBike = useCallback(async (b: Bike) => {
+  const onPickBike = useCallback(async (b: Bike) => {
+    tapMedium();
+    if (bike && bike.id !== b.id) {
+      const allowed = await canAddBike(1);
+      if (!allowed) {
+        setPremiumModal({ visible: true, feature: "premium.feature.bikes" });
+        setPickerOpen(false);
+        return;
+      }
+    }
     setBike(b);
     await storage.setItem(K_BIKE, b.id);
     setPickerOpen(false);
-  }, []);
-
-  const onPickBike = useCallback(async (b: Bike) => {
-    tapMedium();
-    // Mesma mota ou primeira escolha -> troca direta, sem aviso.
-    if (!bike || bike.id === b.id) { await doSwitchBike(b); return; }
-    // Trocar para mota diferente -> abre o modal com o visual da app.
-    setSwitchModal({ visible: true, target: b });
-  }, [bike, doSwitchBike]);
-
-  const onSwitchSave = useCallback(async () => {
-    const target = switchModal.target;
-    if (!bike || !target) return;
-    const premium = await isPremium();
-    if (!premium) {
-      setSwitchModal({ visible: false, target: null });
-      setPremiumModal({ visible: true, feature: "premium.feature.setups" });
-      setPickerOpen(false);
-      return;
-    }
-    try {
-      const curSetup = calcSetupById(bike.id, load);
-      await saveSetup({
-        name: `${bikeLabel(bike.id)} — ${new Date().toLocaleDateString()}`,
-        bikeId: bike.id,
-        bikeLabel: bikeLabel(bike.id),
-        load,
-        setup: curSetup,
-        confidence: curSetup.confidence,
-      });
-    } catch {}
-    setSwitchModal({ visible: false, target: null });
-    await doSwitchBike(target);
-  }, [bike, load, switchModal.target, doSwitchBike]);
-
-  const onSwitchDiscard = useCallback(async () => {
-    const target = switchModal.target;
-    setSwitchModal({ visible: false, target: null });
-    if (target) await doSwitchBike(target);
-  }, [switchModal.target, doSwitchBike]);
+  }, [bike]);
 
   const onPickScenario = useCallback(async (m: LoadMode) => {
     tapMedium();
@@ -274,7 +237,7 @@ export default function HomeScreen() {
                       </View>
                     </View>
                     {(() => {
-                      const sagOk = setup.sag >= 25 && setup.sag <= 75;
+                      const sagOk = setup.sag >= 20 && setup.sag <= 50;
                       const color = sagOk ? C.ok : C.warn;
                       const bg    = sagOk ? C.okSoft : C.warnSoft;
                       const bc    = sagOk ? "rgba(34,208,138,0.35)" : "rgba(244,178,62,0.35)";
@@ -333,14 +296,6 @@ export default function HomeScreen() {
 
       <BikePicker open={pickerOpen} onClose={() => setPickerOpen(false)} onPick={onPickBike} selectedId={bike?.id} t={t} />
       <PremiumModal visible={premiumModal.visible} feature={premiumModal.feature} onClose={() => setPremiumModal({ visible: false })} />
-      <SwitchBikeModal
-        visible={switchModal.visible}
-        fromLabel={bike ? `${bike.brand} ${bike.model}` : undefined}
-        toLabel={switchModal.target ? `${switchModal.target.brand} ${switchModal.target.model}` : undefined}
-        onSave={onSwitchSave}
-        onDiscard={onSwitchDiscard}
-        onClose={() => setSwitchModal({ visible: false, target: null })}
-      />
 
       <Modal transparent visible={safetyInfo} animationType="fade" onRequestClose={() => setSafetyInfo(false)}>
         <Pressable style={styles.safetyBackdrop} onPress={() => setSafetyInfo(false)} />
@@ -518,25 +473,12 @@ function FeatureCard({ icon, title, desc, onPress, testID, highlight }: { icon: 
 
 
 
-function rtNorm(s: string): string {
-  return s.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim();
-}
-
 function BikePicker({ open, onClose, onPick, selectedId, t }: { open: boolean; onClose: () => void; onPick: (b: Bike) => void; selectedId?: string; t: (k: never) => string }) {
   const [step, setStep] = React.useState<"cat" | "brand" | "model">("cat");
   const [selCat, setSelCat] = React.useState<string | null>(null);
   const [selBrand, setSelBrand] = React.useState<string | null>(null);
-  const [query, setQuery] = React.useState("");
-  const [kbHeight, setKbHeight] = React.useState(0);
-  React.useEffect(() => {
-    const showEvt = Platform.OS === "ios" ? "keyboardWillShow" : "keyboardDidShow";
-    const hideEvt = Platform.OS === "ios" ? "keyboardWillHide" : "keyboardDidHide";
-    const s = Keyboard.addListener(showEvt, (e) => setKbHeight(e.endCoordinates?.height ?? 0));
-    const h = Keyboard.addListener(hideEvt, () => setKbHeight(0));
-    return () => { s.remove(); h.remove(); };
-  }, []);
 
-  const reset = () => { setStep("cat"); setSelCat(null); setSelBrand(null); setQuery(""); };
+  const reset = () => { setStep("cat"); setSelCat(null); setSelBrand(null); };
   const handleClose = () => { reset(); onClose(); };
   const handlePick = (b: Bike) => { reset(); onPick(b); };
 
@@ -547,11 +489,6 @@ function BikePicker({ open, onClose, onPick, selectedId, t }: { open: boolean; o
     ? BIKES.filter((b) => b.category === selCat && b.brand === selBrand)
     : [];
 
-  const q = rtNorm(query);
-  const searchResults = q.length >= 1
-    ? BIKES.filter((b) => rtNorm(b.brand + " " + b.model).includes(q)).slice(0, 60)
-    : [];
-
   const stepTitle =
     step === "cat"   ? t("picker.title" as never) :
     step === "brand" ? t(`bike.cat.${selCat}` as never) :
@@ -560,12 +497,7 @@ function BikePicker({ open, onClose, onPick, selectedId, t }: { open: boolean; o
   return (
     <Modal visible={open} animationType="slide" transparent onRequestClose={handleClose}>
       <Pressable style={styles.modalBackdrop} onPress={handleClose} />
-      <KeyboardAvoidingView
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
-        style={styles.pickerKav}
-        pointerEvents="box-none"
-      >
-      <View style={[styles.sheet, kbHeight > 0 && { paddingBottom: kbHeight + 12 }]} testID="bike-picker">
+      <View style={styles.sheet} testID="bike-picker">
         <View style={styles.sheetHandle} />
         <View style={{ flexDirection: "row", alignItems: "center", gap: 8, marginBottom: 2 }}>
           {step !== "cat" && (
@@ -575,54 +507,13 @@ function BikePicker({ open, onClose, onPick, selectedId, t }: { open: boolean; o
           )}
           <Text style={styles.sheetTitle}>{stepTitle}</Text>
         </View>
-        <View style={styles.searchBox}>
-          <Ionicons name="search" size={18} color={C.textMute} />
-          <TextInput
-            testID="bike-search"
-            value={query}
-            onChangeText={setQuery}
-            placeholder={t("picker.search_ph" as never)}
-            placeholderTextColor={C.textMute}
-            style={styles.searchInput}
-            autoCorrect={false}
-            autoCapitalize="none"
-            returnKeyType="search"
-          />
-          {query.length > 0 && (
-            <HapticButton onPress={() => setQuery("")} style={{ padding: 2 }} haptic="none">
-              <Ionicons name="close-circle" size={18} color={C.textMute} />
-            </HapticButton>
-          )}
-        </View>
         <Text style={styles.sheetSub}>
-          {q.length >= 1 ? `${searchResults.length} ${searchResults.length === 1 ? "resultado" : "resultados"}` :
-           step === "cat"   ? t("picker.sub" as never) :
+          {step === "cat"   ? t("picker.sub" as never) :
            step === "brand" ? `${brandsInCat.length} marcas disponíveis` :
            `${modelsInBrandCat.length} ${modelsInBrandCat.length === 1 ? "modelo" : "modelos"}`}
         </Text>
-        <ScrollView style={{ maxHeight: kbHeight > 0 ? 300 : 540 }} keyboardShouldPersistTaps="handled" showsVerticalScrollIndicator={false}>
-          {q.length >= 1 && searchResults.map((b) => {
-            const active = b.id === selectedId;
-            return (
-              <HapticButton key={b.id} activeOpacity={0.85} onPress={() => handlePick(b)} haptic="none"
-                style={[styles.bikeRow, active && styles.bikeRowActive]} testID={`bike-${b.id}`}>
-                <View style={styles.bikeIcon}>
-                  <MaterialCommunityIcons name="motorbike" size={22} color={C.accent} />
-                </View>
-                <View style={{ flex: 1 }}>
-                  <Text style={styles.bikeBrand}>{b.brand} {b.model}</Text>
-                  <Text style={styles.bikeModel}>{b.cc}</Text>
-                </View>
-                {active
-                  ? <Ionicons name="checkmark-circle" size={20} color={C.ok} />
-                  : <Ionicons name="chevron-forward" size={18} color={C.textMute} />}
-              </HapticButton>
-            );
-          })}
-          {q.length >= 1 && searchResults.length === 0 && (
-            <Text style={styles.searchEmpty}>{t("picker.search_empty" as never)}</Text>
-          )}
-          {q.length === 0 && step === "cat" && BIKE_CATEGORIES.map((cat) => {
+        <ScrollView style={{ maxHeight: 540 }} showsVerticalScrollIndicator={false}>
+          {step === "cat" && BIKE_CATEGORIES.map((cat) => {
             const count = BIKES.filter((b) => b.category === cat).length;
             if (count === 0) return null;
             return (
@@ -639,7 +530,7 @@ function BikePicker({ open, onClose, onPick, selectedId, t }: { open: boolean; o
               </HapticButton>
             );
           })}
-          {q.length === 0 && step === "brand" && brandsInCat.map((brand) => {
+          {step === "brand" && brandsInCat.map((brand) => {
             const count = BIKES.filter((b) => b.category === selCat && b.brand === brand).length;
             return (
               <HapticButton key={brand} activeOpacity={0.85} style={styles.bikeRow}
@@ -655,7 +546,7 @@ function BikePicker({ open, onClose, onPick, selectedId, t }: { open: boolean; o
               </HapticButton>
             );
           })}
-          {q.length === 0 && step === "model" && modelsInBrandCat.map((b) => {
+          {step === "model" && modelsInBrandCat.map((b) => {
             const active = b.id === selectedId;
             return (
               <HapticButton key={b.id} activeOpacity={0.85} onPress={() => handlePick(b)} haptic="none"
@@ -675,7 +566,6 @@ function BikePicker({ open, onClose, onPick, selectedId, t }: { open: boolean; o
           })}
         </ScrollView>
       </View>
-      </KeyboardAvoidingView>
     </Modal>
   );
 }
@@ -758,10 +648,6 @@ const styles = StyleSheet.create({
   sheetHandle: { alignSelf: "center", width: 40, height: 4, borderRadius: 2, backgroundColor: C.borderHi, marginBottom: 14 },
   sheetTitle: { color: C.text, fontSize: 15, fontWeight: "700" },
   sheetSub: { color: C.textDim, fontSize: 13, marginTop: 4, marginBottom: 16 },
-  pickerKav: { ...StyleSheet.absoluteFillObject, justifyContent: "flex-end" },
-  searchBox: { flexDirection: "row", alignItems: "center", gap: 8, backgroundColor: "rgba(255,255,255,0.05)", borderWidth: 1, borderColor: C.border, borderRadius: 12, paddingHorizontal: 12, paddingVertical: 10, marginTop: 10, marginBottom: 4 },
-  searchInput: { flex: 1, color: C.text, fontSize: 15, padding: 0 },
-  searchEmpty: { color: C.textMute, fontSize: 14, textAlign: "center", paddingVertical: 28 },
   bikeRow: { flexDirection: "row", alignItems: "center", gap: 12, padding: 14, borderRadius: 14, backgroundColor: C.surface, borderWidth: 1, borderColor: C.border, marginBottom: 8 },
   bikeRowActive: { borderColor: "rgba(34,208,138,0.45)", backgroundColor: C.okSoft },
   bikeIcon: { width: 38, height: 38, borderRadius: 10, backgroundColor: C.accentSoft, alignItems: "center", justifyContent: "center" },

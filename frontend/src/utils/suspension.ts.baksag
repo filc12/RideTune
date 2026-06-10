@@ -73,12 +73,12 @@ const PROFILES: Record<BikeCategory, CategoryProfile> = {
     base: {
       front: { preload: 4, rebound: 14, compression: 14 },
       rear:  { preload: 5, rebound: 14, compression: 14 },
-      sag: 60,
+      sag: 35,
     },
     clamps: {
       front: { preload: [0, 18], rebound: [2, 25], compression: [2, 22] },
       rear:  { preload: [0, 22], rebound: [2, 25], compression: [2, 22] },
-      sag: [50, 70],
+      sag: [30, 50],
     },
     // Softer springs → more preload change needed per kg of load.
     scaling: { preloadFront: 10, preloadRear: 5, rebound: 12, compression: 12, sag: 7 },
@@ -90,12 +90,12 @@ const PROFILES: Record<BikeCategory, CategoryProfile> = {
     base: {
       front: { preload: 4, rebound: 10, compression: 12 },
       rear:  { preload: 4, rebound: 10, compression: 12 },
-      sag: 40,
+      sag: 30,
     },
     clamps: {
       front: { preload: [0, 15], rebound: [2, 20], compression: [2, 20] },
       rear:  { preload: [0, 20], rebound: [2, 20], compression: [2, 20] },
-      sag: [33, 48],
+      sag: [25, 38],
     },
     scaling: { preloadFront: 12, preloadRear: 6, rebound: 15, compression: 15, sag: 8 },
   },
@@ -106,12 +106,12 @@ const PROFILES: Record<BikeCategory, CategoryProfile> = {
     base: {
       front: { preload: 3, rebound: 8, compression: 10 },
       rear:  { preload: 3, rebound: 8, compression: 10 },
-      sag: 36,
+      sag: 25,
     },
     clamps: {
       front: { preload: [0, 10], rebound: [2, 18], compression: [2, 18] },
       rear:  { preload: [0, 12], rebound: [2, 18], compression: [2, 18] },
-      sag: [30, 44],
+      sag: [20, 30],
     },
     // Stiff springs → each kg moves the needle much less.
     scaling: { preloadFront: 18, preloadRear: 10, rebound: 20, compression: 20, sag: 12 },
@@ -123,12 +123,12 @@ const PROFILES: Record<BikeCategory, CategoryProfile> = {
     base: {
       front: { preload: 4, rebound: 12, compression: 13 },
       rear:  { preload: 5, rebound: 12, compression: 14 },
-      sag: 42,
+      sag: 32,
     },
     clamps: {
       front: { preload: [0, 16], rebound: [2, 22], compression: [2, 20] },
       rear:  { preload: [0, 22], rebound: [2, 22], compression: [2, 22] },
-      sag: [35, 50],
+      sag: [28, 42],
     },
     scaling: { preloadFront: 10, preloadRear: 5, rebound: 13, compression: 13, sag: 7 },
   },
@@ -139,12 +139,12 @@ const PROFILES: Record<BikeCategory, CategoryProfile> = {
     base: {
       front: { preload: 3, rebound: 12, compression: 11 },
       rear:  { preload: 4, rebound: 14, compression: 12 },
-      sag: 50,
+      sag: 32,
     },
     clamps: {
       front: { preload: [0, 14], rebound: [2, 22], compression: [2, 18] },
       rear:  { preload: [0, 18], rebound: [2, 22], compression: [2, 18] },
-      sag: [40, 60],
+      sag: [28, 42],
     },
     scaling: { preloadFront: 13, preloadRear: 7, rebound: 14, compression: 14, sag: 8 },
   },
@@ -155,12 +155,12 @@ const PROFILES: Record<BikeCategory, CategoryProfile> = {
     base: {
       front: { preload: 3, rebound: 9, compression: 11 },
       rear:  { preload: 3, rebound: 9, compression: 11 },
-      sag: 38,
+      sag: 27,
     },
     clamps: {
       front: { preload: [0, 12], rebound: [2, 18], compression: [2, 18] },
       rear:  { preload: [0, 15], rebound: [2, 18], compression: [2, 18] },
-      sag: [32, 46],
+      sag: [22, 32],
     },
     scaling: { preloadFront: 15, preloadRear: 8, rebound: 18, compression: 18, sag: 10 },
   },
@@ -170,12 +170,12 @@ const PROFILES: Record<BikeCategory, CategoryProfile> = {
     base: {
       front: { preload: 4, rebound: 11, compression: 12 },
       rear:  { preload: 4, rebound: 11, compression: 12 },
-      sag: 42,
+      sag: 32,
     },
     clamps: {
       front: { preload: [0, 14], rebound: [2, 20], compression: [2, 18] },
       rear:  { preload: [0, 18], rebound: [2, 20], compression: [2, 20] },
-      sag: [35, 50],
+      sag: [28, 40],
     },
     scaling: { preloadFront: 12, preloadRear: 6, rebound: 14, compression: 14, sag: 8 },
   },
@@ -203,7 +203,7 @@ export function calcSetup(load: Load, category?: BikeCategory): Setup {
       rebound:     clamp(base.rear.rebound     - Math.round(delta / scaling.rebound),      ...clamps.rear.rebound),
       compression: clamp(base.rear.compression - Math.round(delta / scaling.compression),  ...clamps.rear.compression),
     },
-    sag: base.sag, // alvo fixo (~30% do curso); o peso ajusta a pre-carga, nao o alvo
+    sag: clamp(base.sag + Math.round(delta / scaling.sag), ...clamps.sag),
   };
 }
 

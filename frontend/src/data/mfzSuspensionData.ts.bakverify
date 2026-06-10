@@ -1025,27 +1025,6 @@ const TRIUMPH: MfzProfile[] = [
   },
 ];
 
-const MACBOR: MfzProfile[] = [
-  {
-    id: 'macbor_xr5',
-    brand: 'Macbor', model: 'Montana XR5', year: '2021+',
-    baseKg: 75, source: 'Manual do utilizador Montana XR5/510 (oficial)', formula: 'ktm',
-    countNote: 'Cliques contados desde totalmente fechado "H" (duro), a abrir para "S" (mole). Pre-carga frente em mm (folga; menos mm = mais duro; fabrica 19 mm). Pre-carga tras = comprimento da mola 241,5 mm de fabrica (referencia).',
-    front: {
-      preload: mm(19),
-      comp:    cl_h(7),
-      reb:     cl_h(7),
-    },
-    rear: {
-      preload: pos('241,5 mm comprimento mola (fabrica)'),
-      comp:    cl_h(11),
-      reb:     cl_h(6),
-    },
-    notes: 'Suspensao KYB totalmente ajustavel. Valores de fabrica do manual oficial. Frente: forquilha invertida 41 mm. Tras: monoamortecedor com reservatorio. Pre-carga traseira ajusta-se ao comprimento de mola (fabrica 241,5 +/-1,5 mm); usa o sag (~30% / ~60 mm) como guia. Confirmar sempre pelo sag.',
-    dataQuality: 'oem_manual',
-  },
-];
-
 export const MFZ_PROFILES: MfzProfile[] = [
   ...CFMOTO,
   ...HONDA,
@@ -1057,7 +1036,6 @@ export const MFZ_PROFILES: MfzProfile[] = [
   ...DUCATI,
   ...KAWASAKI,
   ...TRIUMPH,
-  ...MACBOR,
 ];
 
 /** Quick lookup by profile ID */
