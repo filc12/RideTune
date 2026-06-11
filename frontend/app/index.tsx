@@ -2,7 +2,6 @@ import React, { useCallback, useEffect, useState } from "react";
 import {
   Animated,
   Keyboard,
-  KeyboardAvoidingView,
   Modal,
   Platform,
   Pressable,
@@ -560,12 +559,8 @@ function BikePicker({ open, onClose, onPick, selectedId, t }: { open: boolean; o
   return (
     <Modal visible={open} animationType="slide" transparent onRequestClose={handleClose}>
       <Pressable style={styles.modalBackdrop} onPress={handleClose} />
-      <KeyboardAvoidingView
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
-        style={styles.pickerKav}
-        pointerEvents="box-none"
-      >
-      <View style={[styles.sheet, kbHeight > 0 && { paddingBottom: kbHeight + 12 }]} testID="bike-picker">
+      <View style={[styles.pickerKav, kbHeight > 0 && styles.pickerKavTop]} pointerEvents="box-none">
+      <View style={styles.sheet} testID="bike-picker">
         <View style={styles.sheetHandle} />
         <View style={{ flexDirection: "row", alignItems: "center", gap: 8, marginBottom: 2 }}>
           {step !== "cat" && (
@@ -675,7 +670,7 @@ function BikePicker({ open, onClose, onPick, selectedId, t }: { open: boolean; o
           })}
         </ScrollView>
       </View>
-      </KeyboardAvoidingView>
+      </View>
     </Modal>
   );
 }
@@ -754,11 +749,12 @@ const styles = StyleSheet.create({
   navLabelActive: { color: C.accent, fontWeight: "700" },
   navActiveDot: { width: 4, height: 4, borderRadius: 2, backgroundColor: C.accent, marginTop: 3 },
   modalBackdrop: { ...StyleSheet.absoluteFillObject, backgroundColor: "rgba(0,0,0,0.6)" },
-  sheet: { position: "absolute", bottom: 0, left: 0, right: 0, backgroundColor: "#0E141C", borderTopLeftRadius: 24, borderTopRightRadius: 24, paddingHorizontal: 20, paddingTop: 10, paddingBottom: 28, borderTopWidth: 1, borderColor: C.borderHi },
+  sheet: { width: "100%", backgroundColor: "#0E141C", borderTopLeftRadius: 24, borderTopRightRadius: 24, paddingHorizontal: 20, paddingTop: 10, paddingBottom: 28, borderTopWidth: 1, borderColor: C.borderHi },
   sheetHandle: { alignSelf: "center", width: 40, height: 4, borderRadius: 2, backgroundColor: C.borderHi, marginBottom: 14 },
   sheetTitle: { color: C.text, fontSize: 15, fontWeight: "700" },
   sheetSub: { color: C.textDim, fontSize: 13, marginTop: 4, marginBottom: 16 },
   pickerKav: { ...StyleSheet.absoluteFillObject, justifyContent: "flex-end" },
+  pickerKavTop: { justifyContent: "flex-start", paddingTop: 48 },
   searchBox: { flexDirection: "row", alignItems: "center", gap: 8, backgroundColor: "rgba(255,255,255,0.05)", borderWidth: 1, borderColor: C.border, borderRadius: 12, paddingHorizontal: 12, paddingVertical: 10, marginTop: 10, marginBottom: 4 },
   searchInput: { flex: 1, color: C.text, fontSize: 15, padding: 0 },
   searchEmpty: { color: C.textMute, fontSize: 14, textAlign: "center", paddingVertical: 28 },
