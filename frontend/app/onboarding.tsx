@@ -7,6 +7,7 @@ import { saveProfile } from "@/src/utils/profiles";
 import { saveLoad, getLoad } from "@/src/utils/suspension";
 import { storage } from "@/src/utils/storage";
 import { C } from "@/src/theme";
+import { Analytics } from "@/src/services/analytics";
 
 const K_ONBOARDED = "ridetune.onboarded";
 type Step = "lang" | "welcome" | "name" | "weight" | "safety";
@@ -71,6 +72,7 @@ export default function OnboardingScreen() {
         await saveLoad({ ...lo, rider: w });
       } catch {}
       await storage.setItem(K_ONBOARDED, "true");
+      Analytics.onboardingCompleted();
     } catch {}
     router.replace("/" as never);
   };

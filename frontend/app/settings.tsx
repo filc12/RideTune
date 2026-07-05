@@ -1,5 +1,5 @@
 import React from "react";
-import { Modal, ScrollView, StatusBar, StyleSheet, Text, TextInput, View } from "react-native";
+import { Alert, Modal, ScrollView, StatusBar, StyleSheet, Text, TextInput, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { LinearGradient } from "expo-linear-gradient";
 import { Ionicons } from "@expo/vector-icons";
@@ -13,6 +13,8 @@ import { BottomNav } from "@/src/components/BottomNav";
 import { HapticButton } from "@/src/components/HapticButton";
 import { tapSuccess } from "@/src/utils/haptics";
 import { storage } from "@/src/utils/storage";
+import { exportBackup, importBackup } from "@/src/services/backup";
+import { Analytics } from "@/src/services/analytics";
 
 export default function SettingsScreen() {
   const { t, lang, setLang } = useT();
@@ -32,6 +34,8 @@ export default function SettingsScreen() {
   const UNLOCK_PW = "121276"; // dev unlock password — change as needed
 
   const onVersionTap = () => {
+    // Dev unlock só existe em builds de desenvolvimento — nunca em produção.
+    if (!__DEV__) return;
     const next = tapCount + 1;
     setTapCount(next);
     if (next >= 7) { setAskPw(true); setPwInput(""); setPwError(false); setTapCount(0); }
@@ -52,6 +56,25 @@ export default function SettingsScreen() {
   const onReplayOnboarding = async () => {
     await storage.removeItem("ridetune.onboarded");
     router.replace("/onboarding" as never);
+  };
+
+  const onExportBackup = async () => {
+    const ok = await exportBackup();
+    if (ok) {
+      Analytics.backupExported();
+    } else {
+      Alert.alert(t("settings.backup.import.error"));
+    }
+  };
+
+  const onImportBackup = async () => {
+    const result = await importBackup();
+    if (result.ok) {
+      Analytics.backupImported();
+      Alert.alert(t("settings.backup.import.success"));
+    } else if (result.reason !== "cancelled") {
+      Alert.alert(t("settings.backup.import.error"));
+    }
   };
 
   const onToggleDevPremium = async () => {
@@ -78,8 +101,9 @@ export default function SettingsScreen() {
                   activeOpacity={0.85}
                   onPress={async () => {
                     const allowed = await canUseLanguage(l.code);
-                    if (!allowed) { setPremiumModal(true); return; }
+                    if (!allowed) { setPremiumModal(true); Analytics.premiumModalShown({ feature: 'premium.feature.languages' }); return; }
                     setLang(l.code as Lang);
+                    Analytics.languageChanged({ lang: l.code });
                   }}
                   style={[st.row, active && st.rowActive]}
                   testID={`lang-${l.code}`}
@@ -130,6 +154,41 @@ export default function SettingsScreen() {
             </View>
             <Ionicons name="chevron-forward" size={16} color={C.textMute} />
           </HapticButton>
+
+          <Text style={[st.section, { marginTop: 28 }]}>{t("settings.data").toUpperCase()}</Text>
+          <View style={{ gap: 8 }}>
+            <HapticButton
+              activeOpacity={0.85}
+              onPress={onExportBackup}
+              style={st.row}
+              testID="export-backup"
+            >
+              <View style={st.iconBox}>
+                <Ionicons name="download-outline" size={18} color={C.accent} />
+              </View>
+              <View style={{ flex: 1 }}>
+                <Text style={st.rowLabel}>{t("settings.backup.export")}</Text>
+                <Text style={st.rowSub}>{t("settings.backup.export.sub")}</Text>
+              </View>
+              <Ionicons name="share-outline" size={16} color={C.textMute} />
+            </HapticButton>
+
+            <HapticButton
+              activeOpacity={0.85}
+              onPress={onImportBackup}
+              style={st.row}
+              testID="import-backup"
+            >
+              <View style={st.iconBox}>
+                <Ionicons name="cloud-upload-outline" size={18} color={C.accent} />
+              </View>
+              <View style={{ flex: 1 }}>
+                <Text style={st.rowLabel}>{t("settings.backup.import")}</Text>
+                <Text style={st.rowSub}>{t("settings.backup.import.sub")}</Text>
+              </View>
+              <Ionicons name="chevron-forward" size={16} color={C.textMute} />
+            </HapticButton>
+          </View>
 
           {__DEV__ && (
           <HapticButton

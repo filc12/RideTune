@@ -2,7 +2,7 @@
 // Visual/educational only — must be validated by the rider.
 import { storage } from "@/src/utils/storage";
 import type { BikeCategory } from "@/src/data/bikes";
-import { BIKE_BY_ID } from "@/src/data/bikes";
+import { getOemBikeById } from "@/src/services/oem-data";
 import { getRealSuspension, type AdjResult, type ConfidenceLevel } from "@/src/utils/suspensionReal";
 
 export type Setup = {
@@ -216,7 +216,7 @@ export function calcSetup(load: Load, category?: BikeCategory): Setup {
  */
 export function calcSetupById(bikeId: string | null, load: Load): SetupResult {
   if (bikeId) {
-    const bike = BIKE_BY_ID[bikeId];
+    const bike = getOemBikeById(bikeId);
     if (bike?.mfzProfileId) {
       const real = getRealSuspension(bike.mfzProfileId, load.rider, load.passenger, load.luggage);
       if (real) {
@@ -280,7 +280,7 @@ export function calcSetupById(bikeId: string | null, load: Load): SetupResult {
   }
 
   // Fallback: category-based heuristic
-  const category = bikeId ? BIKE_BY_ID[bikeId]?.category : undefined;
+  const category = bikeId ? getOemBikeById(bikeId)?.category : undefined;
   // noData: always true in fallback — real data was unavailable
   const heuristic = calcSetup(load, category);
   return {

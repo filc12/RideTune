@@ -21,7 +21,7 @@ RideTune helps you understand:
 - Basic suspension diagnostics
 
 The free plan includes 1 bike, solo mode, a basic sag guide and diagnostics.
-Premium unlocks all bikes, all load modes, saved setups and 5 languages: English, Portuguese, Spanish, French and German.
+RideTune Premium Lifetime — Buy once. Ride forever. One payment unlocks all motorcycles, all load modes, saved setups, smart diagnostics and an unlimited Ride Diary. No subscriptions — future bikes and lifetime updates included.
 
 RideTune supports adventure, naked, sport, sport touring, supermoto and scrambler motorcycles from brands such as KTM, Yamaha, Honda, Suzuki, CFMoto, Kove and more.
 
@@ -48,7 +48,7 @@ O RideTune ajuda-te a perceber:
 - Diagnostico basico de suspensao
 
 O plano gratuito inclui 1 moto, modo solo, guia basico de sag e diagnostico.
-O Premium desbloqueia todas as motos, todos os modos de carga, setups guardados e 5 idiomas: ingles, portugues, espanhol, frances e alemao.
+RideTune Premium Lifetime — Buy once. Ride forever. Um unico pagamento desbloqueia todas as motos, todos os modos de carga, setups guardados, diagnostico inteligente e Ride Diary ilimitado. Sem subscricoes — novas motos e atualizacoes vitalicias incluidas.
 
 O RideTune suporta motos adventure, naked, sport, sport touring, supermoto e scrambler de marcas como KTM, Yamaha, Honda, Suzuki, CFMoto, Kove e mais.
 
@@ -75,7 +75,7 @@ RideTune hilft dir zu verstehen:
 - Grundlegende Federungsdiagnose
 
 Der kostenlose Plan umfasst 1 Motorrad, Solo-Modus, einen einfachen Sag-Guide und Diagnose.
-Premium schaltet alle Motorrader, alle Lastmodi, gespeicherte Setups und 5 Sprachen frei.
+RideTune Premium Lifetime — Buy once. Ride forever. Eine einmalige Zahlung schaltet alle Motorrader, alle Lastmodi, gespeicherte Setups, intelligente Diagnose und ein unbegrenztes Ride Diary frei. Keine Abos — zukunftige Motorrader und lebenslange Updates inklusive.
 
 Start mit einer besseren Basis. Stelle mit mehr Sicherheit ein.
 
@@ -100,7 +100,7 @@ RideTune te ayuda a entender:
 - Diagnostico basico de suspension
 
 El plan gratuito incluye 1 moto, modo solo, guia basica de sag y diagnostico.
-Premium desbloquea todas las motos, todos los modos de carga, setups guardados y 5 idiomas.
+RideTune Premium Lifetime — Buy once. Ride forever. Un unico pago desbloquea todas las motos, todos los modos de carga, setups guardados, diagnostico inteligente y Ride Diary ilimitado. Sin suscripciones — futuras motos y actualizaciones de por vida incluidas.
 
 Empieza con una mejor base. Ajusta con mas confianza.
 
@@ -125,6 +125,6 @@ RideTune vous aide a comprendre :
 - Diagnostic de suspension de base
 
 Le plan gratuit comprend 1 moto, mode solo, un guide de sag de base et un diagnostic.
-Premium debloque toutes les motos, tous les modes de charge, les reglages sauvegardes et 5 langues.
+RideTune Premium Lifetime — Buy once. Ride forever. Un seul paiement debloque toutes les motos, tous les modes de charge, les reglages sauvegardes, le diagnostic intelligent et un Ride Diary illimite. Sans abonnement — futures motos et mises a jour a vie incluses.
 
 Commencez avec une meilleure base. Ajustez avec plus de confiance.

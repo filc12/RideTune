@@ -9,12 +9,12 @@
  */
 
 import {
-  MFZ_MAP,
-  MfzProfile,
-  SuspVal,
-  WeightPoint,
-  VType,
+  type MfzProfile,
+  type SuspVal,
+  type WeightPoint,
+  type VType,
 } from '../data/mfzSuspensionData';
+import { getOemSuspMap } from '../services/oem-data';
 
 // ─────────────────────────────────────────────
 // Output types
@@ -290,7 +290,7 @@ export function getRealSuspension(
   pillionKg: number,
   luggageKg: number
 ): SuspensionResult | null {
-  const profile = MFZ_MAP[profileId];
+  const profile = getOemSuspMap()[profileId];
   if (!profile) return null;
 
   const total = riderKg + pillionKg + luggageKg;
@@ -365,7 +365,7 @@ export function getRealSuspension(
 export function findProfileId(brand: string, model: string, year?: string): string | null {
   const b = brand.toLowerCase();
   const m = model.toLowerCase();
-  const matches = Object.values(MFZ_MAP).filter(p => {
+  const matches = Object.values(getOemSuspMap()).filter(p => {
     const bMatch = p.brand.toLowerCase().includes(b);
     const mMatch = p.model.toLowerCase().includes(m);
     const yMatch = !year || p.year.includes(year);
@@ -383,7 +383,7 @@ export function findProfileId(brand: string, model: string, year?: string): stri
 
 /** List all available profile IDs */
 export function listProfiles(): Array<{ id: string; brand: string; model: string; year: string }> {
-  return Object.values(MFZ_MAP).map(p => ({
+  return Object.values(getOemSuspMap()).map(p => ({
     id: p.id, brand: p.brand, model: p.model, year: p.year,
   }));
 }

@@ -10,11 +10,14 @@
     "newArchEnabled": true,
     "ios": {
       "supportsTablet": false,
-      "bundleIdentifier": "com.ridetune.app"
+      "bundleIdentifier": "com.ridetune.app",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "android": {
       "package": "com.ridetune.app",
-      "versionCode": 12,
+      "versionCode": 14,
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#070A0F"
@@ -37,7 +40,15 @@
           "backgroundColor": "#070A0F"
         }
       ],
-      "expo-font"
+      "expo-font",
+      [
+        "@sentry/react-native/expo",
+        {
+          "organization": "ridetune",
+          "project": "react-native"
+        }
+      ],
+      "expo-document-picker"
     ],
     "experiments": {
       "typedRoutes": true

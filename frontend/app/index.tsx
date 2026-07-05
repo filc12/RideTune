@@ -22,7 +22,8 @@ import { useFocusEffect, useRouter } from "expo-router";
 import { storage } from "@/src/utils/storage";
 import { useT } from "@/src/i18n";
 import { calcSetup, calcSetupById, deriveMode, getLoad, saveLoad, type Load } from "@/src/utils/suspension";
-import { BIKES, BIKE_BY_ID, BIKE_CATEGORIES, bikeLabel, type Bike } from "@/src/data/bikes";
+import { BIKE_CATEGORIES, bikeLabel, type Bike } from "@/src/data/bikes";
+import { getOemBikes, getOemBikeById } from "@/src/services/oem-data";
 import { ConfidenceBadge } from "@/src/components/ConfidenceBadge";
 import { PremiumModal } from "@/src/components/PremiumModal";
 import { SwitchBikeModal } from "@/src/components/SwitchBikeModal";
@@ -32,6 +33,7 @@ import { canUseLoadMode } from "@/src/services/premium";
 import { tapMedium } from "@/src/utils/haptics";
 import { HapticButton } from "@/src/components/HapticButton";
 import { BottomNav } from "@/src/components/BottomNav";
+import { Analytics } from "@/src/services/analytics";
 import { C } from "@/src/theme";
 
 
@@ -66,7 +68,7 @@ export default function HomeScreen() {
   const refresh = useCallback(async () => {
     const id = await storage.getItem<string>(K_BIKE, "");
     if (id) {
-      const found = BIKE_BY_ID[id];
+      const found = getOemBikeById(id);
       if (found) setBike(found);
     }
     setLoad(await getLoad());
@@ -75,10 +77,33 @@ export default function HomeScreen() {
   useEffect(() => { refresh(); }, [refresh]);
   useFocusEffect(useCallback(() => { refresh(); }, [refresh]));
 
+  // Track setup_calculated quando mota ou modo de carga muda
+  useEffect(() => {
+    if (!bike) return;
+    const s = calcSetupById(bike.id, load);
+    if (s.noData) return;
+    isPremium().then(premium => {
+      Analytics.setupCalculated({
+        confidence: s.confidence,
+        load_mode:  deriveMode(load),
+        total_kg:   load.rider + (load.passenger ?? 0) + (load.luggage ?? 0),
+        is_premium: premium,
+      });
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [bike?.id, load.rider, load.passenger, load.luggage]);
+
   const doSwitchBike = useCallback(async (b: Bike) => {
     setBike(b);
     await storage.setItem(K_BIKE, b.id);
     setPickerOpen(false);
+    Analytics.bikeSelected({
+      bike_id:      b.id,
+      brand:        b.brand,
+      category:     b.category,
+      adj:          b.adj,
+      has_oem_data: Boolean(b.mfzProfileId),
+    });
   }, []);
 
   const onPickBike = useCallback(async (b: Bike) => {
@@ -96,6 +121,7 @@ export default function HomeScreen() {
     if (!premium) {
       setSwitchModal({ visible: false, target: null });
       setPremiumModal({ visible: true, feature: "premium.feature.setups" });
+      Analytics.premiumModalShown({ feature: "premium.feature.setups" });
       setPickerOpen(false);
       return;
     }
@@ -125,6 +151,7 @@ export default function HomeScreen() {
     const allowed = await canUseLoadMode(m);
     if (!allowed) {
       setPremiumModal({ visible: true, feature: "premium.feature.loadmodes" });
+      Analytics.premiumModalShown({ feature: "premium.feature.loadmodes" });
       return;
     }
     const presets: Record<LoadMode, Pick<Load, "passenger" | "luggage">> = {
@@ -540,15 +567,15 @@ function BikePicker({ open, onClose, onPick, selectedId, t }: { open: boolean; o
   const handlePick = (b: Bike) => { reset(); onPick(b); };
 
   const brandsInCat = selCat
-    ? [...new Set(BIKES.filter((b) => b.category === selCat).map((b) => b.brand))].sort()
+    ? [...new Set(getOemBikes().filter((b) => b.category === selCat).map((b) => b.brand))].sort()
     : [];
   const modelsInBrandCat = selCat && selBrand
-    ? BIKES.filter((b) => b.category === selCat && b.brand === selBrand)
+    ? getOemBikes().filter((b) => b.category === selCat && b.brand === selBrand)
     : [];
 
   const q = rtNorm(query);
   const searchResults = q.length >= 1
-    ? BIKES.filter((b) => rtNorm(b.brand + " " + b.model).includes(q)).slice(0, 60)
+    ? getOemBikes().filter((b) => rtNorm(b.brand + " " + b.model).includes(q)).slice(0, 60)
     : [];
 
   const stepTitle =
@@ -618,7 +645,7 @@ function BikePicker({ open, onClose, onPick, selectedId, t }: { open: boolean; o
             <Text style={styles.searchEmpty}>{t("picker.search_empty" as never)}</Text>
           )}
           {q.length === 0 && step === "cat" && BIKE_CATEGORIES.map((cat) => {
-            const count = BIKES.filter((b) => b.category === cat).length;
+            const count = getOemBikes().filter((b) => b.category === cat).length;
             if (count === 0) return null;
             return (
               <HapticButton key={cat} activeOpacity={0.85} style={styles.bikeRow}
@@ -635,7 +662,7 @@ function BikePicker({ open, onClose, onPick, selectedId, t }: { open: boolean; o
             );
           })}
           {q.length === 0 && step === "brand" && brandsInCat.map((brand) => {
-            const count = BIKES.filter((b) => b.category === selCat && b.brand === brand).length;
+            const count = getOemBikes().filter((b) => b.category === selCat && b.brand === brand).length;
             return (
               <HapticButton key={brand} activeOpacity={0.85} style={styles.bikeRow}
                 onPress={() => { setSelBrand(brand); setStep("model"); }}>

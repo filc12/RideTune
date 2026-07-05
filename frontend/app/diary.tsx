@@ -13,6 +13,7 @@ import { storage } from "@/src/utils/storage";
 import { tapSuccess } from "@/src/utils/haptics";
 import { HapticButton } from "@/src/components/HapticButton";
 import { useT } from "@/src/i18n";
+import { Analytics } from "@/src/services/analytics";
 
 const RATINGS = [1,2,3,4,5];
 
@@ -92,6 +93,7 @@ export default function DiaryScreen() {
       await updateEntry(editTarget.id, { setup: setup.trim() || "No setup noted", rating, notes: notes.trim() });
     } else {
       await saveEntry({ bikeLabel, setup: setup.trim() || "No setup noted", rating, notes: notes.trim() });
+      Analytics.diaryEntryCreated();
     }
     setEditTarget(null);
     setModalOpen(false);

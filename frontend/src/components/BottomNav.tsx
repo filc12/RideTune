@@ -12,7 +12,7 @@ import { useT } from "@/src/i18n";
 import { tapLight } from "@/src/utils/haptics";
 import { C } from "@/src/theme";
 
-export type NavActive = "home" | "carga" | "diag" | "sag" | "none";
+export type NavActive = "home" | "carga" | "diag" | "sag" | "pneus" | "none";
 
 export function BottomNav({ active }: { active: NavActive }) {
   const router = useRouter();
@@ -20,10 +20,11 @@ export function BottomNav({ active }: { active: NavActive }) {
   const { t } = useT();
 
   const items: { id: NavActive; label: string; icon: keyof typeof MaterialCommunityIcons.glyphMap; href: string }[] = [
-    { id: "home",  label: t("nav.home"),  icon: "home-variant",     href: "/"            },
-    { id: "carga", label: t("nav.carga"), icon: "weight-kilogram",  href: "/carga"       },
-    { id: "diag",  label: t("nav.diag"),  icon: "stethoscope",      href: "/diagnostico" },
-    { id: "sag",   label: t("nav.sag"),   icon: "speedometer",      href: "/sag"         },
+    { id: "home",  label: t("nav.home"),  icon: "home-variant",    href: "/"            },
+    { id: "carga", label: t("nav.carga"), icon: "weight-kilogram", href: "/carga"       },
+    { id: "diag",  label: t("nav.diag"),  icon: "stethoscope",     href: "/diagnostico" },
+    { id: "sag",   label: t("nav.sag"),   icon: "speedometer",     href: "/sag"         },
+    { id: "pneus", label: t("nav.pneus"), icon: "tire",            href: "/pneus"       },
   ];
 
   return (
