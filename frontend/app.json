@@ -17,7 +17,7 @@
     },
     "android": {
       "package": "com.ridetune.app",
-      "versionCode": 14,
+      "versionCode": 15,
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#070A0F"
