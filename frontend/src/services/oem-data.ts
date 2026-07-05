@@ -20,6 +20,7 @@
 
 import { BIKES as BUNDLE_BIKES, type Bike, type BikeCategory, type SuspAdj } from '@/src/data/bikes';
 import { MFZ_PROFILES as BUNDLE_PROFILES, type MfzProfile } from '@/src/data/mfzSuspensionData';
+import { TIRE_PRESSURES as BUNDLE_PRESSURES } from '@/src/data/tirePressure';
 import { storage } from '@/src/utils/storage';
 import { captureError } from '@/src/services/sentry';
 
@@ -53,7 +54,9 @@ let _bikes: Bike[]                     = [...BUNDLE_BIKES];
 let _suspMap: Record<string, MfzProfile> = Object.fromEntries(
   BUNDLE_PROFILES.map(p => [p.id, p])
 );
-let _pressureMap: Record<string, TirePressure> = {};
+let _pressureMap: Record<string, TirePressure> = Object.fromEntries(
+  BUNDLE_PRESSURES.map(p => [p.bikeId, p])
+);
 
 // ─── API pública (síncrona) ───────────────────────────────────────────────────
 
