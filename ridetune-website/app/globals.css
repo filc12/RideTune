@@ -26,3 +26,28 @@ body {
   background: #4a9eff;
   color: #04111e;
 }
+
+/* Slow cinematic zoom for the hero image */
+@keyframes hero-zoom {
+  from { transform: scale(1.08); }
+  to   { transform: scale(1); }
+}
+.animate-hero-zoom {
+  animation: hero-zoom 6s cubic-bezier(0.2, 0.6, 0.3, 1) both;
+}
+
+/* Brand marquee */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.animate-marquee {
+  animation: marquee 40s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-hero-zoom,
+  .animate-marquee {
+    animation: none;
+  }
+}
