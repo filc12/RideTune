@@ -381,13 +381,25 @@ export default function Home() {
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent" />
               <span className="absolute bottom-6 left-6 text-2xl font-bold">Adventure</span>
             </div>
-            <div className="flex h-96 flex-col justify-end overflow-hidden rounded-3xl border border-brand-border bg-brand-card bg-[radial-gradient(circle_at_30%_20%,rgba(74,158,255,0.25),transparent_60%)] p-6">
-              <span className="text-2xl font-bold">Touring</span>
-              <span className="mt-1 text-xs text-brand-muted">Passenger & panniers, recalculated</span>
+            <div className="relative h-96 overflow-hidden rounded-3xl border border-brand-border">
+              <Image
+                src="/img/touring.jpg"
+                alt="Touring motorcycle with panniers on a coastal road"
+                fill
+                className="object-cover opacity-70 transition-transform duration-500 hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent" />
+              <span className="absolute bottom-6 left-6 text-2xl font-bold">Touring</span>
             </div>
-            <div className="flex h-96 flex-col justify-end overflow-hidden rounded-3xl border border-brand-border bg-brand-card bg-[radial-gradient(circle_at_70%_80%,rgba(74,158,255,0.2),transparent_60%)] p-6">
-              <span className="text-2xl font-bold">Sport</span>
-              <span className="mt-1 text-xs text-brand-muted">Track-day precision, street-day comfort</span>
+            <div className="relative h-96 overflow-hidden rounded-3xl border border-brand-border">
+              <Image
+                src="/img/sport.jpg"
+                alt="Sport motorcycle cornering on a racetrack"
+                fill
+                className="object-cover opacity-70 transition-transform duration-500 hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent" />
+              <span className="absolute bottom-6 left-6 text-2xl font-bold">Sport</span>
             </div>
           </div>
         </div>
