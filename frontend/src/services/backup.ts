@@ -7,7 +7,7 @@
  * Dependências necessárias:
  *   npx expo install expo-file-system expo-sharing expo-document-picker
  */
-import * as FileSystem from "expo-file-system";
+import * as FileSystem from "expo-file-system/legacy";
 // expo-sharing e expo-document-picker requerem development build.
 // Lazy require evita crash em Expo Go.
 const getSharing = () => require("expo-sharing") as typeof import("expo-sharing");
