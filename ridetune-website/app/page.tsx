@@ -118,6 +118,7 @@ const tour = [
   { kicker: "BIKE SELECTION", title: "All the bikes you ride.", sub: "Adventure, naked, sport, touring, supermoto and more — growing every month.", img: "/screens/bikes.webp" },
   { kicker: "LOAD CALCULATOR", title: "Adjust for your real load.", sub: "Rider, passenger, luggage — the setup is recalculated instantly.", img: "/screens/load.webp" },
   { kicker: "RECOMMENDATIONS", title: "Count the clicks with confidence.", sub: "Preload, rebound and compression, in plain language, for your bike.", img: "/screens/clicks.webp" },
+  { kicker: "TYRE PRESSURE", title: "Grip starts with pressure.", sub: "OEM cold-tyre pressures for your bike — road or off-road, solo or fully loaded.", img: "/screens/tyres.webp" },
   { kicker: "RIDE DIARY", title: "Every adjustment tells a story.", sub: "Log setup changes and sensations. Build a library only you can build.", img: "/screens/diary.webp" },
 ];
 
