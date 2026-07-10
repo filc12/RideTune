@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SETUP_MODELS, getModel, USE_LABEL } from "@/data/setups";
+import { getCommunitySetups } from "@/data/community";
 import { SITE_URL, PLAY_URL } from "@/site.config";
 import { SetupsNav, SetupsFooter } from "@/components/SetupsChrome";
 import FadeIn from "@/components/FadeIn";
@@ -60,6 +61,20 @@ function Value({ label, value, unit }: { label: string; value: string; unit: str
   );
 }
 
+function OemBadge({ match }: { match: string }) {
+  const map: Record<string, { label: string; cls: string }> = {
+    verified: { label: "✓ Verified", cls: "text-[#4ade80] bg-[#4ade80]/10" },
+    outside_oem: { label: "⚠ Outside OEM", cls: "text-[#fbbf24] bg-[#fbbf24]/10" },
+    unverified: { label: "Unverified", cls: "text-brand-muted bg-white/5" },
+  };
+  const b = map[match] ?? map.unverified;
+  return (
+    <span className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[13px] ${b.cls}`}>
+      {b.label}
+    </span>
+  );
+}
+
 export default async function ModelSetups({
   params,
 }: {
@@ -70,6 +85,7 @@ export default async function ModelSetups({
   if (!m) notFound();
 
   const name = `${m.brand} ${m.model}`;
+  const community = await getCommunitySetups(slug);
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -180,20 +196,79 @@ export default async function ModelSetups({
       </section>
 
       <section className="mx-auto max-w-6xl px-6 pb-16">
-        <div className="rounded-3xl border border-dashed border-brand-border bg-brand-deep/40 px-6 py-12 text-center">
-          <h2 className="text-xl font-bold">Community setups</h2>
-          <p className="mx-auto mt-3 max-w-md text-[15px] leading-relaxed text-brand-muted">
-            Riders will be able to share the setups that actually work for their{" "}
-            {m.model} here — with their real load and how it felt. Be one of the
-            first.
-          </p>
+        <div className="mb-6 flex items-center justify-between gap-4">
+          <h2 className="text-2xl font-bold tracking-tight">
+            Community setups
+            {community.length > 0 && (
+              <span className="ml-3 font-mono text-sm font-normal uppercase tracking-[0.12em] text-brand-muted">
+                {community.length}
+              </span>
+            )}
+          </h2>
           <a
             href={PLAY_URL}
-            className="mt-7 inline-block rounded-full border border-brand-border px-7 py-3 text-[15px] font-semibold text-white transition-colors duration-300 hover:border-brand-accent"
+            className="hidden rounded-full border border-brand-border px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:border-brand-accent sm:inline-block"
           >
-            Share your setup in the app
+            Share yours in the app
           </a>
         </div>
+
+        {community.length === 0 ? (
+          <div className="rounded-3xl border border-dashed border-brand-border bg-brand-deep/40 px-6 py-12 text-center">
+            <p className="mx-auto max-w-md text-[15px] leading-relaxed text-brand-muted">
+              No community setups for the {m.model} yet. Riders share the setups
+              that actually work for them — with their real load and how it felt.
+              Be one of the first.
+            </p>
+            <a
+              href={PLAY_URL}
+              className="mt-7 inline-block rounded-full border border-brand-border px-7 py-3 text-[15px] font-semibold text-white transition-colors duration-300 hover:border-brand-accent"
+            >
+              Share your setup in the app
+            </a>
+          </div>
+        ) : (
+          <div className="grid gap-5 md:grid-cols-2">
+            {community.map((s) => (
+              <article
+                key={s.id}
+                className="flex flex-col gap-4 rounded-3xl border border-brand-border bg-brand-card/70 p-6"
+              >
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <span className="rounded-full bg-brand-accent/10 px-3 py-1 text-[13px] text-brand-accent-soft">
+                      {USE_LABEL[s.load]}
+                    </span>
+                    <span className="text-[13px] text-brand-muted">
+                      {s.rider_gear_kg} kg
+                      {s.country ? ` · ${s.country.toUpperCase()}` : ""}
+                    </span>
+                  </div>
+                  <OemBadge match={s.oem_match} />
+                </div>
+
+                <div className="grid grid-cols-2 gap-x-4 gap-y-3 border-y border-brand-border py-4">
+                  <Value label="Front sag" value={String(s.front_sag_mm)} unit="mm" />
+                  <Value label="Rear sag" value={String(s.rear_sag_mm)} unit="mm" />
+                  <Value label="Preload" value={s.preload} unit="" />
+                  <Value label="Rebound" value={String(s.rebound)} unit="clicks" />
+                  <Value label="Compression" value={String(s.compression)} unit="clicks" />
+                </div>
+
+                {s.note ? (
+                  <p className="text-sm leading-relaxed text-slate-300">
+                    &ldquo;{s.note}&rdquo;
+                  </p>
+                ) : null}
+
+                <div className="flex items-center justify-between text-[13px] text-brand-muted">
+                  <span>Anonymous rider</span>
+                  <span className="text-brand-accent-soft">▲ {s.helpful_count} helpful</span>
+                </div>
+              </article>
+            ))}
+          </div>
+        )}
       </section>
       </FadeIn>
 

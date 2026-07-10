@@ -9,6 +9,10 @@ export const SITE_URL =
 export const PLAY_URL =
   "https://play.google.com/store/apps/details?id=com.ridetune.app";
 
+/** Backend base URL for community setups. Empty = feature disabled (safe default). */
+export const API_URL =
+  process.env.NEXT_PUBLIC_API_URL?.replace(/\/$/, "") ?? "";
+
 export const SITE_NAME = "RideTune";
 
 export const SITE_DESCRIPTION =
