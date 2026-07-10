@@ -52,19 +52,8 @@ async def get_status_checks():
     status_checks = await db.status_checks.find().to_list(1000)
     return [StatusCheck(**status_check) for status_check in status_checks]
 
-# Community setups (Phase 2)
-import setups as setups_module
-
-setups_module.init(db)
-
-# Include the routers in the main app
+# Include the router in the main app
 app.include_router(api_router)
-app.include_router(setups_module.router)
-
-
-@app.on_event("startup")
-async def _ensure_setup_indexes():
-    await setups_module.ensure_indexes()
 
 app.add_middleware(
     CORSMiddleware,

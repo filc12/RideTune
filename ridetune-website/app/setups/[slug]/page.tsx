@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { SETUP_MODELS, getModel, USE_LABEL } from "@/data/setups";
+import { SETUP_MODELS, getModel, USE_LABEL, type Clicks } from "@/data/setups";
 import { getCommunitySetups } from "@/data/community";
 import { SITE_URL, PLAY_URL } from "@/site.config";
 import { SetupsNav, SetupsFooter } from "@/components/SetupsChrome";
@@ -48,15 +48,33 @@ function Stat({ value, label }: { value: string; label: string }) {
   );
 }
 
-function Value({ label, value, unit }: { label: string; value: string; unit: string }) {
+function SetupValues({ sag, front, rear }: { sag: number; front: Clicks; rear: Clicks }) {
+  const head = "font-mono text-[12px] uppercase tracking-[0.08em] text-brand-muted";
   return (
-    <div>
-      <div className="font-mono text-[13px] uppercase tracking-[0.08em] text-brand-muted">
-        {label}
+    <div className="border-y border-brand-border py-4">
+      <div className="mb-3 flex items-baseline gap-2">
+        <span className={head}>Sag</span>
+        <span className="text-base font-semibold">
+          {sag} <span className="text-brand-accent">mm</span>
+        </span>
       </div>
-      <div className="mt-1 text-base font-semibold">
-        {value} <span className="text-brand-accent">{unit}</span>
+      <div className="grid grid-cols-[3.5rem_1fr_1fr_1fr] items-center gap-x-3 gap-y-2 text-[15px]">
+        <span aria-hidden />
+        <span className={head}>Preload</span>
+        <span className={head}>Rebound</span>
+        <span className={head}>Comp.</span>
+
+        <span className={head}>Front</span>
+        <span className="font-semibold">{front.preload}</span>
+        <span className="font-semibold">{front.rebound}</span>
+        <span className="font-semibold">{front.compression}</span>
+
+        <span className={head}>Rear</span>
+        <span className="font-semibold">{rear.preload}</span>
+        <span className="font-semibold">{rear.rebound}</span>
+        <span className="font-semibold">{rear.compression}</span>
       </div>
+      <p className="mt-2 text-[12px] text-brand-muted">clicks from fully closed</p>
     </div>
   );
 }
@@ -127,7 +145,7 @@ export default async function ModelSetups({
         </p>
         <div className="mt-7 flex flex-wrap gap-x-10 gap-y-4">
           <Stat value={String(m.setups.length)} label="Reference setups" />
-          <Stat value={`${m.oem.frontSag} / ${m.oem.rearSag} mm`} label="OEM sag target F / R" />
+          <Stat value={`${m.oemSag} mm`} label="OEM sag target" />
           <Stat value={m.cc} label="Displacement" />
           <Stat value={m.categoryLabel} label="Category" />
         </div>
@@ -175,13 +193,7 @@ export default async function ModelSetups({
                 </span>
               </div>
 
-              <div className="grid grid-cols-2 gap-x-4 gap-y-3 border-y border-brand-border py-4">
-                <Value label="Front sag" value={String(s.frontSag)} unit="mm" />
-                <Value label="Rear sag" value={String(s.rearSag)} unit="mm" />
-                <Value label="Preload" value={s.preload} unit="" />
-                <Value label="Rebound" value={String(s.rebound)} unit="clicks" />
-                <Value label="Compression" value={String(s.compression)} unit="clicks" />
-              </div>
+              <SetupValues sag={s.sag} front={s.front} rear={s.rear} />
 
               <p className="text-sm leading-relaxed text-slate-300">{s.note}</p>
             </article>
@@ -247,13 +259,20 @@ export default async function ModelSetups({
                   <OemBadge match={s.oem_match} />
                 </div>
 
-                <div className="grid grid-cols-2 gap-x-4 gap-y-3 border-y border-brand-border py-4">
-                  <Value label="Front sag" value={String(s.front_sag_mm)} unit="mm" />
-                  <Value label="Rear sag" value={String(s.rear_sag_mm)} unit="mm" />
-                  <Value label="Preload" value={s.preload} unit="" />
-                  <Value label="Rebound" value={String(s.rebound)} unit="clicks" />
-                  <Value label="Compression" value={String(s.compression)} unit="clicks" />
-                </div>
+                <SetupValues
+                  sag={s.sag_mm}
+                  front={{
+                    preload: s.front_preload,
+                    rebound: s.front_rebound,
+                    compression: s.front_compression,
+                  }}
+                  rear={{
+                    preload: s.rear_preload,
+                    rebound: s.rear_rebound,
+                    compression: s.rear_compression,
+                  }}
+                />
+
 
                 {s.note ? (
                   <p className="text-sm leading-relaxed text-slate-300">

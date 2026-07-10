@@ -15,6 +15,15 @@ export const LANGS: { code: Lang; label: string; flag: string }[] = [
 type Dict = Record<string, string>;
 
 const PT: Dict = {
+  "share.title": "Partilhar este setup",
+  "share.body": "A tua mota, carga e clicks vão aparecer em ridetune.app e na app como “Anonymous rider”. Nenhum dado pessoal é partilhado. Podes remover quando quiseres.",
+  "share.note_ph": "Adiciona uma nota curta — como ficou (opcional)",
+  "share.action": "Partilhar",
+  "share.sharing": "A partilhar…",
+  "share.ok_title": "Setup partilhado",
+  "share.ok_pending": "Obrigado! O teu setup está em revisão e aparecerá em breve.",
+  "share.ok_live": "Obrigado! O teu setup já está na comunidade.",
+  "share.err_title": "Não foi possível partilhar",
   // Home
   "home.headline.l1": "Afina a suspensão",
   "home.headline.l2": "à tua carga real",
@@ -399,6 +408,15 @@ const PT: Dict = {
 };
 
 const EN: Dict = {
+  "share.title": "Share this setup",
+  "share.body": "Your bike, load and clicks will appear on ridetune.app and in the app as “Anonymous rider”. No personal data is shared. You can remove it anytime.",
+  "share.note_ph": "Add a short note — how it felt (optional)",
+  "share.action": "Share",
+  "share.sharing": "Sharing…",
+  "share.ok_title": "Setup shared",
+  "share.ok_pending": "Thanks! Your setup is being reviewed and will appear shortly.",
+  "share.ok_live": "Thanks! Your setup is now live in the community.",
+  "share.err_title": "Couldn’t share",
   "home.headline.l1": "Tune your suspension",
   "home.headline.l2": "to your real load",
   "home.sub": "Pick your bike, add weight, luggage or a passenger and get a practical starting point for your setup.",
@@ -771,6 +789,15 @@ const EN: Dict = {
 };
 
 const ES: Dict = {
+  "share.title": "Compartir esta configuración",
+  "share.body": "Tu moto, carga y clics aparecerán en ridetune.app y en la app como «Anonymous rider». No se comparte ningún dato personal. Puedes eliminarlo cuando quieras.",
+  "share.note_ph": "Añade una nota corta — cómo se sintió (opcional)",
+  "share.action": "Compartir",
+  "share.sharing": "Compartiendo…",
+  "share.ok_title": "Configuración compartida",
+  "share.ok_pending": "¡Gracias! Tu configuración está en revisión y aparecerá pronto.",
+  "share.ok_live": "¡Gracias! Tu configuración ya está en la comunidad.",
+  "share.err_title": "No se pudo compartir",
   "home.headline.l1": "Ajusta la suspensión",
   "home.headline.l2": "a tu carga real",
   "home.sub": "Elige tu moto, añade peso, maletas o pasajero y obtén un punto de partida seguro para tu setup.",
@@ -1144,6 +1171,15 @@ const ES: Dict = {
 };
 
 const FR: Dict = {
+  "share.title": "Partager ce réglage",
+  "share.body": "Ta moto, ta charge et tes clics apparaîtront sur ridetune.app et dans l’app en tant que « Anonymous rider ». Aucune donnée personnelle n’est partagée. Tu peux le retirer à tout moment.",
+  "share.note_ph": "Ajoute une note courte — le ressenti (facultatif)",
+  "share.action": "Partager",
+  "share.sharing": "Partage…",
+  "share.ok_title": "Réglage partagé",
+  "share.ok_pending": "Merci ! Ton réglage est en cours de vérification et apparaîtra bientôt.",
+  "share.ok_live": "Merci ! Ton réglage est maintenant dans la communauté.",
+  "share.err_title": "Impossible de partager",
   "home.headline.l1": "Règle la suspension",
   "home.headline.l2": "à ta charge réelle",
   "home.sub": "Choisis ta moto, ajoute du poids, des bagages ou un passager et reçois un point de départ sûr pour ton setup.",
@@ -1515,6 +1551,15 @@ const FR: Dict = {
 };
 
 const DE: Dict = {
+  "share.title": "Dieses Setup teilen",
+  "share.body": "Dein Motorrad, deine Beladung und Klicks erscheinen auf ridetune.app und in der App als „Anonymous rider“. Es werden keine personenbezogenen Daten geteilt. Du kannst es jederzeit entfernen.",
+  "share.note_ph": "Kurze Notiz hinzufügen — wie es sich anfühlte (optional)",
+  "share.action": "Teilen",
+  "share.sharing": "Wird geteilt…",
+  "share.ok_title": "Setup geteilt",
+  "share.ok_pending": "Danke! Dein Setup wird geprüft und erscheint in Kürze.",
+  "share.ok_live": "Danke! Dein Setup ist jetzt in der Community.",
+  "share.err_title": "Teilen fehlgeschlagen",
   "home.headline.l1": "Abstimmung der Federung",
   "home.headline.l2": "auf deine echte Last",
   "home.sub": "Wähle dein Motorrad, gib Gewicht, Gepäck oder Mitfahrer ein und erhalte einen sicheren Setup-Ausgangspunkt.",
@@ -1885,6 +1930,15 @@ const DE: Dict = {
 
 
 const IT: Dict = {
+  "share.title": "Condividi questa configurazione",
+  "share.body": "La tua moto, il carico e i clic appariranno su ridetune.app e nell’app come «Anonymous rider». Nessun dato personale viene condiviso. Puoi rimuoverlo quando vuoi.",
+  "share.note_ph": "Aggiungi una nota breve — com’era (facoltativo)",
+  "share.action": "Condividi",
+  "share.sharing": "Condivisione…",
+  "share.ok_title": "Configurazione condivisa",
+  "share.ok_pending": "Grazie! La tua configurazione è in revisione e apparirà a breve.",
+  "share.ok_live": "Grazie! La tua configurazione è ora nella community.",
+  "share.err_title": "Impossibile condividere",
   ...EN,
   // --- setups (IT) ---
   "setups.title": "Setup Salvati",

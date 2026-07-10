@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { Modal, Pressable, ScrollView, StatusBar, StyleSheet, Text, TextInput, View } from "react-native";
+import { Alert, Modal, Pressable, ScrollView, StatusBar, StyleSheet, Text, TextInput, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { LinearGradient } from "expo-linear-gradient";
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
@@ -16,6 +16,8 @@ import { ConfidenceBadge } from "@/src/components/ConfidenceBadge";
 import { storage } from "@/src/utils/storage";
 import { bikeLabel } from "@/src/data/bikes";
 import { HapticButton } from "@/src/components/HapticButton";
+import { submitSetup, isCommunityConfigured, type LoadUse } from "@/src/services/community";
+import { communitySlug } from "@/src/data/setupSlug";
 
 export default function SetupsScreen() {
   const { t } = useT();
@@ -25,6 +27,9 @@ export default function SetupsScreen() {
   const [premiumModal, setPremiumModal] = useState(false);
   const [name, setName] = useState("");
   const [deleteTarget, setDeleteTarget] = useState<{ id: string; name: string } | null>(null);
+  const [shareTarget, setShareTarget] = useState<SavedSetup | null>(null);
+  const [shareNote, setShareNote] = useState("");
+  const [sharing, setSharing] = useState(false);
 
   const load = useCallback(async () => setItems(await listSetups()), []);
   useEffect(() => { load(); }, [load]);
@@ -56,6 +61,48 @@ export default function SetupsScreen() {
     await deleteSetup(deleteTarget.id);
     setDeleteTarget(null);
     load();
+  };
+
+  const canShare = (s: SavedSetup) =>
+    isCommunityConfigured() && communitySlug(s.bikeId) !== null;
+
+  const onShare = (s: SavedSetup) => {
+    setShareNote("");
+    setShareTarget(s);
+  };
+
+  const confirmShare = async () => {
+    if (!shareTarget) return;
+    const slug = communitySlug(shareTarget.bikeId);
+    if (!slug) return;
+    const lo = shareTarget.load;
+    const loadEnum: LoadUse =
+      lo.passenger > 0 ? "twoup" : lo.luggage > 0 ? "touring" : "road";
+    setSharing(true);
+    try {
+      const res = await submitSetup({
+        bike_slug: slug,
+        load: loadEnum,
+        rider_gear_kg: Math.round(lo.rider + lo.luggage),
+        sag_mm: Math.round(shareTarget.setup.sag),
+        front_preload: shareTarget.setup.front.preload,
+        front_rebound: shareTarget.setup.front.rebound,
+        front_compression: shareTarget.setup.front.compression,
+        rear_preload: shareTarget.setup.rear.preload,
+        rear_rebound: shareTarget.setup.rear.rebound,
+        rear_compression: shareTarget.setup.rear.compression,
+        note: shareNote.trim() || undefined,
+      });
+      setShareTarget(null);
+      Alert.alert(
+        t("share.ok_title"),
+        res.status === "pending" ? t("share.ok_pending") : t("share.ok_live"),
+      );
+    } catch (e) {
+      Alert.alert(t("share.err_title"), String((e as Error)?.message ?? e));
+    } finally {
+      setSharing(false);
+    }
   };
 
   return (
@@ -108,6 +155,16 @@ export default function SetupsScreen() {
                   >
                     <Ionicons name="checkmark-circle-outline" size={16} color={C.ok} />
                   </HapticButton>
+                  {canShare(s) && (
+                    <HapticButton
+                      activeOpacity={0.8}
+                      onPress={() => onShare(s)} haptic="medium"
+                      style={st.share}
+                      testID={`share-${s.id}`}
+                    >
+                      <Ionicons name="cloud-upload-outline" size={16} color={C.accent} />
+                    </HapticButton>
+                  )}
                   <HapticButton
                     activeOpacity={0.7}
                     onPress={() => onDelete(s.id, s.name)} haptic="warning"
@@ -171,6 +228,39 @@ export default function SetupsScreen() {
           </View>
         </View>
       </Modal>
+
+      <Modal transparent visible={!!shareTarget} animationType="fade" onRequestClose={() => setShareTarget(null)}>
+        <Pressable style={st.backdrop} onPress={() => setShareTarget(null)} />
+        <View style={st.modal}>
+          <Text style={st.modalTitle}>{t("share.title")}</Text>
+          <Text style={{ color: "#94A3B8", fontSize: 13, marginTop: 8, lineHeight: 19 }}>
+            {t("share.body")}
+          </Text>
+          <TextInput
+            value={shareNote}
+            onChangeText={setShareNote}
+            placeholder={t("share.note_ph")}
+            placeholderTextColor={C.textMute}
+            style={[st.input, { minHeight: 64, textAlignVertical: "top" }]}
+            maxLength={200}
+            multiline
+          />
+          <View style={{ flexDirection: "row", gap: 10 }}>
+            <HapticButton onPress={() => setShareTarget(null)} style={st.cancel} activeOpacity={0.8}>
+              <Text style={st.cancelLabel}>{t("common.cancel")}</Text>
+            </HapticButton>
+            <HapticButton
+              onPress={confirmShare}
+              haptic="success"
+              style={[st.confirm, sharing && { opacity: 0.6 }]}
+              activeOpacity={0.9}
+              disabled={sharing}
+            >
+              <Text style={st.confirmLabel}>{sharing ? t("share.sharing") : t("share.action")}</Text>
+            </HapticButton>
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 }
@@ -220,6 +310,17 @@ const st = StyleSheet.create({
     backgroundColor: "rgba(34,208,138,0.12)",
     borderWidth: 1,
     borderColor: "rgba(34,208,138,0.3)",
+    alignItems: "center",
+    justifyContent: "center",
+    marginRight: 6,
+  },
+  share: {
+    width: 36,
+    height: 36,
+    borderRadius: 10,
+    backgroundColor: C.accentSoft,
+    borderWidth: 1,
+    borderColor: C.accentLine,
     alignItems: "center",
     justifyContent: "center",
     marginRight: 6,
