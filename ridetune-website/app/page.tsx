@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Hero from "@/components/Hero";
 import PhoneTour from "@/components/PhoneTour";
 import { Reveal, RevealGroup, RevealItem } from "@/components/Reveal";
 
@@ -15,40 +16,22 @@ function Badge({ children }: { children: React.ReactNode }) {
   );
 }
 
-function PlayButton({ light = false }: { light?: boolean }) {
+function PlayButton() {
   return (
     <a
       href={PLAY_URL}
-      className={`inline-flex items-center gap-3 rounded-full px-6 py-3 transition-transform hover:scale-[1.03] ${
-        light ? "bg-white text-black" : "bg-brand-accent text-[#04111e]"
-      }`}
+      className="group inline-flex items-center gap-3 rounded-full bg-white px-7 py-3.5 text-black transition-all duration-300 hover:scale-[1.04] hover:shadow-[0_8px_40px_rgba(74,158,255,0.35)]"
     >
-      <svg viewBox="0 0 24 24" className="h-6 w-6" fill="currentColor" aria-hidden>
+      <svg viewBox="0 0 24 24" className="h-6 w-6 transition-transform duration-300 group-hover:scale-110" fill="currentColor" aria-hidden>
         <path d="M3.6 1.8 13.7 12 3.6 22.2c-.4-.3-.6-.8-.6-1.4V3.2c0-.6.2-1.1.6-1.4Zm12.6 7.7L6.3 3.8l9.9 5.7ZM6.3 20.2l9.9-5.7-2.5-2.5-7.4 8.2Zm11.5-9.3 2.8 1.6c1 .6 1 1.6 0 2.2l-2.8 1.6L15.2 12l2.6-2.6Z" />
       </svg>
       <span className="text-left leading-tight">
-        <span className="block text-[10px] font-semibold uppercase tracking-widest opacity-70">
+        <span className="block text-[10px] font-semibold uppercase tracking-widest opacity-60">
           Get it on
         </span>
         <span className="block text-base font-bold">Google Play</span>
       </span>
     </a>
-  );
-}
-
-function IPhoneSoon() {
-  return (
-    <span className="inline-flex items-center gap-3 rounded-full border border-white/15 px-6 py-3 text-brand-muted backdrop-blur-sm">
-      <svg viewBox="0 0 24 24" className="h-6 w-6" fill="currentColor" aria-hidden>
-        <path d="M16.4 12.9c0-2.7 2.2-4 2.3-4.1-1.3-1.8-3.2-2.1-3.9-2.1-1.6-.2-3.2 1-4 1s-2.1-1-3.5-1c-1.8 0-3.4 1-4.3 2.6-1.9 3.2-.5 8 1.3 10.6.9 1.3 1.9 2.7 3.3 2.6 1.3-.1 1.8-.8 3.4-.8s2 .8 3.5.8c1.4 0 2.3-1.3 3.2-2.6a11 11 0 0 0 1.4-3c-.1 0-2.7-1-2.7-4Zm-2.6-7.5c.7-.9 1.2-2.1 1.1-3.4-1 .1-2.3.7-3 1.6-.7.8-1.3 2-1.1 3.3 1.1.1 2.3-.6 3-1.5Z" />
-      </svg>
-      <span className="text-left leading-tight">
-        <span className="block text-[10px] font-semibold uppercase tracking-widest opacity-70">
-          Coming soon
-        </span>
-        <span className="block text-base font-bold text-white/70">for iPhone</span>
-      </span>
-    </span>
   );
 }
 
@@ -62,6 +45,37 @@ function Logo() {
     </a>
   );
 }
+
+/** Full-bleed emotional photo interlude — image and one line, nothing else. */
+function Interlude({
+  img,
+  title,
+  sub,
+  position = "center",
+}: {
+  img: string;
+  title: string;
+  sub?: string;
+  position?: string;
+}) {
+  return (
+    <section className="relative flex h-[85vh] items-end overflow-hidden">
+      <Image src={img} alt={title} fill className="object-cover" sizes="100vw" style={{ objectPosition: position }} />
+      <div className="absolute inset-0 bg-gradient-to-t from-brand-dark via-brand-dark/10 to-brand-dark/30" />
+      <div className="relative mx-auto w-full max-w-6xl px-6 pb-24">
+        <Reveal>
+          <h2 className="max-w-3xl text-5xl font-bold leading-[1.02] tracking-tight md:text-8xl">
+            {title}
+          </h2>
+          {sub ? <p className="mt-5 max-w-md text-lg text-slate-300">{sub}</p> : null}
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
+const cardHover =
+  "transition-all duration-300 hover:-translate-y-1.5 hover:bg-brand-card hover:shadow-[0_18px_50px_-18px_rgba(0,0,0,0.7)]";
 
 /* ── content ─────────────────────────────────────────────────────────────── */
 
@@ -104,7 +118,7 @@ const tour = [
   { kicker: "BIKE SELECTION", title: "All the bikes you ride.", sub: "Adventure, naked, sport, touring, supermoto and more — growing every month.", img: "/screens/bikes.webp" },
   { kicker: "LOAD CALCULATOR", title: "Adjust for your real load.", sub: "Rider, passenger, luggage — the setup is recalculated instantly.", img: "/screens/load.webp" },
   { kicker: "RECOMMENDATIONS", title: "Count the clicks with confidence.", sub: "Preload, rebound and compression, in plain language, for your bike.", img: "/screens/clicks.webp" },
-  { kicker: "RIDE DIARY", title: "Keep every ride that works.", sub: "Log setup changes and sensations. Build a library only you can build.", img: "/screens/diary.webp" },
+  { kicker: "RIDE DIARY", title: "Every adjustment tells a story.", sub: "Log setup changes and sensations. Build a library only you can build.", img: "/screens/diary.webp" },
 ];
 
 const rides = [
@@ -128,14 +142,14 @@ export default function Home() {
         <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
           <Logo />
           <nav className="hidden items-center gap-8 text-sm text-brand-muted md:flex">
-            <a href="#features" className="transition-colors hover:text-white">Features</a>
-            <a href="#how" className="transition-colors hover:text-white">How it works</a>
-            <a href="#rides" className="transition-colors hover:text-white">For every ride</a>
-            <a href="#premium" className="transition-colors hover:text-white">Premium</a>
+            <a href="#features" className="link-underline transition-colors hover:text-white">Features</a>
+            <a href="#how" className="link-underline transition-colors hover:text-white">How it works</a>
+            <a href="#rides" className="link-underline transition-colors hover:text-white">For every ride</a>
+            <a href="#premium" className="link-underline transition-colors hover:text-white">Premium</a>
           </nav>
           <a
             href={PLAY_URL}
-            className="rounded-full bg-brand-accent px-5 py-2 text-sm font-semibold text-[#04111e] transition-transform hover:scale-105"
+            className="rounded-full bg-brand-accent px-5 py-2 text-sm font-semibold text-[#04111e] transition-all duration-300 hover:scale-105 hover:shadow-[0_4px_24px_rgba(74,158,255,0.5)]"
           >
             Download
           </a>
@@ -143,54 +157,17 @@ export default function Home() {
       </header>
 
       {/* HERO */}
-      <section className="relative flex min-h-screen flex-col justify-end overflow-hidden">
-        <div className="absolute inset-0 animate-hero-zoom">
-          <Image
-            src="/img/hero.jpg"
-            alt="Adventure motorcycle on a mountain road at sunrise"
-            fill
-            priority
-            className="object-cover object-center"
-          />
-        </div>
-        <div className="absolute inset-0 bg-gradient-to-t from-brand-dark via-brand-dark/30 to-brand-dark/60" />
-        <div className="relative mx-auto w-full max-w-6xl px-6 pb-24 pt-40">
-          <Reveal>
-            <Badge>Motorcycle suspension, intelligent</Badge>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <h1 className="mt-8 max-w-4xl text-5xl font-bold leading-[1.02] tracking-tight md:text-8xl">
-              Every ride starts with
-              <br />
-              the <span className="text-brand-accent">right setup.</span>
-            </h1>
-          </Reveal>
-          <Reveal delay={0.2}>
-            <p className="mt-6 max-w-xl text-lg text-slate-300">
-              RideTune finds your perfect motorcycle suspension setup using OEM
-              data, intelligent calculations and the real-world way you ride.
-            </p>
-          </Reveal>
-          <Reveal delay={0.3}>
-            <div className="mt-10 flex flex-wrap items-center gap-4">
-              <PlayButton light />
-              <IPhoneSoon />
-            </div>
-          </Reveal>
-        </div>
-      </section>
+      <Hero />
 
       {/* DOES YOUR BIKE… */}
-      <section className="mx-auto max-w-4xl px-6 py-28 text-center">
+      <section className="mx-auto max-w-4xl px-6 py-32 text-center">
         <Reveal>
-          <h2 className="text-4xl font-bold tracking-tight md:text-5xl">
-            Does your bike…
-          </h2>
+          <h2 className="text-4xl font-bold tracking-tight md:text-5xl">Does your bike…</h2>
         </Reveal>
         <RevealGroup className="mx-auto mt-10 grid max-w-2xl gap-3 text-left sm:grid-cols-2">
           {symptoms.map((s) => (
             <RevealItem key={s}>
-              <div className="flex items-center gap-4 rounded-2xl bg-brand-card/70 px-6 py-5">
+              <div className={`flex items-center gap-4 rounded-2xl bg-brand-card/70 px-6 py-5 ${cardHover}`}>
                 <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md border border-brand-border text-brand-accent">
                   <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="3">
                     <path d="m5 13 4 4L19 7" />
@@ -230,7 +207,7 @@ export default function Home() {
             <RevealGroup className="grid gap-5 sm:grid-cols-2">
               {problems.map(([title, sub]) => (
                 <RevealItem key={title}>
-                  <div className="h-full rounded-3xl bg-brand-card/70 p-7 transition-colors hover:bg-brand-card">
+                  <div className={`h-full rounded-3xl bg-brand-card/70 p-7 ${cardHover}`}>
                     <h3 className="font-semibold text-white">{title}</h3>
                     <p className="mt-2 text-sm leading-relaxed text-brand-muted">{sub}</p>
                   </div>
@@ -254,7 +231,7 @@ export default function Home() {
         <RevealGroup className="mt-16 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
           {steps.map(([title, sub], i) => (
             <RevealItem key={title}>
-              <div className="h-full rounded-3xl bg-brand-card/70 p-8">
+              <div className={`h-full rounded-3xl bg-brand-card/70 p-8 ${cardHover}`}>
                 <div className="text-6xl font-bold text-brand-accent/25">
                   {String(i + 1).padStart(2, "0")}
                 </div>
@@ -265,6 +242,9 @@ export default function Home() {
           ))}
         </RevealGroup>
       </section>
+
+      {/* INTERLUDE — emotion, not features */}
+      <Interlude img="/img/touring.jpg" title="Ride with confidence." position="center 35%" />
 
       {/* FEATURES */}
       <section id="features" className="border-y border-white/5 bg-brand-deep py-32">
@@ -288,7 +268,7 @@ export default function Home() {
           <RevealGroup className="mt-16 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {features.map(([title, sub]) => (
               <RevealItem key={title}>
-                <div className="h-full rounded-3xl bg-brand-card/70 p-8 transition-colors hover:bg-brand-card">
+                <div className={`h-full rounded-3xl bg-brand-card/70 p-8 ${cardHover}`}>
                   <h3 className="font-semibold text-white">{title}</h3>
                   <p className="mt-2 text-sm leading-relaxed text-brand-muted">{sub}</p>
                 </div>
@@ -307,6 +287,16 @@ export default function Home() {
           </h2>
         </Reveal>
         <PhoneTour steps={tour} />
+      </section>
+
+      {/* CTA after the tour */}
+      <section className="mx-auto max-w-4xl px-6 pb-32 text-center">
+        <Reveal>
+          <p className="text-2xl font-semibold text-slate-200">Ready when you are.</p>
+          <div className="mt-8 flex justify-center">
+            <PlayButton />
+          </div>
+        </Reveal>
       </section>
 
       {/* BUILT FOR EVERY RIDE — fullscreen panels */}
@@ -353,7 +343,7 @@ export default function Home() {
 
         <div className="mx-auto mt-24 grid max-w-3xl gap-6 md:grid-cols-2">
           <Reveal>
-            <div className="h-full rounded-3xl bg-brand-card/70 p-9">
+            <div className={`h-full rounded-3xl bg-brand-card/70 p-9 ${cardHover}`}>
               <h3 className="text-xl font-bold">Free</h3>
               <p className="mt-1 text-sm text-brand-muted">Try it on your bike</p>
               <ul className="mt-7 space-y-3.5 text-sm text-slate-300">
@@ -365,7 +355,7 @@ export default function Home() {
               </ul>
               <a
                 href={PLAY_URL}
-                className="mt-9 block rounded-full border border-brand-border py-3 text-center text-sm font-semibold text-white transition-colors hover:border-brand-accent"
+                className="mt-9 block rounded-full border border-brand-border py-3 text-center text-sm font-semibold text-white transition-all duration-300 hover:border-brand-accent hover:shadow-[0_4px_24px_rgba(74,158,255,0.25)]"
               >
                 Start free
               </a>
@@ -373,7 +363,7 @@ export default function Home() {
           </Reveal>
 
           <Reveal delay={0.12}>
-            <div className="relative h-full rounded-3xl bg-gradient-to-b from-brand-accent/15 to-brand-card/70 p-9 shadow-[0_0_80px_-24px_rgba(74,158,255,0.5)] ring-1 ring-brand-accent/40">
+            <div className="relative h-full rounded-3xl bg-gradient-to-b from-brand-accent/15 to-brand-card/70 p-9 shadow-[0_0_80px_-24px_rgba(74,158,255,0.5)] ring-1 ring-brand-accent/40 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_0_100px_-20px_rgba(74,158,255,0.65)]">
               <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-brand-accent px-4 py-1 text-xs font-bold uppercase tracking-wider text-[#04111e]">
                 Lifetime
               </span>
@@ -399,7 +389,7 @@ export default function Home() {
               </ul>
               <a
                 href={PLAY_URL}
-                className="mt-9 block rounded-full bg-brand-accent py-3 text-center text-sm font-bold text-[#04111e] transition-transform hover:scale-[1.02]"
+                className="mt-9 block rounded-full bg-brand-accent py-3 text-center text-sm font-bold text-[#04111e] transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_4px_30px_rgba(74,158,255,0.5)]"
               >
                 Get Premium in the app
               </a>
@@ -418,7 +408,7 @@ export default function Home() {
         <div className="relative mt-10 overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_15%,black_85%,transparent)]">
           <div className="flex w-max animate-marquee gap-14 pr-14">
             {[...brands, ...brands].map((b, i) => (
-              <span key={`${b}-${i}`} className="text-2xl font-semibold tracking-tight text-white/40 transition-colors hover:text-white/80">
+              <span key={`${b}-${i}`} className="text-2xl font-semibold tracking-tight text-white/40 transition-colors duration-300 hover:text-white/90">
                 {b}
               </span>
             ))}
@@ -437,30 +427,32 @@ export default function Home() {
           </p>
           <a
             href={PLAY_URL}
-            className="mt-8 inline-block rounded-full border border-brand-border px-8 py-3 text-sm font-semibold text-white transition-colors hover:border-brand-accent"
+            className="mt-8 inline-block rounded-full border border-brand-border px-8 py-3 text-sm font-semibold text-white transition-all duration-300 hover:border-brand-accent hover:shadow-[0_4px_24px_rgba(74,158,255,0.25)]"
           >
             Rate it on Google Play
           </a>
         </Reveal>
       </section>
 
-      {/* FINAL CTA */}
+      {/* FINAL — the road changes */}
       <section className="relative overflow-hidden border-t border-white/5">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(74,158,255,0.12),transparent_60%)]" />
-        <div className="relative mx-auto max-w-4xl px-6 py-36 text-center">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(74,158,255,0.1),transparent_60%)]" />
+        <div className="relative mx-auto max-w-5xl px-6 py-48 text-center">
           <Reveal>
-            <h2 className="text-5xl font-bold tracking-tight md:text-7xl">
-              Every ride starts
+            <h2 className="text-5xl font-bold leading-[1.02] tracking-tight md:text-8xl">
+              The road changes.
               <br />
-              with the <span className="text-brand-accent">right setup.</span>
+              <span className="text-brand-accent">Your setup should too.</span>
             </h2>
-            <p className="mx-auto mt-6 max-w-md text-slate-300">
-              Download RideTune today. Feel the difference on your very next ride.
-            </p>
-            <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-              <PlayButton light />
-              <IPhoneSoon />
+          </Reveal>
+          <Reveal delay={0.15}>
+            <div className="mt-14 flex justify-center">
+              <PlayButton />
             </div>
+            <p className="mx-auto mt-10 max-w-md text-sm leading-relaxed text-brand-muted">
+              RideTune is continuously evolving — new motorcycles, smarter
+              recommendations and new features, added regularly.
+            </p>
           </Reveal>
         </div>
       </section>
@@ -475,9 +467,9 @@ export default function Home() {
             </span>
           </div>
           <nav className="flex items-center gap-6 text-sm text-brand-muted">
-            <a href="/privacy" className="transition-colors hover:text-white">Privacy</a>
-            <a href="mailto:filipeac12@gmail.com" className="transition-colors hover:text-white">Support</a>
-            <a href="mailto:filipeac12@gmail.com" className="transition-colors hover:text-white">Contact</a>
+            <a href="/privacy" className="link-underline transition-colors hover:text-white">Privacy</a>
+            <a href="mailto:filipeac12@gmail.com" className="link-underline transition-colors hover:text-white">Support</a>
+            <a href="mailto:filipeac12@gmail.com" className="link-underline transition-colors hover:text-white">Contact</a>
           </nav>
         </div>
       </footer>
