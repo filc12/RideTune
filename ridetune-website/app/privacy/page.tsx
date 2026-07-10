@@ -1,8 +1,17 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy — RideTune",
-  description: "How RideTune handles your data.",
+  title: "Privacy Policy",
+  description:
+    "How RideTune handles your data: no accounts, local-first storage, anonymous analytics and crash reports only.",
+  alternates: { canonical: "/privacy" },
+  openGraph: {
+    type: "article",
+    url: "/privacy",
+    title: "Privacy Policy — RideTune",
+    description: "How RideTune handles your data.",
+  },
 };
 
 const sections: [string, string][] = [
@@ -40,16 +49,16 @@ const sections: [string, string][] = [
   ],
   [
     "Contact",
-    "Questions about privacy? Email filipeac12@gmail.com.",
+    "Questions about privacy? Email support@ridetune.app.",
   ],
 ];
 
 export default function Privacy() {
   return (
     <main className="mx-auto max-w-2xl px-6 py-24 text-slate-200">
-      <a href="/" className="text-sm text-brand-accent hover:underline">
+      <Link href="/" className="text-sm text-brand-accent hover:underline">
         ← Back to RideTune
-      </a>
+      </Link>
       <h1 className="mt-6 text-4xl font-bold tracking-tight">Privacy Policy</h1>
       <p className="mt-2 text-sm text-brand-muted">Last updated: July 2026</p>
       <div className="mt-10 space-y-10">

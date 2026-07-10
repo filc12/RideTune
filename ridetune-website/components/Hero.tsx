@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
 
 const PLAY_URL = "https://play.google.com/store/apps/details?id=com.ridetune.app";
 
@@ -16,8 +16,11 @@ const line = {
   },
 };
 
+const lineStatic = { hidden: { opacity: 1 }, show: { opacity: 1 } };
+
 export default function Hero() {
   const ref = useRef<HTMLElement>(null);
+  const reduce = useReducedMotion();
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end start"],
@@ -28,7 +31,7 @@ export default function Hero() {
 
   return (
     <section ref={ref} className="relative flex min-h-screen flex-col justify-end overflow-hidden">
-      <motion.div style={{ y }} className="absolute inset-0 animate-hero-zoom">
+      <motion.div style={reduce ? undefined : { y }} className="absolute inset-0 animate-hero-zoom">
         <Image
           src="/img/hero.jpg"
           alt="Adventure motorcycle on a mountain road at sunrise"
@@ -45,9 +48,16 @@ export default function Hero() {
         <motion.div
           initial="hidden"
           animate="show"
-          variants={{ hidden: {}, show: { transition: { staggerChildren: 0.14, delayChildren: 0.2 } } }}
+          variants={{
+            hidden: {},
+            show: {
+              transition: reduce
+                ? {}
+                : { staggerChildren: 0.14, delayChildren: 0.2 },
+            },
+          }}
         >
-          <motion.div variants={line}>
+          <motion.div variants={reduce ? lineStatic : line}>
             <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-black/30 px-4 py-1.5 font-mono text-[11px] uppercase tracking-[0.2em] text-slate-300 backdrop-blur-md">
               <span className="h-1.5 w-1.5 rounded-full bg-brand-accent" />
               Motorcycle suspension, intelligent
@@ -55,22 +65,22 @@ export default function Hero() {
           </motion.div>
 
           <h1 className="mt-10 text-[15vw] font-bold leading-[0.95] tracking-tight sm:text-7xl md:text-[6.5rem] lg:text-[7.5rem]">
-            <motion.span variants={line} className="block">
+            <motion.span variants={reduce ? lineStatic : line} className="block">
               Every ride
             </motion.span>
-            <motion.span variants={line} className="block">
+            <motion.span variants={reduce ? lineStatic : line} className="block">
               starts with
             </motion.span>
-            <motion.span variants={line} className="block text-brand-accent">
+            <motion.span variants={reduce ? lineStatic : line} className="block text-brand-accent">
               the right setup.
             </motion.span>
           </h1>
 
-          <motion.p variants={line} className="mt-8 max-w-xl text-lg text-slate-300">
+          <motion.p variants={reduce ? lineStatic : line} className="mt-8 max-w-xl text-lg text-slate-300">
             OEM data, intelligent calculations and the real-world way you ride.
           </motion.p>
 
-          <motion.div variants={line} className="mt-10 flex flex-wrap items-center gap-4">
+          <motion.div variants={reduce ? lineStatic : line} className="mt-10 flex flex-wrap items-center gap-4">
             <a
               href={PLAY_URL}
               className="group inline-flex items-center gap-3 rounded-full bg-white px-7 py-3.5 text-black shadow-[0_8px_30px_rgba(0,0,0,0.4)] transition-all duration-300 hover:scale-[1.04] hover:shadow-[0_8px_40px_rgba(74,158,255,0.35)]"

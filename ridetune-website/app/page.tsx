@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import Hero from "@/components/Hero";
 import PhoneTour from "@/components/PhoneTour";
 import { Reveal, RevealGroup, RevealItem } from "@/components/Reveal";
@@ -35,11 +36,13 @@ function PlayButton() {
   );
 }
 
-function Logo() {
+function Logo({ big = false }: { big?: boolean }) {
   return (
-    <a href="#top" className="flex items-center gap-2.5">
-      <span className="h-3 w-7 rounded-full bg-brand-accent shadow-[0_0_18px_rgba(74,158,255,0.9)]" />
-      <span className="text-lg font-bold tracking-tight">
+    <a href="#top" className={`flex items-center ${big ? "gap-3" : "gap-2.5"}`}>
+      <span
+        className={`${big ? "h-4 w-9" : "h-3 w-7"} rounded-full bg-brand-accent shadow-[0_0_22px_rgba(74,158,255,0.9)]`}
+      />
+      <span className={`${big ? "text-2xl" : "text-lg"} font-bold tracking-tight`}>
         Ride<span className="text-brand-accent">Tune</span>
       </span>
     </a>
@@ -140,12 +143,12 @@ export default function Home() {
     <main id="top" className="overflow-x-clip bg-brand-dark text-slate-100">
       {/* NAV */}
       <header className="fixed inset-x-0 top-0 z-50 border-b border-white/5 bg-brand-dark/70 backdrop-blur-md">
-        <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
-          <Logo />
+        <div className="mx-auto flex h-[76px] max-w-6xl items-center justify-between px-6">
+          <Logo big />
           <nav className="hidden items-center gap-8 text-sm text-brand-muted md:flex">
             <a href="#features" className="link-underline transition-colors hover:text-white">Features</a>
             <a href="#how" className="link-underline transition-colors hover:text-white">How it works</a>
-            <a href="#rides" className="link-underline transition-colors hover:text-white">For every ride</a>
+            <Link href="/setups" className="link-underline transition-colors hover:text-white">Setups</Link>
             <a href="#premium" className="link-underline transition-colors hover:text-white">Premium</a>
           </nav>
           <a
@@ -468,9 +471,10 @@ export default function Home() {
             </span>
           </div>
           <nav className="flex items-center gap-6 text-sm text-brand-muted">
+            <Link href="/setups" className="link-underline transition-colors hover:text-white">Setups</Link>
             <a href="/privacy" className="link-underline transition-colors hover:text-white">Privacy</a>
-            <a href="mailto:filipeac12@gmail.com" className="link-underline transition-colors hover:text-white">Support</a>
-            <a href="mailto:filipeac12@gmail.com" className="link-underline transition-colors hover:text-white">Contact</a>
+            <a href="mailto:support@ridetune.app" className="link-underline transition-colors hover:text-white">Support</a>
+            <a href="mailto:support@ridetune.app" className="link-underline transition-colors hover:text-white">Contact</a>
           </nav>
         </div>
       </footer>

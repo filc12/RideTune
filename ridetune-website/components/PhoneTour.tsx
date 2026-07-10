@@ -2,7 +2,7 @@
 
 import { useRef, useState, useEffect } from "react";
 import Image from "next/image";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 
 export type TourStep = {
   kicker: string;
@@ -20,12 +20,17 @@ function PhoneFrame({
   width: number;
   tilt?: boolean;
 }) {
+  const reduce = useReducedMotion();
   return (
     <motion.div
-      initial={{ opacity: 0, y: 60, rotate: tilt ? -9 : 0, scale: 0.94 }}
+      initial={
+        reduce
+          ? { opacity: 1, rotate: tilt ? -4 : 0 }
+          : { opacity: 0, y: 60, rotate: tilt ? -9 : 0, scale: 0.94 }
+      }
       whileInView={{ opacity: 1, y: 0, rotate: tilt ? -4 : 0, scale: 1 }}
       viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 1, ease: [0.21, 0.6, 0.35, 1] }}
+      transition={{ duration: reduce ? 0 : 1, ease: [0.21, 0.6, 0.35, 1] }}
       className="relative"
       style={{ width }}
     >
@@ -51,6 +56,7 @@ function PhoneFrame({
  */
 export default function PhoneTour({ steps }: { steps: TourStep[] }) {
   const [active, setActive] = useState(0);
+  const reduce = useReducedMotion();
   const refs = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
@@ -112,10 +118,14 @@ export default function PhoneTour({ steps }: { steps: TourStep[] }) {
               </PhoneFrame>
             </div>
             <motion.div
-              initial={{ opacity: 0, y: 30, filter: "blur(6px)" }}
+              initial={
+                reduce
+                  ? { opacity: 1 }
+                  : { opacity: 0, y: 30, filter: "blur(6px)" }
+              }
               whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
               viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.7, ease: [0.21, 0.6, 0.35, 1] }}
+              transition={{ duration: reduce ? 0 : 0.7, ease: [0.21, 0.6, 0.35, 1] }}
             >
               <p className="font-mono text-xs uppercase tracking-[0.25em] text-brand-muted">
                 <span className="text-brand-accent">{String(i + 1).padStart(2, "0")}</span>
