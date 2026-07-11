@@ -41,6 +41,7 @@ export function SetupsFooter() {
         <nav className="flex items-center gap-6 text-[15px] text-brand-muted">
           <Link href="/setups" className="transition-colors hover:text-white">Setups</Link>
           <Link href="/privacy" className="transition-colors hover:text-white">Privacy</Link>
+          <Link href="/terms" className="transition-colors hover:text-white">Terms</Link>
           <a href="mailto:support@ridetune.app" className="transition-colors hover:text-white">Support</a>
         </nav>
       </div>

@@ -473,6 +473,7 @@ export default function Home() {
           <nav className="flex items-center gap-6 text-sm text-brand-muted">
             <Link href="/setups" className="link-underline transition-colors hover:text-white">Setups</Link>
             <a href="/privacy" className="link-underline transition-colors hover:text-white">Privacy</a>
+            <Link href="/terms" className="link-underline transition-colors hover:text-white">Terms</Link>
             <a href="mailto:support@ridetune.app" className="link-underline transition-colors hover:text-white">Support</a>
             <a href="mailto:support@ridetune.app" className="link-underline transition-colors hover:text-white">Contact</a>
           </nav>

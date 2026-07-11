@@ -44,8 +44,12 @@ const sections: [string, string][] = [
     "The app downloads its motorcycle and suspension database from our servers. These requests are anonymous read-only downloads.",
   ],
   [
+    "Community setups (shared by you)",
+    "If you choose to share a setup to the community, that setup — your motorcycle, load, sag and clicker values, an optional country and an optional short note — is published on ridetune.app and inside the app as “Anonymous rider”. It is tied only to a random device identifier generated on your phone, never to your name, email or any personal data. Sharing is always your choice and is confirmed each time. You can view and delete your shared setups at any time from the app, which removes them from our servers. Submissions may be checked automatically and lightly moderated to keep the library useful. Community data is stored with Supabase (our database provider). By sharing, you agree to the submission terms.",
+  ],
+  [
     "Data deletion",
-    "Because your data lives on your device, deleting the app deletes your data. Anonymous analytics and crash data are retained by our providers for a limited period and cannot be linked back to you.",
+    "Because your data lives on your device, deleting the app deletes your on-device data. Setups you shared to the community can be removed at any time from the app, which deletes them from our servers. Anonymous analytics and crash data are retained by our providers for a limited period and cannot be linked back to you.",
   ],
   [
     "Contact",
@@ -69,6 +73,13 @@ export default function Privacy() {
           </section>
         ))}
       </div>
+      <p className="mt-12 text-sm text-brand-muted">
+        See also our{" "}
+        <Link href="/terms" className="text-brand-accent hover:underline">
+          Submission Terms
+        </Link>
+        .
+      </p>
     </main>
   );
 }
