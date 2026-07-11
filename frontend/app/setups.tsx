@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { Alert, Modal, Pressable, ScrollView, StatusBar, StyleSheet, Text, TextInput, View } from "react-native";
+import { Alert, Linking, Modal, Pressable, ScrollView, StatusBar, StyleSheet, Text, TextInput, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { LinearGradient } from "expo-linear-gradient";
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
@@ -235,6 +235,12 @@ export default function SetupsScreen() {
           <Text style={st.modalTitle}>{t("share.title")}</Text>
           <Text style={{ color: "#94A3B8", fontSize: 13, marginTop: 8, lineHeight: 19 }}>
             {t("share.body")}
+          </Text>
+          <Text
+            onPress={() => Linking.openURL("https://ridetune.app/terms")}
+            style={{ color: C.accent, fontSize: 13, marginTop: 8 }}
+          >
+            {t("share.terms")} ↗
           </Text>
           <TextInput
             value={shareNote}
