@@ -4,6 +4,9 @@
 import { storage } from "@/src/utils/storage";
 
 const K_PREMIUM = "ridetune.premium";
+const K_PREMIUM_SOURCE = "ridetune.premium.source";
+
+type PremiumSource = "store" | "dev";
 
 export const PLAN_LIMITS = {
   free: {
@@ -24,11 +27,30 @@ export const PLAN_LIMITS = {
 
 export async function getPremiumStatus(): Promise<boolean> {
   const val = await storage.getItem<string>(K_PREMIUM, "false");
-  return val === "true" || val === (true as never);
+  const active = val === "true" || val === (true as never);
+  if (!active) return false;
+
+  const source = await storage.getItem<PremiumSource>(K_PREMIUM_SOURCE, "dev");
+  return source === "store" || (__DEV__ && source === "dev");
 }
 
 export async function setPremiumStatusForTesting(value: boolean): Promise<void> {
+  if (!__DEV__) {
+    await storage.setItem(K_PREMIUM, "false");
+    await storage.removeItem(K_PREMIUM_SOURCE);
+    return;
+  }
   await storage.setItem(K_PREMIUM, value ? "true" : "false");
+  await storage.setItem(K_PREMIUM_SOURCE, "dev");
+}
+
+export async function setPremiumStatusFromStore(value: boolean): Promise<void> {
+  await storage.setItem(K_PREMIUM, value ? "true" : "false");
+  if (value) {
+    await storage.setItem(K_PREMIUM_SOURCE, "store");
+  } else {
+    await storage.removeItem(K_PREMIUM_SOURCE);
+  }
 }
 
 export async function isPremium(): Promise<boolean> {

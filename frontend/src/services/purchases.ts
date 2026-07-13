@@ -11,7 +11,7 @@
  * Fonte de verdade: entitlement do RevenueCat. A flag local (premium.ts)
  * funciona como cache offline e é sincronizada em cada arranque.
  */
-import { setPremiumStatusForTesting } from "@/src/services/premium";
+import { setPremiumStatusFromStore } from "@/src/services/premium";
 
 export const ENTITLEMENT_ID = "premium";
 
@@ -54,7 +54,7 @@ export async function initPurchases(): Promise<void> {
 
 async function applyCustomerInfo(info: { entitlements: { active: Record<string, unknown> } }): Promise<boolean> {
   const active = !!info?.entitlements?.active?.[ENTITLEMENT_ID];
-  await setPremiumStatusForTesting(active);
+  await setPremiumStatusFromStore(active);
   return active;
 }
 
