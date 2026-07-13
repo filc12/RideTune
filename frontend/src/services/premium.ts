@@ -8,8 +8,10 @@ const K_PREMIUM_SOURCE = "ridetune.premium.source";
 
 type PremiumSource = "store" | "dev";
 
+export const isForceFreeBuild = process.env.EXPO_PUBLIC_FORCE_FREE === "true";
+
 export const canUseDevPremiumUnlock =
-  __DEV__ && process.env.EXPO_PUBLIC_ENABLE_DEV_PREMIUM_UNLOCK === "true";
+  !isForceFreeBuild && __DEV__ && process.env.EXPO_PUBLIC_ENABLE_DEV_PREMIUM_UNLOCK === "true";
 
 export const PLAN_LIMITS = {
   free: {
@@ -29,6 +31,8 @@ export const PLAN_LIMITS = {
 } as const;
 
 export async function getPremiumStatus(): Promise<boolean> {
+  if (isForceFreeBuild) return false;
+
   const val = await storage.getItem<string>(K_PREMIUM, "false");
   const active = val === "true" || val === (true as never);
   if (!active) return false;
@@ -48,6 +52,12 @@ export async function setPremiumStatusForTesting(value: boolean): Promise<void> 
 }
 
 export async function setPremiumStatusFromStore(value: boolean): Promise<void> {
+  if (isForceFreeBuild) {
+    await storage.setItem(K_PREMIUM, "false");
+    await storage.removeItem(K_PREMIUM_SOURCE);
+    return;
+  }
+
   await storage.setItem(K_PREMIUM, value ? "true" : "false");
   if (value) {
     await storage.setItem(K_PREMIUM_SOURCE, "store");

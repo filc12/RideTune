@@ -11,7 +11,7 @@
  * Fonte de verdade: entitlement do RevenueCat. A flag local (premium.ts)
  * funciona como cache offline e é sincronizada em cada arranque.
  */
-import { setPremiumStatusFromStore } from "@/src/services/premium";
+import { isForceFreeBuild, setPremiumStatusFromStore } from "@/src/services/premium";
 
 export const ENTITLEMENT_ID = "premium";
 
@@ -40,6 +40,10 @@ export function isBillingAvailable(): boolean {
 
 /** Chamar uma vez no arranque da app (não bloqueia; falha em silêncio). */
 export async function initPurchases(): Promise<void> {
+  if (isForceFreeBuild) {
+    await setPremiumStatusFromStore(false);
+    return;
+  }
   const Purchases = getPurchases();
   if (!Purchases || !API_KEY_ANDROID || configured) return;
   try {
