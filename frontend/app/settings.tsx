@@ -7,7 +7,7 @@ import { useRouter } from "expo-router";
 
 import { C, ScreenHeader } from "@/src/components/ScreenHeader";
 import { PremiumModal } from "@/src/components/PremiumModal";
-import { canUseLanguage, getPremiumStatus, setPremiumStatusForTesting } from "@/src/services/premium";
+import { canUseDevPremiumUnlock, canUseLanguage, getPremiumStatus, setPremiumStatusForTesting } from "@/src/services/premium";
 import { LANGS, useT, type Lang } from "@/src/i18n";
 import { BottomNav } from "@/src/components/BottomNav";
 import { HapticButton } from "@/src/components/HapticButton";
@@ -35,7 +35,7 @@ export default function SettingsScreen() {
 
   const onVersionTap = () => {
     // Dev unlock só existe em builds de desenvolvimento — nunca em produção.
-    if (!__DEV__) return;
+    if (!canUseDevPremiumUnlock) return;
     const next = tapCount + 1;
     setTapCount(next);
     if (next >= 7) { setAskPw(true); setPwInput(""); setPwError(false); setTapCount(0); }
@@ -190,7 +190,7 @@ export default function SettingsScreen() {
             </HapticButton>
           </View>
 
-          {__DEV__ && (
+          {canUseDevPremiumUnlock && (
           <HapticButton
             activeOpacity={0.85}
             onPress={onReplayOnboarding}
