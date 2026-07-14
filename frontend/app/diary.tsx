@@ -144,6 +144,14 @@ export default function DiaryScreen() {
           <Text style={{ color: "#38bdf8", fontWeight: "700", fontSize: 14 }}>Partilhar na Web (ridetune.app/setups)</Text>
         </HapticButton>
 
+        <HapticButton 
+          onPress={() => Linking.openURL("https://www.ridetune.app/setups")} 
+          style={{ flexDirection: "row", alignItems: "center", justifyContent: "center", gap: 8, backgroundColor: "rgba(56, 189, 248, 0.1)", borderWidth: 1, borderColor: "#38bdf8", paddingVertical: 12, paddingHorizontal: 16, borderRadius: 12, marginTop: 12, marginBottom: 16 }}
+        >
+          <Ionicons name="globe-outline" size={18} color="#38bdf8" />
+          <Text style={{ color: "#38bdf8", fontWeight: "700", fontSize: 14 }}>Partilhar na Web (ridetune.app/setups)</Text>
+        </HapticButton>
+
           {!premium && (
             <View style={st.limitBanner}>
               <MaterialCommunityIcons name="lock-outline" size={15} color={C.warn} />
