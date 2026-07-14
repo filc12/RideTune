@@ -100,8 +100,17 @@ export default function DiaryScreen() {
 
             {/* BOTÃO FORA E POR BAIXO DO CARD */}
             <Pressable 
-              onPress={() => Linking.openURL("https://www.ridetune.app/setups")} 
+              onPress={() => {
+                const params = new URLSearchParams({
+                  bike: e.bikeLabel,
+                  setup: e.setupSummary,
+                  notes: e.notes || "",
+                  action: "share"
+                }).toString();
+                Linking.openURL(`https://www.ridetune.app/setups?${params}`);
+              }} 
               style={st.webShareBtn}
+            >
             >
               <Ionicons name="globe-outline" size={18} color="#38bdf8" />
               <Text style={st.webShareText}>Partilhar na Web (ridetune.app/setups)</Text>
