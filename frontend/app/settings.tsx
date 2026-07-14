@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, ScrollView, Linking, SafeAreaView, Modal } from 'react-native';
+import { View, Text, TouchableOpacity, ScrollView, Linking, SafeAreaView, Modal, Share } from 'react-native';
 import { useRouter } from 'expo-router';
 import { 
   ArrowLeft, 
@@ -11,7 +11,8 @@ import {
   Scale, 
   Info, 
   ChevronRight,
-  X 
+  X,
+  Share2
 } from 'lucide-react-native';
 
 export default function SettingsScreen() {
@@ -22,6 +23,18 @@ export default function SettingsScreen() {
 
   const openURL = (url: string) => {
     Linking.openURL(url).catch(() => {});
+  };
+
+  const handleShareSetup = async () => {
+    try {
+      await Share.share({
+        title: 'RideTune - Comunidade & Setups',
+        message: 'Consulta e partilha as tuas afinações de suspensão no RideTune: https://ridetune.app/setups',
+        url: 'https://ridetune.app/setups',
+      });
+    } catch (error) {
+      // Ignorar cancelamento
+    }
   };
 
   const openLegalModal = (title: string, content: string) => {
@@ -55,20 +68,32 @@ export default function SettingsScreen() {
             <Text style={{ color: '#94a3b8', fontSize: 13, marginTop: 4 }}>Suspension Setup Advisor</Text>
           </View>
 
-          {/* Section: Comunidade & Suporte */}
+          {/* Section: Comunidade & Setups */}
           <Text style={{ color: '#38bdf8', fontSize: 12, fontWeight: '700', textTransform: 'uppercase', letterSpacing: 1, marginBottom: 12, marginLeft: 4 }}>
-            Comunidade & Suporte
+            Comunidade & Setups
           </Text>
           
           <View style={{ backgroundColor: '#111827', borderRadius: 16, overflow: 'hidden', borderWidth: 1, borderColor: 'rgba(255, 255, 255, 0.05)', marginBottom: 24 }}>
             <TouchableOpacity 
-              onPress={() => openURL('https://ridetune.app')}
+              onPress={() => openURL('https://ridetune.app/setups')}
               style={{ flexDirection: 'row', alignItems: 'center', padding: 16, borderBottomWidth: 1, borderBottomColor: 'rgba(255, 255, 255, 0.05)' }}
             >
               <Globe size={20} color="#38bdf8" />
               <View style={{ flex: 1, marginLeft: 14 }}>
-                <Text style={{ color: '#ffffff', fontSize: 15, fontWeight: '600' }}>Website Oficial</Text>
-                <Text style={{ color: '#94a3b8', fontSize: 12, marginTop: 2 }}>Visita o nosso site</Text>
+                <Text style={{ color: '#ffffff', fontSize: 15, fontWeight: '600' }}>Setups na Web</Text>
+                <Text style={{ color: '#94a3b8', fontSize: 12, marginTop: 2 }}>Explorar e partilhar afinações no site</Text>
+              </View>
+              <ChevronRight size={18} color="#64748b" />
+            </TouchableOpacity>
+
+            <TouchableOpacity 
+              onPress={handleShareSetup}
+              style={{ flexDirection: 'row', alignItems: 'center', padding: 16, borderBottomWidth: 1, borderBottomColor: 'rgba(255, 255, 255, 0.05)' }}
+            >
+              <Share2 size={20} color="#38bdf8" />
+              <View style={{ flex: 1, marginLeft: 14 }}>
+                <Text style={{ color: '#ffffff', fontSize: 15, fontWeight: '600' }}>Partilhar Diário / Setups</Text>
+                <Text style={{ color: '#94a3b8', fontSize: 12, marginTop: 2 }}>Enviar link direto das tuas afinações</Text>
               </View>
               <ChevronRight size={18} color="#64748b" />
             </TouchableOpacity>
