@@ -151,6 +151,7 @@ export default function SetupsPage() {
       
       
       
+      
       <h1 style={{ fontSize: "28px", fontWeight: "bold", marginBottom: "8px", color: "#ffffff" }}>Setups Públicos</h1>
       <p style={{ color: "#94a3b8", fontSize: "15px" }}>Explora e partilha afinações de suspensão da comunidade RideTune.</p>
 
@@ -192,7 +193,6 @@ function ShareConfirmationModal() {
     setShowShareModal(false);
     setHasProcessed(true);
     router.replace("/setups", { scroll: false });
-    
   };
 
   if (!showShareModal || !pendingSetup || hasProcessed) return null;
