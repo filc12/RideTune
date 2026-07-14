@@ -43,6 +43,7 @@ const SettingsRow = ({ icon, title, subtitle, rightElement, onPress, isLast }: S
 export default function SettingsScreen({ navigation }: any) {
   return (
     <View className="flex-1 bg-[#090d16]">
+      {/* Top Navigation Bar */}
       <View className="flex-row items-center justify-between px-4 pt-12 pb-4 border-b border-white/5">
         <TouchableOpacity onPress={() => navigation?.goBack?.()} className="p-2 -ml-2">
           <ArrowLeft size={22} color="#ffffff" />
@@ -52,6 +53,8 @@ export default function SettingsScreen({ navigation }: any) {
       </View>
 
       <ScrollView className="flex-1 px-4 pt-6" showsVerticalScrollIndicator={false}>
+        
+        {/* Header Compacto da Marca */}
         <View className="items-center mb-8">
           <View className="flex-row items-center gap-1.5">
             <View className="w-1.5 h-6 bg-blue-500 rounded-full" />
@@ -62,6 +65,7 @@ export default function SettingsScreen({ navigation }: any) {
           <Text className="text-slate-400 text-xs mt-1">Suspension Setup Advisor</Text>
         </View>
 
+        {/* SECÇÃO 1: COMUNIDADE & SUPORTE */}
         <Text className="text-slate-400 text-xs font-semibold uppercase tracking-wider mb-2 ml-1">
           Comunidade & Suporte
         </Text>
@@ -86,6 +90,7 @@ export default function SettingsScreen({ navigation }: any) {
           />
         </View>
 
+        {/* SECÇÃO 2: LEGAL & SOBRE */}
         <Text className="text-slate-400 text-xs font-semibold uppercase tracking-wider mb-2 ml-1">
           Informações & Legal
         </Text>
@@ -110,9 +115,11 @@ export default function SettingsScreen({ navigation }: any) {
           />
         </View>
 
+        {/* Footer */}
         <Text className="text-center text-slate-500 text-xs pb-12">
           Built for riders, by riders.
         </Text>
+
       </ScrollView>
     </View>
   );
