@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { Alert, KeyboardAvoidingView, Modal, Platform, Pressable, ScrollView, Share, StatusBar, StyleSheet, Text, TextInput, View } from "react-native";
+import { Alert, KeyboardAvoidingView, Modal, Platform, Pressable, ScrollView, Share, StatusBar, StyleSheet, Text, TextInput, View, Linking } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { LinearGradient } from "expo-linear-gradient";
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
@@ -124,15 +124,17 @@ export default function DiaryScreen() {
         <ScreenHeader title={t("diary.title")} />
         <ScrollView contentContainerStyle={{ padding: 20, paddingBottom: 120, maxWidth: 600, alignSelf: "center", width: "100%" }}>
 
-        <HapticButton 
-          onPress={() => Share.share({ message: "Consulta e partilha as minhas afinações de suspensão no RideTune: https://www.ridetune.app/setups" })} 
-          style={{ flexDirection: "row", alignItems: "center", justifyContent: "center", gap: 8, backgroundColor: "rgba(56, 189, 248, 0.1)", borderWidth: 1, borderColor: "#38bdf8", paddingVertical: 12, paddingHorizontal: 16, borderRadius: 12, marginBottom: 16 }}
-        >
-          <Ionicons name="share-social-outline" size={18} color="#38bdf8" />
-          <Text style={{ color: "#38bdf8", fontWeight: "700", fontSize: 14 }}>Partilhar na Web (ridetune.app/setups)</Text>
-        </HapticButton>
+        
 
           <Text style={st.sub}>{t("diary.sub")}</Text>
+
+        <HapticButton 
+          onPress={() => Linking.openURL("https://www.ridetune.app/setups")} 
+          style={{ flexDirection: "row", alignItems: "center", justifyContent: "center", gap: 8, backgroundColor: "rgba(56, 189, 248, 0.1)", borderWidth: 1, borderColor: "#38bdf8", paddingVertical: 12, paddingHorizontal: 16, borderRadius: 12, marginTop: 12, marginBottom: 16 }}
+        >
+          <Ionicons name="globe-outline" size={18} color="#38bdf8" />
+          <Text style={{ color: "#38bdf8", fontWeight: "700", fontSize: 14 }}>Partilhar na Web (ridetune.app/setups)</Text>
+        </HapticButton>
 
           {!premium && (
             <View style={st.limitBanner}>
