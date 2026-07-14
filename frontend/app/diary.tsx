@@ -127,13 +127,7 @@ export default function DiaryScreen() {
         
 
           <Text style={st.sub}>{t("diary.sub")}</Text>
-        <HapticButton 
-          onPress={() => Linking.openURL("https://www.ridetune.app/setups")} 
-          style={{ flexDirection: "row", alignItems: "center", justifyContent: "center", gap: 8, backgroundColor: "rgba(56, 189, 248, 0.1)", borderWidth: 1, borderColor: "#38bdf8", paddingVertical: 12, paddingHorizontal: 16, borderRadius: 12, marginTop: 12, marginBottom: 16 }}
-        >
-          <Ionicons name="globe-outline" size={18} color="#38bdf8" />
-          <Text style={{ color: "#38bdf8", fontWeight: "700", fontSize: 14 }}>Partilhar na Web (ridetune.app/setups)</Text>
-        </HapticButton>
+        
 
         
 
@@ -167,6 +161,14 @@ export default function DiaryScreen() {
                       <Text style={st.cardBike}>{e.bikeLabel}</Text>
                       <Text style={st.cardDate}>{new Date(e.createdAt).toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" })}</Text>
                     </View>
+
+        <HapticButton 
+          onPress={() => Linking.openURL("https://www.ridetune.app/setups")} 
+          style={{ flexDirection: "row", alignItems: "center", justifyContent: "center", gap: 8, backgroundColor: "rgba(56, 189, 248, 0.1)", borderWidth: 1, borderColor: "#38bdf8", paddingVertical: 12, paddingHorizontal: 16, borderRadius: 12, marginTop: 10, marginBottom: 20 }}
+        >
+          <Ionicons name="globe-outline" size={18} color="#38bdf8" />
+          <Text style={{ color: "#38bdf8", fontWeight: "700", fontSize: 14 }}>Partilhar na Web (ridetune.app/setups)</Text>
+        </HapticButton>
                     <View style={st.cardActions}>
                       <HapticButton onPress={() => onShare(e)} style={st.actionBtn}>
                         <Ionicons name="share-outline" size={16} color={C.accent} />
