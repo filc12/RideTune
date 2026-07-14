@@ -1,5 +1,5 @@
-import React from 'react';
-import { View, Text, TouchableOpacity, ScrollView, Linking, SafeAreaView } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, TouchableOpacity, ScrollView, Linking, SafeAreaView, Modal } from 'react-native';
 import { useRouter } from 'expo-router';
 import { 
   ArrowLeft, 
@@ -10,14 +10,24 @@ import {
   ShieldCheck, 
   Scale, 
   Info, 
-  ChevronRight 
+  ChevronRight,
+  X 
 } from 'lucide-react-native';
 
 export default function SettingsScreen() {
   const router = useRouter();
+  const [modalVisible, setModalVisible] = useState(false);
+  const [modalTitle, setModalTitle] = useState('');
+  const [modalContent, setModalContent] = useState('');
 
   const openURL = (url: string) => {
     Linking.openURL(url).catch(() => {});
+  };
+
+  const openLegalModal = (title: string, content: string) => {
+    setModalTitle(title);
+    setModalContent(content);
+    setModalVisible(true);
   };
 
   return (
@@ -95,7 +105,10 @@ export default function SettingsScreen() {
 
           <View style={{ backgroundColor: '#111827', borderRadius: 16, overflow: 'hidden', borderWidth: 1, borderColor: 'rgba(255, 255, 255, 0.05)', marginBottom: 24 }}>
             <TouchableOpacity 
-              onPress={() => openURL('https://ridetune.app/terms')}
+              onPress={() => openLegalModal(
+                'Termos de Utilização', 
+                'A aplicação RideTune destina-se a auxiliar na afinação e cálculo de parâmetros de suspensão de motociclos. A utilização dos cálculos e sugestões fornecidos é da exclusiva responsabilidade do condutor.'
+              )}
               style={{ flexDirection: 'row', alignItems: 'center', padding: 16, borderBottomWidth: 1, borderBottomColor: 'rgba(255, 255, 255, 0.05)' }}
             >
               <FileText size={20} color="#38bdf8" />
@@ -106,7 +119,10 @@ export default function SettingsScreen() {
             </TouchableOpacity>
 
             <TouchableOpacity 
-              onPress={() => openURL('https://ridetune.app/privacy')}
+              onPress={() => openLegalModal(
+                'Política de Privacidade', 
+                'A RideTune respeita a sua privacidade. Os dados de afinação, perfis e configurações introduzidos são guardados maioritariamente de forma local no seu dispositivo para garantir total segurança e controlo dos seus dados.'
+              )}
               style={{ flexDirection: 'row', alignItems: 'center', padding: 16, borderBottomWidth: 1, borderBottomColor: 'rgba(255, 255, 255, 0.05)' }}
             >
               <ShieldCheck size={20} color="#38bdf8" />
@@ -117,7 +133,10 @@ export default function SettingsScreen() {
             </TouchableOpacity>
 
             <TouchableOpacity 
-              onPress={() => openURL('https://ridetune.app/legal')}
+              onPress={() => openLegalModal(
+                'Avisos Legais & Isenção de Responsabilidade', 
+                'A RideTune é uma ferramenta de aconselhamento técnico baseada nas especificações informadas. O estado mecânico do veículo, desgaste de componentes e a condução em segurança são sempre da responsabilidade do piloto. Verifique sempre o manual oficial do fabricante da sua moto.'
+              )}
               style={{ flexDirection: 'row', alignItems: 'center', padding: 16 }}
             >
               <Scale size={20} color="#38bdf8" />
@@ -138,6 +157,41 @@ export default function SettingsScreen() {
           </View>
 
         </ScrollView>
+
+        {/* Modal de Informação Legal */}
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={modalVisible}
+          onRequestClose={() => setModalVisible(false)}
+        >
+          <View style={{ flex: 1, backgroundColor: 'rgba(0,0,0,0.8)', justifyContent: 'flex-end' }}>
+            <View style={{ backgroundColor: '#111827', borderTopLeftRadius: 24, borderTopRightRadius: 24, padding: 24, maxHeight: '70%', borderWidth: 1, borderColor: 'rgba(255,255,255,0.1)' }}>
+              
+              <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
+                <Text style={{ color: '#ffffff', fontSize: 18, fontWeight: '700', flex: 1, paddingRight: 12 }}>{modalTitle}</Text>
+                <TouchableOpacity onPress={() => setModalVisible(false)} style={{ padding: 6, backgroundColor: 'rgba(255,255,255,0.05)', borderRadius: 20 }}>
+                  <X size={20} color="#ffffff" />
+                </TouchableOpacity>
+              </View>
+
+              <ScrollView style={{ marginBottom: 20 }}>
+                <Text style={{ color: '#cbd5e1', fontSize: 14, lineHeight: 22 }}>
+                  {modalContent}
+                </Text>
+              </ScrollView>
+
+              <TouchableOpacity 
+                onPress={() => setModalVisible(false)}
+                style={{ backgroundColor: '#38bdf8', paddingVertical: 14, borderRadius: 12, alignItems: 'center' }}
+              >
+                <Text style={{ color: '#090d16', fontWeight: '700', fontSize: 15 }}>Entendido</Text>
+              </TouchableOpacity>
+
+            </View>
+          </View>
+        </Modal>
+
       </View>
     </SafeAreaView>
   );
