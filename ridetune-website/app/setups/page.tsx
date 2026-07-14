@@ -165,7 +165,8 @@ export default function SetupsPage() {
     <main style={{ minHeight: "100vh", backgroundColor: "#090d16", color: "#fff", padding: "32px 24px", maxWidth: "1200px", margin: "0 auto" }}>
       <Suspense fallback={null}><ShareConfirmationModal /></Suspense>
       
-      <Suspense fallback={null}><ShareConfirmationModal onPublish={() => {}} /></Suspense>
+      
+      
       <h1 style={{ fontSize: "28px", fontWeight: "bold", marginBottom: "8px", color: "#ffffff" }}>Setups Públicos</h1>
       <p style={{ color: "#94a3b8", fontSize: "15px" }}>Explora e partilha afinações de suspensão da comunidade RideTune.</p>
 
