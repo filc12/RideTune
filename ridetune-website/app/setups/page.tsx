@@ -54,21 +54,10 @@ function SetupsContent() {
   }, [searchParams]);
 
   const handleConfirm = () => {
-    if (!pendingSetup) return;
-
-    setPublished(true);
-
-    setTimeout(() => {
-      // Adiciona o novo setup ao topo da lista de cards da página
-      const newEntry: SetupCard = {
-        id: Date.now().toString(),
-        bike: pendingSetup.bike,
-        setup: pendingSetup.setup,
-        notes: pendingSetup.notes,
-        author: "Utilizador RideTune",
-        date: "Agora mesmo",
-        isNew: true
-      };
+    setShowShareModal(false);
+    setHasProcessed(true);
+    router.replace("/setups", { scroll: false });
+  };
 
       setSetups((prev) => [newEntry, ...prev]);
       setShowShareModal(false);
@@ -90,13 +79,7 @@ function SetupsContent() {
       {showShareModal && pendingSetup && (
         <div style={{ position: "fixed", inset: 0, backgroundColor: "rgba(0, 0, 0, 0.85)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 9999, padding: "16px" }}>
           <div style={{ backgroundColor: "#111827", padding: "24px", borderRadius: "16px", maxWidth: "440px", width: "100%", border: "1px solid #38bdf8", boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.5)" }}>
-            {published ? (
-              <div style={{ textAlign: "center", padding: "16px 0" }}>
-                <span style={{ fontSize: "36px" }}>✅</span>
-                <h3 style={{ color: "#ffffff", fontSize: "18px", fontWeight: "bold", marginTop: "12px" }}>Setup Publicado!</h3>
-                <p style={{ color: "#94a3b8", fontSize: "14px", marginTop: "4px" }}>A adicionar à lista da comunidade...</p>
-              </div>
-            ) : (
+            {
               <>
                 <h3 style={{ color: "#ffffff", fontSize: "18px", fontWeight: "bold", marginBottom: "8px" }}>Confirmar Partilha de Setup</h3>
                 <p style={{ color: "#94a3b8", fontSize: "14px", marginBottom: "16px" }}>Recebemos a tua afinação da app RideTune. Confirmas a publicação para a comunidade?</p>
