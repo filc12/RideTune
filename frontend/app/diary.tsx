@@ -113,7 +113,7 @@ export default function DiaryScreen() {
   };
 
   const onShare = async (e: DiaryEntry) => {
-    await Share.share({ message: formatEntry(e) });
+    await Share.share({ message: formatEntry(e) + "\n\nVer e partilhar setups em: https://www.ridetune.app/setups" });
   };
 
   return (
