@@ -29,8 +29,8 @@ export default function SettingsScreen() {
     try {
       await Share.share({
         title: 'RideTune - Comunidade & Setups',
-        message: 'Consulta e partilha as tuas afinações de suspensão no RideTune: https://ridetune.app/setups',
-        url: 'https://ridetune.app/setups',
+        message: 'Consulta e partilha as tuas afinações de suspensão no RideTune: https://www.ridetune.app/setups',
+        url: 'https://www.ridetune.app/setups',
       });
     } catch (error) {
       // Ignorar cancelamento
@@ -75,7 +75,7 @@ export default function SettingsScreen() {
           
           <View style={{ backgroundColor: '#111827', borderRadius: 16, overflow: 'hidden', borderWidth: 1, borderColor: 'rgba(255, 255, 255, 0.05)', marginBottom: 24 }}>
             <TouchableOpacity 
-              onPress={() => openURL('https://ridetune.app/setups')}
+              onPress={() => openURL('https://www.ridetune.app/setups')}
               style={{ flexDirection: 'row', alignItems: 'center', padding: 16, borderBottomWidth: 1, borderBottomColor: 'rgba(255, 255, 255, 0.05)' }}
             >
               <Globe size={20} color="#38bdf8" />
@@ -111,7 +111,7 @@ export default function SettingsScreen() {
             </TouchableOpacity>
 
             <TouchableOpacity 
-              onPress={() => openURL('https://ridetune.app/review')}
+              onPress={() => openURL('https://www.ridetune.app/review')}
               style={{ flexDirection: 'row', alignItems: 'center', padding: 16 }}
             >
               <Star size={20} color="#38bdf8" />
