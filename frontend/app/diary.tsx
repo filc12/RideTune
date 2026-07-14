@@ -42,22 +42,22 @@ export default function DiaryScreen() {
           Regista as tuas sensações de condução e mudanças de setup.
         </Text>
 
-        {/* Banner Plano Grátis */}
+        
         <View style={st.planBanner}>
           <Ionicons name="lock-closed-outline" size={16} color="#eab308" />
           <Text style={st.planText}>Plano grátis: 1/3 entradas. Faz upgrade para ilimitadas.</Text>
         </View>
 
-        {/* Botão Nova Entrada */}
+        
         <Pressable style={st.newEntryBtn}>
           <Ionicons name="add-circle" size={20} color="#ffffff" />
           <Text style={st.newEntryText}>Nova entrada</Text>
         </Pressable>
 
-        {/* Lista de Registos */}
+        
         {entries.map((e) => (
           <View key={e.id} style={{ marginBottom: 16 }}>
-            {/* CARD PRINCIPAL (Isolado) */}
+            
             <View style={st.card}>
               <View style={st.cardHeader}>
                 <View style={{ flex: 1 }}>
@@ -79,7 +79,7 @@ export default function DiaryScreen() {
                 </View>
               </View>
 
-              {/* Estrelas */}
+              
               <View style={st.ratingRow}>
                 {[1, 2, 3, 4, 5].map((star) => (
                   <Ionicons
@@ -91,14 +91,14 @@ export default function DiaryScreen() {
                 ))}
               </View>
 
-              {/* Resumo do Setup */}
+              
               <Text style={st.setupSummary}>⚙️ {e.setupSummary}</Text>
 
-              {/* Notas do utilizador */}
+              
               <Text style={st.cardNotes}>{e.notes}</Text>
             </View>
 
-            {/* BOTÃO FORA E POR BAIXO DO CARD */}
+            
             <Pressable 
               onPress={() => {
                 const params = new URLSearchParams({
