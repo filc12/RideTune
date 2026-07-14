@@ -209,7 +209,7 @@ function ShareConfirmationModal() {
     setShowShareModal(false);
     setHasProcessed(true);
     router.replace("/setups", { scroll: false });
-    alert("Setup publicado com sucesso!");
+    
   };
 
   if (!showShareModal || !pendingSetup || hasProcessed) return null;
