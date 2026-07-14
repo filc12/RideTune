@@ -142,33 +142,7 @@ export default function DiaryScreen() {
             </View>
           )}
 
-          <HapticButton style={[st.addBtn, (!premium && entries.length >= FREE_DIARY_LIMIT) && st.addBtnLocked]} onPress={onAdd} activeOpacity={0.9}>
-            <Ionicons name="add-circle" size={18} color={(!premium && entries.length >= FREE_DIARY_LIMIT) ? C.textMute : "#04111E"} />
-            <Text style={[st.addLabel, (!premium && entries.length >= FREE_DIARY_LIMIT) && { color: C.textMute }]}>{t("diary.new")}</Text>
-          </HapticButton>
-
-          {entries.length === 0 ? (
-            <View style={st.empty}>
-              <MaterialCommunityIcons name="notebook-outline" size={32} color={C.textMute} />
-              <Text style={st.emptyText}>{t("diary.empty")}</Text>
-            </View>
-          ) : (
-            <View style={{ marginTop: 18, gap: 12 }}>
-              {entries.map((e) => (
-                <View key={e.id} style={st.card}>
-                  <View style={st.cardHeader}>
-                    <View style={{ flex: 1 }}>
-                      <Text style={st.cardBike}>{e.bikeLabel}</Text>
-                      <Text style={st.cardDate}>{new Date(e.createdAt).toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" })}</Text>
-                    </View>
-
-        <HapticButton 
-          onPress={() => Linking.openURL("https://www.ridetune.app/setups")} 
-          style={{ flexDirection: "row", alignItems: "center", justifyContent: "center", gap: 8, backgroundColor: "rgba(56, 189, 248, 0.1)", borderWidth: 1, borderColor: "#38bdf8", paddingVertical: 12, paddingHorizontal: 16, borderRadius: 12, marginTop: 10, marginBottom: 20 }}
-        >
-          <Ionicons name="globe-outline" size={18} color="#38bdf8" />
-          <Text style={{ color: "#38bdf8", fontWeight: "700", fontSize: 14 }}>Partilhar na Web (ridetune.app/setups)</Text>
-        </HapticButton>
+          
                     <View style={st.cardActions}>
                       <HapticButton onPress={() => onShare(e)} style={st.actionBtn}>
                         <Ionicons name="share-outline" size={16} color={C.accent} />
