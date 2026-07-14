@@ -167,6 +167,7 @@ export default function SetupsPage() {
       
       
       
+      
       <h1 style={{ fontSize: "28px", fontWeight: "bold", marginBottom: "8px", color: "#ffffff" }}>Setups Públicos</h1>
       <p style={{ color: "#94a3b8", fontSize: "15px" }}>Explora e partilha afinações de suspensão da comunidade RideTune.</p>
 
@@ -183,8 +184,11 @@ function ShareConfirmationModal() {
   const router = useRouter();
   const [showShareModal, setShowShareModal] = useState(false);
   const [pendingSetup, setPendingSetup] = useState<any>(null);
+  const [hasProcessed, setHasProcessed] = useState(false);
 
   useEffect(() => {
+    if (hasProcessed) return;
+
     const bike = searchParams.get("bike");
     const setup = searchParams.get("setup");
     const notes = searchParams.get("notes");
@@ -193,25 +197,38 @@ function ShareConfirmationModal() {
       setPendingSetup({ bike, setup, notes: notes || "" });
       setShowShareModal(true);
     }
-  }, [searchParams]);
+  }, [searchParams, hasProcessed]);
 
-  if (!showShareModal || !pendingSetup) return null;
+  const handleClose = () => {
+    setShowShareModal(false);
+    setHasProcessed(true);
+    router.replace("/setups", { scroll: false });
+  };
+
+  const handleConfirm = () => {
+    setShowShareModal(false);
+    setHasProcessed(true);
+    router.replace("/setups", { scroll: false });
+    alert("Setup publicado com sucesso!");
+  };
+
+  if (!showShareModal || !pendingSetup || hasProcessed) return null;
 
   return (
-    <div style={{ position: "fixed", inset: 0, backgroundColor: "rgba(0, 0, 0, 0.85)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 9999, padding: "16px" }}>
-      <div style={{ backgroundColor: "#111827", padding: "24px", borderRadius: "16px", maxWidth: "440px", width: "100%", border: "1px solid #38bdf8", boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.5)" }}>
-        <h3 style={{ color: "#ffffff", fontSize: "18px", fontWeight: "bold", marginBottom: "8px" }}>Confirmar Partilha de Setup</h3>
-        <p style={{ color: "#94a3b8", fontSize: "14px", marginBottom: "16px" }}>Recebemos a tua afinação da app RideTune. Confirmas a publicação para a comunidade?</p>
+    <div style={{ position: "fixed", inset: 0, backgroundColor: "rgba(0, 0, 0, 0.8)", backdropFilter: "blur(4px)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 9999, padding: "16px" }}>
+      <div style={{ backgroundColor: "#0f172a", padding: "28px", borderRadius: "20px", maxWidth: "460px", width: "100%", border: "1px solid #1e293b", boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.7)" }}>
+        <h3 style={{ color: "#ffffff", fontSize: "20px", fontWeight: "700", marginBottom: "6px" }}>Confirmar Partilha de Setup</h3>
+        <p style={{ color: "#94a3b8", fontSize: "14px", marginBottom: "20px", lineHeight: "1.5" }}>Recebemos a tua afinação da app RideTune. Confirmas a publicação para a comunidade?</p>
         
-        <div style={{ backgroundColor: "#1e293b", padding: "14px", borderRadius: "10px", marginBottom: "20px", borderLeft: "4px solid #38bdf8" }}>
-          <p style={{ color: "#38bdf8", fontWeight: "bold", fontSize: "15px", margin: 0 }}>{pendingSetup.bike}</p>
-          <p style={{ color: "#cbd5e1", fontSize: "13px", marginTop: "6px", marginBottom: 0 }}>{pendingSetup.setup}</p>
-          {pendingSetup.notes ? <p style={{ color: "#94a3b8", fontSize: "12px", marginTop: "8px", fontStyle: "italic", margin: 0 }}>"{pendingSetup.notes}"</p> : null}
+        <div style={{ backgroundColor: "#1e293b", padding: "16px", borderRadius: "12px", marginBottom: "24px", borderLeft: "4px solid #38bdf8" }}>
+          <p style={{ color: "#38bdf8", fontWeight: "700", fontSize: "16px", margin: 0 }}>{pendingSetup.bike}</p>
+          <p style={{ color: "#e2e8f0", fontSize: "13px", marginTop: "8px", marginBottom: 0, fontFamily: "monospace" }}>{pendingSetup.setup}</p>
+          {pendingSetup.notes ? <p style={{ color: "#94a3b8", fontSize: "13px", marginTop: "10px", fontStyle: "italic", margin: 0 }}>"{pendingSetup.notes}"</p> : null}
         </div>
 
         <div style={{ display: "flex", gap: "12px", justifyContent: "flex-end" }}>
-          <button onClick={() => { setShowShareModal(false); router.replace("/setups"); }} style={{ padding: "10px 16px", borderRadius: "8px", background: "transparent", color: "#94a3b8", border: "1px solid #334155", cursor: "pointer", fontWeight: "600" }}>Cancelar</button>
-          <button onClick={() => { alert("Setup publicado com sucesso!"); setShowShareModal(false); router.replace("/setups"); }} style={{ padding: "10px 16px", borderRadius: "8px", background: "#38bdf8", color: "#090d16", fontWeight: "bold", border: "none", cursor: "pointer" }}>Publicar Setup</button>
+          <button onClick={handleClose} style={{ padding: "10px 18px", borderRadius: "10px", background: "transparent", color: "#94a3b8", border: "1px solid #334155", cursor: "pointer", fontWeight: "600", fontSize: "14px" }}>Cancelar</button>
+          <button onClick={handleConfirm} style={{ padding: "10px 18px", borderRadius: "10px", background: "#38bdf8", color: "#020617", fontWeight: "700", border: "none", cursor: "pointer", fontSize: "14px" }}>Publicar Setup</button>
         </div>
       </div>
     </div>
