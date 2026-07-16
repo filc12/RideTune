@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useRef } from "react";
 import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
+import { useI18n } from "@/i18n/LanguageProvider";
 
 const PLAY_URL = "https://play.google.com/store/apps/details?id=com.ridetune.app";
 
@@ -19,6 +20,8 @@ const line = {
 const lineStatic = { hidden: { opacity: 1 }, show: { opacity: 1 } };
 
 export default function Hero() {
+  const { t } = useI18n();
+  const h = t.home;
   const ref = useRef<HTMLElement>(null);
   const reduce = useReducedMotion();
   const { scrollYProgress } = useScroll({
@@ -60,24 +63,24 @@ export default function Hero() {
           <motion.div variants={reduce ? lineStatic : line}>
             <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-black/30 px-4 py-1.5 font-mono text-[11px] uppercase tracking-[0.2em] text-slate-300 backdrop-blur-md">
               <span className="h-1.5 w-1.5 rounded-full bg-brand-accent" />
-              Motorcycle suspension, intelligent
+              {h.heroBadge}
             </span>
           </motion.div>
 
           <h1 className="mt-10 text-[15vw] font-bold leading-[0.95] tracking-tight sm:text-7xl md:text-[6.5rem] lg:text-[7.5rem]">
             <motion.span variants={reduce ? lineStatic : line} className="block">
-              Every ride
+              {h.heroLine1}
             </motion.span>
             <motion.span variants={reduce ? lineStatic : line} className="block">
-              starts with
+              {h.heroLine2}
             </motion.span>
             <motion.span variants={reduce ? lineStatic : line} className="block text-brand-accent">
-              the right setup.
+              {h.heroLine3}
             </motion.span>
           </h1>
 
           <motion.p variants={reduce ? lineStatic : line} className="mt-8 max-w-xl text-lg text-slate-300">
-            OEM data, intelligent calculations and the real-world way you ride.
+            {h.heroSub}
           </motion.p>
 
           <motion.div variants={reduce ? lineStatic : line} className="mt-10 flex flex-wrap items-center gap-4">
@@ -90,7 +93,7 @@ export default function Hero() {
               </svg>
               <span className="text-left leading-tight">
                 <span className="block text-[10px] font-semibold uppercase tracking-widest opacity-60">
-                  Get it on
+                  {h.getItOn}
                 </span>
                 <span className="block text-base font-bold">Google Play</span>
               </span>
@@ -101,9 +104,9 @@ export default function Hero() {
               </svg>
               <span className="text-left leading-tight">
                 <span className="block text-[10px] font-semibold uppercase tracking-widest opacity-60">
-                  Coming soon
+                  {h.comingSoon}
                 </span>
-                <span className="block text-base font-bold text-white/60">for iPhone</span>
+                <span className="block text-base font-bold text-white/60">{h.forIphone}</span>
               </span>
             </span>
           </motion.div>

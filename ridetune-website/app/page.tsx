@@ -1,8 +1,12 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import Hero from "@/components/Hero";
 import PhoneTour from "@/components/PhoneTour";
 import { Reveal, RevealGroup, RevealItem } from "@/components/Reveal";
+import { useI18n } from "@/i18n/LanguageProvider";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 
 const PLAY_URL = "https://play.google.com/store/apps/details?id=com.ridetune.app";
 
@@ -18,6 +22,7 @@ function Badge({ children }: { children: React.ReactNode }) {
 }
 
 function PlayButton() {
+  const { t } = useI18n();
   return (
     <a
       href={PLAY_URL}
@@ -28,7 +33,7 @@ function PlayButton() {
       </svg>
       <span className="text-left leading-tight">
         <span className="block text-[10px] font-semibold uppercase tracking-widest opacity-60">
-          Get it on
+          {t.home.getItOn}
         </span>
         <span className="block text-base font-bold">Google Play</span>
       </span>
@@ -80,56 +85,16 @@ function Interlude({
 const cardHover =
   "transition-all duration-300 hover:-translate-y-1.5 hover:bg-brand-card hover:shadow-[0_18px_50px_-18px_rgba(0,0,0,0.7)]";
 
-/* ── content ─────────────────────────────────────────────────────────────── */
-
-const symptoms = [
-  "Dive under braking?",
-  "Feel nervous in corners?",
-  "Become uncomfortable with luggage?",
-  "Feel unstable off-road?",
-] as const;
-
-const problems = [
-  ["Too much front dive", "Braking hard nose-plants the bike and unsettles the chassis."],
-  ["Feels unstable", "Weaves and vagueness at speed erode your trust."],
-  ["Harsh over bumps", "Your spine takes hits that the suspension should absorb."],
-  ["Poor traction", "Tires skip instead of tracking through corners."],
-  ["Too soft with luggage", "Add a passenger or panniers and the bike wallows."],
-] as const;
-
-const steps = [
-  ["Choose your motorcycle", "Pick your exact model — new motorcycles added regularly."],
-  ["Add rider, passenger & luggage", "Enter what you actually carry — not a factory assumption."],
-  ["Receive your personalized setup", "Clear click values for preload, rebound and compression."],
-  ["Ride with confidence", "Feel the difference on the very first ride."],
-] as const;
-
-const features = [
-  ["OEM Suspension Database", "OEM-based, verified, calculated or estimated data — always labelled."],
-  ["Smart Load Calculator", "Rider, passenger and luggage — recalculated in real time."],
-  ["Suspension Recommendations", "Preload, rebound and compression, in clicks, for you."],
-  ["Suspension Diagnostics", "Describe what you feel. Get a targeted fix."],
-  ["Ride Diary", "Track every ride, every setup, every sensation."],
-  ["Tyre Pressure Guide", "Cold-tyre pressures matched to your load."],
-  ["SAG Reference", "The one measurement that changes everything."],
-  ["6 Languages", "English, Português, Español, Français, Deutsch, Italiano."],
-  ["Growing every month", "New motorcycles and data updates added regularly."],
-] as const;
-
-const tour = [
-  { kicker: "HOME", title: "Suspension setup, made simple.", sub: "Your current setup, load mode and status — the moment you open the app.", img: "/screens/home.webp" },
-  { kicker: "BIKE SELECTION", title: "All the bikes you ride.", sub: "Adventure, naked, sport, touring, supermoto and more — growing every month.", img: "/screens/bikes.webp" },
-  { kicker: "LOAD CALCULATOR", title: "Adjust for your real load.", sub: "Rider, passenger, luggage — the setup is recalculated instantly.", img: "/screens/load.webp" },
-  { kicker: "RECOMMENDATIONS", title: "Count the clicks with confidence.", sub: "Preload, rebound and compression, in plain language, for your bike.", img: "/screens/clicks.webp" },
-  { kicker: "TYRE PRESSURE", title: "Grip starts with pressure.", sub: "OEM cold-tyre pressures for your bike — road or off-road, solo or fully loaded.", img: "/screens/tyres.webp" },
-  { kicker: "RIDE DIARY", title: "Every adjustment tells a story.", sub: "Log setup changes and sensations. Build a library only you can build.", img: "/screens/diary.webp" },
+const tourImgs = [
+  "/screens/home.webp",
+  "/screens/bikes.webp",
+  "/screens/load.webp",
+  "/screens/clicks.webp",
+  "/screens/tyres.webp",
+  "/screens/diary.webp",
 ];
 
-const rides = [
-  { name: "Adventure", sub: "Gravel, dust and distance — solo or fully loaded.", img: "/img/adventure.jpg" },
-  { name: "Touring", sub: "Passenger and panniers, recalculated in seconds.", img: "/img/touring.jpg" },
-  { name: "Sport", sub: "Track-day precision, street-day comfort.", img: "/img/sport.jpg" },
-];
+const rideImgs = ["/img/adventure.jpg", "/img/touring.jpg", "/img/sport.jpg"];
 
 const brands = [
   "Aprilia", "BMW", "CF Moto", "Ducati", "Honda", "Kawasaki", "Kove",
@@ -139,6 +104,11 @@ const brands = [
 /* ── page ────────────────────────────────────────────────────────────────── */
 
 export default function Home() {
+  const { t } = useI18n();
+  const h = t.home;
+
+  const tour = h.tour.map(([kicker, title, sub], i) => ({ kicker, title, sub, img: tourImgs[i] }));
+
   return (
     <main id="top" className="overflow-x-clip bg-brand-dark text-slate-100">
       {/* NAV */}
@@ -146,17 +116,20 @@ export default function Home() {
         <div className="mx-auto flex h-[76px] max-w-6xl items-center justify-between px-6">
           <Logo big />
           <nav className="hidden items-center gap-8 text-sm text-brand-muted md:flex">
-            <a href="#features" className="link-underline transition-colors hover:text-white">Features</a>
-            <a href="#how" className="link-underline transition-colors hover:text-white">How it works</a>
-            <Link href="/setups" className="link-underline transition-colors hover:text-white">Setups</Link>
-            <a href="#premium" className="link-underline transition-colors hover:text-white">Premium</a>
+            <a href="#features" className="link-underline transition-colors hover:text-white">{h.featuresBadge}</a>
+            <a href="#how" className="link-underline transition-colors hover:text-white">{t.nav.how}</a>
+            <Link href="/setups" className="link-underline transition-colors hover:text-white">{t.nav.setups}</Link>
+            <a href="#premium" className="link-underline transition-colors hover:text-white">{t.nav.premium}</a>
           </nav>
-          <a
-            href={PLAY_URL}
-            className="rounded-full bg-brand-accent px-5 py-2 text-sm font-semibold text-[#04111e] transition-all duration-300 hover:scale-105 hover:shadow-[0_4px_24px_rgba(74,158,255,0.5)]"
-          >
-            Download
-          </a>
+          <div className="flex items-center gap-3">
+            <LanguageSwitcher />
+            <a
+              href={PLAY_URL}
+              className="rounded-full bg-brand-accent px-5 py-2 text-sm font-semibold text-[#04111e] transition-all duration-300 hover:scale-105 hover:shadow-[0_4px_24px_rgba(74,158,255,0.5)]"
+            >
+              {t.nav.download}
+            </a>
+          </div>
         </div>
       </header>
 
@@ -166,10 +139,10 @@ export default function Home() {
       {/* DOES YOUR BIKE… */}
       <section className="mx-auto max-w-4xl px-6 py-32 text-center">
         <Reveal>
-          <h2 className="text-4xl font-bold tracking-tight md:text-5xl">Does your bike…</h2>
+          <h2 className="text-4xl font-bold tracking-tight md:text-5xl">{h.symptomsTitle}</h2>
         </Reveal>
         <RevealGroup className="mx-auto mt-10 grid max-w-2xl gap-3 text-left sm:grid-cols-2">
-          {symptoms.map((s) => (
+          {h.symptoms.map((s) => (
             <RevealItem key={s}>
               <div className={`flex items-center gap-4 rounded-2xl bg-brand-card/70 px-6 py-5 ${cardHover}`}>
                 <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md border border-brand-border text-brand-accent">
@@ -184,7 +157,7 @@ export default function Home() {
         </RevealGroup>
         <Reveal delay={0.2}>
           <p className="mt-12 text-2xl font-semibold">
-            Then RideTune is <span className="text-brand-accent">for you.</span>
+            {h.thenRidetune} <span className="text-brand-accent">{h.forYou}</span>
           </p>
         </Reveal>
       </section>
@@ -194,22 +167,20 @@ export default function Home() {
         <div className="mx-auto max-w-6xl px-6">
           <div className="grid items-start gap-16 lg:grid-cols-2">
             <Reveal>
-              <Badge>The truth about suspension</Badge>
+              <Badge>{h.truthBadge}</Badge>
               <h2 className="mt-6 text-4xl font-bold leading-tight tracking-tight md:text-5xl">
-                Your motorcycle
+                {h.truthLine1}
                 <br />
-                isn&apos;t the problem.
+                {h.truthLine2}
                 <br />
-                <span className="text-brand-muted">Your setup is.</span>
+                <span className="text-brand-muted">{h.truthLine3}</span>
               </h2>
               <p className="mt-6 max-w-md text-slate-300">
-                Most modern motorcycles ship with excellent suspension. Very few
-                riders ever unlock what&apos;s already underneath them. RideTune
-                closes that gap — without the guesswork.
+                {h.truthBody}
               </p>
             </Reveal>
             <RevealGroup className="grid gap-5 sm:grid-cols-2">
-              {problems.map(([title, sub]) => (
+              {h.problems.map(([title, sub]) => (
                 <RevealItem key={title}>
                   <div className={`h-full rounded-3xl bg-brand-card/70 p-7 ${cardHover}`}>
                     <h3 className="font-semibold text-white">{title}</h3>
@@ -225,15 +196,15 @@ export default function Home() {
       {/* HOW IT WORKS */}
       <section id="how" className="mx-auto max-w-6xl px-6 py-32">
         <Reveal className="text-center">
-          <Badge>How it works</Badge>
+          <Badge>{h.howBadge}</Badge>
           <h2 className="mt-6 text-4xl font-bold tracking-tight md:text-5xl">
-            Four steps between you
+            {h.howLine1}
             <br />
-            and the perfect setup.
+            {h.howLine2}
           </h2>
         </Reveal>
         <RevealGroup className="mt-16 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-          {steps.map(([title, sub], i) => (
+          {h.steps.map(([title, sub], i) => (
             <RevealItem key={title}>
               <div className={`h-full rounded-3xl bg-brand-card/70 p-8 ${cardHover}`}>
                 <div className="text-6xl font-bold text-brand-accent/25">
@@ -248,29 +219,28 @@ export default function Home() {
       </section>
 
       {/* INTERLUDE — emotion, not features */}
-      <Interlude img="/img/touring.jpg" title="Ride with confidence." position="center 35%" />
+      <Interlude img="/img/touring.jpg" title={h.interludeConfidence} position="center 35%" />
 
       {/* FEATURES */}
       <section id="features" className="border-y border-white/5 bg-brand-deep py-32">
         <div className="mx-auto max-w-6xl px-6">
           <div className="grid items-end gap-8 lg:grid-cols-2">
             <Reveal>
-              <Badge>Features</Badge>
+              <Badge>{h.featuresBadge}</Badge>
               <h2 className="mt-6 text-4xl font-bold tracking-tight md:text-5xl">
-                Everything the manual
+                {h.featuresLine1}
                 <br />
-                doesn&apos;t tell you.
+                {h.featuresLine2}
               </h2>
             </Reveal>
             <Reveal delay={0.1}>
               <p className="max-w-md text-slate-300 lg:justify-self-end">
-                Built as a workshop tool, refined to feel like a Sunday-morning
-                app. Every feature exists to give you the same thing: confidence.
+                {h.featuresIntro}
               </p>
             </Reveal>
           </div>
           <RevealGroup className="mt-16 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {features.map(([title, sub]) => (
+            {h.features.map(([title, sub]) => (
               <RevealItem key={title}>
                 <div className={`h-full rounded-3xl bg-brand-card/70 p-8 ${cardHover}`}>
                   <h3 className="font-semibold text-white">{title}</h3>
@@ -285,9 +255,9 @@ export default function Home() {
       {/* INSIDE RIDETUNE — sticky phone tour */}
       <section className="py-24">
         <Reveal className="mx-auto max-w-6xl px-6 text-center">
-          <Badge>Inside RideTune</Badge>
+          <Badge>{h.insideBadge}</Badge>
           <h2 className="mt-6 text-4xl font-bold tracking-tight md:text-5xl">
-            A guided tour, one screen at a time.
+            {h.insideTitle}
           </h2>
         </Reveal>
         <PhoneTour steps={tour} />
@@ -296,7 +266,7 @@ export default function Home() {
       {/* CTA after the tour */}
       <section className="mx-auto max-w-4xl px-6 pb-32 text-center">
         <Reveal>
-          <p className="text-2xl font-semibold text-slate-200">Ready when you are.</p>
+          <p className="text-2xl font-semibold text-slate-200">{h.readyWhenYouAre}</p>
           <div className="mt-8 flex justify-center">
             <PlayButton />
           </div>
@@ -306,16 +276,16 @@ export default function Home() {
       {/* BUILT FOR EVERY RIDE — fullscreen panels */}
       <section id="rides" className="border-t border-white/5">
         <Reveal className="mx-auto max-w-6xl px-6 pt-28 pb-16">
-          <Badge>Built for every ride</Badge>
+          <Badge>{h.ridesBadge}</Badge>
           <h2 className="mt-6 text-4xl font-bold tracking-tight md:text-6xl">
-            Whatever the road,
+            {h.ridesLine1}
             <br />
-            whatever the load.
+            {h.ridesLine2}
           </h2>
         </Reveal>
-        {rides.map(({ name, sub, img }) => (
+        {h.rides.map(([name, sub], i) => (
           <div key={name} className="relative h-[80vh] overflow-hidden">
-            <Image src={img} alt={`${name} riding`} fill className="object-cover" sizes="100vw" />
+            <Image src={rideImgs[i]} alt={`${name} riding`} fill className="object-cover" sizes="100vw" />
             <div className="absolute inset-0 bg-gradient-to-t from-brand-dark via-transparent to-brand-dark/40" />
             <div className="absolute inset-x-0 bottom-0 mx-auto max-w-6xl px-6 pb-16">
               <Reveal>
@@ -330,15 +300,15 @@ export default function Home() {
       {/* PREMIUM */}
       <section id="premium" className="mx-auto max-w-6xl px-6 py-36">
         <Reveal className="text-center">
-          <Badge>RideTune Premium Lifetime</Badge>
+          <Badge>{h.premiumBadge}</Badge>
           <h2 className="mt-10 text-6xl font-bold leading-[0.95] tracking-tight md:text-[7.5rem]">
-            Buy once.
+            {h.premiumLine1}
             <br />
-            <span className="text-brand-accent">Ride forever.</span>
+            <span className="text-brand-accent">{h.premiumLine2}</span>
           </h2>
         </Reveal>
         <RevealGroup className="mx-auto mt-14 flex max-w-3xl flex-wrap items-center justify-center gap-x-8 gap-y-3 text-lg text-slate-300 md:text-xl">
-          {["No subscriptions.", "No recurring fees.", "One purchase.", "Lifetime updates."].map((l) => (
+          {h.premiumBullets.map((l) => (
             <RevealItem key={l}>
               <span className="font-medium">{l}</span>
             </RevealItem>
@@ -348,10 +318,10 @@ export default function Home() {
         <div className="mx-auto mt-24 grid max-w-3xl gap-6 md:grid-cols-2">
           <Reveal>
             <div className={`h-full rounded-3xl bg-brand-card/70 p-9 ${cardHover}`}>
-              <h3 className="text-xl font-bold">Free</h3>
-              <p className="mt-1 text-sm text-brand-muted">Try it on your bike</p>
+              <h3 className="text-xl font-bold">{h.freeTitle}</h3>
+              <p className="mt-1 text-sm text-brand-muted">{h.freeSub}</p>
               <ul className="mt-7 space-y-3.5 text-sm text-slate-300">
-                {["1 motorcycle", "Solo load mode", "OEM data browser", "Basic sag guide", "Basic diagnostics"].map((f) => (
+                {h.freeFeatures.map((f) => (
                   <li key={f} className="flex items-center gap-3">
                     <span className="text-brand-muted">✓</span> {f}
                   </li>
@@ -361,7 +331,7 @@ export default function Home() {
                 href={PLAY_URL}
                 className="mt-9 block rounded-full border border-brand-border py-3 text-center text-sm font-semibold text-white transition-all duration-300 hover:border-brand-accent hover:shadow-[0_4px_24px_rgba(74,158,255,0.25)]"
               >
-                Start free
+                {h.startFree}
               </a>
             </div>
           </Reveal>
@@ -369,22 +339,15 @@ export default function Home() {
           <Reveal delay={0.12}>
             <div className="relative h-full rounded-3xl bg-gradient-to-b from-brand-accent/15 to-brand-card/70 p-9 shadow-[0_0_80px_-24px_rgba(74,158,255,0.5)] ring-1 ring-brand-accent/40 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_0_100px_-20px_rgba(74,158,255,0.65)]">
               <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-brand-accent px-4 py-1 text-xs font-bold uppercase tracking-wider text-[#04111e]">
-                Lifetime
+                {h.lifetime}
               </span>
-              <h3 className="text-xl font-bold">Premium</h3>
+              <h3 className="text-xl font-bold">{h.premiumTierTitle}</h3>
               <p className="mt-1 text-sm text-brand-muted">
                 <span className="text-3xl font-bold text-white">14.99&nbsp;€</span>{" "}
-                <span className="line-through">19.99&nbsp;€</span> · launch price
+                <span className="line-through">19.99&nbsp;€</span> · {h.launchPrice}
               </p>
               <ul className="mt-7 space-y-3.5 text-sm text-slate-200">
-                {[
-                  "All motorcycles",
-                  "All load modes",
-                  "Saved setups & unlimited Ride Diary",
-                  "Smart diagnostics",
-                  "Future bike updates included",
-                  "Lifetime updates",
-                ].map((f) => (
+                {h.premiumFeatures.map((f) => (
                   <li key={f} className="flex items-center gap-3">
                     <span className="flex h-5 w-5 items-center justify-center rounded-full bg-brand-accent/20 text-xs text-brand-accent">✓</span>
                     {f}
@@ -395,7 +358,7 @@ export default function Home() {
                 href={PLAY_URL}
                 className="mt-9 block rounded-full bg-brand-accent py-3 text-center text-sm font-bold text-[#04111e] transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_4px_30px_rgba(74,158,255,0.5)]"
               >
-                Get Premium in the app
+                {h.getPremium}
               </a>
             </div>
           </Reveal>
@@ -406,7 +369,7 @@ export default function Home() {
       <section className="border-y border-white/5 bg-brand-deep py-20">
         <Reveal className="mx-auto max-w-6xl px-6 text-center">
           <p className="font-mono text-xs uppercase tracking-[0.25em] text-brand-muted">
-            Supported motorcycles — growing every month
+            {h.supportedTitle}
           </p>
         </Reveal>
         <div className="relative mt-10 overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_15%,black_85%,transparent)]">
@@ -423,17 +386,16 @@ export default function Home() {
       {/* TRUSTED BY RIDERS */}
       <section className="mx-auto max-w-4xl px-6 py-28 text-center">
         <Reveal>
-          <Badge>Trusted by riders</Badge>
+          <Badge>{h.trustedBadge}</Badge>
           <div className="mt-8 text-3xl tracking-[0.3em] text-brand-accent">★★★★★</div>
           <p className="mx-auto mt-6 max-w-lg text-lg text-slate-300">
-            RideTune is new on Google Play — ride with it, feel the difference,
-            and be one of the first to leave a review.
+            {h.trustedBody}
           </p>
           <a
             href={PLAY_URL}
             className="mt-8 inline-block rounded-full border border-brand-border px-8 py-3 text-sm font-semibold text-white transition-all duration-300 hover:border-brand-accent hover:shadow-[0_4px_24px_rgba(74,158,255,0.25)]"
           >
-            Rate it on Google Play
+            {h.rateIt}
           </a>
         </Reveal>
       </section>
@@ -444,9 +406,9 @@ export default function Home() {
         <div className="relative mx-auto max-w-5xl px-6 py-48 text-center">
           <Reveal>
             <h2 className="text-5xl font-bold leading-[1.02] tracking-tight md:text-8xl">
-              The road changes.
+              {h.finalLine1}
               <br />
-              <span className="text-brand-accent">Your setup should too.</span>
+              <span className="text-brand-accent">{h.finalLine2}</span>
             </h2>
           </Reveal>
           <Reveal delay={0.15}>
@@ -454,8 +416,7 @@ export default function Home() {
               <PlayButton />
             </div>
             <p className="mx-auto mt-10 max-w-md text-sm leading-relaxed text-brand-muted">
-              RideTune is continuously evolving — new motorcycles, smarter
-              recommendations and new features, added regularly.
+              {h.finalBody}
             </p>
           </Reveal>
         </div>
@@ -467,15 +428,15 @@ export default function Home() {
           <div className="flex items-center gap-4">
             <Logo />
             <span className="text-xs text-brand-muted">
-              © {new Date().getFullYear()} RideTune. All rights reserved.
+              © {new Date().getFullYear()} RideTune. {t.footer.rights}
             </span>
           </div>
           <nav className="flex items-center gap-6 text-sm text-brand-muted">
-            <Link href="/setups" className="link-underline transition-colors hover:text-white">Setups</Link>
-            <a href="/privacy" className="link-underline transition-colors hover:text-white">Privacy</a>
-            <Link href="/terms" className="link-underline transition-colors hover:text-white">Terms</Link>
-            <a href="mailto:support@ridetune.app" className="link-underline transition-colors hover:text-white">Support</a>
-            <a href="mailto:support@ridetune.app" className="link-underline transition-colors hover:text-white">Contact</a>
+            <Link href="/setups" className="link-underline transition-colors hover:text-white">{t.nav.setups}</Link>
+            <a href="/privacy" className="link-underline transition-colors hover:text-white">{t.footer.privacy}</a>
+            <Link href="/terms" className="link-underline transition-colors hover:text-white">{t.footer.terms}</Link>
+            <a href="mailto:support@ridetune.app" className="link-underline transition-colors hover:text-white">{t.footer.support}</a>
+            <a href="mailto:support@ridetune.app" className="link-underline transition-colors hover:text-white">{t.footer.contact}</a>
           </nav>
         </div>
       </footer>
