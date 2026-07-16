@@ -435,8 +435,7 @@ export default function Home() {
             <Link href="/setups" className="link-underline transition-colors hover:text-white">{t.nav.setups}</Link>
             <a href="/privacy" className="link-underline transition-colors hover:text-white">{t.footer.privacy}</a>
             <Link href="/terms" className="link-underline transition-colors hover:text-white">{t.footer.terms}</Link>
-            <a href="mailto:support@ridetune.app" className="link-underline transition-colors hover:text-white">{t.footer.support}</a>
-            <a href="mailto:support@ridetune.app" className="link-underline transition-colors hover:text-white">{t.footer.contact}</a>
+            <Link href="/contact" className="link-underline transition-colors hover:text-white">{t.footer.contact}</Link>
           </nav>
         </div>
       </footer>

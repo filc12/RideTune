@@ -98,9 +98,11 @@ export default function SetupsPage() {
 
       {/* NAVBAR */}
       <header style={{ borderBottom: "1px solid #1e293b", padding: "16px 24px", display: "flex", alignItems: "center", justifyContent: "space-between", maxWidth: "1200px", margin: "0 auto" }}>
-        <Link href="/" style={{ display: "flex", alignItems: "center", gap: "10px", textDecoration: "none" }}>
-          <div style={{ width: "12px", height: "12px", borderRadius: "50%", backgroundColor: "#38bdf8", boxShadow: "0 0 12px #38bdf8" }}></div>
-          <span style={{ fontWeight: "800", fontSize: "20px", letterSpacing: "-0.5px", color: "#ffffff" }}>RideTune</span>
+        <Link href="/" className="flex items-center gap-3" style={{ textDecoration: "none" }}>
+          <span className="h-4 w-9 rounded-full bg-brand-accent shadow-[0_0_22px_rgba(74,158,255,0.9)]" />
+          <span className="text-2xl font-bold tracking-tight text-white">
+            Ride<span className="text-brand-accent">Tune</span>
+          </span>
         </Link>
         <nav style={{ display: "flex", gap: "24px", fontSize: "14px", color: "#94a3b8", alignItems: "center" }}>
           <Link href="/#features" style={{ color: "#94a3b8", textDecoration: "none" }}>{t.nav.features}</Link>
@@ -265,8 +267,7 @@ export default function SetupsPage() {
             <nav style={{ display: "flex", flexWrap: "wrap", gap: "20px", fontSize: "13px" }}>
               <Link href="/privacy" style={{ color: "#94a3b8", textDecoration: "none" }}>{t.footer.privacy}</Link>
               <Link href="/terms" style={{ color: "#94a3b8", textDecoration: "none" }}>{t.footer.terms}</Link>
-              <a href="mailto:support@ridetune.app" style={{ color: "#94a3b8", textDecoration: "none" }}>{t.footer.support}</a>
-              <a href="mailto:support@ridetune.app" style={{ color: "#94a3b8", textDecoration: "none" }}>{t.footer.contact}</a>
+              <Link href="/contact" style={{ color: "#94a3b8", textDecoration: "none" }}>{t.footer.contact}</Link>
             </nav>
           </div>
         </div>

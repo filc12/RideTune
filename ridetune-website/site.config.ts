@@ -9,6 +9,17 @@ export const SITE_URL =
 export const PLAY_URL =
   "https://play.google.com/store/apps/details?id=com.ridetune.app";
 
+/** Support email shown on the contact page and footers. */
+export const SUPPORT_EMAIL = "support@ridetune.app";
+
+/**
+ * Web3Forms public access key for the contact form.
+ * Get a free key at https://web3forms.com (it's a public key, safe in client code).
+ * Override at deploy time with NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY, or paste it here.
+ */
+export const WEB3FORMS_ACCESS_KEY =
+  process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY ?? "";
+
 /** Supabase (community setups). Empty = feature disabled (safe default). */
 export const SUPABASE_URL =
   process.env.NEXT_PUBLIC_SUPABASE_URL?.replace(/\/$/, "") ?? "";
