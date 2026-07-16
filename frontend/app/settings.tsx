@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, ScrollView, Linking, SafeAreaView, Modal, Share } from 'react-native';
 import { useRouter } from 'expo-router';
+import Constants from 'expo-constants';
 import { 
   ArrowLeft, 
   Globe, 
@@ -111,7 +112,7 @@ export default function SettingsScreen() {
             </TouchableOpacity>
 
             <TouchableOpacity 
-              onPress={() => openURL('https://www.ridetune.app/review')}
+              onPress={() => openURL('https://play.google.com/store/apps/details?id=com.ridetune.app')}
               style={{ flexDirection: 'row', alignItems: 'center', padding: 16 }}
             >
               <Star size={20} color="#38bdf8" />
@@ -177,7 +178,7 @@ export default function SettingsScreen() {
             <Info size={20} color="#38bdf8" />
             <View style={{ marginLeft: 14 }}>
               <Text style={{ color: '#ffffff', fontSize: 15, fontWeight: '600' }}>Versão da App</Text>
-              <Text style={{ color: '#94a3b8', fontSize: 12, marginTop: 2 }}>v1.1.0 • Built for riders, by riders.</Text>
+              <Text style={{ color: '#94a3b8', fontSize: 12, marginTop: 2 }}>v{Constants.expoConfig?.version ?? '1.0.0'} • Built for riders, by riders.</Text>
             </View>
           </View>
 
