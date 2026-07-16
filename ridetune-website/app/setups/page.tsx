@@ -2,8 +2,13 @@
 
 import { useSearchParams, useRouter } from "next/navigation";
 import { Suspense, useEffect, useState } from "react";
+import Link from "next/link";
+import { PLAY_URL } from "@/site.config";
+import { useI18n } from "@/i18n/LanguageProvider";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 
 function ShareConfirmationModal() {
+  const { t } = useI18n();
   const searchParams = useSearchParams();
   const router = useRouter();
   const [showShareModal, setShowShareModal] = useState(false);
@@ -42,9 +47,9 @@ function ShareConfirmationModal() {
       <div style={{ backgroundColor: "#0f172a", padding: "28px", borderRadius: "24px", maxWidth: "460px", width: "100%", border: "1px solid #334155", boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.9)" }}>
         <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "8px" }}>
           <span style={{ fontSize: "22px" }}>⚡</span>
-          <h3 style={{ color: "#ffffff", fontSize: "20px", fontWeight: "700", margin: 0 }}>Confirmar Partilha de Setup</h3>
+          <h3 style={{ color: "#ffffff", fontSize: "20px", fontWeight: "700", margin: 0 }}>{t.setups.modalTitle}</h3>
         </div>
-        <p style={{ color: "#94a3b8", fontSize: "14px", marginBottom: "20px", lineHeight: "1.5" }}>Recebemos a tua afinação da app RideTune. Confirmas a publicação para a comunidade?</p>
+        <p style={{ color: "#94a3b8", fontSize: "14px", marginBottom: "20px", lineHeight: "1.5" }}>{t.setups.modalDesc}</p>
         
         <div style={{ backgroundColor: "#1e293b", padding: "16px", borderRadius: "16px", marginBottom: "24px", borderLeft: "4px solid #38bdf8" }}>
           <p style={{ color: "#38bdf8", fontWeight: "700", fontSize: "16px", margin: 0 }}>{pendingSetup.bike}</p>
@@ -53,8 +58,8 @@ function ShareConfirmationModal() {
         </div>
 
         <div style={{ display: "flex", gap: "12px", justifyContent: "flex-end" }}>
-          <button onClick={handleClose} style={{ padding: "10px 18px", borderRadius: "12px", background: "transparent", color: "#94a3b8", border: "1px solid #334155", cursor: "pointer", fontWeight: "600", fontSize: "14px" }}>Cancelar</button>
-          <button onClick={handleConfirm} style={{ padding: "10px 20px", borderRadius: "12px", background: "#38bdf8", color: "#020617", fontWeight: "700", border: "none", cursor: "pointer", fontSize: "14px", boxShadow: "0 4px 14px rgba(56, 189, 248, 0.4)" }}>Publicar Setup</button>
+          <button onClick={handleClose} style={{ padding: "10px 18px", borderRadius: "12px", background: "transparent", color: "#94a3b8", border: "1px solid #334155", cursor: "pointer", fontWeight: "600", fontSize: "14px" }}>{t.setups.cancel}</button>
+          <button onClick={handleConfirm} style={{ padding: "10px 20px", borderRadius: "12px", background: "#38bdf8", color: "#020617", fontWeight: "700", border: "none", cursor: "pointer", fontSize: "14px", boxShadow: "0 4px 14px rgba(56, 189, 248, 0.4)" }}>{t.setups.publish}</button>
         </div>
       </div>
     </div>
@@ -62,6 +67,7 @@ function ShareConfirmationModal() {
 }
 
 export default function SetupsPage() {
+  const { t } = useI18n();
   const [search, setSearch] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
 
@@ -92,42 +98,45 @@ export default function SetupsPage() {
 
       {/* NAVBAR */}
       <header style={{ borderBottom: "1px solid #1e293b", padding: "16px 24px", display: "flex", alignItems: "center", justifyContent: "space-between", maxWidth: "1200px", margin: "0 auto" }}>
-        <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+        <Link href="/" style={{ display: "flex", alignItems: "center", gap: "10px", textDecoration: "none" }}>
           <div style={{ width: "12px", height: "12px", borderRadius: "50%", backgroundColor: "#38bdf8", boxShadow: "0 0 12px #38bdf8" }}></div>
-          <span style={{ fontWeight: "800", fontSize: "20px", letterSpacing: "-0.5px" }}>RideTune</span>
-        </div>
+          <span style={{ fontWeight: "800", fontSize: "20px", letterSpacing: "-0.5px", color: "#ffffff" }}>RideTune</span>
+        </Link>
         <nav style={{ display: "flex", gap: "24px", fontSize: "14px", color: "#94a3b8", alignItems: "center" }}>
-          <a href="#" style={{ color: "#94a3b8", textDecoration: "none" }}>Features</a>
-          <a href="#" style={{ color: "#94a3b8", textDecoration: "none" }}>How it works</a>
-          <a href="#" style={{ color: "#ffffff", fontWeight: "600", textDecoration: "none" }}>Setups</a>
-          <a href="#" style={{ color: "#94a3b8", textDecoration: "none" }}>Premium</a>
+          <Link href="/#features" style={{ color: "#94a3b8", textDecoration: "none" }}>{t.nav.features}</Link>
+          <Link href="/#how" style={{ color: "#94a3b8", textDecoration: "none" }}>{t.nav.how}</Link>
+          <Link href="/setups" style={{ color: "#ffffff", fontWeight: "600", textDecoration: "none" }}>{t.nav.setups}</Link>
+          <Link href="/#premium" style={{ color: "#94a3b8", textDecoration: "none" }}>{t.nav.premium}</Link>
         </nav>
-        <button style={{ backgroundColor: "#38bdf8", color: "#020617", padding: "8px 20px", borderRadius: "20px", fontWeight: "700", border: "none", fontSize: "14px", cursor: "pointer" }}>Download</button>
+        <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+          <LanguageSwitcher />
+          <a href={PLAY_URL} target="_blank" rel="noopener noreferrer" style={{ backgroundColor: "#38bdf8", color: "#020617", padding: "8px 20px", borderRadius: "20px", fontWeight: "700", border: "none", fontSize: "14px", cursor: "pointer", textDecoration: "none" }}>{t.nav.download}</a>
+        </div>
       </header>
 
       {/* MAIN CONTAINER */}
       <main style={{ maxWidth: "1200px", margin: "0 auto", padding: "48px 24px" }}>
         <div style={{ marginBottom: "16px" }}>
           <span style={{ fontSize: "11px", letterSpacing: "1.2px", color: "#38bdf8", textTransform: "uppercase", fontWeight: "700", backgroundColor: "rgba(56, 189, 248, 0.1)", padding: "6px 14px", borderRadius: "12px", border: "1px solid rgba(56, 189, 248, 0.25)" }}>
-            • SETUP LIBRARY · VERIFIED AGAINST OEM
+            • {t.setups.eyebrow}
           </span>
         </div>
-        
+
         <h1 style={{ fontSize: "clamp(32px, 5vw, 56px)", fontWeight: "800", lineHeight: "1.1", marginBottom: "16px", maxWidth: "700px" }}>
-          Suspension setups, <br />
-          <span style={{ color: "#38bdf8" }}>for your exact bike.</span>
+          {t.setups.titleA} <br />
+          <span style={{ color: "#38bdf8" }}>{t.setups.titleB}</span>
         </h1>
-        
+
         <p style={{ color: "#94a3b8", fontSize: "16px", maxWidth: "600px", lineHeight: "1.6", marginBottom: "40px" }}>
-          Reference starting points for sag, preload, rebound and compression — by model and by how you ride. Browse and contribute for free.
+          {t.setups.subtitle}
         </p>
 
         {/* CONTROLS */}
         <div style={{ display: "flex", flexWrap: "wrap", gap: "16px", alignItems: "center", justifyContent: "space-between", marginBottom: "32px" }}>
           <div style={{ position: "relative", minWidth: "280px", flex: "1", maxWidth: "400px" }}>
             <input 
-              type="text" 
-              placeholder="Search a model..." 
+              type="text"
+              placeholder={t.setups.searchPlaceholder}
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               style={{ width: "100%", padding: "12px 16px 12px 42px", borderRadius: "24px", backgroundColor: "#0f172a", border: "1px solid #1e293b", color: "#ffffff", fontSize: "14px", outline: "none" }}
@@ -142,14 +151,14 @@ export default function SetupsPage() {
                 onClick={() => setSelectedCategory(cat)}
                 style={{ padding: "8px 18px", borderRadius: "20px", fontSize: "13px", fontWeight: "600", border: "1px solid #1e293b", cursor: "pointer", transition: "all 0.2s", backgroundColor: selectedCategory === cat ? "#38bdf8" : "#0f172a", color: selectedCategory === cat ? "#020617" : "#94a3b8" }}
               >
-                {cat}
+                {cat === "All" ? t.setups.all : cat}
               </button>
             ))}
           </div>
         </div>
 
         <div style={{ fontSize: "12px", color: "#64748b", fontWeight: "700", marginBottom: "24px", letterSpacing: "1px" }}>
-          {filteredSetups.length} MODELS FOUND
+          {filteredSetups.length} {t.setups.modelsFound}
         </div>
 
         {/* PREVIEW CARDS GRELHA MODERNA */}
@@ -202,7 +211,7 @@ export default function SetupsPage() {
                   </div>
                   {item.isNew && (
                     <span style={{ backgroundColor: "#38bdf8", color: "#020617", fontSize: "10px", fontWeight: "800", padding: "4px 10px", borderRadius: "12px", letterSpacing: "0.5px" }}>
-                      NOVO
+                      {t.setups.isNew}
                     </span>
                   )}
                 </div>
@@ -216,8 +225,8 @@ export default function SetupsPage() {
 
                 {/* GRELHA FRENTE / TRÁS */}
                 <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px", marginBottom: "16px" }}>
-                  {axisBox("FRENTE", "f")}
-                  {axisBox("TRÁS", "r")}
+                  {axisBox(t.setups.front, "f")}
+                  {axisBox(t.setups.rear, "r")}
                 </div>
 
                 {/* NOTAS DE CONDUÇÃO */}
@@ -244,6 +253,24 @@ export default function SetupsPage() {
           })}
         </div>
       </main>
+
+      {/* FOOTER */}
+      <footer style={{ borderTop: "1px solid #1e293b", marginTop: "48px", padding: "40px 24px" }}>
+        <div style={{ maxWidth: "1200px", margin: "0 auto", display: "flex", flexDirection: "column", gap: "20px" }}>
+          <p style={{ fontSize: "12px", color: "#64748b", lineHeight: "1.6", margin: 0, maxWidth: "760px" }}>
+            {t.footer.disclaimer}
+          </p>
+          <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: "16px", borderTop: "1px solid #1e293b", paddingTop: "20px" }}>
+            <span style={{ fontSize: "12px", color: "#64748b" }}>© {new Date().getFullYear()} RideTune. {t.footer.rights}</span>
+            <nav style={{ display: "flex", flexWrap: "wrap", gap: "20px", fontSize: "13px" }}>
+              <Link href="/privacy" style={{ color: "#94a3b8", textDecoration: "none" }}>{t.footer.privacy}</Link>
+              <Link href="/terms" style={{ color: "#94a3b8", textDecoration: "none" }}>{t.footer.terms}</Link>
+              <a href="mailto:support@ridetune.app" style={{ color: "#94a3b8", textDecoration: "none" }}>{t.footer.support}</a>
+              <a href="mailto:support@ridetune.app" style={{ color: "#94a3b8", textDecoration: "none" }}>{t.footer.contact}</a>
+            </nav>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }

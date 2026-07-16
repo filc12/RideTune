@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { SITE_URL, SITE_NAME, SITE_DESCRIPTION, PLAY_URL } from "@/site.config";
+import { LanguageProvider } from "@/i18n/LanguageProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -102,7 +103,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col bg-brand-dark">
         {/* subtle premium film-grain overlay */}
         <div className="noise-overlay" aria-hidden />
-        {children}
+        <LanguageProvider>{children}</LanguageProvider>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
