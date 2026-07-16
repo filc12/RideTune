@@ -92,3 +92,6 @@ frontend/assets/images/LogoRT_src.png
 frontend/assets/images/splash_src.png
 frontend/assets/images/splash-image1.png
 frontend/build-*.apk
+# Android build artifacts (EAS local builds)
+*.aab
+*.apk
