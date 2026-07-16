@@ -1,10 +1,8 @@
-import React, { useCallback, useEffect, useState } from "react";
-import { Alert, KeyboardAvoidingView, Modal, Platform, Pressable, ScrollView, Share, StatusBar, StyleSheet, Text, TextInput, View, Linking } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { LinearGradient } from "expo-linear-gradient";
-import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
+import React, { useState } from "react";
+import { Linking, Pressable, SafeAreaView, ScrollView, Share, StatusBar, StyleSheet, Text, View } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 
-import { C, ScreenHeader } from "@/src/components/ScreenHeader";
+import { ScreenHeader } from "@/src/components/ScreenHeader";
 
 // Definição de Tipos
 interface DiaryEntry {
@@ -28,10 +26,6 @@ export default function DiaryScreen() {
     }
   ]);
 
-  const onShare = async (e: DiaryEntry) => {
-    await Share.share({ message: `${e.bikeLabel} - ${e.setupSummary}\n\n"https://www.ridetune.app/setups"` });
-  };
-
   return (
     <SafeAreaView style={st.root}>
       <StatusBar barStyle="light-content" />
@@ -42,78 +36,88 @@ export default function DiaryScreen() {
           Regista as tuas sensações de condução e mudanças de setup.
         </Text>
 
-        
+        {/* Banner do Plano */}
         <View style={st.planBanner}>
           <Ionicons name="lock-closed-outline" size={16} color="#eab308" />
           <Text style={st.planText}>Plano grátis: 1/3 entradas. Faz upgrade para ilimitadas.</Text>
         </View>
 
-        
+        {/* Botão Nova Entrada */}
         <Pressable style={st.newEntryBtn}>
-          <Ionicons name="add-circle" size={20} color="#ffffff" />
+          <Ionicons name="add-circle-outline" size={20} color="#090d16" />
           <Text style={st.newEntryText}>Nova entrada</Text>
         </Pressable>
 
-        
+        {/* Lista de Registos (Card + Botão de Partilha) */}
         {entries.map((e) => (
-          <View key={e.id} style={{ marginBottom: 16 }}>
-            
+          <View key={e.id} style={{ marginBottom: 20 }}>
+            {/* Card Principal */}
             <View style={st.card}>
               <View style={st.cardHeader}>
-                <View style={{ flex: 1 }}>
+                <View>
                   <Text style={st.cardBike}>{e.bikeLabel}</Text>
                   <Text style={st.cardDate}>
-                    {new Date(e.createdAt).toLocaleDateString("pt-PT", { day: "2-digit", month: "short", year: "numeric" })}
+                    {new Date(e.createdAt).toLocaleDateString("pt-PT")}
                   </Text>
                 </View>
+                
                 <View style={st.cardActions}>
-                  <Pressable onPress={() => onShare(e)} style={st.actionBtn}>
-                    <Ionicons name="share-outline" size={16} color={C.accent} />
+                  <Pressable 
+                    style={st.actionBtn}
+                    onPress={async () => {
+                      await Share.share({ message: `${e.bikeLabel.replace(/-/g, " ")} - ${e.setupSummary}\n\nhttps://www.ridetune.app/setups` });
+                    }}
+                  >
+                    <Ionicons name="share-outline" size={16} color="#94a3b8" />
                   </Pressable>
-                  <Pressable style={[st.actionBtn, { borderColor: "rgba(61,169,255,0.3)" }]}>
-                    <Ionicons name="pencil-outline" size={16} color={C.accent} />
+                  <Pressable style={st.actionBtn}>
+                    <Ionicons name="pencil-outline" size={16} color="#94a3b8" />
                   </Pressable>
-                  <Pressable style={[st.actionBtn, { borderColor: "rgba(239,68,68,0.3)" }]}>
+                  <Pressable style={st.actionBtn}>
                     <Ionicons name="trash-outline" size={16} color="#ef4444" />
                   </Pressable>
                 </View>
               </View>
 
-              
+              {/* Avaliação por Estrelas */}
               <View style={st.ratingRow}>
                 {[1, 2, 3, 4, 5].map((star) => (
                   <Ionicons
                     key={star}
                     name={star <= e.rating ? "star" : "star-outline"}
                     size={16}
-                    color="#f59e0b"
+                    color="#eab308"
                   />
                 ))}
               </View>
 
-              
-              <Text style={st.setupSummary}>⚙️ {e.setupSummary}</Text>
+              {/* Resumo da Afinação */}
+              <Text style={st.setupSummary}>
+                ⚙️ {e.setupSummary}
+              </Text>
 
-              
-              <Text style={st.cardNotes}>{e.notes}</Text>
+              {/* Notas de Condução */}
+              {e.notes ? (
+                <Text style={st.cardNotes}>{e.notes}</Text>
+              ) : null}
             </View>
 
-            
-            <Pressable 
+            {/* Botão de Partilha na Web */}
+            <Pressable
               onPress={() => {
                 const params = new URLSearchParams({
-                  bike: e.bikeLabel,
-                  setup: e.setupSummary,
-                  notes: e.notes || "",
-                  action: "share"
-                }).toString();
-                Linking.openURL(`https://www.ridetune.app/setups?${params}`);
-              }} 
+                  bike: String(e.bikeLabel || "").replace(/-/g, " "),
+                  setup: String(e.setupSummary || ""),
+                  notes: String(e.notes || "")
+                });
+                Linking.openURL("https://www.ridetune.app/setups?" + params.toString());
+              }}
               style={st.webShareBtn}
             >
-            >
               <Ionicons name="globe-outline" size={18} color="#38bdf8" />
-              <Text style={st.webShareText}>Partilhar na Web (ridetune.app/setups)</Text>
+              <Text style={st.webShareText}>
+                Partilhar na Web (ridetune.app/setups)
+              </Text>
             </Pressable>
           </View>
         ))}
