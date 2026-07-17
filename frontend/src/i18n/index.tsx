@@ -15,6 +15,19 @@ export const LANGS: { code: Lang; label: string; flag: string }[] = [
 type Dict = Record<string, string>;
 
 const PT: Dict = {
+  "settings.tagline": "Assistente de afinação de suspensão",
+  "settings.sec.community": "Comunidade & Setups",
+  "settings.sec.legal": "Informações & Legal",
+  "settings.community.web": "Setups na Web",
+  "settings.community.web.sub": "Explorar e partilhar afinações no site",
+  "settings.community.share": "Partilhar Diário / Setups",
+  "settings.community.share.sub": "Enviar link direto das tuas afinações",
+  "settings.support": "Apoio ao Cliente",
+  "settings.support.sub": "Dúvidas ou sugestões",
+  "settings.rate": "Avaliar a RideTune",
+  "settings.rate.sub": "Deixa a tua opinião na loja",
+  "settings.built_by": "Feito por motards, para motards.",
+  "common.ok": "Entendido",
   "share.title": "Partilhar este setup",
   "share.body": "A tua mota, carga e clicks vão aparecer em ridetune.app e na app como “Anonymous rider”. Nenhum dado pessoal é partilhado. Podes remover quando quiseres.",
   "share.note_ph": "Adiciona uma nota curta — como ficou (opcional)",
@@ -409,6 +422,19 @@ const PT: Dict = {
 };
 
 const EN: Dict = {
+  "settings.tagline": "Suspension setup advisor",
+  "settings.sec.community": "Community & Setups",
+  "settings.sec.legal": "Info & Legal",
+  "settings.community.web": "Setups on the web",
+  "settings.community.web.sub": "Browse and share setups on the site",
+  "settings.community.share": "Share diary / setups",
+  "settings.community.share.sub": "Send a direct link to your setups",
+  "settings.support": "Support",
+  "settings.support.sub": "Questions or suggestions",
+  "settings.rate": "Rate RideTune",
+  "settings.rate.sub": "Leave your review on the store",
+  "settings.built_by": "Built for riders, by riders.",
+  "common.ok": "Got it",
   "share.title": "Share this setup",
   "share.body": "Your bike, load and clicks will appear on ridetune.app and in the app as “Anonymous rider”. No personal data is shared. You can remove it anytime.",
   "share.note_ph": "Add a short note — how it felt (optional)",
@@ -791,6 +817,19 @@ const EN: Dict = {
 };
 
 const ES: Dict = {
+  "settings.tagline": "Asistente de ajuste de suspensión",
+  "settings.sec.community": "Comunidad y ajustes",
+  "settings.sec.legal": "Información y legal",
+  "settings.community.web": "Ajustes en la web",
+  "settings.community.web.sub": "Explora y comparte ajustes en el sitio",
+  "settings.community.share": "Compartir diario / ajustes",
+  "settings.community.share.sub": "Envía un enlace directo a tus ajustes",
+  "settings.support": "Soporte",
+  "settings.support.sub": "Dudas o sugerencias",
+  "settings.rate": "Valorar RideTune",
+  "settings.rate.sub": "Deja tu reseña en la tienda",
+  "settings.built_by": "Hecho por moteros, para moteros.",
+  "common.ok": "Entendido",
   "share.title": "Compartir esta configuración",
   "share.body": "Tu moto, carga y clics aparecerán en ridetune.app y en la app como «Anonymous rider». No se comparte ningún dato personal. Puedes eliminarlo cuando quieras.",
   "share.note_ph": "Añade una nota corta — cómo se sintió (opcional)",
@@ -1174,6 +1213,19 @@ const ES: Dict = {
 };
 
 const FR: Dict = {
+  "settings.tagline": "Assistant de réglage de suspension",
+  "settings.sec.community": "Communauté et réglages",
+  "settings.sec.legal": "Infos et mentions légales",
+  "settings.community.web": "Réglages sur le web",
+  "settings.community.web.sub": "Explorez et partagez des réglages sur le site",
+  "settings.community.share": "Partager carnet / réglages",
+  "settings.community.share.sub": "Envoyez un lien direct vers vos réglages",
+  "settings.support": "Assistance",
+  "settings.support.sub": "Questions ou suggestions",
+  "settings.rate": "Noter RideTune",
+  "settings.rate.sub": "Laissez votre avis sur le store",
+  "settings.built_by": "Créé par des motards, pour des motards.",
+  "common.ok": "Compris",
   "share.title": "Partager ce réglage",
   "share.body": "Ta moto, ta charge et tes clics apparaîtront sur ridetune.app et dans l’app en tant que « Anonymous rider ». Aucune donnée personnelle n’est partagée. Tu peux le retirer à tout moment.",
   "share.note_ph": "Ajoute une note courte — le ressenti (facultatif)",
@@ -1555,6 +1607,19 @@ const FR: Dict = {
 };
 
 const DE: Dict = {
+  "settings.tagline": "Fahrwerk-Setup-Assistent",
+  "settings.sec.community": "Community & Setups",
+  "settings.sec.legal": "Infos & Rechtliches",
+  "settings.community.web": "Setups im Web",
+  "settings.community.web.sub": "Setups auf der Website entdecken und teilen",
+  "settings.community.share": "Tagebuch / Setups teilen",
+  "settings.community.share.sub": "Direkten Link zu deinen Setups senden",
+  "settings.support": "Support",
+  "settings.support.sub": "Fragen oder Vorschläge",
+  "settings.rate": "RideTune bewerten",
+  "settings.rate.sub": "Bewertung im Store hinterlassen",
+  "settings.built_by": "Von Fahrern, für Fahrer.",
+  "common.ok": "Verstanden",
   "share.title": "Dieses Setup teilen",
   "share.body": "Dein Motorrad, deine Beladung und Klicks erscheinen auf ridetune.app und in der App als „Anonymous rider“. Es werden keine personenbezogenen Daten geteilt. Du kannst es jederzeit entfernen.",
   "share.note_ph": "Kurze Notiz hinzufügen — wie es sich anfühlte (optional)",
@@ -1935,6 +2000,19 @@ const DE: Dict = {
 
 
 const IT: Dict = {
+  "settings.tagline": "Assistente di setup sospensione",
+  "settings.sec.community": "Community e setup",
+  "settings.sec.legal": "Info e note legali",
+  "settings.community.web": "Setup sul web",
+  "settings.community.web.sub": "Esplora e condividi setup sul sito",
+  "settings.community.share": "Condividi diario / setup",
+  "settings.community.share.sub": "Invia un link diretto ai tuoi setup",
+  "settings.support": "Assistenza",
+  "settings.support.sub": "Domande o suggerimenti",
+  "settings.rate": "Valuta RideTune",
+  "settings.rate.sub": "Lascia la tua recensione nello store",
+  "settings.built_by": "Fatto da motociclisti, per motociclisti.",
+  "common.ok": "Capito",
   "share.title": "Condividi questa configurazione",
   "share.body": "La tua moto, il carico e i clic appariranno su ridetune.app e nell’app come «Anonymous rider». Nessun dato personale viene condiviso. Puoi rimuoverlo quando vuoi.",
   "share.note_ph": "Aggiungi una nota breve — com’era (facoltativo)",
