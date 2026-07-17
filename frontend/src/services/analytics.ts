@@ -27,7 +27,7 @@ import { captureError } from '@/src/services/sentry';
 // ─── Config ───────────────────────────────────────────────────────────────────
 
 const PH_KEY  = process.env.EXPO_PUBLIC_POSTHOG_KEY  ?? '';
-const PH_HOST = process.env.EXPO_PUBLIC_POSTHOG_HOST ?? 'https://eu.i.posthog.com';
+const PH_HOST = process.env.EXPO_PUBLIC_POSTHOG_HOST ?? 'https://us.i.posthog.com';
 const FORCE_DEV = process.env.EXPO_PUBLIC_ANALYTICS_DEV === 'true';
 const ENABLED   = Boolean(PH_KEY) && (!__DEV__ || FORCE_DEV);
 
