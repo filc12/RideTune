@@ -18,7 +18,8 @@ export const SUPPORT_EMAIL = "support@ridetune.app";
  * Override at deploy time with NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY, or paste it here.
  */
 export const WEB3FORMS_ACCESS_KEY =
-  process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY ?? "";
+  process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY ??
+  "3fee6e1e-961b-485e-987a-6cc3bb757af9";
 
 /** Supabase (community setups). Empty = feature disabled (safe default). */
 export const SUPABASE_URL =
