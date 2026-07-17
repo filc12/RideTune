@@ -20,6 +20,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { useFocusEffect } from "expo-router";
 
 import { ScreenHeader } from "@/src/components/ScreenHeader";
+import { useT } from "@/src/i18n";
 import {
   listEntries,
   saveEntry,
@@ -30,6 +31,7 @@ import {
 } from "@/src/utils/diary";
 
 export default function DiaryScreen() {
+  const { t } = useT();
   const [entries, setEntries] = useState<DiaryEntry[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -78,7 +80,7 @@ export default function DiaryScreen() {
 
   const onSave = async () => {
     if (!fBike.trim() || !fSetup.trim()) {
-      Alert.alert("Faltam dados", "Preenche pelo menos a moto e o setup.");
+      Alert.alert(t("diary.missing.title"), t("diary.missing.msg"));
       return;
     }
     setSaving(true);
@@ -106,10 +108,10 @@ export default function DiaryScreen() {
   };
 
   const onDelete = (e: DiaryEntry) => {
-    Alert.alert("Apagar entrada", `Queres mesmo apagar "${e.bikeLabel.replace(/-/g, " ")}"?`, [
-      { text: "Cancelar", style: "cancel" },
+    Alert.alert(t("diary.delete.title"), t("diary.delete.confirm"), [
+      { text: t("common.cancel"), style: "cancel" },
       {
-        text: "Apagar",
+        text: t("diary.delete.btn"),
         style: "destructive",
         onPress: async () => {
           await deleteEntry(e.id);
@@ -132,29 +134,29 @@ export default function DiaryScreen() {
   return (
     <SafeAreaView style={st.root}>
       <StatusBar barStyle="light-content" />
-      <ScreenHeader title="Diário de Viagem" />
+      <ScreenHeader title={t("diary.title")} />
 
       <ScrollView contentContainerStyle={st.content}>
-        <Text style={st.sub}>Regista as tuas sensações de condução e mudanças de setup.</Text>
+        <Text style={st.sub}>{t("diary.sub")}</Text>
 
         {/* Banner do Plano */}
         <View style={st.planBanner}>
           <Ionicons name="lock-closed-outline" size={16} color="#eab308" />
           <Text style={st.planText}>
-            Plano grátis: {entries.length}/{FREE_DIARY_LIMIT} entradas. Faz upgrade para ilimitadas.
+            {t("diary.limit").replace("{n}", String(entries.length)).replace("{max}", String(FREE_DIARY_LIMIT))}
           </Text>
         </View>
 
         {/* Botão Nova Entrada */}
         <Pressable style={st.newEntryBtn} onPress={openNew}>
           <Ionicons name="add-circle-outline" size={20} color="#090d16" />
-          <Text style={st.newEntryText}>Nova entrada</Text>
+          <Text style={st.newEntryText}>{t("diary.new")}</Text>
         </Pressable>
 
         {loading ? (
           <ActivityIndicator color="#38bdf8" style={{ marginTop: 24 }} />
         ) : entries.length === 0 ? (
-          <Text style={st.empty}>Ainda não tens entradas. Toca em "Nova entrada" para começar.</Text>
+          <Text style={st.empty}>{t("diary.empty")}</Text>
         ) : (
           entries.map((e) => (
             <View key={e.id} style={{ marginBottom: 20 }}>
@@ -215,7 +217,7 @@ export default function DiaryScreen() {
                 style={st.webShareBtn}
               >
                 <Ionicons name="globe-outline" size={18} color="#38bdf8" />
-                <Text style={st.webShareText}>Partilhar na Web (ridetune.app/setups)</Text>
+                <Text style={st.webShareText}>{t("diary.share_web")}</Text>
               </Pressable>
             </View>
           ))
@@ -230,32 +232,32 @@ export default function DiaryScreen() {
         >
           <View style={st.modalCard}>
             <View style={st.modalHeader}>
-              <Text style={st.modalTitle}>{editingId ? "Editar entrada" : "Nova entrada"}</Text>
+              <Text style={st.modalTitle}>{editingId ? t("diary.modal.edit") : t("diary.modal.new")}</Text>
               <Pressable onPress={() => setModalOpen(false)} hitSlop={8}>
                 <Ionicons name="close" size={22} color="#ffffff" />
               </Pressable>
             </View>
 
             <ScrollView>
-              <Text style={st.label}>Moto</Text>
+              <Text style={st.label}>{t("diary.bike_label")}</Text>
               <TextInput
                 style={st.input}
                 value={fBike}
                 onChangeText={setFBike}
-                placeholder="Ex: Honda Transalp 2026"
+                placeholder={t("diary.bike_ph")}
                 placeholderTextColor="#64748b"
               />
 
-              <Text style={st.label}>Setup</Text>
+              <Text style={st.label}>{t("diary.setup_field")}</Text>
               <TextInput
                 style={st.input}
                 value={fSetup}
                 onChangeText={setFSetup}
-                placeholder="Ex: F.Pre: 6 | F.Reb: 1 | F.Comp: 11 | R.Pre: 2.25"
+                placeholder={t("diary.setup_field_ph")}
                 placeholderTextColor="#64748b"
               />
 
-              <Text style={st.label}>Avaliação</Text>
+              <Text style={st.label}>{t("diary.rating")}</Text>
               <View style={st.ratingPicker}>
                 {[1, 2, 3, 4, 5].map((star) => (
                   <Pressable key={star} onPress={() => setFRating(star)} hitSlop={6}>
@@ -268,19 +270,19 @@ export default function DiaryScreen() {
                 ))}
               </View>
 
-              <Text style={st.label}>Notas</Text>
+              <Text style={st.label}>{t("diary.notes_label")}</Text>
               <TextInput
                 style={[st.input, st.inputMultiline]}
                 value={fNotes}
                 onChangeText={setFNotes}
-                placeholder="As tuas sensações de condução…"
+                placeholder={t("diary.notes_ph")}
                 placeholderTextColor="#64748b"
                 multiline
               />
             </ScrollView>
 
             <Pressable style={[st.saveBtn, saving && { opacity: 0.6 }]} onPress={onSave} disabled={saving}>
-              <Text style={st.saveBtnText}>{saving ? "A guardar…" : "Guardar"}</Text>
+              <Text style={st.saveBtnText}>{saving ? t("common.saving") : t("common.save")}</Text>
             </Pressable>
           </View>
         </KeyboardAvoidingView>

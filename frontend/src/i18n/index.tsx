@@ -15,6 +15,14 @@ export const LANGS: { code: Lang; label: string; flag: string }[] = [
 type Dict = Record<string, string>;
 
 const PT: Dict = {
+  "diary.bike_label": "Moto",
+  "diary.bike_ph": "Ex: Honda Transalp 2026",
+  "diary.setup_field": "Setup",
+  "diary.setup_field_ph": "Ex: F.Pre: 6 | F.Reb: 1 | F.Comp: 11 | R.Pre: 2.25",
+  "diary.missing.title": "Faltam dados",
+  "diary.missing.msg": "Preenche pelo menos a moto e o setup.",
+  "diary.share_web": "Partilhar na Web (ridetune.app/setups)",
+  "common.saving": "A guardar…",
   "settings.tagline": "Assistente de afinação de suspensão",
   "settings.sec.community": "Comunidade & Setups",
   "settings.sec.legal": "Informações & Legal",
@@ -422,6 +430,14 @@ const PT: Dict = {
 };
 
 const EN: Dict = {
+  "diary.bike_label": "Bike",
+  "diary.bike_ph": "e.g. Honda Transalp 2026",
+  "diary.setup_field": "Setup",
+  "diary.setup_field_ph": "e.g. F.Pre: 6 | F.Reb: 1 | F.Comp: 11 | R.Pre: 2.25",
+  "diary.missing.title": "Missing info",
+  "diary.missing.msg": "Fill in at least the bike and the setup.",
+  "diary.share_web": "Share on the web (ridetune.app/setups)",
+  "common.saving": "Saving…",
   "settings.tagline": "Suspension setup advisor",
   "settings.sec.community": "Community & Setups",
   "settings.sec.legal": "Info & Legal",
@@ -817,6 +833,14 @@ const EN: Dict = {
 };
 
 const ES: Dict = {
+  "diary.bike_label": "Moto",
+  "diary.bike_ph": "Ej: Honda Transalp 2026",
+  "diary.setup_field": "Ajuste",
+  "diary.setup_field_ph": "Ej: F.Pre: 6 | F.Reb: 1 | F.Comp: 11 | R.Pre: 2.25",
+  "diary.missing.title": "Faltan datos",
+  "diary.missing.msg": "Rellena al menos la moto y el ajuste.",
+  "diary.share_web": "Compartir en la web (ridetune.app/setups)",
+  "common.saving": "Guardando…",
   "settings.tagline": "Asistente de ajuste de suspensión",
   "settings.sec.community": "Comunidad y ajustes",
   "settings.sec.legal": "Información y legal",
@@ -1213,6 +1237,14 @@ const ES: Dict = {
 };
 
 const FR: Dict = {
+  "diary.bike_label": "Moto",
+  "diary.bike_ph": "Ex : Honda Transalp 2026",
+  "diary.setup_field": "Réglage",
+  "diary.setup_field_ph": "Ex : F.Pre: 6 | F.Reb: 1 | F.Comp: 11 | R.Pre: 2.25",
+  "diary.missing.title": "Champs manquants",
+  "diary.missing.msg": "Renseignez au moins la moto et le réglage.",
+  "diary.share_web": "Partager sur le web (ridetune.app/setups)",
+  "common.saving": "Enregistrement…",
   "settings.tagline": "Assistant de réglage de suspension",
   "settings.sec.community": "Communauté et réglages",
   "settings.sec.legal": "Infos et mentions légales",
@@ -1607,6 +1639,14 @@ const FR: Dict = {
 };
 
 const DE: Dict = {
+  "diary.bike_label": "Motorrad",
+  "diary.bike_ph": "z. B. Honda Transalp 2026",
+  "diary.setup_field": "Setup",
+  "diary.setup_field_ph": "z. B. F.Pre: 6 | F.Reb: 1 | F.Comp: 11 | R.Pre: 2.25",
+  "diary.missing.title": "Fehlende Angaben",
+  "diary.missing.msg": "Gib mindestens Motorrad und Setup an.",
+  "diary.share_web": "Im Web teilen (ridetune.app/setups)",
+  "common.saving": "Speichern…",
   "settings.tagline": "Fahrwerk-Setup-Assistent",
   "settings.sec.community": "Community & Setups",
   "settings.sec.legal": "Infos & Rechtliches",
@@ -2000,6 +2040,14 @@ const DE: Dict = {
 
 
 const IT: Dict = {
+  "diary.bike_label": "Moto",
+  "diary.bike_ph": "Es: Honda Transalp 2026",
+  "diary.setup_field": "Setup",
+  "diary.setup_field_ph": "Es: F.Pre: 6 | F.Reb: 1 | F.Comp: 11 | R.Pre: 2.25",
+  "diary.missing.title": "Dati mancanti",
+  "diary.missing.msg": "Compila almeno la moto e il setup.",
+  "diary.share_web": "Condividi sul web (ridetune.app/setups)",
+  "common.saving": "Salvataggio…",
   "settings.tagline": "Assistente di setup sospensione",
   "settings.sec.community": "Community e setup",
   "settings.sec.legal": "Info e note legali",
