@@ -7,6 +7,7 @@ import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import { C, ScreenHeader } from "@/src/components/ScreenHeader";
 import { useT } from "@/src/i18n";
 import { BottomNav } from "@/src/components/BottomNav";
+import { useScreenView } from "@/src/hooks/useScreenView";
 
 if (Platform.OS === "android" && UIManager.setLayoutAnimationEnabledExperimental) {
   UIManager.setLayoutAnimationEnabledExperimental(true);
@@ -21,6 +22,7 @@ const SECTIONS: { key: SectionKey; tKey: string; bodyKey: string; icon: keyof ty
 ];
 
 export default function InfoScreen() {
+  useScreenView("informacoes");
   const { t } = useT();
   const [open, setOpen] = useState<SectionKey | null>("about");
 

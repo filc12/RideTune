@@ -10,6 +10,7 @@ import { PremiumModal } from "@/src/components/PremiumModal";
 import { useT } from "@/src/i18n";
 import { isPremium } from "@/src/services/premium";
 import { HapticButton } from "@/src/components/HapticButton";
+import { useScreenView } from "@/src/hooks/useScreenView";
 
 const QUIZ_KEYS = ["diag.q1", "diag.q2", "diag.q3", "diag.q4", "diag.q5"] as const;
 
@@ -22,6 +23,7 @@ const QUIZ_FIX_KEYS: Record<number, { t: string; d: string }> = {
 };
 
 export default function DiagScreen() {
+  useScreenView("diagnostico");
   const { t } = useT();
   const [answers, setAnswers] = useState<Record<number, boolean>>({});
   const [idx, setIdx] = useState(0);

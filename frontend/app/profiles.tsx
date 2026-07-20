@@ -15,8 +15,10 @@ import {
 } from "@/src/utils/profiles";
 import { saveLoad, getLoad } from "@/src/utils/suspension";
 import { isPremium } from "@/src/services/premium";
+import { useScreenView } from "@/src/hooks/useScreenView";
 
 export default function ProfilesScreen() {
+  useScreenView("perfis");
   const { t } = useT();
   const router = useRouter();
   const [profiles, setProfiles] = useState<RiderProfile[]>([]);

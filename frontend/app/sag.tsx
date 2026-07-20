@@ -7,8 +7,10 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { C, ScreenHeader } from "@/src/components/ScreenHeader";
 import { BottomNav } from "@/src/components/BottomNav";
 import { useT } from "@/src/i18n";
+import { useScreenView } from "@/src/hooks/useScreenView";
 
 export default function SagScreen() {
+  useScreenView("sag");
   const { t } = useT();
   const steps: { t: string; d: string }[] = [
     { t: t("sag.step1.t"), d: t("sag.step1.d") },

@@ -29,8 +29,10 @@ import {
   FREE_DIARY_LIMIT,
   type DiaryEntry,
 } from "@/src/utils/diary";
+import { useScreenView } from "@/src/hooks/useScreenView";
 
 export default function DiaryScreen() {
+  useScreenView("diario");
   const { t } = useT();
   const [entries, setEntries] = useState<DiaryEntry[]>([]);
   const [loading, setLoading] = useState(true);

@@ -16,8 +16,10 @@ import {
   Share2
 } from 'lucide-react-native';
 import { useT } from '@/src/i18n';
+import { useScreenView } from '@/src/hooks/useScreenView';
 
 export default function SettingsScreen() {
+  useScreenView("definicoes");
   const router = useRouter();
   const { t } = useT();
   const [modalVisible, setModalVisible] = useState(false);

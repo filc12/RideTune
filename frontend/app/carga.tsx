@@ -14,12 +14,14 @@ import { PremiumModal } from "@/src/components/PremiumModal";
 import { getActiveProfile, updateProfile, type RiderProfile } from "@/src/utils/profiles";
 import { tapSuccess } from "@/src/utils/haptics";
 import { HapticButton } from "@/src/components/HapticButton";
+import { useScreenView } from "@/src/hooks/useScreenView";
 
 const RIDER_BOUNDS = { min: 40, max: 130, step: 1 };
 const PASSENGER_BOUNDS = { min: 0, max: 120, step: 1 };
 const LUGGAGE_BOUNDS = { min: 0, max: 60, step: 1 };
 
 export default function CargaScreen() {
+  useScreenView("carga");
   const { t } = useT();
   const router = useRouter();
   const [load, setLoad] = useState<Load>({ rider: 75, passenger: 0, luggage: 0 });

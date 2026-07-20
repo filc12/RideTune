@@ -7,8 +7,10 @@ import { useRouter } from "expo-router";
 
 import { C, ScreenHeader } from "@/src/components/ScreenHeader";
 import { useT } from "@/src/i18n";
+import { useScreenView } from "@/src/hooks/useScreenView";
 
 export default function HowItWorks() {
+  useScreenView("como_funciona");
   const router = useRouter();
   const { t } = useT();
   const steps: { icon: keyof typeof MaterialCommunityIcons.glyphMap; title: string; desc: string }[] = [

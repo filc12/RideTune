@@ -17,7 +17,7 @@ import { HapticButton } from "@/src/components/HapticButton";
 import { useT } from "@/src/i18n";
 import { storage } from "@/src/utils/storage";
 import { getOemBikeById, getOemTirePressure, type TirePressure } from "@/src/services/oem-data";
-import { Analytics } from "@/src/services/analytics";
+import { useScreenView } from "@/src/hooks/useScreenView";
 import type { Bike } from "@/src/data/bikes";
 
 const K_BIKE = "ridetune.bike";
@@ -80,9 +80,10 @@ export default function PneusScreen() {
     if (p) setPressure(p);
   }, []);
 
+  useScreenView("pneus");
+
   useEffect(() => {
     load();
-    Analytics.screenViewed({ screen: 'pneus' });
   }, [load]);
 
   const hasOffRoad = pressure?.frontOffRoadBar != null || pressure?.rearOffRoadBar != null;

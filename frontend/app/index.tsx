@@ -35,6 +35,7 @@ import { HapticButton } from "@/src/components/HapticButton";
 import { BottomNav } from "@/src/components/BottomNav";
 import { Analytics } from "@/src/services/analytics";
 import { C } from "@/src/theme";
+import { useScreenView } from "@/src/hooks/useScreenView";
 
 
 
@@ -43,6 +44,7 @@ type LoadMode = "solo" | "malas" | "duo" | "duo_malas";
 const K_BIKE = "ridetune.bike";
 
 export default function HomeScreen() {
+  useScreenView("home");
   const router = useRouter();
   const insets = useSafeAreaInsets();
   const [onboardingChecked, setOnboardingChecked] = React.useState(false);

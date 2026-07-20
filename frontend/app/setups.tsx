@@ -18,8 +18,10 @@ import { bikeLabel } from "@/src/data/bikes";
 import { HapticButton } from "@/src/components/HapticButton";
 import { submitSetup, isCommunityConfigured, type LoadUse } from "@/src/services/community";
 import { communitySlug } from "@/src/data/setupSlug";
+import { useScreenView } from "@/src/hooks/useScreenView";
 
 export default function SetupsScreen() {
+  useScreenView("setups");
   const { t } = useT();
   const router = useRouter();
   const [items, setItems] = useState<SavedSetup[]>([]);
