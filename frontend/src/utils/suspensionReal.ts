@@ -186,7 +186,28 @@ function applyFormula(
 // CFMOTO multi-weight interpolation
 // ─────────────────────────────────────────────
 
-function interpolateWps(wps: WeightPoint[], total: number, field: keyof WeightPoint): number | null {
+/**
+ * Arredonda um valor interpolado para algo que o utilizador consiga mesmo pôr
+ * no amortecedor. Não existe meio click: os tipos em clicks arredondam para
+ * inteiro, as voltas para 1/4 e os mm para 0,5.
+ */
+function roundForType(v: number, type: VType): number {
+  switch (type) {
+    case 'cl_hard':
+    case 'cl_soft': return Math.round(v);
+    case 'tu_hard':
+    case 'tu_soft': return roundQuarter(v);
+    case 'mm':      return Math.round(v * 2) / 2;
+    default:        return roundQuarter(v);
+  }
+}
+
+function interpolateWps(
+  wps: WeightPoint[],
+  total: number,
+  field: keyof WeightPoint,
+  type: VType
+): number | null {
   const sorted = [...wps].sort((a, b) => a.kg - b.kg);
   const vals = sorted.map(wp => ({ kg: wp.kg, v: wp[field] as number | undefined }));
 
@@ -201,7 +222,7 @@ function interpolateWps(wps: WeightPoint[], total: number, field: keyof WeightPo
       const lo = vals[i], hi = vals[i + 1];
       if (lo.v == null || hi.v == null) return lo.v ?? null;
       const ratio = (total - lo.kg) / (hi.kg - lo.kg);
-      return roundQuarter(lo.v + ratio * (hi.v - lo.v));
+      return roundForType(lo.v + ratio * (hi.v - lo.v), type);
     }
   }
   return null;
@@ -307,7 +328,7 @@ export function getRealSuspension(
 
     // CFMOTO: interpolate from weight points
     if (isInterp && profile.weightPoints && wpField) {
-      const interp = interpolateWps(profile.weightPoints, total, wpField);
+      const interp = interpolateWps(profile.weightPoints, total, wpField, sv.type);
       return interp ?? sv.v;
     }
 

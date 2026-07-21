@@ -98,8 +98,13 @@ const CFMOTO: MfzProfile[] = [
   {
     id: 'cfmoto_800mtx',
     brand: 'CFMOTO', model: '800MT-X', year: '2022+',
-    baseKg: 75, source: 'mfzstudio.com/moto/cfmoto/', formula: 'cfmoto_interp',
-    countNote: 'ACW to fully soft (0), then CW count up.',
+    // Pré-carga e amortecimento conferidos contra o CF MOTO 800MT Owner's
+    // Manual p.181 / IBEX 800-S p.148 — batem certo.
+    // POR VERIFICAR: a compressão traseira (rComp 8/10/12/14). Nenhum dos dois
+    // manuais oficiais tem sequer coluna de compressão traseira. Manter até
+    // confirmar num manual da variante MT-X; se não aparecer, passar a na().
+    baseKg: 75, source: 'CFMOTO 800MT Owner\'s Manual p.181 (official); rear compression unverified', formula: 'cfmoto_interp',
+    countNote: 'ACW to fully soft (0), then CW count up. Manual gives damping as ±2 — treat as a starting range, not an exact click.',
     front: {
       preload: cl_s(4), comp: cl_s(10), reb: cl_s(10),
     },
@@ -137,8 +142,13 @@ const CFMOTO: MfzProfile[] = [
   {
     id: 'cfmoto_800mt',
     brand: 'CFMOTO', model: '800MT', year: '2022+',
-    baseKg: 75, source: 'mfzstudio.com/moto/cfmoto/', formula: 'cfmoto_interp',
-    countNote: 'ACW to fully soft (0), then CW count up. No rear compression adjuster.',
+    // VERIFICADO contra o manual oficial: CF MOTO 800MT Owner's Manual p.181
+    // (chart idêntico no IBEX 800-S p.148). As 4 colunas do manual mapeiam
+    // para 75 / 115 / 150 / 190 kg e batem certo valor a valor.
+    // Nota: a frente é MESMO igual entre "só piloto" e "piloto + 3 malas".
+    baseKg: 75, source: 'CFMOTO 800MT Owner\'s Manual p.181 (official)', formula: 'cfmoto_interp',
+    dataQuality: 'oem_manual',
+    countNote: 'ACW to fully soft (0), then CW count up. No rear compression adjuster. Manual gives damping as ±2 — treat as a starting range, not an exact click.',
     front: {
       preload: cl_s(4), comp: cl_s(10), reb: cl_s(10),
     },
@@ -195,10 +205,16 @@ const CFMOTO: MfzProfile[] = [
   {
     id: 'cfmoto_450mt',
     brand: 'CFMOTO', model: '450MT', year: '2023+',
-    baseKg: 75, source: 'mfzstudio.com/moto/cfmoto/', formula: 'cfmoto_interp',
-    countNote: 'Damping: anticlockwise to soft (0), then clockwise to count. Rear preload: ring collar, clockwise adds preload.',
+    // Reconstruído do manual oficial (450MT Owner's Manual p.140, "Shock
+    // Absorber Adjustment Suggestion Chart"). O manual define 4 cenários e
+    // SÓ altera a pré-carga traseira: o amortecimento fica em 10 gears em
+    // todos eles, à frente e atrás. Os valores anteriores (11/12/14) eram
+    // estimativas, não constavam de nenhum manual.
+    baseKg: 75, source: 'CFMOTO 450MT Owner\'s Manual p.140 (official)', formula: 'cfmoto_interp',
+    dataQuality: 'oem_manual',
+    countNote: 'Damping: S direction (anticlockwise) to the end, then H (clockwise) and count to 10 = factory. Rear preload: from factory setting (spring height 8 inch), turn the adjuster nut clockwise to add.',
     front: {
-      preload: pos('Standard seat: position 10 (spring length)'),
+      preload: pos('Factory setting — screw sleeve convex 0.5 inch'),
       comp: cl_s(10),
       reb: cl_s(10),
     },
@@ -207,13 +223,14 @@ const CFMOTO: MfzProfile[] = [
       comp: na('No rear compression adjuster'),
       reb: cl_s(10),
     },
+    // kg 75  = "not equipped with three boxes"  → factory setting
+    // kg 115 = "equipped with three boxes"      → +4 turns on the preload nut
+    // (assento rebaixado usa +6 voltas; não modelado — ver notes)
     weightPoints: [
       { kg: 75,  fComp: 10, fReb: 10, rPre: 0, rReb: 10 },
-      { kg: 80,  fComp: 11, fReb: 11, rPre: 1, rReb: 11 },
-      { kg: 105, fComp: 12, fReb: 12, rPre: 4, rReb: 12 },
-      { kg: 155, fComp: 14, fReb: 14, rPre: 4, rReb: 14 },
+      { kg: 115, fComp: 10, fReb: 10, rPre: 4, rReb: 10 },
     ],
-    notes: 'Rear preload shown in turns (≈ visible rings on the collar; turn clockwise to add). Rear has no compression adjuster; damping uses click adjusters. Starting point only — confirm by sag (~30% / ~60mm of 200mm travel). If heavy loads need a lot of preload to reach target sag, fit a stiffer rear spring: preload does not replace correct spring rate.',
+    notes: 'Official chart: only the REAR PRELOAD changes with load — damping stays at 10 gears front and rear in every condition. Factory rear spring height is 8 inch; with three boxes (side + tail) add 4 turns on the preload nut, or 6 turns if the seat height has been lowered. IMPORTANT: CFMOTO states this shock suits ONE RIDER ONLY, and recommends staying below 75 mph / 120 km/h when carrying the three boxes. Confirm by sag; if you need lots of preload to reach target sag, fit a stiffer spring — preload does not replace spring rate.',
   },
 ];
 
