@@ -98,13 +98,16 @@ const CFMOTO: MfzProfile[] = [
   {
     id: 'cfmoto_800mtx',
     brand: 'CFMOTO', model: '800MT-X', year: '2022+',
-    // Pré-carga e amortecimento conferidos contra o CF MOTO 800MT Owner's
-    // Manual p.181 / IBEX 800-S p.148 — batem certo.
-    // POR VERIFICAR: a compressão traseira (rComp 8/10/12/14). Nenhum dos dois
-    // manuais oficiais tem sequer coluna de compressão traseira. Manter até
-    // confirmar num manual da variante MT-X; se não aparecer, passar a na().
-    baseKg: 75, source: 'CFMOTO 800MT Owner\'s Manual p.181 (official); rear compression unverified', formula: 'cfmoto_interp',
+    // VERIFICADO contra o Suspension Adjustment Chart oficial do 800MT-X
+    // (o chart do MT-X tem coluna de compressão traseira, ao contrário do
+    // 800MT/IBEX 800-S). As 4 linhas de carga batem certo valor a valor.
+    // POR MODELAR: o chart tem uma 5.ª linha que NÃO é de peso —
+    // "One person (75kg) + Continuous rough road" → trás 3/12/15, frente
+    // 4/10/13. É um modo de terreno, não é interpolável por kg.
+    baseKg: 75, source: 'CFMOTO 800MT-X Suspension Adjustment Chart (official)', formula: 'cfmoto_interp',
+    dataQuality: 'oem_manual',
     countNote: 'ACW to fully soft (0), then CW count up. Manual gives damping as ±2 — treat as a starting range, not an exact click.',
+    notes: 'Official chart also lists a 5th condition not modelled here: solo rider on continuous rough road → rear 3 circles / 12±2 comp / 15±2 reb, front 4 circles / 10±2 comp / 13±2 reb. Same weight as solo but firmer damping for sustained rough surfaces.',
     front: {
       preload: cl_s(4), comp: cl_s(10), reb: cl_s(10),
     },
