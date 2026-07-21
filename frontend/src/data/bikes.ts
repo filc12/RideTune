@@ -144,6 +144,10 @@ export const BIKES: Bike[] = [
   { id: "qj-srk900",   brand: "QJ Motor", model: "SRK 900",    cc: "900cc", category: "naked",     adj: "full" },
   { id: "qj-srt450rx", brand: "QJ Motor", model: "SRT 450 RX", cc: "449cc", category: "adventure", adj: "full" },
   { id: "qj-srt900sx", brand: "QJ Motor", model: "SRT 900 SX", cc: "904cc", category: "adventure", adj: "full" },
+  // SRT 600 SX (2024+): garfo Marzocchi 43mm invertido totalmente ajustável
+  // (pré-carga, compressão e ressalto, 145mm de curso); atrás monoshock com
+  // pré-carga remota e ressalto, sem compressão → "partial".
+  { id: "qj-srt600sx", brand: "QJ Motor", model: "SRT 600 SX", cc: "554cc", category: "adventure", adj: "partial" },
 
   // ===== Suzuki =====
   { id: "suzuki-vstrom-1050de", brand: "Suzuki", model: "V-Strom 1050 DE",  cc: "1037cc", category: "adventure", adj: "full",  mfzProfileId: "suzuki_vstrom_1050de" },
