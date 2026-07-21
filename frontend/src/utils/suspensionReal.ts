@@ -174,7 +174,11 @@ function applyFormula(
     case 'honda':   return adjustHonda(base, total, type);
     case 'kove':    return adjustKove(base, total, type);
     case 'suzuki':  return adjustSuzuki(base, total, type);
-    default:        return base;
+    // 'cfmoto_interp' só chega aqui se os weightPoints faltarem (dados
+    // corrompidos ou incompletos). Nesse caso NÃO devolver o valor base — isso
+    // congela o setup em qualquer carga e parece à app estar avariada.
+    // Usar a fórmula genérica KTM como rede de segurança.
+    default:        return adjustKtm(base, total, type);
   }
 }
 

@@ -29,7 +29,10 @@ import { captureError } from '@/src/services/sentry';
 const SUPABASE_URL      = process.env.EXPO_PUBLIC_SUPABASE_URL ?? '';
 const SUPABASE_ANON_KEY = process.env.EXPO_PUBLIC_SUPABASE_ANON_KEY ?? '';
 
-const CACHE_KEY    = 'ridetune.oem_cache_v1';
+// v2: o cache v1 foi gravado sem conversão snake_case→camelCase, por isso os
+// perfis CFMOTO ficaram sem `weightPoints`. Bumpar a chave descarta esse cache
+// envenenado em vez de o manter até expirar (7 dias).
+const CACHE_KEY    = 'ridetune.oem_cache_v2';
 const CACHE_TTL_MS = 7 * 24 * 60 * 60 * 1000; // 7 dias
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -149,6 +152,29 @@ type DbBikeRow = {
   mfz_profile_id: string | null;
 };
 
+/**
+ * Linha da tabela `oem_suspension` — Postgres usa snake_case.
+ * ATENÇÃO: tem de ser convertida para camelCase antes de entrar no _suspMap.
+ * Se `weight_points` não for mapeado para `weightPoints`, os perfis com
+ * formula 'cfmoto_interp' perdem os pontos de peso e ficam congelados no valor
+ * base (applyFormula não tem branch para 'cfmoto_interp').
+ */
+type DbSuspRow = {
+  id:            string;
+  brand:         string;
+  model:         string;
+  year:          string;
+  base_kg:       number;
+  source:        string;
+  formula:       string;
+  front:         MfzProfile['front'];
+  rear:          MfzProfile['rear'];
+  weight_points: MfzProfile['weightPoints'] | null;
+  count_note:    string | null;
+  notes:         string | null;
+  data_quality:  string | null;
+};
+
 type OemCache = {
   cachedAt:    number;
   bikes:       Bike[];
@@ -187,10 +213,27 @@ async function _fetchFromSupabase(): Promise<void> {
   }
 
   const rawBikes:    DbBikeRow[]          = await bikesRes.json();
-  const rawSusp:     MfzProfile[]         = await suspRes.json();
+  const rawSusp:     DbSuspRow[]          = await suspRes.json();
   const rawPressure: DbTirePressureRow[]  = await pressureRes.json();
 
   if (!rawBikes.length || !rawSusp.length) return;
+
+  // Converter snake_case → camelCase para suspensão
+  const suspension: MfzProfile[] = rawSusp.map(row => ({
+    id:           row.id,
+    brand:        row.brand,
+    model:        row.model,
+    year:         row.year,
+    baseKg:       row.base_kg,
+    source:       row.source,
+    formula:      row.formula as MfzProfile['formula'],
+    front:        row.front,
+    rear:         row.rear,
+    weightPoints: row.weight_points ?? undefined,
+    countNote:    row.count_note ?? undefined,
+    notes:        row.notes ?? undefined,
+    dataQuality:  (row.data_quality ?? undefined) as MfzProfile['dataQuality'],
+  }));
 
   // Converter snake_case → camelCase para bikes
   const bikes: Bike[] = rawBikes.map(row => ({
@@ -219,12 +262,12 @@ async function _fetchFromSupabase(): Promise<void> {
   }));
 
   _applyBikes(bikes);
-  _applySuspension(rawSusp);
+  _applySuspension(suspension);
   _applyPressure(pressure);
 
   // Guardar cache
   try {
-    const entry: OemCache = { cachedAt: Date.now(), bikes, suspension: rawSusp, pressure };
+    const entry: OemCache = { cachedAt: Date.now(), bikes, suspension, pressure };
     await storage.setItem(CACHE_KEY, JSON.stringify(entry));
   } catch (e) {
     captureError(e, { context: 'oem-data cache write' });
