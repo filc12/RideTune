@@ -27,20 +27,29 @@
 // mesma via; o caminho que falta é o manual do utilizador (PDF), ver nota no fim.
 //   CFMoto:   cfmoto-1000srr (o 1000 SR-R saiu do cfmoto.com global — modelo de
 //             mercado chinês; a gama Sport Racing global só lista o 675SR-R)
-//   QJ Motor: qj-srt800x, qj-srt750sx, qj-srk921, qj-srk600, qj-srk800, qj-srk900,
+//   QJ Motor: qj-srt750sx, qj-srk921, qj-srk600, qj-srk800, qj-srk900,
 //             qj-srt450rx, qj-srt900sx, qj-srt600sx
 //             (global.qjmotor.com usa um template genérico em TODOS os modelos —
 //             "Upside down telescopic forks" / "Telescopic coil spring oil damped".
 //             Confirmado no SRK 921 RR e no SRT 300 DX: nunca diz que é ajustável.)
-//   Voge:     voge-900dsx, voge-650dsx, voge-525dsx, voge-525r, voge-625dsx,
-//             voge-800dsx-rally, voge-r625, voge-ac525x
+//   Voge:     voge-650dsx, voge-525dsx, voge-525r, voge-800dsx-rally, voge-r625,
+//             voge-ac525x
 //             (a Voge não tem site global vivo: voge.eu e voge.com estão à venda,
 //             voge.it idem. Só restam importadores nacionais e imprensa.)
 //
-// Via que falta explorar para o bloco chinês: os manuais do utilizador em PDF que os
-// importadores publicam (ex.: qjmotor.es/wp-content/uploads/.../MANUAL-USUARIO-*.pdf).
-// São documento OEM e listam os afinadores. Não deu para extrair o texto por browser
-// — é preciso descarregar o PDF à mão e ler o capítulo da suspensão.
+// O QUE FUNCIONA para o bloco chinês: o MANUAL DO PROPRIETÁRIO em PDF. É documento OEM
+// e traz o capítulo de afinação adjuster a adjuster. Já resolveu qj-srt800x, voge-900dsx
+// e voge-625dsx. Atenção: o manual de OFICINA (ficheiros "sm-*") não serve — não tem o
+// capítulo de afinação. E há manuais QJ que descrevem duas configurações de hardware
+// ("Configuração 1 / 2") sem dizer qual é a do modelo — esses também não servem.
+//
+// Os manuais trazem ainda os valores de fábrica por carga (solo / com malas / 2 pessoas),
+// que é material para perfil MFZ com dataQuality 'oem_manual' — ver nota no fim do
+// mfzSuspensionData.ts. Recolhido até agora, ainda POR INTRODUZIR:
+//   voge-900dsx  precarga trás 6 / 16±1 / 21±1 cliques do mole; extensão trás 18 / 16±1
+//                / 14±1 cliques do duro
+//   voge-625dsx  precarga trás +0 / +2 / +3 voltas; extensão trás 10 / 8±1 / 6±1 e
+//                compressão trás 10 / 8 / 6 cliques do mole
 
 export type BikeCategory =
   | "adventure"
@@ -257,7 +266,11 @@ export const BIKES: Bike[] = [
   { id: "ktm-690-enduro-r",  brand: "KTM", model: "690 Enduro R (2019+)",   cc: "693cc",  category: "adventure", adj: "full",    mfzProfileId: "ktm_690_enduro_2019" },
 
   // ===== QJ Motor =====
-  { id: "qj-srt800x",   brand: "QJ Motor", model: "SRT 800 X",  cc: "778cc", category: "adventure",     adj: "partial" },
+  // SRT 800 X: manual do utilizador QJMOTOR SRT800/SRT800X (documento OEM). Só existe
+  // capítulo "Rear shock absorber" — o índice salta de "Tool Kit" para "Rear shock
+  // absorber", não há qualquer secção de afinação da frente. Atrás: botão de extensão
+  // no fundo do amortecedor + duas porcas de precarga na mola. Sem compressão atrás.
+  { id: "qj-srt800x",   brand: "QJ Motor", model: "SRT 800 X",  cc: "778cc", category: "adventure",     adj: "partial", adjusters: { fPre: false, fComp: false, fReb: false, rPre: true, rComp: false, rReb: true } },
   { id: "qj-srt750sx",  brand: "QJ Motor", model: "SRT 750 SX", cc: "744cc", category: "sport_touring", adj: "partial" },
   // SRK921: Marzocchi fully adjustable (2026 spec confirmed)
   { id: "qj-srk921",    brand: "QJ Motor", model: "SRK 921",    cc: "921cc", category: "naked",         adj: "full"    },
@@ -300,10 +313,16 @@ export const BIKES: Bike[] = [
 
   // ===== Voge =====
   // 900 DSX & 525 DSX: KYB fully adjustable confirmed
-  { id: "voge-900dsx",  brand: "Voge", model: "900 DSX", cc: "895cc", category: "adventure", adj: "full"    },
+  // 900 DSX: manual do proprietário Voge (PT). Forquilha com precarga (comando 1),
+  // extensão (comando 2, bainha esquerda) e compressão (comando 3, bainha direita).
+  // Atrás só precarga (comando 1) + extensão (comando 2) — o manual NÃO tem compressão.
+  { id: "voge-900dsx",  brand: "Voge", model: "900 DSX", cc: "895cc", category: "adventure", adj: "full",    adjusters: { fPre: true, fComp: true, fReb: true, rPre: true, rComp: false, rReb: true } },
   { id: "voge-650dsx",  brand: "Voge", model: "650 DSX", cc: "652cc", category: "adventure", adj: "partial" },
   { id: "voge-525dsx",  brand: "Voge", model: "525 DSX", cc: "494cc", category: "adventure", adj: "full"    },
   { id: "voge-525r",    brand: "Voge", model: "525 R",   cc: "494cc", category: "naked",     adj: "partial" },
+  // 625 DSX (DS 625X): manual do proprietário Voge. Os seis afinadores existem —
+  // frente precarga + extensão (bainha esq.) + compressão (bainha dta.); atrás precarga
+  // + extensão + compressão (ajustador 3, no reservatório). Default "full" correto.
   { id: "voge-625dsx",       brand: "Voge", model: "625 DSX",      cc: "625cc", category: "adventure", adj: "full" },
   { id: "voge-800dsx-rally", brand: "Voge", model: "800 DSX Rally", cc: "798cc", category: "adventure", adj: "full" },
   { id: "voge-r625",         brand: "Voge", model: "R625",          cc: "625cc", category: "naked",     adj: "full" },
