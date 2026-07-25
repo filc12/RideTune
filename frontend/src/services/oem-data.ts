@@ -18,7 +18,7 @@
  *   - Usar `getOemBikes()` e `getOemSuspById()` em todo o código
  */
 
-import { BIKES as BUNDLE_BIKES, type Bike, type BikeCategory, type SuspAdj } from '@/src/data/bikes';
+import { BIKES as BUNDLE_BIKES, type Bike, type BikeAdjusters, type BikeCategory, type SuspAdj } from '@/src/data/bikes';
 import { MFZ_PROFILES as BUNDLE_PROFILES, type MfzProfile } from '@/src/data/mfzSuspensionData';
 import { TIRE_PRESSURES as BUNDLE_PRESSURES } from '@/src/data/tirePressure';
 import { storage } from '@/src/utils/storage';
@@ -149,6 +149,8 @@ type DbBikeRow = {
   cc: string;
   category: string;
   adj: string;
+  /** Optional jsonb column. Se não existir, resolveAdjusters() usa o default de `adj`. */
+  adjusters: BikeAdjusters | null;
   mfz_profile_id: string | null;
 };
 
@@ -243,6 +245,7 @@ async function _fetchFromSupabase(): Promise<void> {
     cc:           row.cc,
     category:     row.category as BikeCategory,
     adj:          row.adj as SuspAdj,
+    adjusters:    row.adjusters ?? undefined,
     mfzProfileId: row.mfz_profile_id ?? undefined,
   }));
 

@@ -1,7 +1,7 @@
 // Heuristic suspension setup calculator for RideTune.
 // Visual/educational only — must be validated by the rider.
 import { storage } from "@/src/utils/storage";
-import type { BikeCategory } from "@/src/data/bikes";
+import { resolveAdjusters, type BikeCategory } from "@/src/data/bikes";
 import { getOemBikeById } from "@/src/services/oem-data";
 import { getRealSuspension, type AdjResult, type ConfidenceLevel } from "@/src/utils/suspensionReal";
 
@@ -280,28 +280,60 @@ export function calcSetupById(bikeId: string | null, load: Load): SetupResult {
   }
 
   // Fallback: category-based heuristic
-  const category = bikeId ? getOemBikeById(bikeId)?.category : undefined;
+  const fallbackBike = bikeId ? getOemBikeById(bikeId) : undefined;
+  const category = fallbackBike?.category;
   // noData: always true in fallback — real data was unavailable
   const heuristic = calcSetup(load, category);
+
+  // Which adjusters physically exist. Without this the heuristic would invent a
+  // number for every adjuster — e.g. the 390 Adventure (fixed front, rear preload
+  // cam only) used to show six values, five of which the rider cannot set.
+  const has = fallbackBike
+    ? resolveAdjusters(fallbackBike)
+    : { fPre: true, fComp: true, fReb: true, rPre: true, rComp: true, rReb: true };
+
+  // 'na' makes the UI render N/A instead of a number (see DataCell in app/index.tsx).
+  const vt = (exists: boolean, type: string) => (exists ? type : 'na');
+  const detail = (exists: boolean, text: string) => (exists ? text : 'Not adjustable');
+  const zeroIfAbsent = (exists: boolean, v: number) => (exists ? v : 0);
+
   return {
     ...heuristic,
+    front: {
+      preload:     zeroIfAbsent(has.fPre,  heuristic.front.preload),
+      rebound:     zeroIfAbsent(has.fReb,  heuristic.front.rebound),
+      compression: zeroIfAbsent(has.fComp, heuristic.front.compression),
+    },
+    rear: {
+      preload:     zeroIfAbsent(has.rPre,  heuristic.rear.preload),
+      rebound:     zeroIfAbsent(has.rReb,  heuristic.rear.rebound),
+      compression: zeroIfAbsent(has.rComp, heuristic.rear.compression),
+    },
     confidence: 'category_estimate',
     isRealData: false,
     noData: true,
-    frontVType: 'cl_hard',
-    rearVType: 'cl_hard',
-    frontTypes: { preload: 'cl_soft', reb: 'cl_hard', comp: 'cl_hard' },
-    rearTypes:  { preload: 'cl_soft', reb: 'cl_hard', comp: 'cl_hard' },
+    frontVType: has.fReb ? 'cl_hard' : 'na',
+    rearVType:  has.rReb ? 'cl_hard' : 'na',
+    frontTypes: {
+      preload: vt(has.fPre,  'cl_soft'),
+      reb:     vt(has.fReb,  'cl_hard'),
+      comp:    vt(has.fComp, 'cl_hard'),
+    },
+    rearTypes: {
+      preload: vt(has.rPre,  'cl_soft'),
+      reb:     vt(has.rReb,  'cl_hard'),
+      comp:    vt(has.rComp, 'cl_hard'),
+    },
     adjDetails: {
       front: {
-        preload: `${heuristic.front.preload} clicks up (from fully soft)`,
-        comp:    `${heuristic.front.compression} clicks out (from fully hard)`,
-        reb:     `${heuristic.front.rebound} clicks out (from fully hard)`,
+        preload: detail(has.fPre,  `${heuristic.front.preload} clicks up (from fully soft)`),
+        comp:    detail(has.fComp, `${heuristic.front.compression} clicks out (from fully hard)`),
+        reb:     detail(has.fReb,  `${heuristic.front.rebound} clicks out (from fully hard)`),
       },
       rear: {
-        preload: `${heuristic.rear.preload} clicks up (from fully soft)`,
-        comp:    `${heuristic.rear.compression} clicks out (from fully hard)`,
-        reb:     `${heuristic.rear.rebound} clicks out (from fully hard)`,
+        preload: detail(has.rPre,  `${heuristic.rear.preload} clicks up (from fully soft)`),
+        comp:    detail(has.rComp, `${heuristic.rear.compression} clicks out (from fully hard)`),
+        reb:     detail(has.rReb,  `${heuristic.rear.rebound} clicks out (from fully hard)`),
       },
     },
   };
