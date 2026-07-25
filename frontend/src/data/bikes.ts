@@ -28,12 +28,11 @@
 //   CFMoto:   cfmoto-1000srr (o 1000 SR-R saiu do cfmoto.com global — modelo de
 //             mercado chinês; a gama Sport Racing global só lista o 675SR-R)
 //   QJ Motor: qj-srt750sx, qj-srk921, qj-srk600, qj-srk800, qj-srk900,
-//             qj-srt450rx, qj-srt900sx, qj-srt600sx
+//             qj-srt900sx, qj-srt600sx
 //             (global.qjmotor.com usa um template genérico em TODOS os modelos —
 //             "Upside down telescopic forks" / "Telescopic coil spring oil damped".
 //             Confirmado no SRK 921 RR e no SRT 300 DX: nunca diz que é ajustável.)
-//   Voge:     voge-650dsx, voge-525dsx, voge-525r, voge-800dsx-rally, voge-r625,
-//             voge-ac525x
+//   Voge:     voge-650dsx, voge-525dsx, voge-525r, voge-r625, voge-ac525x
 //             (a Voge não tem site global vivo: voge.eu e voge.com estão à venda,
 //             voge.it idem. Só restam importadores nacionais e imprensa.)
 //
@@ -47,10 +46,15 @@
 // que é material para perfil MFZ com dataQuality 'oem_manual' — ver nota no fim do
 // mfzSuspensionData.ts. Recolhido até agora, ainda POR INTRODUZIR:
 //   voge-900dsx  precarga trás 6 / 16±1 / 21±1 cliques do mole; extensão trás 18 / 16±1
-//                / 14±1 cliques do duro. (A compressão trás existe — parafuso no
-//                reservatório de gás — mas o manual não dá o valor de fábrica.)
+//                / 14±1 cliques do duro. Compressão trás: usar os valores do 800 DSX
+//                Rally (10 / 8 / 6 do duro) — mesmo amortecedor, os outros dois eixos
+//                batem certo ao clique, e o manual do 900 é que omite a compressão.
+//   voge-800dsx-rally  precarga trás 6 / 16±1 / 21±1 do mole; extensão trás 18 / 16±1 /
+//                14±1 do duro; compressão trás 10 / 8 / 6 do duro. Frente: extensão e
+//                compressão com 10 posições cada.
 //   voge-625dsx  precarga trás +0 / +2 / +3 voltas; extensão trás 10 / 8±1 / 6±1 e
 //                compressão trás 10 / 8 / 6 cliques do mole
+//   qj-srt450rx  frente compressão 1,5 voltas e extensão 2,5 voltas (limite 4 cada)
 
 export type BikeCategory =
   | "adventure"
@@ -278,7 +282,11 @@ export const BIKES: Bike[] = [
   { id: "qj-srk600",    brand: "QJ Motor", model: "SRK 600",    cc: "598cc", category: "naked",         adj: "partial" },
   { id: "qj-srk800",   brand: "QJ Motor", model: "SRK 800",    cc: "778cc", category: "naked",     adj: "full" },
   { id: "qj-srk900",   brand: "QJ Motor", model: "SRK 900",    cc: "900cc", category: "naked",     adj: "full" },
-  { id: "qj-srt450rx", brand: "QJ Motor", model: "SRT 450 RX", cc: "449cc", category: "adventure", adj: "full" },
+  // SRT 450 RX: manual do proprietário QJMOTOR (capítulo ΡΥΘΜΙΣΗ ΑΝΑΡΤΗΣΕΩΝ). À frente
+  // só amortecimento, um por perna: compressão na esquerda (limite 4 voltas, fábrica 1,5)
+  // e extensão na direita (limite 4 voltas, fábrica 2,5) — SEM precarga. Atrás só
+  // precarga, por porca de aperto + porca de ajuste (folga 3 a 8 mm) — sem amortecimento.
+  { id: "qj-srt450rx", brand: "QJ Motor", model: "SRT 450 RX", cc: "449cc", category: "adventure", adj: "full", adjusters: { fPre: false, fComp: true, fReb: true, rPre: true, rComp: false, rReb: false } },
   { id: "qj-srt900sx", brand: "QJ Motor", model: "SRT 900 SX", cc: "904cc", category: "adventure", adj: "full" },
   // SRT 600 SX (2024+): garfo Marzocchi 43mm invertido totalmente ajustável
   // (pré-carga, compressão e ressalto, 145mm de curso); atrás monoshock com
@@ -330,6 +338,10 @@ export const BIKES: Bike[] = [
   // frente precarga + extensão (bainha esq.) + compressão (bainha dta.); atrás precarga
   // + extensão + compressão (ajustador 3, no reservatório). Default "full" correto.
   { id: "voge-625dsx",       brand: "Voge", model: "625 DSX",      cc: "625cc", category: "adventure", adj: "full" },
+  // 800 DSX Rally: manual do proprietário Voge (EN). Os seis afinadores existem —
+  // frente precarga (ajustador 1) + extensão (ajustador 2, topo, 10 posições) +
+  // compressão (ajustador 3, base, 10 posições); atrás precarga + extensão +
+  // compressão (ajustador 3, no reservatório de gás). Default "full" correto.
   { id: "voge-800dsx-rally", brand: "Voge", model: "800 DSX Rally", cc: "798cc", category: "adventure", adj: "full" },
   { id: "voge-r625",         brand: "Voge", model: "R625",          cc: "625cc", category: "naked",     adj: "full" },
   { id: "voge-ac525x",       brand: "Voge", model: "AC 525X",       cc: "494cc", category: "scrambler", adj: "partial" },
