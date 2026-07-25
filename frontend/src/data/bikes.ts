@@ -27,20 +27,25 @@
 // mesma via; o caminho que falta é o manual do utilizador (PDF), ver nota no fim.
 //   CFMoto:   cfmoto-1000srr (o 1000 SR-R saiu do cfmoto.com global — modelo de
 //             mercado chinês; a gama Sport Racing global só lista o 675SR-R)
-//   QJ Motor: qj-srt750sx, qj-srk921, qj-srk600, qj-srk800, qj-srk900,
-//             qj-srt900sx, qj-srt600sx
+//   QJ Motor: qj-srt750sx, qj-srt600sx
 //             (global.qjmotor.com usa um template genérico em TODOS os modelos —
 //             "Upside down telescopic forks" / "Telescopic coil spring oil damped".
-//             Confirmado no SRK 921 RR e no SRT 300 DX: nunca diz que é ajustável.)
+//             Confirmado no SRK 921 RR e no SRT 300 DX: nunca diz que é ajustável.
+//             E o importador russo, que publica os manuais, não tem nenhum destes dois.)
 //   Voge:     voge-650dsx, voge-525dsx, voge-525r, voge-r625, voge-ac525x
 //             (a Voge não tem site global vivo: voge.eu e voge.com estão à venda,
 //             voge.it idem. Só restam importadores nacionais e imprensa.)
 //
 // O QUE FUNCIONA para o bloco chinês: o MANUAL DO PROPRIETÁRIO em PDF. É documento OEM
-// e traz o capítulo de afinação adjuster a adjuster. Já resolveu qj-srt800x, voge-900dsx
-// e voge-625dsx. Atenção: o manual de OFICINA (ficheiros "sm-*") não serve — não tem o
-// capítulo de afinação. E há manuais QJ que descrevem duas configurações de hardware
-// ("Configuração 1 / 2") sem dizer qual é a do modelo — esses também não servem.
+// e traz o capítulo de afinação adjuster a adjuster. Já resolveu 10 motos.
+// Melhor fonte encontrada: qjmotor-russia.com/inctructions — o importador russo publica
+// 22 manuais em PDF (Google Drive), text-based, com tabelas de afinação e valores de
+// fábrica. Muito melhor que o manualslib, onde as páginas são imagem e não dá para ler.
+// Atenção: o manual de OFICINA (ficheiros "sm-*") não serve — não tem o capítulo de
+// afinação. E alguns manuais QJ descrevem duas configurações de hardware sem dizer qual
+// é a do modelo; só servem se as duas configurações tiverem os mesmos afinadores (foi o
+// caso do SRK 600). Um capítulo em falta é informação: nos SRK 900 e SRT 900 SX o índice
+// salta a afinação da frente, e isso significa forquilha sem afinadores.
 //
 // Os manuais trazem ainda os valores de fábrica por carga (solo / com malas / 2 pessoas),
 // que é material para perfil MFZ com dataQuality 'oem_manual' — ver nota no fim do
@@ -54,6 +59,13 @@
 //                compressão com 10 posições cada.
 //   voge-625dsx  precarga trás +0 / +2 / +3 voltas; extensão trás 10 / 8±1 / 6±1 e
 //                compressão trás 10 / 8 / 6 cliques do mole
+//   qj-srk800    frente precarga 5 voltas (limite 10), compressão 1 e extensão 3,25
+//                (limite 4,75); trás precarga hidráulica 0 (curso 10 mm), extensão 7
+//   qj-srk921    frente precarga 3,5 (limite 10), compressão 1,5 e extensão 2,5 (limite
+//                4,75); trás mola L 165 mm ±5, compressão baixa e alta 12 cliques cada
+//   qj-srk600    trás extensão posição 10 de 26
+//   qj-srk900    trás extensão 9 voltas do duro
+//   qj-srt900sx  trás extensão 10 voltas do duro (a versão S usa 5)
 //   qj-srt450rx  frente compressão 1,5 voltas e extensão 2,5 voltas (limite 4 cada),
 //                contadas do duro (horário até ao fim, depois abrir) → 'tu_hard'.
 //                Precarga trás em mm: 3 a 8 mm entre o topo da rosca e a contraporca.
@@ -282,10 +294,27 @@ export const BIKES: Bike[] = [
   { id: "qj-srt800x",   brand: "QJ Motor", model: "SRT 800 X",  cc: "778cc", category: "adventure",     adj: "partial", adjusters: { fPre: false, fComp: false, fReb: false, rPre: true, rComp: false, rReb: true } },
   { id: "qj-srt750sx",  brand: "QJ Motor", model: "SRT 750 SX", cc: "744cc", category: "sport_touring", adj: "partial" },
   // SRK921: Marzocchi fully adjustable (2026 spec confirmed)
+  // SRK 921 (MY2026): manual do proprietário QJMOTOR (RU). É a mais completa do
+  // catálogo QJ — frente com precarga (chave 14 mm, limite 10, fábrica 3,5), compressão
+  // à esquerda (4,75, fábrica 1,5) e extensão à direita (4,75, fábrica 2,5); atrás
+  // precarga (chave de gancho, mola L 165 mm ±5) + extensão + compressão SEPARADA em
+  // baixa e alta velocidade (12 cliques cada). Default "full" correto.
   { id: "qj-srk921",    brand: "QJ Motor", model: "SRK 921",    cc: "921cc", category: "naked",         adj: "full"    },
-  { id: "qj-srk600",    brand: "QJ Motor", model: "SRK 600",    cc: "598cc", category: "naked",         adj: "partial" },
-  { id: "qj-srk800",   brand: "QJ Motor", model: "SRK 800",    cc: "778cc", category: "naked",     adj: "full" },
-  { id: "qj-srk900",   brand: "QJ Motor", model: "SRK 900",    cc: "900cc", category: "naked",     adj: "full" },
+  // SRK 600: manual do proprietário QJMOTOR (RU). O manual dá duas configurações de
+  // forquilha, mas AMBAS têm os três afinadores — precarga (chave sextavada) +
+  // compressão (perna esquerda) + extensão (perna direita). Atrás: extensão por botão
+  // no fundo (26 posições, fábrica 10) + precarga por duas bainhas. Sem compressão atrás.
+  { id: "qj-srk600",    brand: "QJ Motor", model: "SRK 600",    cc: "598cc", category: "naked",         adj: "partial", adjusters: { fPre: true, fComp: true, fReb: true, rPre: true, rComp: false, rReb: true } },
+  // SRK 800: manual do proprietário QJMOTOR (RU). Frente completa — precarga (chave de
+  // 14 mm, limite 10 voltas, fábrica 5), compressão à esquerda (limite 4,75, fábrica 1)
+  // e extensão à direita (limite 4,75, fábrica 3,25). Atrás precarga hidráulica (curso
+  // 10 mm, fábrica 0) + extensão (fábrica 7 voltas do duro). Sem compressão atrás.
+  { id: "qj-srk800",   brand: "QJ Motor", model: "SRK 800",    cc: "778cc", category: "naked",     adj: "full", adjusters: { fPre: true, fComp: true, fReb: true, rPre: true, rComp: false, rReb: true } },
+  // SRK 900: manual do proprietário QJMOTOR (RU). Só tem capítulo "Задний амортизатор"
+  // (amortecedor traseiro) — não há qualquer secção de afinação da frente, nem no índice.
+  // Atrás extensão (fábrica 9 voltas a partir do mais duro) + precarga por anel com
+  // chave de gancho. Sem compressão atrás. Estava como "full" — não é.
+  { id: "qj-srk900",   brand: "QJ Motor", model: "SRK 900",    cc: "900cc", category: "naked",     adj: "full", adjusters: { fPre: false, fComp: false, fReb: false, rPre: true, rComp: false, rReb: true } },
   // SRT 450 RX: manual do proprietário QJMOTOR, confirmado em DUAS edições independentes
   // (grega e russa MY2026) que dão exatamente os mesmos números. À frente só
   // amortecimento, um por perna: compressão na esquerda (limite 4 voltas, fábrica 1,5)
@@ -293,7 +322,11 @@ export const BIKES: Bike[] = [
   // precarga, por porca de aperto + porca de ajuste (folga 3 a 8 mm) — sem amortecimento.
   // Contagem: fechar tudo no sentido horário (duro) e abrir anti-horário — 'tu_hard'.
   { id: "qj-srt450rx", brand: "QJ Motor", model: "SRT 450 RX", cc: "449cc", category: "adventure", adj: "full", adjusters: { fPre: false, fComp: true, fReb: true, rPre: true, rComp: false, rReb: false } },
-  { id: "qj-srt900sx", brand: "QJ Motor", model: "SRT 900 SX", cc: "904cc", category: "adventure", adj: "full" },
+  // SRT 900 SX: manual do proprietário QJMOTOR SRT 900 S/SX (RU). Como a SRK 900, só
+  // tem capítulo do amortecedor traseiro — nada de afinação à frente, nem no índice.
+  // Atrás extensão (fábrica 10 voltas do mais duro na SX; 5 na S) + precarga por anel
+  // com chave de gancho. Sem compressão atrás. Estava como "full" — não é.
+  { id: "qj-srt900sx", brand: "QJ Motor", model: "SRT 900 SX", cc: "904cc", category: "adventure", adj: "full", adjusters: { fPre: false, fComp: false, fReb: false, rPre: true, rComp: false, rReb: true } },
   // SRT 600 SX (2024+): garfo Marzocchi 43mm invertido totalmente ajustável
   // (pré-carga, compressão e ressalto, 145mm de curso); atrás monoshock com
   // pré-carga remota e ressalto, sem compressão → "partial".
