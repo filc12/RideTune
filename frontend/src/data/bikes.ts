@@ -22,11 +22,25 @@
 //             "inverted telescopic, coil spring, oil damped" — não lista afinadores)
 //   Yamaha:   yamaha-r1 (frente confirmada full em yamahamotorsports.com: pré-carga +
 //             compressão alta/baixa + extensão; falta confirmação oficial do traseiro)
-//   CFMoto:   cfmoto-1000srr
+//
+// BLOCO CHINÊS — tentado e SEM SAÍDA pelo site oficial. Não repetir a pesquisa pela
+// mesma via; o caminho que falta é o manual do utilizador (PDF), ver nota no fim.
+//   CFMoto:   cfmoto-1000srr (o 1000 SR-R saiu do cfmoto.com global — modelo de
+//             mercado chinês; a gama Sport Racing global só lista o 675SR-R)
 //   QJ Motor: qj-srt800x, qj-srt750sx, qj-srk921, qj-srk600, qj-srk800, qj-srk900,
 //             qj-srt450rx, qj-srt900sx, qj-srt600sx
+//             (global.qjmotor.com usa um template genérico em TODOS os modelos —
+//             "Upside down telescopic forks" / "Telescopic coil spring oil damped".
+//             Confirmado no SRK 921 RR e no SRT 300 DX: nunca diz que é ajustável.)
 //   Voge:     voge-900dsx, voge-650dsx, voge-525dsx, voge-525r, voge-625dsx,
 //             voge-800dsx-rally, voge-r625, voge-ac525x
+//             (a Voge não tem site global vivo: voge.eu e voge.com estão à venda,
+//             voge.it idem. Só restam importadores nacionais e imprensa.)
+//
+// Via que falta explorar para o bloco chinês: os manuais do utilizador em PDF que os
+// importadores publicam (ex.: qjmotor.es/wp-content/uploads/.../MANUAL-USUARIO-*.pdf).
+// São documento OEM e listam os afinadores. Não deu para extrair o texto por browser
+// — é preciso descarregar o PDF à mão e ler o capítulo da suspensão.
 
 export type BikeCategory =
   | "adventure"
