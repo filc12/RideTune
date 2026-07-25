@@ -27,11 +27,19 @@
 // mesma via; o caminho que falta é o manual do utilizador (PDF), ver nota no fim.
 //   CFMoto:   cfmoto-1000srr (o 1000 SR-R saiu do cfmoto.com global — modelo de
 //             mercado chinês; a gama Sport Racing global só lista o 675SR-R)
-//   QJ Motor: qj-srt750sx, qj-srt600sx
+//   QJ Motor: qj-srt750sx — TRÁS JÁ CONFIRMADO pelo manual QJ750-7 (SRT 750 X):
+//             extensão 26 cliques, fábrica 10, mais precarga por colar da mola, sem
+//             compressão. Falta a FRENTE: o manual dá três hipóteses "if equipped" sem
+//             dizer qual é a do modelo — Type 1 (precarga + compressão + extensão),
+//             Type 2 (só extensão, 26 cliques, fábrica 12) e Type 3 (não ajustável).
+//             Como a SRT 800 X partilha a mesma plataforma QJ750-7 e é Type 3, o mais
+//             provável é ser também Type 3 — mas é preciso confirmar na moto ou noutra
+//             edição do manual antes de escrever.
+//   QJ Motor: qj-srt600sx
 //             (global.qjmotor.com usa um template genérico em TODOS os modelos —
 //             "Upside down telescopic forks" / "Telescopic coil spring oil damped".
 //             Confirmado no SRK 921 RR e no SRT 300 DX: nunca diz que é ajustável.
-//             E o importador russo, que publica os manuais, não tem nenhum destes dois.)
+//             E o importador russo, que publica os manuais, não tem este.)
 //   Voge:     voge-650dsx, voge-525dsx, voge-525r, voge-r625, voge-ac525x
 //             (a Voge não tem site global vivo: voge.eu e voge.com estão à venda,
 //             voge.it idem. Só restam importadores nacionais e imprensa.)
@@ -322,10 +330,10 @@ export const BIKES: Bike[] = [
   // precarga, por porca de aperto + porca de ajuste (folga 3 a 8 mm) — sem amortecimento.
   // Contagem: fechar tudo no sentido horário (duro) e abrir anti-horário — 'tu_hard'.
   { id: "qj-srt450rx", brand: "QJ Motor", model: "SRT 450 RX", cc: "449cc", category: "adventure", adj: "full", adjusters: { fPre: false, fComp: true, fReb: true, rPre: true, rComp: false, rReb: false } },
-  // SRT 900 SX: manual do proprietário QJMOTOR SRT 900 S/SX (RU). Como a SRK 900, só
-  // tem capítulo do amortecedor traseiro — nada de afinação à frente, nem no índice.
-  // Atrás extensão (fábrica 10 voltas do mais duro na SX; 5 na S) + precarga por anel
-  // com chave de gancho. Sem compressão atrás. Estava como "full" — não é.
+  // SRT 900 SX: manual do proprietário QJMOTOR SRT 900 S/SX, confirmado em DUAS edições
+  // (russa e inglesa). Como a SRK 900, só tem capítulo do amortecedor traseiro — nada de
+  // afinação à frente, nem no índice. Atrás extensão (fábrica 10 voltas do mais duro na
+  // SX; 5 na S) + precarga por colar da mola. Sem compressão atrás. Estava como "full".
   { id: "qj-srt900sx", brand: "QJ Motor", model: "SRT 900 SX", cc: "904cc", category: "adventure", adj: "full", adjusters: { fPre: false, fComp: false, fReb: false, rPre: true, rComp: false, rReb: true } },
   // SRT 600 SX (2024+): garfo Marzocchi 43mm invertido totalmente ajustável
   // (pré-carga, compressão e ressalto, 145mm de curso); atrás monoshock com
