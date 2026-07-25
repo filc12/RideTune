@@ -47,7 +47,8 @@
 // que é material para perfil MFZ com dataQuality 'oem_manual' — ver nota no fim do
 // mfzSuspensionData.ts. Recolhido até agora, ainda POR INTRODUZIR:
 //   voge-900dsx  precarga trás 6 / 16±1 / 21±1 cliques do mole; extensão trás 18 / 16±1
-//                / 14±1 cliques do duro
+//                / 14±1 cliques do duro. (A compressão trás existe — parafuso no
+//                reservatório de gás — mas o manual não dá o valor de fábrica.)
 //   voge-625dsx  precarga trás +0 / +2 / +3 voltas; extensão trás 10 / 8±1 / 6±1 e
 //                compressão trás 10 / 8 / 6 cliques do mole
 
@@ -315,8 +316,13 @@ export const BIKES: Bike[] = [
   // 900 DSX & 525 DSX: KYB fully adjustable confirmed
   // 900 DSX: manual do proprietário Voge (PT). Forquilha com precarga (comando 1),
   // extensão (comando 2, bainha esquerda) e compressão (comando 3, bainha direita).
-  // Atrás só precarga (comando 1) + extensão (comando 2) — o manual NÃO tem compressão.
-  { id: "voge-900dsx",  brand: "Voge", model: "900 DSX", cc: "895cc", category: "adventure", adj: "full",    adjusters: { fPre: true, fComp: true, fReb: true, rPre: true, rComp: false, rReb: true } },
+  // Atrás o manual só descreve precarga (comando 1) + extensão (comando 2), mas a
+  // compressão traseira EXISTE — parafuso rotativo no reservatório de gás separado
+  // (garrafa dourada KYB). O manual é fraco (nem nomeia a KYB; a tabela de specs diz
+  // só "Amortecedor central. Curso 63 mm") e omite-a. O manual do DS 625X, mesma
+  // família de amortecedor, documenta esse afinador como "adjustor 3 (at position of
+  // air bottle)". Portanto full nas duas pontas — default correto, sem `adjusters`.
+  { id: "voge-900dsx",  brand: "Voge", model: "900 DSX", cc: "895cc", category: "adventure", adj: "full"    },
   { id: "voge-650dsx",  brand: "Voge", model: "650 DSX", cc: "652cc", category: "adventure", adj: "partial" },
   { id: "voge-525dsx",  brand: "Voge", model: "525 DSX", cc: "494cc", category: "adventure", adj: "full"    },
   { id: "voge-525r",    brand: "Voge", model: "525 R",   cc: "494cc", category: "naked",     adj: "partial" },
