@@ -331,19 +331,19 @@ export const BIKES: Bike[] = [
   // (amortecedor traseiro) — não há qualquer secção de afinação da frente, nem no índice.
   // Atrás extensão (fábrica 9 voltas a partir do mais duro) + precarga por anel com
   // chave de gancho. Sem compressão atrás. Estava como "full" — não é.
-  { id: "qj-srk900",   brand: "QJ Motor", model: "SRK 900",    cc: "900cc", category: "naked",     adj: "full", adjusters: { fPre: false, fComp: false, fReb: false, rPre: true, rComp: false, rReb: true } },
+  { id: "qj-srk900",   brand: "QJ Motor", model: "SRK 900",    cc: "900cc", category: "naked",     adj: "full", mfzProfileId: "qj_srk900" },
   // SRT 450 RX: manual do proprietário QJMOTOR, confirmado em DUAS edições independentes
   // (grega e russa MY2026) que dão exatamente os mesmos números. À frente só
   // amortecimento, um por perna: compressão na esquerda (limite 4 voltas, fábrica 1,5)
   // e extensão na direita (limite 4 voltas, fábrica 2,5) — SEM precarga. Atrás só
   // precarga, por porca de aperto + porca de ajuste (folga 3 a 8 mm) — sem amortecimento.
   // Contagem: fechar tudo no sentido horário (duro) e abrir anti-horário — 'tu_hard'.
-  { id: "qj-srt450rx", brand: "QJ Motor", model: "SRT 450 RX", cc: "449cc", category: "adventure", adj: "full", adjusters: { fPre: false, fComp: true, fReb: true, rPre: true, rComp: false, rReb: false } },
+  { id: "qj-srt450rx", brand: "QJ Motor", model: "SRT 450 RX", cc: "449cc", category: "adventure", adj: "full", mfzProfileId: "qj_srt450rx" },
   // SRT 900 SX: manual do proprietário QJMOTOR SRT 900 S/SX, confirmado em DUAS edições
   // (russa e inglesa). Como a SRK 900, só tem capítulo do amortecedor traseiro — nada de
   // afinação à frente, nem no índice. Atrás extensão (fábrica 10 voltas do mais duro na
   // SX; 5 na S) + precarga por colar da mola. Sem compressão atrás. Estava como "full".
-  { id: "qj-srt900sx", brand: "QJ Motor", model: "SRT 900 SX", cc: "904cc", category: "adventure", adj: "full", adjusters: { fPre: false, fComp: false, fReb: false, rPre: true, rComp: false, rReb: true } },
+  { id: "qj-srt900sx", brand: "QJ Motor", model: "SRT 900 SX", cc: "904cc", category: "adventure", adj: "full", mfzProfileId: "qj_srt900sx" },
   // SRT 600 SX (2024+): garfo Marzocchi 43mm invertido totalmente ajustável
   // (pré-carga, compressão e ressalto, 145mm de curso); atrás monoshock com
   // pré-carga remota e ressalto, sem compressão → "partial".

@@ -1066,8 +1066,78 @@ const MACBOR: MfzProfile[] = [
   },
 ];
 
+// ─────────────────────────────────────────────
+// QJ MOTOR
+// Fonte: manuais do proprietário publicados pelo importador russo
+// (qjmotor-russia.com/inctructions). Documento OEM, text-based.
+//
+// Só estão aqui os modelos cujo perfil fica COMPLETO — ou seja, aqueles em que
+// a forquilha não tem afinadores nenhuns e por isso não há valores em falta.
+// Os restantes QJ e as Voge ficam de fora de propósito: têm afinadores à frente
+// que o manual confirma existirem mas para os quais nunca dá valor de fábrica.
+// Criar-lhes perfil trocaria a estimativa da heurística por células vazias.
+// Contagem: fechar no sentido horário até ao fim (duro), depois abrir (tu_hard).
+// ─────────────────────────────────────────────
+const QJMOTOR: MfzProfile[] = [
+  {
+    id: 'qj_srk900',
+    brand: 'QJ Motor', model: 'SRK 900', year: '2023+',
+    baseKg: 75, source: 'Manual do proprietário QJMOTOR SRK 900 (oficial)', formula: 'ktm',
+    dataQuality: 'oem_manual',
+    front: {
+      preload: na('Forquilha sem afinadores'),
+      comp:    na('Forquilha sem afinadores'),
+      reb:     na('Forquilha sem afinadores'),
+    },
+    rear: {
+      preload: pos('Anel de precarga — sem valor de fábrica no manual'),
+      comp:    na('O amortecedor não tem afinador de compressão'),
+      reb:     tu_h(9),
+    },
+    countNote: 'Extensão traseira: rodar até ao fim no sentido horário (mais duro) e abrir 9 voltas. Precarga por anel roscado com chave de gancho — o manual não dá volta de fábrica, usa o sag.',
+    notes: 'O manual só tem capítulo do amortecedor traseiro; não há qualquer secção de afinação da frente, nem no índice. Forquilha sem afinadores. Confirmar sempre pelo sag.',
+  },
+  {
+    id: 'qj_srt900sx',
+    brand: 'QJ Motor', model: 'SRT 900 SX', year: '2023+',
+    baseKg: 75, source: 'Manual do proprietário QJMOTOR SRT 900 S/SX (oficial)', formula: 'ktm',
+    dataQuality: 'oem_manual',
+    front: {
+      preload: na('Forquilha sem afinadores'),
+      comp:    na('Forquilha sem afinadores'),
+      reb:     na('Forquilha sem afinadores'),
+    },
+    rear: {
+      preload: pos('Anel de precarga — sem valor de fábrica no manual'),
+      comp:    na('O amortecedor não tem afinador de compressão'),
+      reb:     tu_h(10),
+    },
+    countNote: 'Extensão traseira: rodar até ao fim no sentido horário (mais duro) e abrir 10 voltas. Precarga por anel roscado com chave de gancho — o manual não dá volta de fábrica, usa o sag.',
+    notes: 'Mesma estrutura da SRK 900: o manual só cobre o amortecedor traseiro. A versão SRT 900 S usa 5 voltas de extensão em vez de 10 — este perfil é o da SX. Confirmar sempre pelo sag.',
+  },
+  {
+    id: 'qj_srt450rx',
+    brand: 'QJ Motor', model: 'SRT 450 RX', year: '2024+',
+    baseKg: 75, source: 'Manual do proprietário QJMOTOR SRT 450 RX (oficial)', formula: 'ktm',
+    dataQuality: 'oem_manual',
+    front: {
+      preload: na('A forquilha não tem afinador de precarga'),
+      comp:    tu_h(1.5),
+      reb:     tu_h(2.5),
+    },
+    rear: {
+      preload: pos('3 a 8 mm entre o topo da rosca e a contraporca'),
+      comp:    na('O amortecedor não tem afinador de compressão'),
+      reb:     na('O amortecedor não tem afinador de extensão'),
+    },
+    countNote: 'Frente: rodar o parafuso até ao fim no sentido horário (mais duro) e abrir — compressão na perna esquerda 1,5 voltas, extensão na direita 2,5 voltas. Limite de 4 voltas em cada. Atrás só precarga, por porca de ajuste com chave de gancho.',
+    notes: 'Confirmado em duas edições independentes do manual (grega e russa MY2026) com os mesmos números. Um afinador por perna: só compressão à esquerda e só extensão à direita, sem precarga à frente. Atrás só precarga — o manual dá o intervalo em mm (3 a 8) e não uma posição única, por isso usa o sag para escolher dentro dele.',
+  },
+];
+
 export const MFZ_PROFILES: MfzProfile[] = [
   ...CFMOTO,
+  ...QJMOTOR,
   ...HONDA,
   ...KOVE,
   ...KTM,
