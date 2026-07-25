@@ -30,11 +30,20 @@
 //   QJ Motor: qj-srt750sx — TRÁS JÁ CONFIRMADO pelo manual QJ750-7 (SRT 750 X):
 //             extensão 26 cliques, fábrica 10, mais precarga por colar da mola, sem
 //             compressão. Falta a FRENTE: o manual dá três hipóteses "if equipped" sem
-//             dizer qual é a do modelo — Type 1 (precarga + compressão + extensão),
-//             Type 2 (só extensão, 26 cliques, fábrica 12) e Type 3 (não ajustável).
-//             Como a SRT 800 X partilha a mesma plataforma QJ750-7 e é Type 3, o mais
-//             provável é ser também Type 3 — mas é preciso confirmar na moto ou noutra
-//             edição do manual antes de escrever.
+//             dizer qual é a do modelo — Type 1 (porca sextavada exterior de precarga +
+//             parafuso central), Type 2 (só extensão, 26 cliques, fábrica 12) e Type 3
+//             (não ajustável).
+//             Type 3 JÁ ESTÁ EXCLUÍDO: as fotos oficiais do modelo mostram parafuso de
+//             afinação ao centro dos dois tampos da forquilha. Falta separar Type 1 de
+//             Type 2, e a diferença é grande (3 afinadores contra 1). O que distingue é
+//             haver ou não uma porca sextavada de precarga à volta do parafuso central —
+//             nas fotos não dá para separar isso do sextavado normal do tampo.
+//             ATENÇÃO se algum dia for Type 1: o manual diz que o parafuso central mexe
+//             na compressão E na extensão ao mesmo tempo (um só afinador combinado, não
+//             dois). Marcar fComp e fReb ambos a true faria a app pedir dois números para
+//             um só parafuso — exatamente o erro que este campo existe para evitar.
+//             O BikeAdjusters não sabe representar afinadores combinados; se aparecerem
+//             mais casos destes, é sinal de que o tipo precisa de mudar.
 //   QJ Motor: qj-srt600sx
 //             (global.qjmotor.com usa um template genérico em TODOS os modelos —
 //             "Upside down telescopic forks" / "Telescopic coil spring oil damped".
