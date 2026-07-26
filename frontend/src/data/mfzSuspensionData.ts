@@ -1164,9 +1164,15 @@ const QJMOTOR: MfzProfile[] = [
     countNote: 'Extensão traseira: rodar até ao fim no sentido horário (mais duro) e abrir 9 voltas. Precarga por anel roscado com chave de gancho — o manual não dá volta de fábrica, usa o sag.',
     notes: 'O manual só tem capítulo do amortecedor traseiro; não há qualquer secção de afinação da frente, nem no índice. Forquilha sem afinadores. Confirmar sempre pelo sag.',
   },
+  // ÓRFÃO DE PROPÓSITO — não está ligado a nenhuma moto do catálogo.
+  // Descreve a variante de mercado RUSSO, cujo manual não tem afinação à frente. A moto
+  // vendida em Portugal leva Marzocchi 43 mm totalmente ajustável à frente segundo a
+  // qjmotor.pt, por isso a entrada qj-srt900sx usa `adjusters` em vez deste perfil.
+  // Fica aqui para não se perder o valor de fábrica da extensão traseira, caso um dia se
+  // confirme qual das duas suspensões é a que chega cá.
   {
     id: 'qj_srt900sx',
-    brand: 'QJ Motor', model: 'SRT 900 SX', year: '2023+',
+    brand: 'QJ Motor', model: 'SRT 900 SX (mercado RU)', year: '2023+',
     baseKg: 75, source: 'Manual do proprietário QJMOTOR SRT 900 S/SX (oficial)', formula: 'ktm',
     dataQuality: 'oem_manual',
     front: {

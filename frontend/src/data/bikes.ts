@@ -25,41 +25,34 @@
 // mesma via; o caminho que falta é o manual do utilizador (PDF), ver nota no fim.
 //   CFMoto:   cfmoto-1000srr (o 1000 SR-R saiu do cfmoto.com global — modelo de
 //             mercado chinês; a gama Sport Racing global só lista o 675SR-R)
-//   QJ Motor: qj-srt750sx — TRÁS JÁ CONFIRMADO pelo manual QJ750-7 (SRT 750 X):
-//             extensão 26 cliques, fábrica 10, mais precarga por colar da mola, sem
-//             compressão. Falta a FRENTE: o manual dá três hipóteses "if equipped" sem
-//             dizer qual é a do modelo — Type 1 (porca sextavada exterior de precarga +
-//             parafuso central), Type 2 (só extensão, 26 cliques, fábrica 12) e Type 3
-//             (não ajustável).
-//             Type 3 JÁ ESTÁ EXCLUÍDO: as fotos oficiais do modelo mostram parafuso de
-//             afinação ao centro dos dois tampos da forquilha.
-//             Type 2 TAMBÉM PARECE EXCLUÍDO, mas para o SRT 750 **X**, não para o SX: a
-//             review da RoadRUNNER ao 2023 SRT750X diz "the front fork features
-//             adjustable spring preload and rebound damping". Havendo precarga, é Type 1.
-//             CUIDADO ANTES DE COPIAR ISTO PARA O SX. Duas razões:
-//               1) Na nomenclatura QJ, SX é a versão mais recente e mais equipada do X
-//                  (o SRT 800 SX de 2024 é o upgrade do SRT 800 X). O SX pode ter MAIS
-//                  afinação do que o X, não a mesma.
-//               2) O cc do catálogo (744) não bate com o do X (754, plataforma QJ750-7).
-//                  Ou o 744 está errado, ou são mesmo motos diferentes — resolver isto
-//                  antes de tocar nos afinadores.
-//             Se um dia se confirmar que o SX é igual ao X: Type 1 = precarga + UM
-//             parafuso central de amortecimento. A review chama-lhe extensão, o manual
-//             diz que mexe em compressão e extensão ao mesmo tempo. Ver a nota seguinte.
-//             ATENÇÃO se algum dia for Type 1: o manual diz que o parafuso central mexe
-//             na compressão E na extensão ao mesmo tempo (um só afinador combinado, não
-//             dois). Marcar fComp e fReb ambos a true faria a app pedir dois números para
-//             um só parafuso — exatamente o erro que este campo existe para evitar.
-//             O BikeAdjusters não sabe representar afinadores combinados; se aparecerem
-//             mais casos destes, é sinal de que o tipo precisa de mudar.
-//   QJ Motor: qj-srt600sx
+//   QJ Motor: qj-srt600sx (o importador PT vende-a e a página diz só "Suspensões
+//             Marzocchi multi-reguláveis", sem separar frente de trás. O importador
+//             russo não tem manual desta. Fica oculta até haver detalhe.)
+//             NOTA sobre a antiga entrada "SRT 750 SX": não existia. A QJ não vende
+//             nenhum 750 em Portugal — a gama cá é SRT 600SX, 700X, 700 ON, 900SX e
+//             900S. O id qj-srt750sx passou a ser a SRT 700X, 698cc, com os afinadores
+//             da qjmotor.pt. Com isso caiu também toda a investigação do manual QJ750-7
+//             sobre os "Type 1 / 2 / 3" da forquilha: era do SRT 750 X americano, que
+//             não é vendido cá.
+//             O que vale a pena guardar dessa investigação: alguns manuais QJ descrevem
+//             um ÚNICO parafuso central que mexe na compressão E na extensão ao mesmo
+//             tempo. O BikeAdjusters não sabe representar afinadores combinados — marcar
+//             fComp e fReb a true faria a app pedir dois números para um só parafuso.
+//             Se isso aparecer confirmado nalguma moto, o tipo tem de mudar.
 //             (global.qjmotor.com usa um template genérico em TODOS os modelos —
 //             "Upside down telescopic forks" / "Telescopic coil spring oil damped".
-//             Confirmado no SRK 921 RR e no SRT 300 DX: nunca diz que é ajustável.
-//             E o importador russo, que publica os manuais, não tem este.)
+//             Confirmado no SRK 921 RR e no SRT 300 DX: nunca diz que é ajustável.)
 //   Voge:     voge-650dsx, voge-525r, voge-r625
 //             (a Voge não tem site global vivo: voge.eu e voge.com estão à venda,
 //             voge.it idem. Só restam importadores nacionais e imprensa.)
+//
+// FONTE NOVA E BOA para a QJ: qjmotor.pt, o importador oficial português. As fichas de
+// modelo separam frente e trás ("multi-regulável em pré-carga, compressão e extensão").
+// É a fonte a usar por defeito, porque é a spec do mercado onde a app é usada — a QJ
+// avisa no site global que as specs variam por região, e isso já deu um conflito real
+// na SRT 900 SX (ver comentário na entrada). Cautela: a frase aparece igual em vários
+// modelos, o que pode ser texto reaproveitado; na SRK 600 bate certo com o manual, o que
+// lhe dá crédito. Confirma sempre a gama antes de assumir que um modelo existe cá.
 //
 // O QUE FUNCIONA para o bloco chinês: o MANUAL DO PROPRIETÁRIO em PDF. É documento OEM
 // e traz o capítulo de afinação adjuster a adjuster. Já resolveu 10 motos.
@@ -69,8 +62,12 @@
 // Atenção: o manual de OFICINA (ficheiros "sm-*") não serve — não tem o capítulo de
 // afinação. E alguns manuais QJ descrevem duas configurações de hardware sem dizer qual
 // é a do modelo; só servem se as duas configurações tiverem os mesmos afinadores (foi o
-// caso do SRK 600). Um capítulo em falta é informação: nos SRK 900 e SRT 900 SX o índice
-// salta a afinação da frente, e isso significa forquilha sem afinadores.
+// caso do SRK 600). Um capítulo em falta costuma ser informação: no SRT 800 X e no SRK
+// 900 o índice salta a afinação da frente, e isso significa forquilha sem afinadores.
+// MAS não é regra: no SRT 900 SX o manual russo também salta esse capítulo e a ficha
+// oficial portuguesa diz que a moto tem Marzocchi 43 mm totalmente ajustável à frente.
+// Ausência de capítulo é prova fraca — quando houver ficha do importador que contrarie,
+// ganha a ficha do mercado onde a app é usada.
 //
 // Os manuais trazem ainda os valores de fábrica por carga (solo / com malas / 2 pessoas),
 // que é material para perfil MFZ com dataQuality 'oem_manual' — ver nota no fim do
@@ -338,7 +335,13 @@ export const BIKES: Bike[] = [
   // absorber", não há qualquer secção de afinação da frente. Atrás: botão de extensão
   // no fundo do amortecedor + duas porcas de precarga na mola. Sem compressão atrás.
   { id: "qj-srt800x",   brand: "QJ Motor", model: "SRT 800 X",  cc: "778cc", category: "adventure",     adj: "partial", adjusters: { fPre: false, fComp: false, fReb: false, rPre: true, rComp: false, rReb: true } },
-  { id: "qj-srt750sx",  brand: "QJ Motor", model: "SRT 750 SX", cc: "744cc", category: "sport_touring", adj: "partial", hidden: true },
+  // Era "SRT 750 SX / 744cc", que não corresponde a nenhuma moto vendida em Portugal —
+  // a QJ cá tem SRT 600SX, 700X, 700 ON, 900SX e 900S, não há 750 nenhum. Corrigido para
+  // a SRT 700X, que é a adventure média real da gama. qjmotor.pt: "Forquilha invertida
+  // 43 mm multi-regulável em pré-carga, compressão e extensão. Traseira:
+  // mono-amortecedor multi-regulável em pré-carga e extensão."
+  // O id fica como estava para não partir setups nem diário de quem já o tinha escolhido.
+  { id: "qj-srt750sx",  brand: "QJ Motor", model: "SRT 700X", cc: "698cc", category: "adventure", adj: "full", adjusters: { fPre: true, fComp: true, fReb: true, rPre: true, rComp: false, rReb: true } },
   // SRK921: Marzocchi fully adjustable (2026 spec confirmed)
   // SRK 921 (MY2026): manual do proprietário QJMOTOR (RU). É a mais completa do
   // catálogo QJ — frente com precarga (chave 14 mm, limite 10, fábrica 3,5), compressão
@@ -372,7 +375,19 @@ export const BIKES: Bike[] = [
   // (russa e inglesa). Como a SRK 900, só tem capítulo do amortecedor traseiro — nada de
   // afinação à frente, nem no índice. Atrás extensão (fábrica 10 voltas do mais duro na
   // SX; 5 na S) + precarga por colar da mola. Sem compressão atrás. Estava como "full".
-  { id: "qj-srt900sx", brand: "QJ Motor", model: "SRT 900 SX", cc: "904cc", category: "adventure", adj: "full", mfzProfileId: "qj_srt900sx" },
+  // SRT 900 SX: DUAS FONTES EM CONFLITO na frente, resolvido a favor do mercado PT.
+  //   qjmotor.pt (importador oficial, modelo 2025): "Forquilha invertida Marzocchi de
+  //   43 mm, multi-regulável em pré-carga, compressão e extensão. Traseira:
+  //   mono-amortecedor multi-regulável em pré-carga e extensão."
+  //   Manual do proprietário russo SRT 900 S/SX: NÃO tem capítulo de afinação da frente.
+  // O traseiro bate certo nos dois (precarga + extensão, sem compressão); só a frente
+  // diverge. A QJ avisa no site global que as specs variam por região, por isso o mais
+  // provável é serem variantes de mercado diferentes. Como a app é para Portugal, manda
+  // a qjmotor.pt. Por isso NÃO usa o perfil MFZ qj_srt900sx — os valores desse perfil
+  // vieram do manual russo e podem ser de outro hardware.
+  // Cautela: a frase da qjmotor.pt aparece igual na SRK 600 e na SRT 700X, o que cheira
+  // a texto de marketing reaproveitado. A favor dela: na SRK 600 bate certo com o manual.
+  { id: "qj-srt900sx", brand: "QJ Motor", model: "SRT 900 SX", cc: "904cc", category: "adventure", adj: "full", adjusters: { fPre: true, fComp: true, fReb: true, rPre: true, rComp: false, rReb: true } },
   // SRT 600 SX (2024+): garfo Marzocchi 43mm invertido totalmente ajustável
   // (pré-carga, compressão e ressalto, 145mm de curso); atrás monoshock com
   // pré-carga remota e ressalto, sem compressão → "partial".
