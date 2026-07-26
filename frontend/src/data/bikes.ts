@@ -13,13 +13,6 @@
 // ficam fora do seletor mas continuam a resolver por id, para não partir setups nem
 // diário de quem já as escolheu. Tira-se o `hidden` assim que aparecer o manual.
 //
-// POR VERIFICAR — mantêm o default do nível `adj`, que pode estar errado.
-// Não editar sem confirmar em spec oficial do fabricante:
-//   Suzuki:   suzuki-gsxr1000 (a tabela oficial da Suzuki diz só "inverted telescopic,
-//             coil spring, oil damped" — não lista afinadores. NÃO está oculta de
-//             propósito: é moto corrente e o manual do proprietário existe. A GSX-S1000,
-//             que estava aqui pelo mesmo motivo, resolveu-se assim.)
-//
 // TRUQUE PARA O MANUALSLIB: as páginas são imagem e o texto não é extraível, mas dá para
 // as LER em captura de ecrã. O índice, esse, é texto normal e diz logo que capítulos de
 // afinação existem. Foi assim que se fez a GSX-S1000 (páginas 50 a 54).
@@ -73,17 +66,9 @@
 // ganha a ficha do mercado onde a app é usada.
 //
 // Os manuais trazem ainda os valores de fábrica por carga (solo / com malas / 2 pessoas),
-// que é material para perfil MFZ com dataQuality 'oem_manual' — ver nota no fim do
-// mfzSuspensionData.ts. Recolhido até agora, ainda POR INTRODUZIR:
-//   voge-900dsx  precarga trás 6 / 16±1 / 21±1 cliques do mole; extensão trás 18 / 16±1
-//                / 14±1 cliques do duro. Compressão trás: usar os valores do 800 DSX
-//                Rally (10 / 8 / 6 do duro) — mesmo amortecedor, os outros dois eixos
-//                batem certo ao clique, e o manual do 900 é que omite a compressão.
-//   voge-800dsx-rally  precarga trás 6 / 16±1 / 21±1 do mole; extensão trás 18 / 16±1 /
-//                14±1 do duro; compressão trás 10 / 8 / 6 do duro. Frente: extensão e
-//                compressão com 10 posições cada.
-//   voge-625dsx  precarga trás +0 / +2 / +3 voltas; extensão trás 10 / 8±1 / 6±1 e
-//                compressão trás 10 / 8 / 6 cliques do mole
+// que é material para perfil MFZ com dataQuality 'oem_manual'. As três Voge (900 DSX,
+// 800 DSX Rally e 625 DSX) já têm perfil criado, com os valores por carga em
+// weightPoints. Ainda POR INTRODUZIR:
 //   qj-srk800    frente precarga 5 voltas (limite 10), compressão 1 e extensão 3,25
 //                (limite 4,75); trás precarga hidráulica 0 (curso 10 mm), extensão 7
 //   qj-srk921    frente precarga 3,5 (limite 10), compressão 1,5 e extensão 2,5 (limite
@@ -407,7 +392,11 @@ export const BIKES: Bike[] = [
   // cada a abrir do duro. Atrás precarga por anel de 7 posições (4 de fábrica na versão
   // sem carenagem, 3 na F/FA) e extensão 1 volta — SEM compressão traseira.
   { id: "suzuki-gsxs1000",      brand: "Suzuki", model: "GSX-S1000 (2015-2020)", cc: "999cc",  category: "naked",     adj: "full",    mfzProfileId: "suzuki_gsxs1000_2015" },
-  { id: "suzuki-gsxr1000",      brand: "Suzuki", model: "GSX-R1000R",       cc: "999cc",  category: "sport",     adj: "full"    },
+  // GSX-R1000R (2017+): manual do proprietário Suzuki 99011-17K57-01A, que cobre a base
+  // e a R. Showa BFF à frente com os afinadores de amortecimento EM BAIXO (precarga 7,75
+  // voltas do mole, compressão 3 e extensão 2,5 do duro) e BFRC-lite atrás com os dois
+  // afinadores no topo (compressão 2,75, extensão 3). Full nas duas pontas.
+  { id: "suzuki-gsxr1000",      brand: "Suzuki", model: "GSX-R1000R (2017+)", cc: "999cc",  category: "sport",     adj: "full",    mfzProfileId: "suzuki_gsxr1000r_2017" },
 
   // ===== Triumph =====
   { id: "triumph-tiger-1200",       brand: "Triumph", model: "Tiger 1200 Rally Pro",  cc: "1160cc", category: "adventure",     adj: "full",    mfzProfileId: "triumph_tiger1200_showa" }, // Showa semi-active
@@ -437,7 +426,7 @@ export const BIKES: Bike[] = [
   // só "Amortecedor central. Curso 63 mm") e omite-a. O manual do DS 625X, mesma
   // família de amortecedor, documenta esse afinador como "adjustor 3 (at position of
   // air bottle)". Portanto full nas duas pontas — default correto, sem `adjusters`.
-  { id: "voge-900dsx",  brand: "Voge", model: "900 DSX", cc: "895cc", category: "adventure", adj: "full"    },
+  { id: "voge-900dsx",  brand: "Voge", model: "900 DSX", cc: "895cc", category: "adventure", adj: "full"   , mfzProfileId: "voge_900dsx" },
   { id: "voge-650dsx",  brand: "Voge", model: "650 DSX", cc: "652cc", category: "adventure", adj: "partial", hidden: true },
   // 525 DSX (DS525X): manual do proprietário Voge. Só tem "Adjust the rear shock
   // absorber", e lá dentro só precarga da mola — nem amortecimento atrás, nem qualquer
@@ -448,12 +437,12 @@ export const BIKES: Bike[] = [
   // 625 DSX (DS 625X): manual do proprietário Voge. Os seis afinadores existem —
   // frente precarga + extensão (bainha esq.) + compressão (bainha dta.); atrás precarga
   // + extensão + compressão (ajustador 3, no reservatório). Default "full" correto.
-  { id: "voge-625dsx",       brand: "Voge", model: "625 DSX",      cc: "625cc", category: "adventure", adj: "full" },
+  { id: "voge-625dsx",       brand: "Voge", model: "625 DSX",      cc: "625cc", category: "adventure", adj: "full", mfzProfileId: "voge_625dsx" },
   // 800 DSX Rally: manual do proprietário Voge (EN). Os seis afinadores existem —
   // frente precarga (ajustador 1) + extensão (ajustador 2, topo, 10 posições) +
   // compressão (ajustador 3, base, 10 posições); atrás precarga + extensão +
   // compressão (ajustador 3, no reservatório de gás). Default "full" correto.
-  { id: "voge-800dsx-rally", brand: "Voge", model: "800 DSX Rally", cc: "798cc", category: "adventure", adj: "full" },
+  { id: "voge-800dsx-rally", brand: "Voge", model: "800 DSX Rally", cc: "798cc", category: "adventure", adj: "full", mfzProfileId: "voge_800dsx_rally" },
   { id: "voge-r625",         brand: "Voge", model: "R625",          cc: "625cc", category: "naked",     adj: "full", hidden: true },
   // AC 525X: manual do proprietário Voge. Igual à 525 DSX — só "Adjustment of rear shock
   // absorber" com precarga da mola, sem amortecimento atrás e sem afinação à frente.

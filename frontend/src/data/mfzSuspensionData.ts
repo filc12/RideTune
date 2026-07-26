@@ -1145,7 +1145,111 @@ const YAMAHA_EXTRA: MfzProfile[] = [
   },
 ];
 
+// ─────────────────────────────────────────────
+// VOGE
+// Fonte: manuais do proprietário (documento OEM).
+//
+// PORQUE É QUE A FRENTE APARECE SEM NÚMERO: não é lacuna, é o que o manual diz. A Voge
+// documenta o traseiro ao clique e por carga, e sobre a frente escreve "Please adjust the
+// gear according to personal preference" — dá o número de posições e como encontrar a
+// posição 1, mas recusa-se a prescrever. Usar `pos` mantém o afinador como existente
+// (isAdjustable = true) e mostra a instrução em vez de inventar um valor. É mais correto
+// que a heurística por categoria, que poria ali um número que a fábrica nunca deu.
+//
+// Contagem traseira: a precarga conta-se a partir do MOLE (anti-horário até ao fim,
+// depois apertar) e a extensão a partir do DURO (horário até ao fim, depois abrir).
+// ─────────────────────────────────────────────
+const VOGE: MfzProfile[] = [
+  {
+    id: 'voge_900dsx',
+    brand: 'Voge', model: '900 DSX', year: '2023+',
+    baseKg: 75, source: 'Manual do proprietário Voge 900 DSX (PT, oficial)', formula: 'cfmoto_interp',
+    dataQuality: 'oem_manual',
+    front: {
+      preload: pos('Ajustável (comando 1) — o manual não dá valor de fábrica'),
+      comp:    pos('Ajustável (comando 3, bainha direita) — sem valor de fábrica'),
+      reb:     pos('Ajustável (comando 2, bainha esquerda) — sem valor de fábrica'),
+    },
+    rear: {
+      preload: cl_s(6),
+      comp:    pos('Existe (parafuso no reservatório de gás) — o manual omite-a'),
+      reb:     cl_h(18),
+    },
+    weightPoints: [
+      { kg: 75,  rPre: 6,  rReb: 18 },
+      { kg: 115, rPre: 16, rReb: 16 },
+      { kg: 190, rPre: 21, rReb: 14 },
+    ],
+    countNote: 'Atrás: precarga a partir do mole (anti-horário até ao fim, depois conta a apertar) e extensão a partir do duro (horário até ao fim, depois conta a abrir). À frente o manual não prescreve valores — regula pelo sag e pela sensação.',
+    notes: 'As três cargas do manual são: só piloto (6 cliques de precarga, 18 de extensão), piloto com 3 malas (16±1 e 16±1) e piloto com passageiro e 3 malas (21±1 e 14±1). A compressão traseira EXISTE, por parafuso no reservatório de gás, mas este manual não a descreve — o manual do 800 DSX Rally, que tem o mesmo amortecedor e os mesmos valores de precarga e extensão ao clique, usa 10 / 8 / 6 cliques do duro para as mesmas três cargas. Não foi copiado para aqui por ser outro modelo. Confirmar sempre pelo sag.',
+  },
+  {
+    id: 'voge_800dsx_rally',
+    brand: 'Voge', model: '800 DSX Rally', year: '2024+',
+    baseKg: 75, source: 'Manual do proprietário Voge 800 DSX Rally (EN, oficial)', formula: 'cfmoto_interp',
+    dataQuality: 'oem_manual',
+    front: {
+      preload: mm(19),
+      comp:    pos('10 posições (ajustador 3, em baixo) — a Voge não prescreve'),
+      reb:     pos('10 posições (ajustador 2, em cima) — a Voge não prescreve'),
+    },
+    rear: {
+      preload: cl_s(6),
+      comp:    cl_h(10),
+      reb:     cl_h(18),
+    },
+    weightPoints: [
+      { kg: 75,  rPre: 6,  rComp: 10, rReb: 18 },
+      { kg: 115, rPre: 16, rComp: 8,  rReb: 16 },
+      { kg: 190, rPre: 21, rComp: 6,  rReb: 14 },
+    ],
+    countNote: 'Atrás: precarga a partir do mole, extensão e compressão a partir do duro (a compressão é o ajustador 3, no reservatório de gás). Precarga da frente em mm de altura, 19 mm de fábrica (intervalo 4 a 19). Compressão e extensão da frente têm 10 posições cada e o manual manda escolher por preferência.',
+    notes: 'É o perfil Voge mais completo: o único cujo manual dá valor de fábrica para a precarga da frente (19 mm). As três cargas são só piloto, piloto com 3 malas e piloto com passageiro e 3 malas. Confirmar sempre pelo sag.',
+  },
+  {
+    id: 'voge_625dsx',
+    brand: 'Voge', model: '625 DSX (DS 625X)', year: '2024+',
+    baseKg: 75, source: 'Manual do proprietário Voge DS 625X (EN, oficial)', formula: 'cfmoto_interp',
+    dataQuality: 'oem_manual',
+    front: {
+      preload: pos('Ajustável (ajustador 1, chave de bocas 14 Nm) — sem valor de fábrica'),
+      comp:    pos('Ajustável (ajustador 3, bainha direita) — sem valor de fábrica'),
+      reb:     pos('Ajustável (ajustador 2, bainha esquerda) — sem valor de fábrica'),
+    },
+    rear: {
+      preload: pos('Posição de entrega; +2 voltas com 3 malas, +3 a dois com malas'),
+      comp:    cl_s(10),
+      reb:     cl_s(10),
+    },
+    weightPoints: [
+      { kg: 75,  rComp: 10, rReb: 10 },
+      { kg: 115, rComp: 8,  rReb: 8  },
+      { kg: 190, rComp: 6,  rReb: 6  },
+    ],
+    countNote: 'Atrás, ao contrário das outras Voge, a extensão e a compressão contam-se a partir do MOLE: anti-horário até ao fim, depois conta a apertar. A precarga traseira é em voltas a partir da posição de entrega, não a partir de um limite — por isso não tem número absoluto.',
+    notes: 'Cargas do manual: só piloto (extensão e compressão 10 cliques, precarga na posição de entrega), piloto com 3 malas (8±1 e 8, precarga +2 voltas) e piloto com passageiro e 3 malas (6±1 e 6, precarga +3 voltas). Confirmar sempre pelo sag.',
+  },
+];
+
 const SUZUKI_EXTRA: MfzProfile[] = [
+  {
+    id: 'suzuki_gsxr1000r_2017',
+    brand: 'Suzuki', model: 'GSX-R1000R', year: '2017+',
+    baseKg: 75, source: 'Manual do proprietário Suzuki GSX-R1000/R (99011-17K57-01A, oficial)', formula: 'suzuki',
+    dataQuality: 'oem_manual',
+    front: {
+      preload: tu_s(7.75),
+      comp:    tu_h(3),
+      reb:     tu_h(2.5),
+    },
+    rear: {
+      preload: pos('Anel roscado — precisa de ferramenta especial, a Suzuki manda ir ao concessionário'),
+      comp:    tu_h(2.75),
+      reb:     tu_h(3),
+    },
+    countNote: 'Frente (Showa BFF): os afinadores de compressão e extensão estão em BAIXO nas duas pernas, não em cima. Fechar no sentido horário até parar e abrir — compressão 3 voltas, extensão 2,5. A precarga é ao contrário: fechar no anti-horário até parar e apertar 7,75 voltas, com chave sextavada no topo. Atrás: extensão 3 voltas e compressão 2,75, ambas a abrir do duro, com os dois afinadores no TOPO do amortecedor. Afinar 1/8 de volta de cada vez.',
+    notes: 'Valores da versão R, que tem Showa BFF à frente e BFRC-lite atrás. A GSX-R1000 base tem números diferentes no mesmo manual — precarga da frente 4,75 voltas, extensão 4, compressão 4,75; atrás extensão 2,75 e compressão separada em alta e baixa velocidade, que a R não tem. Regular sempre as duas pernas da forquilha igual. A precarga traseira não tem valor de fábrica publicado: usar o sag. Confirmar sempre pelo sag.',
+  },
   {
     id: 'suzuki_gsxs1000_2015',
     brand: 'Suzuki', model: 'GSX-S1000', year: '2015-2020',
@@ -1234,6 +1338,7 @@ export const MFZ_PROFILES: MfzProfile[] = [
   ...KTM_EXTRA,
   ...YAMAHA_EXTRA,
   ...SUZUKI_EXTRA,
+  ...VOGE,
   ...QJMOTOR,
   ...HONDA,
   ...KOVE,
