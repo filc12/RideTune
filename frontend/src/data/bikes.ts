@@ -11,19 +11,9 @@
 //
 // POR VERIFICAR — mantêm o default do nível `adj`, que pode estar errado.
 // Não editar sem confirmar em spec oficial do fabricante:
-//   Honda:    honda-fireblade (honda.co.uk MY2025+ lista Öhlins NPX/TTX36 S-EC 3.0:
-//             compressão e extensão são ELETRÓNICAS. Falta confirmar se a pré-carga é
-//             manual — se for, é caso de adjusters {fPre,rPre} true e o resto false;
-//             se não for, é perfil MFZ com tudo `na`. A geração anterior (Showa BPF)
-//             era mecânica full, por isso a entrada precisa de ano no nome.)
-//   KTM:      ktm-1290-sdr (a KTM removeu a página de technical-specifications do
-//             ktm.com — sem fonte oficial viva. Nota: a 890 Duke R, que estava aqui
-//             pelo mesmo motivo, resolveu-se com o manual do proprietário em PDF —
-//             vale a pena tentar o mesmo caminho para esta.)
 //   Suzuki:   suzuki-gsxs1000, suzuki-gsxr1000 (a tabela oficial da Suzuki diz só
-//             "inverted telescopic, coil spring, oil damped" — não lista afinadores)
-//   Yamaha:   yamaha-r1 (frente confirmada full em yamahamotorsports.com: pré-carga +
-//             compressão alta/baixa + extensão; falta confirmação oficial do traseiro)
+//             "inverted telescopic, coil spring, oil damped" — não lista afinadores.
+//             Resolve-se com o manual do proprietário em PDF, como as outras.)
 //
 // BLOCO CHINÊS — tentado e SEM SAÍDA pelo site oficial. Não repetir a pesquisa pela
 // mesma via; o caminho que falta é o manual do utilizador (PDF), ver nota no fim.
@@ -240,7 +230,13 @@ export const BIKES: Bike[] = [
   // NC750X: front non-adjustable, rear preload ring only
   { id: "honda-nc750x",      brand: "Honda", model: "NC750X",                       cc: "745cc",  category: "adventure", adj: "fixed"   },
   { id: "honda-xadv",        brand: "Honda", model: "X-ADV",                        cc: "745cc",  category: "adventure", adj: "fixed"   },
-  { id: "honda-fireblade",   brand: "Honda", model: "CBR1000RR-R Fireblade",        cc: "999cc",  category: "sport",     adj: "full"    },
+  // Fireblade (2024+): manual oficial CBR1000RR-R Fireblade SP 2025. Öhlins Smart EC —
+  // "the system continually adjusts compression and rebound damping levels according to
+  // the riding situation. You can adjust the front and rear suspension preload manually."
+  // Ou seja: compressão e extensão são ELETRÓNICAS nas duas pontas (não há clicker), e
+  // só a precarga é manual, à frente e atrás. A geração anterior (Showa BPF) era
+  // mecânica e totalmente ajustável — daí o ano no nome.
+  { id: "honda-fireblade",   brand: "Honda", model: "CBR1000RR-R Fireblade (2024+)", cc: "999cc",  category: "sport",     adj: "full", adjusters: { fPre: true, fComp: false, fReb: false, rPre: true, rComp: false, rReb: false } },
   // CB1000R: front compression only, rear preload+rebound (no front rebound, no rear compression)
   { id: "honda-nt1100",      brand: "Honda", model: "NT1100",                        cc: "1084cc", category: "sport_touring", adj: "partial", mfzProfileId: "honda_nt1100_2022" },
   // CB1000R: Showa SFF-BP front (preload+comp+reb, damping numa perna); Showa rear preload+rebound
@@ -291,7 +287,11 @@ export const BIKES: Bike[] = [
   { id: "ktm-390-adv-r",     brand: "KTM", model: "390 Adventure R (2025+)", cc: "399cc",  category: "adventure", adj: "partial", mfzProfileId: "ktm_390_adv_r_2025" },
   // 390 Enduro R (2025+): mesma base WP APEX 43 / split piston, 230 mm curso. ktm.com specs
   { id: "ktm-390-enduro-r",  brand: "KTM", model: "390 Enduro R (2025+)",   cc: "399cc",  category: "adventure", adj: "partial", mfzProfileId: "ktm_390_enduro_r_2025" },
-  { id: "ktm-1290-sdr",      brand: "KTM", model: "1290 Super Duke R",      cc: "1301cc", category: "naked",     adj: "full"    },
+  // 1290 Super Duke R: manual oficial KTM 2021 (art. 3214331en). WP APEX totalmente
+  // ajustável nas duas pontas — precarga por parafuso nas duas pernas à frente (ao
+  // contrário da 890 Duke R, que é split e não tem), e atrás precarga por manípulo,
+  // extensão e compressão separada em baixa e alta velocidade.
+  { id: "ktm-1290-sdr",      brand: "KTM", model: "1290 Super Duke R (2020-2023)", cc: "1301cc", category: "naked", adj: "full", mfzProfileId: "ktm_1290_sdr_2021" },
   // 890 Duke R: manual oficial KTM 2022 (art. 3214544en). Forquilha WP APEX 43 split —
   // compressão na perna esquerda, extensão na direita, SEM precarga à frente. Atrás
   // precarga + extensão + compressão separada em baixa e alta velocidade.
@@ -431,7 +431,10 @@ export const BIKES: Bike[] = [
   // XSR900: same platform as MT-09, preload+rebound both ends
   // XSR900 (2022+): KYB 41 mm totalmente ajustável à frente; atrás precarga + extensão
   { id: "yamaha-xsr900",     brand: "Yamaha", model: "XSR900",                cc: "890cc", category: "naked",         adj: "partial", adjusters: { fPre: true, fComp: true, fReb: true, rPre: true, rComp: false, rReb: true } },
-  { id: "yamaha-r1",         brand: "Yamaha", model: "YZF-R1",                cc: "998cc", category: "sport",         adj: "full"    },
+  // YZF-R1 (2020+): manual oficial Yamaha (B3L). KYB totalmente ajustável nas duas
+  // pontas — atrás com compressão separada em lenta e rápida. A R1M é que tem Öhlins
+  // eletrónica; esta entrada é a R1 manual.
+  { id: "yamaha-r1",         brand: "Yamaha", model: "YZF-R1 (2020+)",        cc: "998cc", category: "sport",         adj: "full",    mfzProfileId: "yamaha_r1_2020" },
   // R7: KYB front non-adjustable, rear preload+rebound
   // YZF-R7: KYB 41 mm totalmente ajustável à frente; atrás precarga + extensão
   { id: "yamaha-r7",         brand: "Yamaha", model: "YZF-R7",                cc: "689cc", category: "midsport",      adj: "partial", adjusters: { fPre: true, fComp: true, fReb: true, rPre: true, rComp: false, rReb: true } },

@@ -1080,6 +1080,26 @@ const MACBOR: MfzProfile[] = [
 // ─────────────────────────────────────────────
 const KTM_EXTRA: MfzProfile[] = [
   {
+    id: 'ktm_1290_sdr_2021',
+    brand: 'KTM', model: '1290 Super Duke R', year: '2020-2023',
+    baseKg: 75, source: 'KTM 1290 Super Duke R Owner\'s Manual 2021 (art. 3214331en, oficial)', formula: 'ktm',
+    dataQuality: 'oem_manual',
+    front: {
+      preload: pos('0 = base de fábrica (escala -3 a +3)'),
+      comp:    cl_h(15),   // perna ESQUERDA, parafuso branco COMP
+      reb:     cl_h(15),   // perna DIREITA, parafuso vermelho REB
+    },
+    rear: {
+      preload: pos('0 = base de fábrica (manípulo, escala -5 a +15)'),
+      comp:    cl_h(12),   // = baixa velocidade
+      reb:     cl_h(15),
+      lsComp:  cl_h(12),
+      hsComp:  tu_h(1.5),
+    },
+    countNote: 'Frente: fechar até ao fim no sentido horário e abrir 15 cliques — compressão na perna ESQUERDA (parafuso branco, COMP), extensão na DIREITA (vermelho, REB). Precarga da frente por parafuso nas duas pernas, escala -3 / 0 / +3 (0 é a base). Atrás: extensão 15 cliques e compressão de baixa velocidade 12, ambas a abrir do duro; alta velocidade 1,5 voltas. Precarga traseira por manípulo do lado direito, escala -5 a +15 (0 é a base).',
+    notes: 'Valores "Standard" do manual oficial, versão SUPER DUKE R (a RR tem outros). O manual dá quatro predefinições: Comfort / Standard / Sport / Carga máxima. Frente — precarga -3/0/+3/+3, compressão 21/15/7/7 e extensão 21/15/7/7 cliques. Atrás — compressão baixa velocidade 21/12/7/7 cliques, alta velocidade 1,5/1,5/1/1 voltas, extensão 21/15/10/10 cliques. Confirmar sempre pelo sag.',
+  },
+  {
     id: 'ktm_890_duke_r_2022',
     brand: 'KTM', model: '890 Duke R', year: '2020-2023',
     baseKg: 75, source: 'KTM 890 Duke R Owner\'s Manual 2022 (art. 3214544en, oficial)', formula: 'ktm',
@@ -1099,6 +1119,29 @@ const KTM_EXTRA: MfzProfile[] = [
     },
     countNote: 'Frente: fechar o afinador até ao fim no sentido horário e abrir 15 cliques — compressão na perna ESQUERDA (adjuster branco, marcado COMP), extensão na DIREITA (vermelho, REB). Atrás igual para extensão e compressão de baixa velocidade (14 cliques); a de alta velocidade é em voltas (1,5) com chave de bocas. Precarga: abrir tudo no sentido anti-horário e apertar 3 voltas.',
     notes: 'Valores "Standard" do manual oficial. O manual dá quatro predefinições: Comfort / Standard / Sport / Carga máxima. Frente — compressão 20/15/4/15 e extensão 20/15/10/15 cliques. Atrás — compressão baixa velocidade 16/14/10/14 cliques, alta velocidade 1,5 voltas em todas, extensão 17/14/12/11 cliques, precarga 1/3/5,5/6 voltas. A forquilha split NÃO tem precarga: o único ajuste de precarga da moto é no amortecedor. Confirmar sempre pelo sag.',
+  },
+];
+
+const YAMAHA_EXTRA: MfzProfile[] = [
+  {
+    id: 'yamaha_r1_2020',
+    brand: 'Yamaha', model: 'YZF-R1', year: '2020+',
+    baseKg: 75, source: 'Manual do proprietário Yamaha YZF-R1 / R1M (B3L, oficial)', formula: 'yamaha',
+    dataQuality: 'oem_manual',
+    front: {
+      preload: tu_s(6),    // min 0, standard 6, max 15 voltas
+      comp:    cl_h(17),   // min 23, standard 17, max 1 cliques
+      reb:     cl_h(7),    // min 14, standard 7, max 1 cliques
+    },
+    rear: {
+      preload: pos('Medida pela distância A — ver manual'),
+      comp:    cl_h(12),   // = baixa velocidade
+      reb:     cl_h(12),   // min 23, standard 12, max 1
+      lsComp:  cl_h(12),   // min 18, standard 12, max 1
+      hsComp:  tu_h(3),    // min 5,5, standard 3, max 0 voltas
+    },
+    countNote: 'Fechar o afinador até ao fim no sentido de endurecer e contar a abrir. Frente: compressão 17 cliques, extensão 7 cliques; precarga ao contrário — fechar até parar no sentido de aliviar e apertar 6 voltas. Atrás: extensão 12 cliques, compressão lenta 12 cliques, compressão rápida 3 voltas. Precarga traseira mede-se pela distância A, não por cliques.',
+    notes: 'Valores standard do manual oficial, versão YZF-R1 (a R1M tem suspensão Öhlins eletrónica, com compressão e extensão ajustadas pelo ecrã — não é este perfil). Extremos do manual: frente precarga 0 a 15 voltas, compressão 23 a 1, extensão 14 a 1. Atrás extensão 23 a 1, compressão lenta 18 a 1, compressão rápida 5,5 a 0 voltas. Confirmar sempre pelo sag.',
   },
 ];
 
@@ -1162,6 +1205,7 @@ const QJMOTOR: MfzProfile[] = [
 export const MFZ_PROFILES: MfzProfile[] = [
   ...CFMOTO,
   ...KTM_EXTRA,
+  ...YAMAHA_EXTRA,
   ...QJMOTOR,
   ...HONDA,
   ...KOVE,
