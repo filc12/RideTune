@@ -508,14 +508,21 @@ function DataCell({ label, value, vtype, t, forceSet }: { label: string; value: 
   const isNa  = vtype === 'na' && !forceSet;
   const isPos = vtype === 'pos' || (vtype === 'na' && forceSet);
   const unit = (!isNa && !isPos && vtype && t) ? t(("susp.unit." + vtype) as never) : undefined;
-  const shown = isNa ? 'N/A' : isPos ? 'SET' : value;
+  // `na` = o afinador NÃO existe na moto. `pos` = existe, mas o fabricante não prescreve
+  // um valor (ou é uma posição/medida, não um número de cliques). São coisas diferentes e
+  // têm de se distinguir à vista: se as duas aparecerem cinzentas e apagadas, uma moto com
+  // regulação à frente parece uma moto sem regulação nenhuma.
+  const shown = isNa ? 'N/A' : isPos ? (t ? t("susp.cell.pos" as never) : 'SET') : value;
   return (
     <View style={styles.dataCell}>
       <Text style={styles.dataLabel} numberOfLines={2} adjustsFontSizeToFit minimumFontScale={0.75}>{label}</Text>
-      {(isNa || isPos)
+      {isNa
         ? <Text style={[styles.dataValue, { fontSize: 13, color: C.textMute }]}>{shown}</Text>
-        : <AnimatedNumber value={value} style={styles.dataValue} duration={500} />}
+        : isPos
+          ? <Text style={[styles.dataValue, { fontSize: 13, color: C.accent }]}>{shown}</Text>
+          : <AnimatedNumber value={value} style={styles.dataValue} duration={500} />}
       {unit ? <Text style={styles.dataUnit}>{unit}</Text> : null}
+      {isPos ? <Text style={styles.dataUnit}>{t ? t("susp.cell.pos_hint" as never) : ""}</Text> : null}
     </View>
   );
 }
