@@ -31,6 +31,13 @@ export interface SuspVal {
   v: number | null;
   type: VType;
   label?: string;   // used when type='pos' or 'na'
+  /**
+   * Token curto para a célula quando type='pos'. Sem isto a célula mostra só a palavra
+   * genérica ("AJUSTA"), o que desperdiça informação que às vezes temos: o curso do
+   * afinador ("1-10") ou a posição de fábrica numa escala ("2,5/5"). Mantém-se curto
+   * porque a célula é estreita — a explicação vai no `label` e na countNote.
+   */
+  cell?: string;
 }
 
 export interface Axle {
@@ -86,7 +93,7 @@ const cl_s = (v: number): SuspVal => ({ v, type: 'cl_soft' });
 const tu_h = (v: number): SuspVal => ({ v, type: 'tu_hard' });
 const tu_s = (v: number): SuspVal => ({ v, type: 'tu_soft' });
 const mm   = (v: number): SuspVal => ({ v, type: 'mm' });
-const pos  = (label: string): SuspVal => ({ v: null, type: 'pos', label });
+const pos  = (label: string, cell?: string): SuspVal => ({ v: null, type: 'pos', label, cell });
 const na   = (label = 'Not adjustable'): SuspVal => ({ v: null, type: 'na', label });
 
 // ─────────────────────────────────────────────
@@ -1057,7 +1064,7 @@ const MACBOR: MfzProfile[] = [
       reb:     cl_h(7),
     },
     rear: {
-      preload: pos('241,5 mm comprimento mola (fabrica)'),
+      preload: pos('241,5 mm comprimento mola (fabrica)', '241,5 mm'),
       comp:    cl_h(11),
       reb:     cl_h(6),
     },
@@ -1085,12 +1092,12 @@ const KTM_EXTRA: MfzProfile[] = [
     baseKg: 75, source: 'KTM 1290 Super Duke R Owner\'s Manual 2021 (art. 3214331en, oficial)', formula: 'ktm',
     dataQuality: 'oem_manual',
     front: {
-      preload: pos('0 = base de fábrica (escala -3 a +3)'),
+      preload: pos('0 = base de fábrica (escala -3 a +3)', '0 (-3/+3)'),
       comp:    cl_h(15),   // perna ESQUERDA, parafuso branco COMP
       reb:     cl_h(15),   // perna DIREITA, parafuso vermelho REB
     },
     rear: {
-      preload: pos('0 = base de fábrica (manípulo, escala -5 a +15)'),
+      preload: pos('0 = base de fábrica (manípulo, escala -5 a +15)', '0 (-5/+15)'),
       comp:    cl_h(12),   // = baixa velocidade
       reb:     cl_h(15),
       lsComp:  cl_h(12),
@@ -1190,8 +1197,8 @@ const VOGE: MfzProfile[] = [
     dataQuality: 'oem_manual',
     front: {
       preload: mm(19),
-      comp:    pos('10 posições (ajustador 3, em baixo) — a Voge não prescreve'),
-      reb:     pos('10 posições (ajustador 2, em cima) — a Voge não prescreve'),
+      comp:    pos('10 posições (ajustador 3, em baixo) — a Voge não prescreve', '1-10'),
+      reb:     pos('10 posições (ajustador 2, em cima) — a Voge não prescreve', '1-10'),
     },
     rear: {
       preload: cl_s(6),
@@ -1217,7 +1224,7 @@ const VOGE: MfzProfile[] = [
       reb:     pos('Ajustável (ajustador 2, bainha esquerda) — sem valor de fábrica'),
     },
     rear: {
-      preload: pos('Posição de entrega; +2 voltas com 3 malas, +3 a dois com malas'),
+      preload: pos('Posição de entrega; +2 voltas com 3 malas, +3 a dois com malas', 'entrega'),
       comp:    cl_s(10),
       reb:     cl_s(10),
     },
@@ -1256,12 +1263,12 @@ const SUZUKI_EXTRA: MfzProfile[] = [
     baseKg: 75, source: 'Manual do proprietário Suzuki GSX-S1000 / F / FA (oficial)', formula: 'suzuki',
     dataQuality: 'oem_manual',
     front: {
-      preload: pos('Posição 2,5 de 5 (fábrica) — 5 riscas no ajustador, 1 = mais mole'),
+      preload: pos('Posição 2,5 de 5 (fábrica) — 5 riscas no ajustador, 1 = mais mole', '2,5/5'),
       comp:    cl_h(8),
       reb:     cl_h(8),
     },
     rear: {
-      preload: pos('Posição 4 de 7 (fábrica, GSX-S1000/A; a F/FA vem na 3)'),
+      preload: pos('Posição 4 de 7 (fábrica, GSX-S1000/A; a F/FA vem na 3)', '4/7'),
       comp:    na('O amortecedor não tem afinador de compressão'),
       reb:     tu_h(1),
     },
@@ -1324,7 +1331,7 @@ const QJMOTOR: MfzProfile[] = [
       reb:     tu_h(2.5),
     },
     rear: {
-      preload: pos('3 a 8 mm entre o topo da rosca e a contraporca'),
+      preload: pos('3 a 8 mm entre o topo da rosca e a contraporca', '3-8 mm'),
       comp:    na('O amortecedor não tem afinador de compressão'),
       reb:     na('O amortecedor não tem afinador de extensão'),
     },

@@ -25,6 +25,9 @@ export type SetupResult = Setup & {
   /** Per-adjuster value type (na, pos, clicks, turns, mm) so the UI can show N/A or SET. */
   frontTypes?: { preload: string; reb: string; comp: string };
   rearTypes?:  { preload: string; reb: string; comp: string };
+  /** Token curto por célula para os afinadores 'pos' (curso ou posição de fábrica). */
+  frontCells?: { preload?: string; reb?: string; comp?: string };
+  rearCells?:  { preload?: string; reb?: string; comp?: string };
   /** Rear high/low-speed compression (rally shocks): value + type for translated display. */
   rearHs?: { value: number | string | null; type: string };
   rearLs?: { value: number | string | null; type: string };
@@ -253,6 +256,16 @@ export function calcSetupById(bikeId: string | null, load: Load): SetupResult {
             preload: real.rear.preload.type,
             reb:     real.rear.rebound.type,
             comp:    real.rear.compression.type,
+          },
+          frontCells: {
+            preload: real.front.preload.cell,
+            reb:     real.front.rebound.cell,
+            comp:    real.front.compression.cell,
+          },
+          rearCells: {
+            preload: real.rear.preload.cell,
+            reb:     real.rear.rebound.cell,
+            comp:    real.rear.compression.cell,
           },
           rearHs: real.rear.highSpeedCompression
             ? { value: real.rear.highSpeedCompression.value, type: real.rear.highSpeedCompression.type }

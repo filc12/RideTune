@@ -32,6 +32,8 @@ export interface AdjResult {
   display: string;       // Human-readable string for the UI
   countDirection: string; // How to count (instruction text)
   isAdjustable: boolean;
+  /** Token curto para a célula quando type='pos' (curso ou posição de fábrica). */
+  cell?: string;
 }
 
 export interface SuspensionResult {
@@ -272,6 +274,7 @@ function buildAdjResult(sv: SuspVal, adjustedValue?: number): AdjResult {
     display: formatDisplay(finalValue, sv.type, sv.label),
     countDirection: COUNT_INSTRUCTIONS[sv.type],
     isAdjustable,
+    cell: sv.cell,
   };
 }
 

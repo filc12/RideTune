@@ -289,9 +289,9 @@ export default function HomeScreen() {
                 <>
                   {!setup.noData && <ConfidenceBadge level={setup.confidence} compact />}
                   {setup.noData && <NoDataBadge />}
-                  <SuspensionBlock title={t("card.front")} icon="arrow-up-bold-circle-outline" values={setup.front} adj={setup.adjDetails?.front} types={setup.frontTypes} t={t} />
+                  <SuspensionBlock title={t("card.front")} icon="arrow-up-bold-circle-outline" values={setup.front} adj={setup.adjDetails?.front} types={setup.frontTypes} cells={setup.frontCells} t={t} />
                   <View style={styles.hairline} />
-                  <SuspensionBlock title={t("card.rear")} icon="arrow-down-bold-circle-outline" values={setup.rear} adj={setup.adjDetails?.rear} types={setup.rearTypes} t={t} hasHsLs={!!(setup.rearHs || setup.rearLs)} />
+                  <SuspensionBlock title={t("card.rear")} icon="arrow-down-bold-circle-outline" values={setup.rear} adj={setup.adjDetails?.rear} types={setup.rearTypes} cells={setup.rearCells} t={t} hasHsLs={!!(setup.rearHs || setup.rearLs)} />
                   <View style={styles.hairline} />
                   <View style={styles.sagRow}>
                     <View style={{ flex: 1 }}>
@@ -406,13 +406,14 @@ function getNum(s: string | undefined, fallback: number) {
   return m ? m[0] : String(fallback);
 }
 function SuspensionBlock({
-  title, icon, values, adj, types, t, hasHsLs,
+  title, icon, values, adj, types, cells, t, hasHsLs,
 }: {
   title: string;
   icon: keyof typeof MaterialCommunityIcons.glyphMap;
   values: { preload: number; rebound: number; compression: number };
   adj?: { preload: string; comp: string; reb: string; hsComp?: string };
   types?: { preload: string; reb: string; comp: string };
+  cells?: { preload?: string; reb?: string; comp?: string };
   t: (k: never) => string;
   hasHsLs?: boolean;
 }) {
@@ -423,9 +424,9 @@ function SuspensionBlock({
         <Text style={styles.suspTitle}>{title}</Text>
       </View>
       <View style={styles.suspGrid}>
-        <DataCell label={t("card.preload" as never)} value={getNum(adj?.preload, values.preload)} vtype={types?.preload ?? getVType(adj?.preload)} t={t} />
-        <DataCell label={t("card.rebound" as never)} value={getNum(adj?.reb, values.rebound)} vtype={types?.reb ?? getVType(adj?.reb)} t={t} />
-        <DataCell label={t("card.compression" as never)} value={getNum(adj?.comp, values.compression)} vtype={types?.comp ?? getVType(adj?.comp)} t={t} forceSet={hasHsLs} />
+        <DataCell label={t("card.preload" as never)} value={getNum(adj?.preload, values.preload)} vtype={types?.preload ?? getVType(adj?.preload)} cell={cells?.preload} t={t} />
+        <DataCell label={t("card.rebound" as never)} value={getNum(adj?.reb, values.rebound)} vtype={types?.reb ?? getVType(adj?.reb)} cell={cells?.reb} t={t} />
+        <DataCell label={t("card.compression" as never)} value={getNum(adj?.comp, values.compression)} vtype={types?.comp ?? getVType(adj?.comp)} cell={cells?.comp} t={t} forceSet={hasHsLs} />
       </View>
     </View>
   );
@@ -504,7 +505,7 @@ function AnimatedNumber({ value, style, duration = 500 }: { value: string; style
   return <Text style={style}>{isNumeric ? display : value}</Text>;
 }
 
-function DataCell({ label, value, vtype, t, forceSet }: { label: string; value: string; vtype?: string; t?: (k: never) => string; forceSet?: boolean }) {
+function DataCell({ label, value, vtype, cell, t, forceSet }: { label: string; value: string; vtype?: string; cell?: string; t?: (k: never) => string; forceSet?: boolean }) {
   const isNa  = vtype === 'na' && !forceSet;
   const isPos = vtype === 'pos' || (vtype === 'na' && forceSet);
   const unit = (!isNa && !isPos && vtype && t) ? t(("susp.unit." + vtype) as never) : undefined;
@@ -512,7 +513,10 @@ function DataCell({ label, value, vtype, t, forceSet }: { label: string; value: 
   // um valor (ou é uma posição/medida, não um número de cliques). São coisas diferentes e
   // têm de se distinguir à vista: se as duas aparecerem cinzentas e apagadas, uma moto com
   // regulação à frente parece uma moto sem regulação nenhuma.
-  const shown = isNa ? 'N/A' : isPos ? (t ? t("susp.cell.pos" as never) : 'SET') : value;
+  // Num `pos` mostra-se o token curto quando existe — curso do afinador ("1-10") ou
+  // posição de fábrica numa escala ("2,5/5"). Só quando não há nada disso é que cai na
+  // palavra genérica.
+  const shown = isNa ? 'N/A' : isPos ? (cell || (t ? t("susp.cell.pos" as never) : 'SET')) : value;
   return (
     <View style={styles.dataCell}>
       <Text style={styles.dataLabel} numberOfLines={2} adjustsFontSizeToFit minimumFontScale={0.75}>{label}</Text>
