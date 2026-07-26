@@ -15,11 +15,14 @@
 //
 // POR VERIFICAR — mantêm o default do nível `adj`, que pode estar errado.
 // Não editar sem confirmar em spec oficial do fabricante:
-//   Suzuki:   suzuki-gsxs1000, suzuki-gsxr1000 (a tabela oficial da Suzuki diz só
-//             "inverted telescopic, coil spring, oil damped" — não lista afinadores.
-//             NÃO estão ocultas de propósito: são motos correntes e o manual do
-//             proprietário existe e é fácil de obter. É só ir buscá-lo, como se fez
-//             para a KTM 890 Duke R e para a Honda Fireblade.)
+//   Suzuki:   suzuki-gsxr1000 (a tabela oficial da Suzuki diz só "inverted telescopic,
+//             coil spring, oil damped" — não lista afinadores. NÃO está oculta de
+//             propósito: é moto corrente e o manual do proprietário existe. A GSX-S1000,
+//             que estava aqui pelo mesmo motivo, resolveu-se assim.)
+//
+// TRUQUE PARA O MANUALSLIB: as páginas são imagem e o texto não é extraível, mas dá para
+// as LER em captura de ecrã. O índice, esse, é texto normal e diz logo que capítulos de
+// afinação existem. Foi assim que se fez a GSX-S1000 (páginas 50 a 54).
 //
 // BLOCO CHINÊS — tentado e SEM SAÍDA pelo site oficial. Não repetir a pesquisa pela
 // mesma via; o caminho que falta é o manual do utilizador (PDF), ver nota no fim.
@@ -399,7 +402,11 @@ export const BIKES: Bike[] = [
   // V-Strom 650 XT: front non-adjustable, rear preload only
   // V-Strom 650 XT (2017+): frente sem qualquer ajuste externo; atrás precarga + extensão
   { id: "suzuki-vstrom-650",    brand: "Suzuki", model: "V-Strom 650 XT",   cc: "645cc",  category: "adventure", adj: "fixed",   adjusters: { fPre: false, fComp: false, fReb: false, rPre: true, rComp: false, rReb: true } },
-  { id: "suzuki-gsxs1000",      brand: "Suzuki", model: "GSX-S1000",        cc: "999cc",  category: "naked",     adj: "full"    },
+  // GSX-S1000 (2015-2020): manual do proprietário Suzuki (o mesmo cobre a F/FA). Frente
+  // KYB com precarga por posições (2,5 de 5 de fábrica), compressão e extensão 8 cliques
+  // cada a abrir do duro. Atrás precarga por anel de 7 posições (4 de fábrica na versão
+  // sem carenagem, 3 na F/FA) e extensão 1 volta — SEM compressão traseira.
+  { id: "suzuki-gsxs1000",      brand: "Suzuki", model: "GSX-S1000 (2015-2020)", cc: "999cc",  category: "naked",     adj: "full",    mfzProfileId: "suzuki_gsxs1000_2015" },
   { id: "suzuki-gsxr1000",      brand: "Suzuki", model: "GSX-R1000R",       cc: "999cc",  category: "sport",     adj: "full"    },
 
   // ===== Triumph =====

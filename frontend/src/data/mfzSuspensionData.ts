@@ -1145,6 +1145,27 @@ const YAMAHA_EXTRA: MfzProfile[] = [
   },
 ];
 
+const SUZUKI_EXTRA: MfzProfile[] = [
+  {
+    id: 'suzuki_gsxs1000_2015',
+    brand: 'Suzuki', model: 'GSX-S1000', year: '2015-2020',
+    baseKg: 75, source: 'Manual do proprietário Suzuki GSX-S1000 / F / FA (oficial)', formula: 'suzuki',
+    dataQuality: 'oem_manual',
+    front: {
+      preload: pos('Posição 2,5 de 5 (fábrica) — 5 riscas no ajustador, 1 = mais mole'),
+      comp:    cl_h(8),
+      reb:     cl_h(8),
+    },
+    rear: {
+      preload: pos('Posição 4 de 7 (fábrica, GSX-S1000/A; a F/FA vem na 3)'),
+      comp:    na('O amortecedor não tem afinador de compressão'),
+      reb:     tu_h(1),
+    },
+    countNote: 'Frente: rodar o afinador no sentido horário até parar e abrir 8 cliques — compressão em baixo, extensão em cima, iguais nas duas pernas. Precarga da frente por posições (riscas no ajustador), fábrica na 2,5 de 5. Atrás só extensão: horário até parar, depois 1 volta a abrir. Precarga traseira por anel roscado de 7 posições, com a chave do kit de ferramentas.',
+    notes: 'A Suzuki dá o mesmo valor de fábrica (8 cliques) para compressão e extensão à frente, por isso não é gralha. Atrás não há afinador de compressão. Regular sempre as duas pernas da forquilha igual — o manual avisa que assimetria causa instabilidade. Confirmar pelo sag.',
+  },
+];
+
 const QJMOTOR: MfzProfile[] = [
   {
     id: 'qj_srk900',
@@ -1212,6 +1233,7 @@ export const MFZ_PROFILES: MfzProfile[] = [
   ...CFMOTO,
   ...KTM_EXTRA,
   ...YAMAHA_EXTRA,
+  ...SUZUKI_EXTRA,
   ...QJMOTOR,
   ...HONDA,
   ...KOVE,
