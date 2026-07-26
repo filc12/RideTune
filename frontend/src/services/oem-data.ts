@@ -63,10 +63,21 @@ let _pressureMap: Record<string, TirePressure> = Object.fromEntries(
 
 // ─── API pública (síncrona) ───────────────────────────────────────────────────
 
+/** Catálogo completo, incluindo as motos marcadas `hidden`. */
 export function getOemBikes(): Bike[] {
   return _bikes;
 }
 
+/**
+ * O que se mostra no seletor de motos. Exclui as `hidden` — motos cujos afinadores
+ * não deu para confirmar em fonte oficial e que por isso não devem ser oferecidas.
+ * Usa esta em listagens; a getOemBikes() só para contagens internas ou diagnóstico.
+ */
+export function getSelectableOemBikes(): Bike[] {
+  return _bikes.filter(b => !b.hidden);
+}
+
+/** Resolve por id SEM filtrar `hidden`, para não partir setups e diário já guardados. */
 export function getOemBikeById(id: string): Bike | undefined {
   return _bikes.find(b => b.id === id);
 }
@@ -151,6 +162,8 @@ type DbBikeRow = {
   adj: string;
   /** Optional jsonb column. Se não existir, resolveAdjusters() usa o default de `adj`. */
   adjusters: BikeAdjusters | null;
+  /** Coluna opcional. Se não existir, a moto conta como visível. */
+  hidden: boolean | null;
   mfz_profile_id: string | null;
 };
 
@@ -246,6 +259,7 @@ async function _fetchFromSupabase(): Promise<void> {
     category:     row.category as BikeCategory,
     adj:          row.adj as SuspAdj,
     adjusters:    row.adjusters ?? undefined,
+    hidden:       row.hidden ?? undefined,
     mfzProfileId: row.mfz_profile_id ?? undefined,
   }));
 

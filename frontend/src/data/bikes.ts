@@ -9,11 +9,17 @@
 // forma inventaria um número para afinadores que a moto não tem. Quando omitido usa-se
 // ADJUSTERS_BY_LEVEL[adj]. Só está preenchido onde a moto DIVERGE desse default.
 //
+// As motos que não deu para confirmar em fonte oficial estão marcadas `hidden: true`:
+// ficam fora do seletor mas continuam a resolver por id, para não partir setups nem
+// diário de quem já as escolheu. Tira-se o `hidden` assim que aparecer o manual.
+//
 // POR VERIFICAR — mantêm o default do nível `adj`, que pode estar errado.
 // Não editar sem confirmar em spec oficial do fabricante:
 //   Suzuki:   suzuki-gsxs1000, suzuki-gsxr1000 (a tabela oficial da Suzuki diz só
 //             "inverted telescopic, coil spring, oil damped" — não lista afinadores.
-//             Resolve-se com o manual do proprietário em PDF, como as outras.)
+//             NÃO estão ocultas de propósito: são motos correntes e o manual do
+//             proprietário existe e é fácil de obter. É só ir buscá-lo, como se fez
+//             para a KTM 890 Duke R e para a Honda Fireblade.)
 //
 // BLOCO CHINÊS — tentado e SEM SAÍDA pelo site oficial. Não repetir a pesquisa pela
 // mesma via; o caminho que falta é o manual do utilizador (PDF), ver nota no fim.
@@ -114,6 +120,14 @@ export type Bike = {
   adjusters?: BikeAdjusters;
   /** Links to a real factory data profile from mfzstudio.com/moto/ */
   mfzProfileId?: string;
+  /**
+   * Fora do seletor de motos, mas NÃO apagada.
+   * Usa-se quando não há forma de confirmar os afinadores em fonte oficial: mais vale
+   * não oferecer a moto do que oferecer números inventados pela heurística.
+   * Continua a resolver por id (`getOemBikeById`), para não partir setups e entradas de
+   * diário de quem já a tinha escolhida. Tira-se o `hidden` assim que houver manual.
+   */
+  hidden?: boolean;
 };
 
 /** Conservative default per `adj` level, used when `adjusters` is not set. */
@@ -185,7 +199,7 @@ export const BIKES: Bike[] = [
   // 450MT: KYB fully adjustable confirmed (preload+compression+rebound both ends)
   { id: "cfmoto-450mt",         brand: "CF Moto", model: "450 MT",         cc: "449cc", category: "adventure", adj: "full",    mfzProfileId: "cfmoto_450mt"  },
   { id: "cfmoto-800nk",         brand: "CF Moto", model: "800 NK",         cc: "799cc", category: "naked",     adj: "partial", mfzProfileId: "cfmoto_800nk"  },
-  { id: "cfmoto-1000srr",       brand: "CF Moto", model: "1000 SR-R",      cc: "998cc", category: "sport",     adj: "partial" },
+  { id: "cfmoto-1000srr",       brand: "CF Moto", model: "1000 SR-R",      cc: "998cc", category: "sport",     adj: "partial", hidden: true },
   { id: "cfmoto-800mtx", brand: "CF Moto", model: "800 MT-X", cc: "799cc", category: "adventure", adj: "full", mfzProfileId: "cfmoto_800mtx" },
   { id: "cfmoto-1000mtx", brand: "CF Moto", model: "1000 MT-X", cc: "947cc", category: "adventure", adj: "full", mfzProfileId: "cfmoto_1000mtx" },
 
@@ -314,7 +328,7 @@ export const BIKES: Bike[] = [
   // absorber", não há qualquer secção de afinação da frente. Atrás: botão de extensão
   // no fundo do amortecedor + duas porcas de precarga na mola. Sem compressão atrás.
   { id: "qj-srt800x",   brand: "QJ Motor", model: "SRT 800 X",  cc: "778cc", category: "adventure",     adj: "partial", adjusters: { fPre: false, fComp: false, fReb: false, rPre: true, rComp: false, rReb: true } },
-  { id: "qj-srt750sx",  brand: "QJ Motor", model: "SRT 750 SX", cc: "744cc", category: "sport_touring", adj: "partial" },
+  { id: "qj-srt750sx",  brand: "QJ Motor", model: "SRT 750 SX", cc: "744cc", category: "sport_touring", adj: "partial", hidden: true },
   // SRK921: Marzocchi fully adjustable (2026 spec confirmed)
   // SRK 921 (MY2026): manual do proprietário QJMOTOR (RU). É a mais completa do
   // catálogo QJ — frente com precarga (chave 14 mm, limite 10, fábrica 3,5), compressão
@@ -352,7 +366,7 @@ export const BIKES: Bike[] = [
   // SRT 600 SX (2024+): garfo Marzocchi 43mm invertido totalmente ajustável
   // (pré-carga, compressão e ressalto, 145mm de curso); atrás monoshock com
   // pré-carga remota e ressalto, sem compressão → "partial".
-  { id: "qj-srt600sx", brand: "QJ Motor", model: "SRT 600 SX", cc: "554cc", category: "adventure", adj: "partial" },
+  { id: "qj-srt600sx", brand: "QJ Motor", model: "SRT 600 SX", cc: "554cc", category: "adventure", adj: "partial", hidden: true },
 
   // ===== Suzuki =====
   { id: "suzuki-vstrom-1050de", brand: "Suzuki", model: "V-Strom 1050 DE",  cc: "1037cc", category: "adventure", adj: "full",  mfzProfileId: "suzuki_vstrom_1050de" },
@@ -392,13 +406,13 @@ export const BIKES: Bike[] = [
   // família de amortecedor, documenta esse afinador como "adjustor 3 (at position of
   // air bottle)". Portanto full nas duas pontas — default correto, sem `adjusters`.
   { id: "voge-900dsx",  brand: "Voge", model: "900 DSX", cc: "895cc", category: "adventure", adj: "full"    },
-  { id: "voge-650dsx",  brand: "Voge", model: "650 DSX", cc: "652cc", category: "adventure", adj: "partial" },
+  { id: "voge-650dsx",  brand: "Voge", model: "650 DSX", cc: "652cc", category: "adventure", adj: "partial", hidden: true },
   // 525 DSX (DS525X): manual do proprietário Voge. Só tem "Adjust the rear shock
   // absorber", e lá dentro só precarga da mola — nem amortecimento atrás, nem qualquer
   // secção de afinação da frente. É exatamente o default do nível "fixed", por isso não
   // precisa de `adjusters`. Estava como "full", o que era muito otimista.
   { id: "voge-525dsx",  brand: "Voge", model: "525 DSX", cc: "494cc", category: "adventure", adj: "fixed"   },
-  { id: "voge-525r",    brand: "Voge", model: "525 R",   cc: "494cc", category: "naked",     adj: "partial" },
+  { id: "voge-525r",    brand: "Voge", model: "525 R",   cc: "494cc", category: "naked",     adj: "partial", hidden: true },
   // 625 DSX (DS 625X): manual do proprietário Voge. Os seis afinadores existem —
   // frente precarga + extensão (bainha esq.) + compressão (bainha dta.); atrás precarga
   // + extensão + compressão (ajustador 3, no reservatório). Default "full" correto.
@@ -408,7 +422,7 @@ export const BIKES: Bike[] = [
   // compressão (ajustador 3, base, 10 posições); atrás precarga + extensão +
   // compressão (ajustador 3, no reservatório de gás). Default "full" correto.
   { id: "voge-800dsx-rally", brand: "Voge", model: "800 DSX Rally", cc: "798cc", category: "adventure", adj: "full" },
-  { id: "voge-r625",         brand: "Voge", model: "R625",          cc: "625cc", category: "naked",     adj: "full" },
+  { id: "voge-r625",         brand: "Voge", model: "R625",          cc: "625cc", category: "naked",     adj: "full", hidden: true },
   // AC 525X: manual do proprietário Voge. Igual à 525 DSX — só "Adjustment of rear shock
   // absorber" com precarga da mola, sem amortecimento atrás e sem afinação à frente.
   { id: "voge-ac525x",       brand: "Voge", model: "AC 525X",       cc: "494cc", category: "scrambler", adj: "fixed"   },

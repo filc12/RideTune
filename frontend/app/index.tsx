@@ -23,7 +23,7 @@ import { storage } from "@/src/utils/storage";
 import { useT } from "@/src/i18n";
 import { calcSetup, calcSetupById, deriveMode, getLoad, saveLoad, type Load } from "@/src/utils/suspension";
 import { BIKE_CATEGORIES, bikeLabel, type Bike } from "@/src/data/bikes";
-import { getOemBikes, getOemBikeById } from "@/src/services/oem-data";
+import { getSelectableOemBikes, getOemBikeById } from "@/src/services/oem-data";
 import { ConfidenceBadge } from "@/src/components/ConfidenceBadge";
 import { PremiumModal } from "@/src/components/PremiumModal";
 import { SwitchBikeModal } from "@/src/components/SwitchBikeModal";
@@ -569,15 +569,15 @@ function BikePicker({ open, onClose, onPick, selectedId, t }: { open: boolean; o
   const handlePick = (b: Bike) => { reset(); onPick(b); };
 
   const brandsInCat = selCat
-    ? [...new Set(getOemBikes().filter((b) => b.category === selCat).map((b) => b.brand))].sort()
+    ? [...new Set(getSelectableOemBikes().filter((b) => b.category === selCat).map((b) => b.brand))].sort()
     : [];
   const modelsInBrandCat = selCat && selBrand
-    ? getOemBikes().filter((b) => b.category === selCat && b.brand === selBrand)
+    ? getSelectableOemBikes().filter((b) => b.category === selCat && b.brand === selBrand)
     : [];
 
   const q = rtNorm(query);
   const searchResults = q.length >= 1
-    ? getOemBikes().filter((b) => rtNorm(b.brand + " " + b.model).includes(q)).slice(0, 60)
+    ? getSelectableOemBikes().filter((b) => rtNorm(b.brand + " " + b.model).includes(q)).slice(0, 60)
     : [];
 
   const stepTitle =
@@ -647,7 +647,7 @@ function BikePicker({ open, onClose, onPick, selectedId, t }: { open: boolean; o
             <Text style={styles.searchEmpty}>{t("picker.search_empty" as never)}</Text>
           )}
           {q.length === 0 && step === "cat" && BIKE_CATEGORIES.map((cat) => {
-            const count = getOemBikes().filter((b) => b.category === cat).length;
+            const count = getSelectableOemBikes().filter((b) => b.category === cat).length;
             if (count === 0) return null;
             return (
               <HapticButton key={cat} activeOpacity={0.85} style={styles.bikeRow}
@@ -664,7 +664,7 @@ function BikePicker({ open, onClose, onPick, selectedId, t }: { open: boolean; o
             );
           })}
           {q.length === 0 && step === "brand" && brandsInCat.map((brand) => {
-            const count = getOemBikes().filter((b) => b.category === selCat && b.brand === brand).length;
+            const count = getSelectableOemBikes().filter((b) => b.category === selCat && b.brand === brand).length;
             return (
               <HapticButton key={brand} activeOpacity={0.85} style={styles.bikeRow}
                 onPress={() => { setSelBrand(brand); setStep("model"); }}>
