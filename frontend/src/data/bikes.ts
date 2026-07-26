@@ -66,21 +66,9 @@
 // ganha a ficha do mercado onde a app é usada.
 //
 // Os manuais trazem ainda os valores de fábrica por carga (solo / com malas / 2 pessoas),
-// que é material para perfil MFZ com dataQuality 'oem_manual'. As três Voge (900 DSX,
-// 800 DSX Rally e 625 DSX) já têm perfil criado, com os valores por carga em
-// weightPoints. Ainda POR INTRODUZIR:
-//   qj-srk800    frente precarga 5 voltas (limite 10), compressão 1 e extensão 3,25
-//                (limite 4,75); trás precarga hidráulica 0 (curso 10 mm), extensão 7
-//   qj-srk921    frente precarga 3,5 (limite 10), compressão 1,5 e extensão 2,5 (limite
-//                4,75); trás mola L 165 mm ±5, compressão baixa e alta 12 cliques cada
-//   qj-srk600    trás extensão posição 10 de 26
-//   qj-srk900    trás extensão 9 voltas do duro
-//   qj-srt900sx  trás extensão 10 voltas do duro (a versão S usa 5)
-//   qj-srt450rx  frente compressão 1,5 voltas e extensão 2,5 voltas (limite 4 cada),
-//                contadas do duro (horário até ao fim, depois abrir) → 'tu_hard'.
-//                Precarga trás em mm: 3 a 8 mm entre o topo da rosca e a contraporca.
-//                Duas fontes concordantes (manual grego e russo MY2026) — é o candidato
-//                mais sólido a perfil MFZ 'oem_manual' de todo o bloco chinês.
+// que é material para perfil MFZ com dataQuality 'oem_manual'. Já está tudo introduzido:
+// as três Voge (900 DSX, 800 DSX Rally, 625 DSX) com weightPoints, e as QJ SRK 600, 800,
+// 900, 921, SRT 450 RX e SRT 900 SX com valor único. Não há valores por transcrever.
 
 export type BikeCategory =
   | "adventure"
@@ -336,17 +324,17 @@ export const BIKES: Bike[] = [
   // à esquerda (4,75, fábrica 1,5) e extensão à direita (4,75, fábrica 2,5); atrás
   // precarga (chave de gancho, mola L 165 mm ±5) + extensão + compressão SEPARADA em
   // baixa e alta velocidade (12 cliques cada). Default "full" correto.
-  { id: "qj-srk921",    brand: "QJ Motor", model: "SRK 921",    cc: "921cc", category: "naked",         adj: "full"    },
+  { id: "qj-srk921",    brand: "QJ Motor", model: "SRK 921",    cc: "921cc", category: "naked",         adj: "full"   , mfzProfileId: "qj_srk921" },
   // SRK 600: manual do proprietário QJMOTOR (RU). O manual dá duas configurações de
   // forquilha, mas AMBAS têm os três afinadores — precarga (chave sextavada) +
   // compressão (perna esquerda) + extensão (perna direita). Atrás: extensão por botão
   // no fundo (26 posições, fábrica 10) + precarga por duas bainhas. Sem compressão atrás.
-  { id: "qj-srk600",    brand: "QJ Motor", model: "SRK 600",    cc: "598cc", category: "naked",         adj: "partial", adjusters: { fPre: true, fComp: true, fReb: true, rPre: true, rComp: false, rReb: true } },
+  { id: "qj-srk600",    brand: "QJ Motor", model: "SRK 600",    cc: "598cc", category: "naked",         adj: "partial", mfzProfileId: "qj_srk600" },
   // SRK 800: manual do proprietário QJMOTOR (RU). Frente completa — precarga (chave de
   // 14 mm, limite 10 voltas, fábrica 5), compressão à esquerda (limite 4,75, fábrica 1)
   // e extensão à direita (limite 4,75, fábrica 3,25). Atrás precarga hidráulica (curso
   // 10 mm, fábrica 0) + extensão (fábrica 7 voltas do duro). Sem compressão atrás.
-  { id: "qj-srk800",   brand: "QJ Motor", model: "SRK 800",    cc: "778cc", category: "naked",     adj: "full", adjusters: { fPre: true, fComp: true, fReb: true, rPre: true, rComp: false, rReb: true } },
+  { id: "qj-srk800",   brand: "QJ Motor", model: "SRK 800",    cc: "778cc", category: "naked",     adj: "full", mfzProfileId: "qj_srk800" },
   // SRK 900: manual do proprietário QJMOTOR (RU). Só tem capítulo "Задний амортизатор"
   // (amortecedor traseiro) — não há qualquer secção de afinação da frente, nem no índice.
   // Atrás extensão (fábrica 9 voltas a partir do mais duro) + precarga por anel com

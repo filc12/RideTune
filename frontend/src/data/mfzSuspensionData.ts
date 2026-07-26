@@ -1188,7 +1188,7 @@ const VOGE: MfzProfile[] = [
       { kg: 190, rPre: 21, rReb: 14 },
     ],
     countNote: 'Atrás: precarga a partir do mole (anti-horário até ao fim, depois conta a apertar) e extensão a partir do duro (horário até ao fim, depois conta a abrir). À frente o manual não prescreve valores — regula pelo sag e pela sensação.',
-    notes: 'As três cargas do manual são: só piloto (6 cliques de precarga, 18 de extensão), piloto com 3 malas (16±1 e 16±1) e piloto com passageiro e 3 malas (21±1 e 14±1). A compressão traseira EXISTE, por parafuso no reservatório de gás, mas este manual não a descreve — o manual do 800 DSX Rally, que tem o mesmo amortecedor e os mesmos valores de precarga e extensão ao clique, usa 10 / 8 / 6 cliques do duro para as mesmas três cargas. Não foi copiado para aqui por ser outro modelo. Confirmar sempre pelo sag.',
+    notes: 'As três cargas do manual são: só piloto (6 cliques de precarga, 18 de extensão), piloto com 3 malas (16±1 e 16±1) e piloto com passageiro e 3 malas (21±1 e 14±1). A compressão traseira EXISTE, por parafuso no reservatório de gás, mas este manual não a descreve — o manual do 800 DSX Rally, que tem o mesmo amortecedor e os mesmos valores de precarga e extensão ao clique, usa 10 / 8 / 6 cliques do duro para as mesmas três cargas. Não foi copiado para aqui por ser outro modelo. A frente não tem valores de fábrica em fonte nenhuma: confirmado no manual português, no manual inglês DS900X, por OCR às figuras, e no fórum 900dsx.com, onde os próprios proprietários não os encontram. CUIDADO com o artigo de 900dsx.com sobre a forquilha — ele numera os parafusos ao contrário do manual (diz "tornillo 2 = compresión, tornillo 3 = rebote", quando a Voge diz comando 2 = extensão na bainha ESQUERDA e comando 3 = compressão na DIREITA). Está a descrever uma forquilha genérica, não esta. Confirmar sempre pelo sag.',
   },
   {
     id: 'voge_800dsx_rally',
@@ -1278,6 +1278,62 @@ const SUZUKI_EXTRA: MfzProfile[] = [
 ];
 
 const QJMOTOR: MfzProfile[] = [
+  {
+    id: 'qj_srk921',
+    brand: 'QJ Motor', model: 'SRK 921', year: '2026+',
+    baseKg: 75, source: 'Manual do proprietário QJMOTOR SRK 921 MY2026 (oficial)', formula: 'ktm',
+    dataQuality: 'oem_manual',
+    front: {
+      preload: tu_s(3.5),
+      comp:    tu_h(1.5),
+      reb:     tu_h(2.5),
+    },
+    rear: {
+      preload: pos('Comprimento da mola 165 mm ±5 (fábrica)', '165 mm'),
+      comp:    cl_h(12),   // = baixa velocidade
+      reb:     pos('A posição de fábrica vem marcada A COR no ajustador'),
+      lsComp:  cl_h(12),
+      hsComp:  cl_h(12),
+    },
+    countNote: 'É a QJ mais completa do catálogo. Frente: precarga a partir do mole (anti-horário até ao fim, depois 3,5 voltas a apertar, limite 10); compressão 1,5 voltas e extensão 2,5 a abrir do duro (limite 4,75 cada). Atrás: compressão SEPARADA em baixa e alta velocidade, 12 cliques cada a abrir do duro. A precarga faz-se pelo comprimento da mola, 165 mm. A extensão traseira não tem número — a posição de fábrica vem marcada a cor no próprio ajustador.',
+    notes: 'Único modelo QJ do catálogo com compressão traseira separada em baixa e alta velocidade. Confirmar sempre pelo sag.',
+  },
+  {
+    id: 'qj_srk800',
+    brand: 'QJ Motor', model: 'SRK 800', year: '2023+',
+    baseKg: 75, source: 'Manual do proprietário QJMOTOR SRK 800 (oficial)', formula: 'ktm',
+    dataQuality: 'oem_manual',
+    front: {
+      preload: tu_s(5),
+      comp:    tu_h(1),
+      reb:     tu_h(3.25),
+    },
+    rear: {
+      preload: pos('Precarga hidráulica, 0 de fábrica (curso 10 mm)', '0 (0-10 mm)'),
+      comp:    na('O amortecedor não tem afinador de compressão'),
+      reb:     tu_h(7),
+    },
+    countNote: 'Frente: precarga com chave de 14 mm a partir do mole (anti-horário até ao fim, depois 5 voltas a apertar, limite 10); compressão 1 volta e extensão 3,25 a abrir do duro (limite 4,75 cada). Atrás: precarga hidráulica com 10 mm de curso, 0 de fábrica, e extensão 7 voltas a abrir do duro. Sem compressão atrás.',
+    notes: 'ATENÇÃO — o manual contradiz-se na frente: a tabela dá compressão 1 volta e extensão 3,25, mas o texto do procedimento de reset logo abaixo diz 1,5 e 3,5. Ficaram os valores da TABELA, que é onde estão também os limites. O texto parece copiado de outro modelo (no SRK 921 os dois batem certo). Se algum dia houver terceira fonte, vale a pena confirmar. Confirmar sempre pelo sag.',
+  },
+  {
+    id: 'qj_srk600',
+    brand: 'QJ Motor', model: 'SRK 600', year: '2023+',
+    baseKg: 75, source: 'Manual do proprietário QJMOTOR SRK 600 (oficial)', formula: 'ktm',
+    dataQuality: 'oem_manual',
+    front: {
+      preload: pos('Ajustável por chave sextavada — o manual não dá valor de fábrica'),
+      comp:    pos('Ajustável (haste central, perna esquerda) — sem valor de fábrica'),
+      reb:     pos('Ajustável (haste central, perna direita) — sem valor de fábrica'),
+    },
+    rear: {
+      preload: pos('Duas bainhas roscadas — o manual não dá valor de fábrica'),
+      comp:    na('O amortecedor não tem afinador de compressão'),
+      reb:     cl_h(10),
+    },
+    countNote: 'Atrás: extensão na posição 10 de 26 — fechar no sentido horário (direção H) até ao batente, que é a posição 1, e abrir no sentido S até à 10. Sem compressão atrás. À frente existem os três afinadores mas o manual não prescreve valores: acerta pelo sag.',
+    notes: 'O manual descreve duas configurações de forquilha para este modelo, mas ambas têm os mesmos três afinadores — precarga por chave sextavada, e compressão e extensão pelas hastes centrais, uma em cada perna. Por isso dá para afirmar que a frente é totalmente ajustável, mesmo sem saber qual das duas a moto leva. Confirmar sempre pelo sag.',
+  },
   {
     id: 'qj_srk900',
     brand: 'QJ Motor', model: 'SRK 900', year: '2023+',

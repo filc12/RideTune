@@ -288,15 +288,26 @@ function buildAdjResult(sv: SuspVal, adjustedValue?: number): AdjResult {
 
 function calcConfidence(profile: MfzProfile, total: number): ConfidenceLevel {
   const atBase = Math.abs(total - profile.baseKg) <= 5;
+  const hasRealCurve = profile.formula === 'cfmoto_interp' && !!profile.weightPoints?.length;
 
-  // Honda profiles sourced directly from official service manual
+  // Perfis com tabela de carga REAL (vários pontos tirados do manual/chart) continuam a
+  // ser dados reais fora do baseKg — o que muda com o peso é qual das linhas se usa, não
+  // uma fórmula inventada. Esta verificação tem de vir ANTES da de `oem_manual`: um perfil
+  // pode ser as duas coisas (as Voge e as CFMoto são), e se a de oem_manual apanhasse
+  // primeiro, as motos com os MELHORES dados da app mostravam o crachá mais fraco assim
+  // que o piloto saísse dos 75 kg.
+  if (hasRealCurve) {
+    return profile.dataQuality === 'oem_manual' ? 'real_oem' : 'real_mfz';
+  }
+
+  // Valor de fábrica único: só é "real" à volta do peso base; fora disso é fórmula.
   if (profile.dataQuality === 'oem_manual') {
     return atBase ? 'real_oem' : 'brand_formula';
   }
 
-  // CFMOTO: real multi-weight breakpoints, linear interpolation — always real
+  // Interpolação declarada mas sem weightPoints — dados incompletos, trata como fórmula.
   if (profile.formula === 'cfmoto_interp') {
-    return 'real_mfz';
+    return atBase ? 'real_mfz' : 'brand_formula';
   }
 
   // All other brands: mfzstudio verified baseline + formula
