@@ -32,10 +32,20 @@
 //             parafuso central), Type 2 (só extensão, 26 cliques, fábrica 12) e Type 3
 //             (não ajustável).
 //             Type 3 JÁ ESTÁ EXCLUÍDO: as fotos oficiais do modelo mostram parafuso de
-//             afinação ao centro dos dois tampos da forquilha. Falta separar Type 1 de
-//             Type 2, e a diferença é grande (3 afinadores contra 1). O que distingue é
-//             haver ou não uma porca sextavada de precarga à volta do parafuso central —
-//             nas fotos não dá para separar isso do sextavado normal do tampo.
+//             afinação ao centro dos dois tampos da forquilha.
+//             Type 2 TAMBÉM PARECE EXCLUÍDO, mas para o SRT 750 **X**, não para o SX: a
+//             review da RoadRUNNER ao 2023 SRT750X diz "the front fork features
+//             adjustable spring preload and rebound damping". Havendo precarga, é Type 1.
+//             CUIDADO ANTES DE COPIAR ISTO PARA O SX. Duas razões:
+//               1) Na nomenclatura QJ, SX é a versão mais recente e mais equipada do X
+//                  (o SRT 800 SX de 2024 é o upgrade do SRT 800 X). O SX pode ter MAIS
+//                  afinação do que o X, não a mesma.
+//               2) O cc do catálogo (744) não bate com o do X (754, plataforma QJ750-7).
+//                  Ou o 744 está errado, ou são mesmo motos diferentes — resolver isto
+//                  antes de tocar nos afinadores.
+//             Se um dia se confirmar que o SX é igual ao X: Type 1 = precarga + UM
+//             parafuso central de amortecimento. A review chama-lhe extensão, o manual
+//             diz que mexe em compressão e extensão ao mesmo tempo. Ver a nota seguinte.
 //             ATENÇÃO se algum dia for Type 1: o manual diz que o parafuso central mexe
 //             na compressão E na extensão ao mesmo tempo (um só afinador combinado, não
 //             dois). Marcar fComp e fReb ambos a true faria a app pedir dois números para
