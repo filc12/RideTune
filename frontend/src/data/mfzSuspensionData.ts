@@ -1078,6 +1078,30 @@ const MACBOR: MfzProfile[] = [
 // Criar-lhes perfil trocaria a estimativa da heurística por células vazias.
 // Contagem: fechar no sentido horário até ao fim (duro), depois abrir (tu_hard).
 // ─────────────────────────────────────────────
+const KTM_EXTRA: MfzProfile[] = [
+  {
+    id: 'ktm_890_duke_r_2022',
+    brand: 'KTM', model: '890 Duke R', year: '2020-2023',
+    baseKg: 75, source: 'KTM 890 Duke R Owner\'s Manual 2022 (art. 3214544en, oficial)', formula: 'ktm',
+    dataQuality: 'oem_manual',
+    front: {
+      // Forquilha WP APEX 43 split: um afinador por perna, sem precarga externa.
+      preload: na('A forquilha split não tem afinador de precarga'),
+      comp:    cl_h(15),   // perna ESQUERDA, adjuster branco COMP
+      reb:     cl_h(15),   // perna DIREITA, adjuster vermelho REB
+    },
+    rear: {
+      preload: tu_s(3),
+      comp:    cl_h(14),   // = baixa velocidade; ver lsComp/hsComp
+      reb:     cl_h(14),
+      lsComp:  cl_h(14),
+      hsComp:  tu_h(1.5),
+    },
+    countNote: 'Frente: fechar o afinador até ao fim no sentido horário e abrir 15 cliques — compressão na perna ESQUERDA (adjuster branco, marcado COMP), extensão na DIREITA (vermelho, REB). Atrás igual para extensão e compressão de baixa velocidade (14 cliques); a de alta velocidade é em voltas (1,5) com chave de bocas. Precarga: abrir tudo no sentido anti-horário e apertar 3 voltas.',
+    notes: 'Valores "Standard" do manual oficial. O manual dá quatro predefinições: Comfort / Standard / Sport / Carga máxima. Frente — compressão 20/15/4/15 e extensão 20/15/10/15 cliques. Atrás — compressão baixa velocidade 16/14/10/14 cliques, alta velocidade 1,5 voltas em todas, extensão 17/14/12/11 cliques, precarga 1/3/5,5/6 voltas. A forquilha split NÃO tem precarga: o único ajuste de precarga da moto é no amortecedor. Confirmar sempre pelo sag.',
+  },
+];
+
 const QJMOTOR: MfzProfile[] = [
   {
     id: 'qj_srk900',
@@ -1137,6 +1161,7 @@ const QJMOTOR: MfzProfile[] = [
 
 export const MFZ_PROFILES: MfzProfile[] = [
   ...CFMOTO,
+  ...KTM_EXTRA,
   ...QJMOTOR,
   ...HONDA,
   ...KOVE,

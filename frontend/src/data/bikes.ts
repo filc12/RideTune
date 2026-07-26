@@ -16,8 +16,10 @@
 //             manual — se for, é caso de adjusters {fPre,rPre} true e o resto false;
 //             se não for, é perfil MFZ com tudo `na`. A geração anterior (Showa BPF)
 //             era mecânica full, por isso a entrada precisa de ano no nome.)
-//   KTM:      ktm-1290-sdr, ktm-890-duke-r (a KTM removeu ambas as páginas de
-//             technical-specifications do ktm.com — sem fonte oficial viva)
+//   KTM:      ktm-1290-sdr (a KTM removeu a página de technical-specifications do
+//             ktm.com — sem fonte oficial viva. Nota: a 890 Duke R, que estava aqui
+//             pelo mesmo motivo, resolveu-se com o manual do proprietário em PDF —
+//             vale a pena tentar o mesmo caminho para esta.)
 //   Suzuki:   suzuki-gsxs1000, suzuki-gsxr1000 (a tabela oficial da Suzuki diz só
 //             "inverted telescopic, coil spring, oil damped" — não lista afinadores)
 //   Yamaha:   yamaha-r1 (frente confirmada full em yamahamotorsports.com: pré-carga +
@@ -49,7 +51,7 @@
 //             "Upside down telescopic forks" / "Telescopic coil spring oil damped".
 //             Confirmado no SRK 921 RR e no SRT 300 DX: nunca diz que é ajustável.
 //             E o importador russo, que publica os manuais, não tem este.)
-//   Voge:     voge-650dsx, voge-525dsx, voge-525r, voge-r625, voge-ac525x
+//   Voge:     voge-650dsx, voge-525r, voge-r625
 //             (a Voge não tem site global vivo: voge.eu e voge.com estão à venda,
 //             voge.it idem. Só restam importadores nacionais e imprensa.)
 //
@@ -290,7 +292,10 @@ export const BIKES: Bike[] = [
   // 390 Enduro R (2025+): mesma base WP APEX 43 / split piston, 230 mm curso. ktm.com specs
   { id: "ktm-390-enduro-r",  brand: "KTM", model: "390 Enduro R (2025+)",   cc: "399cc",  category: "adventure", adj: "partial", mfzProfileId: "ktm_390_enduro_r_2025" },
   { id: "ktm-1290-sdr",      brand: "KTM", model: "1290 Super Duke R",      cc: "1301cc", category: "naked",     adj: "full"    },
-  { id: "ktm-890-duke-r",    brand: "KTM", model: "890 Duke R",             cc: "889cc",  category: "naked",     adj: "full"    },
+  // 890 Duke R: manual oficial KTM 2022 (art. 3214544en). Forquilha WP APEX 43 split —
+  // compressão na perna esquerda, extensão na direita, SEM precarga à frente. Atrás
+  // precarga + extensão + compressão separada em baixa e alta velocidade.
+  { id: "ktm-890-duke-r",    brand: "KTM", model: "890 Duke R (2020-2023)", cc: "889cc",  category: "naked",     adj: "full",    mfzProfileId: "ktm_890_duke_r_2022" },
   // 790 Duke: WP APEX preload+rebound both ends, no compression
   { id: "ktm-790-duke",      brand: "KTM", model: "790 Duke",               cc: "799cc",  category: "naked",     adj: "partial" },
   // 690 SMC R: forquilha WP APEX 48 split (compressão na perna esquerda, extensão na
@@ -388,7 +393,11 @@ export const BIKES: Bike[] = [
   // air bottle)". Portanto full nas duas pontas — default correto, sem `adjusters`.
   { id: "voge-900dsx",  brand: "Voge", model: "900 DSX", cc: "895cc", category: "adventure", adj: "full"    },
   { id: "voge-650dsx",  brand: "Voge", model: "650 DSX", cc: "652cc", category: "adventure", adj: "partial" },
-  { id: "voge-525dsx",  brand: "Voge", model: "525 DSX", cc: "494cc", category: "adventure", adj: "full"    },
+  // 525 DSX (DS525X): manual do proprietário Voge. Só tem "Adjust the rear shock
+  // absorber", e lá dentro só precarga da mola — nem amortecimento atrás, nem qualquer
+  // secção de afinação da frente. É exatamente o default do nível "fixed", por isso não
+  // precisa de `adjusters`. Estava como "full", o que era muito otimista.
+  { id: "voge-525dsx",  brand: "Voge", model: "525 DSX", cc: "494cc", category: "adventure", adj: "fixed"   },
   { id: "voge-525r",    brand: "Voge", model: "525 R",   cc: "494cc", category: "naked",     adj: "partial" },
   // 625 DSX (DS 625X): manual do proprietário Voge. Os seis afinadores existem —
   // frente precarga + extensão (bainha esq.) + compressão (bainha dta.); atrás precarga
@@ -400,7 +409,9 @@ export const BIKES: Bike[] = [
   // compressão (ajustador 3, no reservatório de gás). Default "full" correto.
   { id: "voge-800dsx-rally", brand: "Voge", model: "800 DSX Rally", cc: "798cc", category: "adventure", adj: "full" },
   { id: "voge-r625",         brand: "Voge", model: "R625",          cc: "625cc", category: "naked",     adj: "full" },
-  { id: "voge-ac525x",       brand: "Voge", model: "AC 525X",       cc: "494cc", category: "scrambler", adj: "partial" },
+  // AC 525X: manual do proprietário Voge. Igual à 525 DSX — só "Adjustment of rear shock
+  // absorber" com precarga da mola, sem amortecimento atrás e sem afinação à frente.
+  { id: "voge-ac525x",       brand: "Voge", model: "AC 525X",       cc: "494cc", category: "scrambler", adj: "fixed"   },
 
   // ===== Yamaha =====
   { id: "yamaha-tenere-w",   brand: "Yamaha", model: "Ténéré 700 World Raid", cc: "689cc", category: "adventure",     adj: "full",    mfzProfileId: "yamaha_t700_world_raid_2026" }, // KYB fully adjustable (Ohlins is only the steering damper)
