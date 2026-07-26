@@ -1131,6 +1131,24 @@ const KTM_EXTRA: MfzProfile[] = [
 
 const YAMAHA_EXTRA: MfzProfile[] = [
   {
+    id: 'yamaha_xt1200z_2010',
+    brand: 'Yamaha', model: 'XT1200Z Super Ténéré', year: '2010-2020',
+    baseKg: 75, source: 'Manual do proprietário Yamaha XT1200Z Super Ténéré (oficial)', formula: 'yamaha',
+    dataQuality: 'oem_manual',
+    front: {
+      preload: pos('Ranhura 5,5 de 8 (fábrica) — alinha a ranhura com o topo do tampo', '5,5/8'),
+      comp:    cl_h(6),
+      reb:     cl_h(8),
+    },
+    rear: {
+      preload: pos('Posição 4 de 6 no manípulo (fábrica) — 1 é a mais dura', '4/6'),
+      comp:    na('O amortecedor não tem afinador de compressão'),
+      reb:     cl_h(10),
+    },
+    countNote: 'Frente: fechar o parafuso até ao fim no sentido de endurecer e contar a abrir — compressão 6 cliques (de 13 no máximo mole), extensão 8 (de 10). A precarga não é por cliques: alinha-se a ranhura do ajustador com o topo do tampo da forquilha, escala 0 a 8, fábrica em 5,5 (0 = mais duro). Regula as duas pernas IGUAIS, o manual avisa que assimetria tira estabilidade. Atrás: extensão 10 cliques a abrir do duro (de 20 no mole) e precarga por manípulo de 6 posições, fábrica na 4. Não há compressão traseira.',
+    notes: 'Versão XT1200Z base. A XT1200ZE tem suspensão eletrónica, regulada pelo ecrã — não é este perfil. O manual avisa que o número real de cliques pode não bater certo ao valor listado por diferenças de produção: conta o curso total do teu afinador e ajusta a proporção. Pressões de fábrica: até 90 kg, 2,25 bar à frente e 2,50 atrás; acima disso, 2,25 e 2,90. Confirmar sempre pelo sag.',
+  },
+  {
     id: 'yamaha_r1_2020',
     brand: 'Yamaha', model: 'YZF-R1', year: '2020+',
     baseKg: 75, source: 'Manual do proprietário Yamaha YZF-R1 / R1M (B3L, oficial)', formula: 'yamaha',
