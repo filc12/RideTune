@@ -43,11 +43,11 @@ function PlayButton() {
 
 function Logo({ big = false }: { big?: boolean }) {
   return (
-    <a href="#top" className={`flex items-center ${big ? "gap-3" : "gap-2.5"}`}>
+    <a href="#top" className={`flex shrink-0 items-center ${big ? "gap-2 md:gap-3" : "gap-2.5"}`}>
       <span
-        className={`${big ? "h-4 w-9" : "h-3 w-7"} rounded-full bg-brand-accent shadow-[0_0_22px_rgba(74,158,255,0.9)]`}
+        className={`${big ? "h-3.5 w-8 md:h-4 md:w-9" : "h-3 w-7"} rounded-full bg-brand-accent shadow-[0_0_22px_rgba(74,158,255,0.9)]`}
       />
-      <span className={`${big ? "text-2xl" : "text-lg"} font-bold tracking-tight`}>
+      <span className={`${big ? "text-lg md:text-2xl" : "text-lg"} font-bold tracking-tight`}>
         Ride<span className="text-brand-accent">Tune</span>
       </span>
     </a>
@@ -113,7 +113,7 @@ export default function Home() {
     <main id="top" className="overflow-x-clip bg-brand-dark text-slate-100">
       {/* NAV */}
       <header className="fixed inset-x-0 top-0 z-50 border-b border-white/5 bg-brand-dark/70 backdrop-blur-md">
-        <div className="mx-auto flex h-[76px] max-w-6xl items-center justify-between px-6">
+        <div className="mx-auto flex h-[76px] max-w-6xl items-center justify-between gap-2 px-3 md:px-6">
           <Logo big />
           <nav className="hidden items-center gap-8 text-sm text-brand-muted md:flex">
             <a href="#features" className="link-underline transition-colors hover:text-white">{h.featuresBadge}</a>
@@ -121,11 +121,11 @@ export default function Home() {
             <Link href="/setups" className="link-underline transition-colors hover:text-white">{t.nav.setups}</Link>
             <a href="#premium" className="link-underline transition-colors hover:text-white">{t.nav.premium}</a>
           </nav>
-          <div className="flex items-center gap-3">
+          <div className="flex shrink-0 items-center gap-1.5 md:gap-3">
             <LanguageSwitcher />
             <a
               href={PLAY_URL}
-              className="rounded-full bg-brand-accent px-5 py-2 text-sm font-semibold text-[#04111e] transition-all duration-300 hover:scale-105 hover:shadow-[0_4px_24px_rgba(74,158,255,0.5)]"
+              className="whitespace-nowrap rounded-full bg-brand-accent px-3 py-2 text-[12.5px] font-semibold text-[#04111e] transition-all duration-300 hover:scale-105 hover:shadow-[0_4px_24px_rgba(74,158,255,0.5)] md:px-5 md:text-sm"
             >
               {t.nav.download}
             </a>
