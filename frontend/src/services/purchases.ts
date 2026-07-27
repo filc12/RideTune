@@ -11,11 +11,22 @@
  * Fonte de verdade: entitlement do RevenueCat. A flag local (premium.ts)
  * funciona como cache offline e é sincronizada em cada arranque.
  */
+import { Platform } from "react-native";
 import { isForceFreeBuild, setPremiumStatusFromStore } from "@/src/services/premium";
 
 export const ENTITLEMENT_ID = "premium";
 
-const API_KEY_ANDROID = process.env.EXPO_PUBLIC_REVENUECAT_ANDROID_KEY ?? "";
+/**
+ * A RevenueCat tem uma chave por loja — a de Android não funciona na App Store.
+ * Sem a chave certa, `isBillingAvailable()` devolve false e a app fica sem compras:
+ * em iOS isso e' motivo de rejeicao, porque ha funcionalidade premium que ninguem
+ * consegue comprar. Por isso a escolha e' explicita por plataforma.
+ */
+const API_KEY = Platform.select({
+  ios:     process.env.EXPO_PUBLIC_REVENUECAT_IOS_KEY,
+  android: process.env.EXPO_PUBLIC_REVENUECAT_ANDROID_KEY,
+  default: undefined,
+}) ?? "";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PurchasesModule = any;
@@ -34,7 +45,7 @@ function getPurchases(): PurchasesModule | null {
 }
 
 export function isBillingAvailable(): boolean {
-  if (available === null) available = getPurchases() !== null && API_KEY_ANDROID.length > 0;
+  if (available === null) available = getPurchases() !== null && API_KEY.length > 0;
   return available;
 }
 
@@ -45,9 +56,9 @@ export async function initPurchases(): Promise<void> {
     return;
   }
   const Purchases = getPurchases();
-  if (!Purchases || !API_KEY_ANDROID || configured) return;
+  if (!Purchases || !API_KEY || configured) return;
   try {
-    Purchases.configure({ apiKey: API_KEY_ANDROID });
+    Purchases.configure({ apiKey: API_KEY });
     configured = true;
     // sync do estado real → cache local (cobre reinstalações e refunds)
     await syncPremiumFromStore();
