@@ -77,3 +77,31 @@ fabricante as publica.
 
 - [Suspensão modificada (pós-venda)](./ideia-suspensao-modificada.md) — decidido
   avançar só depois do lançamento iOS.
+
+---
+
+## Website em telemovel — o que aprendemos
+
+Quatro correcoes, todas a mesma causa: **um elemento em tamanho de desktop
+que nao encolhe num ecra estreito**. Se aparecer outra pagina torta, e o
+primeiro sitio a olhar.
+
+- Cabecalho da /setups: menu sempre visivel, sem `hidden md:flex`
+- Cartoes da /setups: `minmax(340px, 1fr)` nao cabe em 360px
+- Tabela da pagina de moto: colunas `1fr` tem minimo em min-content
+- Cabecalho da pagina principal: logotipo e botao em tamanho de desktop
+
+Duas armadilhas que custaram tempo:
+
+**Estilos inline ganham sempre ao Tailwind.** Um `style={{ display: "flex" }}`
+anula um `className="hidden md:flex"`. Ao esconder algo, o `display` tem de
+sair do inline.
+
+**Elementos `position: fixed` nao aumentam o `scrollWidth` do documento.**
+Cortam a vista mas nao deixam rasto mensuravel — uma analise automatica de
+overflow nao os apanha. Foi por isso que dei a pagina principal como boa
+quando estava cortada. Para cabecalhos fixos, ver com os olhos.
+
+**Como medir sem telemovel:** forcar os tamanhos da versao mobile por
+JavaScript e somar as larguras dos filhos do cabecalho. O alvo e caber em
+360px, que e o telemovel Android mais estreito ainda comum.
