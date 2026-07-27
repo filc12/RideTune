@@ -97,14 +97,14 @@ export default function SetupsPage() {
       </Suspense>
 
       {/* NAVBAR */}
-      <header style={{ borderBottom: "1px solid #1e293b", padding: "16px 24px", display: "flex", alignItems: "center", justifyContent: "space-between", maxWidth: "1200px", margin: "0 auto" }}>
+      <header style={{ borderBottom: "1px solid #1e293b", padding: "16px 24px", display: "flex", flexWrap: "wrap", gap: "12px", alignItems: "center", justifyContent: "space-between", maxWidth: "1200px", margin: "0 auto" }}>
         <Link href="/" className="flex items-center gap-3" style={{ textDecoration: "none" }}>
           <span className="h-4 w-9 rounded-full bg-brand-accent shadow-[0_0_22px_rgba(74,158,255,0.9)]" />
           <span className="text-2xl font-bold tracking-tight text-white">
             Ride<span className="text-brand-accent">Tune</span>
           </span>
         </Link>
-        <nav style={{ display: "flex", gap: "24px", fontSize: "14px", color: "#94a3b8", alignItems: "center" }}>
+        <nav className="hidden md:flex" style={{ gap: "24px", fontSize: "14px", color: "#94a3b8", alignItems: "center" }}>
           <Link href="/#features" style={{ color: "#94a3b8", textDecoration: "none" }}>{t.nav.features}</Link>
           <Link href="/#how" style={{ color: "#94a3b8", textDecoration: "none" }}>{t.nav.how}</Link>
           <Link href="/setups" style={{ color: "#ffffff", fontWeight: "600", textDecoration: "none" }}>{t.nav.setups}</Link>
@@ -135,7 +135,7 @@ export default function SetupsPage() {
 
         {/* CONTROLS */}
         <div style={{ display: "flex", flexWrap: "wrap", gap: "16px", alignItems: "center", justifyContent: "space-between", marginBottom: "32px" }}>
-          <div style={{ position: "relative", minWidth: "280px", flex: "1", maxWidth: "400px" }}>
+          <div style={{ position: "relative", minWidth: "min(280px, 100%)", flex: "1", maxWidth: "400px" }}>
             <input 
               type="text"
               placeholder={t.setups.searchPlaceholder}
@@ -164,7 +164,7 @@ export default function SetupsPage() {
         </div>
 
         {/* PREVIEW CARDS GRELHA MODERNA */}
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(340px, 1fr))", gap: "24px" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(min(340px, 100%), 1fr))", gap: "24px" }}>
           {filteredSetups.map((item) => {
             const rows = [
               { k: "Pre", f: item.front.pre, r: item.rear.pre },
