@@ -13,10 +13,12 @@ import {
   Info,
   ChevronRight,
   X,
-  Share2
+  Share2,
+  RefreshCw
 } from 'lucide-react-native';
 import { useT } from '@/src/i18n';
 import { useScreenView } from '@/src/hooks/useScreenView';
+import { refreshOemData } from '@/src/services/oem-data';
 
 export default function SettingsScreen() {
   useScreenView("definicoes");
@@ -25,6 +27,17 @@ export default function SettingsScreen() {
   const [modalVisible, setModalVisible] = useState(false);
   const [modalTitle, setModalTitle] = useState('');
   const [modalContent, setModalContent] = useState('');
+  // 'idle' | 'loading' | 'ok' | 'fail' — o estado fica visível na própria linha,
+  // sem alertas, porque isto é uma ação de manutenção e não deve interromper.
+  const [refreshState, setRefreshState] = useState<'idle' | 'loading' | 'ok' | 'fail'>('idle');
+
+  const handleRefreshData = async () => {
+    if (refreshState === 'loading') return;
+    setRefreshState('loading');
+    const ok = await refreshOemData();
+    setRefreshState(ok ? 'ok' : 'fail');
+    setTimeout(() => setRefreshState('idle'), 4000);
+  };
 
   const openURL = (url: string) => {
     Linking.openURL(url).catch(() => {});
@@ -111,6 +124,23 @@ export default function SettingsScreen() {
               <View style={{ flex: 1, marginLeft: 14 }}>
                 <Text style={{ color: '#ffffff', fontSize: 15, fontWeight: '600' }}>{t('settings.support')}</Text>
                 <Text style={{ color: '#94a3b8', fontSize: 12, marginTop: 2 }}>{t('settings.support.sub')}</Text>
+              </View>
+              <ChevronRight size={18} color="#64748b" />
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              onPress={handleRefreshData}
+              style={{ flexDirection: 'row', alignItems: 'center', padding: 16, borderBottomWidth: 1, borderBottomColor: 'rgba(255, 255, 255, 0.05)' }}
+            >
+              <RefreshCw size={20} color="#38bdf8" />
+              <View style={{ flex: 1, marginLeft: 14 }}>
+                <Text style={{ color: '#ffffff', fontSize: 15, fontWeight: '600' }}>{t('settings.refresh')}</Text>
+                <Text style={{ color: refreshState === 'fail' ? '#f87171' : refreshState === 'ok' ? '#22D08A' : '#94a3b8', fontSize: 12, marginTop: 2 }}>
+                  {refreshState === 'loading' ? t('settings.refresh.loading')
+                    : refreshState === 'ok' ? t('settings.refresh.ok')
+                    : refreshState === 'fail' ? t('settings.refresh.fail')
+                    : t('settings.refresh.sub')}
+                </Text>
               </View>
               <ChevronRight size={18} color="#64748b" />
             </TouchableOpacity>

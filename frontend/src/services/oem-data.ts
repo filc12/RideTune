@@ -31,9 +31,25 @@ const SUPABASE_ANON_KEY = process.env.EXPO_PUBLIC_SUPABASE_ANON_KEY ?? '';
 
 // v2: o cache v1 foi gravado sem conversão snake_case→camelCase, por isso os
 // perfis CFMOTO ficaram sem `weightPoints`. Bumpar a chave descarta esse cache
-// envenenado em vez de o manter até expirar (7 dias).
+// envenenado em vez de o manter até expirar.
 const CACHE_KEY    = 'ridetune.oem_cache_v2';
-const CACHE_TTL_MS = 7 * 24 * 60 * 60 * 1000; // 7 dias
+
+/**
+ * Idade a partir da qual se volta a pedir dados ao servidor.
+ *
+ * ATENÇÃO ao histórico disto: era de 7 dias E o arranque fazia `return` quando o
+ * cache estava fresco, ou seja, nunca revalidava. O resultado é que uma moto nova
+ * demorava até uma semana a chegar a quem já tinha a app instalada — e não havia
+ * forma nenhuma de forçar. Deu queixas reais de utilizadores.
+ *
+ * Agora o arranque aplica o cache de imediato (para não atrasar o ecrã) e revalida
+ * SEMPRE em segundo plano. Este intervalo já só serve para não repetir o pedido
+ * quando a app é reaberta várias vezes seguidas.
+ */
+const REVALIDATE_AFTER_MS = 60 * 60 * 1000; // 1 hora
+
+/** Evita pedidos simultâneos se o arranque e o botão de refresh coincidirem. */
+let _inFlight: Promise<void> | null = null;
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -104,37 +120,52 @@ export function getOemTirePressure(bikeId: string): TirePressure | undefined {
  * Não precisa de await — a app usa dados bundle enquanto o fetch corre.
  */
 export async function initOemData(): Promise<void> {
+  let ageMs = Infinity;
+
   try {
     const raw = await storage.getItem<string>(CACHE_KEY, '');
     if (raw) {
       const cached: OemCache = JSON.parse(raw);
-      const ageMs = Date.now() - (cached.cachedAt ?? 0);
+      ageMs = Date.now() - (cached.cachedAt ?? 0);
 
-      // Aplicar dados de cache imediatamente (mesmo que stale)
+      // Aplicar dados de cache imediatamente para o ecrã não esperar por rede.
       if (cached.bikes?.length)      _applyBikes(cached.bikes);
       if (cached.suspension?.length) _applySuspension(cached.suspension);
       if (cached.pressure?.length)   _applyPressure(cached.pressure);
-
-      // Cache fresco → terminar
-      if (ageMs < CACHE_TTL_MS) return;
     }
   } catch {
     // cache inválido — continuar com bundle
   }
 
-  // Refresh em background (não bloqueia o arranque)
-  _fetchFromSupabase().catch(() => {/* falha silenciosa */});
+  // Revalidar em segundo plano. NÃO fazer `return` aqui quando o cache é recente:
+  // era isso que impedia as motos novas de chegarem a quem já tinha a app.
+  if (ageMs >= REVALIDATE_AFTER_MS) {
+    _refreshOnce().catch(() => {/* falha silenciosa — fica o cache */});
+  }
 }
 
-// ─── Refresh forçado (ex: pull-to-refresh no futuro) ─────────────────────────
+// ─── Refresh forçado (botão nas definições) ──────────────────────────────────
 
+/**
+ * Vai buscar dados novos e devolve true se conseguiu.
+ * Usado pelo botão "Atualizar dados" — a única forma de o utilizador destrancar
+ * uma moto acabada de acrescentar sem esperar pela revalidação automática.
+ */
 export async function refreshOemData(): Promise<boolean> {
   try {
-    await _fetchFromSupabase();
+    await _refreshOnce();
     return true;
   } catch {
     return false;
   }
+}
+
+/** Partilha o pedido em curso, para o arranque e o botão não duplicarem tráfego. */
+function _refreshOnce(): Promise<void> {
+  if (!_inFlight) {
+    _inFlight = _fetchFromSupabase().finally(() => { _inFlight = null; });
+  }
+  return _inFlight;
 }
 
 // ─── Internals ────────────────────────────────────────────────────────────────
