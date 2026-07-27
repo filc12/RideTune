@@ -1,32 +1,33 @@
 # Pendentes
 
-Estado em 26/07/2026. O catálogo está em 114 motos e 65 perfis, com o Supabase
-sincronizado com o código.
+Estado em 27/07/2026. O catálogo está em 114 motos e 65 perfis, com o Supabase
+sincronizado com o código. A **1.1.5 (versionCode 22)** está em teste interno na
+Play Store.
 
 ---
 
-## Para o próximo build (não chegam aos utilizadores sem ele)
+## Resolvido na 1.1.5
 
-**Cache de dados OEM — 7 dias, sem forma de forçar.**
-O `initOemData` em `src/services/oem-data.ts` aplica o cache e faz `return` se ele
-tiver menos de 7 dias. Só passado esse tempo é que vai ao Supabase. A `refreshOemData`
-existe mas **nada a chama** — é código morto.
+**Cache de dados OEM.** O `initOemData` aplicava o cache e fazia `return` se ele
+tivesse menos de 7 dias, portanto nunca revalidava — uma moto nova levava até uma
+semana a chegar a quem já tinha a app, e não havia forma de forçar. Agora aplica o
+cache de imediato e revalida sempre em segundo plano, com um intervalo de 1 hora só
+para não repetir o pedido em aberturas seguidas. A `refreshOemData`, que era código
+morto, está ligada ao botão "Atualizar dados" nas definições.
 
-Consequência: qualquer moto nova leva até uma semana a chegar a quem já tem a app.
-Já deu um utilizador a queixar-se de não ver a XT1200Z.
+**`expo-updates` instalado e configurado**, com `runtimeVersion` em `appVersion`.
+A partir da 1.1.5 é possível corrigir JavaScript por OTA sem passar pela loja.
+Atenção: como a política é `appVersion`, é preciso subir a versão no `app.json`
+sempre que o nativo mude, senão pode empurrar-se um OTA incompativel.
 
-Correção proposta:
-1. Revalidar sempre em segundo plano — aplicar o cache de imediato para o arranque
-   ser rápido, e ir buscar dados novos a seguir.
-2. Baixar o TTL, com o ponto 1 a fazer o trabalho.
-3. Ligar a `refreshOemData` a um botão nas definições.
+Notas de ambiente, para não voltar a perder tempo:
 
-Entretanto, quem não vir dados novos: limpar dados da app (não basta reinstalar — no
-Android a cópia de segurança da Google restaura o cache).
-
-**Não há `expo-updates` instalado.** Sem atualizações OTA, toda a correção de código
-passa por build e loja. Vale a pena ponderar instalar — era a diferença entre corrigir
-em minutos ou em dias.
+- O projeto **não corre no Expo Go** (tem `react-native-purchases` e
+  `@sentry/react-native`). É preciso development build.
+- Os builds locais precisam de mais memória que a predefinição. Está em
+  `~/.gradle/gradle.properties`: `org.gradle.jvmargs=-Xmx6g -XX:MaxMetaspaceSize=2g`.
+  Sem isto, o `lintVitalAnalyzeRelease` rebenta com OutOfMemoryError: Metaspace.
+- `eas build --local` não gasta a cota de builds da nuvem do plano gratuito.
 
 ---
 
