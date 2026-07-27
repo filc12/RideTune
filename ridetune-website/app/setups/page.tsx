@@ -97,10 +97,10 @@ export default function SetupsPage() {
       </Suspense>
 
       {/* NAVBAR */}
-      <header style={{ borderBottom: "1px solid #1e293b", padding: "14px 16px", display: "flex", flexWrap: "wrap", gap: "10px", alignItems: "center", justifyContent: "space-between", maxWidth: "1200px", margin: "0 auto" }}>
+      <header style={{ borderBottom: "1px solid #1e293b", padding: "12px 12px", display: "flex", flexWrap: "wrap", gap: "8px", alignItems: "center", justifyContent: "space-between", maxWidth: "1200px", margin: "0 auto" }}>
         <Link href="/" className="flex shrink-0 items-center gap-2 md:gap-3" style={{ textDecoration: "none" }}>
           <span className="h-3.5 w-8 rounded-full bg-brand-accent shadow-[0_0_22px_rgba(74,158,255,0.9)] md:h-4 md:w-9" />
-          <span className="text-xl font-bold tracking-tight text-white md:text-2xl">
+          <span className="text-lg font-bold tracking-tight text-white md:text-2xl">
             Ride<span className="text-brand-accent">Tune</span>
           </span>
         </Link>
@@ -112,7 +112,7 @@ export default function SetupsPage() {
         </nav>
         <div style={{ display: "flex", alignItems: "center", gap: "8px", flexShrink: 0 }}>
           <LanguageSwitcher />
-          <a href={PLAY_URL} target="_blank" rel="noopener noreferrer" style={{ backgroundColor: "#38bdf8", color: "#020617", padding: "8px 16px", borderRadius: "20px", fontWeight: "700", border: "none", fontSize: "13px", cursor: "pointer", textDecoration: "none", whiteSpace: "nowrap" }}>{t.nav.download}</a>
+          <a href={PLAY_URL} target="_blank" rel="noopener noreferrer" style={{ backgroundColor: "#38bdf8", color: "#020617", padding: "7px 13px", borderRadius: "20px", fontWeight: "700", border: "none", fontSize: "12.5px", cursor: "pointer", textDecoration: "none", whiteSpace: "nowrap" }}>{t.nav.download}</a>
         </div>
       </header>
 
