@@ -1414,10 +1414,41 @@ const QJMOTOR: MfzProfile[] = [
   },
 ];
 
+const BMW_EXTRA: MfzProfile[] = [
+  {
+    id: 'bmw_r1200gs_lc_2013',
+    brand: 'BMW', model: 'R 1200 GS (LC)', year: '2013-2018',
+    baseKg: 85,
+    source: 'Manual de operação e manutenção BMW R 1200 GS, código 0A01, edição 08/2015 (oficial)',
+    formula: 'cfmoto_interp',
+    dataQuality: 'oem_manual',
+    front: {
+      preload: na('O Telelever não tem afinador de precarga'),
+      comp:    na('O Telelever não tem afinador de compressão'),
+      reb:     na('O Telelever não tem afinador de extensão'),
+    },
+    rear: {
+      preload: tu_s(0),
+      comp:    na('O amortecedor de série não tem afinador de compressão'),
+      reb:     cl_h(8),
+    },
+    // O manual dá três estados de carga, não pesos. Os kg abaixo são a NOSSA leitura
+    // desses estados — os números dos afinadores é que são da BMW. Ver `notes`.
+    weightPoints: [
+      { kg: 85,  rPre: 0,  rReb: 8 },   // só piloto, sem carga
+      { kg: 115, rPre: 15, rReb: 2 },   // piloto com carga
+      { kg: 185, rPre: 30, rReb: 2 },   // piloto, passageiro e carga
+    ],
+    countNote: 'Só há afinadores atrás. Precarga: roda de ajuste até ao batente no sentido LOW e conta voltas para HIGH — 0 voltas só com piloto, 15 com carga, 30 com passageiro e carga. Extensão: parafuso até ao batente no sentido horário e conta cliques no sentido anti-horário — 8 só com piloto, 2 com carga ou com passageiro. Começa o ajuste pelo lado esquerdo da moto. À frente não há nada a mexer: o Telelever não tem afinadores.',
+    notes: '⚠️ Este perfil é da R 1200 GS (código 0A01). A GS Adventure é o 0A02, com amortecedor e curso diferentes — os valores não se transferem. ⚠️ Se a tua moto tem Dynamic ESA, o amortecimento e a precarga regulam-se pelo ecrã e não por estes valores. O manual da BMW não dá pesos, dá três estados de carga; os kg deste perfil são a forma como os traduzimos para a app, mas os números dos afinadores são os do manual. A precarga é contínua (voltas), não tem cliques. Confirmar sempre pelo sag.',
+  },
+];
+
 export const MFZ_PROFILES: MfzProfile[] = [
   ...CFMOTO,
   ...KTM_EXTRA,
   ...YAMAHA_EXTRA,
+  ...BMW_EXTRA,
   ...SUZUKI_EXTRA,
   ...VOGE,
   ...QJMOTOR,

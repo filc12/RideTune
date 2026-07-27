@@ -159,6 +159,7 @@ export const BIKES: Bike[] = [
   // R 1250 GS / RT sem ESA: Telelever à frente NÃO tem qualquer ajuste externo.
   // Atrás, manípulo de precarga + manípulo de extensão. (Com ESA é tudo eletrónico.)
   { id: "bmw-1250-gs",       brand: "BMW", model: "R 1250 GS (2019-2023)", cc: "1254cc", category: "adventure",     adj: "full", adjusters: { fPre: false, fComp: false, fReb: false, rPre: true, rComp: false, rReb: true } },
+  { id: "bmw-r1200gs-lc",    brand: "BMW", model: "R 1200 GS (2013-2018)", cc: "1170cc", category: "adventure",     adj: "full", adjusters: { fPre: false, fComp: false, fReb: false, rPre: true, rComp: false, rReb: true }, mfzProfileId: "bmw_r1200gs_lc_2013" },
   { id: "bmw-r1250-rt",      brand: "BMW", model: "R 1250 RT (2019-2024)", cc: "1254cc", category: "sport_touring", adj: "full", adjusters: { fPre: false, fComp: false, fReb: false, rPre: true, rComp: false, rReb: true } },
   // F 900 GS (2024+): forquilha 43 mm precarga+comp+ext; atrás precarga hidráulica +
   // extensão (sem compressão). bmwmotorcycles.com
