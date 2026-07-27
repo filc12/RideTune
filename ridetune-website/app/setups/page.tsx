@@ -119,7 +119,7 @@ export default function SetupsPage() {
       {/* MAIN CONTAINER */}
       <main style={{ maxWidth: "1200px", margin: "0 auto", padding: "48px 24px" }}>
         <div style={{ marginBottom: "16px" }}>
-          <span style={{ fontSize: "11px", letterSpacing: "1.2px", color: "#38bdf8", textTransform: "uppercase", fontWeight: "700", backgroundColor: "rgba(56, 189, 248, 0.1)", padding: "6px 14px", borderRadius: "12px", border: "1px solid rgba(56, 189, 248, 0.25)" }}>
+          <span style={{ display: "inline-block", fontSize: "11px", letterSpacing: "1.2px", color: "#38bdf8", textTransform: "uppercase", fontWeight: "700", backgroundColor: "rgba(56, 189, 248, 0.1)", padding: "6px 14px", borderRadius: "12px", border: "1px solid rgba(56, 189, 248, 0.25)" }}>
             • {t.setups.eyebrow}
           </span>
         </div>
