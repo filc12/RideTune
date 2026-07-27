@@ -58,10 +58,10 @@ function SetupValues({ sag, front, rear }: { sag: number; front: Clicks; rear: C
           {sag} <span className="text-brand-accent">mm</span>
         </span>
       </div>
-      <div className="grid grid-cols-[3.5rem_1fr_1fr_1fr] items-center gap-x-3 gap-y-2 text-[15px]">
+      <div className="grid grid-cols-[2.75rem_minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)] items-center gap-x-2 gap-y-2 text-[15px] sm:grid-cols-[3.5rem_1fr_1fr_1fr] sm:gap-x-3">
         <span aria-hidden />
-        <span className={head}>Preload</span>
-        <span className={head}>Rebound</span>
+        <span className={head}><span className="sm:hidden">Pre</span><span className="hidden sm:inline">Preload</span></span>
+        <span className={head}><span className="sm:hidden">Reb</span><span className="hidden sm:inline">Rebound</span></span>
         <span className={head}>Comp.</span>
 
         <span className={head}>Front</span>
