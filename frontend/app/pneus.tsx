@@ -12,7 +12,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import { C, ScreenHeader } from "@/src/components/ScreenHeader";
-import { BottomNav } from "@/src/components/BottomNav";
+import { BottomNav, useBottomNavClearance } from "@/src/components/BottomNav";
 import { HapticButton } from "@/src/components/HapticButton";
 import { useT } from "@/src/i18n";
 import { storage } from "@/src/utils/storage";
@@ -66,6 +66,7 @@ function PressureCard({ label, soloBar, loadedBar, tLabel }: PressureCardProps) 
 type ModeTab = "road" | "offroad";
 
 export default function PneusScreen() {
+  const navPad = useBottomNavClearance();
   const { t } = useT();
   const [bike, setBike] = useState<Bike | null>(null);
   const [pressure, setPressure] = useState<TirePressure | null>(null);
@@ -96,7 +97,7 @@ export default function PneusScreen() {
         <ScreenHeader title={t("pneus.title")} />
 
         <ScrollView
-          contentContainerStyle={st.scroll}
+          contentContainerStyle={[st.scroll, { paddingBottom: navPad }]}
           showsVerticalScrollIndicator={false}
         >
           {/* Subtítulo */}

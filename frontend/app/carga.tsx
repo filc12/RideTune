@@ -7,7 +7,7 @@ import { useRouter } from "expo-router";
 
 import { storage } from "@/src/utils/storage";
 import { C, ScreenHeader } from "@/src/components/ScreenHeader";
-import { BottomNav } from "@/src/components/BottomNav";
+import { BottomNav, useBottomNavClearance } from "@/src/components/BottomNav";
 import { useT } from "@/src/i18n";
 import { calcSetup, calcSetupById, getLoad, saveLoad, type Load } from "@/src/utils/suspension";
 import { PremiumModal } from "@/src/components/PremiumModal";
@@ -21,6 +21,7 @@ const PASSENGER_BOUNDS = { min: 0, max: 120, step: 1 };
 const LUGGAGE_BOUNDS = { min: 0, max: 60, step: 1 };
 
 export default function CargaScreen() {
+  const navPad = useBottomNavClearance();
   useScreenView("carga");
   const { t } = useT();
   const router = useRouter();
@@ -96,7 +97,7 @@ export default function CargaScreen() {
       <SafeAreaView style={{ flex: 1 }} edges={["top"]}>
         <ScreenHeader title={t("carga.title")} />
         <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === "ios" ? "padding" : undefined}>
-          <ScrollView contentContainerStyle={{ padding: 20, paddingBottom: 120, maxWidth: 600, alignSelf: "center", width: "100%" }}>
+          <ScrollView contentContainerStyle={{ padding: 20, paddingBottom: navPad, maxWidth: 600, alignSelf: "center", width: "100%" }}>
             <Text style={st.h1}>{t("carga.sub")}</Text>
 
             <WeightRow

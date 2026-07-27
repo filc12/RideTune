@@ -7,7 +7,7 @@ import { useRouter } from "expo-router";
 
 import { C, ScreenHeader } from "@/src/components/ScreenHeader";
 import { useT } from "@/src/i18n";
-import { BottomNav } from "@/src/components/BottomNav";
+import { BottomNav, useBottomNavClearance } from "@/src/components/BottomNav";
 import {
   listProfiles, saveProfile, updateProfile, deleteProfile,
   setActiveProfile, getActiveProfile, FREE_PROFILE_LIMIT,
@@ -18,6 +18,7 @@ import { isPremium } from "@/src/services/premium";
 import { useScreenView } from "@/src/hooks/useScreenView";
 
 export default function ProfilesScreen() {
+  const navPad = useBottomNavClearance();
   useScreenView("perfis");
   const { t } = useT();
   const router = useRouter();
@@ -90,7 +91,7 @@ export default function ProfilesScreen() {
       <LinearGradient colors={["#0B1220", "#070A0F"]} style={StyleSheet.absoluteFill} />
       <SafeAreaView style={{ flex: 1 }} edges={["top"]}>
         <ScreenHeader title={t("profiles.title")} />
-        <ScrollView contentContainerStyle={{ padding: 20, paddingBottom: 120, maxWidth: 600, alignSelf: "center", width: "100%" }}>
+        <ScrollView contentContainerStyle={{ padding: 20, paddingBottom: navPad, maxWidth: 600, alignSelf: "center", width: "100%" }}>
           <Text style={st.sub}>{t("profiles.sub")}</Text>
 
           {atLimit && (

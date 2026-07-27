@@ -5,7 +5,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 
 import { C, ScreenHeader } from "@/src/components/ScreenHeader";
-import { BottomNav } from "@/src/components/BottomNav";
+import { BottomNav, useBottomNavClearance } from "@/src/components/BottomNav";
 import { useT } from "@/src/i18n";
 import { deleteSetup, listSetups, saveSetup, type SavedSetup } from "@/src/utils/setups";
 import { useRouter } from "expo-router";
@@ -21,6 +21,7 @@ import { communitySlug } from "@/src/data/setupSlug";
 import { useScreenView } from "@/src/hooks/useScreenView";
 
 export default function SetupsScreen() {
+  const navPad = useBottomNavClearance();
   useScreenView("setups");
   const { t } = useT();
   const router = useRouter();
@@ -113,7 +114,7 @@ export default function SetupsScreen() {
       <LinearGradient colors={["#0B1220", "#070A0F"]} style={StyleSheet.absoluteFill} />
       <SafeAreaView style={{ flex: 1 }} edges={["top"]}>
         <ScreenHeader title={t("setups.title")} />
-        <ScrollView contentContainerStyle={{ padding: 20, paddingBottom: 120, maxWidth: 600, alignSelf: "center", width: "100%" }}>
+        <ScrollView contentContainerStyle={{ padding: 20, paddingBottom: navPad, maxWidth: 600, alignSelf: "center", width: "100%" }}>
           <Text style={st.sub}>{t("setups.sub")}</Text>
 
           <HapticButton

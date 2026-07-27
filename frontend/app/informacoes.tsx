@@ -6,7 +6,7 @@ import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 
 import { C, ScreenHeader } from "@/src/components/ScreenHeader";
 import { useT } from "@/src/i18n";
-import { BottomNav } from "@/src/components/BottomNav";
+import { BottomNav, useBottomNavClearance } from "@/src/components/BottomNav";
 import { useScreenView } from "@/src/hooks/useScreenView";
 
 if (Platform.OS === "android" && UIManager.setLayoutAnimationEnabledExperimental) {
@@ -22,6 +22,7 @@ const SECTIONS: { key: SectionKey; tKey: string; bodyKey: string; icon: keyof ty
 ];
 
 export default function InfoScreen() {
+  const navPad = useBottomNavClearance();
   useScreenView("informacoes");
   const { t } = useT();
   const [open, setOpen] = useState<SectionKey | null>("about");
@@ -37,7 +38,7 @@ export default function InfoScreen() {
       <LinearGradient colors={["#0B1220", "#070A0F"]} style={StyleSheet.absoluteFill} />
       <SafeAreaView style={{ flex: 1 }} edges={["top"]}>
         <ScreenHeader title={t("info.title")} />
-        <ScrollView contentContainerStyle={{ padding: 20, paddingBottom: 120, maxWidth: 600, alignSelf: "center", width: "100%" }}>
+        <ScrollView contentContainerStyle={{ padding: 20, paddingBottom: navPad, maxWidth: 600, alignSelf: "center", width: "100%" }}>
           <View style={st.brand}>
             <View style={st.brandLogo}>
               <View style={st.logoBar} />

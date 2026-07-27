@@ -5,7 +5,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 
 import { C, ScreenHeader } from "@/src/components/ScreenHeader";
-import { BottomNav } from "@/src/components/BottomNav";
+import { BottomNav, useBottomNavClearance } from "@/src/components/BottomNav";
 import { PremiumModal } from "@/src/components/PremiumModal";
 import { useT } from "@/src/i18n";
 import { isPremium } from "@/src/services/premium";
@@ -23,6 +23,7 @@ const QUIZ_FIX_KEYS: Record<number, { t: string; d: string }> = {
 };
 
 export default function DiagScreen() {
+  const navPad = useBottomNavClearance();
   useScreenView("diagnostico");
   const { t } = useT();
   const [answers, setAnswers] = useState<Record<number, boolean>>({});
@@ -63,7 +64,7 @@ export default function DiagScreen() {
       <LinearGradient colors={["#0B1220", "#070A0F"]} style={StyleSheet.absoluteFill} />
       <SafeAreaView style={{ flex: 1 }} edges={["top"]}>
         <ScreenHeader title={t("diag.title")} />
-        <ScrollView contentContainerStyle={{ padding: 20, paddingBottom: 120, maxWidth: 600, alignSelf: "center", width: "100%" }}>
+        <ScrollView contentContainerStyle={{ padding: 20, paddingBottom: navPad, maxWidth: 600, alignSelf: "center", width: "100%" }}>
           <Text style={st.sub}>{t("diag.sub")}</Text>
 
           {!done && (

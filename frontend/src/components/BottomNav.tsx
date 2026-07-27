@@ -12,6 +12,22 @@ import { useT } from "@/src/i18n";
 import { tapLight } from "@/src/utils/haptics";
 import { C } from "@/src/theme";
 
+/**
+ * Espaço a reservar no fim de cada ecrã para o conteúdo não ficar debaixo da barra.
+ *
+ * A barra é `position: absolute`, portanto flutua por cima do conteúdo: cada ecrã tem
+ * de reservar o espaço dela no fim do scroll. Mede cerca de 65px mais o `insets.bottom`,
+ * que num Android com navegação por gestos chega aos 48 — daí somar-se o inset em vez
+ * de usar um número fixo. O resto é folga, para o último cartão não ficar colado.
+ *
+ * Vive aqui, ao lado da barra, para que mexer na altura dela nao obrigue a caçar
+ * números soltos por oito ecrãs. Era assim que o /sag tinha ficado com 100 e a cortar.
+ */
+export function useBottomNavClearance() {
+  const insets = useSafeAreaInsets();
+  return 120 + insets.bottom;
+}
+
 export type NavActive = "home" | "carga" | "diag" | "sag" | "pneus" | "none";
 
 export function BottomNav({ active }: { active: NavActive }) {
