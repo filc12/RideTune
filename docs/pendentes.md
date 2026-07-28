@@ -211,6 +211,7 @@ Verificadas assim (27/07), agora `oem_manual`:
 | Tiger 900 / 900 GT | 2,50 | 2,90 | 2,90 | Manual Tiger 900 Series, pág. 189 |
 | Tiger 900 Rally | **2,35** | 2,90 | 2,90 | Manual Tiger 900 Series, pág. 195 |
 | V-Strom 800DE | 2,25 | 2,80 | 2,80 | Manual DL800DE, pág. 1-29 |
+| Transalp XL750 | 2,25 | 2,50 | **2,80** | Etiqueta oficial Honda (webom) |
 
 Correções que isto trouxe: a Ténéré tinha **2,25/2,50/2,90** — a frente errada e um
 valor de carga inventado; o manual dá 220/250 iguais a solo e a dois, e **200/200
@@ -225,8 +226,11 @@ A T7 2025 e a World Raid ficaram com os valores corrigidos mas em
 - **Yamaha** — na secção "Tires" da manutenção, tabela «Cold tire air pressure»
   com 1 pessoa / 2 pessoas / off-road. A melhor documentada de todas.
 - **Suzuki** — secção "Tire Pressure and Loading", tabela SOLO / DUAL RIDING.
-- **Honda** — na etiqueta «Tire Information & Drive Chain Label» e nas
-  especificações no fim. Distingue geração, atenção.
+- **Honda** — **usar `webom.hondamotopub.com`**. É o manual oficial em HTML,
+  página a página, com a tabela da etiqueta «Tyre information & drive chain» em
+  texto limpo. Resolve o problema dos PDF de 380 páginas que ficam sempre
+  cortados. O caminho é `/webom/HMEE/<código>/html/index.html`; a etiqueta está
+  em Vehicle Safety → Image Labels. Atenção que a Honda distingue geração.
 - **Triumph** — a página "Tire Inflation Pressures" da manutenção **não tem
   valores**, só remete para a secção Specifications. Confirmado: no manual da
   Tiger 900 Series os valores estão na **pág. 189**, com as medidas dos pneus ao
