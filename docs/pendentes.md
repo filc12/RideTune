@@ -217,6 +217,18 @@ quando não varia.
 A T7 2025 e a World Raid ficaram com os valores corrigidos mas em
 `estimated_spec` — são manuais diferentes e não li nenhum dos dois.
 
+**Onde cada marca esconde os valores** (poupa uma leitura por moto):
+
+- **Yamaha** — na secção "Tires" da manutenção, tabela «Cold tire air pressure»
+  com 1 pessoa / 2 pessoas / off-road. A melhor documentada de todas.
+- **Suzuki** — secção "Tire Pressure and Loading", tabela SOLO / DUAL RIDING.
+- **Honda** — na etiqueta «Tire Information & Drive Chain Label» e nas
+  especificações no fim. Distingue geração, atenção.
+- **Triumph** — a página "Tire Inflation Pressures" da manutenção **não tem
+  valores**, só remete para a secção Specifications (perto do fim, ~pág. 189 num
+  manual de 200). Ir direto para lá.
+- **BMW** — não publica. Só o autocolante debaixo do assento.
+
 **Como retomar.** Para cada moto: encontrar o manual do proprietario, ler a
 tabela de pressoes, corrigir os valores se preciso, e so entao repor
 `oem_manual` **com a citacao concreta** (documento, edicao, pagina). Comecar
