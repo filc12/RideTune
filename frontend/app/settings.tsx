@@ -16,9 +16,30 @@ import {
   Share2,
   RefreshCw
 } from 'lucide-react-native';
+import * as Updates from 'expo-updates';
 import { useT } from '@/src/i18n';
 import { useScreenView } from '@/src/hooks/useScreenView';
 import { refreshOemData } from '@/src/services/oem-data';
+
+/**
+ * Marca de OTA na linha da versão. Devolve null quando a app está a correr
+ * o bundle que veio da loja — nesse caso não há nada a assinalar.
+ * Deliberadamente sem tradução: "OTA + data" lê-se igual em qualquer idioma
+ * e serve sobretudo para diagnóstico ("que bundle é que este telemóvel tem?").
+ */
+function otaLabel(): string | null {
+  if (__DEV__) return null;
+  try {
+    if (Updates.isEmbeddedLaunch) return null;
+    const d = Updates.createdAt;
+    if (!d) return null;
+    const dd = String(d.getDate()).padStart(2, '0');
+    const mm = String(d.getMonth() + 1).padStart(2, '0');
+    return `OTA ${dd}/${mm}`;
+  } catch {
+    return null;
+  }
+}
 
 export default function SettingsScreen() {
   useScreenView("definicoes");
@@ -203,7 +224,10 @@ export default function SettingsScreen() {
             <Info size={20} color="#38bdf8" />
             <View style={{ marginLeft: 14 }}>
               <Text style={{ color: '#ffffff', fontSize: 15, fontWeight: '600' }}>{t('settings.version')}</Text>
-              <Text style={{ color: '#94a3b8', fontSize: 12, marginTop: 2 }}>v{Constants.expoConfig?.version ?? '1.0.0'} • {t('settings.built_by')}</Text>
+              <Text style={{ color: '#94a3b8', fontSize: 12, marginTop: 2 }}>
+                v{Constants.expoConfig?.version ?? '1.0.0'}
+                {otaLabel() ? ` · ${otaLabel()}` : ''} • {t('settings.built_by')}
+              </Text>
             </View>
           </View>
 
