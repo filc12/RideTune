@@ -209,6 +209,7 @@ Verificadas assim (27/07), agora `oem_manual`:
 | Tracer 9 | 2,50 | 2,90 | 2,90 | Manual MTT890D, pág. 85 |
 | V-Strom 650 | 2,25 | 2,50 | **2,80** | Manual DL650A, pág. 92 |
 | Tiger 900 / 900 GT | 2,50 | 2,90 | 2,90 | Manual Tiger 900 Series, pág. 189 |
+| Tiger 900 Rally | **2,35** | 2,90 | 2,90 | Manual Tiger 900 Series, pág. 195 |
 
 Correções que isto trouxe: a Ténéré tinha **2,25/2,50/2,90** — a frente errada e um
 valor de carga inventado; o manual dá 220/250 iguais a solo e a dois, e **200/200
@@ -229,7 +230,8 @@ A T7 2025 e a World Raid ficaram com os valores corrigidos mas em
   valores**, só remete para a secção Specifications. Confirmado: no manual da
   Tiger 900 Series os valores estão na **pág. 189**, com as medidas dos pneus ao
   lado. Ir direto para lá; custou-me três leituras a descobrir.
-  Atenção: a Rally tem roda de 21" e vem noutra página.
+  A Rally vem noutra página: o manual repete a secção Specifications por
+  variante — pág. 189 para a 900/GT, pág. 195 para a Rally.
 - **BMW** — não publica. Só o autocolante debaixo do assento.
 
 **Como retomar.** Para cada moto: encontrar o manual do proprietario, ler a
