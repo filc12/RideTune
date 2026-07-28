@@ -210,6 +210,7 @@ Verificadas assim (27/07), agora `oem_manual`:
 | V-Strom 650 | 2,25 | 2,50 | **2,80** | Manual DL650A, pág. 92 |
 | Tiger 900 / 900 GT | 2,50 | 2,90 | 2,90 | Manual Tiger 900 Series, pág. 189 |
 | Tiger 900 Rally | **2,35** | 2,90 | 2,90 | Manual Tiger 900 Series, pág. 195 |
+| V-Strom 800DE | 2,25 | 2,80 | 2,80 | Manual DL800DE, pág. 1-29 |
 
 Correções que isto trouxe: a Ténéré tinha **2,25/2,50/2,90** — a frente errada e um
 valor de carga inventado; o manual dá 220/250 iguais a solo e a dois, e **200/200
@@ -233,6 +234,10 @@ A T7 2025 e a World Raid ficaram com os valores corrigidos mas em
   A Rally vem noutra página: o manual repete a secção Specifications por
   variante — pág. 189 para a 900/GT, pág. 195 para a Rally.
 - **BMW** — não publica. Só o autocolante debaixo do assento.
+
+**Por confirmar na V-Strom 800DE:** a medida traseira. Temos 150/70 R18 e a
+tabela do manual (pág. 3-61) não coube na leitura. As pressões batem certo com a
+página 1-29, mas a medida não foi verificada.
 
 **Como retomar.** Para cada moto: encontrar o manual do proprietario, ler a
 tabela de pressoes, corrigir os valores se preciso, e so entao repor
