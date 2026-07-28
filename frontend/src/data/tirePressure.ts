@@ -12,7 +12,7 @@ import type { TirePressure } from '@/src/services/oem-data';
 
 export const TIRE_PRESSURES: TirePressure[] = [
   {"bikeId":"aprilia-tuareg","frontSoloBar":2.2,"frontLoadedBar":null,"rearSoloBar":2.4,"rearLoadedBar":null,"frontOffRoadBar":1.5,"rearOffRoadBar":1.6,"frontSize":"90/90-21","rearSize":"150/70 R18","source":"Estimativa (categoria)","dataQuality":"estimated_spec"},
-  {"bikeId":"macbor-montana-xr5","frontSoloBar":2.4,"frontLoadedBar":2.5,"rearSoloBar":2.7,"rearLoadedBar":2.9,"frontOffRoadBar":1.5,"rearOffRoadBar":1.8,"frontSize":null,"rearSize":null,"source":"Estimativa (categoria)","dataQuality":"estimated_spec"},
+  {"bikeId":"macbor-montana-xr5","frontSoloBar":2.3,"frontLoadedBar":null,"rearSoloBar":2.5,"rearLoadedBar":null,"frontOffRoadBar":null,"rearOffRoadBar":null,"frontSize":"110/80 R19","rearSize":"150/70 R17","source":"Manual do utilizador Macbor Montana XR5 Euro 5 (PT), pág. 94","dataQuality":"oem_manual"},
   {"bikeId":"aprilia-rsv4","frontSoloBar":2.5,"frontLoadedBar":null,"rearSoloBar":2.9,"rearLoadedBar":null,"frontOffRoadBar":null,"rearOffRoadBar":null,"frontSize":"120/70 ZR17","rearSize":"200/55 ZR17","source":"Manual Aprilia","dataQuality":"oem_manual"},
   {"bikeId":"aprilia-tuono-v4","frontSoloBar":2.5,"frontLoadedBar":null,"rearSoloBar":2.9,"rearLoadedBar":null,"frontOffRoadBar":null,"rearOffRoadBar":null,"frontSize":"120/70 ZR17","rearSize":"200/55 ZR17","source":"Manual Aprilia","dataQuality":"oem_manual"},
   {"bikeId":"aprilia-rs660","frontSoloBar":2.5,"frontLoadedBar":null,"rearSoloBar":2.9,"rearLoadedBar":null,"frontOffRoadBar":null,"rearOffRoadBar":null,"frontSize":"120/70 ZR17","rearSize":"180/55 ZR17","source":"OEM","dataQuality":"oem_manual"},
