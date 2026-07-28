@@ -105,3 +105,45 @@ quando estava cortada. Para cabecalhos fixos, ver com os olhos.
 **Como medir sem telemovel:** forcar os tamanhos da versao mobile por
 JavaScript e somar as larguras dos filhos do cabecalho. O alvo e caber em
 360px, que e o telemovel Android mais estreito ainda comum.
+
+---
+
+## Pressões de pneus — o rótulo foi despromovido, falta verificar
+
+**O que aconteceu.** Ao acrescentar a XT1200ZE reparei que o Supabase e o
+codigo discordavam nas pressoes. A investigacao revelou pior: **101 das 107
+motos no Supabase partilhavam apenas 6 combinacoes de valores, todas marcadas
+`oem_manual`**. Um manual real nao produz isso.
+
+Pior ainda, os dois lados discordam entre si e ambos discordam do manual:
+
+| Africa Twin | frente solo | tras solo | tras carga |
+|---|---|---|---|
+| Manual Honda | 2,50 | 2,90 | 2,90 |
+| Codigo | **2,00** | 2,50 | 2,90 |
+| Supabase | 2,50 | 2,90 | **3,20** |
+
+Verificado por pesquisa (mas ainda sem citacao de documento):
+- **Yamaha Tenere 700**: 220/250 kPa. Tinhamos 2,3 a frente. Errado.
+- **BMW R 1250 GS**: 2,5/2,9 **independentemente da carga**. Tinhamos 3,4 em
+  carga. Inventado.
+- **Honda Africa Twin**: 2,5/2,9. O nosso valor a solo esta certo no Supabase.
+- **Ducati Multistrada V4**: fontes em conflito, nao verificavel.
+
+**Padrao:** a coluna "em carga" e onde vive a invencao. Varios fabricantes dao
+um so par de pressoes, sem distincao de carga. A tabela inventava sempre um
+valor mais alto (3,2 / 3,4 / 2,8).
+
+**O que foi feito.** So continua a afirmar `oem_manual` o que tem **citacao
+concreta do documento** — o mesmo criterio que usamos na suspensao. Passaram de
+106 para 3: Macbor Montana XR5 (manual PT, pag. 94) e as duas XT1200Z/ZE.
+As restantes 104 estao `estimated_spec`, com a fonte marcada "— por confirmar".
+
+**Os valores nao foram alterados**, so o rotulo. Continuam a ser o melhor
+palpite; deixaram e' de ser apresentados como verdade verificada.
+
+**Como retomar.** Para cada moto: encontrar o manual do proprietario, ler a
+tabela de pressoes, corrigir os valores se preciso, e so entao repor
+`oem_manual` **com a citacao concreta** (documento, edicao, pagina). Comecar
+pelas mais usadas. Nunca subir o rotulo com base num resumo de pesquisa — foi
+assim que se chegou aqui.
