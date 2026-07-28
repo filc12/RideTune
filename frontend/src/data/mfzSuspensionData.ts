@@ -1412,6 +1412,26 @@ const QJMOTOR: MfzProfile[] = [
     countNote: 'Frente: rodar o parafuso até ao fim no sentido horário (mais duro) e abrir — compressão na perna esquerda 1,5 voltas, extensão na direita 2,5 voltas. Limite de 4 voltas em cada. Atrás só precarga, por porca de ajuste com chave de gancho.',
     notes: 'Confirmado em duas edições independentes do manual (grega e russa MY2026) com os mesmos números. Um afinador por perna: só compressão à esquerda e só extensão à direita, sem precarga à frente. Atrás só precarga — o manual dá o intervalo em mm (3 a 8) e não uma posição única, por isso usa o sag para escolher dentro dele.',
   },
+  {
+    id: 'yamaha_xt1200ze_2014',
+    brand: 'Yamaha', model: 'XT1200ZE Super Ténéré', year: '2014-2020',
+    baseKg: 75,
+    source: 'Manual do proprietário Yamaha XT1200Z/ZE (oficial) — a secção da ZE remete a regulação para o ecrã',
+    formula: 'yamaha',
+    dataQuality: 'oem_manual',
+    front: {
+      preload: na('Eletrónica — regula-se pelo ecrã'),
+      comp:    na('Eletrónica — regula-se pelo ecrã'),
+      reb:     na('Eletrónica — regula-se pelo ecrã'),
+    },
+    rear: {
+      preload: na('Eletrónica — regula-se pelo ecrã'),
+      comp:    na('Eletrónica — regula-se pelo ecrã'),
+      reb:     na('Eletrónica — regula-se pelo ecrã'),
+    },
+    countNote: 'Não há cliques a contar nesta moto. A suspensão eletrónica regula-se pelos botões do guiador e pelo ecrã: escolhes o modo de amortecimento e a predefinição de carga (só piloto / com bagagem / dois / dois com bagagem). O que a app te dá aqui é o sag e as pressões de pneus, que continuam a ser teus para medir.',
+    notes: '⚠️ Esta é a versão ZE, com suspensão eletrónica. Se a tua moto tem afinadores manuais na forquilha e no amortecedor, é a XT1200Z base — escolhe essa, que tem os valores de fábrica do manual. Pressões de fábrica iguais às da Z: até 90 kg, 2,25 bar à frente e 2,50 atrás; acima disso, 2,25 e 2,90. O sag é a única medida que continua a valer numa suspensão eletrónica: confirma sempre por aí.',
+  },
 ];
 
 const BMW_EXTRA: MfzProfile[] = [

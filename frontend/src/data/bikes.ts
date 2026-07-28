@@ -444,6 +444,7 @@ export const BIKES: Bike[] = [
   // manípulo de 6 posições (fábrica na 4) e extensão 10 cliques — SEM compressão atrás.
   // A XT1200ZE tem suspensão eletrónica e não é esta entrada.
   { id: "yamaha-xt1200z",    brand: "Yamaha", model: "XT1200Z Super Ténéré (2010-2020)", cc: "1199cc", category: "adventure", adj: "full", mfzProfileId: "yamaha_xt1200z_2010" },
+  { id: "yamaha-xt1200ze",  brand: "Yamaha", model: "XT1200ZE Super Ténéré (2014-2020)", cc: "1199cc", category: "adventure", adj: "full", mfzProfileId: "yamaha_xt1200ze_2014" },
   // Ténéré 700 base: KYB preload+rebound both ends, no compression
   { id: "yamaha-tenere-2019", brand: "Yamaha", model: "Ténéré 700 (2019-2024)", cc: "689cc", category: "adventure", adj: "partial", mfzProfileId: "yamaha_t700_2019" },
   { id: "yamaha-tenere-2025", brand: "Yamaha", model: "Ténéré 700 (2025+)",      cc: "689cc", category: "adventure", adj: "full",    mfzProfileId: "yamaha_t700_2025" },
