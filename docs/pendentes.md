@@ -213,6 +213,7 @@ Verificadas assim (27/07), agora `oem_manual`:
 | V-Strom 800DE | 2,25 | 2,80 | 2,80 | Manual DL800DE, pág. 1-29 |
 | Transalp XL750 | 2,25 | 2,50 | **2,80** | Etiqueta oficial Honda (webom) |
 | Africa Twin (todas) | 2,25 | 2,50 | **2,80** | Etiqueta oficial Honda, MLN250 |
+| NC750X | **2,50** | **2,90** | 2,90 | Etiqueta oficial Honda, MKW250 |
 
 Correções que isto trouxe: a Ténéré tinha **2,25/2,50/2,90** — a frente errada e um
 valor de carga inventado; o manual dá 220/250 iguais a solo e a dois, e **200/200
@@ -245,6 +246,15 @@ A T7 2025 e a World Raid ficaram com os valores corrigidos mas em
   A Rally vem noutra página: o manual repete a secção Specifications por
   variante — pág. 189 para a 900/GT, pág. 195 para a Rally.
 - **BMW** — não publica. Só o autocolante debaixo do assento.
+
+**Códigos Honda já descobertos** (para não repetir a pesquisa):
+Transalp 2025 `MLC250` · Africa Twin 2025 `MLN250` · NC750X 2025 `MKW250`.
+Faltam: X-ADV, NT1100, CB1000R, CB650R, Fireblade.
+
+**Custo real, medido:** cada moto Honda são 2 a 3 leituras — uma para achar o
+código, uma ou duas para a etiqueta — e cada leitura traz o índice inteiro do
+manual pelo meio. É por isso que isto não anda a 10 motos por sessão. Se houver
+pressa, o caminho rápido continua a ser ter os PDF em disco.
 
 **Como retomar.** Para cada moto: encontrar o manual do proprietario, ler a
 tabela de pressoes, corrigir os valores se preciso, e so entao repor
