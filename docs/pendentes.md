@@ -157,6 +157,40 @@ As restantes 104 estao `estimated_spec`, com a fonte marcada "— por confirmar"
 **Os valores nao foram alterados**, so o rotulo. Continuam a ser o melhor
 palpite; deixaram e' de ser apresentados como verdade verificada.
 
+### O que a investigação de manuais já revelou (27/07)
+
+**A BMW não publica as pressões no manual.** Confirmado no manual oficial da
+R 1250 GS Adventure (`manuals.bmw-motorrad.com`, R_0M11_RM_0321_01.pdf): a lista
+"debaixo do assento" inclui, no ponto 3, uma *Tyre pressures table* — um autocolante.
+O texto do manual não contém um único valor em bar. Procurei por "bar", "kPa",
+"2.5" e "2.9": zero ocorrências.
+
+Consequência: **nenhuma BMW pode chegar a `oem_manual` por via do manual.** A única
+fonte legítima é a foto do rótulo debaixo do assento. Isto também invalida a linha
+que eu tinha escrito acima a dar a R 1250 GS como "verificada por pesquisa" — o que
+encontrei foram sites de terceiros a repetir-se uns aos outros.
+
+**Africa Twin: os dois lados estavam errados, e eu também.** O manual distingue
+gerações, coisa que nenhum dos nossos conjuntos fazia:
+
+| | frente | trás solo | trás 2 pessoas |
+|---|---|---|---|
+| CRF1000L (2016-2019) | 2,00 | 2,50 | 2,80 |
+| CRF1100L (2020+) | 2,25 | 2,50 | 2,80 |
+| *tínhamos no código* | 2,00 | 2,50 | 2,90 |
+| *tínhamos no Supabase* | 2,50 | 2,90 | 3,20 |
+
+O código tinha os valores da geração **anterior**; o Supabase não tinha os de
+nenhuma. E a frente não muda com a carga — muda com o ano do modelo. Corrigido nos
+dois lados para o CRF1100L (as nossas são 1084cc), incluindo a DCT, que não tinha
+linha nenhuma. Fica em `estimated_spec` até eu conseguir citar a página: os PDF
+oficiais da Honda são grandes demais para a ferramenta de leitura e a secção de
+especificações fica sempre cortada.
+
+**Lição de método:** um resumo de pesquisa não distingue gerações nem mercados. Foi
+exatamente assim que a tabela original ganhou valores inventados. Só o documento
+serve.
+
 **Como retomar.** Para cada moto: encontrar o manual do proprietario, ler a
 tabela de pressoes, corrigir os valores se preciso, e so entao repor
 `oem_manual` **com a citacao concreta** (documento, edicao, pagina). Comecar
