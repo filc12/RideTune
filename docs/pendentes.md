@@ -235,10 +235,6 @@ A T7 2025 e a World Raid ficaram com os valores corrigidos mas em
   variante — pág. 189 para a 900/GT, pág. 195 para a Rally.
 - **BMW** — não publica. Só o autocolante debaixo do assento.
 
-**Por confirmar na V-Strom 800DE:** a medida traseira. Temos 150/70 R18 e a
-tabela do manual (pág. 3-61) não coube na leitura. As pressões batem certo com a
-página 1-29, mas a medida não foi verificada.
-
 **Como retomar.** Para cada moto: encontrar o manual do proprietario, ler a
 tabela de pressoes, corrigir os valores se preciso, e so entao repor
 `oem_manual` **com a citacao concreta** (documento, edicao, pagina). Comecar
