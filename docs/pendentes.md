@@ -20,6 +20,20 @@ A partir da 1.1.5 é possível corrigir JavaScript por OTA sem passar pela loja.
 Atenção: como a política é `appVersion`, é preciso subir a versão no `app.json`
 sempre que o nativo mude, senão pode empurrar-se um OTA incompativel.
 
+**Canal OTA testado e a funcionar** (27/07/2026). Publicado com
+`npx eas-cli update --channel production` a partir de `frontend/`, chegou ao
+telemóvel ao fim de duas reaberturas completas — a primeira descarrega, a segunda
+arranca já com o novo bundle.
+
+Como confirmar qual o bundle em uso: a linha da versão nas Definições mostra
+`v1.1.5 · OTA dd/mm` quando está a correr um update, e só `v1.1.5` quando está a
+correr o que veio da Play Store. Serve para diagnóstico quando alguém reportar um
+bug — diz que bundle é que o telemóvel dele tem.
+
+**Armadilha do `appVersion`:** o update só chega a quem tem a versão nativa igual
+à do `app.json` no momento da publicação. Se se subir a versão sem fazer build
+nova, o OTA fica sem destinatários e não há erro nenhum a avisar.
+
 Notas de ambiente, para não voltar a perder tempo:
 
 - O projeto **não corre no Expo Go** (tem `react-native-purchases` e
