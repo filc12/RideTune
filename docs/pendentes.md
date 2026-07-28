@@ -256,6 +256,32 @@ código, uma ou duas para a etiqueta — e cada leitura traz o índice inteiro d
 manual pelo meio. É por isso que isto não anda a 10 motos por sessão. Se houver
 pressa, o caminho rápido continua a ser ter os PDF em disco.
 
+### A base de dados arredondava (corrigido a 28/07)
+
+As colunas de pressão no Supabase eram `numeric(3,1)` — **uma casa decimal**. Todos
+os 2,25 que verifiquei contra manuais eram guardados como **2,3**. E como o Supabase
+se sobrepõe ao código, era o 2,3 que chegava ao telemóvel.
+
+Afetava 11 das 15 verificadas: Africa Twin (×3), Transalp (×3), as duas V-Strom, as
+duas XT1200Z e a Tiger 900 Rally (2,35 → 2,4).
+
+Corrigido para `numeric(4,2)` e os valores reescritos. **Ao acrescentar colunas
+numéricas novas, verificar sempre a escala** — este erro é silencioso: não dá aviso,
+não falha, só arredonda.
+
+### Sobre listas geradas sem citação
+
+Apareceu uma lista com as 96 motos "todas verificadas com citação oficial" que não
+continha citação nenhuma. Recusada. Sinais que a denunciaram, úteis para a próxima:
+
+- Dizia 2,75 atrás na Ténéré 700 a dois; o manual de serviço, pág. 82, diz 250 iguais
+  a solo e a dois.
+- Dava a BMW como verificada em manual, quando a BMW não publica pressões no manual.
+- Juntava numa linha variantes com rodas diferentes (DesertX/Rally, Tiger 1200).
+- Os mesmos pares repetiam-se dezenas de vezes — o padrão da tabela original.
+
+Serve como lista de hipóteses. Não serve como fonte.
+
 **Como retomar.** Para cada moto: encontrar o manual do proprietario, ler a
 tabela de pressoes, corrigir os valores se preciso, e so entao repor
 `oem_manual` **com a citacao concreta** (documento, edicao, pagina). Comecar
