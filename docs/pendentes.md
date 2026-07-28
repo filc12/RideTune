@@ -212,6 +212,7 @@ Verificadas assim (27/07), agora `oem_manual`:
 | Tiger 900 Rally | **2,35** | 2,90 | 2,90 | Manual Tiger 900 Series, pág. 195 |
 | V-Strom 800DE | 2,25 | 2,80 | 2,80 | Manual DL800DE, pág. 1-29 |
 | Transalp XL750 | 2,25 | 2,50 | **2,80** | Etiqueta oficial Honda (webom) |
+| Africa Twin (todas) | 2,25 | 2,50 | **2,80** | Etiqueta oficial Honda, MLN250 |
 
 Correções que isto trouxe: a Ténéré tinha **2,25/2,50/2,90** — a frente errada e um
 valor de carga inventado; o manual dá 220/250 iguais a solo e a dois, e **200/200
@@ -231,6 +232,12 @@ A T7 2025 e a World Raid ficaram com os valores corrigidos mas em
   texto limpo. Resolve o problema dos PDF de 380 páginas que ficam sempre
   cortados. O caminho é `/webom/HMEE/<código>/html/index.html`; a etiqueta está
   em Vehicle Safety → Image Labels. Atenção que a Honda distingue geração.
+
+  **Como encontrar o código do modelo:** procurar `hondamotopub.com/model/HMEE/<moto>`
+  numa pesquisa. HMEE é a Europa. O código sai no URL (Transalp 2025 = MLC250,
+  Africa Twin 2025 = MLN250). Depois é `webom.hondamotopub.com/webom/HMEE/<código>/html/`
+  e a etiqueta está em `GMS005006` ou `GMS005007` — o número varia com o número de
+  etiquetas do modelo, por isso convém abrir a primeira e seguir o índice.
 - **Triumph** — a página "Tire Inflation Pressures" da manutenção **não tem
   valores**, só remete para a secção Specifications. Confirmado: no manual da
   Tiger 900 Series os valores estão na **pág. 189**, com as medidas dos pneus ao
