@@ -191,6 +191,32 @@ especificações fica sempre cortada.
 exatamente assim que a tabela original ganhou valores inventados. Só o documento
 serve.
 
+### Método que funciona (usar este)
+
+O que falhou: procurar o PDF oficial. Os manuais têm 300-380 páginas e a
+ferramenta de leitura corta a meio, sempre antes das especificações.
+
+O que funciona: **`manualslib.com/manual/<id>/<Moto>.html?page=N`** devolve o texto
+daquela página, com a tabela de pressões legível e o número de página para citar.
+Procurar primeiro `manualslib <marca> <modelo> owner's manual tire pressure kPa`
+para descobrir o N, depois ir buscar a página.
+
+Verificadas assim (27/07), agora `oem_manual`:
+
+| Moto | frente | trás solo | trás 2 pessoas | fonte |
+|---|---|---|---|---|
+| Ténéré 700 (2019-2024) | 2,20 | 2,50 | 2,50 | Manual de serviço 2020, pág. 82 |
+| Tracer 9 | 2,50 | 2,90 | 2,90 | Manual MTT890D, pág. 85 |
+| V-Strom 650 | 2,25 | 2,50 | **2,80** | Manual DL650A, pág. 92 |
+
+Correções que isto trouxe: a Ténéré tinha **2,25/2,50/2,90** — a frente errada e um
+valor de carga inventado; o manual dá 220/250 iguais a solo e a dois, e **200/200
+fora de estrada**, que não tínhamos. A V-Strom tinha a frente a variar com a carga,
+quando não varia.
+
+A T7 2025 e a World Raid ficaram com os valores corrigidos mas em
+`estimated_spec` — são manuais diferentes e não li nenhum dos dois.
+
 **Como retomar.** Para cada moto: encontrar o manual do proprietario, ler a
 tabela de pressoes, corrigir os valores se preciso, e so entao repor
 `oem_manual` **com a citacao concreta** (documento, edicao, pagina). Comecar
