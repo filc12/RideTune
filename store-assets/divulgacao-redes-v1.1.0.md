@@ -122,7 +122,7 @@ Grazie a tutti per il supporto e buone curve! 🏍️
 ## Português
 A tua mota provavelmente já tem uma suspensão excelente. O que falta é o setup certo.
 
-O RideTune dá-te os valores exatos de pré-carga, rebound e compressão para a tua mota — a partir de dados OEM e da forma como realmente andas: sozinho, com passageiro, com malas.
+O RideTune dá-te um ponto de partida concreto de pré-carga, rebound e compressão para a tua mota — a partir das regulações de fábrica do manual e da forma como realmente andas: sozinho, com passageiro, com malas.
 
 100+ motos. Setup em minutos. Sem adivinhar.
 Compra única, atualizações para sempre.
@@ -135,7 +135,7 @@ Compra única, atualizações para sempre.
 ## English
 Your bike probably already has excellent suspension. What's missing is the right setup.
 
-RideTune gives you the exact preload, rebound and compression values for your motorcycle — from OEM data and the way you actually ride: solo, two-up, or fully loaded.
+RideTune gives you a concrete starting point for preload, rebound and compression — from the factory settings in your bike's manual and the way you actually ride: solo, two-up, or fully loaded.
 
 100+ bikes. Setup in minutes. No more guessing.
 Buy once, updates forever.
@@ -148,7 +148,7 @@ Buy once, updates forever.
 ## Español
 Tu moto probablemente ya tiene una suspensión excelente. Lo que falta es el ajuste correcto.
 
-RideTune te da los valores exactos de precarga, rebote y compresión para tu moto — a partir de datos OEM y de cómo conduces de verdad: solo, con pasajero o con equipaje.
+RideTune te da un punto de partida concreto de precarga, rebote y compresión para tu moto — a partir de los reglajes de fábrica del manual y de cómo conduces de verdad: solo, con pasajero o con equipaje.
 
 100+ motos. Ajuste en minutos. Sin adivinar.
 Pago único, actualizaciones para siempre.
@@ -198,13 +198,13 @@ El ajuste correcto en minutos → RideTune. Link en la bio.
 # 4. LinkedIn (tom mais explicativo)
 
 ## Português
-Lancei uma atualização do RideTune, a app que ajuda motociclistas a acertar a suspensão sem tentativa e erro. Escolhes a moto, dizes o que levas (piloto, passageiro, bagagem) e recebes os cliques exatos de pré-carga, rebound e compressão — baseados em dados OEM. Agora também dá para explorar e partilhar setups da comunidade em ridetune.app/setups. Compra única, sem subscrições. Disponível na Google Play.
+Lancei uma atualização do RideTune, a app que ajuda motociclistas a acertar a suspensão sem tentativa e erro. Escolhes a moto, dizes o que levas (piloto, passageiro, bagagem) e recebes cliques concretos de pré-carga, rebound e compressão — a partir das regulações de fábrica do manual da tua mota. Agora também dá para explorar e partilhar setups da comunidade em ridetune.app/setups. Compra única, sem subscrições. Disponível na Google Play.
 
 ## English
-I've shipped an update to RideTune, the app that helps riders dial in their suspension without trial and error. Pick your bike, tell it what you carry (rider, passenger, luggage) and get the exact preload, rebound and compression clicks — based on OEM data. You can now also browse and share community setups at ridetune.app/setups. Buy once, no subscriptions. Available on Google Play.
+I've shipped an update to RideTune, the app that helps riders dial in their suspension without trial and error. Pick your bike, tell it what you carry (rider, passenger, luggage) and get concrete preload, rebound and compression clicks — based on the factory settings in your bike's manual. You can now also browse and share community setups at ridetune.app/setups. Buy once, no subscriptions. Available on Google Play.
 
 ## Español
-He lanzado una actualización de RideTune, la app que ayuda a los moteros a ajustar la suspensión sin prueba y error. Eliges la moto, indicas lo que llevas (piloto, pasajero, equipaje) y recibes los clics exactos de precarga, rebote y compresión — basados en datos OEM. Ahora también puedes explorar y compartir ajustes de la comunidad en ridetune.app/setups. Pago único, sin suscripciones. Disponible en Google Play.
+He lanzado una actualización de RideTune, la app que ayuda a los moteros a ajustar la suspensión sin prueba y error. Eliges la moto, indicas lo que llevas (piloto, pasajero, equipaje) y recibes clics concretos de precarga, rebote y compresión — a partir de los reglajes de fábrica del manual. Ahora también puedes explorar y compartir ajustes de la comunidad en ridetune.app/setups. Pago único, sin suscripciones. Disponible en Google Play.
 
 ---
 

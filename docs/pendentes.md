@@ -61,10 +61,11 @@ para um só parafuso.
 
 ## Comunicação
 
-**O material de divulgação promete "os valores exatos".** Verdade para as 54 motos com
-perfil; para as outras é heurística por categoria. Convém suavizar — foi o tipo de
-promessa que levou um utilizador a perguntar qual era a fonte das curvas de
-amortecimento.
+**~~O material de divulgação promete "os valores exatos".~~ Corrigido.** Era verdade
+para as 54 motos com perfil; para as outras é heurística por categoria. Passou a
+"ponto de partida concreto ... a partir das regulações de fábrica do manual", nas
+três línguas do `divulgacao-redes-v1.1.0.md`. Foi este tipo de promessa que levou um
+utilizador a perguntar qual era a fonte das curvas de amortecimento.
 
 Resposta a essa pergunta, para reutilizar: não usamos curvas de amortecimento e não o
 afirmamos. Isso são dados força/velocidade do fabricante da suspensão, não publicados.
