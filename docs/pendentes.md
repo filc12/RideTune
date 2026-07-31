@@ -243,6 +243,7 @@ Verificadas assim (27/07), agora `oem_manual`:
 | Ténéré 700 (2025+) | 2,20 | 2,50 | 2,50 | Manual Yamaha BRL-28199-70 (etiqueta) |
 | YZF-R7 | **2,50** | **2,90** | 2,90 | Manual Yamaha BEB-28199-20, pág. 7-19 |
 | Ténéré 700 World Raid | 2,20 | 2,50 | 2,50 | Manual Yamaha BXD-F819D-P0, pág. 7-19 |
+| NT1100 | 2,50 | 2,90 | 2,90 | Etiqueta oficial Honda, MLF250 |
 | NC750X | **2,50** | **2,90** | 2,90 | Etiqueta oficial Honda, MKW250 |
 
 Correções que isto trouxe: a Ténéré tinha **2,25/2,50/2,90** — a frente errada e um
@@ -271,6 +272,12 @@ A T7 2025 e a World Raid ficaram com os valores corrigidos mas em
   texto limpo. Resolve o problema dos PDF de 380 páginas que ficam sempre
   cortados. O caminho é `/webom/HMEE/<código>/html/index.html`; a etiqueta está
   em Vehicle Safety → Image Labels. Atenção que a Honda distingue geração.
+
+  **Nem todos os modelos têm versão HTML.** A CB650R de 2024, por exemplo, só tem PDF
+  no `hondamotopub` — a página do modelo mostra apenas "PDF Ver". Nesses casos o
+  `webom` devolve a página de pesquisa em vez do manual, e é preciso o ficheiro.
+  Códigos já descobertos: Transalp `MLC250` · Africa Twin `MLN250` · NC750X `MKW250` ·
+  NT1100 `MLF250` · CB650R 2024 `MKY241` (só PDF).
 
   **Como encontrar o código do modelo:** procurar `hondamotopub.com/model/HMEE/<moto>`
   numa pesquisa. HMEE é a Europa. O código sai no URL (Transalp 2025 = MLC250,
