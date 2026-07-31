@@ -228,6 +228,7 @@ Verificadas assim (27/07), agora `oem_manual`:
 | 890 Adventure R | **2,40** | **2,90** | 2,90 | Manual KTM 3214269en, pág. 99 |
 | 1290 Super Adventure S | 2,40 | **2,90** | 2,90 | Manual KTM 3214538en, sec. 15.7 |
 | 1290 Super Adventure R | 2,40 | **2,90** | 2,90 | Manual KTM 3214297en, sec. 15.7 |
+| 790 Adventure R | **2,40** | **2,90** | 2,90 | Manual KTM 3214533en |
 | NC750X | **2,50** | **2,90** | 2,90 | Etiqueta oficial Honda, MKW250 |
 
 Correções que isto trouxe: a Ténéré tinha **2,25/2,50/2,90** — a frente errada e um
@@ -272,11 +273,16 @@ remota: nos manuais de 2021 e 2022 o corte cai antes da secção das pressões (
 15.7, pág. 140 no de 2022). Nas 890 deu porque o valor aparece cedo, no capítulo do
 TPMS. **Com o PDF em disco resolve-se em segundos** — foi assim que ficaram as duas.
 
-**Resultado da KTM até agora: quatro motos, o mesmo par 2,4 / 2,9.** 890 Adventure,
-890 Adventure R, 1290 Super Adventure S e R. Rodas diferentes (21/18 contra 19/17),
-pesos diferentes, e a KTM dá o mesmo valor a todas, sem distinguir carga. Isto torna
-suspeitos os 2,3/2,5 que ainda temos nas 790 — mesma plataforma das 890. Verificar
-antes de assumir, mas é o palpite mais forte que há no ficheiro.
+**Resultado da KTM: cinco motos lidas, cinco vezes 2,4 / 2,9.** 890 Adventure e R,
+1290 Super Adventure S e R, 790 Adventure R. Rodas de 19 e de 21, pesos entre 190 e
+250 kg, e a KTM dá o mesmo par a todas sem distinguir carga. A suspeita sobre as 790
+confirmou-se na R.
+
+**Mesmo assim, não extrapolar.** Falta a 790 Adventure base (o manual de 2024,
+`3214950en`, corta antes da secção) e as pequenas — 390 Adventure, 390 Enduro R,
+690 SMC R. Uma 390 não tem por que levar a mesma pressão de uma 1290, e o padrão que
+se confirmou é entre motos grandes da mesma família. As `3214950en`, `3214530en`
+(690 SMC R 2022) e as 390 precisam do PDF em disco ou de outra via.
 
 **Duas notas sobre a KTM, ganhas na 890 Adventure:**
 
