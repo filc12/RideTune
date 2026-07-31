@@ -47,6 +47,20 @@ Notas de ambiente, para não voltar a perder tempo:
 
 ## Catálogo
 
+**Suzuki DR-Z4S (2025+) — acrescentada, com duas dúvidas por fechar:**
+
+1. **Precarga traseira.** A página oficial da Suzuki diz que "both the front and rear
+   suspension offer compression and rebound damping adjustments" — não fala de precarga
+   em lado nenhum. Marquei `rPre: true` com base no material de imprensa (Dirt Rider,
+   derivado do dossier da Suzuki) e no facto de um amortecedor link-type ter quase
+   sempre anel roscado. Se o manual disser o contrário, é mudar.
+2. **Medida traseira.** A Suzuki diz `120/80-18 M/C 62P`; a transcrição do manual no
+   maintenanceschedule.com diz `120/90-18 M/C 65P`. Fiquei pela Suzuki. Pode ser
+   diferença de mercado.
+
+Pressões (150 solo e a dois à frente; 175/225 atrás) vêm de uma transcrição do manual,
+não do manual — ficam em `estimated_spec` até alguém abrir o documento.
+
 **5 motos ocultas**, à espera de manual do proprietário: CFMoto 1000 SR-R,
 QJ SRT 600 SX, Voge 650 DSX, Voge 525 R, Voge R625.
 
