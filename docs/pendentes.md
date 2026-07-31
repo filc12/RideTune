@@ -245,6 +245,7 @@ Verificadas assim (27/07), agora `oem_manual`:
 | Ténéré 700 World Raid | 2,20 | 2,50 | 2,50 | Manual Yamaha BXD-F819D-P0, pág. 7-19 |
 | NT1100 | 2,50 | 2,90 | 2,90 | Etiqueta oficial Honda, MLF250 |
 | X-ADV | **2,50** | **2,80** | 2,80 | Manual Honda 32MKT700 (2025) |
+| CB650R | 2,50 | 2,90 | 2,90 | Manual Honda 32MKYH000 (2021) |
 | NC750X | **2,50** | **2,90** | 2,90 | Etiqueta oficial Honda, MKW250 |
 
 Correções que isto trouxe: a Ténéré tinha **2,25/2,50/2,90** — a frente errada e um
@@ -279,6 +280,10 @@ A T7 2025 e a World Raid ficaram com os valores corrigidos mas em
   `webom` devolve a página de pesquisa em vez do manual, e é preciso o ficheiro.
   Códigos já descobertos: Transalp `MLC250` · Africa Twin `MLN250` · NC750X `MKW250` ·
   NT1100 `MLF250` · CB650R 2024 `MKY241` (só PDF).
+
+  **Cuidado com os manuais americanos** (`cdn.powersports.honda.com`): a extração de
+  texto não devolve a tabela de pressões — nem em kPa nem em psi. Tentado no CB1000
+  de 2025 e no CB1000R de 2024, sem resultado nos dois. Usar sempre os europeus.
 
   **Terceira via, a melhor de todas:** `2rom-prd-data.hondamotopub.com/om/HMEE/<MODELO>/
   <ano>/<ficheiro>.pdf` — o PDF direto, sem página de aceitação. Foi de lá que saiu o
