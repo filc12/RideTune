@@ -236,6 +236,10 @@ Verificadas assim (27/07), agora `oem_manual`:
 | 390 Adventure | **2,00** | **2,00** | **2,20** | Manual KTM 3214794en, sec. 15.7 |
 | 390 Adventure R (2025) | 2,00 | 2,00 | 2,20 | Manual KTM 3240182en, sec. 15.7 |
 | 390 Enduro R (2025) | 2,00 | 2,00 | 2,20 | Manual KTM 3240187en, sec. 14.7 |
+| MT-09 | 2,50 | 2,90 | 2,90 | Manual Yamaha B7N-28199-E0 |
+| MT-07 | **2,25** | **2,50** | — | Manual Yamaha 1WS-28199-E3, pág. 6-17 |
+| XSR900 | 2,50 | 2,90 | 2,90 | Manual Yamaha BAE-28199-E0 |
+| MT-10 | 2,50 | 2,90 | 2,90 | Manual Yamaha B67-28199-E0, pág. 7-19 |
 | NC750X | **2,50** | **2,90** | 2,90 | Etiqueta oficial Honda, MKW250 |
 
 Correções que isto trouxe: a Ténéré tinha **2,25/2,50/2,90** — a frente errada e um
@@ -250,7 +254,9 @@ A T7 2025 e a World Raid ficaram com os valores corrigidos mas em
 
 - **Yamaha** — **`cdn2.yamaha-motor.eu/prod/owner-manuals/Motorcycles/P<código>E.PDF`**,
   com `<código>` a referência do manual sem hífenes (MT-09 = `B7N28199E0`, MT-07 =
-  `1WS28199E3`). PDF oficial da Yamaha Europa, e a secção dos pneus fica dentro do
+  `1WS28199E3`, XSR900 = `BAE28199E0`, MT-10 = `B6728199E0`). O `28199` é fixo em
+  todas as Yamaha, portanto o código sai de uma pesquisa por `<modelo> owner's manual
+  28199`. PDF oficial da Yamaha Europa, e a secção dos pneus fica dentro do
   alcance da leitura remota. Melhor que o ManualsLib: sem índice pelo meio.
 - **Yamaha (alternativa)** — na secção "Tires" da manutenção, tabela «Cold tire air pressure»
   com 1 pessoa / 2 pessoas / off-road. A melhor documentada de todas.
