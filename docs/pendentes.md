@@ -225,6 +225,7 @@ Verificadas assim (27/07), agora `oem_manual`:
 | 1290 Super Duke R | 2,50 | **2,50** | 2,90 | Manual KTM 3214331en, sec. 15.6 |
 | YZF-R1 | 2,50 | 2,90 | 2,90 | Manual Yamaha B3L-28199-E0, pág. 7-20 |
 | 890 Adventure | **2,40** | **2,90** | 2,90 | Manual KTM 3214267en, pág. 103 |
+| 890 Adventure R | **2,40** | **2,90** | 2,90 | Manual KTM 3214269en, pág. 99 |
 | NC750X | **2,50** | **2,90** | 2,90 | Etiqueta oficial Honda, MKW250 |
 
 Correções que isto trouxe: a Ténéré tinha **2,25/2,50/2,90** — a frente errada e um
@@ -257,6 +258,13 @@ A T7 2025 e a World Raid ficaram com os valores corrigidos mas em
   lado. Ir direto para lá; custou-me três leituras a descobrir.
   A Rally vem noutra página: o manual repete a secção Specifications por
   variante — pág. 189 para a 900/GT, pág. 195 para a Rally.
+**Onde estão os manuais da KTM:** `ktmshop.se/bike-manuals/<AA>_<art>_en_OM.pdf`, com
+`AA` o ano a dois dígitos. Descobre-se o número de artigo procurando
+`ktmshop.se OWNER'S MANUAL <modelo> <ano> "Art. no."`. Já conhecidos:
+890 Adventure 2021 `3214267en` · 890 Adventure R 2021 `3214269en` ·
+890 Adventure 2022 `3214534en` · 890 Adventure R 2022 `3214536en` ·
+890 Adventure R 2024 `3214932en` · 1290 Super Duke R 2021 `3214331en`.
+
 **Duas notas sobre a KTM, ganhas na 890 Adventure:**
 
 - A KTM dá **um só par de valores** para solo, com passageiro e carga máxima. Não há
