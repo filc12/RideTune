@@ -229,6 +229,7 @@ Verificadas assim (27/07), agora `oem_manual`:
 | 1290 Super Adventure S | 2,40 | **2,90** | 2,90 | Manual KTM 3214538en, sec. 15.7 |
 | 1290 Super Adventure R | 2,40 | **2,90** | 2,90 | Manual KTM 3214297en, sec. 15.7 |
 | 790 Adventure R | **2,40** | **2,90** | 2,90 | Manual KTM 3214533en |
+| 690 SMC R | **2,30** | 2,50 | 2,50 | Manual KTM 3214530en, sec. 13.8 |
 | NC750X | **2,50** | **2,90** | 2,90 | Etiqueta oficial Honda, MKW250 |
 
 Correções que isto trouxe: a Ténéré tinha **2,25/2,50/2,90** — a frente errada e um
@@ -277,6 +278,11 @@ TPMS. **Com o PDF em disco resolve-se em segundos** — foi assim que ficaram as
 1290 Super Adventure S e R, 790 Adventure R. Rodas de 19 e de 21, pesos entre 190 e
 250 kg, e a KTM dá o mesmo par a todas sem distinguir carga. A suspeita sobre as 790
 confirmou-se na R.
+
+**E o padrão quebrou-se logo a seguir, como convinha.** A 690 SMC R dá **2,3 / 2,5**,
+não 2,4 / 2,9. A KTM não tem um valor de casa: tem um valor por família. As grandes
+partilham 2,4/2,9; a supermoto de um cilindro é outra coisa. Se eu tivesse aplicado o
+padrão às restantes sem ler, tinha posto 0,4 bar a mais no traseiro de uma moto de 150 kg.
 
 **Mesmo assim, não extrapolar.** Falta a 790 Adventure base (o manual de 2024,
 `3214950en`, corta antes da secção) e as pequenas — 390 Adventure, 390 Enduro R,
