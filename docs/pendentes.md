@@ -240,6 +240,8 @@ Verificadas assim (27/07), agora `oem_manual`:
 | MT-07 | **2,25** | **2,50** | — | Manual Yamaha 1WS-28199-E3, pág. 6-17 |
 | XSR900 | 2,50 | 2,90 | 2,90 | Manual Yamaha BAE-28199-E0 |
 | MT-10 | 2,50 | 2,90 | 2,90 | Manual Yamaha B67-28199-E0, pág. 7-19 |
+| Ténéré 700 (2025+) | 2,20 | 2,50 | 2,50 | Manual Yamaha BRL-28199-70 (etiqueta) |
+| YZF-R7 | **2,50** | **2,90** | 2,90 | Manual Yamaha BEB-28199-20, pág. 7-19 |
 | NC750X | **2,50** | **2,90** | 2,90 | Etiqueta oficial Honda, MKW250 |
 
 Correções que isto trouxe: a Ténéré tinha **2,25/2,50/2,90** — a frente errada e um
@@ -395,6 +397,11 @@ continha citação nenhuma. Recusada. Sinais que a denunciaram, úteis para a pr
 - Os mesmos pares repetiam-se dezenas de vezes — o padrão da tabela original.
 
 Serve como lista de hipóteses. Não serve como fonte.
+
+**Cuidado com os códigos de manual da Yamaha:** procurar "YZF-R7 owner's manual"
+devolve `5FL-28199`, que é da R7 de **1998** (a OW-02, moto completamente diferente).
+A de 2022, baseada na MT-07, é `BEB-28199-20`. Confirmar sempre o modelo na primeira
+página do PDF antes de usar os valores.
 
 **Como retomar.** Para cada moto: encontrar o manual do proprietario, ler a
 tabela de pressoes, corrigir os valores se preciso, e so entao repor
