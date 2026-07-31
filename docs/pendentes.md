@@ -224,6 +224,7 @@ Verificadas assim (27/07), agora `oem_manual`:
 | Africa Twin (todas) | 2,25 | 2,50 | **2,80** | Etiqueta oficial Honda, MLN250 |
 | 1290 Super Duke R | 2,50 | **2,50** | 2,90 | Manual KTM 3214331en, sec. 15.6 |
 | YZF-R1 | 2,50 | 2,90 | 2,90 | Manual Yamaha B3L-28199-E0, pág. 7-20 |
+| 890 Adventure | **2,40** | **2,90** | 2,90 | Manual KTM 3214267en, pág. 103 |
 | NC750X | **2,50** | **2,90** | 2,90 | Etiqueta oficial Honda, MKW250 |
 
 Correções que isto trouxe: a Ténéré tinha **2,25/2,50/2,90** — a frente errada e um
@@ -256,6 +257,15 @@ A T7 2025 e a World Raid ficaram com os valores corrigidos mas em
   lado. Ir direto para lá; custou-me três leituras a descobrir.
   A Rally vem noutra página: o manual repete a secção Specifications por
   variante — pág. 189 para a 900/GT, pág. 195 para a Rally.
+**Duas notas sobre a KTM, ganhas na 890 Adventure:**
+
+- A KTM dá **um só par de valores** para solo, com passageiro e carga máxima. Não há
+  coluna de carga — quem inventou a tabela original inventou-a aqui também.
+- **O valor de fora de estrada não está onde eu esperava.** A página 103 não o traz, e
+  a leitura corta antes da secção 15. Tirei os 1,8/1,8 que lá estavam em vez de os
+  manter numa linha que passou a dizer "manual": não os li em lado nenhum.
+  Fica por recuperar para as KTM de trilho.
+
 - **KTM** — secção "Checking tire pressure" (15.6 no 1290 SDR), com solo e
   passageiro/carga máxima separados. Os PDF da KTM extraem-se sem espaços entre
   palavras, o que estraga a pesquisa por texto — procurar antes por `bar` ou `psi`.
