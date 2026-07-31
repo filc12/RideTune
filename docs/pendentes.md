@@ -242,6 +242,7 @@ Verificadas assim (27/07), agora `oem_manual`:
 | MT-10 | 2,50 | 2,90 | 2,90 | Manual Yamaha B67-28199-E0, pág. 7-19 |
 | Ténéré 700 (2025+) | 2,20 | 2,50 | 2,50 | Manual Yamaha BRL-28199-70 (etiqueta) |
 | YZF-R7 | **2,50** | **2,90** | 2,90 | Manual Yamaha BEB-28199-20, pág. 7-19 |
+| Ténéré 700 World Raid | 2,20 | 2,50 | 2,50 | Manual Yamaha BXD-F819D-P0, pág. 7-19 |
 | NC750X | **2,50** | **2,90** | 2,90 | Etiqueta oficial Honda, MKW250 |
 
 Correções que isto trouxe: a Ténéré tinha **2,25/2,50/2,90** — a frente errada e um
@@ -397,6 +398,14 @@ continha citação nenhuma. Recusada. Sinais que a denunciaram, úteis para a pr
 - Os mesmos pares repetiam-se dezenas de vezes — o padrão da tabela original.
 
 Serve como lista de hipóteses. Não serve como fonte.
+
+**Yamaha fechada: 12 de 12.** Primeira marca completa. Duas correções reais (MT-07 e
+YZF-R7) e dez confirmações. A T7, a T7 2025 e a World Raid dão as três 220/250 — a
+World Raid, apesar do depósito maior, não muda de pressão.
+
+**Estado por marca** (verificadas / total): KTM 13/14 · **Yamaha 12/12** · Honda 6/12 ·
+Suzuki 4/7 · Triumph 2/7 · Macbor 1/1 · Aprilia 0/5 · BMW 0/9 · Ducati 0/11 ·
+Voge 0/8 · QJ 0/9 · CFMoto 0/8 · Kawasaki 0/6 · Kove 0/4.
 
 **Cuidado com os códigos de manual da Yamaha:** procurar "YZF-R7 owner's manual"
 devolve `5FL-28199`, que é da R7 de **1998** (a OW-02, moto completamente diferente).
