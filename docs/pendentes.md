@@ -244,6 +244,7 @@ Verificadas assim (27/07), agora `oem_manual`:
 | YZF-R7 | **2,50** | **2,90** | 2,90 | Manual Yamaha BEB-28199-20, pág. 7-19 |
 | Ténéré 700 World Raid | 2,20 | 2,50 | 2,50 | Manual Yamaha BXD-F819D-P0, pág. 7-19 |
 | NT1100 | 2,50 | 2,90 | 2,90 | Etiqueta oficial Honda, MLF250 |
+| X-ADV | **2,50** | **2,80** | 2,80 | Manual Honda 32MKT700 (2025) |
 | NC750X | **2,50** | **2,90** | 2,90 | Etiqueta oficial Honda, MKW250 |
 
 Correções que isto trouxe: a Ténéré tinha **2,25/2,50/2,90** — a frente errada e um
@@ -278,6 +279,10 @@ A T7 2025 e a World Raid ficaram com os valores corrigidos mas em
   `webom` devolve a página de pesquisa em vez do manual, e é preciso o ficheiro.
   Códigos já descobertos: Transalp `MLC250` · Africa Twin `MLN250` · NC750X `MKW250` ·
   NT1100 `MLF250` · CB650R 2024 `MKY241` (só PDF).
+
+  **Terceira via, a melhor de todas:** `2rom-prd-data.hondamotopub.com/om/HMEE/<MODELO>/
+  <ano>/<ficheiro>.pdf` — o PDF direto, sem página de aceitação. Foi de lá que saiu o
+  X-ADV. Encontra-se por pesquisa do nome do modelo com `hondamotopub` e `.pdf`.
 
   **Como encontrar o código do modelo:** procurar `hondamotopub.com/model/HMEE/<moto>`
   numa pesquisa. HMEE é a Europa. O código sai no URL (Transalp 2025 = MLC250,
