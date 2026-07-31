@@ -230,6 +230,8 @@ Verificadas assim (27/07), agora `oem_manual`:
 | 1290 Super Adventure R | 2,40 | **2,90** | 2,90 | Manual KTM 3214297en, sec. 15.7 |
 | 790 Adventure R | **2,40** | **2,90** | 2,90 | Manual KTM 3214533en |
 | 690 SMC R | **2,30** | 2,50 | 2,50 | Manual KTM 3214530en, sec. 13.8 |
+| 890 Duke R | **2,30** | **2,50** | **2,60** | Manual KTM 3214302en, pág. 78 |
+| 790 Duke | 2,30 | 2,60 | 2,60 | Manual KTM 3213925en, pág. 72 |
 | NC750X | **2,50** | **2,90** | 2,90 | Etiqueta oficial Honda, MKW250 |
 
 Correções que isto trouxe: a Ténéré tinha **2,25/2,50/2,90** — a frente errada e um
@@ -278,6 +280,17 @@ TPMS. **Com o PDF em disco resolve-se em segundos** — foi assim que ficaram as
 1290 Super Adventure S e R, 790 Adventure R. Rodas de 19 e de 21, pesos entre 190 e
 250 kg, e a KTM dá o mesmo par a todas sem distinguir carga. A suspeita sobre as 790
 confirmou-se na R.
+
+**A KTM tem duas famílias, e agora sabe-se quais.** Nove motos lidas:
+
+| família | frente | trás |
+|---|---|---|
+| Adventure grandes (890 ×2, 1290 SAdv ×2, 790 Adv R) | 2,4 | 2,9 |
+| Naked e supermoto (690 SMC R, 890 Duke R, 790 Duke) | 2,3 | 2,5-2,6 |
+| 1290 Super Duke R | 2,5 | 2,5 solo / 2,9 carga |
+
+A 1290 Super Duke R não encaixa em nenhuma das duas — é a única com valor diferente
+a solo e em carga. Ou seja: nem por família se pode extrapolar com segurança.
 
 **E o padrão quebrou-se logo a seguir, como convinha.** A 690 SMC R dá **2,3 / 2,5**,
 não 2,4 / 2,9. A KTM não tem um valor de casa: tem um valor por família. As grandes
