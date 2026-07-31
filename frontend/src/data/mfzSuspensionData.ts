@@ -932,6 +932,30 @@ const SUZUKI: MfzProfile[] = [
       lsComp:  cl_h(10),
     },
   },
+  {
+    id: 'suzuki_drz4sm_2025',
+    brand: 'Suzuki', model: 'DR-Z4SM', year: '2025+',
+    // Mesma edição do manual que a DR-Z4S (M5), que cobre as duas. Onde o manual dá dois
+    // valores, estes são os da SM. Repare-se na compressão da frente: na S conta-se em
+    // CLIQUES, na SM em VOLTAS — não é o mesmo afinador com outro número.
+    baseKg: 75, source: 'Manual do proprietário Suzuki DR-Z4S/DR-Z4SM (M5), págs. 2-51 a 2-56',
+    formula: 'suzuki',
+    dataQuality: 'oem_manual',
+    countNote: 'Todos os afinadores contam a partir do fim de curso no sentido dos ponteiros (duro) e abrem ao contrário. Curso total: frente 21 cliques de extensão e 3 voltas de compressão (afinar de 1/8 em 1/8); atrás 18 cliques na compressão de baixa velocidade.',
+    notes: 'A forquilha KYB não tem precarga: regula-se pela pressão de ar interna, cujo valor de fábrica é 0 kPa. A precarga traseira existe, por anel roscado, mas a Suzuki recomenda que seja o concessionário a mexer. Compressão traseira separada em alta e baixa velocidade. A SM leva câmaras de ar.',
+    front: {
+      preload: na('Sem precarga — forquilha por pressão de ar, padrão 0 kPa'),
+      comp:    tu_h(1.5),
+      reb:     cl_h(15),
+    },
+    rear: {
+      preload: pos('Anel roscado — a Suzuki recomenda ajuste em concessionário (ferramenta especial)', 'ANEL'),
+      comp:    na('Usar compressão de alta e de baixa velocidade'),
+      reb:     cl_h(15),
+      hsComp:  tu_h(1),
+      lsComp:  cl_h(15),
+    },
+  },
 ];
 
 // ─────────────────────────────────────────────

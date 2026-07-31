@@ -391,6 +391,9 @@ export const BIKES: Bike[] = [
   // (anel roscado) mas a Suzuki manda ao concessionário. Compressão traseira separada em
   // alta e baixa velocidade, por isso `rComp` fica a false: quem mexe é o perfil.
   { id: "suzuki-drz4s",         brand: "Suzuki", model: "DR-Z4S (2025+)",     cc: "398cc",  category: "adventure", adj: "full",    mfzProfileId: "suzuki_drz4s_2025" },
+  // DR-Z4SM: mesma base, supermoto de 17". Perfil separado de proposito — o manual da
+  // valores diferentes para as duas, e a compressao da frente muda de cliques para voltas.
+  { id: "suzuki-drz4sm",        brand: "Suzuki", model: "DR-Z4SM (2025+)",    cc: "398cc",  category: "supermoto", adj: "full",    mfzProfileId: "suzuki_drz4sm_2025" },
 
   // ===== Triumph =====
   { id: "triumph-tiger-1200",       brand: "Triumph", model: "Tiger 1200 Rally Pro",  cc: "1160cc", category: "adventure",     adj: "full",    mfzProfileId: "triumph_tiger1200_showa" }, // Showa semi-active
