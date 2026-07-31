@@ -386,12 +386,11 @@ export const BIKES: Bike[] = [
   // voltas do mole, compressão 3 e extensão 2,5 do duro) e BFRC-lite atrás com os dois
   // afinadores no topo (compressão 2,75, extensão 3). Full nas duas pontas.
   { id: "suzuki-gsxr1000",      brand: "Suzuki", model: "GSX-R1000R (2017+)", cc: "999cc",  category: "sport",     adj: "full",    mfzProfileId: "suzuki_gsxr1000r_2017" },
-  // DR-Z4S (2025+): a página oficial da Suzuki diz que "both the front and rear suspension
-  // offer compression and rebound damping adjustments" — não menciona precarga em lado
-  // nenhum. A forquilha KYB invertida não tem mesmo precarga externa; a precarga traseira
-  // (anel roscado) vem do material de imprensa da Suzuki, não da página de especificações.
-  // POR VERIFICAR no manual: precarga traseira, e os cliques de fábrica de cada afinador.
-  { id: "suzuki-drz4s",         brand: "Suzuki", model: "DR-Z4S (2025+)",     cc: "398cc",  category: "adventure", adj: "full",    adjusters: { fPre: false, fComp: true, fReb: true, rPre: true, rComp: true, rReb: true } },
+  // DR-Z4S (2025+): confirmado no manual do proprietário (M5). A forquilha KYB não tem
+  // precarga — regula-se por pressão de ar, de fábrica a 0 kPa. A precarga traseira existe
+  // (anel roscado) mas a Suzuki manda ao concessionário. Compressão traseira separada em
+  // alta e baixa velocidade, por isso `rComp` fica a false: quem mexe é o perfil.
+  { id: "suzuki-drz4s",         brand: "Suzuki", model: "DR-Z4S (2025+)",     cc: "398cc",  category: "adventure", adj: "full",    mfzProfileId: "suzuki_drz4s_2025" },
 
   // ===== Triumph =====
   { id: "triumph-tiger-1200",       brand: "Triumph", model: "Tiger 1200 Rally Pro",  cc: "1160cc", category: "adventure",     adj: "full",    mfzProfileId: "triumph_tiger1200_showa" }, // Showa semi-active

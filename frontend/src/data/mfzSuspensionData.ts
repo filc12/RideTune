@@ -908,6 +908,30 @@ const SUZUKI: MfzProfile[] = [
     ],
     notes: 'Front preload in turns; rear preload in clicks. Damping counts turns OUT from fully hard (fewer turns = more damping). All six adjusters active. Starting point — confirm by sag.',
   },
+  {
+    id: 'suzuki_drz4s_2025',
+    brand: 'Suzuki', model: 'DR-Z4S', year: '2025+',
+    // Lido no manual do proprietário DR-Z4S/DR-Z4SM (edição M5). O manual cobre as duas
+    // motos e dá valores diferentes para cada uma — estes são os da S. A SM tem 15/1,5
+    // voltas à frente e 15/15 atrás, por isso não se pode reutilizar este perfil.
+    baseKg: 75, source: 'Manual do proprietário Suzuki DR-Z4S/DR-Z4SM (M5), págs. 2-51 a 2-56',
+    formula: 'suzuki',
+    dataQuality: 'oem_manual',
+    countNote: 'Todos os afinadores contam a partir do fim de curso no sentido dos ponteiros (duro) e abrem ao contrário. Curso total: frente 21 cliques de extensão e 19 de compressão; atrás 18 cliques na compressão de baixa velocidade.',
+    notes: 'A forquilha KYB não tem precarga: regula-se pela pressão de ar interna, cujo valor de fábrica é 0 kPa (equilibrada com a atmosfera). A precarga traseira existe, por anel roscado, mas a Suzuki recomenda que seja o concessionário a mexer — precisa de ferramenta especial. O amortecedor tem compressão separada de alta e baixa velocidade.',
+    front: {
+      preload: na('Sem precarga — forquilha por pressão de ar, padrão 0 kPa'),
+      comp:    cl_h(8),
+      reb:     cl_h(13),
+    },
+    rear: {
+      preload: pos('Anel roscado — a Suzuki recomenda ajuste em concessionário (ferramenta especial)', 'ANEL'),
+      comp:    na('Usar compressão de alta e de baixa velocidade'),
+      reb:     cl_h(14),
+      hsComp:  tu_h(1),
+      lsComp:  cl_h(10),
+    },
+  },
 ];
 
 // ─────────────────────────────────────────────

@@ -47,19 +47,14 @@ Notas de ambiente, para não voltar a perder tempo:
 
 ## Catálogo
 
-**Suzuki DR-Z4S (2025+) — acrescentada, com duas dúvidas por fechar:**
+**Suzuki DR-Z4S (2025+) — fechada com o manual.** As duas dúvidas ficaram resolvidas:
+a forquilha KYB **não tem precarga** (regula-se por pressão de ar, 0 kPa de fábrica) e a
+precarga traseira **existe**, por anel roscado. A medida traseira é **120/80-18**, como
+dizia a Suzuki — a transcrição de terceiros que dizia 120/90-18 estava errada.
 
-1. **Precarga traseira.** A página oficial da Suzuki diz que "both the front and rear
-   suspension offer compression and rebound damping adjustments" — não fala de precarga
-   em lado nenhum. Marquei `rPre: true` com base no material de imprensa (Dirt Rider,
-   derivado do dossier da Suzuki) e no facto de um amortecedor link-type ter quase
-   sempre anel roscado. Se o manual disser o contrário, é mudar.
-2. **Medida traseira.** A Suzuki diz `120/80-18 M/C 62P`; a transcrição do manual no
-   maintenanceschedule.com diz `120/90-18 M/C 65P`. Fiquei pela Suzuki. Pode ser
-   diferença de mercado.
-
-Pressões (150 solo e a dois à frente; 175/225 atrás) vêm de uma transcrição do manual,
-não do manual — ficam em `estimated_spec` até alguém abrir o documento.
+Perfil `suzuki_drz4s_2025` criado com valores de fábrica reais e compressão traseira
+separada em alta e baixa velocidade. Atenção ao reutilizar: o manual cobre a S e a SM
+com valores diferentes, e os da SM não servem aqui.
 
 **5 motos ocultas**, à espera de manual do proprietário: CFMoto 1000 SR-R,
 QJ SRT 600 SX, Voge 650 DSX, Voge 525 R, Voge R625.
