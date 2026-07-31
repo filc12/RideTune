@@ -281,6 +281,16 @@ TPMS. **Com o PDF em disco resolve-se em segundos** — foi assim que ficaram as
 250 kg, e a KTM dá o mesmo par a todas sem distinguir carga. A suspeita sobre as 790
 confirmou-se na R.
 
+**Porque é que umas KTM saem por leitura remota e outras não.** Não é o tamanho do
+manual: é o **TPMS**. Nas motos com sensor de pressão, o valor aparece duas vezes — uma
+no capítulo do quadro de instrumentos, a meio do manual, e outra na secção das rodas, no
+fim. A leitura remota corta a meio, portanto só apanha a primeira. As motos **sem TPMS**
+(390 Adventure, 790 Adventure base) só o têm no fim, e ficam fora de alcance.
+
+Testado e confirmado: o manual da 390 Adventure de 2023 (`3214794en`) não dá nada por
+esta via. Estas precisam do PDF em disco:
+`23_3214794_en_OM.pdf` (390 Adventure) · `24_3214950_en_OM.pdf` (790 Adventure).
+
 **A KTM tem duas famílias, e agora sabe-se quais.** Nove motos lidas:
 
 | família | frente | trás |
