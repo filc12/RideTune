@@ -222,6 +222,8 @@ Verificadas assim (27/07), agora `oem_manual`:
 | V-Strom 800DE | 2,25 | 2,80 | 2,80 | Manual DL800DE, pág. 1-29 |
 | Transalp XL750 | 2,25 | 2,50 | **2,80** | Etiqueta oficial Honda (webom) |
 | Africa Twin (todas) | 2,25 | 2,50 | **2,80** | Etiqueta oficial Honda, MLN250 |
+| 1290 Super Duke R | 2,50 | **2,50** | 2,90 | Manual KTM 3214331en, sec. 15.6 |
+| YZF-R1 | 2,50 | 2,90 | 2,90 | Manual Yamaha B3L-28199-E0, pág. 7-20 |
 | NC750X | **2,50** | **2,90** | 2,90 | Etiqueta oficial Honda, MKW250 |
 
 Correções que isto trouxe: a Ténéré tinha **2,25/2,50/2,90** — a frente errada e um
@@ -254,7 +256,14 @@ A T7 2025 e a World Raid ficaram com os valores corrigidos mas em
   lado. Ir direto para lá; custou-me três leituras a descobrir.
   A Rally vem noutra página: o manual repete a secção Specifications por
   variante — pág. 189 para a 900/GT, pág. 195 para a Rally.
+- **KTM** — secção "Checking tire pressure" (15.6 no 1290 SDR), com solo e
+  passageiro/carga máxima separados. Os PDF da KTM extraem-se sem espaços entre
+  palavras, o que estraga a pesquisa por texto — procurar antes por `bar` ou `psi`.
 - **BMW** — não publica. Só o autocolante debaixo do assento.
+
+**Já há dois manuais na pasta de uploads** que resolveram duas motos sem uma única
+pesquisa: o do 1290 Super Duke R e o da YZF-R1. Vale sempre a pena ver o que já lá
+está antes de ir à internet.
 
 **Códigos Honda já descobertos** (para não repetir a pesquisa):
 Transalp 2025 `MLC250` · Africa Twin 2025 `MLN250` · NC750X 2025 `MKW250`.
