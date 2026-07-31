@@ -265,6 +265,12 @@ A T7 2025 e a World Raid ficaram com os valores corrigidos mas em
 890 Adventure 2022 `3214534en` · 890 Adventure R 2022 `3214536en` ·
 890 Adventure R 2024 `3214932en` · 1290 Super Duke R 2021 `3214331en`.
 
+**Limite encontrado nas 1290 Super Adventure.** Tentei o manual de 2021 (`3214295en`) e
+o de 2022 (`3214538en`): nos dois, a leitura corta antes da secção das pressões. Nas 890
+deu porque o valor aparece cedo, no capítulo do TPMS (pág. 99-103); nas 1290 esse
+capítulo fica depois do corte. **Não há volta a dar por esta via** — estas precisam do
+PDF em disco. Vale para as duas 1290 Super Adventure, S e R.
+
 **Duas notas sobre a KTM, ganhas na 890 Adventure:**
 
 - A KTM dá **um só par de valores** para solo, com passageiro e carga máxima. Não há
