@@ -281,6 +281,11 @@ A T7 2025 e a World Raid ficaram com os valores corrigidos mas em
   Códigos já descobertos: Transalp `MLC250` · Africa Twin `MLN250` · NC750X `MKW250` ·
   NT1100 `MLF250` · CB650R 2024 `MKY241` (só PDF).
 
+  **A CB1000R não está na região europeia (HMEE).** Só aparece em HPI (Filipinas),
+  código `MKJ221`, e essa região não tem versão HTML nem PDF direto — só o download com
+  aceitação de termos. Fica a precisar do ficheiro. O mesmo vale provavelmente para a
+  Fireblade, que também não apareceu em HMEE.
+
   **Cuidado com os manuais americanos** (`cdn.powersports.honda.com`): a extração de
   texto não devolve a tabela de pressões — nem em kPa nem em psi. Tentado no CB1000
   de 2025 e no CB1000R de 2024, sem resultado nos dois. Usar sempre os europeus.
