@@ -289,9 +289,20 @@ no capítulo do quadro de instrumentos, a meio do manual, e outra na secção da
 fim. A leitura remota corta a meio, portanto só apanha a primeira. As motos **sem TPMS**
 (390 Adventure, 790 Adventure base) só o têm no fim, e ficam fora de alcance.
 
-Testado e confirmado: o manual da 390 Adventure de 2023 (`3214794en`) não dá nada por
-esta via. Estas precisam do PDF em disco:
-`23_3214794_en_OM.pdf` (390 Adventure) · `24_3214950_en_OM.pdf` (790 Adventure).
+Testado e confirmado em três: 390 Adventure 2023, 790 Adventure 2024 e 390 Adventure R
+2025. Nenhuma dá nada por leitura remota; as três primeiras já foram feitas com o PDF
+em disco.
+
+**Faltam da KTM, todas por falta de TPMS — precisam do ficheiro:**
+
+| moto | ficheiro |
+|---|---|
+| 390 Adventure R (2025+) | `mobil.ktmshop.se/bike-manuals/25_3240182_en_BA.pdf` |
+| 390 Enduro R (2025+) | `mobil.ktmshop.se/bike-manuals/25_3240187_en_BA.pdf` |
+| 1190 Adventure R | sem manual localizado no arquivo (modelo de 2013-2016) |
+
+Nota: os manuais de 2025 mudaram de nomenclatura — passaram de `_OM.pdf` para `_BA.pdf`
+e de "Art. no." para "Item no.". A pesquisa pelo formato antigo não os encontra.
 
 **A KTM tem duas famílias, e agora sabe-se quais.** Nove motos lidas:
 
