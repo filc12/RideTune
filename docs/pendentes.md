@@ -248,7 +248,11 @@ A T7 2025 e a World Raid ficaram com os valores corrigidos mas em
 
 **Onde cada marca esconde os valores** (poupa uma leitura por moto):
 
-- **Yamaha** — na secção "Tires" da manutenção, tabela «Cold tire air pressure»
+- **Yamaha** — **`cdn2.yamaha-motor.eu/prod/owner-manuals/Motorcycles/P<código>E.PDF`**,
+  com `<código>` a referência do manual sem hífenes (MT-09 = `B7N28199E0`, MT-07 =
+  `1WS28199E3`). PDF oficial da Yamaha Europa, e a secção dos pneus fica dentro do
+  alcance da leitura remota. Melhor que o ManualsLib: sem índice pelo meio.
+- **Yamaha (alternativa)** — na secção "Tires" da manutenção, tabela «Cold tire air pressure»
   com 1 pessoa / 2 pessoas / off-road. A melhor documentada de todas.
 - **Suzuki** — secção "Tire Pressure and Loading", tabela SOLO / DUAL RIDING.
 - **Honda** — **usar `webom.hondamotopub.com`**. É o manual oficial em HTML,
