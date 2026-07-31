@@ -234,6 +234,8 @@ Verificadas assim (27/07), agora `oem_manual`:
 | 790 Duke | 2,30 | 2,60 | 2,60 | Manual KTM 3213925en, pág. 72 |
 | 790 Adventure | 2,40 → 2,60 | 2,40 → **2,90** | — | Manual KTM 3214950en, sec. 15.7 |
 | 390 Adventure | **2,00** | **2,00** | **2,20** | Manual KTM 3214794en, sec. 15.7 |
+| 390 Adventure R (2025) | 2,00 | 2,00 | 2,20 | Manual KTM 3240182en, sec. 15.7 |
+| 390 Enduro R (2025) | 2,00 | 2,00 | 2,20 | Manual KTM 3240187en, sec. 14.7 |
 | NC750X | **2,50** | **2,90** | 2,90 | Etiqueta oficial Honda, MKW250 |
 
 Correções que isto trouxe: a Ténéré tinha **2,25/2,50/2,90** — a frente errada e um
@@ -293,13 +295,8 @@ Testado e confirmado em três: 390 Adventure 2023, 790 Adventure 2024 e 390 Adve
 2025. Nenhuma dá nada por leitura remota; as três primeiras já foram feitas com o PDF
 em disco.
 
-**Faltam da KTM, todas por falta de TPMS — precisam do ficheiro:**
-
-| moto | ficheiro |
-|---|---|
-| 390 Adventure R (2025+) | `mobil.ktmshop.se/bike-manuals/25_3240182_en_BA.pdf` |
-| 390 Enduro R (2025+) | `mobil.ktmshop.se/bike-manuals/25_3240187_en_BA.pdf` |
-| 1190 Adventure R | sem manual localizado no arquivo (modelo de 2013-2016) |
+**KTM: 13 de 14 verificadas.** Falta só a **1190 Adventure R** — modelo de 2013-2016,
+e o arquivo do ktmshop só guarda de 2019 para cá. Procurar noutra via.
 
 Nota: os manuais de 2025 mudaram de nomenclatura — passaram de `_OM.pdf` para `_BA.pdf`
 e de "Art. no." para "Item no.". A pesquisa pelo formato antigo não os encontra.
