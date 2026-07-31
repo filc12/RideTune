@@ -226,6 +226,7 @@ Verificadas assim (27/07), agora `oem_manual`:
 | YZF-R1 | 2,50 | 2,90 | 2,90 | Manual Yamaha B3L-28199-E0, pág. 7-20 |
 | 890 Adventure | **2,40** | **2,90** | 2,90 | Manual KTM 3214267en, pág. 103 |
 | 890 Adventure R | **2,40** | **2,90** | 2,90 | Manual KTM 3214269en, pág. 99 |
+| 1290 Super Adventure S | 2,40 | **2,90** | 2,90 | Manual KTM 3214538en, sec. 15.7 |
 | NC750X | **2,50** | **2,90** | 2,90 | Etiqueta oficial Honda, MKW250 |
 
 Correções que isto trouxe: a Ténéré tinha **2,25/2,50/2,90** — a frente errada e um
@@ -265,11 +266,11 @@ A T7 2025 e a World Raid ficaram com os valores corrigidos mas em
 890 Adventure 2022 `3214534en` · 890 Adventure R 2022 `3214536en` ·
 890 Adventure R 2024 `3214932en` · 1290 Super Duke R 2021 `3214331en`.
 
-**Limite encontrado nas 1290 Super Adventure.** Tentei o manual de 2021 (`3214295en`) e
-o de 2022 (`3214538en`): nos dois, a leitura corta antes da secção das pressões. Nas 890
-deu porque o valor aparece cedo, no capítulo do TPMS (pág. 99-103); nas 1290 esse
-capítulo fica depois do corte. **Não há volta a dar por esta via** — estas precisam do
-PDF em disco. Vale para as duas 1290 Super Adventure, S e R.
+**Limite confirmado, e como se contorna.** As 1290 Super Adventure não saem por leitura
+remota: nos manuais de 2021 e 2022 o corte cai antes da secção das pressões (secção
+15.7, pág. 140 no de 2022). Nas 890 deu porque o valor aparece cedo, no capítulo do
+TPMS. **Com o PDF em disco resolve-se em segundos** — foi assim que a S ficou feita.
+Falta a **1290 Super Adventure R**, manual `22_3214540_en_OM.pdf`.
 
 **Duas notas sobre a KTM, ganhas na 890 Adventure:**
 
