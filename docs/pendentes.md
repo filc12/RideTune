@@ -227,6 +227,7 @@ Verificadas assim (27/07), agora `oem_manual`:
 | 890 Adventure | **2,40** | **2,90** | 2,90 | Manual KTM 3214267en, pág. 103 |
 | 890 Adventure R | **2,40** | **2,90** | 2,90 | Manual KTM 3214269en, pág. 99 |
 | 1290 Super Adventure S | 2,40 | **2,90** | 2,90 | Manual KTM 3214538en, sec. 15.7 |
+| 1290 Super Adventure R | 2,40 | **2,90** | 2,90 | Manual KTM 3214297en, sec. 15.7 |
 | NC750X | **2,50** | **2,90** | 2,90 | Etiqueta oficial Honda, MKW250 |
 
 Correções que isto trouxe: a Ténéré tinha **2,25/2,50/2,90** — a frente errada e um
@@ -269,8 +270,13 @@ A T7 2025 e a World Raid ficaram com os valores corrigidos mas em
 **Limite confirmado, e como se contorna.** As 1290 Super Adventure não saem por leitura
 remota: nos manuais de 2021 e 2022 o corte cai antes da secção das pressões (secção
 15.7, pág. 140 no de 2022). Nas 890 deu porque o valor aparece cedo, no capítulo do
-TPMS. **Com o PDF em disco resolve-se em segundos** — foi assim que a S ficou feita.
-Falta a **1290 Super Adventure R**, manual `22_3214540_en_OM.pdf`.
+TPMS. **Com o PDF em disco resolve-se em segundos** — foi assim que ficaram as duas.
+
+**Resultado da KTM até agora: quatro motos, o mesmo par 2,4 / 2,9.** 890 Adventure,
+890 Adventure R, 1290 Super Adventure S e R. Rodas diferentes (21/18 contra 19/17),
+pesos diferentes, e a KTM dá o mesmo valor a todas, sem distinguir carga. Isto torna
+suspeitos os 2,3/2,5 que ainda temos nas 790 — mesma plataforma das 890. Verificar
+antes de assumir, mas é o palpite mais forte que há no ficheiro.
 
 **Duas notas sobre a KTM, ganhas na 890 Adventure:**
 
