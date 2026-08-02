@@ -648,3 +648,37 @@ seria pior do que não dar nada.
 **Regra que passa a valer para toda a marca:** a Aprilia publica sempre duas
 afinações, estrada e pista, e proíbe expressamente a de pista fora de competição
 autorizada. Só entra a de estrada. Isto vale para a RSV4, a Tuono V4 e as 660.
+
+## Triumph — Tiger 1200 e Street Triple RS confirmadas
+
+Dois Owner's Handbooks lidos. Os valores estão sempre na secção *Specifications*,
+no fim, em tabela com uma coluna por variante.
+
+**Tiger 1200 (pág. 211)** — o manual cobre quatro versões, em duas colunas:
+
+| | GT Pro / GT Explorer | Rally Pro / Rally Explorer |
+|---|---|---|
+| Pneu frente | 120/70 R19 | 90/90-21 |
+| Frente | 2,2 bar | **2,3 bar** |
+| Trás | 2,9 bar | 2,9 bar |
+
+A nossa é a Rally Pro, logo 2,3 — tínhamos 2,2, que é o valor da GT. Outra vez o
+mesmo erro da Tiger 900: apanhar a coluna da variante errada. A roda dianteira
+diferente (19" contra 21") vale 0,1 bar.
+
+**Street Triple (pág. 232)**: 2,34 à frente e 2,9 atrás. Tínhamos 2,35. O manual
+escreve «2.34 bar (34 lb/in²)» — a conversão dos 34 psi. As versões S, R e RS
+levam todas exatamente o mesmo.
+
+**Tiraram-se as pressões de todo-o-terreno da Tiger 1200** (tínhamos 1,6/1,8).
+A Triumph não publica valores de fora de estrada em lado nenhum do manual; o que
+diz é o contrário — que pressões reduzidas para fora de estrada prejudicam a
+estabilidade na estrada, e que se deve usar sempre o valor da secção Specifications
+para uso em estrada. Os 1,6/1,8 não vieram de lá.
+
+**Padrão Triumph confirmado nos dois manuais:** um único valor por eixo, sem
+distinção entre solo e com carga. Já são quatro manuais Triumph com este formato.
+
+**A rever quando houver oportunidade:** a Tiger 900 Rally está com 2,35 e a Street
+Triple com 2,34. Se as duas vierem dos mesmos 34 psi, uma delas está mal
+transcrita. Não mexo sem reabrir o manual da Tiger 900.
