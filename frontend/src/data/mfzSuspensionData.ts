@@ -1530,6 +1530,25 @@ export const MFZ_PROFILES: MfzProfile[] = [
   ...KAWASAKI,
   ...TRIUMPH,
   ...MACBOR,
+  {
+    id: 'honda_cb750_hornet_2023',
+    brand: 'Honda', model: 'CB750 Hornet', year: '2023+',
+    baseKg: 75, source: 'Manual do proprietário Honda Hornet (CB750A), 3PMLB600, pág. 131',
+    formula: 'honda',
+    dataQuality: 'oem_manual',
+    countNote: 'A precarga traseira tem 7 posições, com a 4 de fábrica. 1 a 3 são mais macias, 5 a 7 mais rijas. Precisa da chave de pinos e da barra de extensão do kit de ferramentas.',
+    notes: 'A forquilha Showa SFF-BP não tem afinadores externos — o capítulo de afinação do manual só cobre a suspensão traseira. Só a precarga traseira é regulável.',
+    front: {
+      preload: na('Forquilha sem afinadores externos'),
+      comp:    na('Forquilha sem afinadores externos'),
+      reb:     na('Forquilha sem afinadores externos'),
+    },
+    rear: {
+      preload: pos('7 posições por anel roscado; a 4 é a de fábrica', '4/7'),
+      comp:    na('Sem afinador de compressão'),
+      reb:     na('Sem afinador de extensão'),
+    },
+  },
 ];
 
 /** Quick lookup by profile ID */

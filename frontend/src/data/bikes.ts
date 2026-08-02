@@ -242,6 +242,10 @@ export const BIKES: Bike[] = [
   // CB650R 2021+: Showa SFF-BP fully adjustable
   // CB650R: Showa SFF-BP só com precarga à frente (sem extensão nem compressão);
   // monoamortecedor só precarga (10 posições). Não é "full".
+  // CB750 Hornet: manual 3PMLB600 (PT). O capitulo de afinacao so cobre a traseira —
+  // precarga por anel de 7 posicoes, a 4 de fabrica. Forquilha Showa SFF-BP sem
+  // afinadores externos.
+  { id: "honda-cb750-hornet", brand: "Honda", model: "CB750 Hornet (2023+)", cc: "755cc", category: "naked", adj: "fixed", mfzProfileId: "honda_cb750_hornet_2023" },
   { id: "honda-cb650r",      brand: "Honda", model: "CB650R",                       cc: "649cc",  category: "naked",     adj: "full",    adjusters: { fPre: true, fComp: false, fReb: false, rPre: true, rComp: false, rReb: false } },
 
   // ===== Kawasaki =====
