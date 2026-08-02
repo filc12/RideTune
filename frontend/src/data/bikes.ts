@@ -196,6 +196,10 @@ export const BIKES: Bike[] = [
   // totalmente ajustável c/ precarga remota. Não é Skyhook — essa é a S. ducati.com
   { id: "ducati-multi-v4",        brand: "Ducati", model: "Multistrada V4",         cc: "1158cc", category: "adventure", adj: "full"    },
   // V4 S: Skyhook eletrónica (comp/ext/precarga no ecrã)
+  // V4 RS e Pikes Peak: versoes de roda 17" a frente, ao contrario da V4/V4 S (19").
+  // Suspensao Ohlins semiativa — sem cliques, so modos no painel.
+  { id: "ducati-multi-v4-rs",   brand: "Ducati", model: "Multistrada V4 RS (2026)",         cc: "1158cc", category: "adventure", adj: "full", mfzProfileId: "ducati_multi_v4_ohlins_smartec" },
+  { id: "ducati-multi-v4-pp",   brand: "Ducati", model: "Multistrada V4 Pikes Peak (2026)", cc: "1158cc", category: "adventure", adj: "full", mfzProfileId: "ducati_multi_v4_ohlins_smartec" },
   { id: "ducati-multi-v4-s",      brand: "Ducati", model: "Multistrada V4 S",       cc: "1158cc", category: "adventure", adj: "full",    mfzProfileId: "ducati_multi_v4_skyhook" },
   // Multistrada V2 (2025+): forquilha mecânica Ø45 totalmente ajustável + monoamortecedor
   // totalmente ajustável c/ precarga remota. (A versão S é Skyhook eletrónica.) ducati.com

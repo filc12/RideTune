@@ -1549,6 +1549,29 @@ export const MFZ_PROFILES: MfzProfile[] = [
       reb:     na('Sem afinador de extensão'),
     },
   },
+  {
+    id: 'ducati_multi_v4_ohlins_smartec',
+    brand: 'Ducati', model: 'Multistrada V4 RS / Pikes Peak', year: '2026',
+    // Manual PT: forquilha Ohlins 48 mm e amortecedor TTX36, ambos com amortecimento
+    // gerido eletronicamente (Smart EC 2.0). Nao ha cliques: escolhe-se um de cinco
+    // modos no painel. A unica regulacao mecanica e' a precarga da frente; a de tras
+    // tambem e' eletronica.
+    baseKg: 75, source: 'Manual do proprietário Ducati Multistrada V4 RS (2026), pág. 348-349, e V4 Pikes Peak (2026), pág. 339',
+    formula: 'suzuki',
+    dataQuality: 'oem_manual',
+    countNote: 'Não há cliques. O amortecimento escolhe-se no painel entre Hardest, Hard, Medium, Soft e Softest, e a moto tem 4 geometrias de carga (só piloto, piloto com bagagem, dois, dois com bagagem).',
+    notes: 'Öhlins Smart EC 2.0 event-based nas duas pontas. A precarga da frente é manual; a de trás é elétrica, pelo painel. Curso de roda 170 mm à frente e atrás.',
+    front: {
+      preload: pos('Regulação manual da pré-carga na forquilha', 'MANUAL'),
+      comp:    na('Gerido eletronicamente (Öhlins Smart EC 2.0)'),
+      reb:     na('Gerido eletronicamente (Öhlins Smart EC 2.0)'),
+    },
+    rear: {
+      preload: pos('Pré-carga elétrica, escolhida no painel entre 4 geometrias de carga', 'PAINEL'),
+      comp:    na('Gerido eletronicamente (Öhlins Smart EC 2.0)'),
+      reb:     na('Gerido eletronicamente (Öhlins Smart EC 2.0)'),
+    },
+  },
 ];
 
 /** Quick lookup by profile ID */

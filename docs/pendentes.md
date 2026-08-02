@@ -439,7 +439,23 @@ devolve `5FL-28199`, que é da R7 de **1998** (a OW-02, moto completamente difer
 A de 2022, baseada na MT-07, é `BEB-28199-20`. Confirmar sempre o modelo na primeira
 página do PDF antes de usar os valores.
 
-### Ducati: testada, não sai por leitura remota
+### Ducati: duas entradas novas, e uma pista sobre as antigas
+
+**Multistrada V4 RS e V4 Pikes Peak (2026)** acrescentadas, com pressões e suspensão do
+manual PT: **2,5 bar à frente** (solo e plena carga), **2,5 → 2,9 atrás**. Suspensão
+Öhlins Smart EC 2.0 semiativa — sem cliques, cinco modos no painel e quatro geometrias
+de carga. Precarga da frente manual, a de trás elétrica.
+
+**O que isto diz sobre as que já cá estavam.** Dois manuais Ducati independentes dão a
+mesma estrutura: frente constante, traseiro a subir de 2,5 para 2,9. Nenhum usa 3,20.
+Os **3,20 de carga que temos nas quatro Multistrada são quase de certeza invenção** —
+mas não os mudo sem o manual dessas motos, porque a V4 e a V4 S levam roda de 19" à
+frente e estas levam 17".
+
+**Erro provável a confirmar:** a nossa V4 S tem pneu traseiro `190/55 ZR17`, que é a
+medida do RS e da Pikes Peak. A V4 S de série leva 170/60 R17.
+
+### Ducati: os manuais não saem por leitura remota
 
 **O manualpdf.pt abre, mas não dá texto.** Não tem verificação anti-robô — a lista de
 modelos lê-se bem e tem 207 manuais Ducati, muitos em português. Mas o manual em si é
