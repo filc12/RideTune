@@ -441,6 +441,16 @@ página do PDF antes de usar os valores.
 
 ### Ducati: testada, não sai por leitura remota
 
+**O manualpdf.pt abre, mas não dá texto.** Não tem verificação anti-robô — a lista de
+modelos lê-se bem e tem 207 manuais Ducati, muitos em português. Mas o manual em si é
+mostrado **página a página como imagem**, com `?p=N`; a página não traz uma linha do
+texto do manual. Serve para **encontrar e descarregar** o PDF certo, não para eu ler.
+
+Bons candidatos que lá estão, em PT: Multistrada V4 (2023, 306 pág.), Multistrada V4 S
+(2021/2022/2023/2024), Multistrada V2 (2025/2026), DesertX Rally (2025),
+Streetfighter V4 (2023/2025), Panigale V4 (2022/2025), Monster (2026),
+Hypermotard 950 (2025), Hypermotard 698 Mono (2026).
+
 **O ownersmanuals2.com não serve para mim.** Tem verificação anti-robô ("Please wait…
 Verifying…") em todas as páginas, incluindo as de modelo. Testado duas vezes, na Ténéré
 e na Hypermotard 698. Abre bem num browser — portanto os links servem para **descarregar**,
