@@ -11,7 +11,7 @@
 import type { TirePressure } from '@/src/services/oem-data';
 
 export const TIRE_PRESSURES: TirePressure[] = [
-  {"bikeId":"aprilia-tuareg","frontSoloBar":2.2,"frontLoadedBar":null,"rearSoloBar":2.4,"rearLoadedBar":null,"frontOffRoadBar":1.5,"rearOffRoadBar":1.6,"frontSize":"90/90-21","rearSize":"150/70 R18","source":"Estimativa (categoria)","dataQuality":"estimated_spec"},
+  {"bikeId":"aprilia-tuareg","frontSoloBar":2.0,"frontLoadedBar":2.2,"rearSoloBar":2.5,"rearLoadedBar":2.7,"frontOffRoadBar":2.0,"rearOffRoadBar":2.0,"frontSize":"90/90-21","rearSize":"150/70 R18","source":"Manual do proprietário Aprilia Tuareg 660, Ed. 01_10/2021, cód. 2Q000498, pág. 182-183 — frente 2,0 solo e 2,2 com passageiro; trás 2,5 solo e 2,7 com passageiro; fora de estrada 2,0 nas duas rodas","dataQuality":"oem_manual"},
   {"bikeId":"macbor-montana-xr5","frontSoloBar":2.3,"frontLoadedBar":null,"rearSoloBar":2.5,"rearLoadedBar":null,"frontOffRoadBar":null,"rearOffRoadBar":null,"frontSize":"110/80 R19","rearSize":"150/70 R17","source":"Manual do utilizador Macbor Montana XR5 Euro 5 (PT), pág. 94","dataQuality":"oem_manual"},
   {"bikeId":"aprilia-rsv4","frontSoloBar":2.5,"frontLoadedBar":null,"rearSoloBar":2.9,"rearLoadedBar":null,"frontOffRoadBar":null,"rearOffRoadBar":null,"frontSize":"120/70 ZR17","rearSize":"200/55 ZR17","source":"Manual Aprilia — por confirmar","dataQuality":"estimated_spec"},
   {"bikeId":"aprilia-tuono-v4","frontSoloBar":2.5,"frontLoadedBar":null,"rearSoloBar":2.9,"rearLoadedBar":null,"frontOffRoadBar":null,"rearOffRoadBar":null,"frontSize":"120/70 ZR17","rearSize":"200/55 ZR17","source":"Manual Aprilia — por confirmar","dataQuality":"estimated_spec"},

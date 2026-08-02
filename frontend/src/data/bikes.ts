@@ -142,7 +142,7 @@ export const BIKE_CATEGORIES: BikeCategory[] = [
 
 export const BIKES: Bike[] = [
   // ===== Aprilia =====
-  { id: "aprilia-tuareg",    brand: "Aprilia", model: "Tuareg 660",    cc: "659cc",  category: "adventure", adj: "full" },
+  { id: "aprilia-tuareg",    brand: "Aprilia", model: "Tuareg 660",    cc: "659cc",  category: "adventure", adj: "full", mfzProfileId: "aprilia_tuareg660_2021" },
   { id: "macbor-montana-xr5", brand: "Macbor", model: "Montana XR5", cc: "498cc", category: "adventure", adj: "full", mfzProfileId: "macbor_xr5" },
   { id: "aprilia-rsv4",      brand: "Aprilia", model: "RSV4",          cc: "1099cc", category: "sport",     adj: "full" },
   { id: "aprilia-tuono-v4",  brand: "Aprilia", model: "Tuono V4",      cc: "1077cc", category: "naked",     adj: "full" },

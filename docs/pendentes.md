@@ -546,3 +546,43 @@ devolveu, com toda a confiança, os valores de TRÁS — os mesmos 10 cliques, 2
 1,5 voltas da tabela acima. Numa segunda pergunta inventou uns "6 mm, 8 cliques,
 8 cliques" que não apareceram em documento nenhum que eu tenha aberto.
 Resumo de motor de busca não é fonte. Só conta o que se lê na página do manual.
+
+## Aprilia Tuareg 660 — FECHADA (manual do proprietário, Ed. 01_10/2021, cód. 2Q000498)
+
+Manual completo em PDF, 194 páginas, texto extraível. Pneus e suspensão, tudo lá.
+
+**Pressões (pág. 182-183) — e três coisas que contrariam padrões anteriores:**
+
+| | Solo | Com passageiro | Fora de estrada |
+|---|---|---|---|
+| Frente 90/90-21 | 2,0 | 2,2 | 2,0 |
+| Trás 150/70 R18 | 2,5 | 2,7 | 2,0 |
+
+1. **A frente MUDA com a carga.** Em oito marcas lidas até aqui a frente era sempre
+   constante. A Aprilia sobe 0,2 bar. O padrão não era regra, era coincidência de
+   amostra — deixar de o usar como argumento.
+2. **É a segunda fonte com pressões de todo-o-terreno**, depois do manual de oficina
+   da Ténéré 700. E aqui é o manual normal, não o de oficina.
+3. **O que lá tínhamos estava errado e do lado perigoso:** 2,2/2,4 na estrada, e
+   1,5/1,6 fora de estrada. A Aprilia manda 2,0 nas duas rodas fora de estrada e
+   avisa em maiúsculas que andar abaixo do prescrito é fortemente desaconselhado e
+   pode danificar jantes e moto. Estávamos 0,4-0,5 bar abaixo do que o fabricante manda.
+
+**Perfil de suspensão (pág. 113 e 116)** — perfil `aprilia_tuareg660_2021`, duas cargas:
+
+| | Solo | Com passageiro e/ou bagagem |
+|---|---|---|
+| Pré-carga frente | desapertar 6 mm | desapertar 7 mm |
+| Compressão frente | 8 cliques desde todo fechado | igual |
+| Extensão frente | 8 cliques desde todo fechado | igual |
+| Pré-carga trás | fechar 10 cliques desde todo aberto | 26 cliques |
+| Compressão trás | 2 voltas desde todo fechado | igual |
+| Extensão trás | 1,5 voltas | 1 volta |
+
+Só a pré-carga e a extensão de trás mudam com a carga. A compressão fica igual nas duas.
+Saliência das bengalas: 1 entalhe acima da mesa superior (excluindo a tampa).
+
+Nota de método: os valores da frente que o motor de busca me tinha dado (6 mm, 8, 8)
+acabaram por bater certo — mas isso foi sorte, porque na pergunta anterior o mesmo
+motor tinha-me dado os valores de trás como se fossem da frente. Continua a valer:
+só entra o que se lê no documento.

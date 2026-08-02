@@ -1591,6 +1591,30 @@ export const MFZ_PROFILES: MfzProfile[] = [
       reb:     na('Comandado eletronicamente (Ducati Skyhook EVO)'),
     },
   },
+  {
+    id: 'aprilia_tuareg660_2021',
+    brand: 'Aprilia', model: 'Tuareg 660', year: '2021+',
+    baseKg: 75,
+    source: 'Manual do proprietário Aprilia Tuareg 660, Ed. 01_10/2021, cód. 2Q000498 (EN), pág. 113 e 116',
+    formula: 'cfmoto_interp',
+    dataQuality: 'oem_manual',
+    countNote: 'Conta-se SEMPRE a partir da posição mais dura, com o regulador todo rodado no sentido horário — é o que o manual manda. À frente, a pré-carga mede-se em milímetros de porca desapertada; atrás conta-se em cliques a fechar desde todo aberto.',
+    notes: 'Forquilha invertida de 43 mm, curso 240 mm. Amortecedor com reservatório separado e ligação progressiva, curso 106,5 mm. O manual traz uma segunda tabela para passageiro e/ou bagagem: só mudam a pré-carga (6→7 mm à frente, 10→26 cliques atrás) e a extensão de trás (1,5→1 volta). A compressão fica igual nas duas cargas.',
+    front: {
+      preload: mm(6),
+      comp: cl_h(8),
+      reb: cl_h(8),
+    },
+    rear: {
+      preload: cl_s(10),
+      comp: tu_h(2),
+      reb: tu_h(1.5),
+    },
+    weightPoints: [
+      { kg: 75,  fPre: 6, fComp: 8, fReb: 8, rPre: 10, rComp: 2, rReb: 1.5 },
+      { kg: 150, fPre: 7, fComp: 8, fReb: 8, rPre: 26, rComp: 2, rReb: 1 },
+    ],
+  },
 ];
 
 /** Quick lookup by profile ID */
