@@ -702,3 +702,30 @@ contra 2,3/2,5. Mesma coluna, mesma página, valores distintos. Quem preenchesse
 Tiger Sport por semelhança com a Trident errava 0,4 bar atrás.
 
 Triumph: 6 de 7 verificadas. Falta a Speed Triple 1200 RS.
+
+### Triumph FECHADA — 7 de 7
+
+**Speed Triple 1200 RS (pág. 195):** 2,34 / 2,9, com 120/70 R17 e 190/55 R17.
+Tínhamos 2,5 à frente. As versões RR e RS levam exatamente o mesmo.
+
+Quadro final da marca:
+
+| Moto | Frente | Trás |
+|---|---|---|
+| Tiger 1200 Rally Pro | 2,3 | 2,9 |
+| Tiger 900 Rally Pro | 2,35 (a rever) | 2,9 |
+| Tiger 900 GT | 2,5 | 2,9 |
+| Tiger Sport 660 | 2,3 | 2,5 |
+| Street Triple RS | 2,34 | 2,9 |
+| Speed Triple 1200 RS | 2,34 | 2,9 |
+| Scrambler 1200 XE | 2,5 | 2,9 |
+
+**Nota de leitura destes manuais:** o `pdfplumber` não encontrou a tabela de pneus
+da Speed Triple à primeira porque a busca por `ZR17` falhou — este manual escreve
+`120/70 R17`, sem o Z. Procurar sempre por `Tyre Pressures`, que é constante em
+todos os Owner's Handbooks, e nunca pela medida do pneu.
+
+**Fica a rever, e agora com mais razão:** a Tiger 900 Rally está com 2,35. Quatro
+manuais Triumph diferentes escrevem `2.34 bar (34 lb/in²)` — nenhum escreve 2,35.
+É quase certo que os 2,35 são um erro meu de transcrição, mas não mexo sem reabrir
+o manual da Tiger 900. Se aparecer, é a primeira coisa a confirmar.
