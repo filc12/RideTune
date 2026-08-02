@@ -876,3 +876,63 @@ notas do perfil.
 que quase toda a gente tem. Criou-se `ducati-desertx-937` com os valores
 verificados. A V2 e a Rally ficam `estimated_spec` com os mesmos números e a fonte
 a dizer porquê: partilham as medidas de pneu mas não são a mesma moto.
+
+## Kawasaki: os manuais de oficina fecham a Z900 e destapam outra moto
+
+Chegaram dois PDFs que resolvem o impasse do *Owner Center*: **manuais de oficina**,
+não de proprietário. Servem igual — a pressão está no capítulo 2 (Periodic
+Maintenance) e as afinações de suspensão no capítulo 13.
+
+**Nota prática:** o da Z900 vem digitalizado, sem camada de texto. Foi preciso OCR
+página a página e confirmar as frações à lupa em 300 dpi. O da Ninja tinha texto e
+leu-se direto. Se aparecerem mais manuais Kawasaki, contar com esta diferença.
+
+### Z900 — confirmada, e ganhou perfil de suspensão
+
+Manual `99924-1525-31`, cobre ZR900AH e ZR900BH de **2017**.
+
+Pressões (pág. 2-11 e 2-38): **250 kPa à frente e 290 kPa atrás**, a frio, carga
+total até **180 kg**. Valor único. Era o que já tínhamos, agora com fonte —
+`estimated_spec` passa a `oem_manual`. As medidas (120/70ZR17 e 180/55ZR17, pág.
+1-11) também batem certo, e estavam a `null` no código.
+
+Perfil novo `kawasaki_z900_2017` (pág. 13-6), a primeira suspensão Kawasaki com
+números reais no catálogo:
+
+| | Frente | Trás |
+|---|---|---|
+| Retorno | 7 cliques de 12, desde o mais duro | 1 1/4 voltas de 1 4/5, desde o mais duro |
+| Pré-carga | 8 voltas de 30, a apertar desde solta | mola a **199,6 mm** (margem 190,5–200,5) |
+| Compressão | não existe | não existe |
+
+**A pré-carga traseira não se conta em cliques nem voltas:** mede-se o comprimento
+da mola já montada. Ficou como `pos` com a célula a mostrar `199,6 mm`.
+
+### Ninja 1000: o manual é de outra moto que não tínhamos
+
+Manual `99924-1519-02` (2.ª ed., Jul. 2017), cobre **ZX1000WH (2017) e ZX1000WJ
+(2018)** — a Ninja 1000 / Z1000SX. O traseiro é **190/50ZR17** (pág. 10-5). A nossa
+`kawasaki-1000sx` tem 190/55, ou seja, é a Ninja 1000SX de 2020 em diante. **São
+motos diferentes** — mesmo caso da DesertX.
+
+Criada `kawasaki-1000-2017`, «Ninja 1000 / Z1000SX (2017-2019)», com tudo
+verificado: 250/290 kPa até 195 kg, e perfil `kawasaki_ninja1000_2017` —
+
+| | Frente | Trás |
+|---|---|---|
+| Retorno | 2 3/4 voltas de 3 1/2 | 2 1/2 voltas de 2 1/2 |
+| Compressão | 1 3/4 voltas de 3 | não existe |
+| Pré-carga | 5 voltas de 15, a apertar | 8 cliques de 40 |
+
+**A compressão da frente existe só na bengala DIREITA.** Os `adjusters` que já lá
+estavam na SX (`fComp: true`, `rComp: false`) batem certo com o manual — a estrutura
+estava bem, faltavam os números.
+
+Exceção registada nas notas: nas ZX1000WJ *early* do mercado brasileiro o retorno
+traseiro são 2 voltas em vez de 2 1/2.
+
+**Fica em aberto:** os 3,20 bar de trás com carga na SX 2020+ que estavam no
+Supabase. Nenhum manual Kawasaki publica valor traseiro com passageiro nestes
+modelos — o número ficou como estava, mas com a razão da dúvida escrita na fonte.
+
+**Faltam 3 Kawasaki:** Ninja 1000SX (2020+), Z H2 e ZX-10R.

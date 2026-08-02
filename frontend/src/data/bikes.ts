@@ -260,11 +260,13 @@ export const BIKES: Bike[] = [
   { id: "kawasaki-versys-650",  brand: "Kawasaki", model: "Versys 650",      cc: "649cc",  category: "adventure",     adj: "partial" },
   // Ninja 1000SX: frente precarga+comp+ext; atrás precarga remota + extensão (sem compressão)
   { id: "kawasaki-1000sx",      brand: "Kawasaki", model: "Ninja 1000SX",    cc: "1043cc", category: "sport_touring", adj: "full",    adjusters: { fPre: true, fComp: true, fReb: true, rPre: true, rComp: false, rReb: true } },
+  // Geração anterior (ZX1000WH/WJ): traseiro 190/50, não 190/55. Manual de oficina lido.
+  { id: "kawasaki-1000-2017",   brand: "Kawasaki", model: "Ninja 1000 / Z1000SX (2017-2019)", cc: "1043cc", category: "sport_touring", adj: "full", mfzProfileId: "kawasaki_ninja1000_2017", adjusters: { fPre: true, fComp: true, fReb: true, rPre: true, rComp: false, rReb: true } },
   // ZX-10R: Balance Free Fork invertida Ø43 com compressão + extensão + precarga; atrás
   // BFRC lite com compressão + extensão + precarga. Full nas duas pontas. kawasaki.eu
   { id: "kawasaki-zx10r",       brand: "Kawasaki", model: "Ninja ZX-10R",    cc: "998cc",  category: "sport",         adj: "full"    },
   // Z900 standard: KYB front preload+rebound, rear preload+rebound — no compression either end
-  { id: "kawasaki-z900",        brand: "Kawasaki", model: "Z900",            cc: "948cc",  category: "naked",         adj: "partial" },
+  { id: "kawasaki-z900",        brand: "Kawasaki", model: "Z900",            cc: "948cc",  category: "naked",         adj: "partial", mfzProfileId: "kawasaki_z900_2017", adjusters: { fPre: true, fComp: false, fReb: true, rPre: true, rComp: false, rReb: true } },
   // Z H2 (base, não-SE): frente SFF-BP com compressão + extensão + precarga; atrás
   // Uni-Trak só com EXTENSÃO + precarga — a Kawasaki não lista compressão traseira.
   // (A Z H2 SE é que tem KECS eletrónica.) kawasaki.eu

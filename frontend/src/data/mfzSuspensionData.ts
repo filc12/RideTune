@@ -1078,6 +1078,46 @@ const KAWASAKI: MfzProfile[] = [
     notes: 'Versys 1000 SE: KECS semi-active electronic suspension with Showa Skyhook — no manual clicks. Damping self-adjusts; preload and modes set on the screen. The base Versys 1000 S does not have KECS. Confirm by sag.',
     dataQuality: 'oem_manual',
   },
+  {
+    id: 'kawasaki_ninja1000_2017',
+    brand: 'Kawasaki', model: 'Ninja 1000 / Z1000SX', year: '2017-2019',
+    baseKg: 75,
+    source: 'Manual de oficina Kawasaki Z1000SX / Ninja 1000, ref. 99924-1519-02 (2.ª ed., Jul. 2017), pág. 13-6',
+    formula: 'suzuki',
+    dataQuality: 'oem_manual',
+    countNote: 'À frente conta-se em VOLTAS a partir do mais duro (regulador todo no sentido horário), tanto no retorno como na compressão. A pré-carga da frente é ao contrário: 5 voltas a apertar desde a posição toda solta. Atrás, o retorno é em voltas desde o mais duro e a pré-carga é em cliques desde a posição toda solta.',
+    notes: 'Forquilha invertida de 41 mm, com os reguladores repartidos: a compressão existe só na bengala DIREITA, o retorno e a pré-carga estão nas duas. Margens de fábrica: retorno da frente 0 a 3 1/2 voltas, compressão 0 a 3 voltas, pré-carga da frente 0 a 15 voltas; atrás, retorno 0 a 2 1/2 voltas e pré-carga 0 a 40 cliques. O amortecedor é de gás a 980-1 280 kPa, não regulável. Exceção do manual: nas ZX1000WJ early do mercado BR o retorno de trás são 2 voltas em vez de 2 1/2. O manual cobre ZX1000WH (2017) e ZX1000WJ (2018); a 2019 é a mesma máquina.',
+    front: {
+      preload: tu_s(5),
+      comp:    tu_h(1.75),
+      reb:     tu_h(2.75),
+    },
+    rear: {
+      preload: cl_s(8),
+      comp:    na('O amortecedor não tem regulação de compressão'),
+      reb:     tu_h(2.5),
+    },
+  },
+  {
+    id: 'kawasaki_z900_2017',
+    brand: 'Kawasaki', model: 'Z900', year: '2017+',
+    baseKg: 75,
+    source: 'Manual de oficina Kawasaki Z900 / Z900 ABS, ref. 99924-1525-31, pág. 13-6',
+    formula: 'suzuki',
+    dataQuality: 'oem_manual',
+    countNote: 'À frente, o retorno conta-se em CLIQUES a partir do mais duro (regulador todo no sentido horário) e a pré-carga em voltas a apertar desde a posição toda solta. Atrás, o retorno conta-se em voltas desde o mais duro; a pré-carga não se conta em cliques nem voltas, afere-se pelo comprimento da mola já montada.',
+    notes: 'Forquilha invertida de 41 mm, 120 mm de curso; amortecedor horizontal back-link, 140 mm de curso. Margens de fábrica: retorno da frente 0 a 12 cliques, pré-carga da frente 0 a 30 voltas; atrás, retorno 0 a 1 4/5 voltas e pré-carga entre 190,5 e 200,5 mm de comprimento de mola (mais curto é mais duro). Não há regulação de compressão em nenhuma das pontas. Gás do amortecedor a 1 500 kPa, não regulável. O manual cobre as ZR900A/ZR900B de 2017; a geração 2020+ mantém a mesma forquilha e amortecedor mas não está confirmada por manual.',
+    front: {
+      preload: tu_s(8),
+      comp:    na('A forquilha não tem regulação de compressão'),
+      reb:     cl_h(7),
+    },
+    rear: {
+      preload: pos('Regular até a mola montada ficar com 199,6 mm de comprimento', '199,6 mm'),
+      comp:    na('O amortecedor não tem regulação de compressão'),
+      reb:     tu_h(1.25),
+    },
+  },
 ];
 
 const TRIUMPH: MfzProfile[] = [
