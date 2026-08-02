@@ -206,6 +206,7 @@ export const BIKES: Bike[] = [
   { id: "ducati-multi-v2s-travel", brand: "Ducati", model: "Multistrada V2 S Travel (2026)", cc: "890cc", category: "adventure", adj: "full", mfzProfileId: "ducati_multi_v2s_dss_evo" },
   { id: "ducati-multi-v2",        brand: "Ducati", model: "Multistrada V2 (2025+)", cc: "890cc",  category: "adventure", adj: "full"    },
   // DesertX V2 (2026+): KYB 46 totalmente ajustável + KYB traseiro totalmente ajustável
+  { id: "ducati-desertx-937", brand: "Ducati", model: "DesertX (2022-2025)", cc: "937cc", category: "adventure", adj: "full", mfzProfileId: "ducati_desertx_kayaba" },
   { id: "ducati-desertx",         brand: "Ducati", model: "DesertX V2 (2026+)",     cc: "890cc",  category: "adventure", adj: "full"    },
   // DesertX Rally: KYB 48 closed cartridge — a Ducati lista SÓ compressão e extensão à
   // frente, sem precarga. Atrás fully adjustable (HSC/LSC + ext) + precarga remota.

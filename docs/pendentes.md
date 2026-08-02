@@ -838,3 +838,41 @@ Não se pode assumir o formato de uma a partir da outra.
 
 **Faltam 5 e só se fecham com os manuais atuais:** Ninja 1000SX, Versys 1000 SE,
 Z900, Z H2 e ZX-10R. Vêm do *Owner Center* da Kawasaki, escolhendo modelo e ano.
+
+## Ducati DesertX — o manual mais completo lido até hoje
+
+Manual do proprietário DesertX (EN, ed. 25 ED02), 300 páginas. Traz tudo:
+pressões nas quatro combinações E tabelas de suspensão por carga e por tipo de uso.
+
+**Pressões (pág. 278-279):**
+
+| | Estrada solo | Estrada c/ passageiro | Fora de estrada solo | Fora de estrada c/ carga |
+|---|---|---|---|---|
+| Frente 90/90-21 | 2,0 | 2,2 | 1,8 | 2,0 |
+| Trás 150/70 R18 | 2,2 | 2,5 | 1,8 | 2,2 |
+
+Tínhamos 2,2/2,4 e fora de estrada 1,5/1,6. **A frente estava 0,2 acima e o
+fora de estrada 0,3 abaixo do que a Ducati manda.**
+
+É o **terceiro fabricante** a publicar pressões de todo-o-terreno, depois do manual
+de oficina da Ténéré 700 e do manual da Tuareg 660. E é o primeiro a dar
+todo-o-terreno *com carga*, o que dá as quatro combinações completas.
+
+**Perfil `ducati_desertx_kayaba` (pág. 57-60), com três pontos de carga:**
+
+| | Só piloto | Piloto + malas | Piloto + passageiro |
+|---|---|---|---|
+| Frente (retorno/comp/pré-carga) | 2 / 2 / 2 voltas | igual | igual |
+| Trás retorno | 1,75 voltas | 1,75 | 1,5 |
+| Trás compressão | 3 voltas | 2,5 | 2 |
+| Trás pré-carga | 6 cliques | 17 | 26 |
+
+**A frente não muda com a carga — só o amortecedor muda.** O manual traz ainda
+afinações por tipo de uso (Off Road Standard e Off Road Sport), que ficaram nas
+notas do perfil.
+
+**Problema de catálogo que isto destapou:** o id `ducati-desertx` está rotulado
+«DesertX V2 (2026+)», 890cc, e não tínhamos a DesertX de 937 (2022-2025), que é a
+que quase toda a gente tem. Criou-se `ducati-desertx-937` com os valores
+verificados. A V2 e a Rally ficam `estimated_spec` com os mesmos números e a fonte
+a dizer porquê: partilham as medidas de pneu mas não são a mesma moto.

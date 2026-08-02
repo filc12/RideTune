@@ -1695,6 +1695,31 @@ export const MFZ_PROFILES: MfzProfile[] = [
       reb: cl_h(13),
     },
   },
+  {
+    id: 'ducati_desertx_kayaba',
+    brand: 'Ducati', model: 'DesertX', year: '2022-2025',
+    baseKg: 75,
+    source: 'Manual do proprietário Ducati DesertX (EN, ed. 25 ED02), pág. 57-60',
+    formula: 'cfmoto_interp',
+    dataQuality: 'oem_manual',
+    countNote: 'À frente conta-se em VOLTAS a partir do mais duro (regulador todo no sentido horário). A pré-carga da frente também é em voltas, a apertar desde a posição toda solta, e cada volta vale 1 mm. Atrás, o retorno e a compressão são em voltas desde o mais duro, mas a pré-carga é em cliques.',
+    notes: 'Kayaba nas duas pontas, 46 mm à frente, 230 mm de curso. O manual dá uma tabela por carga e outra por tipo de uso. À frente, os valores NÃO mudam com a carga: são sempre 2 voltas de retorno, 2 de compressão e 2 de pré-carga. Só o amortecedor muda. Para fora de estrada o manual sugere Off Road Standard (1,5 / 1,5 / 4 à frente) e Off Road Sport (1,25 / 1 / 8).',
+    front: {
+      preload: tu_s(2),
+      comp: tu_h(2),
+      reb: tu_h(2),
+    },
+    rear: {
+      preload: cl_s(6),
+      comp: tu_h(3),
+      reb: tu_h(1.75),
+    },
+    weightPoints: [
+      { kg: 75,  fPre: 2, fComp: 2, fReb: 2, rPre: 6,  rComp: 3,   rReb: 1.75 },
+      { kg: 100, fPre: 2, fComp: 2, fReb: 2, rPre: 17, rComp: 2.5, rReb: 1.75 },
+      { kg: 150, fPre: 2, fComp: 2, fReb: 2, rPre: 26, rComp: 2,   rReb: 1.5 },
+    ],
+  },
 ];
 
 /** Quick lookup by profile ID */
