@@ -483,3 +483,29 @@ tabela de pressoes, corrigir os valores se preciso, e so entao repor
 `oem_manual` **com a citacao concreta** (documento, edicao, pagina). Comecar
 pelas mais usadas. Nunca subir o rotulo com base num resumo de pesquisa — foi
 assim que se chegou aqui.
+
+## Ducati Multistrada V2 S Travel (2026) — manual lido, pág. 280-281
+
+Terceiro manual Ducati lido, e o primeiro que traz uma coisa que nenhum outro
+fabricante fez até agora: **a pressão depende do pneu montado**, não só da moto.
+
+| Pneu | Frente (solo / carga) | Trás (solo / carga) |
+|---|---|---|
+| Pirelli Scorpion Trail II (série) | 2,4 / 2,4 | 2,5 / 2,9 |
+| Pirelli Scorpion Rally STR (alternativa M+S) | 2,1 / 2,1 | 2,3 / 2,7 |
+
+Medidas: 120/70 ZR19 à frente, 170/60 ZR17 atrás — as mesmas da Multistrada V2
+de série. Guardámos os valores do Trail II, que é o pneu de origem, e o resto
+ficou escrito na fonte da linha.
+
+**Limitação do nosso modelo:** a tabela tem uma linha por moto, não por pneu.
+Uma diferença de 0,3 bar à frente entre dois pneus homologados para a mesma moto
+é grande de mais para se ignorar em silêncio. Se voltar a aparecer noutro
+fabricante, a tabela precisa de uma coluna de pneu.
+
+**Confirma o padrão Ducati pela terceira vez:** frente constante entre solo e
+carga; trás sobe 0,4 bar. E pela terceira vez **não aparece nenhum 3,20** — os
+3,20 que a tabela original tinha nas Multistrada são invenção.
+
+A V2 de série ficou com estes valores mas continua `estimated_spec`: partilha
+rodas e pneus com a S Travel, mas não li o manual dela.

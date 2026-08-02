@@ -203,6 +203,7 @@ export const BIKES: Bike[] = [
   { id: "ducati-multi-v4-s",      brand: "Ducati", model: "Multistrada V4 S",       cc: "1158cc", category: "adventure", adj: "full",    mfzProfileId: "ducati_multi_v4_skyhook" },
   // Multistrada V2 (2025+): forquilha mecânica Ø45 totalmente ajustável + monoamortecedor
   // totalmente ajustável c/ precarga remota. (A versão S é Skyhook eletrónica.) ducati.com
+  { id: "ducati-multi-v2s-travel", brand: "Ducati", model: "Multistrada V2 S Travel (2026)", cc: "890cc", category: "adventure", adj: "full", mfzProfileId: "ducati_multi_v2s_dss_evo" },
   { id: "ducati-multi-v2",        brand: "Ducati", model: "Multistrada V2 (2025+)", cc: "890cc",  category: "adventure", adj: "full"    },
   // DesertX V2 (2026+): KYB 46 totalmente ajustável + KYB traseiro totalmente ajustável
   { id: "ducati-desertx",         brand: "Ducati", model: "DesertX V2 (2026+)",     cc: "890cc",  category: "adventure", adj: "full"    },

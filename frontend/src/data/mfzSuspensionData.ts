@@ -1572,6 +1572,25 @@ export const MFZ_PROFILES: MfzProfile[] = [
       reb:     na('Gerido eletronicamente (Öhlins Smart EC 2.0)'),
     },
   },
+  {
+    id: 'ducati_multi_v2s_dss_evo',
+    brand: 'Ducati', model: 'Multistrada V2 S / S Travel', year: '2025+',
+    baseKg: 75, source: 'Manual do proprietário Ducati Multistrada V2 S Travel (2026), pág. 280-281',
+    formula: 'suzuki',
+    dataQuality: 'oem_manual',
+    countNote: 'Sem cliques. Escolhe-se o modo de suspensão (Comfort, Dynamic, Low Grip, Off Road) e, dentro do modo de pilotagem, um de cinco níveis: Hardest, Hard, Medium, Soft, Softest.',
+    notes: 'Ducati Skyhook Suspension EVO: retorno, compressão e pré-carga comandados eletricamente nas duas pontas. Quatro geometrias de carga mais modo automático. Curso de roda 170 mm; curso do amortecedor 59 mm.',
+    front: {
+      preload: na('Comandado eletronicamente (Ducati Skyhook EVO)'),
+      comp:    na('Comandado eletronicamente (Ducati Skyhook EVO)'),
+      reb:     na('Comandado eletronicamente (Ducati Skyhook EVO)'),
+    },
+    rear: {
+      preload: pos('Pré-carga elétrica: 4 geometrias de carga mais modo automático', 'PAINEL'),
+      comp:    na('Comandado eletronicamente (Ducati Skyhook EVO)'),
+      reb:     na('Comandado eletronicamente (Ducati Skyhook EVO)'),
+    },
+  },
 ];
 
 /** Quick lookup by profile ID */
