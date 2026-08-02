@@ -785,3 +785,33 @@ escreve as duas coisas. Fica como está.
 Guardámos sempre os valores do manual do proprietário, que é o que o condutor lê.
 A diferença entre 2,27 e 2,3 está abaixo da resolução de qualquer manómetro de
 bomba, mas a proveniência ficou escrita na fonte da linha.
+
+## Kawasaki — primeira verificada, e uma fonte nova que funciona
+
+**FONTE NOVA: `manualowl.com`.** Ao contrário do manualslib (que só serve texto nos
+manuais do proprietário) e do ownersmanuals2 (que tem verificação anti-robô e não
+deixa ler), o manualowl entrega **o texto integral da página** num único pedido:
+
+`manualowl.com/am/Kawasaki/<ANO>-<MODELO>/Manual/<id>?page=N`
+
+O índice completo vem na mesma resposta, com o número de página de cada capítulo —
+ou seja, um pedido dá a página E o mapa para as seguintes. Para a Kawasaki, a
+tabela está sempre no capítulo *Wheels*, dentro de *Maintenance and Adjustment*.
+
+**Versys 650 (manual 2015, pág. 136) — VERIFICADA:**
+
+| Carga total | Frente | Trás |
+|---|---|---|
+| até 150 kg | 225 kPa (2,25) | 250 kPa (2,50) |
+| 150 a 210 kg | 225 kPa (2,25) | 290 kPa (2,90) |
+
+Tínhamos 2,25 à frente (certo, por sorte) e **2,9 atrás sem distinção de carga** —
+ou seja, o valor de carga máxima aplicado a quem anda sozinho. 0,4 bar a mais.
+
+**O formato Kawasaki é diferente de tudo o que vimos:** a tabela não é «solo» e
+«com passageiro», é por **carga total em quilos**, com o corte aos 150 kg. Isso
+encaixa melhor no nosso modelo do que o formato Ducati ou Triumph, porque a app
+já raciocina por peso. A frente é constante, como na maioria.
+
+Os 2,25 bar são também a prova viva de que a correção do `numeric(3,1)` para
+`numeric(4,2)` no Supabase valeu a pena: antes, este valor teria sido gravado 2,3.
