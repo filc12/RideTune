@@ -1,0 +1,12 @@
+id_app,Marca,Modelo,Manual PDF,Pág. Pressões,Pág. Suspensão,Pressão Frente (manual),Pressão Trás solo (manual),Pressão Trás carga (manual),Pneu Frente (app),Pneu Trás (app),"Pressão Frente (app, estimada)","Pressão Trás solo (app, estimada)","Pressão Trás carga (app, estimada)",adj (app),Perfil de suspensão (app),Estado,Notas
+ducati-multi-v4-rally,Ducati,Multistrada V4 Rally,,,,,,,120/70 ZR19,170/60 ZR17,"2,50","2,90","3,20",full,ducati_multi_v4_skyhook,Pendente,"Valores (app) são estimativa, não do manual. Preencher só as colunas (manual)."
+ducati-multi-v4,Ducati,Multistrada V4,,,,,,,120/70 ZR19,170/60 ZR17,"2,50","2,90","3,20",full,—,Pendente,"Valores (app) são estimativa, não do manual. Preencher só as colunas (manual)."
+ducati-multi-v4-s,Ducati,Multistrada V4 S,,,,,,,120/70 ZR19,190/55 ZR17,"2,40","2,50","2,90",full,ducati_multi_v4_skyhook,Pendente,"Valores (app) são estimativa, não do manual. Preencher só as colunas (manual)."
+ducati-multi-v2,Ducati,Multistrada V2 (2025+),,,,,,,120/70 ZR19,170/60 ZR17,"2,50","2,90","3,20",full,—,Pendente,"Valores (app) são estimativa, não do manual. Preencher só as colunas (manual)."
+ducati-desertx,Ducati,DesertX V2 (2026+),,,,,,,90/90-21,150/70 R18,"2,50","2,90","3,20",full,—,Pendente,"Valores (app) são estimativa, não do manual. Preencher só as colunas (manual)."
+ducati-desertx-rally,Ducati,DesertX Rally,,,,,,,90/90-21,150/70 R18,"2,50","2,90","3,20",full,—,Pendente,"Valores (app) são estimativa, não do manual. Preencher só as colunas (manual)."
+ducati-sf-v4,Ducati,Streetfighter V4,,,,,,,120/70 ZR17,200/60 ZR17,"2,50","2,90",,full,—,Pendente,"Valores (app) são estimativa, não do manual. Preencher só as colunas (manual)."
+ducati-pani-v4,Ducati,Panigale V4,,,,,,,120/70 ZR17,200/60 ZR17,"2,50","2,90",,full,—,Pendente,"Valores (app) são estimativa, não do manual. Preencher só as colunas (manual)."
+ducati-monster,Ducati,Monster,,,,,,,120/70 ZR17,180/55 ZR17,"2,50","2,90",,partial,—,Pendente,"Valores (app) são estimativa, não do manual. Preencher só as colunas (manual)."
+ducati-hyper-950,Ducati,Hypermotard 950,,,,,,,120/70 ZR17,180/55 ZR17,"2,50","2,80",,full,—,Pendente,"Valores (app) são estimativa, não do manual. Preencher só as colunas (manual)."
+ducati-hyper-698,Ducati,Hypermotard 698 Mono,,,,,,,120/70 ZR17,160/60 ZR17,"2,50","2,90",,full,—,Pendente,"Valores (app) são estimativa, não do manual. Preencher só as colunas (manual)."
