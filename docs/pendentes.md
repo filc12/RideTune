@@ -729,3 +729,22 @@ todos os Owner's Handbooks, e nunca pela medida do pneu.
 manuais Triumph diferentes escrevem `2.34 bar (34 lb/in²)` — nenhum escreve 2,35.
 É quase certo que os 2,35 são um erro meu de transcrição, mas não mexo sem reabrir
 o manual da Tiger 900. Se aparecer, é a primeira coisa a confirmar.
+
+### Triumph: os Owner's Handbooks NÃO trazem afinações de fábrica da suspensão
+
+Varri o manual da Street Triple (255 páginas) à procura de `clicks from`,
+`turns from`, `standard setting`, `preload` com números — zero resultados. O
+capítulo *Maintenance and Adjustment* trata de embraiagem, corrente, travões e
+rolamentos, e sobre suspensão só diz «verificar se há fugas e se opera suavemente».
+
+O manual chega a listar o **afinador da forquilha no jogo de ferramentas** da R e
+da RS, mas nunca diz em que posição vem de fábrica.
+
+Conclusão prática, para não se repetir o trabalho: **na Triumph, o manual do
+proprietário serve para pressões de pneus e mais nada.** As afinações de fábrica
+da suspensão estão no manual de oficina. Isto é o oposto da Aprilia, onde o manual
+normal traz as tabelas completas por carga.
+
+Por isso as 6 Triumph sem perfil MFZ continuam sem ele, e não vale a pena pedir
+mais Owner's Handbooks para esse fim. A única com perfil, a Tiger 1200, tem-no
+porque é semiativa e o ajuste faz-se por menu.
