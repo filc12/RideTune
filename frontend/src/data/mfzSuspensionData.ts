@@ -1615,6 +1615,66 @@ export const MFZ_PROFILES: MfzProfile[] = [
       { kg: 150, fPre: 7, fComp: 8, fReb: 8, rPre: 26, rComp: 2, rReb: 1 },
     ],
   },
+  {
+    id: 'aprilia_rs660_2020',
+    brand: 'Aprilia', model: 'RS 660', year: '2021+',
+    baseKg: 75,
+    source: 'Manual do proprietário Aprilia RS 660, Ed. 03_11/2020, cód. 2Q000420, pág. 114 e 117',
+    formula: 'suzuki',
+    dataQuality: 'oem_manual',
+    countNote: 'Conta-se sempre a partir da posição mais dura, com o regulador todo rodado no sentido horário.',
+    notes: 'A afinação de fábrica é só uma, para estrada — o manual não dá tabela por carga. À frente há pré-carga e extensão, mas não há regulação de compressão. Atrás só se regula a extensão; a pré-carga afere-se pelo comprimento da mola (145,5 mm ± 2), com o amortecedor a 306 mm ± 2. Saliência das bengalas: 2 entalhes acima da mesa superior.',
+    front: {
+      preload: pos('A afinação de fábrica é com a porca de pré-carga toda desapertada', 'TODA SOLTA'),
+      comp: na('A forquilha não tem regulação de compressão'),
+      reb: cl_h(18),
+    },
+    rear: {
+      preload: pos('Regular até a mola ficar com 145,5 mm ± 2 mm', '145,5 mm'),
+      comp: na('O amortecedor não tem regulação de compressão'),
+      reb: cl_h(5),
+    },
+  },
+  {
+    id: 'aprilia_tuono660_2021',
+    brand: 'Aprilia', model: 'Tuono 660', year: '2021+',
+    baseKg: 75,
+    source: 'Manual do proprietário Aprilia Tuono 660, Ed. 01_01/2021, cód. 2Q000426, pág. 114 e 117',
+    formula: 'suzuki',
+    dataQuality: 'oem_manual',
+    countNote: 'Conta-se sempre a partir da posição mais dura, com o regulador todo rodado no sentido horário.',
+    notes: 'A afinação de fábrica é só uma, para estrada — o manual não dá tabela por carga. À frente há pré-carga e extensão, mas não há regulação de compressão. Atrás só se regula a extensão; a pré-carga afere-se pelo comprimento da mola (145,5 mm ± 2), com o amortecedor a 306 mm ± 2. Saliência das bengalas: 2 entalhes acima da mesa superior.',
+    front: {
+      preload: pos('A afinação de fábrica é com a porca de pré-carga toda desapertada', 'TODA SOLTA'),
+      comp: na('A forquilha não tem regulação de compressão'),
+      reb: cl_h(18),
+    },
+    rear: {
+      preload: pos('Regular até a mola ficar com 145,5 mm ± 2 mm', '145,5 mm'),
+      comp: na('O amortecedor não tem regulação de compressão'),
+      reb: cl_h(5),
+    },
+  },
+  {
+    id: 'aprilia_rsv4_1100_2021',
+    brand: 'Aprilia', model: 'RSV4 1100', year: '2021+',
+    baseKg: 75,
+    source: 'Manual do proprietário Aprilia RSV4 1100, Ed. 02_03/2021, cód. 2Q000439, pág. 126 e 132',
+    formula: 'suzuki',
+    dataQuality: 'oem_manual',
+    countNote: 'Conta-se sempre a partir da posição mais dura, com o regulador todo rodado no sentido horário. A pré-carga da frente é a exceção: contam-se 5 voltas a apertar desde toda aberta.',
+    notes: 'Valores da afinação de estrada. O manual traz ainda uma afinação de pista (extensão da frente a 8 cliques em vez de 10) que só deve ser usada em competição autorizada, fora do trânsito normal — por isso não entra aqui. Atrás, a pré-carga afere-se pelo comprimento da mola já montada: 148 mm, com 312 mm entre centros. Saliência das bengalas: 2 entalhes (8 mm). Amortecedor Sachs, versão sem ASC.',
+    front: {
+      preload: tu_s(5),
+      comp: cl_h(6),
+      reb: cl_h(10),
+    },
+    rear: {
+      preload: pos('Regular até a mola montada ficar com 148 mm', '148 mm'),
+      comp: tu_h(2),
+      reb: cl_h(20),
+    },
+  },
 ];
 
 /** Quick lookup by profile ID */

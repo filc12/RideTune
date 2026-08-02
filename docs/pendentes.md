@@ -586,3 +586,40 @@ Nota de método: os valores da frente que o motor de busca me tinha dado (6 mm, 
 acabaram por bater certo — mas isso foi sorte, porque na pergunta anterior o mesmo
 motor tinha-me dado os valores de trás como se fossem da frente. Continua a valer:
 só entra o que se lê no documento.
+
+## Aprilia FECHADA — 5 de 5 (RS 660, Tuono 660, RSV4 1100, Tuono V4, Tuareg 660)
+
+Quatro manuais do proprietário lidos em PDF, todos texto extraível.
+
+| Moto | Frente | Trás | Manual |
+|---|---|---|---|
+| RS 660 | 2,5 / 2,5 | 2,8 / 2,8 | Ed. 03_11/2020, cód. 2Q000420, pág. 186 |
+| Tuono 660 | 2,5 / 2,5 | 2,8 / 2,8 | Ed. 01_01/2021, cód. 2Q000426, pág. 188 |
+| RSV4 1100 | 2,3 / 2,5 | 2,5 / 2,8 | Ed. 02_03/2021, cód. 2Q000439, pág. 200-201 |
+| Tuono V4 1100 | 2,3 / 2,5 | 2,5 / 2,8 | Ed. 03_03/2015, pág. 150-151 |
+
+Tínhamos 2,5/2,9 nas quatro, sem valores de carga. Os 2,9 atrás não existem em
+manual nenhum. As desportivas de 1100 estavam 0,2 bar acima à frente.
+
+**A frente volta a mudar com a carga nas 1100 (2,3 → 2,5), e não muda nas 660.**
+Dentro da mesma marca, no mesmo ano. Confirma que não há regra transversal: lê-se
+moto a moto.
+
+**Tamanhos:** o manual das 1100 dá a mesma pressão para 190/50, 190/55 e 200/55 ZR17,
+sendo que a de 200/55 só é permitida com Pirelli Diablo Supercorsa SP. Mantivemos
+200/55 no catálogo, que é medida listada, e a alternativa ficou escrita na fonte.
+As 660 admitem 180/55 ou 180/60 atrás, mesma pressão.
+
+**Perfis novos** (afinação de estrada; a de pista fica de fora de propósito):
+- `aprilia_rs660_2020` e `aprilia_tuono660_2021` — iguais. Frente: extensão 18 cliques,
+  pré-carga toda desapertada, SEM compressão. Trás: extensão 5 cliques, SEM compressão,
+  pré-carga por comprimento de mola (145,5 mm ± 2). Confirma os `adjusters` que já
+  lá estavam com fComp/rComp a false — foi das poucas vezes que uma suposição antiga
+  passou no teste do manual.
+- `aprilia_rsv4_1100_2021` — frente: pré-carga 5 voltas a apertar desde toda aberta,
+  compressão 6 cliques, extensão 10. Trás: compressão 2 voltas, extensão 20 cliques,
+  pré-carga por mola a 148 mm. Amortecedor Sachs, versão sem ASC.
+
+**Por fazer:** a Tuono V4 1100 (manual de 2015) tem as pressões mas a tabela de
+afinação não apareceu na varredura das páginas 90-150. Fica sem perfil até se
+localizar a página certa.

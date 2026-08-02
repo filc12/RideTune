@@ -144,12 +144,12 @@ export const BIKES: Bike[] = [
   // ===== Aprilia =====
   { id: "aprilia-tuareg",    brand: "Aprilia", model: "Tuareg 660",    cc: "659cc",  category: "adventure", adj: "full", mfzProfileId: "aprilia_tuareg660_2021" },
   { id: "macbor-montana-xr5", brand: "Macbor", model: "Montana XR5", cc: "498cc", category: "adventure", adj: "full", mfzProfileId: "macbor_xr5" },
-  { id: "aprilia-rsv4",      brand: "Aprilia", model: "RSV4",          cc: "1099cc", category: "sport",     adj: "full" },
+  { id: "aprilia-rsv4",      brand: "Aprilia", model: "RSV4",          cc: "1099cc", category: "sport",     adj: "full", mfzProfileId: "aprilia_rsv4_1100_2021" },
   { id: "aprilia-tuono-v4",  brand: "Aprilia", model: "Tuono V4",      cc: "1077cc", category: "naked",     adj: "full" },
   // RS 660 / Tuono 660 base: KYB 41 mm com precarga + extensão (sem compressão) e monoamortecedor
   // precarga + extensão. Só a Tuono 660 Factory (Sachs) ganha compressão — não está no catálogo.
-  { id: "aprilia-rs660",     brand: "Aprilia", model: "RS 660",        cc: "659cc",  category: "midsport",  adj: "full", adjusters: { fPre: true, fComp: false, fReb: true, rPre: true, rComp: false, rReb: true } },
-  { id: "aprilia-tuono-660", brand: "Aprilia", model: "Tuono 660",     cc: "659cc",  category: "naked",     adj: "full", adjusters: { fPre: true, fComp: false, fReb: true, rPre: true, rComp: false, rReb: true } },
+  { id: "aprilia-rs660",     brand: "Aprilia", model: "RS 660",        cc: "659cc",  category: "midsport",  adj: "full", adjusters: { fPre: true, fComp: false, fReb: true, rPre: true, rComp: false, rReb: true }, mfzProfileId: "aprilia_rs660_2020" },
+  { id: "aprilia-tuono-660", brand: "Aprilia", model: "Tuono 660",     cc: "659cc",  category: "naked",     adj: "full", adjusters: { fPre: true, fComp: false, fReb: true, rPre: true, rComp: false, rReb: true }, mfzProfileId: "aprilia_tuono660_2021" },
 
   // ===== BMW =====
   { id: "bmw-r1300-gs-adv",  brand: "BMW", model: "R 1300 GS Adventure",  cc: "1300cc", category: "adventure",     adj: "full", mfzProfileId: "bmw_r1300gsa_dsa" }, // Dynamic ESA electronic
