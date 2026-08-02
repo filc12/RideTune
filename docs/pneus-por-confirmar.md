@@ -1,114 +1,154 @@
-# Pressões por confirmar — 70 de 114
+# Pressões por confirmar — 60 de 117
 
-Estado em 02/08/2026. **44 verificadas com citação de manual**, 70 por confirmar.
-Catálogo em 119 motos.
+Gerado a partir do código. Só entram as linhas que ainda não têm citação de manual.
 
-Todas as motos abaixo estão marcadas `estimated_spec` na app: não afirmam vir de manual.
-
-## Por dificuldade
-
-| grupo | motos | situação |
-|---|---|---|
-| Precisa do PDF em disco | Ducati 11 · Triumph 5 · Aprilia 5 · Suzuki 3 · Honda 1 · KTM 1 = **26** | rápido quando o ficheiro chega |
-| Impossível por manual | BMW **9** | a BMW não publica; só foto do autocolante |
-| Por testar | Kawasaki **6** | fonte desconhecida |
-| Manuais escassos | QJ 9 · CFMoto 8 · Voge 8 · Kove 4 = **29** | o qjmotor-russia.com pode servir |
-
-## Marcas fechadas
-
-Yamaha 12/12 · Honda 12/13 · KTM 13/14 · Macbor 1/1
+Marcas fechadas: **Yamaha, Aprilia, Triumph**.
 
 
-### Ducati (11)
-- Multistrada V4 Rally
-- Multistrada V4
-- Multistrada V4 S
-- Multistrada V2 (2025+)
-- DesertX V2 (2026+)
-- DesertX Rally
-- Streetfighter V4
-- Panigale V4
-- Monster
-- Hypermotard 950
-- Hypermotard 698 Mono
+## Ducati — 11
 
-### BMW (9)
-- R 1300 GS Adventure
-- R 1300 GS (2024+)
-- R 1250 GS (2019-2023)
-- R 1250 RT (2019-2024)
-- F 900 GS (2024+)
-- F 900 XR (2020+)
-- S 1000 RR
-- S 1000 R
-- M 1000 RR
+| Modelo | cc | Frente atual | Trás atual |
+|---|---|---|---|
+| DesertX Rally | 937cc | 2.2 | 2.4 |
+| DesertX V2 (2026+) | 890cc | 2.2 | 2.4 |
+| Hypermotard 698 Mono | 659cc | 2.2 | 2.4 |
+| Hypermotard 950 | 937cc | 2.5 | 2.9 |
+| Monster | 937cc | 2.4 | 2.5 |
+| Multistrada V2 (2025+) | 890cc | 2.4 | 2.5 |
+| Multistrada V4 | 1158cc | 2.4 | 2.5 |
+| Multistrada V4 Rally | 1158cc | 2.4 | 2.5 |
+| Multistrada V4 S | 1158cc | 2.4 | 2.5 |
+| Panigale V4 | 1103cc | 2.5 | 2.9 |
+| Streetfighter V4 | 1103cc | 2.5 | 2.9 |
 
-### QJ Motor (9)
-- SRT 800 X
-- SRT 700X
-- SRK 921
-- SRK 600
-- SRK 800
-- SRK 900
-- SRT 450 RX
-- SRT 900 SX
-- SRT 600 SX
+## BMW — 9
 
-### CF Moto (8)
-- 800 MT Sport
-- 800 MT Explore
-- 700 MT
-- 450 MT
-- 800 NK
-- 1000 SR-R
-- 800 MT-X
-- 1000 MT-X
+| Modelo | cc | Frente atual | Trás atual |
+|---|---|---|---|
+| F 900 GS (2024+) | 895cc | 2.4 | 2.7 |
+| F 900 XR (2020+) | 895cc | 2.5 | 2.9 |
+| M 1000 RR | 999cc | 2.5 | 2.9 |
+| R 1250 GS (2019-2023) | 1254cc | 2.5 | 2.9 |
+| R 1250 RT (2019-2024) | 1254cc | 2.5 | 2.9 |
+| R 1300 GS (2024+) | 1300cc | 2.5 | 2.9 |
+| R 1300 GS Adventure | 1300cc | 2.5 | 2.9 |
+| S 1000 R | 999cc | 2.5 | 2.9 |
+| S 1000 RR | 999cc | 2.5 | 2.9 |
 
-### Voge (8)
-- 900 DSX
-- 650 DSX
-- 525 DSX
-- 525 R
-- 625 DSX
-- 800 DSX Rally
-- R625
-- AC 525X
+## QJ Motor — 9
 
-### Kawasaki (6)
-- Versys 1000 SE
-- Versys 650
-- Ninja 1000SX
-- Ninja ZX-10R
-- Z900
-- Z H2 (2020+)
+| Modelo | cc | Frente atual | Trás atual |
+|---|---|---|---|
+| SRK 600 | 598cc | 2.2 | 2.5 |
+| SRK 800 | 778cc | 2.5 | 2.9 |
+| SRK 900 | 900cc | 2.5 | 2.9 |
+| SRK 921 | 921cc | 2.3 | 2.3 |
+| SRT 450 RX | 449cc | 2.4 | 2.7 |
+| SRT 600 SX | 554cc | 2.4 | 2.7 |
+| SRT 700X | 698cc | 2.5 | 2.9 |
+| SRT 800 X | 778cc | 2.4 | 2.7 |
+| SRT 900 SX | 904cc | 2.4 | 2.7 |
 
-### Aprilia (5)
-- Tuareg 660
-- RSV4
-- Tuono V4
-- RS 660
-- Tuono 660
+## CF Moto — 8
 
-### Triumph (5)
-- Tiger 1200 Rally Pro
-- Tiger Sport 660
-- Street Triple RS
-- Speed Triple 1200 RS
-- Scrambler 1200 XE
+| Modelo | cc | Frente atual | Trás atual |
+|---|---|---|---|
+| 1000 MT-X | 947cc | 2.4 | 2.7 |
+| 1000 SR-R | 998cc | 2.5 | 2.9 |
+| 450 MT | 449cc | 2 | 2 |
+| 700 MT | 693cc | 2.4 | 2.7 |
+| 800 MT Explore | 799cc | 2.4 | 2.7 |
+| 800 MT Sport | 799cc | 2.4 | 2.7 |
+| 800 MT-X | 799cc | 2.4 | 2.4 |
+| 800 NK | 799cc | 2.4 | 2.6 |
 
-### Kove (4)
-- 800X Pro
-- 800X
-- 800 Rally
-- 450 Rally
+## Voge — 8
 
-### Suzuki (3)
-- V-Strom 1050 DE
-- GSX-S1000 (2015-2020)
-- GSX-R1000R (2017+)
+| Modelo | cc | Frente atual | Trás atual |
+|---|---|---|---|
+| 525 DSX | 494cc | 2.4 | 2.7 |
+| 525 R | 494cc | 2.25 | 2.5 |
+| 625 DSX | 625cc | 2.2 | 2.2 |
+| 650 DSX | 652cc | 2.4 | 2.7 |
+| 800 DSX Rally | 798cc | 2.4 | 2.7 |
+| 900 DSX | 895cc | 2.2 | 2.5 |
+| AC 525X | 494cc | 2.2 | 2.2 |
+| R625 | 625cc | 2.25 | 2.5 |
 
-### Honda (1)
-- XL750 Transalp (2026+)
+## Kawasaki — 6
 
-### KTM (1)
-- 1190 Adventure R
+| Modelo | cc | Frente atual | Trás atual |
+|---|---|---|---|
+| Ninja 1000SX | 1043cc | 2.5 | 2.9 |
+| Ninja ZX-10R | 998cc | 2.5 | 2.9 |
+| Versys 1000 SE | 1043cc | 2.5 | 2.9 |
+| Versys 650 | 649cc | 2.25 | 2.9 |
+| Z H2 (2020+) | 998cc | 2.5 | 2.9 |
+| Z900 | 948cc | 2.5 | 2.9 |
+
+## Kove — 4
+
+| Modelo | cc | Frente atual | Trás atual |
+|---|---|---|---|
+| 450 Rally | 443cc | 2.4 | 2.7 |
+| 800 Rally | 799cc | 2.3 | 2.5 |
+| 800X | 799cc | 2.3 | 2.5 |
+| 800X Pro | 799cc | 2.3 | 2.5 |
+
+## Suzuki — 3
+
+| Modelo | cc | Frente atual | Trás atual |
+|---|---|---|---|
+| GSX-R1000R (2017+) | 999cc | 2.5 | 2.9 |
+| GSX-S1000 (2015-2020) | 999cc | 2.5 | 2.9 |
+| V-Strom 1050 DE | 1037cc | 2.5 | 2.9 |
+
+## Honda — 1
+
+| Modelo | cc | Frente atual | Trás atual |
+|---|---|---|---|
+| XL750 Transalp (2026+) | 755cc | 2.25 | 2.5 |
+
+## KTM — 1
+
+| Modelo | cc | Frente atual | Trás atual |
+|---|---|---|---|
+| 1190 Adventure R | 1195cc | 2.4 | 2.9 |
+
+---
+
+# Onde ir buscar cada uma
+
+Por ordem de quanto rendem por manual descarregado.
+
+## Ducati — 11 motos, a melhor relação esforço/resultado
+`manualpdf.pt/ducati` ou `ownersmanuals2.com`. Cada modelo tem «Manual do usuário — PDF».
+Os valores estão em *Dados técnicos*, no fim (pág. 280-350 conforme o modelo).
+Já sabemos que a Ducati faz **frente constante e trás 2,5 → 2,9**, e que os 3,20
+que temos nas Multistrada não existem em manual nenhum. Descarregar em PDF, não
+tirar fotos ao visualizador: o PDF processa-se em segundos.
+**Atenção:** a Multistrada V2 S Travel dá pressões diferentes conforme o pneu
+montado (Trail II ou Rally STR). Se o manual tiver duas tabelas, quero as duas.
+
+## Kawasaki — 6 motos, nunca tentada
+Nenhuma Kawasaki foi verificada até hoje. Os manuais estão no *Owner Center* da
+Kawasaki (pede o modelo/ano) e no manualslib como *Owner's Manual*. Modelos:
+Ninja 1000SX, Versys 650, Versys 1000 SE, Z900, Z H2, ZX-10R.
+
+## Suzuki — 3 motos
+GSX-R1000R, GSX-S1000 e V-Strom 1050 DE. A Suzuki publica os manuais em PDF no
+site oficial por mercado.
+
+## Chinesas — 29 motos (QJ, CFMoto, Voge, Kove)
+O caminho que já funcionou para os afinadores foi `qjmotor-russia.com/inctructions`,
+com 22 manuais em PDF. Para as pressões nunca foi tentado — vale a pena reabrir
+esses mesmos ficheiros e ir à secção de pneus.
+
+## BMW — 9 motos, IMPOSSÍVEL por manual
+Já confirmado ao ler o manual da R 1250 GS de ponta a ponta: a BMW **não publica
+pressões no manual**. Remete para a chapa autocolante na moto. A única forma é
+fotografar a chapa de cada modelo. Não vale a pena procurar mais manuais BMW.
+
+## Honda e KTM — 1 cada
+Falta a Transalp 2026 (a XL750 de 2023 já está feita) e a KTM 1190 Adventure R,
+que é de 2013-2016 e pode não ter manual em PDF acessível.
