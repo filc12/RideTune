@@ -441,6 +441,11 @@ página do PDF antes de usar os valores.
 
 ### Ducati: testada, não sai por leitura remota
 
+**O ownersmanuals2.com não serve para mim.** Tem verificação anti-robô ("Please wait…
+Verifying…") em todas as páginas, incluindo as de modelo. Testado duas vezes, na Ténéré
+e na Hypermotard 698. Abre bem num browser — portanto os links servem para **descarregar**,
+não para eu ler diretamente.
+
 Os manuais Ducati têm 400 a 430 páginas e as pressões vivem na secção *Technical data*,
 no fim. A leitura corta muito antes — testado no Multistrada V4 RS de 2024. O índice
 menciona "Tyre pressure" mas só como item do menu do painel, não como tabela.
