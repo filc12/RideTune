@@ -439,6 +439,14 @@ devolve `5FL-28199`, que é da R7 de **1998** (a OW-02, moto completamente difer
 A de 2022, baseada na MT-07, é `BEB-28199-20`. Confirmar sempre o modelo na primeira
 página do PDF antes de usar os valores.
 
+### Ducati: testada, não sai por leitura remota
+
+Os manuais Ducati têm 400 a 430 páginas e as pressões vivem na secção *Technical data*,
+no fim. A leitura corta muito antes — testado no Multistrada V4 RS de 2024. O índice
+menciona "Tyre pressure" mas só como item do menu do painel, não como tabela.
+
+Não há atalho tipo TPMS como na KTM: **as onze Ducati precisam do ficheiro em disco.**
+
 **Como retomar.** Para cada moto: encontrar o manual do proprietario, ler a
 tabela de pressoes, corrigir os valores se preciso, e so entao repor
 `oem_manual` **com a citacao concreta** (documento, edicao, pagina). Comecar
