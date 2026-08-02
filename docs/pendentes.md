@@ -748,3 +748,40 @@ normal traz as tabelas completas por carga.
 Por isso as 6 Triumph sem perfil MFZ continuam sem ele, e não vale a pena pedir
 mais Owner's Handbooks para esse fim. A única com perfil, a Tiger 1200, tem-no
 porque é semiativa e o ajuste faz-se por menu.
+
+### Manuais de oficina Triumph — o que se aprendeu (e o que NÃO está lá)
+
+Três manuais de oficina lidos: Speed Triple RS, Tiger 1200 XCX e Tiger Sport 660.
+
+**Nenhum traz afinações de fábrica da suspensão em cliques.** Nem o manual do
+proprietário nem o de oficina. O que o de oficina dá é óleo da forquilha, cursos,
+binários e a saliência das bengalas («groove 5 mm abaixo da mesa superior»).
+A Triumph, ao contrário da Aprilia e da KTM, simplesmente não publica os valores
+de fábrica dos afinadores. As 6 Triumph continuam sem perfil MFZ, e agora sabemos
+que não é por falta do documento certo — é porque o número não existe em documento
+nenhum ao público.
+
+**Dois deles são de gerações diferentes das nossas motos:**
+- «Service Manual - Speed Triple RS» é a **1050** (corrente RK 530, depósito 15,1 L,
+  vela CR9EIA-9), não a 1200 RS que temos. Não se aplicou nada.
+- «Tiger_1200_XCX» é a antiga Explorer de 1215cc, não a Tiger 1200 de 1160cc.
+
+**A descoberta que interessa: a Triumph pensa em psi, e converte para bar de forma
+inconsistente entre documentos.**
+
+| Documento | Frente | Trás |
+|---|---|---|
+| Owner's Handbook Tiger Sport 660 | 2,3 bar (33 psi) | 2,5 bar (36 psi) |
+| Manual de oficina Tiger Sport 660 | **2,27** bar (33 psi) | **2,48** bar (36 psi) |
+
+São os mesmos 33 e 36 psi, arredondados de maneira diferente. O mesmo se passa com
+os 34 psi: o manual de oficina da Speed Triple 1050 escreve **2,35 bar (34 lb/in²)**
+e os Owner's Handbooks de 2023 escrevem **2,34 bar (34 lb/in²)**.
+
+**Isto ilibou os 2,35 da Tiger 900 Rally.** Eu tinha-os marcado como provável erro
+meu de transcrição, porque quatro manuais diziam 2,34. Não era erro: a Triumph
+escreve as duas coisas. Fica como está.
+
+Guardámos sempre os valores do manual do proprietário, que é o que o condutor lê.
+A diferença entre 2,27 e 2,3 está abaixo da resolução de qualquer manómetro de
+bomba, mas a proveniência ficou escrita na fonte da linha.
