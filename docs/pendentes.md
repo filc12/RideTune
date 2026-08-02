@@ -246,6 +246,8 @@ Verificadas assim (27/07), agora `oem_manual`:
 | NT1100 | 2,50 | 2,90 | 2,90 | Etiqueta oficial Honda, MLF250 |
 | X-ADV | **2,50** | **2,80** | 2,80 | Manual Honda 32MKT700 (2025) |
 | CB650R | 2,50 | 2,90 | 2,90 | Manual Honda 32MKYH000 (2021) |
+| CB1000R | 2,50 | 2,90 | 2,90 | Manual Honda CB1000RA, 32MKJ820 |
+| CBR1000RR-R Fireblade | 2,50 | 2,90 | 2,90 | Manual Honda 2025, Specifications |
 | NC750X | **2,50** | **2,90** | 2,90 | Etiqueta oficial Honda, MKW250 |
 
 Correções que isto trouxe: a Ténéré tinha **2,25/2,50/2,90** — a frente errada e um
@@ -281,10 +283,13 @@ A T7 2025 e a World Raid ficaram com os valores corrigidos mas em
   Códigos já descobertos: Transalp `MLC250` · Africa Twin `MLN250` · NC750X `MKW250` ·
   NT1100 `MLF250` · CB650R 2024 `MKY241` (só PDF).
 
-  **A CB1000R não está na região europeia (HMEE).** Só aparece em HPI (Filipinas),
-  código `MKJ221`, e essa região não tem versão HTML nem PDF direto — só o download com
-  aceitação de termos. Fica a precisar do ficheiro. O mesmo vale provavelmente para a
-  Fireblade, que também não apareceu em HMEE.
+  **Modelos fora da região europeia** (CB1000R, Fireblade) só existem em HPI ou nos
+  EUA, e essas regiões não têm HTML nem PDF direto — só download com aceitação de
+  termos. Resolvem-se com o ficheiro.
+
+  **E os manuais americanos afinal servem, se se procurar no sítio certo:** na Fireblade
+  a tabela não está na etiqueta, está na secção *Specifications* no fim, em psi primeiro.
+  Procurar por `Tire air pressure` em vez de `kgf/cm`.
 
   **Cuidado com os manuais americanos** (`cdn.powersports.honda.com`): a extração de
   texto não devolve a tabela de pressões — nem em kPa nem em psi. Tentado no CB1000
@@ -425,9 +430,9 @@ Serve como lista de hipóteses. Não serve como fonte.
 YZF-R7) e dez confirmações. A T7, a T7 2025 e a World Raid dão as três 220/250 — a
 World Raid, apesar do depósito maior, não muda de pressão.
 
-**Estado por marca** (verificadas / total): KTM 13/14 · **Yamaha 12/12** · Honda 6/12 ·
-Suzuki 4/7 · Triumph 2/7 · Macbor 1/1 · Aprilia 0/5 · BMW 0/9 · Ducati 0/11 ·
-Voge 0/8 · QJ 0/9 · CFMoto 0/8 · Kawasaki 0/6 · Kove 0/4.
+**Estado por marca** (verificadas / total): KTM 13/14 · **Yamaha 12/12** ·
+**Honda 11/12** · Suzuki 4/7 · Triumph 2/7 · Macbor 1/1 · Ducati 0/11 · BMW 0/9 ·
+QJ 0/9 · Voge 0/8 · CFMoto 0/8 · Kawasaki 0/6 · Aprilia 0/5 · Kove 0/4.
 
 **Cuidado com os códigos de manual da Yamaha:** procurar "YZF-R7 owner's manual"
 devolve `5FL-28199`, que é da R7 de **1998** (a OW-02, moto completamente diferente).
