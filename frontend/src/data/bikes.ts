@@ -145,7 +145,7 @@ export const BIKES: Bike[] = [
   { id: "aprilia-tuareg",    brand: "Aprilia", model: "Tuareg 660",    cc: "659cc",  category: "adventure", adj: "full", mfzProfileId: "aprilia_tuareg660_2021" },
   { id: "macbor-montana-xr5", brand: "Macbor", model: "Montana XR5", cc: "498cc", category: "adventure", adj: "full", mfzProfileId: "macbor_xr5" },
   { id: "aprilia-rsv4",      brand: "Aprilia", model: "RSV4",          cc: "1099cc", category: "sport",     adj: "full", mfzProfileId: "aprilia_rsv4_1100_2021" },
-  { id: "aprilia-tuono-v4",  brand: "Aprilia", model: "Tuono V4",      cc: "1077cc", category: "naked",     adj: "full" },
+  { id: "aprilia-tuono-v4",  brand: "Aprilia", model: "Tuono V4",      cc: "1077cc", category: "naked",     adj: "full", mfzProfileId: "aprilia_tuono_v4_1100_rr" },
   // RS 660 / Tuono 660 base: KYB 41 mm com precarga + extensão (sem compressão) e monoamortecedor
   // precarga + extensão. Só a Tuono 660 Factory (Sachs) ganha compressão — não está no catálogo.
   { id: "aprilia-rs660",     brand: "Aprilia", model: "RS 660",        cc: "659cc",  category: "midsport",  adj: "full", adjusters: { fPre: true, fComp: false, fReb: true, rPre: true, rComp: false, rReb: true }, mfzProfileId: "aprilia_rs660_2020" },

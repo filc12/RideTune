@@ -623,3 +623,28 @@ As 660 admitem 180/55 ou 180/60 atrás, mesma pressão.
 **Por fazer:** a Tuono V4 1100 (manual de 2015) tem as pressões mas a tabela de
 afinação não apareceu na varredura das páginas 90-150. Fica sem perfil até se
 localizar a página certa.
+
+### Tuono V4 — perfil feito, com uma ressalva de hardware
+
+A tabela estava nas páginas 80 e 85, fora do intervalo que eu tinha varrido.
+
+O manual traz DUAS versões com números diferentes, e a nossa entrada de catálogo
+é só "Tuono V4", sem distinguir:
+
+| | RR (Sachs) | Factory (Öhlins) |
+|---|---|---|
+| Extensão frente | 10 cliques | 10 cliques |
+| Compressão frente | 10 cliques | 15 cliques |
+| Pré-carga frente | 5 voltas a apertar | 10 voltas |
+| Extensão trás | 13 cliques | 17 cliques |
+| Compressão trás | 2 cliques | 15 cliques |
+| Mola trás | 148,5 mm | 148 mm, 303 entre centros |
+
+Guardámos a **RR**, que é a base da gama, e os valores da Factory ficaram escritos
+nas notas do perfil para quem tiver essa. A compressão traseira é o caso extremo:
+2 cliques na RR contra 15 na Factory. Dar os números de uma a quem tem a outra
+seria pior do que não dar nada.
+
+**Regra que passa a valer para toda a marca:** a Aprilia publica sempre duas
+afinações, estrada e pista, e proíbe expressamente a de pista fora de competição
+autorizada. Só entra a de estrada. Isto vale para a RSV4, a Tuono V4 e as 660.

@@ -1675,6 +1675,26 @@ export const MFZ_PROFILES: MfzProfile[] = [
       reb: cl_h(20),
     },
   },
+  {
+    id: 'aprilia_tuono_v4_1100_rr',
+    brand: 'Aprilia', model: 'Tuono V4 1100 RR', year: '2015+',
+    baseKg: 75,
+    source: 'Manual do proprietário Aprilia Tuono V4 1100 RR/Factory, Ed. 03_03/2015, pág. 80 e 85',
+    formula: 'suzuki',
+    dataQuality: 'oem_manual',
+    countNote: 'Conta-se sempre a partir da posição mais dura, com o regulador todo rodado no sentido horário. A pré-carga da frente é a exceção: contam-se 5 voltas a apertar desde toda aberta.',
+    notes: 'Valores da versão RR, com forquilha e amortecedor Sachs — é a base da gama. A Factory leva Öhlins e tem números diferentes: à frente 10 cliques de extensão, 15 de compressão e 10 voltas de pré-carga; atrás 17 cliques de extensão e 15 de compressão, com 303 mm entre centros. Se a tua for Factory, usa esses. Atrás, a pré-carga afere-se pelo comprimento da mola já montada: 148,5 mm. Saliência das bengalas: 2 entalhes (8 mm). A afinação de pista fica de fora: o manual diz que é só para competição autorizada e proíbe expressamente usá-la na estrada.',
+    front: {
+      preload: tu_s(5),
+      comp: cl_h(10),
+      reb: cl_h(10),
+    },
+    rear: {
+      preload: pos('Regular até a mola montada ficar com 148,5 mm', '148,5 mm'),
+      comp: cl_h(2),
+      reb: cl_h(13),
+    },
+  },
 ];
 
 /** Quick lookup by profile ID */
