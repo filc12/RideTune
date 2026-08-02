@@ -815,3 +815,26 @@ já raciocina por peso. A frente é constante, como na maioria.
 
 Os 2,25 bar são também a prova viva de que a correção do `numeric(3,1)` para
 `numeric(4,2)` no Supabase valeu a pena: antes, este valor teria sido gravado 2,3.
+
+### Kawasaki: até onde dá para ir sem manuais teus — e onde bate na parede
+
+**A parede:** o manualowl só tem Kawasaki até ~2015. Não tem Z900 (2017+), Z H2
+(2020+) nem Ninja 1000SX (2020+). No manualslib só existe o manual de *montagem*
+da Z900, que não traz pressões. Os manuais atuais da Kawasaki estão atrás do
+Owner Center, que pede modelo e ano e não é acessível por fetch.
+
+Para as pesquisas: o motor de busca devolveu 2,5/2,9 para a Z900 citando o
+tyreplex e fóruns. **Não entra** — é o mesmo tipo de fonte de onde vieram os
+valores errados que temos andado a corrigir.
+
+**Versys 1000 (manual LT de 2015, pág. 149):** 250 kPa à frente, 290 atrás,
+**valor único, sem tabela por carga**. Bate certo com o que já tínhamos.
+Fica `estimated_spec` porque a nossa entrada é a SE de 2019+, outra geração —
+mas a fonte da linha passou a nomear um documento real em vez de «por confirmar».
+
+**Descoberta sobre a marca:** a Kawasaki não usa um formato só. A Versys 650 traz
+tabela por carga total (corte aos 150 kg); a Versys 1000 traz um valor único.
+Não se pode assumir o formato de uma a partir da outra.
+
+**Faltam 5 e só se fecham com os manuais atuais:** Ninja 1000SX, Versys 1000 SE,
+Z900, Z H2 e ZX-10R. Vêm do *Owner Center* da Kawasaki, escolhendo modelo e ano.
