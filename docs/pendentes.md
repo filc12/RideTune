@@ -509,3 +509,40 @@ carga; trás sobe 0,4 bar. E pela terceira vez **não aparece nenhum 3,20** — 
 
 A V2 de série ficou com estes valores mas continua `estimated_spec`: partilha
 rodas e pneus com a S Travel, mas não li o manual dela.
+
+## Aprilia — fonte encontrada, mas cara. E um aviso sobre motores de busca
+
+**Descoberta útil:** no manualslib, os *instruction manuals* (manuais do proprietário)
+servem o texto da página em HTML — dá para ler. Os *service station manuals* não:
+são imagem. Isto inverte a nota antiga aqui do ficheiro, que dizia que o manualslib
+era todo imagem. Era verdade para os manuais de oficina, não para os do proprietário.
+
+Manual do proprietário da Tuareg 660: `manualslib.com/manual/3237661/Aprilia-Tuareg-660.html?page=N`
+
+O custo é que cada página traz ~10 mil tokens de navegação à volta de meia dúzia de
+linhas úteis. Só compensa quando já se sabe o número exato da página.
+
+Índice do manual da Tuareg 660 (194 páginas):
+- 110-113 — afinação do amortecedor traseiro (tabelas)
+- 114-116 — afinação da forquilha (a tabela cai na 116, não na 115)
+- 141 — pneus: SÓ AVISOS, sem um único número. As pressões estão em *Technical data*,
+  páginas 175-176. Não repetir o erro de ir à página "Tyres" à procura de valores.
+
+**Já lido e confirmado — amortecedor traseiro da Tuareg 660 (pág. 113):**
+
+| | Só piloto | Com passageiro e/ou bagagem |
+|---|---|---|
+| Comprimento da mola (A) | 226,2 mm | 226,2 mm |
+| Comprimento do amortecedor (B) | 399,5 mm | 399,5 mm |
+| Pré-carga (manípulo 1) | fechar 10 cliques desde todo aberto | fechar 26 cliques |
+| Compressão (parafuso 2) | abrir 2 voltas desde todo fechado | abrir 2 voltas |
+| Extensão (regulador 3) | abrir 1,5 voltas desde todo fechado | abrir 1 volta |
+
+Contam-se sempre a partir da posição mais dura (rotação completa no sentido horário).
+Falta a tabela da frente (pág. 116) para o perfil ficar completo — não se cria meio perfil.
+
+**AVISO, e é importante:** perguntei ao motor de busca pelos valores da FRENTE e ele
+devolveu, com toda a confiança, os valores de TRÁS — os mesmos 10 cliques, 2 voltas,
+1,5 voltas da tabela acima. Numa segunda pergunta inventou uns "6 mm, 8 cliques,
+8 cliques" que não apareceram em documento nenhum que eu tenha aberto.
+Resumo de motor de busca não é fonte. Só conta o que se lê na página do manual.
