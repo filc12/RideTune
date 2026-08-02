@@ -682,3 +682,23 @@ distinção entre solo e com carga. Já são quatro manuais Triumph com este for
 **A rever quando houver oportunidade:** a Tiger 900 Rally está com 2,35 e a Street
 Triple com 2,34. Se as duas vierem dos mesmos 34 psi, uma delas está mal
 transcrita. Não mexo sem reabrir o manual da Tiger 900.
+
+### Triumph — Scrambler 1200 e Tiger Sport 660
+
+**Scrambler 1200 XE (manual espanhol X/XE, pág. 236):** 2,5 / 2,9, com 90/90-21 54H
+à frente e 150/70 R17 69V atrás. Era a única moto do catálogo **sem medidas de pneu
+nenhumas** — tinha lá 2,2/2,5→2,9 e dois campos de todo-o-terreno (1,6/1,8) que a
+Triumph não publica em manual nenhum. Estava tudo inventado, incluindo a ideia de
+que a traseira variava com a carga. As versões X e XE levam exatamente o mesmo.
+
+**Tiger Sport 660 (manual Trident/Tiger Sport 2023, pág. 168):** 2,3 / **2,5**.
+Tínhamos 2,5/2,9 — a traseira estava **0,4 bar acima**, das maiores diferenças
+encontradas até agora.
+
+E este manual dá o melhor exemplo de por que é que não se pode copiar entre motos
+parecidas: **a Trident e a Tiger Sport 660 partilham motor, quadro e exatamente os
+mesmos pneus (120/70 ZR17 e 180/55 ZR17), e têm pressões diferentes** — 2,34/2,9
+contra 2,3/2,5. Mesma coluna, mesma página, valores distintos. Quem preenchesse a
+Tiger Sport por semelhança com a Trident errava 0,4 bar atrás.
+
+Triumph: 6 de 7 verificadas. Falta a Speed Triple 1200 RS.
