@@ -1311,3 +1311,25 @@ em seis manuais, não é um número tirado da categoria. É melhor do que estava
 é confirmado.
 
 Cuidado: a página tem uma **SRK 700**, que é a naked. Não serve para a SRT 700X.
+
+### SRT 700X: a estimativa confirmou-se ao valor
+
+Chegou o manual EN/IT da «SRT 700 & 700 X»: **220±10 kPa à frente e 250±10 atrás**,
+exatamente o que a entrada já tinha por extrapolação do padrão da gama. Passa a
+`oem_manual`.
+
+Vale a pena registar porquê, porque é a segunda vez que um empréstimo se confirma sem
+mudar um algarismo — a primeira foi a Multistrada V2 a partir do manual da V2 S Travel.
+**O que distingue um empréstimo defensável de um palpite é a base:** aqui eram seis
+manuais da mesma marca a dizer todos o mesmo número, com uma exceção conhecida e
+identificada (a SRK 800). Não era a média de uma categoria.
+
+Este manual também cobre duas versões: a 700 de estrada calça 120/70ZR17 e 160/60ZR17,
+a 700 X leva 110/80 R19 e 150/70 R17. A pressão é a mesma para as duas — como nas SRT
+800 e 900.
+
+**Sobre a suspensão, não deu para fazer perfil.** O manual descreve os afinadores mas
+não publica um único valor de fábrica, e avisa que a forquilha ajustável é **opcional**
+neste modelo («Configuration I»). Fica a nota de que, nessa configuração, a compressão
+está na bengala ESQUERDA e o retorno na DIREITA — o mesmo padrão repartido que já vimos
+nas Ducati e na Kawasaki Ninja 1000. Sem números não se inventa um perfil.
