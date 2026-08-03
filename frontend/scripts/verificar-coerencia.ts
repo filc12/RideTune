@@ -18,6 +18,7 @@
  */
 
 import { MFZ_PROFILES } from '../src/data/mfzSuspensionData';
+import { BIKES, ADJUSTERS_BY_LEVEL } from '../src/data/bikes';
 
 /**
  * Casos já investigados e deixados de propósito como estão, com a razão.
@@ -81,6 +82,37 @@ console.log(`Afinadores com tabela por carga verificados: ${verificados}` +
 if (conhecidosVistos.length) {
   console.log(`\nJá investigados, deixados como estão (${conhecidosVistos.length}):`);
   console.log(conhecidosVistos.join('\n'));
+}
+
+// ── Segundo aviso: motos que correm à mercê da heurística ────────────────────
+//
+// O campo `adjusters` SÓ é lido nas motos sem `mfzProfileId` — nas outras manda o
+// perfil. Nessas, se `adjusters` também não estiver preenchido, cai-se no default
+// grosseiro do nível `adj`, e a heurística por categoria inventa um número para cada
+// afinador que ela julga existir. É onde a app está mais perto de mostrar um valor
+// para um parafuso que a moto não tem.
+
+const semPerfil = (BIKES as any[]).filter(b => !b.mfzProfileId && !b.hidden);
+const semExplicito = semPerfil.filter(b => !b.adjusters);
+
+if (semExplicito.length) {
+  console.log(
+    `\nMotos visíveis sem perfil: ${semPerfil.length}. Destas, ${semExplicito.length} ` +
+    'não dizem que afinadores têm e ficam no default do nível `adj`:',
+  );
+  const porNivel: Record<string, any[]> = {};
+  for (const b of semExplicito) (porNivel[b.adj] ??= []).push(b);
+  for (const nivel of Object.keys(porNivel).sort()) {
+    const ativos = Object.entries((ADJUSTERS_BY_LEVEL as any)[nivel])
+      .filter(([, v]) => v).map(([k]) => k).join(' ');
+    console.log(`\n  adj="${nivel}" → a app assume ${ativos}  (${porNivel[nivel].length} motos)`);
+    for (const b of porNivel[nivel]) console.log(`     ${b.brand} ${b.model}`);
+  }
+  console.log(
+    '\n  Isto não é erro — é o limite de o não sabermos. Preencher `adjusters` numa\n' +
+    '  destas exige fonte oficial que diga que afinadores a moto tem; a alternativa\n' +
+    '  honesta, quando não há, é marcá-la `hidden`.',
+  );
 }
 
 if (novos.length) {

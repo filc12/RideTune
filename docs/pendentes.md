@@ -1574,3 +1574,39 @@ resolve-se com o manual da DS 625X à frente — a mesma fonte que gerou a entra
 **Como o script se comporta:** lista os casos já investigados com a explicação, e só sai
 com erro se aparecer uma suspeita **nova**. A lista de conhecidos não é para calar
 avisos — só entra lá o que já foi olhado.
+
+### Um falso alarme que vale a pena ter escrito
+
+Ao mesmo tempo, comparei os `adjusters` declarados em cada moto com o que o perfil dela
+diz existir. Deu **107 conflitos** — e não é bug nenhum.
+
+O `adjusters` **só é lido nas motos SEM `mfzProfileId`** (`suspension.ts:305`, dentro
+do caminho de fallback). Nas que têm perfil, manda o perfil, e o campo fica lá sem ser
+consultado. Estava escrito no cabeçalho do `bikes.ts` e confirma-se no código.
+
+Fica registado para o próximo que faça esta comparação não gastar tempo a persegui-la.
+
+### Onde o `adjusters` conta mesmo, e o que isso revelou
+
+Nas motos sem perfil o campo é a única coisa que impede a heurística por categoria de
+inventar um número para um afinador que a moto não tem. **São 43 motos visíveis sem
+perfil, e 21 delas nem sequer dizem que afinadores têm** — caem no default do nível
+`adj`. O script passa agora a listá-las.
+
+As 10 em `adj: "full"` são as mais expostas, porque o default assume que existem os
+seis e a app mostra seis números inventados:
+
+BMW S 1000 RR, S 1000 R e M 1000 RR · Ducati DesertX V2 · Kawasaki Ninja ZX-10R ·
+Triumph Tiger 900 Rally Pro, Street Triple RS, Speed Triple 1200 RS e Scrambler
+1200 XE · Yamaha MT-10.
+
+Há ainda 6 em `adj: "fixed"` (assume só pré-carga traseira) e 5 em `"partial"`.
+
+**Isto não é erro, é o limite de não sabermos.** Preencher o `adjusters` numa destas
+exige fonte que diga que afinadores a moto tem — a ficha do fabricante chega, não é
+preciso manual. A alternativa honesta, quando não houver, é `hidden: true`, que é o que
+já se fez às cinco motos ocultas.
+
+É provavelmente o trabalho de melhor relação esforço/resultado que resta: **22 fichas de
+fabricante a ler**, sem OCR nem manuais de 300 páginas, e tira 21 motos de cima da
+heurística.
