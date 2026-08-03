@@ -1137,8 +1137,8 @@ línguas, a dizer o essencial: a frente não tem precarga (é por pressão de ar
 a precarga de trás é por anel roscado sem escala de cliques, a Suzuki manda ir ao
 concessionário, e acerta-se pelo sag.
 
-**Faltam 18 perfis sem nota de instruções**, e são justamente os que mais precisam,
-porque incluem quase toda a Ducati e as duas Kawasaki novas:
+**Fechado a seguir: os 18 perfis que faltavam.** Todos os 85 têm agora nota nas seis
+línguas — 510 chaves `count.*`, zero lacunas. Eram estes:
 
 `aprilia_rs660_2020`, `aprilia_rsv4_1100_2021`, `aprilia_tuareg660_2021`,
 `aprilia_tuono660_2021`, `aprilia_tuono_v4_1100_rr`, `cfmoto_800mt`,
@@ -1148,5 +1148,13 @@ porque incluem quase toda a Ducati e as duas Kawasaki novas:
 `honda_cb750_hornet_2023`, `kawasaki_ninja1000_2017`, `kawasaki_z900_2017`,
 `macbor_xr5`.
 
-Nestes, o material já está escrito no `countNote` de cada perfil — falta traduzi-lo
-e pô-lo nas chaves `count.*`. É trabalho de tradução, não de investigação.
+As notas foram compostas por blocos, não escritas uma a uma: 27 fragmentos por língua
+(«conta a partir do duro», «precarga por comprimento de mola», «não há compressão»…)
+e uma receita por perfil. Assim a mesma mecânica é descrita sempre com as mesmas
+palavras em todas as línguas, e uma correção num fragmento chega a todos os perfis
+que o usam.
+
+Um detalhe que a composição obrigou a separar: o **«1 mm por volta»** da pré-carga da
+frente só está escrito nos manuais Ducati. Nas Aprilia V4 e nas duas Kawasaki o
+manual dá as voltas mas nunca declara a razão em milímetros, por isso essas ficaram
+com a versão sem o parêntese. Escrever lá «1 mm por volta» seria inventar.
