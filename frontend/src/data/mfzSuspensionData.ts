@@ -148,7 +148,7 @@ const CFMOTO: MfzProfile[] = [
       { kg: 150, fPre: 8.5,  fComp: 7,  fReb: 7,  rPre: 8,  rComp: 6,  rReb: 5  },
       { kg: 190, fPre: 5.5,  fComp: 5,  fReb: 5,  rPre: 6,  rComp: 4,  rReb: 3  },
     ],
-    notes: '1000MT-X front preload is in mm (adjust spring gap). Rear preload counting is OPPOSITE to other CFMOTO — higher stored value = lighter/less preload.',
+    notes: 'Os quatro pontos de peso são a tabela «Tabela de Ajuste da Suspensão» do manual (pág. 205), coluna a coluna. Batem certo valor a valor, incluindo a pré-carga da frente em milímetros: 11,5 / 9,5 / 8,5 / 5,5.\n\nO manual diz por palavras o sentido da contagem, e nesta moto é o INVERSO da 800MT: «primeiro no sentido horário até à posição limite e, em seguida, no sentido contrário ao dos ponteiros do relógio». Ou seja conta-se do DURO. A tabela confirma-o sozinha, porque os números DESCEM com a carga (10, 8, 7, 5) — menos cliques abertos, mais firme.\n\nCORREÇÃO (agosto 2026): os quatro afinadores de amortecimento estavam marcados como contados desde o mole. Os números não mudaram.\n\nPOR MODELAR: a tabela tem uma quinta linha que não é de peso — «1 pessoa + Estrada irregular contínua», com 12 / 6 / 7 atrás e 11,5 mm / 10 / 7 à frente. É um modo de terreno, não é interpolável por quilos. Mesma situação da CFMoto 800MT-X.'
   },
   {
     id: 'cfmoto_800mt',
@@ -159,12 +159,13 @@ const CFMOTO: MfzProfile[] = [
     // Nota: a frente é MESMO igual entre "só piloto" e "piloto + 3 malas".
     baseKg: 75, source: 'Manual do proprietário CFMOTO IBEX 800 (EUA, 20250804), pág. 201-203 — IBEX 800 é o nome americano do 800MT', formula: 'cfmoto_interp',
     dataQuality: 'oem_manual',
-    countNote: 'Conta-se a partir do MAIS DURO: aperta no sentido horário (H) até ao fim e depois abre no sentido contrário (S), contando os cliques. O manual diz isto por palavras, ao contrário do que estava aqui. As pré-cargas não têm número: à frente contam-se as marcas gravadas nos dois afinadores, que têm de ficar iguais; atrás solta-se a contraporca e roda-se o anel.',
+    countNote: 'Conta-se a partir do MOLE: abre o afinador no sentido contrário (S) até ao batente e depois aperta (H), contando os cliques ou as voltas de pré-carga. É o que diz a tabela de afinação por carga do manual, e é a contagem a que estes números pertencem.',
+    notes: 'Os quatro pontos de peso são a tabela «Suspension Adjustment Chart» do manual (IBEX 800, pág. 205), coluna a coluna: só piloto, com três malas, a dois, e a dois com malas.\n\nATENÇÃO, o manual contradiz-se. A secção de procedimento (pág. 201-203) manda repor a afinação de fábrica rodando no sentido H até ao fim e abrindo até ao 10.º clique, ou seja contando do DURO. A tabela da pág. 205 diz o contrário em letra pequena — «all counterclockwise to the limit position, and then clockwise» — ou seja contando do MOLE. No valor de fábrica não se nota, porque 10 numa escala de 20±2 fica a meio e dá no mesmo dos dois lados. Nas outras linhas nota-se: a tabela sobe para 15 e 19 com a carga, e isso só endurece se se contar do mole. Manda a tabela, porque é a que traz os valores por carga.',
     front: {
-      preload: cl_s(4), comp: cl_h(10), reb: cl_h(10),
+      preload: cl_s(4), comp: cl_s(10), reb: cl_s(10),
     },
     rear: {
-      preload: cl_s(3), comp: na('O manual não documenta compressão traseira'), reb: cl_h(10),
+      preload: cl_s(3), comp: na('O manual não documenta compressão traseira'), reb: cl_s(10),
     },
     weightPoints: [
       { kg: 75,  fPre: 4, fComp: 10, fReb: 10, rPre: 3, rReb: 10 },
@@ -176,19 +177,22 @@ const CFMOTO: MfzProfile[] = [
   {
     id: 'cfmoto_800nk',
     brand: 'CFMOTO', model: '800NK', year: '2022+',
-    baseKg: 75, source: 'mfzstudio.com/moto/cfmoto/', formula: 'cfmoto_interp',
-    countNote: 'ACW to fully soft (0), then CW count up. No rear compression adjuster.',
+    baseKg: 75,
+    source: 'Manual do proprietário CFMOTO 800NK (EUA, 20250519), pág. 22 e 139-141',
+    formula: 'cfmoto_interp',
+    dataQuality: 'oem_manual',
+    countNote: 'Conta-se tudo a partir do MOLE: abre o afinador no sentido contrário (S) até ao batente e depois aperta (H), contando os cliques do amortecimento ou as voltas de pré-carga. O amortecedor não tem regulação de compressão.',
+    notes: 'Os dois pontos de peso são a tabela «Suspension Adjustment Chart» do manual (pág. 142): só piloto e a dois. A pré-carga vem de lá em VOLTAS do afinador («circles»), contadas desde o mais solto — 4 à frente e 3 atrás.\n\nO mesmo manual exprime a pré-carga de outra maneira na ficha técnica da pág. 22: 11,5 mm de rosca à vista à frente (margem 4-19 mm) e 106,5 mm entre o topo da mola e o centro do olhal atrás (margem 98,5-113,5 mm). São a mesma afinação escrita de duas formas — a medida serve para conferir, as voltas servem para regular por carga. É por isso que o perfil usa as voltas.\n\nAtrás não há regulação de compressão: a ficha técnica di-lo por palavras, «Unadjustable».',
     front: {
       preload: cl_s(4), comp: cl_s(10), reb: cl_s(10),
     },
     rear: {
-      preload: cl_s(3), comp: na('No rear compression adjuster'), reb: cl_s(10),
+      preload: cl_s(3), comp: na('O amortecedor não tem regulação de compressão'), reb: cl_s(10),
     },
     weightPoints: [
       { kg: 75,  fPre: 4, fComp: 10, fReb: 10, rPre: 3, rReb: 10 },
       { kg: 150, fPre: 5, fComp: 13, fReb: 13, rPre: 6, rReb: 17 },
     ],
-    notes: '115kg and 190kg data estimated by interpolation. Confirm with sag check.',
   },
   {
     id: 'cfmoto_700mt',

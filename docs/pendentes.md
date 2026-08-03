@@ -1483,48 +1483,53 @@ certos**, e dois erros de etiqueta na pré-carga da frente — os dois do mesmo 
 dois nas versões Rally. O mfzstudio acertou nos números e falhou na natureza do
 afinador.
 
-## CFMoto: não há uma convenção CFMoto — há três
+## CFMoto: cada moto tem a sua convenção, e eu quase estraguei duas
 
-Os perfis CFMoto assumiam todos a mesma regra, escrita no `countNote`: *«ACW to fully
-soft (0), then CW count up»*. Confrontados com três manuais, **isso só é verdade numa
-das motos**.
+Fui confrontar os perfis CFMoto com três manuais. O primeiro achado parecia claro: os
+perfis diziam todos «ACW to fully soft, then CW count up» e as secções de procedimento
+da 800MT e da 1000MT-X mandam o contrário — apertar até ao fim e depois abrir. Corrigi
+as duas para contagem desde o duro.
 
-| Manual | Como o próprio manual manda repor a afinação de fábrica | Sentido |
-|---|---|---|
-| 800NK | «rotate **counterclockwise (S) to the end**, then clockwise (H) to the 10th click» | do MOLE |
-| IBEX 800 / 800MT | «rotate **clockwise (H) to the end**, then counter-clockwise (S) to the 10th click» | do DURO |
-| 1000MT-X | «rode no sentido horário (H) **até ao fim** e depois no sentido contrário (S) até ao 10.º clique» | do DURO |
+**Numa delas estava errado, e o que me travou foi um comentário no próprio código.**
 
-**A 800MT e a 1000MT-X estavam com o sentido invertido.** Os números não mudam — 10 em
-todos os afinadores — mas contados do lado errado. Numa escala de 20 cliques o ponto de
-fábrica calha a meio e o erro não se nota; **assim que o piloto sai dos 75 kg, a fórmula
-mexe o número e as duas contagens divergem depressa.** Aos 150 kg a interpolação da
-1000MT-X pede 7: sete do lado duro é firme, sete do lado mole é quase aberto.
+A entrada da 800MT tinha escrito: *«VERIFICADO contra o manual oficial: CF MOTO 800MT
+Owner's Manual p.181»*. Antes de apagar a tabela de pesos fui procurar esse quadro. Ele
+existe — «Suspension Adjustment Chart», pág. 205 do IBEX 800 — e traz em letra pequena:
 
-Detalhe que confirma a correção por outra via: na 1000MT-X os pontos de peso fazem o
-número **descer** com o peso (10 → 8 → 7 → 5). Isso só é fisicamente coerente se se
-contar do duro — menos cliques abertos, mais firme. A tabela contradizia o tipo que
-estava declarado.
+> *«The above are all counterclockwise to the limit position, and then clockwise to
+> increase the number of preload turns or damping segments.»*
 
-É o mesmo erro da Yamaha Ténéré World Raid, e já vai no terceiro caso: **os números
-sobrevivem à cópia, o sentido de contagem não.**
+**O mesmo manual dá duas convenções contraditórias.** A secção de procedimento conta do
+duro; a tabela por carga conta do mole. No valor de fábrica não se nota, porque 10 numa
+escala de 20±2 fica a meio e dá no mesmo dos dois lados. **Nas outras linhas nota-se:**
+a tabela sobe para 15 e 19 com a carga, e isso só endurece contando do mole. Manda a
+tabela, porque é a que traz os valores por carga — que é o que a app usa. Revertido.
 
-### O que ficou por resolver na 800NK
+A 1000MT-X é o caso oposto e a correção mantém-se: a tabela dela (pág. 205 do manual
+português) diz *«primeiro no sentido horário até à posição limite e, em seguida, no
+sentido contrário»* — do duro — e os números **descem** com a carga (10, 8, 7, 5), o
+que só é coerente assim. As duas motos da mesma marca contam ao contrário uma da outra,
+e cada manual é consistente consigo próprio na tabela.
 
-Os sentidos da 800NK estão certos, mas as **pré-cargas estão modeladas como cliques e
-não são cliques**:
+### A pré-carga da 800NK: também estava certa
 
-- Frente: o manual dá **11,5 mm de rosca à vista**, com margem de 4 a 19 mm. O perfil
-  tem `cl_s(4)`.
-- Trás: o manual dá **106,5 mm** entre o topo da mola e o centro do olhal superior, com
-  margem de 98,5 a 113,5 mm. O perfil tem `cl_s(3)`.
+Cheguei a mudá-la para milímetros, porque a ficha técnica dá 11,5 mm de rosca à vista à
+frente e 106,5 mm de mola atrás. Também revertido: a tabela da pág. 142 dá a mesma
+pré-carga em **voltas do afinador** («circles»), 4 à frente e 3 atrás, e é essa a forma
+que varia com a carga. **São a mesma afinação escrita de duas maneiras** — a medida
+serve para conferir, as voltas servem para regular. Ficaram as duas escritas na nota.
 
-Não mexi, e a razão é que não é uma correção isolada: os `weightPoints` desta moto
-fazem variar `fPre` e `rPre` com o peso (4→5→6 e 3→6). Se a pré-carga passar a
-milímetros, esses números deixam de fazer sentido — 6 mm para um piloto pesado seria
-*menos* pré-carga que os 11,5 de fábrica, ou seja o contrário do que se quer.
+### O que fica desta
 
-**Isto precisa de decisão:** ou se tiram `fPre`/`rPre` dos pontos de peso e a pré-carga
-passa a mostrar só o valor de fábrica em mm, ou se mantém a interpolação por cliques
-sabendo que o afinador não tem cliques. A primeira é honesta e perde funcionalidade; a
-segunda mantém a app útil e mente sobre a unidade.
+Duas quase-asneiras seguidas, as duas do mesmo tipo: **li a secção de procedimento e
+não procurei a tabela por carga.** As tabelas CFMoto estão noutro capítulo, dez páginas
+à frente, e é nelas que está a convenção que interessa. O que salvou foi o comentário
+que alguém deixou no código a dizer contra o que é que aquilo tinha sido verificado.
+
+**Regra para a próxima:** quando um perfil tem `weightPoints` e a fonte diz que veio de
+um chart, a convenção de contagem vem do chart, não da secção de procedimento. E antes
+de apagar dados verificados, procurar o documento que a nota cita.
+
+**Balanço real:** de seis perfis CFMoto confrontados, **um erro verdadeiro** — a
+1000MT-X, com os quatro afinadores de amortecimento contados ao contrário. Os outros
+cinco estavam certos.
