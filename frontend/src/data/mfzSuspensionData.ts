@@ -1066,6 +1066,26 @@ const DUCATI: MfzProfile[] = [
     dataQuality: 'oem_manual',
   },
   {
+    id: 'ducati_multi_v4_marzocchi',
+    brand: 'Ducati', model: 'Multistrada V4', year: '2021+',
+    baseKg: 75,
+    source: 'Manual do proprietário Ducati Multistrada V4 (EN, 25 ED02), pág. 239',
+    formula: 'suzuki',
+    dataQuality: 'oem_manual',
+    countNote: 'À frente conta-se em VOLTAS a partir do mais duro, com o regulador todo fechado; atrás conta-se em CLIQUES, também a partir do mais duro. A pré-carga da frente são 5 voltas a apertar desde a posição toda solta, e a de trás mede-se em milímetros desde a mola toda solta.',
+    notes: 'Este perfil é o da Multistrada V4 DE SÉRIE, com Marzocchi mecânico nas duas pontas — forquilha invertida de 50 mm com 170 mm de curso, amortecedor progressivo com 180 mm de curso na roda. A V4 S leva Skyhook eletrónico e tem perfil próprio. Atenção ao ler o manual: a mesma página de especificações descreve a forquilha como «fully manually adjustable» e logo a seguir diz «fully electronic hydraulic damping adjustment» — é a página a cobrir as duas versões ao mesmo tempo. Os números de afinação que lá estão são os mecânicos, ou seja, os da V4 de série.',
+    front: {
+      preload: tu_s(5),
+      comp:    tu_h(2),
+      reb:     tu_h(2),
+    },
+    rear: {
+      preload: mm(19),
+      comp:    cl_h(5),
+      reb:     cl_h(12),
+    },
+  },
+  {
     id: 'ducati_hyper698_marzocchi',
     brand: 'Ducati', model: 'Hypermotard 698 Mono', year: '2024+',
     baseKg: 85,

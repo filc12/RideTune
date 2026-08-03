@@ -27,6 +27,75 @@ function barToPsi(bar: number): number {
   return Math.round(bar * 14.5038);
 }
 
+/**
+ * A `source` de cada pressão é escrita em português, porque a investigação dos manuais
+ * é feita em português. Mas este ecrã mostrava-a em bruto a toda a gente — um utilizador
+ * inglês levava com um parágrafo português por baixo dos valores.
+ *
+ * Cada fonte tem duas partes separadas por travessão:
+ *   «Manual do proprietário Ducati Panigale V4 (EN, 26 ED02), pág. 339 — estrada só piloto...»
+ *    └─ cabeça: tipo de documento + nome, edição e página          └─ detalhe: prosa
+ *
+ * A cabeça é quase toda nomes próprios: traduz-se só a palavra do tipo e a abreviatura
+ * de página, e fica legível em qualquer língua. O detalhe é que é prosa portuguesa, e
+ * na esmagadora maioria dos casos repete os números que já estão no ecrã, por isso
+ * mostra-se apenas em português. A ressalva que não se pode perder — a de o valor ainda
+ * não estar confirmado — passa a ser uma linha própria e traduzida.
+ */
+// A ordem importa: «Valores do manual do proprietário …» tem de ser apanhado pela
+// entrada de `derived` ANTES de qualquer coisa mais curta lhe comer só o princípio.
+const TIPOS_FONTE: [RegExp, string][] = [
+  [/^Valores do manual\s+(?:d[oae]s?\s+propriet[áa]rio\s+|d[oae]s?\s+|de\s+)?/i, "pneus.src.derived"],
+  [/^Manual do propriet[áa]rio\s*/i, "pneus.src.owner"],
+  [/^Manual do utilizador\s*/i,      "pneus.src.owner"],
+  [/^Manual del propietario\s*/i,    "pneus.src.owner"],
+  [/^Owner[’']s Handbook\s*/i,       "pneus.src.owner"],
+  [/^Manual de oficina\s*/i,         "pneus.src.service"],
+  [/^Manual de servi[çc]o\s*/i,      "pneus.src.service"],
+  [/^Etiqueta\s*/i,                  "pneus.src.placard"],
+  [/^Estimativa.*/i,                 "pneus.src.estimate"],
+];
+
+/** Palavras soltas que sobram na citação e que não são nomes próprios. */
+const TERMOS_FONTE: [RegExp, string][] = [
+  [/\bp[áa]g\./gi,   "pneus.src.page"],
+  [/\bsec[çc][ãa]o\b/gi, "pneus.src.section"],
+  [/\bc[óo]d\./gi,   "pneus.src.code"],
+];
+
+function fonteLegivel(
+  source: string | null | undefined,
+  dataQuality: string | null | undefined,
+  lang: string,
+  t: (k: never) => string,
+): string {
+  if (!source) return "";
+  if (lang === "pt") return source;            // em português mostra-se tudo, como sempre
+
+  const cabeca = source.split("—")[0].trim();
+  let texto = cabeca;
+  for (const [re, chave] of TIPOS_FONTE) {
+    if (re.test(cabeca)) {
+      const resto = cabeca.replace(re, "").trim();
+      const tipo = t(chave as never);
+      texto = resto ? `${tipo}: ${resto}` : tipo;
+      break;
+    }
+  }
+  for (const [re, chave] of TERMOS_FONTE) {
+    const palavra = t(chave as never);
+    if (palavra && !palavra.startsWith("pneus.")) texto = texto.replace(re, palavra);
+  }
+  // «pág. 2-11 e 2-38» → o «e» é a única palavra que sobra entre números
+  texto = texto.replace(/(\d)\s+e\s+(\d)/g, "$1, $2");
+
+  if (dataQuality !== "oem_manual") {
+    const aviso = t("pneus.src.unconfirmed" as never);
+    if (aviso && !aviso.startsWith("pneus.")) texto += ` — ${aviso}`;
+  }
+  return texto;
+}
+
 // ─── Componente de pressão individual ────────────────────────────────────────
 
 type PressureCardProps = {
@@ -67,7 +136,7 @@ type ModeTab = "road" | "offroad";
 
 export default function PneusScreen() {
   const navPad = useBottomNavClearance();
-  const { t } = useT();
+  const { t, lang } = useT();
   const [bike, setBike] = useState<Bike | null>(null);
   const [pressure, setPressure] = useState<TirePressure | null>(null);
   const [mode, setMode] = useState<ModeTab>("road");
@@ -228,7 +297,7 @@ export default function PneusScreen() {
 
               {/* Fonte */}
               <Text style={st.sourceText}>
-                {t("pneus.source")}: {pressure.source}
+                {t("pneus.source")}: {fonteLegivel(pressure.source, pressure.dataQuality, lang, t as never)}
               </Text>
             </>
           )}

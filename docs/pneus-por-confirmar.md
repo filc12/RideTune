@@ -1,4 +1,4 @@
-# Pressões por confirmar — 53 de 119
+# Pressões por confirmar — 52 de 119
 
 Gerado a partir do código. Só entram as linhas que ainda não têm citação de manual.
 
@@ -63,7 +63,7 @@ Marcas fechadas: **Aprilia, Macbor, Triumph, Yamaha**.
 | R625 | 625cc | 2.5 | 2.9 |
 
 
-## Ducati — 6
+## Ducati — 5
 
 | Modelo | cc | Frente atual | Trás atual |
 |---|---|---|---|
@@ -71,7 +71,6 @@ Marcas fechadas: **Aprilia, Macbor, Triumph, Yamaha**.
 | DesertX V2 (2026+) | 890cc | 2 | 2.2 |
 | Hypermotard 950 | 937cc | 2.5 | 2.8 |
 | Monster | 937cc | 2.5 | 2.9 |
-| Multistrada V4 | 1158cc | 2.5 | 2.9 |
 | Multistrada V4 S | 1158cc | 2.4 | 2.5 |
 
 
@@ -121,10 +120,12 @@ Marcas fechadas: **Aprilia, Macbor, Triumph, Yamaha**.
 
 Por ordem de quanto rendem por manual descarregado.
 
-## Ducati — 6 motos, e continua a ser a que mais rende
-Feitas: DesertX 937, Multistrada V4 RS, V4 Pikes Peak, V2 S Travel, **V2**,
-**V4 Rally**, **Panigale V4**, **Streetfighter V4** e **Hypermotard 698 Mono**.
-Faltam **Monster, Hypermotard 950, Multistrada V4, V4 S, DesertX V2 e DesertX Rally**.
+## Ducati — 5 motos, e continua a ser a que mais rende
+Feitas: DesertX 937, Multistrada V4 RS, V4 Pikes Peak, V2 S Travel, V2, V4 Rally,
+**Multistrada V4**, Panigale V4, Streetfighter V4 e Hypermotard 698 Mono.
+Faltam **Monster, Hypermotard 950, Multistrada V4 S, DesertX V2 e DesertX Rally**.
+A V4 S já leva os valores do manual da V4 de série, que calça o mesmo pneu — falta o
+manual próprio para lhe tirar o «por confirmar».
 
 `manualpdf.pt/ducati` ou `ownersmanuals2.com`. Cada modelo tem «Manual do usuário — PDF».
 Os valores estão em *Dados técnicos*, no fim (pág. 280-350 conforme o modelo).

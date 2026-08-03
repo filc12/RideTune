@@ -194,7 +194,7 @@ export const BIKES: Bike[] = [
   { id: "ducati-multi-v4-rally",  brand: "Ducati", model: "Multistrada V4 Rally",  cc: "1158cc", category: "adventure", adj: "full",    mfzProfileId: "ducati_multi_v4_rally_dss" },
   // V4 base: forquilha Ø50 MECÂNICA totalmente ajustável (comp+ext manuais) + monoamortecedor
   // totalmente ajustável c/ precarga remota. Não é Skyhook — essa é a S. ducati.com
-  { id: "ducati-multi-v4",        brand: "Ducati", model: "Multistrada V4",         cc: "1158cc", category: "adventure", adj: "full"    },
+  { id: "ducati-multi-v4",        brand: "Ducati", model: "Multistrada V4",         cc: "1158cc", category: "adventure", adj: "full",    mfzProfileId: "ducati_multi_v4_marzocchi" },
   // V4 S: Skyhook eletrónica (comp/ext/precarga no ecrã)
   // V4 RS e Pikes Peak: versoes de roda 17" a frente, ao contrario da V4/V4 S (19").
   // Suspensao Ohlins semiativa — sem cliques, so modos no painel.

@@ -1158,3 +1158,58 @@ Um detalhe que a composição obrigou a separar: o **«1 mm por volta»** da pr�
 frente só está escrito nos manuais Ducati. Nas Aprilia V4 e nas duas Kawasaki o
 manual dá as voltas mas nunca declara a razão em milímetros, por isso essas ficaram
 com a versão sem o parêntese. Escrever lá «1 mm por volta» seria inventar.
+
+## Multistrada V4, e a fonte deixa de ser um parágrafo português
+
+### A V4 de série estava com os quatro valores errados
+
+Manual do proprietário da Multistrada V4 (EN, 25 ED02), pág. 238-239. Com os Pirelli
+Scorpion Trail II de série: **2,4 à frente** (igual só com piloto e com carga) e
+**2,5 / 2,9 atrás**. Tínhamos 2,5/2,5 e 2,9/3,2 — os quatro acima do manual, e os
+3,20 mais uma vez sem apoio em documento nenhum.
+
+Perfil novo `ducati_multi_v4_marzocchi`, o da **V4 de série**, com Marzocchi mecânico:
+frente 2 voltas de retorno, 2 de compressão e 5 de pré-carga; atrás 12 cliques de
+retorno, 5 de compressão e 19 mm de pré-carga. Repare-se na mistura de unidades:
+**voltas à frente, cliques atrás**.
+
+**Armadilha deste manual:** a mesma página de especificações diz que a forquilha é
+«fully manually adjustable» e, três linhas abaixo, «fully electronic hydraulic damping
+adjustment». Não é contradição, é a página a cobrir a V4 e a V4 S ao mesmo tempo. Os
+números de afinação que lá estão são os mecânicos, ou seja, os da V4 de série. A V4 S
+continua com o perfil Skyhook.
+
+### A fonte no ecrã de Pneus
+
+O `pneus.tsx` mostrava a `source` em bruto. Como a investigação dos manuais é feita em
+português, isso queria dizer que um utilizador inglês levava com um parágrafo português
+por baixo dos valores — às vezes com 500 caracteres.
+
+**Antes de mexer, fui verificar o que é mostrado mesmo**, porque tinha afirmado que os
+`notes` também apareciam. Não aparecem: o `notes` dos perfis de suspensão não é
+renderizado em lado nenhum, é texto interno. O problema era só a `source`, e só neste
+ecrã. Convém corrigir o que eu próprio escrevi no documento anterior.
+
+Cada fonte tem duas partes separadas por travessão: a **citação** (tipo de documento,
+nome, edição, página — quase tudo nomes próprios) e o **detalhe**, que é prosa e que
+quase sempre repete os números que já estão no ecrã.
+
+Em português mostra-se tudo, como sempre. Nas outras línguas traduz-se a citação
+mecanicamente — o tipo de documento, `pág.`, `secção`, `cód.` — e o detalhe fica de
+fora. A ressalva que não se podia perder, a de o valor ainda não estar confirmado,
+passou a ser uma linha própria e traduzida, decidida pelo `dataQuality` e não pelo
+texto.
+
+| | Antes (EN) | Agora (EN) |
+|---|---|---|
+| Panigale V4 | *Manual do proprietário Ducati Panigale V4 (EN, 26 ED02), secção «Tyre pressure» — estrada só piloto 2,3 à frente e 2,1 atrás; com passageiro e malas 2,5 e 2,9…* | Owner's manual: Ducati Panigale V4 (EN, 26 ED02), section «Tyre pressure» |
+| M 1000 RR | *BMW M 1000 RR Rider Manual — por confirmar* | BMW M 1000 RR Rider Manual — not yet confirmed against the manufacturer's manual |
+
+Custo por moto nova: **zero**. Nada disto precisa de tradução manual.
+
+**Como foi verificado:** passei as 119 fontes reais pela função e procurei resíduo
+português no resultado. À primeira tentativa saíram 23, e o teste apanhou três defeitos
+que eu não tinha previsto — «Valores do manual **do proprietário**» ficava com o «do
+proprietário» pendurado, e sobravam `secção` e `cód.`. Corrigidos, ficam 3 resíduos, e
+os três são falsos positivos: é o acento de *Ténéré*, que é o nome da moto. O
+comprimento mediano do texto caiu para 77 caracteres, contra os 493 do pior caso antes.
