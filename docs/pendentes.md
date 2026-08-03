@@ -1610,3 +1610,50 @@ já se fez às cinco motos ocultas.
 É provavelmente o trabalho de melhor relação esforço/resultado que resta: **22 fichas de
 fabricante a ler**, sem OCR nem manuais de 300 páginas, e tira 21 motos de cima da
 heurística.
+
+### Tentativa falhada: as fichas oficiais não dão os afinadores
+
+Tentei preencher os `adjusters` das 21 motos pelas fichas dos fabricantes. **Não trouxe
+um único dado utilizável**, e vale a pena registar porquê para não se repetir a
+tentativa.
+
+As páginas de modelo da Triumph e da Yamaha são construídas por JavaScript e a tabela
+de especificações vive dentro de acordeões que só se preenchem em interação. Testado:
+
+- **HTML em bruto** (fetch): a secção «Tech spec» vem no documento como títulos vazios —
+  «Engine & Transmission», «Chassis», «Dimensions» — sem conteúdo nenhum.
+- **Browser com JavaScript**: a página carrega, mas o extrator de texto continua a
+  devolver só os títulos.
+- **Clicar no acordeão «Chassis»** e voltar a extrair: igual. A região fica vazia
+  também na árvore de acessibilidade.
+- **Yamaha**: a página do MT-10 nem sequer devolve texto — só imagens e vídeo.
+
+**Não preenchi nada a partir de conhecimento próprio, e é de propósito.** Escrever
+«fComp: true» na S 1000 RR porque toda a gente sabe que ela tem compressão à frente é
+exatamente o tipo de dado inventado que este catálogo passou o dia a limpar. Sem fonte
+citável, fica por preencher.
+
+**Há ainda um problema de fundo com esta via**, mesmo que as fichas abrissem: as fichas
+comerciais dizem «totalmente ajustável» sem separar os seis afinadores. Já apanhámos
+isso na QJ SRT 900 SX, e é o motivo de a moto estar oculta.
+
+**O caminho que funciona é o mesmo de sempre: o manual do proprietário.** Tem um
+capítulo de afinação da suspensão que diz, afinador a afinador, o que existe — foi assim
+que se fizeram as Ducati, as Kawasaki, as Kove e as QJ.
+
+Para as 10 mais expostas (`adj: "full"` sem `adjusters`), os manuais que faltam são:
+
+| Moto | Nota |
+|---|---|
+| Triumph Street Triple RS | O *Owner's Handbook* já foi usado para as pressões (pág. 232) |
+| Triumph Speed Triple 1200 RS | Idem, ed. 2023, pág. 195 |
+| Triumph Tiger 900 Rally Pro | Idem, pág. 195 |
+| Triumph Scrambler 1200 XE | Idem, *Manual del propietario*, pág. 236 |
+| BMW S 1000 RR / S 1000 R / M 1000 RR | A BMW não publica pressões no manual, mas publica afinações |
+| Kawasaki Ninja ZX-10R | Manual de oficina `99924-xxxx-xx`, a via que já funcionou duas vezes |
+| Yamaha MT-10 | O manual já foi usado para as pressões (B67-28199-E0) |
+| Ducati DesertX V2 | Falta, e é a mesma que falta para as pressões |
+
+**Quatro destes já passaram por aqui** — os quatro manuais Triumph e o da MT-10 foram a
+fonte das pressões respetivas. Se voltarem a aparecer, fecham metade da lista sem
+investigação nenhuma: é ir ao capítulo da suspensão em vez do das pressões.
