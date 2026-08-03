@@ -1355,3 +1355,62 @@ for essa, a moto fica fora do seletor.
 
 Se aparecer confirmação de que a forquilha é fixa, há material para um perfil parcial:
 a pré-carga traseira tem valor de fábrica real (1 volta) e o curso conhecido (10 mm).
+
+## CFMoto e Kove: sete motos, e um valor que ninguém esperaria
+
+Sete manuais de uma vez. Todas as sete estavam erradas.
+
+| Moto | Tínhamos | Manual |
+|---|---|---|
+| CFMoto 800NK | 2,5 / 2,9 | **2,4 / 2,6** |
+| CFMoto 800MT Sport e Explore | 2,5 / 2,9 | **2,4 / 2,8** |
+| CFMoto 1000MT-X | 2,5 / 2,9 | **2,4 / 2,4** |
+| Kove 450 Rally | 1,8 / 1,8 | **2,3 / 2,1** |
+| Kove 800 Rally | 2,3 / 2,5 | **2,0 / 2,25** |
+| Kove 800X Touring | *não existia* | **2,3 / 2,5** |
+
+**O Kove 450 Rally leva mais pressão à frente do que atrás** — 230 contra 210 kPa. Não
+é gralha do OCR: confirmei a 300 dpi. É o primeiro caso do catálogo em que o traseiro é
+mais baixo, e vai contra o instinto de toda a gente.
+
+**O Kove 800 Rally tem a pressão dianteira mais baixa de todo o catálogo**, 2,00 bar.
+
+**A CFMoto 1000MT-X é o segundo caso de pressão igual nas duas rodas** (2,40), depois da
+QJ SRT 450 RX. As duas são trail de roda de 21 polegadas — pode ser padrão da categoria,
+mas com dois casos não passa de observação.
+
+### Correções de medida que os manuais obrigaram
+
+**CFMoto 800NK: a frente estava como 120/60 ZR17 e o manual diz 120/70 ZR17 (58W).**
+Vale a pena registar como isto aconteceu: a medida certa estava no ficheiro do código, a
+errada estava no Supabase, e quando ressincronizei os dois lados dei a base como boa e
+escrevi 120/60 por cima do 120/70. Foi a escolha certa em 48 dos 49 casos, mas nesta
+apaguei o valor bom. **Ressincronizar em bloco tem este custo, e só um manual o desfaz.**
+
+**Kove 450 Rally: 90/90-21 e 140/80-18**, contra os 80/100-21 e 120/80-18 que lá
+estavam. As duas versões do manual, CN4 e E5+, dão as mesmas medidas.
+
+### O que estes manuais NÃO resolvem
+
+**Kove 800X e 800X Pro continuam por confirmar.** Nenhum dos três manuais é dessa
+versão, e não dá para emprestar: a 800X Rally e a 800X Touring têm rodas diferentes
+entre si (21/18 contra 19/17) e nenhuma bate certo com as medidas que a nossa entrada
+tem. Quando as rodas diferem, a pressão diferiu sempre.
+
+**CFMoto 700MT não leva nada do manual da 700CL-X.** São motos diferentes: a CL-X é
+roadster com 18 ou 17 à frente, a 700MT é trail com 19. O manual da CL-X ficou por usar.
+
+**CFMoto 450MT, 800MT-X e 1000 SR-R continuam sem manual.** A 800MT-X tem roda de 21 e
+o manual do IBEX 800 é das versões de 19 — não serve.
+
+### Nota de método: onde está a pressão nos manuais Kove
+
+Não está na ficha técnica, ao contrário de quase todos os outros fabricantes. Está numa
+frase solta no meio da secção **«Tire (Inspection/Replacement)»**, na forma
+*«The standard tire pressure is: Front tire: 230 kPa; Rear tire: 250 kPa»*.
+
+Os manuais Kove são digitalizados sem camada de texto e é preciso OCR. Para não fazer
+OCR a 100 páginas: o manual do 625X Pro tem texto e serve de mapa — a secção dos pneus
+está por volta da página impressa 45. Nos outros, contar o desfasamento entre a
+numeração impressa e a do PDF (no 450 Rally são 8 páginas de publicidade à frente) e
+saltar direto para lá.

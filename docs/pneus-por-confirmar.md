@@ -1,4 +1,4 @@
-# Pressões por confirmar — 43 de 119
+# Pressões por confirmar — 37 de 120
 
 Gerado a partir do código. Só entram as linhas que ainda não têm citação de manual.
 
@@ -18,20 +18,6 @@ Marcas fechadas: **Aprilia, Macbor, QJ Motor, Triumph, Yamaha**.
 | R 1300 GS Adventure | 1300cc | 2.5 | 2.9 |
 | S 1000 R | 999cc | 2.5 | 2.9 |
 | S 1000 RR | 999cc | 2.5 | 2.9 |
-
-
-## CF Moto — 8
-
-| Modelo | cc | Frente atual | Trás atual |
-|---|---|---|---|
-| 1000 MT-X | 947cc | 2.5 | 2.9 |
-| 1000 SR-R | 998cc | 2.5 | 2.9 |
-| 450 MT | 449cc | 2.3 | 2.5 |
-| 700 MT | 693cc | 2.5 | 2.9 |
-| 800 MT Explore | 799cc | 2.5 | 2.9 |
-| 800 MT Sport | 799cc | 2.5 | 2.9 |
-| 800 MT-X | 799cc | 2.3 | 2.5 |
-| 800 NK | 799cc | 2.5 | 2.9 |
 
 
 ## Voge — 8
@@ -59,6 +45,16 @@ Marcas fechadas: **Aprilia, Macbor, QJ Motor, Triumph, Yamaha**.
 | Multistrada V4 S | 1158cc | 2.4 | 2.5 |
 
 
+## CF Moto — 4
+
+| Modelo | cc | Frente atual | Trás atual |
+|---|---|---|---|
+| 1000 SR-R | 998cc | 2.5 | 2.9 |
+| 450 MT | 449cc | 2.3 | 2.5 |
+| 700 MT | 693cc | 2.5 | 2.9 |
+| 800 MT-X | 799cc | 2.3 | 2.5 |
+
+
 ## Kawasaki — 4
 
 | Modelo | cc | Frente atual | Trás atual |
@@ -69,16 +65,6 @@ Marcas fechadas: **Aprilia, Macbor, QJ Motor, Triumph, Yamaha**.
 | Z H2 (2020+) | 998cc | 2.5 | 2.9 |
 
 
-## Kove — 4
-
-| Modelo | cc | Frente atual | Trás atual |
-|---|---|---|---|
-| 450 Rally | 443cc | 1.8 | 1.8 |
-| 800 Rally | 799cc | 2.3 | 2.5 |
-| 800X | 799cc | 2.5 | 2.9 |
-| 800X Pro | 799cc | 2.5 | 2.9 |
-
-
 ## Suzuki — 3
 
 | Modelo | cc | Frente atual | Trás atual |
@@ -86,6 +72,14 @@ Marcas fechadas: **Aprilia, Macbor, QJ Motor, Triumph, Yamaha**.
 | GSX-R1000R (2017+) | 999cc | 2.5 | 2.9 |
 | GSX-S1000 (2015-2020) | 999cc | 2.5 | 2.9 |
 | V-Strom 1050 DE | 1037cc | 2.5 | 2.9 |
+
+
+## Kove — 2
+
+| Modelo | cc | Frente atual | Trás atual |
+|---|---|---|---|
+| 800X | 799cc | 2.5 | 2.9 |
+| 800X Pro | 799cc | 2.5 | 2.9 |
 
 
 ## Honda — 1
