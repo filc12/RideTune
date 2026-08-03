@@ -1,31 +1,32 @@
-# Pressões por confirmar — 60 de 117
+# Pressões por confirmar — 58 de 119
 
 Gerado a partir do código. Só entram as linhas que ainda não têm citação de manual.
 
-Marcas fechadas: **Yamaha, Aprilia, Triumph**.
+Marcas fechadas: **Aprilia, Macbor, Triumph, Yamaha**.
 
 
 ## Ducati — 11
 
 | Modelo | cc | Frente atual | Trás atual |
 |---|---|---|---|
-| DesertX Rally | 937cc | 2.2 | 2.4 |
-| DesertX V2 (2026+) | 890cc | 2.2 | 2.4 |
-| Hypermotard 698 Mono | 659cc | 2.2 | 2.4 |
-| Hypermotard 950 | 937cc | 2.5 | 2.9 |
-| Monster | 937cc | 2.4 | 2.5 |
+| DesertX Rally | 937cc | 2 | 2.2 |
+| DesertX V2 (2026+) | 890cc | 2 | 2.2 |
+| Hypermotard 698 Mono | 659cc | 2.5 | 2.9 |
+| Hypermotard 950 | 937cc | 2.5 | 2.8 |
+| Monster | 937cc | 2.5 | 2.9 |
 | Multistrada V2 (2025+) | 890cc | 2.4 | 2.5 |
-| Multistrada V4 | 1158cc | 2.4 | 2.5 |
-| Multistrada V4 Rally | 1158cc | 2.4 | 2.5 |
+| Multistrada V4 | 1158cc | 2.5 | 2.9 |
+| Multistrada V4 Rally | 1158cc | 2.5 | 2.9 |
 | Multistrada V4 S | 1158cc | 2.4 | 2.5 |
 | Panigale V4 | 1103cc | 2.5 | 2.9 |
 | Streetfighter V4 | 1103cc | 2.5 | 2.9 |
+
 
 ## BMW — 9
 
 | Modelo | cc | Frente atual | Trás atual |
 |---|---|---|---|
-| F 900 GS (2024+) | 895cc | 2.4 | 2.7 |
+| F 900 GS (2024+) | 895cc | 2.5 | 2.9 |
 | F 900 XR (2020+) | 895cc | 2.5 | 2.9 |
 | M 1000 RR | 999cc | 2.5 | 2.9 |
 | R 1250 GS (2019-2023) | 1254cc | 2.5 | 2.9 |
@@ -35,65 +36,69 @@ Marcas fechadas: **Yamaha, Aprilia, Triumph**.
 | S 1000 R | 999cc | 2.5 | 2.9 |
 | S 1000 RR | 999cc | 2.5 | 2.9 |
 
+
 ## QJ Motor — 9
 
 | Modelo | cc | Frente atual | Trás atual |
 |---|---|---|---|
-| SRK 600 | 598cc | 2.2 | 2.5 |
+| SRK 600 | 598cc | 2.5 | 2.9 |
 | SRK 800 | 778cc | 2.5 | 2.9 |
 | SRK 900 | 900cc | 2.5 | 2.9 |
-| SRK 921 | 921cc | 2.3 | 2.3 |
-| SRT 450 RX | 449cc | 2.4 | 2.7 |
+| SRK 921 | 921cc | 2.5 | 2.9 |
+| SRT 450 RX | 449cc | 2.3 | 2.5 |
 | SRT 600 SX | 554cc | 2.4 | 2.7 |
 | SRT 700X | 698cc | 2.5 | 2.9 |
-| SRT 800 X | 778cc | 2.4 | 2.7 |
-| SRT 900 SX | 904cc | 2.4 | 2.7 |
+| SRT 800 X | 778cc | 2.3 | 2.5 |
+| SRT 900 SX | 904cc | 2.5 | 2.9 |
+
 
 ## CF Moto — 8
 
 | Modelo | cc | Frente atual | Trás atual |
 |---|---|---|---|
-| 1000 MT-X | 947cc | 2.4 | 2.7 |
+| 1000 MT-X | 947cc | 2.5 | 2.9 |
 | 1000 SR-R | 998cc | 2.5 | 2.9 |
-| 450 MT | 449cc | 2 | 2 |
-| 700 MT | 693cc | 2.4 | 2.7 |
-| 800 MT Explore | 799cc | 2.4 | 2.7 |
-| 800 MT Sport | 799cc | 2.4 | 2.7 |
-| 800 MT-X | 799cc | 2.4 | 2.4 |
-| 800 NK | 799cc | 2.4 | 2.6 |
+| 450 MT | 449cc | 2.3 | 2.5 |
+| 700 MT | 693cc | 2.5 | 2.9 |
+| 800 MT Explore | 799cc | 2.5 | 2.9 |
+| 800 MT Sport | 799cc | 2.5 | 2.9 |
+| 800 MT-X | 799cc | 2.3 | 2.5 |
+| 800 NK | 799cc | 2.5 | 2.9 |
+
 
 ## Voge — 8
 
 | Modelo | cc | Frente atual | Trás atual |
 |---|---|---|---|
-| 525 DSX | 494cc | 2.4 | 2.7 |
-| 525 R | 494cc | 2.25 | 2.5 |
-| 625 DSX | 625cc | 2.2 | 2.2 |
-| 650 DSX | 652cc | 2.4 | 2.7 |
-| 800 DSX Rally | 798cc | 2.4 | 2.7 |
-| 900 DSX | 895cc | 2.2 | 2.5 |
-| AC 525X | 494cc | 2.2 | 2.2 |
-| R625 | 625cc | 2.25 | 2.5 |
+| 525 DSX | 494cc | 2.3 | 2.5 |
+| 525 R | 494cc | 2.5 | 2.9 |
+| 625 DSX | 625cc | 2.3 | 2.5 |
+| 650 DSX | 652cc | 2.5 | 2.9 |
+| 800 DSX Rally | 798cc | 2.3 | 2.5 |
+| 900 DSX | 895cc | 2.5 | 2.9 |
+| AC 525X | 494cc | 2.3 | 2.5 |
+| R625 | 625cc | 2.5 | 2.9 |
 
-## Kawasaki — 6
+
+## Kawasaki — 4
 
 | Modelo | cc | Frente atual | Trás atual |
 |---|---|---|---|
 | Ninja 1000SX | 1043cc | 2.5 | 2.9 |
 | Ninja ZX-10R | 998cc | 2.5 | 2.9 |
 | Versys 1000 SE | 1043cc | 2.5 | 2.9 |
-| Versys 650 | 649cc | 2.25 | 2.9 |
 | Z H2 (2020+) | 998cc | 2.5 | 2.9 |
-| Z900 | 948cc | 2.5 | 2.9 |
+
 
 ## Kove — 4
 
 | Modelo | cc | Frente atual | Trás atual |
 |---|---|---|---|
-| 450 Rally | 443cc | 2.4 | 2.7 |
+| 450 Rally | 443cc | 1.8 | 1.8 |
 | 800 Rally | 799cc | 2.3 | 2.5 |
-| 800X | 799cc | 2.3 | 2.5 |
-| 800X Pro | 799cc | 2.3 | 2.5 |
+| 800X | 799cc | 2.5 | 2.9 |
+| 800X Pro | 799cc | 2.5 | 2.9 |
+
 
 ## Suzuki — 3
 
@@ -103,19 +108,19 @@ Marcas fechadas: **Yamaha, Aprilia, Triumph**.
 | GSX-S1000 (2015-2020) | 999cc | 2.5 | 2.9 |
 | V-Strom 1050 DE | 1037cc | 2.5 | 2.9 |
 
+
 ## Honda — 1
 
 | Modelo | cc | Frente atual | Trás atual |
 |---|---|---|---|
 | XL750 Transalp (2026+) | 755cc | 2.25 | 2.5 |
 
+
 ## KTM — 1
 
 | Modelo | cc | Frente atual | Trás atual |
 |---|---|---|---|
-| 1190 Adventure R | 1195cc | 2.4 | 2.9 |
-
----
+| 1190 Adventure R | 1195cc | 2.3 | 2.5 |
 
 # Onde ir buscar cada uma
 
@@ -130,10 +135,19 @@ tirar fotos ao visualizador: o PDF processa-se em segundos.
 **Atenção:** a Multistrada V2 S Travel dá pressões diferentes conforme o pneu
 montado (Trail II ou Rally STR). Se o manual tiver duas tabelas, quero as duas.
 
-## Kawasaki — 6 motos, nunca tentada
-Nenhuma Kawasaki foi verificada até hoje. Os manuais estão no *Owner Center* da
-Kawasaki (pede o modelo/ano) e no manualslib como *Owner's Manual*. Modelos:
-Ninja 1000SX, Versys 650, Versys 1000 SE, Z900, Z H2, ZX-10R.
+## Kawasaki — 3 motos, e o caminho já está aberto
+Feitas: Versys 650, Z900 e a Ninja 1000 / Z1000SX de 2017-2019 (entrada nova,
+`kawasaki-1000-2017`). Faltam **Ninja 1000SX (2020+), Z H2 e ZX-10R**.
+
+Os manuais do proprietário estão no *Owner Center* da Kawasaki (pede modelo e ano),
+mas o atalho que funcionou melhor foi outro: **manuais de oficina**. Trazem a pressão
+no capítulo 2 (*Periodic Maintenance*) e as afinações de suspensão no capítulo 13,
+com as margens completas dos afinadores — coisa que o manual do proprietário não dá.
+Procurar pela referência no formato `99924-xxxx-xx`.
+
+Aviso: alguns vêm digitalizados sem camada de texto, e aí é preciso OCR e confirmar
+as frações à lupa. Foi o caso do da Z900 (`99924-1525-31`); o da Ninja
+(`99924-1519-02`) tinha texto e leu-se direto.
 
 ## Suzuki — 3 motos
 GSX-R1000R, GSX-S1000 e V-Strom 1050 DE. A Suzuki publica os manuais em PDF no
