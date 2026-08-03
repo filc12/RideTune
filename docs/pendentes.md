@@ -1007,3 +1007,49 @@ solta (Panigale 8 mm, Streetfighter 11 mm), não em cliques nem voltas — é o 
 A V4 Rally é DSS eletrónico como a V4 S: tudo no painel, exceto a pré-carga da mola
 da frente, que é mecânica (5 voltas, margem 5 a 20 mm) e o manual pede que seja feita
 em concessionário.
+
+## Auditoria da suspensão, e um guarda para não voltar a acontecer
+
+Depois de apanhar 49 pressões desfasadas entre o bundle local e o Supabase, faltava
+fazer a mesma pergunta à suspensão. **Está boa:** 85 perfis dos dois lados, com as
+mesmas afinações valor a valor.
+
+A única divergência eram **três acentos**: o Supabase tinha «Tenere 700» e o código
+«Ténéré 700», nos perfis `yamaha_t700_2019`, `yamaha_t700_2025` e
+`yamaha_t700_world_raid_2026`. Corrigido na base.
+
+Ou seja, o desfasamento das pressões não era um padrão — foi um caso isolado, de
+edições feitas na base que nunca voltaram ao ficheiro.
+
+### `npm run verificar-sync`
+
+Script novo em `frontend/scripts/verificar-sync.ts`. Vai buscar as duas tabelas ao
+Supabase e compara-as com o `tirePressure.ts` e o `mfzSuspensionData.ts`, campo a
+campo. Diz exatamente o que difere:
+
+```
+✗ Pressões: 1 de 119 com diferenças
+  yamaha-r1
+      medidaTras: código=190/55 ZR17  base=200/55 ZR17
+```
+
+Sai com código 1 se houver diferenças, para poder entrar num hook de pre-push ou em
+CI. Lê as credenciais do ambiente ou do `frontend/.env.local`.
+
+O cuidado que o script tem de ter, e tem: **o Postgres devolve os numéricos como
+string** («2.50») e o TypeScript tem-nos como número (2.5). Sem normalizar as duas
+pontas para o mesmo formato, dava 119 falsos positivos. As pré-cargas comparam-se
+por valor *e* por tipo de contagem, senão trocar `cl_hard` por `cl_soft` passava
+despercebido — e essa troca inverte o sentido da afinação.
+
+### Um ponto por esclarecer nas Ténéré
+
+Não é desfasamento (código e base concordam), mas as duas entradas não concordam
+entre si: a `yamaha_t700_2025` conta a compressão e a extensão de trás em `cl_hard`,
+e a `yamaha_t700_world_raid_2026` conta as mesmas em `cl_soft`. É o mesmo
+amortecedor. Uma das duas está com o sentido invertido.
+
+A World Raid é `oem_manual`, vinda do manual oficial XTZ690D; a de 2025 veio do
+mfzstudio. **A suspeita recai sobre a de 2025**, mas isto só se fecha com o manual
+da T7 de 2025 na mão — não vale a pena adivinhar, porque inverter o sentido de um
+afinador é pior do que deixá-lo como está.
