@@ -1118,3 +1118,35 @@ do que a proveniência.
 
 Corrigido o sentido, mantidos os números, e a razão escrita na fonte e na nota.
 A T7 2025 passou também de `mfzstudio` a `oem_manual`, com as margens completas.
+
+### Continuação da DR-Z: traduzir o token não chegava
+
+Traduzir `ANEL` para `RING` tira a palavra portuguesa do ecrã, mas **não responde à
+pergunta que a pessoa fez**, que era «o que é que isto quer dizer?». `RING` sozinho
+continua a não dizer o que fazer.
+
+Ao ir ver porquê, apareceu a lacuna verdadeira. A caixa «Como afinar» mostra uma nota
+por modelo, com a chave `count.<profileId>`, e cai numa frase genérica quando essa
+chave não existe. **A DR-Z não tinha nota nenhuma.** E o `countNote` e o `notes` que
+estão nos dados — onde está escrito que o anel precisa de ferramenta especial e que a
+Suzuki manda ir ao concessionário — **não são mostrados em lado nenhum da app**. É
+texto que existe na base e que o utilizador nunca vê.
+
+Criadas as notas `count.suzuki_drz4s_2025` e `count.suzuki_drz4sm_2025` nas seis
+línguas, a dizer o essencial: a frente não tem precarga (é por pressão de ar, 0 kPa),
+a precarga de trás é por anel roscado sem escala de cliques, a Suzuki manda ir ao
+concessionário, e acerta-se pelo sag.
+
+**Faltam 18 perfis sem nota de instruções**, e são justamente os que mais precisam,
+porque incluem quase toda a Ducati e as duas Kawasaki novas:
+
+`aprilia_rs660_2020`, `aprilia_rsv4_1100_2021`, `aprilia_tuareg660_2021`,
+`aprilia_tuono660_2021`, `aprilia_tuono_v4_1100_rr`, `cfmoto_800mt`,
+`ducati_desertx_kayaba`, `ducati_hyper698_marzocchi`, `ducati_multi_v2_marzocchi`,
+`ducati_multi_v2s_dss_evo`, `ducati_multi_v4_ohlins_smartec`,
+`ducati_multi_v4_rally_dss`, `ducati_panigale_v4_showa`, `ducati_sf_v4_showa`,
+`honda_cb750_hornet_2023`, `kawasaki_ninja1000_2017`, `kawasaki_z900_2017`,
+`macbor_xr5`.
+
+Nestes, o material já está escrito no `countNote` de cada perfil — falta traduzi-lo
+e pô-lo nas chaves `count.*`. É trabalho de tradução, não de investigação.
