@@ -132,14 +132,15 @@ const CFMOTO: MfzProfile[] = [
     id: 'cfmoto_1000mtx',
     brand: 'CFMOTO', model: '1000MT-X', year: '2023+',
     baseKg: 75, source: 'mfzstudio.com/moto/cfmoto/', formula: 'cfmoto_interp',
-    countNote: 'REVERSED vs other CFMOTO. Front preload in mm. Rear preload: CW to max (hard), then ACW count out — higher number = lighter setting.',
+    dataQuality: 'oem_manual',
+    countNote: 'Conta-se tudo a partir do MAIS DURO: aperta no sentido horário (H) até ao fim e depois abre no sentido contrário (S), contando os cliques — amortecimento e pré-carga traseira. A pré-carga da frente é a exceção: mede-se em milímetros de rosca à vista no topo da forquilha, e apertar aumenta a pré-carga.',
     front: {
-      preload: mm(11.5), comp: cl_s(10), reb: cl_s(10),
+      preload: mm(11.5), comp: cl_h(10), reb: cl_h(10),
     },
     rear: {
       // reversed: cl_hard direction — higher value = less preload (lighter setting)
-      preload: { v: 12, type: 'cl_hard', label: 'Reversed counting — see note' },
-      comp: cl_s(10), reb: cl_s(10),
+      preload: { v: 12, type: 'cl_hard', label: 'De fábrica no 12.º clique a contar do mais duro; margem total 25±2' },
+      comp: cl_h(10), reb: cl_h(10),
     },
     weightPoints: [
       { kg: 75,  fPre: 11.5, fComp: 10, fReb: 10, rPre: 12, rComp: 10, rReb: 10 },
@@ -156,14 +157,14 @@ const CFMOTO: MfzProfile[] = [
     // (chart idêntico no IBEX 800-S p.148). As 4 colunas do manual mapeiam
     // para 75 / 115 / 150 / 190 kg e batem certo valor a valor.
     // Nota: a frente é MESMO igual entre "só piloto" e "piloto + 3 malas".
-    baseKg: 75, source: 'CFMOTO 800MT Owner\'s Manual p.181 (official)', formula: 'cfmoto_interp',
+    baseKg: 75, source: 'Manual do proprietário CFMOTO IBEX 800 (EUA, 20250804), pág. 201-203 — IBEX 800 é o nome americano do 800MT', formula: 'cfmoto_interp',
     dataQuality: 'oem_manual',
-    countNote: 'ACW to fully soft (0), then CW count up. No rear compression adjuster. Manual gives damping as ±2 — treat as a starting range, not an exact click.',
+    countNote: 'Conta-se a partir do MAIS DURO: aperta no sentido horário (H) até ao fim e depois abre no sentido contrário (S), contando os cliques. O manual diz isto por palavras, ao contrário do que estava aqui. As pré-cargas não têm número: à frente contam-se as marcas gravadas nos dois afinadores, que têm de ficar iguais; atrás solta-se a contraporca e roda-se o anel.',
     front: {
-      preload: cl_s(4), comp: cl_s(10), reb: cl_s(10),
+      preload: cl_s(4), comp: cl_h(10), reb: cl_h(10),
     },
     rear: {
-      preload: cl_s(3), comp: na('No rear compression adjuster'), reb: cl_s(10),
+      preload: cl_s(3), comp: na('O manual não documenta compressão traseira'), reb: cl_h(10),
     },
     weightPoints: [
       { kg: 75,  fPre: 4, fComp: 10, fReb: 10, rPre: 3, rReb: 10 },
