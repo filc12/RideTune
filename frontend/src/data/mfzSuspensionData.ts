@@ -1341,6 +1341,30 @@ const TRIUMPH: MfzProfile[] = [
     ],
   },
   {
+    id: 'triumph_tiger900_gt',
+    brand: 'Triumph', model: 'Tiger 900 GT', year: '2024+',
+    baseKg: 75,
+    source: 'Owner’s Handbook Triumph Tiger 900 GT / GT Pro / Rally Pro (2024, ENG), pág. 158-167',
+    formula: 'cfmoto_interp',
+    dataQuality: 'oem_manual',
+    countNote: 'O amortecimento conta-se a partir do mais duro: aperta no sentido horário até ao fim e depois abre — cliques à frente, voltas atrás. O manual avisa que o primeiro batente já conta como 1. A pré-carga de trás é ao contrário, voltas no sentido horário desde a posição toda solta, e de fábrica fica no mínimo.',
+    notes: 'Valores da coluna «Solo Riding - Normal», que é como a moto sai de fábrica. Esta é a GT; a Rally Pro tem coluna própria com números diferentes (8 de retorno à frente em vez de 10) e a GT Pro tem pré-carga e retorno ELETRÓNICOS, pelo menu do painel — nenhuma das duas serve aqui.\n\nDois afinadores que a moto NÃO tem, e que o nível «partial» estava a assumir mal: à frente não há pré-carga de mola (a tabela da GT só tem compressão e retorno, e a secção de pré-carga da frente é só da Rally Pro), e atrás não há compressão (a tabela do amortecedor só tem pré-carga e retorno). Em contrapartida a GT TEM compressão à frente, que o «partial» dava como inexistente.\n\nA pré-carga de trás varia muito com a carga e não cabe num número só: mínimo a solo, 17 voltas com malas, 21 com passageiro e máximo com passageiro e malas.\n\nAfinações por tipo de uso que ficam fora da curva de peso: Comfort (frente 15 e 15, trás 2,5 de retorno), Sport (2 e 2, trás 1), Off Road partido (18 e 18, trás 1,25) e Off Road liso (8 e 6, trás 0,5).',
+    front: {
+      preload: na('A forquilha da GT não tem pré-carga de mola — só a Rally Pro é que tem'),
+      comp:    cl_h(8),
+      reb:     cl_h(10),
+    },
+    rear: {
+      preload: pos('Mínimo a solo; 17 voltas com malas, 21 com passageiro e máximo com os dois', 'MIN'),
+      comp:    na('O amortecedor não tem regulação de compressão'),
+      reb:     tu_h(1.5),
+    },
+    weightPoints: [
+      { kg: 75,  fComp: 8, fReb: 10, rReb: 1.5 },
+      { kg: 150, fComp: 8, fReb: 10, rReb: 1   },
+    ],
+  },
+  {
     id: 'triumph_speed1200rs',
     brand: 'Triumph', model: 'Speed Triple 1200 RS', year: '2021+',
     baseKg: 75,

@@ -1707,3 +1707,33 @@ está. Falta o manual da MT-10 base.
 
 Ficam **7 das 10** mais expostas por resolver: as três BMW, a ZX-10R, a DesertX V2, a
 MT-10 e a Street Triple RS.
+
+### E a Tiger 900 GT, do mesmo manual: só três afinadores dos seis
+
+O manual da Tiger 900 traz três colunas e eu só tinha usado uma. A **GT** também está no
+catálogo e também estava sem perfil, a correr no default do nível `partial`.
+
+**Tem menos afinadores do que se assumia, e diferentes dos assumidos:**
+
+| | Default `partial` assumia | O manual diz |
+|---|---|---|
+| Pré-carga frente | tem | **não tem** — a secção de pré-carga da frente é só da Rally Pro |
+| Compressão frente | não tem | **tem**, 8 cliques |
+| Retorno frente | tem | tem, 10 cliques |
+| Pré-carga trás | tem | tem, mínimo a solo |
+| Compressão trás | não tem | não tem ✓ |
+| Retorno trás | tem | tem, 1,5 voltas |
+
+**Dois erros em seis**, e em sentidos opostos: escondia a compressão da frente que existe
+e mostrava uma pré-carga da frente que não existe.
+
+A pré-carga de trás é o caso mais interessante: **mínimo a solo, 17 voltas com malas, 21
+com passageiro e máximo com os dois.** É muita amplitude para caber num número só, por
+isso ficou como posição com a escala escrita na etiqueta.
+
+**Cuidado com a GT Pro:** é a terceira coluna do mesmo manual e tem pré-carga e retorno
+**eletrónicos**, pelo menu do painel. Não está no catálogo, e se entrar precisa de
+entrada própria — não se pode reaproveitar nem a da GT nem a da Rally Pro.
+
+**Estado depois destas quatro:** 90 perfis, e as motos visíveis sem perfil caíram de 43
+para 39. As que correm no default cru são agora 17, das quais 7 em `adj: "full"`.

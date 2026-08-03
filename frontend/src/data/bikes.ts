@@ -411,7 +411,7 @@ export const BIKES: Bike[] = [
   { id: "triumph-tiger-1200",       brand: "Triumph", model: "Tiger 1200 Rally Pro",  cc: "1160cc", category: "adventure",     adj: "full",    mfzProfileId: "triumph_tiger1200_showa" }, // Showa semi-active
   { id: "triumph-tiger-900-rally",  brand: "Triumph", model: "Tiger 900 Rally Pro",   cc: "888cc",  category: "adventure",     adj: "full",    mfzProfileId: "triumph_tiger900_rally_pro" },
   // Tiger 900 GT: Showa preload+rebound, no compression
-  { id: "triumph-tiger-900-gt",     brand: "Triumph", model: "Tiger 900 GT",          cc: "888cc",  category: "adventure",     adj: "partial" },
+  { id: "triumph-tiger-900-gt",     brand: "Triumph", model: "Tiger 900 GT",          cc: "888cc",  category: "adventure",     adj: "partial", mfzProfileId: "triumph_tiger900_gt" },
   // Tiger Sport 660: Showa front preload only + rear preload only — no rebound/compression at all
   { id: "triumph-tiger-sport-660",  brand: "Triumph", model: "Tiger Sport 660",       cc: "660cc",  category: "sport_touring", adj: "fixed"   },
   // Street Triple RS: Showa 41 mm BPF com compressão + extensão + precarga; atrás Öhlins
