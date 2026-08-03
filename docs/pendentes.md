@@ -1213,3 +1213,54 @@ que eu não tinha previsto — «Valores do manual **do proprietário**» ficava
 proprietário» pendurado, e sobravam `secção` e `cód.`. Corrigidos, ficam 3 resíduos, e
 os três são falsos positivos: é o acento de *Ténéré*, que é o nome da moto. O
 comprimento mediano do texto caiu para 77 caracteres, contra os 493 do pior caso antes.
+
+## OTA: o que verificar quando um update não chega ao telemóvel
+
+Publicado com sucesso e o telemóvel não mudou nada. A confusão custou algumas voltas,
+por isso fica aqui a ordem por que se deve verificar — da causa mais banal para a mais
+rebuscada.
+
+**1. Fechar a app duas vezes, a sério.** Com `EXPO_UPDATES_LAUNCH_WAIT_MS=0` a primeira
+abertura depois de publicar só *descarrega* o bundle; continua a correr o antigo. É
+preciso tirar dos recentes, abrir, tirar dos recentes outra vez e abrir. Só na segunda
+é que troca. Minimizar não conta como fechar.
+
+**2. Estás a olhar para uma coisa que muda?** Esta foi minha: a tradução da fonte no
+ecrã de Pneus **não muda nada em português**, de propósito — em PT mantém-se o texto
+completo. Para ver a diferença é preciso pôr a app noutra língua. Testar uma alteração
+de i18n com a app em português não prova nada.
+
+**3. O canal.** A build embute o canal do perfil com que foi construída. Uma build feita
+com o perfil `preview` ouve o canal `preview` e ignora tudo o que for publicado em
+`production`. Confirma-se com:
+
+```
+npx eas-cli channel:view production --json --non-interactive
+npx eas-cli build:list --platform android --limit 3 --json --non-interactive
+```
+
+O campo `Profile` da build diz qual o canal que ela ouve.
+
+**4. O `runtimeVersion`.** A política é `appVersion`: o update só chega a aparelhos cuja
+app nativa tenha exatamente a mesma versão do `app.json` no momento da publicação. Uma
+build 1.0.0 nunca vê um update 1.1.5, e não há erro nenhum a avisar — o update
+simplesmente não existe para aquele aparelho.
+
+**Armadilha relacionada, na pasta `android/`:** ela é gerada pelo prebuild e está no
+`.gitignore`, mas fica em disco com a versão de quando foi gerada. A que está aqui
+ficou em `expo_runtime_version = 1.1.4` e `versionName "1.1.4"`. Se se fizer
+`eas build --local` sem correr `npx expo prebuild --clean` primeiro, sai uma build 1.1.4
+que nunca poderá receber updates de 1.1.5.
+
+**Diagnóstico no próprio telemóvel:** Definições → linha da versão. Mostra
+`v1.1.5 · OTA dd/mm` quando está a correr um update, e só `v1.1.5` quando está a correr
+o bundle que veio da loja. É a forma mais rápida de saber que bundle é que aquele
+aparelho tem.
+
+**Antes de publicar, construir o bundle.** O `tsc` passar não garante que o Metro
+constrói, e um bundle partido enviado por OTA rebenta a app a toda a gente na mesma
+versão nativa até se publicar outro por cima:
+
+```
+npx expo export --platform android --output-dir /tmp/bundle_check
+```
