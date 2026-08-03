@@ -1264,3 +1264,50 @@ versão nativa até se publicar outro por cima:
 ```
 npx expo export --platform android --output-dir /tmp/bundle_check
 ```
+
+## QJ Motor: sete manuais russos, e as nove estavam todas erradas
+
+Os manuais do importador russo, que já tinham servido para os afinadores, resolvem
+também as pressões. São PDF com texto — basta procurar `кПа`.
+
+| Moto | Tínhamos | Manual | Desvio |
+|---|---|---|---|
+| SRK 600 | 2,5 / 2,9 | **2,2 / 2,5** | −0,3 / −0,4 |
+| SRK 800 | 2,5 / 2,9 | **2,3 / 2,6** | −0,2 / −0,3 |
+| SRK 900 | 2,5 / 2,9 | **2,2 / 2,5** | −0,3 / −0,4 |
+| SRK 921 | 2,5 / 2,9 | **2,2 / 2,5** | −0,3 / −0,4 |
+| SRT 450 RX | 2,3 / 2,5 | **2,2 / 2,2** | −0,1 / −0,3 |
+| SRT 800 X | 2,3 / 2,5 | **2,2 / 2,5** | −0,1 / — |
+| SRT 900 SX | 2,5 / 2,9 | **2,2 / 2,5** | −0,3 / −0,4 |
+
+**A gama inteira anda nos 220/250 kPa**, com uma única exceção: a SRK 800, que leva
+230/260. Todas dão valor único, sem distinção de carga.
+
+**A SRT 450 RX é o caso mais invulgar do catálogo até hoje: a mesma pressão à frente
+e atrás**, 220 nas duas rodas.
+
+### Duas coisas que a leitura corrigiu
+
+**As pressões de todo-o-terreno da SRT 450 RX eram inventadas.** Tinha 1,5/1,8, que
+saíram da estimativa por categoria. **Nenhum dos sete manuais QJ publica pressões de
+fora de estrada** — o campo foi limpo, aqui e na SRT 600 SX. Numa moto de rally, um
+número errado de pressão baixa é como se fura o pneu.
+
+**Os manuais das SRT 800 e 900 cobrem a S e a SX ao mesmo tempo.** As duas versões têm
+rodas diferentes — a S calça 120/70ZR17 e 180/55ZR17, a SX leva 110/80R19 e 150/70R17
+em raios — mas a tabela de pressão atravessa as duas colunas: **é a mesma para ambas**.
+Na SRT 900 isso está explícito na tabela; na 800 a pressão aparece uma só vez no
+capítulo de manutenção, com as duas fichas técnicas em páginas separadas.
+
+Vale a pena reter isto, porque contraria a lição da DR-Z4S. Lá, um manual que cobria
+duas motos dava valores **diferentes** para cada uma. Aqui dá o mesmo. Não se pode
+assumir nem uma coisa nem outra: tem de se ler.
+
+### As duas que faltam
+
+A SRT 600 SX e a SRT 700X não estão na página do importador russo. Ficaram com
+2,2/2,5 e `estimated_spec`, com a razão escrita na fonte: é o padrão da gama, medido
+em seis manuais, não é um número tirado da categoria. É melhor do que estava, mas não
+é confirmado.
+
+Cuidado: a página tem uma **SRK 700**, que é a naked. Não serve para a SRT 700X.

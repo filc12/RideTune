@@ -1,4 +1,4 @@
-# Pressões por confirmar — 52 de 119
+# Pressões por confirmar — 45 de 119
 
 Gerado a partir do código. Só entram as linhas que ainda não têm citação de manual.
 
@@ -18,21 +18,6 @@ Marcas fechadas: **Aprilia, Macbor, Triumph, Yamaha**.
 | R 1300 GS Adventure | 1300cc | 2.5 | 2.9 |
 | S 1000 R | 999cc | 2.5 | 2.9 |
 | S 1000 RR | 999cc | 2.5 | 2.9 |
-
-
-## QJ Motor — 9
-
-| Modelo | cc | Frente atual | Trás atual |
-|---|---|---|---|
-| SRK 600 | 598cc | 2.5 | 2.9 |
-| SRK 800 | 778cc | 2.5 | 2.9 |
-| SRK 900 | 900cc | 2.5 | 2.9 |
-| SRK 921 | 921cc | 2.5 | 2.9 |
-| SRT 450 RX | 449cc | 2.3 | 2.5 |
-| SRT 600 SX | 554cc | 2.4 | 2.7 |
-| SRT 700X | 698cc | 2.5 | 2.9 |
-| SRT 800 X | 778cc | 2.3 | 2.5 |
-| SRT 900 SX | 904cc | 2.5 | 2.9 |
 
 
 ## CF Moto — 8
@@ -103,6 +88,14 @@ Marcas fechadas: **Aprilia, Macbor, Triumph, Yamaha**.
 | V-Strom 1050 DE | 1037cc | 2.5 | 2.9 |
 
 
+## QJ Motor — 2
+
+| Modelo | cc | Frente atual | Trás atual |
+|---|---|---|---|
+| SRT 600 SX | 554cc | 2.2 | 2.5 |
+| SRT 700X | 698cc | 2.2 | 2.5 |
+
+
 ## Honda — 1
 
 | Modelo | cc | Frente atual | Trás atual |
@@ -161,10 +154,24 @@ as frações à lupa. Foi o caso do da Z900 (`99924-1525-31`); o da Ninja
 GSX-R1000R, GSX-S1000 e V-Strom 1050 DE. A Suzuki publica os manuais em PDF no
 site oficial por mercado.
 
-## Chinesas — 29 motos (QJ, CFMoto, Voge, Kove)
-O caminho que já funcionou para os afinadores foi `qjmotor-russia.com/inctructions`,
-com 22 manuais em PDF. Para as pressões nunca foi tentado — vale a pena reabrir
-esses mesmos ficheiros e ir à secção de pneus.
+## Chinesas — 22 motos (CFMoto, Voge, Kove)
+
+**Correção ao que estava aqui escrito.** Dizia «29 motos, o caminho é o
+`qjmotor-russia.com`». Estava errado em duas coisas: esse site é **só QJ**, não serve
+para as outras três marcas, e as QJ já estão feitas.
+
+**QJ — 7 fechadas pelos manuais russos.** Restam a SRT 600 SX e a SRT 700X, que não
+estão naquela página. Cuidado: a página tem uma «SRK 700», que é a naked e não a
+touring — não serve para a SRT 700X.
+
+**CFMoto, Voge e Kove continuam sem fonte.** A CFMoto tem página oficial de manuais na
+Europa (`cfmoto-motorcycle.eu/en/service/user-manual`) que seria o caminho natural, mas
+não abriu daqui, nem por fetch nem por browser. Fica por tentar a partir de outra rede.
+
+Nota de método para as chinesas: os manuais russos são **PDF com texto**, e a secção
+que interessa chama-se «Технические характеристики» ou «Эксплуатационные данные». A
+pressão aparece como `Давление воздуха в шинах` em kPa. Não é preciso traduzir o manual
+todo — basta procurar `кПа`.
 
 ## BMW — 9 motos, IMPOSSÍVEL por manual
 Já confirmado ao ler o manual da R 1250 GS de ponta a ponta: a BMW **não publica
