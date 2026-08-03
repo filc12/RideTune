@@ -1414,3 +1414,41 @@ OCR a 100 páginas: o manual do 625X Pro tem texto e serve de mapa — a secçã
 está por volta da página impressa 45. Nos outros, contar o desfasamento entre a
 numeração impressa e a do PDF (no 450 Rally são 8 páginas de publicidade à frente) e
 saltar direto para lá.
+
+## Suspensão Kove confrontada com os manuais: quase toda certa, e um erro que interessa
+
+Com os manuais Kove abertos, valia a pena confrontar os perfis de suspensão, que
+tinham vindo todos do mfzstudio e não de manual. **Confirmei valor a valor.**
+
+**Kove 450 Rally — os números estavam todos certos:**
+
+| | Perfil | Manual |
+|---|---|---|
+| Frente compressão | 10 cliques do mais duro | 10, margem de 22 posições ✓ |
+| Frente retorno | 10 cliques do mais duro | 10, margem de 22 ✓ |
+| Trás retorno | 10 cliques | 10 ✓ |
+| Trás compressão alta | 2 voltas | 2, margem ~4 voltas ✓ |
+| Trás compressão baixa | 8 cliques | 8, margem de 16 ✓ |
+
+**O erro estava noutro sítio: a pré-carga da FRENTE mostrava o comprimento da mola
+TRASEIRA**, «215-230 mm». Era o valor do amortecedor colado à forquilha. O manual é
+inequívoco: a secção da frente tem pressão de ar, compressão e retorno — **e mais
+nada**. A 450 Rally não tem pré-carga de mola à frente; o que se regula é a pressão
+de ar interna, e só para a purgar quando sobe com o uso.
+
+É o mesmo caso da Suzuki DR-Z4S, que também tem forquilha por pressão de ar sem
+pré-carga. Corrigido para `na` com a explicação, e a etiqueta de trás passou a dizer o
+que é: comprimento de mola, 215-230 mm na versão de selim alto e 200-225 na de selim
+baixo, com 1,5 mm por volta do afinador.
+
+**Kove 800X Touring — confirmado a 100%**, à frente 18 e 18, atrás 10 e 10, com margens
+de 24±2 à frente e 20±2 / 23±2 atrás. Passa a `oem_manual`.
+
+Detalhe que vale a pena guardar: **na Touring os afinadores da frente estão repartidos
+por bengala e vêm marcados no próprio amortecedor — COMP à direita, TEN à esquerda.**
+É o mesmo padrão das Ducati, da Kawasaki Ninja 1000 e da QJ SRT 700X, e já vai em
+quatro marcas diferentes. Deixou de ser curiosidade e passou a ser o normal.
+
+**A 450 Rally Factory fica com os números da de série**, com a ressalva escrita: leva
+suspensão de especificação mais alta e pode ter valores próprios. A correção da
+pré-carga da frente aplica-se-lhe na mesma, porque o erro era de leitura, não de moto.
