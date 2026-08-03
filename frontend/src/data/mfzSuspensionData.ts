@@ -1368,11 +1368,11 @@ const TRIUMPH: MfzProfile[] = [
     id: 'triumph_speed1200rs',
     brand: 'Triumph', model: 'Speed Triple 1200 RS', year: '2021+',
     baseKg: 75,
-    source: 'Owner’s Handbook Triumph Speed Triple 1200 RR / RS (2023, ENG), pág. 141-145',
+    source: 'Owner’s Handbook Triumph Speed Triple 1200 RR / RS (2023, ENG), pág. 141-145, e Service Manual Speed Triple RS, secção Front Suspension',
     formula: 'cfmoto_interp',
     dataQuality: 'oem_manual',
     countNote: 'Conta-se em CLIQUES a partir do mais duro: aperta no sentido horário até ao fim e depois abre, contando — o primeiro batente já conta como 1. A pré-carga da frente é ao contrário: voltas no sentido horário desde a posição toda solta, e as duas bengalas têm de ficar iguais.',
-    notes: 'Valores da coluna «Solo Riding - Normal». São os da RS; a RR tem coluna própria no mesmo manual.\n\nO manual dá mais três afinações por tipo de uso: Comfort (frente 20 e 20, trás 20 de retorno com a compressão no mínimo), Sport (frente 12 e 12, trás 13 e 17) e Track (frente 10 e 10, trás 10 e 13).\n\nA compressão da frente está na bengala ESQUERDA.\n\nPOR CONFIRMAR: o manual não publica valor nenhum para a pré-carga TRASEIRA e não lhe dedica secção. Não dá para dizer daqui se o afinador existe — fica marcado como posição, sem número, até haver fonte.',
+    notes: 'Valores da coluna «Solo Riding - Normal». São os da RS; a RR tem coluna própria no mesmo manual e leva Öhlins Smart EC 2.0 semi-ativa, com níveis de firmeza no painel em vez de cliques — não serve aqui de maneira nenhuma.\n\nO manual dá mais três afinações por tipo de uso: Comfort (frente 20 e 20, trás 20 de retorno com a compressão no mínimo), Sport (frente 12 e 12, trás 13 e 17) e Track (frente 10 e 10, trás 10 e 13).\n\nO manual de oficina confirma e completa a repartição por bengala: a pré-carga está nas duas, o RETORNO está na bengala DIREITA e a COMPRESSÃO na ESQUERDA.\n\nPOR CONFIRMAR: a pré-carga TRASEIRA não aparece em documento nenhum dos dois que temos. No manual do proprietário a tabela do amortecedor só tem colunas de retorno e compressão, e no manual de oficina o capítulo da suspensão traseira passa direto dos desenhos para a desmontagem, sem secção de afinação — ao contrário do da frente, que descreve os três afinadores um a um. Duas ausências independentes é mais do que uma, mas continua a ser ausência: pode ser um anel roscado que precisa de chave de gancho e que a Triumph não documenta ao utilizador. Fica como posição, sem número, até haver fonte que o afirme ou o negue.',
     front: {
       preload: pos('Voltas no sentido horário desde toda solta; o manual não publica um valor de fábrica', 'voltas'),
       comp:    { ...cl_h(15), label: 'O regulador de compressão está na bengala esquerda' },

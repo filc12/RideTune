@@ -1737,3 +1737,33 @@ entrada própria — não se pode reaproveitar nem a da GT nem a da Rally Pro.
 
 **Estado depois destas quatro:** 90 perfis, e as motos visíveis sem perfil caíram de 43
 para 39. As que correm no default cru são agora 17, das quais 7 em `adj: "full"`.
+
+### O buraco da Speed Triple: duas fontes, duas ausências
+
+Fui ao *service manual* da Speed Triple RS fechar a única lacuna dos quatro perfis
+Triumph — a pré-carga traseira, que o manual do proprietário não numera.
+
+**Não fechou, mas trouxe duas coisas.**
+
+A primeira é uma confirmação útil. O manual de oficina descreve a forquilha afinador a
+afinador: *«The spring preload adjusters are located at the top of each fork. The
+rebound damping adjuster is located at the top of the right hand fork and the
+compression damping adjuster is located at the top of the left hand fork.»* Confirma a
+compressão à esquerda, que eu já tinha do manual do proprietário, e acrescenta o
+**retorno à direita**.
+
+A segunda é a ausência. O capítulo da suspensão traseira, no manual de oficina, salta
+dos desenhos em explosão direto para a desmontagem — **não tem secção de afinação
+nenhuma**, ao contrário do da frente. E no manual do proprietário a tabela do amortecedor
+só tem colunas de retorno e compressão.
+
+**Duas ausências independentes é mais do que uma, mas continua a ser ausência.** Pode
+perfeitamente ser um anel roscado que precisa de chave de gancho e que a Triumph não
+documenta ao utilizador — é o que acontece na Kove 450 Rally e na CFMoto. Fica como
+posição, sem número, até haver fonte que o afirme ou o negue. Marcá-lo `na` seria dizer
+que não existe, e isso ninguém escreveu.
+
+**Nota lateral sobre a RR:** a coluna dela no mesmo manual não é de cliques — a RR leva
+**Öhlins Smart EC 2.0 semi-ativa**, com níveis de firmeza no painel. Se a RR entrar
+alguma vez no catálogo, é entrada própria e do tipo eletrónico, como a Tiger 1200 e a
+Multistrada V4 S.
