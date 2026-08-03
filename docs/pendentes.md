@@ -1333,3 +1333,25 @@ não publica um único valor de fábrica, e avisa que a forquilha ajustável é 
 neste modelo («Configuration I»). Fica a nota de que, nessa configuração, a compressão
 está na bengala ESQUERDA e o retorno na DIREITA — o mesmo padrão repartido que já vimos
 nas Ducati e na Kawasaki Ninja 1000. Sem números não se inventa um perfil.
+
+### SRT 600 SX fecha a QJ: nove de nove
+
+Manual multilíngue (EN/ES/IT/FR): **220±10 kPa à frente e 250±10 atrás**, confirmado
+nas secções inglesa e francesa, com 110/80R19 e 150/70R17 na ficha técnica. Terceira
+extrapolação do padrão da gama a confirmar-se sem mudar um algarismo.
+
+**A QJ Motor passa a marca fechada.** As nove pressões vêm de manual.
+
+**A moto continua oculta, e de propósito.** O manual documenta só o amortecedor:
+pré-carga por manípulo com 10 mm de curso e estado de fábrica de **uma volta no
+sentido horário**, e retorno em cliques com a posição de fábrica «marcada» mas sem
+número publicado. Da forquilha não diz nada.
+
+Isso não chega para fazer perfil, e sobretudo não autoriza a concluir que a forquilha
+não tem afinadores — a regra que já está escrita neste documento aplica-se aqui:
+*ausência de capítulo é prova fraca*, e a ficha do importador português diz
+«Suspensões Marzocchi multi-reguláveis» sem separar frente de trás. Enquanto a dúvida
+for essa, a moto fica fora do seletor.
+
+Se aparecer confirmação de que a forquilha é fixa, há material para um perfil parcial:
+a pré-carga traseira tem valor de fábrica real (1 volta) e o curso conhecido (10 mm).

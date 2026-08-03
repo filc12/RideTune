@@ -1,8 +1,8 @@
-# Pressões por confirmar — 44 de 119
+# Pressões por confirmar — 43 de 119
 
 Gerado a partir do código. Só entram as linhas que ainda não têm citação de manual.
 
-Marcas fechadas: **Aprilia, Macbor, Triumph, Yamaha**.
+Marcas fechadas: **Aprilia, Macbor, QJ Motor, Triumph, Yamaha**.
 
 
 ## BMW — 9
@@ -101,13 +101,6 @@ Marcas fechadas: **Aprilia, Macbor, Triumph, Yamaha**.
 |---|---|---|---|
 | 1190 Adventure R | 1195cc | 2.3 | 2.5 |
 
-
-## QJ Motor — 1
-
-| Modelo | cc | Frente atual | Trás atual |
-|---|---|---|---|
-| SRT 600 SX | 554cc | 2.2 | 2.5 |
-
 # Onde ir buscar cada uma
 
 Por ordem de quanto rendem por manual descarregado.
@@ -159,10 +152,9 @@ site oficial por mercado.
 `qjmotor-russia.com`». Estava errado em duas coisas: esse site é **só QJ**, não serve
 para as outras três marcas, e as QJ já estão feitas.
 
-**QJ — 8 fechadas.** Sete pelos manuais russos e a SRT 700X pelo manual EN/IT da
-«SRT 700 & 700 X», que confirmou ao valor a estimativa do padrão da gama. **Resta só
-a SRT 600 SX.** Cuidado ao procurar: a página russa tem uma «SRK 700», que é a naked
-e não a touring — não serve.
+**QJ — fechada, nove de nove.** Sete pelos manuais russos, a SRT 700X pelo manual
+EN/IT da «SRT 700 & 700 X» e a SRT 600 SX pelo manual multilíngue. As duas últimas
+confirmaram ao valor a estimativa que tinha ficado do padrão da gama.
 
 **CFMoto, Voge e Kove continuam sem fonte.** A CFMoto tem página oficial de manuais na
 Europa (`cfmoto-motorcycle.eu/en/service/user-manual`) que seria o caminho natural, mas
