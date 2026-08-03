@@ -1452,3 +1452,33 @@ quatro marcas diferentes. Deixou de ser curiosidade e passou a ser o normal.
 **A 450 Rally Factory fica com os números da de série**, com a ressalva escrita: leva
 suspensão de especificação mais alta e pode ter valores próprios. A correção da
 pré-carga da frente aplica-se-lhe na mesma, porque o erro era de leitura, não de moto.
+
+### Kove 800X Rally: os números certos, a mesma etiqueta errada
+
+Confrontado com o manual (pág. 61-66), o perfil da 800X Rally está **todo certo**: à
+frente 18 posições de compressão e **8** de retorno, atrás 8 de retorno, 2 voltas de
+compressão de alta velocidade e 8 posições de baixa. Aquele comentário no código a
+dizer que o retorno da frente era «different from other 800X» estava correto — são
+mesmo 8 e não 18.
+
+Mas repetia-se o erro do 450 Rally: a pré-carga da frente dizia «Fork marking». **Esta
+forquilha também não tem pré-carga de mola** — é a mesma arquitetura por pressão de ar.
+
+### A descoberta que isto trouxe: a Kove tem duas famílias de forquilha
+
+| | Frente | Pré-carga à frente |
+|---|---|---|
+| 450 Rally | pressão de ar | **não existe** |
+| 800X Rally | pressão de ar | **não existe** |
+| 800X Touring | convencional, escalas gravadas | existe |
+
+**As duas arquiteturas coexistem na mesma gama**, e a diferença não se adivinha pelo
+nome. As três versões que ficam sem manual — `kove_800x_standard`, `kove_800x_pro_2026`
+e `kove_800x_e5` — levam agora nota escrita a dizer que não se sabe de que lado caem.
+Continuam com `pos('Fork marking')`, que pode estar certo ou errado; sem manual não há
+como decidir, e trocar para `na` seria adivinhar na direção oposta.
+
+**Balanço da verificação Kove:** sete perfis confrontados, **todos os valores numéricos
+certos**, e dois erros de etiqueta na pré-carga da frente — os dois do mesmo tipo, os
+dois nas versões Rally. O mfzstudio acertou nos números e falhou na natureza do
+afinador.

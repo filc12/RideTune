@@ -521,6 +521,7 @@ const KOVE: MfzProfile[] = [
       comp:    cl_h(10),
       reb:     cl_h(10),
     },
+    notes: 'NOTA (agosto 2026): não sabemos se esta versão leva a forquilha por pressão de ar das Rally, que não tem pré-carga de mola, ou a forquilha com pré-carga da Touring. Os três manuais Kove lidos mostram que as duas arquiteturas coexistem na gama. Falta o manual desta.',
   },
   {
     id: 'kove_800x_e5',
@@ -536,6 +537,7 @@ const KOVE: MfzProfile[] = [
       comp:    cl_h(10),
       reb:     cl_h(10),
     },
+    notes: 'NOTA (agosto 2026): não sabemos se esta versão leva a forquilha por pressão de ar das Rally, que não tem pré-carga de mola, ou a forquilha com pré-carga da Touring. Os três manuais Kove lidos mostram que as duas arquiteturas coexistem na gama. Falta o manual desta.',
   },
   {
     id: 'kove_800x_pro_2026',
@@ -551,7 +553,7 @@ const KOVE: MfzProfile[] = [
       comp:    cl_h(10),
       reb:     cl_h(10),
     },
-    notes: 'Pro 2026 — front compression differs from Standard/E5 (12 vs 18 clicks).',
+    notes: 'Pro 2026 — front compression differs from Standard/E5 (12 vs 18 clicks). NOTA (agosto 2026): não sabemos se esta versão leva a forquilha por pressão de ar das Rally, que não tem pré-carga de mola, ou a forquilha com pré-carga da Touring. Os três manuais Kove lidos mostram que as duas arquiteturas coexistem na gama. Falta o manual desta.',
   },
   {
     id: 'kove_800x_touring',
@@ -576,20 +578,24 @@ const KOVE: MfzProfile[] = [
   {
     id: 'kove_800x_rally',
     brand: 'Kove', model: '800X Rally', year: '2024+',
-    baseKg: 75, source: 'mfzstudio.com/moto/kove/', formula: 'kove',
+    baseKg: 75,
+    source: 'Manual do proprietário Kove 800X Rally (EN, ref. 2504), pág. 61-66',
+    formula: 'kove',
+    dataQuality: 'oem_manual',
+    countNote: 'Conta-se a partir do MAIS DURO: aperta o afinador no sentido horário até ao fim e depois abre, contando as posições. À frente NÃO há pré-carga de mola — só pressão de ar, que se purga pelo parafuso de escape com a roda no ar. A pré-carga de trás é por comprimento de mola, 1,5 mm por volta do afinador.',
+    notes: 'Valores confirmados contra o manual, um a um: à frente 18 posições de compressão e 8 de retorno, atrás 8 de retorno, 2 voltas de compressão de alta velocidade e 8 posições de baixa. Margens: à frente 22 posições em cada; atrás cerca de 4 voltas na alta e 16 posições na baixa. Repare-se que o retorno da frente (8) é mesmo diferente do das outras 800X (18) — não é gralha, está assim no manual.\n\nCORREÇÃO (agosto 2026): a pré-carga da frente dizia «Fork marking — confirm with sag». A forquilha desta moto não tem pré-carga de mola nenhuma; é a mesma arquitetura por pressão de ar da 450 Rally. A 800X Touring, essa, tem pré-carga a sério, com escalas gravadas — as duas famílias não se podem misturar.',
     front: {
-      preload: pos('Fork marking — confirm with sag'),
+      preload: na('A forquilha não tem pré-carga de mola — regula-se pela pressão de ar interna, que se purga pelo parafuso de escape'),
       comp:    cl_h(18),
       reb:     cl_h(8),   // different from other 800X
     },
     rear: {
-      preload: pos('Shock adjuster — confirm with sag'),
+      preload: pos('Comprimento da mola; cada volta do afinador vale 1,5 mm', 'mola'),
       comp:    na('Use high-speed + low-speed compression'),
       reb:     cl_h(8),
       hsComp:  tu_h(2),
       lsComp:  cl_h(8),
     },
-    notes: '800X Rally — separate high-speed and low-speed rear compression. Different front rebound vs Standard.',
   },
 ];
 
