@@ -505,6 +505,34 @@ function AnimatedNumber({ value, style, duration = 500 }: { value: string; style
   return <Text style={style}>{isNumeric ? display : value}</Text>;
 }
 
+/**
+ * Os tokens de `cell` que são MEDIDAS ("199,6 mm", "4/7", "1-10") lêem-se em qualquer
+ * língua e passam tal e qual. Os que são PALAVRAS foram escritos em português, porque
+ * os dados OEM são todos em português — e apareciam assim a toda a gente. Um utilizador
+ * inglês abria a DR-Z e via "ANEL" na casa da pré-carga, onde esperava um número.
+ *
+ * A tradução é feita aqui, à vista, e NÃO nos dados: a mesma linha do Supabase é servida
+ * às versões da app já instaladas, e trocar o valor na base faria as versões antigas
+ * mostrar a chave em bruto. Mapear na app deixa as antigas exatamente como estão.
+ */
+const CELLS_TRADUZIVEIS: Record<string, string> = {
+  'ANEL':       'susp.cell.ring',
+  'MANUAL':     'susp.cell.manual',
+  'PAINEL':     'susp.cell.panel',
+  'TODA SOLTA': 'susp.cell.fully_open',
+  'ENTREGA':    'susp.cell.delivery',
+};
+
+function traduzCell(cell?: string, t?: (k: never) => string): string | undefined {
+  if (!cell) return undefined;
+  const chave = CELLS_TRADUZIVEIS[cell.trim().toUpperCase()];
+  if (!chave || !t) return cell;
+  const traduzido = t(chave as never);
+  // Se a chave não existir no dicionário, o `t` devolve a própria chave — nesse caso
+  // mais vale mostrar o token original do que "susp.cell.ring".
+  return traduzido && traduzido !== chave ? traduzido : cell;
+}
+
 function DataCell({ label, value, vtype, cell, t, forceSet }: { label: string; value: string; vtype?: string; cell?: string; t?: (k: never) => string; forceSet?: boolean }) {
   const isNa  = vtype === 'na' && !forceSet;
   const isPos = vtype === 'pos' || (vtype === 'na' && forceSet);
@@ -516,7 +544,7 @@ function DataCell({ label, value, vtype, cell, t, forceSet }: { label: string; v
   // Num `pos` mostra-se o token curto quando existe — curso do afinador ("1-10") ou
   // posição de fábrica numa escala ("2,5/5"). Só quando não há nada disso é que cai na
   // palavra genérica.
-  const shown = isNa ? 'N/A' : isPos ? (cell || (t ? t("susp.cell.pos" as never) : 'SET')) : value;
+  const shown = isNa ? 'N/A' : isPos ? (traduzCell(cell, t) || (t ? t("susp.cell.pos" as never) : 'SET')) : value;
   return (
     <View style={styles.dataCell}>
       <Text style={styles.dataLabel} numberOfLines={2} adjustsFontSizeToFit minimumFontScale={0.75}>{label}</Text>

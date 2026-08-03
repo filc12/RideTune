@@ -969,7 +969,9 @@ const YAMAHA: MfzProfile[] = [
   {
     id: 'yamaha_t700_world_raid_2026',
     brand: 'Yamaha', model: 'Ténéré 700 World Raid', year: '2026+',
-    baseKg: 75, source: 'Yamaha XTZ690D owner manual (official)', formula: 'yamaha',
+    baseKg: 75,
+    source: 'Manual do proprietário Yamaha XTZ690D (oficial). O SENTIDO de contagem do amortecimento traseiro foi corrigido a partir do manual de oficina da T7 2025 (LIT-11616-38-67), que dá a convenção Yamaha explícita — ver nota',
+    formula: 'yamaha',
     front: {
       preload: mm(19.0),
       comp:    cl_h(11),
@@ -977,10 +979,11 @@ const YAMAHA: MfzProfile[] = [
     },
     rear: {
       preload: cl_s(10),
-      comp:    cl_s(14),
-      reb:     cl_s(11),
+      comp:    cl_h(14),
+      reb:     cl_h(11),
     },
-    notes: 'Ténéré 700 World Raid (XTZ690D). Factory-standard values from the official Yamaha owner manual. Fully adjustable KYB suspension (46mm Kashima fork). Front: preload Distance A = 19.0mm (4mm hard – 19mm soft), compression 11 clicks from hard (range 19), rebound 18 clicks from hard (range 23). Rear: preload knob position 10 (range 0-24), compression 14 clicks from soft, rebound 11 clicks from soft (rear scale counts from soft: 0 = soft, 21 = hard). Keep both fork legs equal. Confirm by sag.',
+    countNote: 'Conta-se a partir do MAIS DURO, à frente e atrás, com o afinador todo apertado no sentido que aumenta o amortecimento. A pré-carga de trás é a exceção: aí o 0 é o mais solto e a de série são 10 cliques a apertar. A pré-carga da frente mede-se pela distância A, onde um número maior é mais mole.',
+    notes: 'Ténéré 700 World Raid (XTZ690D), KYB totalmente ajustável, forquilha de 46 mm com Kashima. Valores de fábrica do manual oficial. Margens em Soft / STD / Hard: à frente pré-carga 19,0 / 19,0 / 4,0 mm, compressão 19 / 11 / 0 cliques e retorno 23 / 18 / 0; atrás pré-carga 0 / 10 / 24 cliques, compressão 21 / 14 / 0 e retorno 21 / 11 / 0. As duas bengalas têm de ficar iguais.\n\nCORREÇÃO (agosto 2026): esta entrada tinha o retorno e a compressão TRASEIROS marcados como contados desde o mais solto, com a nota a dizer «0 = soft, 21 = hard». Estava invertido — era uma leitura trocada da tabela, onde o 21 é a coluna Soft e o 0 é a coluna Hard. O manual de oficina da T7 2025 (LIT-11616-38-67, pág. 3-22 e 3-23) diz explicitamente que a posição de partida é «com o afinador todo rodado na direção a», e que a direção a é a que endurece. A frente desta mesma entrada já estava certa, o que confirma que era engano e não uma diferença real entre eixos. Os números não mudaram, só o sentido da contagem.',
     dataQuality: 'oem_manual',
   },
   {
@@ -1002,7 +1005,10 @@ const YAMAHA: MfzProfile[] = [
   {
     id: 'yamaha_t700_2025',
     brand: 'Yamaha', model: 'Ténéré 700', year: '2025+',
-    baseKg: 75, source: 'mfzstudio.com/moto/yamaha/', formula: 'yamaha',
+    baseKg: 75,
+    source: 'Manual de oficina Yamaha Ténéré 700 2025 (XTZ7S/XTZ7SC), LIT-11616-38-67 / BRL-28197-10, pág. 2-7 e 3-20 a 3-23',
+    formula: 'yamaha',
+    dataQuality: 'oem_manual',
     front: {
       preload: mm(19.0),   // Distance A = 19.0mm
       comp:    cl_h(11),
@@ -1013,7 +1019,8 @@ const YAMAHA: MfzProfile[] = [
       comp:    cl_h(14),
       reb:     cl_h(11),
     },
-    notes: 'New for 2025: fork gained front preload adjustment (the 2019-2024 model had none). Front preload: Distance A = 19.0mm at base, ~15mm range via fork-top adjusters. Keep both fork legs equal. Confirm with sag check.',
+    countNote: 'O manual dá os valores em cliques «a partir da posição de partida», e diz explicitamente que essa posição é com o afinador todo rodado no sentido "a" — o que aumenta o amortecimento. Ou seja, conta-se a partir do MAIS DURO, à frente e atrás. A pré-carga de trás é a exceção: aí o 0 é o mais solto, e a de série são 10 cliques a apertar. A pré-carga da frente mede-se pela distância A, e ao contrário do que parece um número MAIOR é mais MOLE.',
+    notes: 'Novidade de 2025: a forquilha ganhou regulação de pré-carga, que a de 2019-2024 não tinha. As duas bengalas têm de ficar iguais. Margens do manual, em Soft / STD / Hard: à frente pré-carga 19,0 / 19,0 / 4,0 mm, retorno 23 / 18 / 0 cliques e compressão 19 / 11 / 0; atrás pré-carga 0 / 10 / 24 cliques, retorno 21 / 11 / 0 e compressão 21 / 14 / 0. O manual avisa que ao apertar até ao fim o clique 0 e o 1 podem coincidir, e que para além do fim aberto ainda dá cliques mas já não fazem nada.',
   },
 ];
 

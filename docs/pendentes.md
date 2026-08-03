@@ -1053,3 +1053,68 @@ A World Raid é `oem_manual`, vinda do manual oficial XTZ690D; a de 2025 veio do
 mfzstudio. **A suspeita recai sobre a de 2025**, mas isto só se fecha com o manual
 da T7 de 2025 na mão — não vale a pena adivinhar, porque inverter o sentido de um
 afinador é pior do que deixá-lo como está.
+
+## «ANEL»: a tradução que faltava, e o afinador que estava invertido
+
+Duas coisas fechadas com o manual de oficina da T7 2025.
+
+### O comentário do utilizador
+
+> *"Under rear suspension preload, my DRZ says «ANEL» — what does this mean?"*
+
+Bug real, e da pior espécie: um utilizador inglês abria a DR-Z e via **uma palavra
+portuguesa na casa onde esperava um número**.
+
+A causa está em `app/index.tsx`, no `DataCell`. Quando um afinador é do tipo `pos`,
+mostra-se um token curto se existir e só se não existir é que cai na palavra genérica:
+
+```ts
+const shown = isPos ? (cell || t("susp.cell.pos")) : value;
+```
+
+O `t(...)` está traduzido nas seis línguas. O `cell` **não** — vem dos dados, e os
+dados OEM são todos escritos em português. Ou seja, sempre que havia token, ele
+ganhava à tradução. Afetava cinco tokens: `ANEL`, `MANUAL`, `PAINEL`, `TODA SOLTA`
+e `entrega`. Os tokens que são medidas (`199,6 mm`, `4/7`, `1-10`) leem-se em
+qualquer língua e não têm problema.
+
+**A tradução foi feita na app e NÃO nos dados**, de propósito. A mesma linha do
+Supabase é servida às versões já instaladas: se o valor mudasse na base para uma
+chave tipo `@ring`, quem tivesse a 1.1.5 passava a ver `@ring` em vez de `ANEL`.
+Mapear na app deixa as versões antigas exatamente como estavam e corrige as novas.
+
+Fica por resolver o problema maior de que isto é sintoma: **os `label`, `notes` e
+`source` também são todos em português** e aparecem a toda a gente. O `cell` era o
+caso mais gritante porque cabe numa casa de dois centímetros onde devia estar um
+número, mas a app está a mostrar texto português a utilizadores ingleses em mais
+sítios.
+
+### A T7: eu tinha suspeitado da entrada errada
+
+O manual de oficina (LIT-11616-38-67 / BRL-28197-10) dá as tabelas em Soft / STD /
+Hard e diz, à frente e atrás:
+
+> *Adjustment value from the start position (Hard): 0*
+> *\*With the adjuster fully turned in direction "a"* — e a direção "a" é a que
+> aumenta o amortecimento.
+
+Portanto **a posição de partida é o mais duro** e conta-se para fora: `cl_hard`.
+A exceção é a pré-carga traseira, onde o Soft é que é 0 — essa é `cl_soft`.
+
+Isto confirma a `yamaha_t700_2025` como estando certa e apanha a
+`yamaha_t700_world_raid_2026` com o retorno e a compressão traseiros invertidos.
+A nota dessa entrada dizia «rear scale counts from soft: 0 = soft, 21 = hard» — é
+uma leitura trocada da tabela, onde o 21 é a coluna **Soft** e o 0 é a **Hard**.
+
+Na prática, 11 cliques contados do lado errado numa escala de 21 dá quase o extremo
+oposto do que a Yamaha manda.
+
+**Eu tinha escrito no commit anterior que a suspeita recaía sobre a de 2025**, por
+ser a que vinha do mfzstudio e não de manual. Estava errado: a que estava mal era
+justamente a marcada `oem_manual`. A pista que devia ter pesado mais era outra —
+dentro da própria entrada da World Raid, a frente já estava em `cl_hard` e só o
+trás é que divergia. Uma entrada que se contradiz a si própria é sinal mais forte
+do que a proveniência.
+
+Corrigido o sentido, mantidos os números, e a razão escrita na fonte e na nota.
+A T7 2025 passou também de `mfzstudio` a `oem_manual`, com as margens completas.
