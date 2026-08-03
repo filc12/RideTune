@@ -1533,3 +1533,44 @@ de apagar dados verificados, procurar o documento que a nota cita.
 **Balanço real:** de seis perfis CFMoto confrontados, **um erro verdadeiro** — a
 1000MT-X, com os quatro afinadores de amortecimento contados ao contrário. Os outros
 cinco estavam certos.
+
+## `npm run verificar-coerencia`: apanhar o erro do sentido sem precisar de manual
+
+A CFMOTO 1000MT-X denunciou-se sozinha antes de eu abrir o manual: tinha os afinadores
+marcados como contados desde o mole e a tabela por carga a **descer** com o peso. Isso
+é impossível — se o número desce e conta do mole, a moto fica mais macia com o piloto
+mais pesado.
+
+**Isso dá para verificar em todo o catálogo sem ler manual nenhum**, e agora está num
+script:
+
+> Um afinador contado desde o MAIS DURO tem de DESCER com o peso. Contado desde o MAIS
+> MOLE tem de SUBIR. Se a tabela anda ao contrário do `type` declarado, uma das duas
+> coisas está errada.
+
+Passei os 86 perfis: **67 afinadores com tabela por carga, mais 3 em milímetros** (esses
+não dá para inferir, porque o sinal depende da peça — rosca à vista, folga, comprimento
+de mola). **Duas suspeitas, as duas na mesma moto.**
+
+### A Voge 625 DSX, e porque não lhe toquei
+
+A compressão e a extensão traseiras estão como `cl_soft` e a curva desce: 10, 8, 6.
+
+O que faz isto interessante é a moto do lado. A **Voge 800 DSX Rally**, do mesmo
+fabricante e da mesma leva de manuais, tem a compressão traseira com a **curva idêntica**
+— 10, 8, 6 — declarada como `cl_hard`. **Duas entradas da mesma marca, os mesmos números,
+sentidos opostos.** Uma delas está errada.
+
+A física diz que é a 625: números a descer com a carga só endurecem se se contar do duro.
+Mas o `countNote` da 625 diz, com todas as letras, *«ao contrário das outras Voge, a
+extensão e a compressão contam-se a partir do MOLE»*. Alguém escreveu isso a olhar para
+alguma coisa.
+
+**Não mexi, e é deliberado.** Acabei de reverter duas correções minhas nas CFMoto por
+ter agido sobre uma leitura parcial, e o padrão repete-se aqui: tenho um argumento
+físico forte e nenhum documento. Fica sinalizado no script, com a razão escrita, e
+resolve-se com o manual da DS 625X à frente — a mesma fonte que gerou a entrada.
+
+**Como o script se comporta:** lista os casos já investigados com a explicação, e só sai
+com erro se aparecer uma suspeita **nova**. A lista de conhecidos não é para calar
+avisos — só entra lá o que já foi olhado.
