@@ -1292,6 +1292,78 @@ const TRIUMPH: MfzProfile[] = [
     notes: 'Tiger 1200 Rally Pro: Showa semi-active suspension — no manual click adjusters. Damping adapts to the terrain; automatic electronic rear preload (plus Active Preload Reduction). Set modes on the screen. Confirm by sag.',
     dataQuality: 'oem_manual',
   },
+  {
+    id: 'triumph_scrambler1200xe',
+    brand: 'Triumph', model: 'Scrambler 1200 XE', year: '2019+',
+    baseKg: 75,
+    source: 'Owner’s Handbook Triumph Scrambler 1200 XE / 1200 X, pág. 184-190',
+    formula: 'cfmoto_interp',
+    dataQuality: 'oem_manual',
+    countNote: 'Conta-se em VOLTAS a partir do mais duro: aperta no sentido horário até ao fim e depois abre no sentido contrário, contando. As pré-cargas são ao contrário — voltas no sentido horário desde a posição toda solta — e de fábrica ficam no mínimo.',
+    notes: 'Estes valores são só da XE. A Scrambler 1200 X tem a forquilha NÃO regulável e não leva compressão nem retorno atrás — se alguma vez entrar no catálogo, precisa de entrada própria.\n\nO manual dá seis afinações por tipo de uso, não por peso. As duas que são de carga estão nos pontos de peso; as outras quatro ficam aqui: Comfort (frente 4 de retorno e 4 de compressão, trás 4 e 2), Sport (0,5 em tudo), Off Road terreno liso (frente 1,5 e 0,5, trás 0,5 e 1) e Off Road terreno partido (frente 3 e 3, trás 3 e 2). Fora de estrada a pré-carga da frente vai ao máximo.\n\nA compressão da frente está na bengala ESQUERDA. As duas bengalas têm de ficar iguais.',
+    front: {
+      preload: pos('De fábrica no mínimo, que é a posição toda desapertada; conta-se em voltas a apertar', 'MIN'),
+      comp:    { ...tu_h(3.5), label: 'O regulador de compressão está na bengala esquerda' },
+      reb:     tu_h(3),
+    },
+    rear: {
+      preload: pos('De fábrica no mínimo, que é a posição toda desapertada', 'MIN'),
+      comp:    tu_h(2.5),
+      reb:     tu_h(1),
+    },
+    weightPoints: [
+      { kg: 75,  fComp: 3.5, fReb: 3, rComp: 2.5,  rReb: 1   },
+      { kg: 150, fComp: 3,   fReb: 3, rComp: 0.25, rReb: 0.5 },
+    ],
+  },
+  {
+    id: 'triumph_tiger900_rally_pro',
+    brand: 'Triumph', model: 'Tiger 900 Rally Pro', year: '2024+',
+    baseKg: 75,
+    source: 'Owner’s Handbook Triumph Tiger 900 GT / GT Pro / Rally Pro (2024, ENG), pág. 158-167',
+    formula: 'cfmoto_interp',
+    dataQuality: 'oem_manual',
+    countNote: 'O amortecimento conta-se em CLIQUES a partir do mais duro: aperta no sentido horário até ao fim e depois abre, contando — e o manual avisa que o primeiro batente já conta como 1. A pré-carga de trás é ao contrário: voltas no sentido horário desde a posição toda solta.',
+    notes: 'Valores da coluna «Solo Riding - Normal», que é como a moto sai de fábrica. Estes números são os da Rally Pro; a GT e a GT Pro têm coluna própria no mesmo manual e não servem aqui (a GT leva 10 de retorno à frente em vez de 8).\n\nATRÁS NÃO HÁ REGULAÇÃO DE COMPRESSÃO: a tabela do amortecedor só tem pré-carga e retorno. A moto estava a assumir os seis afinadores por defeito do nível «full».\n\nO manual dá ainda afinações por tipo de uso que não cabem numa curva de peso: Comfort (15 e 15 à frente), Sport (3 e 3), Off Road terreno partido (18 e 18, com a pré-carga de trás no mínimo) e Off Road terreno liso (8 e 8). Com carga a pré-carga de trás vai ao máximo.',
+    front: {
+      preload: pos('De fábrica no mínimo; vai ao máximo em todo-o-terreno', 'MIN'),
+      comp:    cl_h(8),
+      reb:     cl_h(8),
+    },
+    rear: {
+      preload: tu_s(10.5),
+      comp:    na('O amortecedor não tem regulação de compressão'),
+      reb:     tu_h(1.25),
+    },
+    weightPoints: [
+      { kg: 75,  fComp: 8, fReb: 8, rReb: 1.25 },
+      { kg: 150, fComp: 8, fReb: 6, rReb: 0.75 },
+    ],
+  },
+  {
+    id: 'triumph_speed1200rs',
+    brand: 'Triumph', model: 'Speed Triple 1200 RS', year: '2021+',
+    baseKg: 75,
+    source: 'Owner’s Handbook Triumph Speed Triple 1200 RR / RS (2023, ENG), pág. 141-145',
+    formula: 'cfmoto_interp',
+    dataQuality: 'oem_manual',
+    countNote: 'Conta-se em CLIQUES a partir do mais duro: aperta no sentido horário até ao fim e depois abre, contando — o primeiro batente já conta como 1. A pré-carga da frente é ao contrário: voltas no sentido horário desde a posição toda solta, e as duas bengalas têm de ficar iguais.',
+    notes: 'Valores da coluna «Solo Riding - Normal». São os da RS; a RR tem coluna própria no mesmo manual.\n\nO manual dá mais três afinações por tipo de uso: Comfort (frente 20 e 20, trás 20 de retorno com a compressão no mínimo), Sport (frente 12 e 12, trás 13 e 17) e Track (frente 10 e 10, trás 10 e 13).\n\nA compressão da frente está na bengala ESQUERDA.\n\nPOR CONFIRMAR: o manual não publica valor nenhum para a pré-carga TRASEIRA e não lhe dedica secção. Não dá para dizer daqui se o afinador existe — fica marcado como posição, sem número, até haver fonte.',
+    front: {
+      preload: pos('Voltas no sentido horário desde toda solta; o manual não publica um valor de fábrica', 'voltas'),
+      comp:    { ...cl_h(15), label: 'O regulador de compressão está na bengala esquerda' },
+      reb:     cl_h(15),
+    },
+    rear: {
+      preload: pos('O manual não publica valor nem procedimento para a pré-carga traseira', 'ver moto'),
+      comp:    cl_h(20),
+      reb:     cl_h(16),
+    },
+    weightPoints: [
+      { kg: 75,  fComp: 15, fReb: 15, rComp: 20, rReb: 16 },
+      { kg: 150, fComp: 15, fReb: 15, rComp: 10, rReb: 10 },
+    ],
+  },
 ];
 
 const MACBOR: MfzProfile[] = [

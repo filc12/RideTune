@@ -409,7 +409,7 @@ export const BIKES: Bike[] = [
 
   // ===== Triumph =====
   { id: "triumph-tiger-1200",       brand: "Triumph", model: "Tiger 1200 Rally Pro",  cc: "1160cc", category: "adventure",     adj: "full",    mfzProfileId: "triumph_tiger1200_showa" }, // Showa semi-active
-  { id: "triumph-tiger-900-rally",  brand: "Triumph", model: "Tiger 900 Rally Pro",   cc: "888cc",  category: "adventure",     adj: "full"    },
+  { id: "triumph-tiger-900-rally",  brand: "Triumph", model: "Tiger 900 Rally Pro",   cc: "888cc",  category: "adventure",     adj: "full",    mfzProfileId: "triumph_tiger900_rally_pro" },
   // Tiger 900 GT: Showa preload+rebound, no compression
   { id: "triumph-tiger-900-gt",     brand: "Triumph", model: "Tiger 900 GT",          cc: "888cc",  category: "adventure",     adj: "partial" },
   // Tiger Sport 660: Showa front preload only + rear preload only — no rebound/compression at all
@@ -420,10 +420,10 @@ export const BIKES: Bike[] = [
   // Speed Triple 1200 RS: Öhlins NIX30 Ø43 + Öhlins TTX36, ambos com precarga +
   // compressão + extensão MANUAIS. A Öhlins SmartEC (semi-ativa) é exclusiva da RR, não
   // desta RS — a dúvida anterior fica resolvida. triumphmotorcycles.com
-  { id: "triumph-speed-1200",       brand: "Triumph", model: "Speed Triple 1200 RS",  cc: "1160cc", category: "naked",         adj: "full"    },
+  { id: "triumph-speed-1200",       brand: "Triumph", model: "Speed Triple 1200 RS",  cc: "1160cc", category: "naked",         adj: "full",    mfzProfileId: "triumph_speed1200rs" },
   // Scrambler 1200 XE: Marzocchi Ø45 "fully adjustable" à frente e duplo amortecedor
   // Marzocchi "fully adjustable" atrás (a XE, não a X, que é não-ajustável à frente).
-  { id: "triumph-scrambler-1200",   brand: "Triumph", model: "Scrambler 1200 XE",    cc: "1200cc", category: "scrambler",     adj: "full"    },
+  { id: "triumph-scrambler-1200",   brand: "Triumph", model: "Scrambler 1200 XE",    cc: "1200cc", category: "scrambler",     adj: "full",    mfzProfileId: "triumph_scrambler1200xe" },
 
   // ===== Voge =====
   // 900 DSX & 525 DSX: KYB fully adjustable confirmed

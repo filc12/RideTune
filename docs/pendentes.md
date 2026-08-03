@@ -1657,3 +1657,53 @@ Para as 10 mais expostas (`adj: "full"` sem `adjusters`), os manuais que faltam 
 **Quatro destes já passaram por aqui** — os quatro manuais Triumph e o da MT-10 foram a
 fonte das pressões respetivas. Se voltarem a aparecer, fecham metade da lista sem
 investigação nenhuma: é ir ao capítulo da suspensão em vez do das pressões.
+
+## Triumph: três perfis novos dos manuais, e um afinador que não existia
+
+Os manuais que faltavam apareceram e resolveram três das dez motos mais expostas —
+não só os `adjusters`, mas o perfil inteiro, porque os *Owner's Handbooks* da Triumph
+trazem **tabelas de afinação por condição de utilização**.
+
+| Moto | Frente (retorno / compressão) | Trás (pré-carga / comp / retorno) |
+|---|---|---|
+| Scrambler 1200 XE | 3 / 3,5 voltas do duro | MIN / 2,5 / 1 volta |
+| Tiger 900 Rally Pro | 8 / 8 cliques do duro | 10,5 voltas do mole / **não existe** / 1,25 voltas |
+| Speed Triple 1200 RS | 15 / 15 cliques do duro | sem valor / 20 / 16 cliques |
+
+**O achado que justifica o exercício: a Tiger 900 Rally Pro não tem regulação de
+compressão atrás.** A tabela do amortecedor no manual só tem duas colunas, pré-carga e
+retorno. A moto estava marcada `adj: "full"` sem `adjusters`, portanto a app assumia os
+seis afinadores e a heurística inventava um número de compressão traseira para um
+parafuso que não existe. Agora o perfil di-lo com `na`.
+
+### Coisas que os manuais Triumph obrigaram a ter cuidado
+
+**Cada manual cobre várias versões com colunas diferentes.** O da Tiger 900 traz a GT,
+a GT Pro e a Rally Pro lado a lado, e os números não são os mesmos — a GT leva 10 de
+retorno à frente onde a Rally Pro leva 8. O do Scrambler cobre a XE e a X, e **a X tem
+a forquilha não regulável**. O da Speed Triple cobre a RR e a RS. Em todos, usei só a
+coluna da moto que temos.
+
+**As tabelas são por tipo de uso, não por peso.** Cada uma dá seis a sete linhas —
+Comfort, Sport, Track, Off Road liso, Off Road partido, com passageiro, com malas. Só as
+de carga entram na curva de peso; as outras ficaram escritas nas notas do perfil, porque
+são afinações reais que a app não sabe representar.
+
+**O primeiro batente conta como 1.** Está escrito nos manuais da Tiger e da Speed
+Triple, e é do género de detalhe que faz um clique de diferença em cada afinação.
+
+**Padrão que se repete: a compressão da frente está na bengala ESQUERDA** no Scrambler e
+na Speed Triple. É a quinta e a sexta marca com afinadores repartidos por bengala.
+
+### O que ficou de fora, e porquê
+
+**Yamaha MT-10:** o manual que chegou é o da **MT-10 SP** (BGG-28199-21), que leva
+Öhlins eletrónica com modos no painel. A nossa entrada é a MT-10 de série, com afinadores
+mecânicos. **São suspensões diferentes e não dá para aproveitar** — ficaria pior do que
+está. Falta o manual da MT-10 base.
+
+**Triumph Street Triple RS:** o ficheiro que veio com esse nome é o *Service Manual* da
+**Speed Triple** RS, que é outra moto. O manual da Street Triple continua a faltar.
+
+Ficam **7 das 10** mais expostas por resolver: as três BMW, a ZX-10R, a DesertX V2, a
+MT-10 e a Street Triple RS.
