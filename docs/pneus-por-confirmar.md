@@ -156,9 +156,40 @@ para as outras três marcas, e as QJ já estão feitas.
 EN/IT da «SRT 700 & 700 X» e a SRT 600 SX pelo manual multilíngue. As duas últimas
 confirmaram ao valor a estimativa que tinha ficado do padrão da gama.
 
-**CFMoto, Voge e Kove continuam sem fonte.** A CFMoto tem página oficial de manuais na
-Europa (`cfmoto-motorcycle.eu/en/service/user-manual`) que seria o caminho natural, mas
-não abriu daqui, nem por fetch nem por browser. Fica por tentar a partir de outra rede.
+### O que abre e o que não abre (testado a 03/08/2026)
+
+**KOVE — resolvido, os manuais estão no site oficial.** `kovemoto.com/service` tem os
+PDF com link direto. Os três que interessam:
+
+- 450 Rally → `/wp-content/uploads/2026/06/450Rally-user-manual.pdf`
+- 800X Rally → `/wp-content/uploads/2026/06/800X-RALLY-Owners-manual-2504.pdf`
+- 800X Touring → `/wp-content/uploads/2026/06/800X-TOURING-user‘s-manual-2026.03.pdf`
+
+O da Touring é o mais próximo que há para a 800X e a 800X Pro, mas é outra versão —
+confirmar as medidas antes de assumir que serve.
+
+**VOGE — beco sem saída, e agora confirmado.** O `vogemoto.com` está à venda no
+GoDaddy, tal como o `voge.eu` e o `voge.com` que já estavam anotados. **A Voge não tem
+site de fabricante vivo.** As oito Voge não têm fonte oficial: ou aparece manual por
+importador, ou ficam por confirmar indefinidamente. Não vale a pena voltar a procurar
+pelo fabricante.
+
+**CFMOTO — sem caminho encontrado.** O `cfmoto.com` responde mas `/service/download`
+dá 404, e o único link de serviço do site aponta para a app CFMOTO RIDE. O
+`cfmoto-motorcycle.eu` não abre de todo. Restam o manualslib e o scribd, que não são
+fonte OEM. Oito motos à espera.
+
+**KAWASAKI — o domínio responde** e devolve «Kawasaki Technical Information», mas os
+caminhos `/en/owner-center/manuals` e `/en/technical-information` dão 404. Falta
+descobrir o caminho certo. Em alternativa, os manuais de oficina `99924-xxxx-xx`, que
+já funcionaram duas vezes.
+
+**KTM — `ktm.com/en-int/service/manuals.html` abre.** Só falta a 1190 Adventure R, que
+é de 2013-2016 e pode não estar lá.
+
+**Limite meu, independente da fonte:** não consigo descarregar PDF nenhum. O fetch tem
+tecto de 30 segundos e os manuais estouram-no; o Google Drive devolve vazio. Encontrar
+o ficheiro consigo — trazê-lo é sempre com o Filipe.
 
 Nota de método para as chinesas: os manuais russos são **PDF com texto**, e a secção
 que interessa chama-se «Технические характеристики» ou «Эксплуатационные данные». A
