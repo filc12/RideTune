@@ -936,3 +936,74 @@ Supabase. Nenhum manual Kawasaki publica valor traseiro com passageiro nestes
 modelos — o número ficou como estava, mas com a razão da dúvida escrita na fonte.
 
 **Faltam 3 Kawasaki:** Ninja 1000SX (2020+), Z H2 e ZX-10R.
+
+## Ducati: cinco manuais de uma vez, e a Panigale estava 0,8 bar errada
+
+Cinco manuais do proprietário em PDF com texto — Hypermotard 698 Mono, Streetfighter
+V4, Panigale V4, Multistrada V4 Rally e Multistrada V2. Todas fechadas, pressões e
+suspensão.
+
+### O erro que mais interessa: as desportivas a solo
+
+Tínhamos 2,5/2,9 na Panigale e na Streetfighter. São os valores **com passageiro e
+malas**. A solo a Ducati manda outra coisa, e no eixo traseiro a diferença é enorme:
+
+| | Frente solo | Trás solo | Frente c/ carga | Trás c/ carga |
+|---|---|---|---|---|
+| Panigale V4 | 2,3 | **2,1** | 2,5 | 2,9 |
+| Streetfighter V4 | 2,3 | **2,5** | 2,4 | 2,9 |
+| Hypermotard 698 | 2,5 | **2,5** | 2,5 | 2,9 |
+
+**A Panigale estava 0,8 bar acima atrás** — o maior desvio que apanhámos até hoje.
+
+Isto derruba a regra que tínhamos escrito, de que a Ducati faz «frente constante e
+trás 2,5 → 2,9». Isso é verdade nas Multistrada; nas desportivas a frente também
+varia e o traseiro a solo desce muito. **Não extrapolar entre famílias.**
+
+As duas desportivas dão ainda pressões de pista (Panigale 2,3/1,8; Streetfighter
+2,3/2,1, com o pneu quente). Ficaram no texto da fonte: a coluna que temos é de
+todo-o-terreno, e usá-la para pista seria mentira.
+
+### Multistrada: três pneus, três tabelas
+
+A V4 Rally homologa Scorpion Trail II, Scorpion Rally e Scorpion Rally Street, cada
+um com a sua pressão:
+
+| Pneu | Frente solo/carga | Trás solo/carga |
+|---|---|---|
+| Trail II (série) | 2,4 / 2,4 | 2,5 / 2,9 |
+| Rally (tacos) | 1,6 / 1,8 | 1,6 / 2,2 |
+| Rally Street | 2,1 / 2,1 | 2,2 / 2,7 |
+
+As colunas de todo-o-terreno levam os 1,6/1,6 do Scorpion Rally, **com a ressalva
+escrita na fonte de que só valem se a moto calçar mesmo o pneu de tacos**. Com os
+Trail II de série não se desce a 1,6. Tínhamos 2,5/2,9/3,2 e fora de estrada 1,5/1,8.
+
+A V2 confirmou ao valor os números que lhe tínhamos emprestado do manual da V2 S
+Travel: 2,4/2,4 e 2,5/2,9. Passa de `estimated_spec` a `oem_manual` sem mudar um
+algarismo — a primeira vez que um empréstimo entre modelos se confirma.
+
+### Suspensão: cinco perfis novos
+
+`ducati_hyper698_marzocchi`, `ducati_multi_v2_marzocchi`, `ducati_panigale_v4_showa`,
+`ducati_sf_v4_showa` e `ducati_multi_v4_rally_dss`.
+
+**O Hypermotard 698 trouxe uma coisa que nenhum manual tinha dito até agora: para
+que piloto é que os valores foram calculados.** «Dressed rider weighing 80-90 kg».
+Todos os outros perfis assumem 75 kg porque nunca ninguém disse. Este ficou a **85**,
+e tem tabela por uso — Road Comfort (a de série), Road Sport, Track e Road com
+passageiro, que é o segundo ponto de carga.
+
+Padrão Ducati que se repete e vale a pena guardar: **os reguladores da frente estão
+repartidos por bengala**. No Hypermotard e na Multistrada V2, compressão só na
+esquerda e retorno só na direita; a pré-carga está nas duas e tem de ficar igual.
+Já tínhamos visto isto na Kawasaki Ninja 1000, mas lá só a compressão é que era de
+uma bengala.
+
+A pré-carga traseira nas desportivas mede-se em **milímetros** desde a mola toda
+solta (Panigale 8 mm, Streetfighter 11 mm), não em cliques nem voltas — é o tipo
+`mm`, que já existia para as KTM EXC e a T7.
+
+A V4 Rally é DSS eletrónico como a V4 S: tudo no painel, exceto a pré-carga da mola
+da frente, que é mecânica (5 voltas, margem 5 a 20 mm) e o manual pede que seja feita
+em concessionário.

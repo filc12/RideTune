@@ -142,17 +142,17 @@ export const BIKE_CATEGORIES: BikeCategory[] = [
 
 export const BIKES: Bike[] = [
   // ===== Aprilia =====
-  { id: "aprilia-tuareg",    brand: "Aprilia", model: "Tuareg 660",    cc: "659cc",  category: "adventure", adj: "full", mfzProfileId: "aprilia_tuareg660_2021" },
-  { id: "macbor-montana-xr5", brand: "Macbor", model: "Montana XR5", cc: "498cc", category: "adventure", adj: "full", mfzProfileId: "macbor_xr5" },
-  { id: "aprilia-rsv4",      brand: "Aprilia", model: "RSV4",          cc: "1099cc", category: "sport",     adj: "full", mfzProfileId: "aprilia_rsv4_1100_2021" },
-  { id: "aprilia-tuono-v4",  brand: "Aprilia", model: "Tuono V4",      cc: "1077cc", category: "naked",     adj: "full", mfzProfileId: "aprilia_tuono_v4_1100_rr" },
+  { id: "aprilia-tuareg",    brand: "Aprilia", model: "Tuareg 660",    cc: "659cc",  category: "adventure", adj: "full",mfzProfileId: "aprilia_tuareg660_2021" },
+  { id: "macbor-montana-xr5", brand: "Macbor", model: "Montana XR5", cc: "498cc", category: "adventure", adj: "full",mfzProfileId: "macbor_xr5" },
+  { id: "aprilia-rsv4",      brand: "Aprilia", model: "RSV4",          cc: "1099cc", category: "sport",     adj: "full",mfzProfileId: "aprilia_rsv4_1100_2021" },
+  { id: "aprilia-tuono-v4",  brand: "Aprilia", model: "Tuono V4",      cc: "1077cc", category: "naked",     adj: "full",mfzProfileId: "aprilia_tuono_v4_1100_rr" },
   // RS 660 / Tuono 660 base: KYB 41 mm com precarga + extensão (sem compressão) e monoamortecedor
   // precarga + extensão. Só a Tuono 660 Factory (Sachs) ganha compressão — não está no catálogo.
   { id: "aprilia-rs660",     brand: "Aprilia", model: "RS 660",        cc: "659cc",  category: "midsport",  adj: "full", adjusters: { fPre: true, fComp: false, fReb: true, rPre: true, rComp: false, rReb: true }, mfzProfileId: "aprilia_rs660_2020" },
   { id: "aprilia-tuono-660", brand: "Aprilia", model: "Tuono 660",     cc: "659cc",  category: "naked",     adj: "full", adjusters: { fPre: true, fComp: false, fReb: true, rPre: true, rComp: false, rReb: true }, mfzProfileId: "aprilia_tuono660_2021" },
 
   // ===== BMW =====
-  { id: "bmw-r1300-gs-adv",  brand: "BMW", model: "R 1300 GS Adventure",  cc: "1300cc", category: "adventure",     adj: "full", mfzProfileId: "bmw_r1300gsa_dsa" }, // Dynamic ESA electronic
+  { id: "bmw-r1300-gs-adv",  brand: "BMW", model: "R 1300 GS Adventure",  cc: "1300cc", category: "adventure",     adj: "full",mfzProfileId: "bmw_r1300gsa_dsa" }, // Dynamic ESA electronic
   // R 1300 GS (2024+): EVO-Telelever sem ajuste; atrás WAD só "spring preload fully
   // adjustable" — a BMW não lista extensão. DSA (eletrónica) é opcional. bmwmotorcycles.com
   { id: "bmw-r1300-gs",      brand: "BMW", model: "R 1300 GS (2024+)",     cc: "1300cc", category: "adventure",     adj: "full", adjusters: { fPre: false, fComp: false, fReb: false, rPre: true, rComp: false, rReb: false } },
@@ -179,57 +179,57 @@ export const BIKES: Bike[] = [
   { id: "cfmoto-800mt-sport",   brand: "CF Moto", model: "800 MT Sport",   cc: "799cc", category: "adventure", adj: "full",    mfzProfileId: "cfmoto_800mt"  },
   { id: "cfmoto-800mt-explore", brand: "CF Moto", model: "800 MT Explore", cc: "799cc", category: "adventure", adj: "full",    mfzProfileId: "cfmoto_800mt"  },
   // 700MT: front rebound only (fixed compression & preload), rear preload+rebound
-  { id: "cfmoto-700mt",         brand: "CF Moto", model: "700 MT",         cc: "693cc", category: "adventure", adj: "partial", mfzProfileId: "cfmoto_700mt"  },
+  { id: "cfmoto-700mt",         brand: "CF Moto", model: "700 MT",         cc: "693cc", category: "adventure", adj: "partial",mfzProfileId: "cfmoto_700mt"  },
   // 450MT: KYB fully adjustable confirmed (preload+compression+rebound both ends)
   { id: "cfmoto-450mt",         brand: "CF Moto", model: "450 MT",         cc: "449cc", category: "adventure", adj: "full",    mfzProfileId: "cfmoto_450mt"  },
-  { id: "cfmoto-800nk",         brand: "CF Moto", model: "800 NK",         cc: "799cc", category: "naked",     adj: "partial", mfzProfileId: "cfmoto_800nk"  },
+  { id: "cfmoto-800nk",         brand: "CF Moto", model: "800 NK",         cc: "799cc", category: "naked",     adj: "partial",mfzProfileId: "cfmoto_800nk"  },
   { id: "cfmoto-1000srr",       brand: "CF Moto", model: "1000 SR-R",      cc: "998cc", category: "sport",     adj: "partial", hidden: true },
-  { id: "cfmoto-800mtx", brand: "CF Moto", model: "800 MT-X", cc: "799cc", category: "adventure", adj: "full", mfzProfileId: "cfmoto_800mtx" },
-  { id: "cfmoto-1000mtx", brand: "CF Moto", model: "1000 MT-X", cc: "947cc", category: "adventure", adj: "full", mfzProfileId: "cfmoto_1000mtx" },
+  { id: "cfmoto-800mtx", brand: "CF Moto", model: "800 MT-X", cc: "799cc", category: "adventure", adj: "full",mfzProfileId: "cfmoto_800mtx" },
+  { id: "cfmoto-1000mtx", brand: "CF Moto", model: "1000 MT-X", cc: "947cc", category: "adventure", adj: "full",mfzProfileId: "cfmoto_1000mtx" },
 
   // ===== Ducati =====
   // V4 Rally: Skyhook EVO — comp/ext e precarga eletrónicas nas duas pontas, sem clickers
   // manuais (ducati.com). Usa o perfil Skyhook, que já cobre "S / Rally" e traz a nota
   // explicativa traduzida (count.ducati_multi_v4_skyhook) em vez de 6 células vazias.
-  { id: "ducati-multi-v4-rally",  brand: "Ducati", model: "Multistrada V4 Rally",  cc: "1158cc", category: "adventure", adj: "full",    mfzProfileId: "ducati_multi_v4_skyhook" },
+  { id: "ducati-multi-v4-rally",  brand: "Ducati", model: "Multistrada V4 Rally",  cc: "1158cc", category: "adventure", adj: "full",    mfzProfileId: "ducati_multi_v4_rally_dss" },
   // V4 base: forquilha Ø50 MECÂNICA totalmente ajustável (comp+ext manuais) + monoamortecedor
   // totalmente ajustável c/ precarga remota. Não é Skyhook — essa é a S. ducati.com
   { id: "ducati-multi-v4",        brand: "Ducati", model: "Multistrada V4",         cc: "1158cc", category: "adventure", adj: "full"    },
   // V4 S: Skyhook eletrónica (comp/ext/precarga no ecrã)
   // V4 RS e Pikes Peak: versoes de roda 17" a frente, ao contrario da V4/V4 S (19").
   // Suspensao Ohlins semiativa — sem cliques, so modos no painel.
-  { id: "ducati-multi-v4-rs",   brand: "Ducati", model: "Multistrada V4 RS (2026)",         cc: "1158cc", category: "adventure", adj: "full", mfzProfileId: "ducati_multi_v4_ohlins_smartec" },
-  { id: "ducati-multi-v4-pp",   brand: "Ducati", model: "Multistrada V4 Pikes Peak (2026)", cc: "1158cc", category: "adventure", adj: "full", mfzProfileId: "ducati_multi_v4_ohlins_smartec" },
+  { id: "ducati-multi-v4-rs",   brand: "Ducati", model: "Multistrada V4 RS (2026)",         cc: "1158cc", category: "adventure", adj: "full",mfzProfileId: "ducati_multi_v4_ohlins_smartec" },
+  { id: "ducati-multi-v4-pp",   brand: "Ducati", model: "Multistrada V4 Pikes Peak (2026)", cc: "1158cc", category: "adventure", adj: "full",mfzProfileId: "ducati_multi_v4_ohlins_smartec" },
   { id: "ducati-multi-v4-s",      brand: "Ducati", model: "Multistrada V4 S",       cc: "1158cc", category: "adventure", adj: "full",    mfzProfileId: "ducati_multi_v4_skyhook" },
   // Multistrada V2 (2025+): forquilha mecânica Ø45 totalmente ajustável + monoamortecedor
   // totalmente ajustável c/ precarga remota. (A versão S é Skyhook eletrónica.) ducati.com
-  { id: "ducati-multi-v2s-travel", brand: "Ducati", model: "Multistrada V2 S Travel (2026)", cc: "890cc", category: "adventure", adj: "full", mfzProfileId: "ducati_multi_v2s_dss_evo" },
-  { id: "ducati-multi-v2",        brand: "Ducati", model: "Multistrada V2 (2025+)", cc: "890cc",  category: "adventure", adj: "full"    },
+  { id: "ducati-multi-v2s-travel", brand: "Ducati", model: "Multistrada V2 S Travel (2026)", cc: "890cc", category: "adventure", adj: "full",mfzProfileId: "ducati_multi_v2s_dss_evo" },
+  { id: "ducati-multi-v2",        brand: "Ducati", model: "Multistrada V2 (2025+)", cc: "890cc",  category: "adventure", adj: "full",    mfzProfileId: "ducati_multi_v2_marzocchi" },
   // DesertX V2 (2026+): KYB 46 totalmente ajustável + KYB traseiro totalmente ajustável
-  { id: "ducati-desertx-937", brand: "Ducati", model: "DesertX (2022-2025)", cc: "937cc", category: "adventure", adj: "full", mfzProfileId: "ducati_desertx_kayaba" },
+  { id: "ducati-desertx-937", brand: "Ducati", model: "DesertX (2022-2025)", cc: "937cc", category: "adventure", adj: "full",mfzProfileId: "ducati_desertx_kayaba" },
   { id: "ducati-desertx",         brand: "Ducati", model: "DesertX V2 (2026+)",     cc: "890cc",  category: "adventure", adj: "full"    },
   // DesertX Rally: KYB 48 closed cartridge — a Ducati lista SÓ compressão e extensão à
   // frente, sem precarga. Atrás fully adjustable (HSC/LSC + ext) + precarga remota.
   { id: "ducati-desertx-rally",   brand: "Ducati", model: "DesertX Rally",          cc: "937cc",  category: "adventure", adj: "full", adjusters: { fPre: false, fComp: true, fReb: true, rPre: true, rComp: true, rReb: true } },
-  { id: "ducati-sf-v4",           brand: "Ducati", model: "Streetfighter V4",       cc: "1103cc", category: "naked",     adj: "full"    },
+  { id: "ducati-sf-v4",           brand: "Ducati", model: "Streetfighter V4",       cc: "1103cc", category: "naked",     adj: "full",    mfzProfileId: "ducati_sf_v4_showa" },
   // Panigale V4 base (não-S): "Fully adjustable Showa BPF fork, 43 mm" à frente e
   // "Fully adjustable Sachs unit" atrás — full nas duas pontas, default correto.
   // (A V4 S é que leva Öhlins NPX/TTX36 S-EC 3.0 eletrónica.) ducati.com tech spec
-  { id: "ducati-pani-v4",         brand: "Ducati", model: "Panigale V4",            cc: "1103cc", category: "sport",     adj: "full"    },
+  { id: "ducati-pani-v4",         brand: "Ducati", model: "Panigale V4",            cc: "1103cc", category: "sport",     adj: "full",    mfzProfileId: "ducati_panigale_v4_showa" },
   // Monster 937: Marzocchi front non-adjustable; rear Sachs preload+rebound only
   { id: "ducati-monster",         brand: "Ducati", model: "Monster",                cc: "937cc",  category: "naked",     adj: "partial", adjusters: { fPre: false, fComp: false, fReb: false, rPre: true, rComp: false, rReb: true } },
   // Hypermotard 950 base: Marzocchi Ø45 totalmente ajustável à frente; Sachs atrás só com
   // precarga + extensão (sem compressão). A versão SP com Öhlins é que é full atrás. ducati.com
   { id: "ducati-hyper-950",       brand: "Ducati", model: "Hypermotard 950",        cc: "937cc",  category: "supermoto", adj: "full", adjusters: { fPre: true, fComp: true, fReb: true, rPre: true, rComp: false, rReb: true } },
-  { id: "ducati-hyper-698",       brand: "Ducati", model: "Hypermotard 698 Mono",   cc: "659cc",  category: "supermoto", adj: "full"    },
+  { id: "ducati-hyper-698",       brand: "Ducati", model: "Hypermotard 698 Mono",   cc: "659cc",  category: "supermoto", adj: "full",    mfzProfileId: "ducati_hyper698_marzocchi" },
 
   // ===== Honda =====
   { id: "honda-africa-as",   brand: "Honda", model: "Africa Twin Adventure Sports", cc: "1084cc", category: "adventure", adj: "full",  mfzProfileId: "honda_at_1100l_advsports_eera" }, // Showa EERA electronic
   { id: "honda-africa",      brand: "Honda", model: "Africa Twin",                  cc: "1084cc", category: "adventure", adj: "full",  mfzProfileId: "honda_at_1100l_2020_manual" },
   { id: "honda-africa-dct",  brand: "Honda", model: "Africa Twin DCT",              cc: "1084cc", category: "adventure", adj: "full",  mfzProfileId: "honda_at_1100l_2020_dct" },
   // Transalp XL750: Showa SFF front + Showa rear — preload only both ends, no rebound/compression
-  { id: "honda-transalp",      brand: "Honda", model: "XL750 Transalp (2023-2024)", cc: "755cc",  category: "adventure", adj: "fixed", mfzProfileId: "honda_transalp_2023" },
-  { id: "honda-transalp-2025", brand: "Honda", model: "XL750 Transalp (2025)",      cc: "755cc",  category: "adventure", adj: "fixed", mfzProfileId: "honda_transalp_2025" },
+  { id: "honda-transalp",      brand: "Honda", model: "XL750 Transalp (2023-2024)", cc: "755cc",  category: "adventure", adj: "fixed",mfzProfileId: "honda_transalp_2023" },
+  { id: "honda-transalp-2025", brand: "Honda", model: "XL750 Transalp (2025)",      cc: "755cc",  category: "adventure", adj: "fixed",mfzProfileId: "honda_transalp_2025" },
   { id: "honda-transalp-2026", brand: "Honda", model: "XL750 Transalp (2026+)",     cc: "755cc",  category: "adventure", adj: "full",  mfzProfileId: "honda_transalp_2026" },
   // NC750X: front non-adjustable, rear preload ring only
   { id: "honda-nc750x",      brand: "Honda", model: "NC750X",                       cc: "745cc",  category: "adventure", adj: "fixed"   },
@@ -242,7 +242,7 @@ export const BIKES: Bike[] = [
   // mecânica e totalmente ajustável — daí o ano no nome.
   { id: "honda-fireblade",   brand: "Honda", model: "CBR1000RR-R Fireblade (2024+)", cc: "999cc",  category: "sport",     adj: "full", adjusters: { fPre: true, fComp: false, fReb: false, rPre: true, rComp: false, rReb: false } },
   // CB1000R: front compression only, rear preload+rebound (no front rebound, no rear compression)
-  { id: "honda-nt1100",      brand: "Honda", model: "NT1100",                        cc: "1084cc", category: "sport_touring", adj: "partial", mfzProfileId: "honda_nt1100_2022" },
+  { id: "honda-nt1100",      brand: "Honda", model: "NT1100",                        cc: "1084cc", category: "sport_touring", adj: "partial",mfzProfileId: "honda_nt1100_2022" },
   // CB1000R: Showa SFF-BP front (preload+comp+reb, damping numa perna); Showa rear preload+rebound
   { id: "honda-cb1000r",     brand: "Honda", model: "CB1000R",                      cc: "998cc",  category: "naked",     adj: "partial", adjusters: { fPre: true, fComp: true, fReb: true, rPre: true, rComp: false, rReb: true } },
   // CB650R 2021+: Showa SFF-BP fully adjustable
@@ -251,7 +251,7 @@ export const BIKES: Bike[] = [
   // CB750 Hornet: manual 3PMLB600 (PT). O capitulo de afinacao so cobre a traseira —
   // precarga por anel de 7 posicoes, a 4 de fabrica. Forquilha Showa SFF-BP sem
   // afinadores externos.
-  { id: "honda-cb750-hornet", brand: "Honda", model: "CB750 Hornet (2023+)", cc: "755cc", category: "naked", adj: "fixed", mfzProfileId: "honda_cb750_hornet_2023" },
+  { id: "honda-cb750-hornet", brand: "Honda", model: "CB750 Hornet (2023+)", cc: "755cc", category: "naked", adj: "fixed",mfzProfileId: "honda_cb750_hornet_2023" },
   { id: "honda-cb650r",      brand: "Honda", model: "CB650R",                       cc: "649cc",  category: "naked",     adj: "full",    adjusters: { fPre: true, fComp: false, fReb: false, rPre: true, rComp: false, rReb: false } },
 
   // ===== Kawasaki =====
@@ -261,25 +261,25 @@ export const BIKES: Bike[] = [
   // Ninja 1000SX: frente precarga+comp+ext; atrás precarga remota + extensão (sem compressão)
   { id: "kawasaki-1000sx",      brand: "Kawasaki", model: "Ninja 1000SX",    cc: "1043cc", category: "sport_touring", adj: "full",    adjusters: { fPre: true, fComp: true, fReb: true, rPre: true, rComp: false, rReb: true } },
   // Geração anterior (ZX1000WH/WJ): traseiro 190/50, não 190/55. Manual de oficina lido.
-  { id: "kawasaki-1000-2017",   brand: "Kawasaki", model: "Ninja 1000 / Z1000SX (2017-2019)", cc: "1043cc", category: "sport_touring", adj: "full", mfzProfileId: "kawasaki_ninja1000_2017", adjusters: { fPre: true, fComp: true, fReb: true, rPre: true, rComp: false, rReb: true } },
+  { id: "kawasaki-1000-2017",   brand: "Kawasaki", model: "Ninja 1000 / Z1000SX (2017-2019)", cc: "1043cc", category: "sport_touring", adj: "full",mfzProfileId: "kawasaki_ninja1000_2017", adjusters: { fPre: true, fComp: true, fReb: true, rPre: true, rComp: false, rReb: true } },
   // ZX-10R: Balance Free Fork invertida Ø43 com compressão + extensão + precarga; atrás
   // BFRC lite com compressão + extensão + precarga. Full nas duas pontas. kawasaki.eu
   { id: "kawasaki-zx10r",       brand: "Kawasaki", model: "Ninja ZX-10R",    cc: "998cc",  category: "sport",         adj: "full"    },
   // Z900 standard: KYB front preload+rebound, rear preload+rebound — no compression either end
-  { id: "kawasaki-z900",        brand: "Kawasaki", model: "Z900",            cc: "948cc",  category: "naked",         adj: "partial", mfzProfileId: "kawasaki_z900_2017", adjusters: { fPre: true, fComp: false, fReb: true, rPre: true, rComp: false, rReb: true } },
+  { id: "kawasaki-z900",        brand: "Kawasaki", model: "Z900",            cc: "948cc",  category: "naked",         adj: "partial",mfzProfileId: "kawasaki_z900_2017", adjusters: { fPre: true, fComp: false, fReb: true, rPre: true, rComp: false, rReb: true } },
   // Z H2 (base, não-SE): frente SFF-BP com compressão + extensão + precarga; atrás
   // Uni-Trak só com EXTENSÃO + precarga — a Kawasaki não lista compressão traseira.
   // (A Z H2 SE é que tem KECS eletrónica.) kawasaki.eu
   { id: "kawasaki-zh2",         brand: "Kawasaki", model: "Z H2 (2020+)",    cc: "998cc",  category: "naked",         adj: "full",    adjusters: { fPre: true, fComp: true, fReb: true, rPre: true, rComp: false, rReb: true } },
 
   // ===== Kove =====
-  { id: "kove-800x-pro",   brand: "Kove", model: "800X Pro",  cc: "799cc", category: "adventure", adj: "full", mfzProfileId: "kove_800x_pro_2026"    },
-  { id: "kove-800x",       brand: "Kove", model: "800X",      cc: "799cc", category: "adventure", adj: "full", mfzProfileId: "kove_800x_standard"    },
-  { id: "kove-800-rally",  brand: "Kove", model: "800 Rally", cc: "799cc", category: "adventure", adj: "full", mfzProfileId: "kove_800x_rally"       },
-  { id: "kove-450-rally",  brand: "Kove", model: "450 Rally", cc: "443cc", category: "adventure", adj: "full", mfzProfileId: "kove_450rally_regular" },
-  { id: "kove-450-rally-factory", brand: "Kove", model: "450 Rally Factory", cc: "443cc", category: "adventure", adj: "full", mfzProfileId: "kove_450rally_factory" },
-  { id: "kove-800x-e5",      brand: "Kove", model: "800X E5",      cc: "799cc", category: "adventure", adj: "full", mfzProfileId: "kove_800x_e5"      },
-  { id: "kove-800x-touring", brand: "Kove", model: "800X Touring", cc: "799cc", category: "adventure", adj: "full", mfzProfileId: "kove_800x_touring" },
+  { id: "kove-800x-pro",   brand: "Kove", model: "800X Pro",  cc: "799cc", category: "adventure", adj: "full",mfzProfileId: "kove_800x_pro_2026"    },
+  { id: "kove-800x",       brand: "Kove", model: "800X",      cc: "799cc", category: "adventure", adj: "full",mfzProfileId: "kove_800x_standard"    },
+  { id: "kove-800-rally",  brand: "Kove", model: "800 Rally", cc: "799cc", category: "adventure", adj: "full",mfzProfileId: "kove_800x_rally"       },
+  { id: "kove-450-rally",  brand: "Kove", model: "450 Rally", cc: "443cc", category: "adventure", adj: "full",mfzProfileId: "kove_450rally_regular" },
+  { id: "kove-450-rally-factory", brand: "Kove", model: "450 Rally Factory", cc: "443cc", category: "adventure", adj: "full",mfzProfileId: "kove_450rally_factory" },
+  { id: "kove-800x-e5",      brand: "Kove", model: "800X E5",      cc: "799cc", category: "adventure", adj: "full",mfzProfileId: "kove_800x_e5"      },
+  { id: "kove-800x-touring", brand: "Kove", model: "800X Touring", cc: "799cc", category: "adventure", adj: "full",mfzProfileId: "kove_800x_touring" },
 
   // ===== KTM =====
   { id: "ktm-1290-sadv",     brand: "KTM", model: "1290 Super Adventure S", cc: "1301cc", category: "adventure", adj: "full",    mfzProfileId: "ktm_1290_sadv_s_electronic" }, // semi-active electronic
@@ -294,14 +294,14 @@ export const BIKES: Bike[] = [
   { id: "ktm-390-adv",       brand: "KTM", model: "390 Adventure",          cc: "399cc",  category: "adventure", adj: "fixed"   },
   // 390 Adventure R (2025+): WP APEX open cartridge 43 comp+reb (30 clicks), sem precarga à frente;
   // WP APEX split piston atrás com precarga por anel + rebound (20 clicks), sem compressão. ktm.com specs
-  { id: "ktm-390-adv-r",     brand: "KTM", model: "390 Adventure R (2025+)", cc: "399cc",  category: "adventure", adj: "partial", mfzProfileId: "ktm_390_adv_r_2025" },
+  { id: "ktm-390-adv-r",     brand: "KTM", model: "390 Adventure R (2025+)", cc: "399cc",  category: "adventure", adj: "partial",mfzProfileId: "ktm_390_adv_r_2025" },
   // 390 Enduro R (2025+): mesma base WP APEX 43 / split piston, 230 mm curso. ktm.com specs
-  { id: "ktm-390-enduro-r",  brand: "KTM", model: "390 Enduro R (2025+)",   cc: "399cc",  category: "adventure", adj: "partial", mfzProfileId: "ktm_390_enduro_r_2025" },
+  { id: "ktm-390-enduro-r",  brand: "KTM", model: "390 Enduro R (2025+)",   cc: "399cc",  category: "adventure", adj: "partial",mfzProfileId: "ktm_390_enduro_r_2025" },
   // 1290 Super Duke R: manual oficial KTM 2021 (art. 3214331en). WP APEX totalmente
   // ajustável nas duas pontas — precarga por parafuso nas duas pernas à frente (ao
   // contrário da 890 Duke R, que é split e não tem), e atrás precarga por manípulo,
   // extensão e compressão separada em baixa e alta velocidade.
-  { id: "ktm-1290-sdr",      brand: "KTM", model: "1290 Super Duke R (2020-2023)", cc: "1301cc", category: "naked", adj: "full", mfzProfileId: "ktm_1290_sdr_2021" },
+  { id: "ktm-1290-sdr",      brand: "KTM", model: "1290 Super Duke R (2020-2023)", cc: "1301cc", category: "naked", adj: "full",mfzProfileId: "ktm_1290_sdr_2021" },
   // 890 Duke R: manual oficial KTM 2022 (art. 3214544en). Forquilha WP APEX 43 split —
   // compressão na perna esquerda, extensão na direita, SEM precarga à frente. Atrás
   // precarga + extensão + compressão separada em baixa e alta velocidade.
@@ -337,29 +337,29 @@ export const BIKES: Bike[] = [
   // à esquerda (4,75, fábrica 1,5) e extensão à direita (4,75, fábrica 2,5); atrás
   // precarga (chave de gancho, mola L 165 mm ±5) + extensão + compressão SEPARADA em
   // baixa e alta velocidade (12 cliques cada). Default "full" correto.
-  { id: "qj-srk921",    brand: "QJ Motor", model: "SRK 921",    cc: "921cc", category: "naked",         adj: "full"   , mfzProfileId: "qj_srk921" },
+  { id: "qj-srk921",    brand: "QJ Motor", model: "SRK 921",    cc: "921cc", category: "naked",         adj: "full",   mfzProfileId: "qj_srk921" },
   // SRK 600: manual do proprietário QJMOTOR (RU). O manual dá duas configurações de
   // forquilha, mas AMBAS têm os três afinadores — precarga (chave sextavada) +
   // compressão (perna esquerda) + extensão (perna direita). Atrás: extensão por botão
   // no fundo (26 posições, fábrica 10) + precarga por duas bainhas. Sem compressão atrás.
-  { id: "qj-srk600",    brand: "QJ Motor", model: "SRK 600",    cc: "598cc", category: "naked",         adj: "partial", mfzProfileId: "qj_srk600" },
+  { id: "qj-srk600",    brand: "QJ Motor", model: "SRK 600",    cc: "598cc", category: "naked",         adj: "partial",mfzProfileId: "qj_srk600" },
   // SRK 800: manual do proprietário QJMOTOR (RU). Frente completa — precarga (chave de
   // 14 mm, limite 10 voltas, fábrica 5), compressão à esquerda (limite 4,75, fábrica 1)
   // e extensão à direita (limite 4,75, fábrica 3,25). Atrás precarga hidráulica (curso
   // 10 mm, fábrica 0) + extensão (fábrica 7 voltas do duro). Sem compressão atrás.
-  { id: "qj-srk800",   brand: "QJ Motor", model: "SRK 800",    cc: "778cc", category: "naked",     adj: "full", mfzProfileId: "qj_srk800" },
+  { id: "qj-srk800",   brand: "QJ Motor", model: "SRK 800",    cc: "778cc", category: "naked",     adj: "full",mfzProfileId: "qj_srk800" },
   // SRK 900: manual do proprietário QJMOTOR (RU). Só tem capítulo "Задний амортизатор"
   // (amortecedor traseiro) — não há qualquer secção de afinação da frente, nem no índice.
   // Atrás extensão (fábrica 9 voltas a partir do mais duro) + precarga por anel com
   // chave de gancho. Sem compressão atrás. Estava como "full" — não é.
-  { id: "qj-srk900",   brand: "QJ Motor", model: "SRK 900",    cc: "900cc", category: "naked",     adj: "full", mfzProfileId: "qj_srk900" },
+  { id: "qj-srk900",   brand: "QJ Motor", model: "SRK 900",    cc: "900cc", category: "naked",     adj: "full",mfzProfileId: "qj_srk900" },
   // SRT 450 RX: manual do proprietário QJMOTOR, confirmado em DUAS edições independentes
   // (grega e russa MY2026) que dão exatamente os mesmos números. À frente só
   // amortecimento, um por perna: compressão na esquerda (limite 4 voltas, fábrica 1,5)
   // e extensão na direita (limite 4 voltas, fábrica 2,5) — SEM precarga. Atrás só
   // precarga, por porca de aperto + porca de ajuste (folga 3 a 8 mm) — sem amortecimento.
   // Contagem: fechar tudo no sentido horário (duro) e abrir anti-horário — 'tu_hard'.
-  { id: "qj-srt450rx", brand: "QJ Motor", model: "SRT 450 RX", cc: "449cc", category: "adventure", adj: "full", mfzProfileId: "qj_srt450rx" },
+  { id: "qj-srt450rx", brand: "QJ Motor", model: "SRT 450 RX", cc: "449cc", category: "adventure", adj: "full",mfzProfileId: "qj_srt450rx" },
   // SRT 900 SX: manual do proprietário QJMOTOR SRT 900 S/SX, confirmado em DUAS edições
   // (russa e inglesa). Como a SRK 900, só tem capítulo do amortecedor traseiro — nada de
   // afinação à frente, nem no índice. Atrás extensão (fábrica 10 voltas do mais duro na
@@ -435,7 +435,7 @@ export const BIKES: Bike[] = [
   // só "Amortecedor central. Curso 63 mm") e omite-a. O manual do DS 625X, mesma
   // família de amortecedor, documenta esse afinador como "adjustor 3 (at position of
   // air bottle)". Portanto full nas duas pontas — default correto, sem `adjusters`.
-  { id: "voge-900dsx",  brand: "Voge", model: "900 DSX", cc: "895cc", category: "adventure", adj: "full"   , mfzProfileId: "voge_900dsx" },
+  { id: "voge-900dsx",  brand: "Voge", model: "900 DSX", cc: "895cc", category: "adventure", adj: "full",   mfzProfileId: "voge_900dsx" },
   { id: "voge-650dsx",  brand: "Voge", model: "650 DSX", cc: "652cc", category: "adventure", adj: "partial", hidden: true },
   // 525 DSX (DS525X): manual do proprietário Voge. Só tem "Adjust the rear shock
   // absorber", e lá dentro só precarga da mola — nem amortecimento atrás, nem qualquer
@@ -446,12 +446,12 @@ export const BIKES: Bike[] = [
   // 625 DSX (DS 625X): manual do proprietário Voge. Os seis afinadores existem —
   // frente precarga + extensão (bainha esq.) + compressão (bainha dta.); atrás precarga
   // + extensão + compressão (ajustador 3, no reservatório). Default "full" correto.
-  { id: "voge-625dsx",       brand: "Voge", model: "625 DSX",      cc: "625cc", category: "adventure", adj: "full", mfzProfileId: "voge_625dsx" },
+  { id: "voge-625dsx",       brand: "Voge", model: "625 DSX",      cc: "625cc", category: "adventure", adj: "full",mfzProfileId: "voge_625dsx" },
   // 800 DSX Rally: manual do proprietário Voge (EN). Os seis afinadores existem —
   // frente precarga (ajustador 1) + extensão (ajustador 2, topo, 10 posições) +
   // compressão (ajustador 3, base, 10 posições); atrás precarga + extensão +
   // compressão (ajustador 3, no reservatório de gás). Default "full" correto.
-  { id: "voge-800dsx-rally", brand: "Voge", model: "800 DSX Rally", cc: "798cc", category: "adventure", adj: "full", mfzProfileId: "voge_800dsx_rally" },
+  { id: "voge-800dsx-rally", brand: "Voge", model: "800 DSX Rally", cc: "798cc", category: "adventure", adj: "full",mfzProfileId: "voge_800dsx_rally" },
   { id: "voge-r625",         brand: "Voge", model: "R625",          cc: "625cc", category: "naked",     adj: "full", hidden: true },
   // AC 525X: manual do proprietário Voge. Igual à 525 DSX — só "Adjustment of rear shock
   // absorber" com precarga da mola, sem amortecimento atrás e sem afinação à frente.
@@ -463,10 +463,10 @@ export const BIKES: Bike[] = [
   // (5,5 de 8), compressão 6 cliques e extensão 8, a abrir do duro. Atrás precarga por
   // manípulo de 6 posições (fábrica na 4) e extensão 10 cliques — SEM compressão atrás.
   // A XT1200ZE tem suspensão eletrónica e não é esta entrada.
-  { id: "yamaha-xt1200z",    brand: "Yamaha", model: "XT1200Z Super Ténéré (2010-2020)", cc: "1199cc", category: "adventure", adj: "full", mfzProfileId: "yamaha_xt1200z_2010" },
-  { id: "yamaha-xt1200ze",  brand: "Yamaha", model: "XT1200ZE Super Ténéré (2014-2020)", cc: "1199cc", category: "adventure", adj: "full", mfzProfileId: "yamaha_xt1200ze_2014" },
+  { id: "yamaha-xt1200z",    brand: "Yamaha", model: "XT1200Z Super Ténéré (2010-2020)", cc: "1199cc", category: "adventure", adj: "full",mfzProfileId: "yamaha_xt1200z_2010" },
+  { id: "yamaha-xt1200ze",  brand: "Yamaha", model: "XT1200ZE Super Ténéré (2014-2020)", cc: "1199cc", category: "adventure", adj: "full",mfzProfileId: "yamaha_xt1200ze_2014" },
   // Ténéré 700 base: KYB preload+rebound both ends, no compression
-  { id: "yamaha-tenere-2019", brand: "Yamaha", model: "Ténéré 700 (2019-2024)", cc: "689cc", category: "adventure", adj: "partial", mfzProfileId: "yamaha_t700_2019" },
+  { id: "yamaha-tenere-2019", brand: "Yamaha", model: "Ténéré 700 (2019-2024)", cc: "689cc", category: "adventure", adj: "partial",mfzProfileId: "yamaha_t700_2019" },
   { id: "yamaha-tenere-2025", brand: "Yamaha", model: "Ténéré 700 (2025+)",      cc: "689cc", category: "adventure", adj: "full",    mfzProfileId: "yamaha_t700_2025" },
   // Tracer 9 GT+: suspensão semi-ativa KADS (KYB Actimatic). Compressão/extensão são
   // eletrónicas — não há clickers manuais. Só a precarga traseira é manual.

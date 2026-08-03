@@ -1,25 +1,8 @@
-# Pressões por confirmar — 58 de 119
+# Pressões por confirmar — 53 de 119
 
 Gerado a partir do código. Só entram as linhas que ainda não têm citação de manual.
 
 Marcas fechadas: **Aprilia, Macbor, Triumph, Yamaha**.
-
-
-## Ducati — 11
-
-| Modelo | cc | Frente atual | Trás atual |
-|---|---|---|---|
-| DesertX Rally | 937cc | 2 | 2.2 |
-| DesertX V2 (2026+) | 890cc | 2 | 2.2 |
-| Hypermotard 698 Mono | 659cc | 2.5 | 2.9 |
-| Hypermotard 950 | 937cc | 2.5 | 2.8 |
-| Monster | 937cc | 2.5 | 2.9 |
-| Multistrada V2 (2025+) | 890cc | 2.4 | 2.5 |
-| Multistrada V4 | 1158cc | 2.5 | 2.9 |
-| Multistrada V4 Rally | 1158cc | 2.5 | 2.9 |
-| Multistrada V4 S | 1158cc | 2.4 | 2.5 |
-| Panigale V4 | 1103cc | 2.5 | 2.9 |
-| Streetfighter V4 | 1103cc | 2.5 | 2.9 |
 
 
 ## BMW — 9
@@ -80,6 +63,18 @@ Marcas fechadas: **Aprilia, Macbor, Triumph, Yamaha**.
 | R625 | 625cc | 2.5 | 2.9 |
 
 
+## Ducati — 6
+
+| Modelo | cc | Frente atual | Trás atual |
+|---|---|---|---|
+| DesertX Rally | 937cc | 2 | 2.2 |
+| DesertX V2 (2026+) | 890cc | 2 | 2.2 |
+| Hypermotard 950 | 937cc | 2.5 | 2.8 |
+| Monster | 937cc | 2.5 | 2.9 |
+| Multistrada V4 | 1158cc | 2.5 | 2.9 |
+| Multistrada V4 S | 1158cc | 2.4 | 2.5 |
+
+
 ## Kawasaki — 4
 
 | Modelo | cc | Frente atual | Trás atual |
@@ -126,14 +121,26 @@ Marcas fechadas: **Aprilia, Macbor, Triumph, Yamaha**.
 
 Por ordem de quanto rendem por manual descarregado.
 
-## Ducati — 11 motos, a melhor relação esforço/resultado
+## Ducati — 6 motos, e continua a ser a que mais rende
+Feitas: DesertX 937, Multistrada V4 RS, V4 Pikes Peak, V2 S Travel, **V2**,
+**V4 Rally**, **Panigale V4**, **Streetfighter V4** e **Hypermotard 698 Mono**.
+Faltam **Monster, Hypermotard 950, Multistrada V4, V4 S, DesertX V2 e DesertX Rally**.
+
 `manualpdf.pt/ducati` ou `ownersmanuals2.com`. Cada modelo tem «Manual do usuário — PDF».
 Os valores estão em *Dados técnicos*, no fim (pág. 280-350 conforme o modelo).
-Já sabemos que a Ducati faz **frente constante e trás 2,5 → 2,9**, e que os 3,20
-que temos nas Multistrada não existem em manual nenhum. Descarregar em PDF, não
-tirar fotos ao visualizador: o PDF processa-se em segundos.
-**Atenção:** a Multistrada V2 S Travel dá pressões diferentes conforme o pneu
-montado (Trail II ou Rally STR). Se o manual tiver duas tabelas, quero as duas.
+Descarregar em PDF, não tirar fotos ao visualizador: o PDF processa-se em segundos.
+
+**A regra «frente constante e trás 2,5 → 2,9» só vale nas Multistrada.** Nas
+desportivas é outra coisa e a solo é bem mais baixa: a Panigale V4 leva 2,3/**2,1**
+e a Streetfighter 2,3/2,5. Não extrapolar de uma família para outra.
+
+**Atenção aos manuais com várias tabelas de pneu.** A Multistrada V2 e a V4 Rally
+dão pressões diferentes conforme a borracha montada (Trail II, Scorpion Rally,
+Rally STR). Quero sempre todas — e a de tacos é a que alimenta as colunas de
+todo-o-terreno, com a ressalva de que só vale se a moto calçar mesmo esse pneu.
+
+As desportivas trazem ainda pressões **de pista**, que ficam de fora das colunas
+(a coluna é «fora de estrada») e vão para o texto da fonte.
 
 ## Kawasaki — 3 motos, e o caminho já está aberto
 Feitas: Versys 650, Z900 e a Ninja 1000 / Z1000SX de 2017-2019 (entrada nova,
