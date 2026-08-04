@@ -1802,3 +1802,44 @@ que não existe, e isso ninguém escreveu.
 **Öhlins Smart EC 2.0 semi-ativa**, com níveis de firmeza no painel. Se a RR entrar
 alguma vez no catálogo, é entrada própria e do tipo eletrónico, como a Tiger 1200 e a
 Multistrada V4 S.
+
+### A ZX-10R fechada, e o manual da DesertX que era o manual errado
+
+Duas motos da lista das sete que corriam no default `adj: "full"`. Uma fechou, a outra
+nem devia ter começado.
+
+**ZX-10R: os seis afinadores, todos com valor de fábrica.** O *service manual* 2021-2023
+dá a página 13-6 inteira, e é dos manuais mais limpos que apanhei — sem ambiguidade
+nenhuma no sentido de contagem. Tudo em **voltas**, compressão e retorno das duas pontas
+contadas do duro, pré-carga da frente do mole (7 voltas), pré-carga de trás pelo
+**comprimento da mola montada: 162,2 mm**. Passou a perfil `kawasaki_zx10r_2021`, com
+`adjusters` explícitos no catálogo em vez do default.
+
+Duas coisas que vale a pena não perder:
+
+A primeira é que o manual cobre **duas motos** e é preciso ler o código. `ZX1002L/M` é a
+ZX-10R, `ZX1002N` é a RR — separei-as pelos números de potência (203 PS às 13 200 contra
+204 PS às 14 000). A RR sai de fábrica noutro sítio em quatro dos seis afinadores.
+Ficaram escritos na nota do perfil, para o dia em que a RR entrar no catálogo.
+
+A segunda é um aviso do próprio manual que passei para as notas: os afinadores da frente
+estão repartidos pelas duas bengalas e a Kawasaki mete em caixa de aviso que **têm de
+ficar iguais nas duas**. Não é conselho, é aviso de segurança.
+
+As pressões confirmaram a estimativa que lá estava — 2,5 e 2,9 — mas o manual dá-as como
+**valor único até 180 kg de carga**, sem coluna de a-dois. Preenchi as duas colunas com o
+mesmo número em vez de deixar `null`, porque a ausência aqui não é falta de dado.
+
+**DesertX V2: o manual não serve.** O ficheiro é o `OM_-_DesertX_-_EN_-_25_-_ED02`, que
+é o manual da **937 de 2025** — exatamente a mesma fonte de onde já saiu o perfil
+`ducati_desertx_kayaba`. Verifiquei linha a linha: os números batem todos certo com o que
+já lá estava (frente 2/2/2 fixos com a carga, trás 6/17/26 de pré-carga em cliques e
+compressão 3/2,5/2 voltas). **Zero informação nova.**
+
+A entrada que falta é a **DesertX V2 de 2026, que é 890 cc e outra moto**. Continua sem
+manual e continua a correr no default. É o mesmo erro que já tinha ficado escrito na
+linha das pressões dela — a fonte diz, com todas as letras, «a nossa entrada é a V2 de
+2026, que é outra moto». Da próxima vez leio a etiqueta da fonte antes de abrir o PDF.
+
+**Estado:** 91 perfis. Motos visíveis sem perfil: 38, das quais 16 no default cru e 6 em
+`adj: "full"`. Pressões: 85 de 120 verificadas por manual.

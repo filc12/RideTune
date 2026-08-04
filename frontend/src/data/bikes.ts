@@ -263,8 +263,9 @@ export const BIKES: Bike[] = [
   // Geração anterior (ZX1000WH/WJ): traseiro 190/50, não 190/55. Manual de oficina lido.
   { id: "kawasaki-1000-2017",   brand: "Kawasaki", model: "Ninja 1000 / Z1000SX (2017-2019)", cc: "1043cc", category: "sport_touring", adj: "full",mfzProfileId: "kawasaki_ninja1000_2017", adjusters: { fPre: true, fComp: true, fReb: true, rPre: true, rComp: false, rReb: true } },
   // ZX-10R: Balance Free Fork invertida Ø43 com compressão + extensão + precarga; atrás
-  // BFRC lite com compressão + extensão + precarga. Full nas duas pontas. kawasaki.eu
-  { id: "kawasaki-zx10r",       brand: "Kawasaki", model: "Ninja ZX-10R",    cc: "998cc",  category: "sport",         adj: "full"    },
+  // BFRC lite com compressão + extensão + precarga. Full nas duas pontas. Confirmado no
+  // manual de oficina 2021-2023 (pág. 13-6), que dá os seis valores de fábrica.
+  { id: "kawasaki-zx10r",       brand: "Kawasaki", model: "Ninja ZX-10R",    cc: "998cc",  category: "sport",         adj: "full",   mfzProfileId: "kawasaki_zx10r_2021", adjusters: { fPre: true, fComp: true, fReb: true, rPre: true, rComp: true, rReb: true } },
   // Z900 standard: KYB front preload+rebound, rear preload+rebound — no compression either end
   { id: "kawasaki-z900",        brand: "Kawasaki", model: "Z900",            cc: "948cc",  category: "naked",         adj: "partial",mfzProfileId: "kawasaki_z900_2017", adjusters: { fPre: true, fComp: false, fReb: true, rPre: true, rComp: false, rReb: true } },
   // Z H2 (base, não-SE): frente SFF-BP com compressão + extensão + precarga; atrás

@@ -1272,6 +1272,26 @@ const KAWASAKI: MfzProfile[] = [
       reb:     tu_h(1.25),
     },
   },
+  {
+    id: 'kawasaki_zx10r_2021',
+    brand: 'Kawasaki', model: 'Ninja ZX-10R', year: '2021-2023',
+    baseKg: 75,
+    source: 'Manual de oficina Kawasaki Ninja ZX-10R / ZX-10RR 2021-2023, pág. 13-6',
+    formula: 'suzuki',
+    dataQuality: 'oem_manual',
+    countNote: 'Tudo em VOLTAS. À frente e atrás, a compressão e o retorno contam-se a partir do mais duro: fechar o regulador todo no sentido horário até assentar e contar a abrir. A pré-carga da frente é ao contrário — abrir tudo no sentido anti-horário e contar 7 voltas a apertar. A pré-carga de trás não se conta: afere-se pelo comprimento da mola já montada.',
+    notes: 'Forquilha Showa Balance Free invertida de Ø43 mm. Os quatro reguladores da frente estão repartidos pelas duas bengalas e o manual avisa em caixa de aviso que TÊM de ficar iguais nas duas — desiguais, a moto fica com o comportamento comprometido. Margens de fábrica: retorno da frente 0 a 5 voltas, compressão da frente 0 a 4 1/2, pré-carga da frente 0 a 15 voltas; atrás, retorno 0 a 4 voltas, compressão 0 a 4 1/2 e pré-carga entre 158,5 e 164,5 mm de comprimento de mola (mais curto é mais duro). O amortecedor é de gás a 980-1 280 kPa, não regulável, e a forquilha é parcialmente pressurizada, também não regulável. ATENÇÃO: este perfil é a ZX-10R (código ZX1002L/M). A ZX-10RR (ZX1002N) partilha o mesmo hardware mas sai de fábrica noutro sítio — compressão da frente 2 1/2 voltas, pré-carga da frente 8 1/2, retorno de trás 2 1/4, compressão de trás 1 volta e mola a 161,5 mm. Não foi criado perfil para a RR por a moto não estar na lista. Confirmar sempre pelo sag.',
+    front: {
+      preload: tu_s(7),
+      comp:    tu_h(2.75),
+      reb:     tu_h(2),
+    },
+    rear: {
+      preload: pos('Regular até a mola montada ficar com 162,2 mm de comprimento', '162,2 mm'),
+      comp:    tu_h(1.5),
+      reb:     tu_h(2.75),
+    },
+  },
 ];
 
 const TRIUMPH: MfzProfile[] = [
