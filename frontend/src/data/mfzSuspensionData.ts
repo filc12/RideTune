@@ -131,7 +131,7 @@ const CFMOTO: MfzProfile[] = [
   {
     id: 'cfmoto_1000mtx',
     brand: 'CFMOTO', model: '1000MT-X', year: '2023+',
-    baseKg: 75, source: 'mfzstudio.com/moto/cfmoto/', formula: 'cfmoto_interp',
+    baseKg: 75, source: 'Manual do proprietário CFMOTO 1000MT-X (PT, v260209), pág. 16 e 196-199', formula: 'cfmoto_interp',
     dataQuality: 'oem_manual',
     countNote: 'Conta-se tudo a partir do MAIS DURO: aperta no sentido horário (H) até ao fim e depois abre no sentido contrário (S), contando os cliques — amortecimento e pré-carga traseira. A pré-carga da frente é a exceção: mede-se em milímetros de rosca à vista no topo da forquilha, e apertar aumenta a pré-carga.',
     front: {
@@ -178,7 +178,7 @@ const CFMOTO: MfzProfile[] = [
     id: 'cfmoto_800nk',
     brand: 'CFMOTO', model: '800NK', year: '2022+',
     baseKg: 75,
-    source: 'Manual do proprietário CFMOTO 800NK (EUA, 20250519), pág. 22 e 139-141',
+    source: 'Manual do proprietário CFMOTO 800NK (EUA, 20250519), pág. 22, 139-141 e 142',
     formula: 'cfmoto_interp',
     dataQuality: 'oem_manual',
     countNote: 'Conta-se tudo a partir do MOLE: abre o afinador no sentido contrário (S) até ao batente e depois aperta (H), contando os cliques do amortecimento ou as voltas de pré-carga. O amortecedor não tem regulação de compressão.',

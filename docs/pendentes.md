@@ -2302,3 +2302,36 @@ que no manualslib «as páginas são imagem e o texto não é extraível». Isso
 via que estava a ser usada na altura, mas já não é a história toda — ver a secção mais
 acima: as páginas servidas em HTML **dão texto**, o que não dão são tabelas alinhadas.
 Vale a pena corrigir esse comentário quando alguém lá mexer.
+
+### Sync com o Supabase: e o bundle é que estava atrás em duas linhas
+
+Corrido o `verificar-sync` depois do trabalho de hoje: 2 pressões e 14 perfis divergentes.
+Doze eram o esperado — trabalho de hoje que ainda não tinha subido. **Duas andavam ao
+contrário**, e essas é que interessam.
+
+O `cfmoto_1000mtx` tinha, no bundle, `source: 'mfzstudio.com/moto/cfmoto/'`. No Supabase
+já dizia **«Manual do proprietário CFMOTO 1000MT-X (PT, v260209), pág. 16 e 196-199»**.
+Alguém verificou aquele perfil por manual, atualizou a base e nunca escreveu de volta no
+código. Consequência prática: a app mostrava proveniência de **manual** quando estava
+online e de **site** no primeiro arranque e offline — para a mesma moto e os mesmos
+números. O `cfmoto_800nk` tinha a mesma doença, mais leve: faltava uma página na lista.
+
+Corrigidos os dois no bundle, que era o lado errado.
+
+**Isto é o `verificar-sync` a fazer exatamente o que foi escrito para fazer,** e vale a
+pena sublinhar porque é fácil assumir que o código está sempre à frente da base. Não está.
+Sempre que o relatório disser que uma linha diverge, a pergunta não é «o que falta subir»
+mas «qual dos dois lados está certo» — que é, aliás, o que a mensagem final do script já
+diz.
+
+**Os restantes doze subiram para o Supabase:** dez perfis novos (as três BMW, ZX-10R,
+X-ADV, 390 Adventure, Street Triple RS, Tiger Sport 660, MT-09 e MT-10) e dois alterados
+(Speed Triple RS com a pré-carga da frente corrigida, Voge 625 DSX com o sentido de
+contagem). Mais as duas linhas de pressão, ZX-10R e Voge 625 DSX.
+
+Base e bundle ficam nos mesmos **100 perfis**, 74 deles por manual.
+
+**Nota de ambiente:** o `tsx` nunca esteve instalado. Os dois scripts foram escritos a
+chamá-lo diretamente mas a dependência não está no `package.json` — quem correr
+`npm run verificar-sync` num clone limpo apanha `command not found`. Funciona com
+`npx tsx`, mas o certo é `npm i -D tsx`.
