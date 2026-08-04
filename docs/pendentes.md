@@ -2163,3 +2163,60 @@ dois), portanto o cartão deve aparecer.
 
 **Lição:** antes de escolher entre `null` e um valor repetido, ver o que o consumidor faz
 com o `null`. Neste projeto está documentado no tipo, à distância de um grep.
+
+### As 11 sem `adjusters`: quatro fechadas por manual, e duas estavam ao contrário
+
+Ataque às motos que corriam no default do nível `adj`. **Passaram de 11 para 7**, e o que
+saiu não foi só preenchimento — **duas das quatro estavam com o oposto do que a moto tem**.
+
+**Descoberta de método: dois portais servem PDFs oficiais por URL direto.**
+
+- **Yamaha**, CDN oficial: `cdn2.yamaha-motor.eu/prod/owner-manuals/Motorcycles/P<código>E.PDF`,
+  onde `<código>` é a referência sem hífenes. `B7N-28199-E0` → `PB7N28199E0E.PDF`. Serve
+  para qualquer Yamaha de que se saiba a referência — e nós temos a referência de quase
+  todas, porque foram a fonte das pressões.
+- **KTM**, via ktmshop.se: `ktmshop.se/documents/<AA>_<artigo>_en_OM.pdf` e
+  `ktmshop.se/bike-manuals/<AA>_<artigo>_en_OM.pdf`, com `AA` = ano de modelo. Os números
+  de artigo já estavam registados neste documento, da altura das pressões.
+
+Os dois abrem em texto por leitura remota. Cortam por volta de 100 000 caracteres, mas o
+**índice vem sempre no princípio** — e nos manuais KTM o índice do capítulo «Tuning the
+chassis» **lista todos os afinadores que a moto tem**. Isso chega para o `adjusters` sem
+sequer chegar ao corpo do capítulo.
+
+| Moto | O que a app assumia | O que o manual diz |
+|---|---|---|
+| **Yamaha MT-09** | frente precarga+extensão, trás precarga+extensão | frente as TRÊS (extensão à direita, compressão à esquerda), trás precarga+extensão |
+| **KTM 790 Duke** | frente precarga+extensão, trás precarga+extensão | **só precarga traseira** |
+| **KTM 890 Adventure** | frente precarga+extensão, trás precarga+extensão | frente NADA, trás precarga+extensão |
+| **KTM 390 Adventure** | só precarga traseira | frente compressão+extensão e SEM precarga, trás precarga+extensão |
+
+**As duas que estavam ao contrário** são a 390 Adventure e o 790 Duke, e em sentidos
+opostos. A 390 estava marcada `fixed` e a app mostrava-lhe só precarga traseira, quando ela
+tem compressão e extensão na forquilha e precarga é que não tem. O 790 Duke estava
+`partial` e a app oferecia-lhe quatro afinadores quando a moto só tem um — o capítulo
+inteiro de afinação do chassis do manual tem **uma única entrada**.
+
+**Perfis completos que saíram de caminho:** MT-09 (`yamaha_mt09_2021`) e 390 Adventure
+(`ktm_390_adv_2023`).
+
+Duas coisas da MT-09 que vale a pena não perder: o amortecedor **não tem compressão**, e a
+distância A da precarga da frente funciona **ao contrário da MT-10** — aqui mais curta é
+mais dura (15 mm de fábrica), lá é o inverso. É o mesmo nome de medida a significar coisas
+opostas em duas Yamaha da mesma gama.
+
+Da 390 Adventure ficou **um número por ler**: a extensão traseira, secção 12.5, que caiu
+na parte cortada do PDF. O afinador está confirmado pelo índice e pelo capítulo; falta o
+valor. Está marcado como tal no perfil.
+
+**As sete que restam, e porquê:**
+
+| Moto | Obstáculo |
+|---|---|
+| Honda NC750X e X-ADV | A Honda não publica manuais em PDF aberto; as pressões vieram da etiqueta |
+| Triumph Tiger Sport 660 | O handbook Trident/Tiger Sport existe mas só via manualslib, e por HTML não se leem tabelas |
+| Voge 525 DSX e AC 525X | Sem manual; o site da Voge esteve à venda no GoDaddy |
+| Kawasaki Versys 650 | Só resultados de fórum — nada citável |
+| Ducati DesertX V2 | É a 890 de 2026; não encontrei manual publicado |
+
+**Estado:** 98 perfis. Motos visíveis sem perfil: 31, das quais 7 no default cru.

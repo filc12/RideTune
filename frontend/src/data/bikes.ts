@@ -291,9 +291,16 @@ export const BIKES: Bike[] = [
   { id: "ktm-790-adv-r",     brand: "KTM", model: "790 Adventure R",        cc: "799cc",  category: "adventure", adj: "full",    mfzProfileId: "ktm_790_adv_r_2019" },
   { id: "ktm-790-adv",       brand: "KTM", model: "790 Adventure (2025+)",    cc: "799cc",  category: "adventure", adj: "full",    mfzProfileId: "ktm_790_adv_std_2025" },
   // 890 Adventure (non-R): WP APEX 43 with preload+rebound both ends, no compression
-  { id: "ktm-890-adv",       brand: "KTM", model: "890 Adventure",          cc: "889cc",  category: "adventure", adj: "partial" },
+  // 890 Adventure (não-R): o capítulo «Tuning the chassis» do manual (art. 3214267en,
+  // 2021) tem só duas entradas, as duas do amortecedor — extensão e precarga. A forquilha
+  // WP APEX de 43 mm não tem afinadores externos. Não confundir com a 890 Adventure R,
+  // que tem perfil próprio e é totalmente ajustável.
+  { id: "ktm-890-adv",       brand: "KTM", model: "890 Adventure",          cc: "889cc",  category: "adventure", adj: "partial", adjusters: { fPre: false, fComp: false, fReb: false, rPre: true, rComp: false, rReb: true } },
   // 390 Adventure: WP non-adjustable front + rear preload cam only
-  { id: "ktm-390-adv",       brand: "KTM", model: "390 Adventure",          cc: "399cc",  category: "adventure", adj: "fixed"   },
+  // 390 Adventure: estava em `fixed`, o que fazia a app mostrar só precarga traseira. É o
+  // contrário: o cap. 12 do manual (art. 3214794en) dá compressão (afinador BRANCO, bainha
+  // esquerda) e extensão (VERMELHO, direita) à frente, e a forquilha NÃO tem precarga.
+  { id: "ktm-390-adv",       brand: "KTM", model: "390 Adventure",          cc: "399cc",  category: "adventure", adj: "fixed",   mfzProfileId: "ktm_390_adv_2023", adjusters: { fPre: false, fComp: true, fReb: true, rPre: true, rComp: false, rReb: true } },
   // 390 Adventure R (2025+): WP APEX open cartridge 43 comp+reb (30 clicks), sem precarga à frente;
   // WP APEX split piston atrás com precarga por anel + rebound (20 clicks), sem compressão. ktm.com specs
   { id: "ktm-390-adv-r",     brand: "KTM", model: "390 Adventure R (2025+)", cc: "399cc",  category: "adventure", adj: "partial",mfzProfileId: "ktm_390_adv_r_2025" },
@@ -309,7 +316,11 @@ export const BIKES: Bike[] = [
   // precarga + extensão + compressão separada em baixa e alta velocidade.
   { id: "ktm-890-duke-r",    brand: "KTM", model: "890 Duke R (2020-2023)", cc: "889cc",  category: "naked",     adj: "full",    mfzProfileId: "ktm_890_duke_r_2022" },
   // 790 Duke: WP APEX preload+rebound both ends, no compression
-  { id: "ktm-790-duke",      brand: "KTM", model: "790 Duke",               cc: "799cc",  category: "naked",     adj: "partial" },
+  // 790 Duke: o capítulo «Tuning the chassis» do manual (art. 3213925en, 2019) tem UMA
+  // única entrada — «12.1 Adjusting the spring preload of the shock absorber». A WP APEX
+  // de 43 mm é de cartucho aberto sem afinadores externos e o amortecedor só tem precarga.
+  // O default de `partial` estava a oferecer quatro afinadores que a moto não tem.
+  { id: "ktm-790-duke",      brand: "KTM", model: "790 Duke",               cc: "799cc",  category: "naked",     adj: "partial", adjusters: { fPre: false, fComp: false, fReb: false, rPre: true, rComp: false, rReb: false } },
   // 690 SMC R: forquilha WP APEX 48 split (compressão na perna esquerda, extensão na
   // direita, 30 cliques cada) — SEM ajuste de precarga à frente. Atrás WP APEX com
   // compressão (alta e baixa velocidade), extensão e precarga. ktm.com technical-specifications
@@ -480,7 +491,10 @@ export const BIKES: Bike[] = [
   // separadas. Não confundir com a MT-10 SP (MTN1000D/DP), que é Öhlins ERS eletrónica.
   { id: "yamaha-mt10",       brand: "Yamaha", model: "MT-10",                 cc: "998cc", category: "naked",         adj: "full",    mfzProfileId: "yamaha_mt10_2016", adjusters: { fPre: true, fComp: true, fReb: true, rPre: true, rComp: true, rReb: true } },
   // MT-09: KYB front preload+rebound, rear preload+rebound — no compression either end
-  { id: "yamaha-mt09",       brand: "Yamaha", model: "MT-09",                 cc: "890cc", category: "naked",         adj: "partial" },
+  // MT-09 (MTN890): à frente tem as três — precarga nas duas bengalas, extensão só na
+  // DIREITA e compressão só na ESQUERDA. Atrás só precarga e extensão: o amortecedor não
+  // tem compressão. O default de `partial` estava a esconder a compressão da frente.
+  { id: "yamaha-mt09",       brand: "Yamaha", model: "MT-09",                 cc: "890cc", category: "naked",         adj: "partial", mfzProfileId: "yamaha_mt09_2021", adjusters: { fPre: true, fComp: true, fReb: true, rPre: true, rComp: false, rReb: true } },
   // MT-07: KYB front non-adjustable, rear preload+rebound
   // MT-07: forquilha sem ajuste; amortecedor só precarga (came de 7 posições)
   { id: "yamaha-mt07",       brand: "Yamaha", model: "MT-07",                 cc: "689cc", category: "naked",         adj: "partial", adjusters: { fPre: false, fComp: false, fReb: false, rPre: true, rComp: false, rReb: false } },

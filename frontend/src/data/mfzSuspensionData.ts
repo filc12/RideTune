@@ -728,6 +728,26 @@ const KTM: MfzProfile[] = [
     },
   },
   {
+    id: 'ktm_390_adv_2023',
+    brand: 'KTM', model: '390 Adventure', year: '2023+',
+    baseKg: 75,
+    source: 'Manual do proprietário KTM 390 Adventure 2023 (art. 3214794en, oficial), cap. 12 «Tuning the chassis», pág. 59-61',
+    formula: 'ktm',
+    dataQuality: 'oem_manual',
+    countNote: 'À frente conta-se em CLIQUES a partir do mais duro: fechar o afinador todo no sentido horário até ao batente e contar a abrir. A compressão é o afinador BRANCO, no topo da bainha ESQUERDA (COMP); a extensão é o VERMELHO, no topo da DIREITA (REB). A forquilha não tem precarga. Atrás, a precarga é por anel roscado, que precisa de chave de gancho.',
+    notes: 'Valores da coluna «Standard» do manual. As outras colunas, à frente (compressão/extensão): Comfort 17 e 20, Sport 10 e 10, Carga máxima 15 e 15 — ou seja, a carga máxima usa os mesmos valores do standard e é a precarga traseira que faz o trabalho, passando de 3 para 10 cliques.\n\nATENÇÃO à diferença face ao que a app assumia: a 390 Adventure estava marcada como `fixed`, o que fazia a app mostrar só precarga traseira. A moto tem compressão E extensão à frente, e não tem precarga à frente nenhuma. Era o contrário do que estava.\n\nPOR LER: a extensão traseira existe — é a secção 12.5 do manual, «Adjusting the rebound damping of the shock absorber» — mas a leitura remota do PDF cortou nessa página. Falta só esse número; o afinador está confirmado pelo índice e pelo capítulo.\n\nO manual lembra que a tabela de recomendações também está impressa numa etiqueta no depósito, por baixo do selim. A precarga traseira precisa da chave de gancho 90529077000 e da extensão 90129099025. Confirmar sempre pelo sag.',
+    front: {
+      preload: na('A forquilha não tem afinador de precarga'),
+      comp:    cl_h(15),
+      reb:     cl_h(15),
+    },
+    rear: {
+      preload: pos('Anel roscado: 3 cliques em uso normal, 10 com carga máxima', '3 cl'),
+      comp:    na('O amortecedor não tem afinador de compressão'),
+      reb:     pos('Existe (secção 12.5 do manual) — valor por ler', 'AJUSTA'),
+    },
+  },
+  {
     id: 'ktm_390_enduro_r_2025',
     brand: 'KTM', model: '390 Enduro R', year: '2025+',
     baseKg: 75, source: 'mfzstudio.com/moto/ktm/', formula: 'ktm',
@@ -1549,6 +1569,26 @@ const YAMAHA_EXTRA: MfzProfile[] = [
     },
     countNote: 'Fechar o afinador até ao fim no sentido de endurecer e contar a abrir. Frente: compressão 17 cliques, extensão 7 cliques; precarga ao contrário — fechar até parar no sentido de aliviar e apertar 6 voltas. Atrás: extensão 12 cliques, compressão lenta 12 cliques, compressão rápida 3 voltas. Precarga traseira mede-se pela distância A, não por cliques.',
     notes: 'Valores standard do manual oficial, versão YZF-R1 (a R1M tem suspensão Öhlins eletrónica, com compressão e extensão ajustadas pelo ecrã — não é este perfil). Extremos do manual: frente precarga 0 a 15 voltas, compressão 23 a 1, extensão 14 a 1. Atrás extensão 23 a 1, compressão lenta 18 a 1, compressão rápida 5,5 a 0 voltas. Confirmar sempre pelo sag.',
+  },
+  {
+    id: 'yamaha_mt09_2021',
+    brand: 'Yamaha', model: 'MT-09', year: '2021+',
+    baseKg: 75,
+    source: 'Manual do proprietário Yamaha MT-09 / MTN890 (B7N-28199-E0, oficial), pág. 4-26 a 4-29',
+    formula: 'yamaha',
+    dataQuality: 'oem_manual',
+    countNote: 'À FRENTE os afinadores estão repartidos: a extensão só na bainha DIREITA, a compressão só na ESQUERDA, ambas em cliques a partir do duro (rodar a endurecer até parar e contar a abrir). A pré-carga da frente mede-se pela distância A e está nas duas bengalas — ATENÇÃO, aqui é ao contrário do costume: quanto MAIS CURTA a distância A, MAIS DURA a pré-carga. Atrás, a pré-carga é por anel com 7 entalhes numerados (4 de fábrica) e a extensão conta-se em VOLTAS a partir do duro.',
+    notes: 'MT-09 de série (MTN890). O amortecedor traseiro NÃO tem regulação de compressão — só pré-carga e extensão. À frente tem as três.\n\nCUIDADO com a distância A: nesta moto mais curta é mais dura (19 mm no mais mole, 15 mm de fábrica, 4 mm no mais duro), ao contrário da MT-10, onde é o inverso. É o mesmo nome de medida a significar coisas opostas em duas Yamaha — não copiar de uma para a outra.\n\nMargens de fábrica: à frente, extensão e compressão de 11 (mole) a 1 (duro) cliques; atrás, pré-carga nas posições 1 a 7 e extensão de 2 1/2 (mole) a 0 (duro) voltas.\n\nO manual avisa duas coisas úteis: na direção de endurecer, a posição 0 e a 1 podem ser a mesma; e na de aliviar, o afinador pode continuar a estalar para lá do especificado, mas isso não afina nada e estraga a suspensão.\n\nA pré-carga traseira precisa da chave especial e da barra de extensão do kit. O manual não dá tabela por carga: dá mole, padrão e duro, e este perfil leva os PADRÃO. Confirmar sempre pelo sag.',
+    front: {
+      preload: mm(15),
+      comp:    cl_h(6),
+      reb:     cl_h(6),
+    },
+    rear: {
+      preload: pos('Anel com 7 entalhes; a posição 4 é a de fábrica (1 mais mole, 7 mais dura)', '4/7'),
+      comp:    na('O amortecedor não tem regulação de compressão'),
+      reb:     tu_h(1),
+    },
   },
   {
     id: 'yamaha_mt10_2016',
