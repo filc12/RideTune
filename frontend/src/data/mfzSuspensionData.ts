@@ -257,6 +257,26 @@ const CFMOTO: MfzProfile[] = [
 // ─────────────────────────────────────────────
 const HONDA: MfzProfile[] = [
   {
+    id: 'honda_xadv_2021',
+    brand: 'Honda', model: 'X-ADV', year: '2021+',
+    baseKg: 75,
+    source: 'Manual do proprietário Honda X-ADV 750 (oficial), pág. 111-113',
+    formula: 'honda',
+    dataQuality: 'oem_manual',
+    countNote: 'À frente: a precarga conta-se em VOLTAS a partir do mais mole (7 de fábrica, das 15 que o afinador tem) e a extensão em VOLTAS a partir do mais DURO (2 de fábrica, com a marca do afinador alinhada com a marca de referência). As duas bengalas têm de ficar iguais. Atrás, a precarga é por anel com 10 posições numeradas, a 4 de fábrica.',
+    notes: 'A X-ADV estava marcada como `fixed`, o que fazia a app mostrar só precarga traseira. Tem precarga E extensão à frente — só a compressão é que não existe.\n\nA precarga da frente mexe-se com a chave de caixa do kit; a extensão precisa do afinador BFR, também do kit. Atrás é chave de pinos mais barra de extensão.\n\nO manual avisa que não se deve saltar direto da posição 1 para a 10 nem ao contrário — passa-se pelas intermédias, ou estraga-se o amortecedor. As posições 1 a 3 são mais moles que a de fábrica e as 5 a 10 mais duras.\n\nO amortecedor tem azoto a alta pressão: não desmontar. Confirmar sempre pelo sag.',
+    front: {
+      preload: tu_s(7),
+      comp:    na('A forquilha não tem afinador de compressão'),
+      reb:     tu_h(2),
+    },
+    rear: {
+      preload: pos('Anel com 10 posições; a 4 é a de fábrica (1 a 3 mais moles, 5 a 10 mais duras)', '4/10'),
+      comp:    na('O amortecedor não tem afinador de compressão'),
+      reb:     na('O amortecedor não tem afinador de extensão'),
+    },
+  },
+  {
     id: 'honda_transalp_2023',
     brand: 'Honda', model: 'XL750 Transalp', year: '2023-2024',
     baseKg: 75, source: 'mfzstudio.com/moto/honda/', formula: 'cfmoto_interp',
@@ -1427,6 +1447,26 @@ const TRIUMPH: MfzProfile[] = [
       { kg: 75,  fPre: 4, fComp: 15, fReb: 15, rComp: 20, rReb: 16 },
       { kg: 150, fPre: 4, fComp: 15, fReb: 15, rComp: 10, rReb: 10 },
     ],
+  },
+  {
+    id: 'triumph_tiger_sport_660',
+    brand: 'Triumph', model: 'Tiger Sport 660', year: '2022+',
+    baseKg: 75,
+    source: 'Manual del propietario Triumph Trident y Tiger Sport (ES, oficial), pág. 134-137',
+    formula: 'suzuki',
+    dataQuality: 'oem_manual',
+    countNote: 'Só há um afinador na moto: a precarga traseira, por manípulo ao lado do amortecedor, alcançável pelo lado ESQUERDO. Roda para o lado direito da moto para endurecer, para o esquerdo para aliviar. Conta-se em cliques desde a posição toda para a esquerda, e o primeiro batente já conta como 1.',
+    notes: 'A suspensão da frente NÃO é regulável, e não é omissão do manual: está escrito com todas as letras, «la suspensión delantera no es ajustable». O nível `adj: "fixed"` do catálogo estava certo — esta é das poucas em que o default acertou, e agora tem fonte.\n\nO manual dá quatro estados de carga para a precarga traseira: só piloto no MÍNIMO, só piloto com acessórios ou carga a 30 cliques, piloto com passageiro no MÁXIMO e piloto com passageiro e carga também no MÁXIMO. Não publica o total de cliques do afinador, por isso o mínimo e o máximo ficam sem número absoluto — só o valor intermédio é que é numerado.\n\nCUIDADO ao ler este manual: cobre a Trident e a Tiger Sport lado a lado e as duas têm sistemas DIFERENTES. A Trident usa anel roscado com chave em C e sete posições numeradas (1 no mínimo, 7 no máximo); a Tiger Sport usa manípulo com cliques. As tabelas estão uma por baixo da outra na mesma página. Confirmar sempre pelo sag.',
+    front: {
+      preload: na('A Triumph escreve que a suspensão da frente não é regulável'),
+      comp:    na('A Triumph escreve que a suspensão da frente não é regulável'),
+      reb:     na('A Triumph escreve que a suspensão da frente não é regulável'),
+    },
+    rear: {
+      preload: pos('Mínimo a solo; 30 cliques com carga; máximo com passageiro', 'MÍN'),
+      comp:    na('O amortecedor não tem afinador de compressão'),
+      reb:     na('O amortecedor não tem afinador de extensão'),
+    },
   },
   {
     id: 'triumph_street_triple_rs',

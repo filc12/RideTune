@@ -2257,3 +2257,48 @@ que é a via que já funcionou três vezes.
 
 **Estado:** 98 perfis. Motos visíveis sem perfil: 31, das quais **6** no default cru — as
 duas Honda, as duas Voge, a Tiger Sport 660 e a DesertX V2.
+
+### X-ADV e Tiger Sport 660: uma correção e uma confirmação
+
+**Honda X-ADV: mais uma que estava ao contrário.** Estava em `fixed`, ou seja, a app
+mostrava-lhe só precarga traseira. O manual (pág. 111-113) dá-lhe **precarga E extensão à
+frente** — só a compressão é que não existe:
+
+| | Unidade | Fábrica | Conta de |
+|---|---|---|---|
+| Precarga frente | voltas | 7 (de 15) | mole |
+| Extensão frente | voltas | 2 | duro |
+| Precarga trás | posição | 4 de 10 | — |
+
+A extensão da frente tem uma marca de punção no afinador que deve ficar alinhada com uma
+marca de referência quando está nas 2 voltas — dá para confirmar a olho sem contar.
+
+Duas notas de ferramenta: a precarga da frente mexe-se com a chave de caixa do kit, a
+extensão precisa do **afinador BFR**, também do kit. E o manual avisa para **não saltar
+direto da posição 1 para a 10** da precarga traseira, nem ao contrário — passa-se pelas
+intermédias ou estraga-se o amortecedor.
+
+**Tiger Sport 660: o default estava certo, e agora tem fonte.** É a primeira vez nesta
+série de auditorias que a heurística acerta. O manual não deixa margem: *«la suspensión
+delantera no es ajustable»*. Só há um afinador na moto inteira, a precarga traseira, por
+manípulo ao lado do amortecedor alcançável pelo lado esquerdo.
+
+O manual dá quatro estados de carga: só piloto no **mínimo**, só piloto com carga a **30
+cliques**, e com passageiro no **máximo** — com ou sem carga. Não publica o total de
+cliques do afinador, por isso o mínimo e o máximo ficam sem número absoluto. Só o valor
+do meio é que é numerado, e ficou no perfil.
+
+**Armadilha deste manual:** cobre a **Trident e a Tiger Sport lado a lado**, com tabelas
+uma por baixo da outra na mesma página, e **os dois sistemas são diferentes**. A Trident
+usa anel roscado com chave em C e sete posições numeradas (1 mínimo, 7 máximo); a Tiger
+Sport usa manípulo com cliques e escala não numerada. Quem leia a tabela errada põe «7»
+numa moto que não tem posição 7.
+
+**Estado:** 100 perfis. Motos visíveis sem perfil: 29, das quais **4** no default cru —
+Honda NC750X, as duas Voge e a DesertX V2.
+
+**Nota de manutenção deste documento e do `bikes.ts`:** o cabeçalho do `bikes.ts` ainda diz
+que no manualslib «as páginas são imagem e o texto não é extraível». Isso é verdade para a
+via que estava a ser usada na altura, mas já não é a história toda — ver a secção mais
+acima: as páginas servidas em HTML **dão texto**, o que não dão são tabelas alinhadas.
+Vale a pena corrigir esse comentário quando alguém lá mexer.

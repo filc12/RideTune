@@ -234,7 +234,9 @@ export const BIKES: Bike[] = [
   { id: "honda-transalp-2026", brand: "Honda", model: "XL750 Transalp (2026+)",     cc: "755cc",  category: "adventure", adj: "full",  mfzProfileId: "honda_transalp_2026" },
   // NC750X: front non-adjustable, rear preload ring only
   { id: "honda-nc750x",      brand: "Honda", model: "NC750X",                       cc: "745cc",  category: "adventure", adj: "fixed"   },
-  { id: "honda-xadv",        brand: "Honda", model: "X-ADV",                        cc: "745cc",  category: "adventure", adj: "fixed"   },
+  // X-ADV: estava em `fixed` (só precarga traseira). O manual (pág. 111-113) dá precarga
+  // E extensão à frente — só compressão é que não tem. Atrás, precarga em 10 posições.
+  { id: "honda-xadv",        brand: "Honda", model: "X-ADV",                        cc: "745cc",  category: "adventure", adj: "fixed",   mfzProfileId: "honda_xadv_2021", adjusters: { fPre: true, fComp: false, fReb: true, rPre: true, rComp: false, rReb: false } },
   // Fireblade (2024+): manual oficial CBR1000RR-R Fireblade SP 2025. Öhlins Smart EC —
   // "the system continually adjusts compression and rebound damping levels according to
   // the riding situation. You can adjust the front and rear suspension preload manually."
@@ -432,7 +434,9 @@ export const BIKES: Bike[] = [
   // Tiger 900 GT: Showa preload+rebound, no compression
   { id: "triumph-tiger-900-gt",     brand: "Triumph", model: "Tiger 900 GT",          cc: "888cc",  category: "adventure",     adj: "partial", mfzProfileId: "triumph_tiger900_gt" },
   // Tiger Sport 660: Showa front preload only + rear preload only — no rebound/compression at all
-  { id: "triumph-tiger-sport-660",  brand: "Triumph", model: "Tiger Sport 660",       cc: "660cc",  category: "sport_touring", adj: "fixed"   },
+  // Tiger Sport 660: o default de `fixed` estava certo e agora tem fonte. O manual diz
+  // com todas as letras que «la suspensión delantera no es ajustable». Só precarga atrás.
+  { id: "triumph-tiger-sport-660",  brand: "Triumph", model: "Tiger Sport 660",       cc: "660cc",  category: "sport_touring", adj: "fixed", mfzProfileId: "triumph_tiger_sport_660", adjusters: { fPre: false, fComp: false, fReb: false, rPre: true, rComp: false, rReb: false } },
   // Street Triple RS: Showa 41 mm BPF com compressão + extensão + precarga; atrás Öhlins
   // STX40 com compressão e extensão — mas a PRÉ-CARGA TRASEIRA NÃO É REGULÁVEL, e não é
   // omissão: o Owner's Handbook põe-no em caixa de aviso (pág. 176). A ficha comercial
