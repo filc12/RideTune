@@ -2123,3 +2123,43 @@ PADRÃO, e por isso não tem `weightPoints`.
 **Estado:** 96 perfis. Motos visíveis sem perfil: 33, das quais 11 no default cru. Em
 `adj: "full"` sem `adjusters` sobra **uma**: a DesertX V2, que continua sem manual porque
 é a 890 de 2026 e não existe ficheiro público que eu tenha encontrado.
+
+### Duas auditorias sem manual nenhum, e um erro meu revertido
+
+**Auditoria 1 — a lição da Speed Triple aplicada aos outros Triumph.** Depois de descobrir
+que a Triumph parte a afinação da frente em duas tabelas separadas (uma só de pré-carga) e
+que por isso tínhamos escrito «o manual não publica» quando publicava, varri os perfis
+todos à procura de pré-cargas marcadas como `pos`.
+
+**Nenhum outro Triumph tem o mesmo problema.** A Scrambler 1200 XE e a Tiger 900 Rally Pro
+dizem «de fábrica no mínimo» e a Tiger 900 GT dá a escala por carga — são valores do
+manual, não ausências. O único caso que restava era a pré-carga TRASEIRA da Speed Triple,
+já resolvido acima.
+
+De caminho ficou a lista completa das 60 e tal pré-cargas em `pos` no catálogo, e a maioria
+são legítimas: comprimento de mola (Aprilia, Kawasaki, Macbor, QJ), posição numerada
+(Suzuki, Honda, Yamaha XT1200Z), sag em mm (BMW) ou anel que exige ferramenta especial
+(Suzuki DR-Z, GSX-R1000R). Só as Voge e três QJ é que são ausências verdadeiras.
+
+**Auditoria 2 — e aqui apanhei-me a mim.** Ao rever as pressões, dei conta de que 21 linhas
+já verificadas por manual têm a coluna de «carregado» a `null`. Fui ver se era lacuna.
+**Não é: o `null` tem significado no código.**
+
+```ts
+frontLoadedBar:  number | null;  // null = igual ao solo
+```
+
+E o ecrã `pneus.tsx` usa-o mesmo: `{loadedBar !== null && (...)}` — com `null`, o cartão
+«Carregado» **não aparece**; com valor, aparece a laranja de aviso (`C.warn`).
+
+**Ou seja, a alteração que eu tinha feito à ZX-10R estava errada.** Tinha preenchido as
+duas colunas com o mesmo número (2,5 e 2,9) achando que era mais honesto do que deixar
+`null`. O efeito real na app é pior: mostra um cartão «Carregado» **a laranja de aviso**
+com o mesmo valor do solo, o que sugere ao condutor que há uma pressão diferente a
+respeitar quando não há. Revertido para `null`, que é a convenção da casa.
+
+A Voge 625 DSX fica como está — ali os valores são mesmo diferentes (2,2 a solo, 2,5 a
+dois), portanto o cartão deve aparecer.
+
+**Lição:** antes de escolher entre `null` e um valor repetido, ver o que o consumidor faz
+com o `null`. Neste projeto está documentado no tipo, à distância de um grep.
