@@ -1581,16 +1581,16 @@ const VOGE: MfzProfile[] = [
     },
     rear: {
       preload: pos('Posição de entrega; +2 voltas com 3 malas, +3 a dois com malas', 'entrega'),
-      comp:    cl_s(10),
-      reb:     cl_s(10),
+      comp:    cl_h(10),
+      reb:     cl_h(10),
     },
     weightPoints: [
       { kg: 75,  rComp: 10, rReb: 10 },
       { kg: 115, rComp: 8,  rReb: 8  },
       { kg: 190, rComp: 6,  rReb: 6  },
     ],
-    countNote: 'Atrás, ao contrário das outras Voge, a extensão e a compressão contam-se a partir do MOLE: anti-horário até ao fim, depois conta a apertar. A precarga traseira é em voltas a partir da posição de entrega, não a partir de um limite — por isso não tem número absoluto.',
-    notes: 'Cargas do manual: só piloto (extensão e compressão 10 cliques, precarga na posição de entrega), piloto com 3 malas (8±1 e 8, precarga +2 voltas) e piloto com passageiro e 3 malas (6±1 e 6, precarga +3 voltas). Confirmar sempre pelo sag.',
+    countNote: 'Atrás: extensão (ajustador 2, no corpo do amortecedor, lado esquerdo) e compressão (ajustador 3, no reservatório de gás) contam-se a partir do DURO — fechar até ao fim no sentido de endurecer e contar a abrir. A precarga traseira é em voltas a partir da posição de entrega, não a partir de um limite — por isso não tem número absoluto. Para encontrar a posição 1: apertar com 0,5 Nm até parar e voltar atrás com 0,5 Nm, até sentir a esfera cair na ranhura.',
+    notes: 'Cargas do manual: só piloto (extensão e compressão 10 cliques, precarga na posição de entrega), piloto com 3 malas (8±1 e 8, precarga +2 voltas) e piloto com passageiro e 3 malas (6±1 e 6, precarga +3 voltas). ATENÇÃO ao sentido de contagem: o manual escreve "anti-clockwise to limit, then clockwise by N positions", o que daria contagem a partir do mole e faria o amortecimento ALIVIAR com a carga — fisicamente ao contrário. Foi assumido erro de tradução e alinhado com a 800 DSX Rally, que tem o mesmo amortecedor e a mesma curva 10/8/6 a contar do duro. O mesmo manual tem um erro de tradução confirmado no ajustador 3, cujo título diz "compression damping" e o corpo do texto diz "returning damping" — a Voge inglesa não é de confiança nas etiquetas. O que o manual SIM confirma sem ambiguidade é a identidade dos afinadores: 2 = extensão, 3 = compressão (no reservatório), portanto não há troca entre os dois. Confirmar sempre pelo sag.',
   },
 ];
 

@@ -1571,6 +1571,41 @@ ter agido sobre uma leitura parcial, e o padrão repete-se aqui: tenho um argume
 físico forte e nenhum documento. Fica sinalizado no script, com a razão escrita, e
 resolve-se com o manual da DS 625X à frente — a mesma fonte que gerou a entrada.
 
+#### RESOLVIDO — agosto de 2026, com o manual DS 625X à frente
+
+O manual apareceu e **não deu a resposta limpa que eu esperava**. Vale a pena escrever o
+que ele diz mesmo, porque a conclusão não sai directamente do texto.
+
+O que o manual **confirma sem ambiguidade** é a identidade dos afinadores traseiros:
+ajustador **2** no corpo do amortecedor (lado esquerdo) é a **extensão**, ajustador **3**
+no reservatório de gás é a **compressão**. Portanto **não havia troca entre os dois** — a
+suspeita original, tal como estava formulada, estava errada. As curvas também batem
+certo: extensão 10 / 8±1 / 6±1 e compressão 10 / 8 / 6, para só piloto, piloto com 3
+malas e piloto com passageiro e 3 malas. Precarga na posição de entrega, +2 e +3 voltas.
+
+O problema é o **sentido de contagem**, e aí o manual diz, literalmente, para os dois
+afinadores: *«Turn the adjustor anti-clockwise to limit, then turn it clockwise by 10
+positions»* — e antes disso já tinha dito que anti-horário alivia. Lido à letra, é
+`cl_soft`, e a curva a descer significa que o manual manda **aliviar** o amortecimento à
+medida que se carrega a moto. Isso não se sustenta.
+
+**Decisão: `cl_hard`, alinhado com a 800 DSX Rally** (mesmo amortecedor, mesma curva
+10/8/6). O que me deu confiança para assumir erro de tradução não foi só a física — foi
+encontrar um **segundo erro do mesmo tipo na mesma página**: o título da secção diz
+*«The compression damping for rear shock absorber is adjustable»* e as duas linhas
+seguintes, a descrever o mesmo ajustador 3, dizem *«the returning damping gets weaker /
+stronger»*. O inglês deste manual troca etiquetas. Já tínhamos o mesmo padrão a morder-nos
+na 900 DSX, onde o 900dsx.com numerava os parafusos da forquilha ao contrário do manual.
+
+Ficou escrito na nota do perfil que o texto literal diz o contrário, para quem lá voltar
+não pensar que foi descuido. **Confirmar pelo sag** continua a ser a última palavra.
+
+**Também saiu do manual:** as pressões reais — 220 kPa à frente e atrás em solo, 250 kPa
+a dois. A tabela tinha estimativa de categoria com 2,9 bar atrás carregado, **0,7 bar a
+mais**. Corrigido e promovido a `oem_manual`.
+
+O `CONHECIDOS` do `verificar-coerencia` ficou vazio.
+
 **Como o script se comporta:** lista os casos já investigados com a explicação, e só sai
 com erro se aparecer uma suspeita **nova**. A lista de conhecidos não é para calar
 avisos — só entra lá o que já foi olhado.

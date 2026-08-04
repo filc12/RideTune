@@ -25,12 +25,8 @@ import { BIKES, ADJUSTERS_BY_LEVEL } from '../src/data/bikes';
  * Só entram aqui depois de alguém ter olhado para eles — não é para calar avisos.
  */
 const CONHECIDOS: Record<string, string> = {
-  'voge_625dsx:rComp':
-    'A curva desce (10, 8, 6) mas o tipo diz cl_soft. A 800 DSX Rally, do mesmo ' +
-    'fabricante, tem a MESMA curva declarada como cl_hard. Falta o manual da 625 para ' +
-    'decidir qual das duas entradas está errada — ver docs/pendentes.md.',
-  'voge_625dsx:rReb':
-    'Mesma situação da compressão traseira: curva a descer com tipo cl_soft.',
+  // (vazio) — a Voge 625 DSX saiu daqui em agosto de 2026, com o manual DS 625X à mão:
+  // passou a cl_hard, alinhada com a 800 DSX Rally. Ver a nota do perfil.
 };
 
 type Campo = [chave: string, eixo: 'front' | 'rear', afinador: string];
