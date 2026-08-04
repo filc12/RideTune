@@ -1843,3 +1843,66 @@ linha das pressões dela — a fonte diz, com todas as letras, «a nossa entrada
 
 **Estado:** 91 perfis. Motos visíveis sem perfil: 38, das quais 16 no default cru e 6 em
 `adj: "full"`. Pressões: 85 de 120 verificadas por manual.
+
+### Onde estão os manuais que faltam, e um caminho novo que funciona
+
+Duas descobertas, e a segunda é a que interessa.
+
+**As três BMW têm URL direto e estável.** O portal `manuals.bmw-motorrad.com` é uma
+SPA e não se navega por fetch, mas os PDFs estão num caminho fixo e previsível:
+
+```
+https://manuals.bmw-motorrad.com/manuals/BA-Extern/IN/BA-INTERNET-COM/PDF/<ficheiro>
+```
+
+| Moto | Ficheiro |
+|---|---|
+| S 1000 RR | `S_0E21_RM_0520_01.pdf` |
+| S 1000 R | `S_0E51_RM_1020_01.pdf` |
+| M 1000 RR | `S_0E71_RM_0920_01.pdf` |
+
+O padrão é `S_<código de tipo>_RM_<mês><ano>_<edição>.pdf`. Serve para qualquer BMW —
+foi assim que já tinha saído o `R_0M11_RM_0321_01.pdf` da R 1250 GS Adventure.
+
+**Estes PDFs abrem em texto por leitura remota, mas cortam antes da suspensão.** Testei
+o da S 1000 RR: sai texto limpo, sem OCR, mas a extração pára por volta da página 103 de
+~240. O capítulo de afinação está nas páginas **107 a 112** — falhou por quatro páginas.
+Confirmei o que lá está pelo índice e pela vista geral: a S 1000 RR tem os seis
+afinadores (`Rebound-stage damping` e `Compression-stage damping` à frente e atrás, mais
+pré-carga nas duas pontas) e um **amortecedor de direção**. Isso já chega para o
+`adjusters`, mas os valores de fábrica exigem o ficheiro em disco.
+
+**A descoberta que muda o resto: o manualslib.com dá texto.** Isto contradiz o que estava
+escrito acima sobre o manualpdf.pt (imagens) e o ownersmanuals2.com (anti-robô). O
+manualslib serve **uma página por URL**, com `?page=N`, e o texto do manual vem no HTML —
+tabelas incluídas. Sem verificação, sem OCR.
+
+Testado na Street Triple: a página 160 do *Owner's Handbook* traz as **tabelas de afinação
+da frente das três versões** (R, R-LRH e RS), com as cinco linhas de utilização — Track,
+Sport, Solo Riding Road, Comfort, Rider and Passenger.
+
+**Não copiei os números, e é de propósito.** A tabela vem achatada em texto corrido e a
+ordem das colunas fica ambígua: os cabeçalhos «Compression Damping» e «Rebound Damping»
+saem interleaved, e os expoentes das notas de rodapé (1 = voltas a apertar desde o
+mole; 2 = voltas a abrir desde o duro) colam-se à coluna errada. São **quinze números por
+versão** e trocar duas colunas dá exatamente o tipo de erro que a Tiger 900 e a Voge 625
+já custaram. Precisa de ser lido com a página à vista, não inferido do texto achatado.
+
+**O que isto abre:** as páginas de afinação de quase todas as motos que faltam estão
+neste site, legíveis. O custo é um fetch por página e leitura cuidada das tabelas.
+Índices já localizados na Street Triple (manual de 210 páginas):
+
+| Página | Secção |
+|---|---|
+| 159 | Suspension |
+| 160-161 | Front Suspension Spring Preload Adjustment |
+| 162 | Front Suspension Rebound and Compression Damping Adjustment |
+| 164 | Rear Suspension Spring Preload Adjustment |
+| 165 | Rear Suspension Rebound Damping Adjustment |
+| 166-167 | Rear Suspension Compression Damping Adjustment |
+
+**Nota sobre a pré-carga traseira**, que é o buraco da Speed Triple e da Street Triple:
+existe secção própria para ela (pág. 164), o que sugere que é ajustável e documentada.
+Mas apareceu numa busca a frase de que na RS *não* é ajustável pelo condutor — vinda de
+um resumo de motor de busca, não de página lida. **Não vale nada até alguém abrir a
+página 164.** Fica como a primeira coisa a fazer por esta via.
