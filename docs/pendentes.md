@@ -2042,3 +2042,47 @@ procurar a caixa de aviso lá antes de assumir.
 **Estado:** 95 perfis, 88 afinadores com tabela por carga verificados. Motos visíveis sem
 perfil: 34, das quais 12 no default cru. Em `adj: "full"` sem `adjusters` sobram **duas**:
 DesertX V2 e MT-10.
+
+### O buraco da Speed Triple fecha-se — e o manual que o fechou já cá estava
+
+Depois de a Street Triple RS mostrar que a Triumph **escreve o aviso quando um afinador
+não existe**, voltei ao manual da Speed Triple 1200 RR/RS que já tínhamos em disco desde o
+início. Duas coisas.
+
+**A primeira é um erro nosso.** O perfil dizia, na pré-carga da frente, «o manual não
+publica um valor de fábrica». **Publica.** Está na página 141, numa tabela própria de
+«Spring Preload Settings», separada da tabela de amortecimento — e é por isso que passou
+despercebida na primeira leitura, que foi à tabela de compressão e retorno:
+
+| | Pré-carga da frente |
+|---|---|
+| Speed Triple 1200 RS | **4 voltas** |
+| Speed Triple 1200 RR | 7 voltas |
+
+Constante nas cinco colunas, incluindo a dois — a Triumph não a faz variar. Corrigido de
+`pos` para `tu_soft(4)` e acrescentado aos `weightPoints`.
+
+**Lição de método:** a Triumph parte a afinação da frente em **duas tabelas separadas**,
+uma só de pré-carga e outra de amortecimento. Quem for à segunda e parar, conclui que a
+primeira não existe. Aconteceu-nos aqui, e provavelmente vale a pena reconferir os outros
+perfis Triumph pela mesma razão.
+
+**A segunda é a pré-carga traseira, que era o buraco.** Não apareceu número — mas deixou
+de ser dúvida sobre se existe. O manual diz, na abertura da secção da RS:
+
+> *«The Speed Triple 1200 RS front and rear suspension is manually adjustable for spring
+> preload, rebound and compression damping.»*
+
+E, ao contrário da Street Triple RS e da Street Triple R, **não há caixa de aviso** a dizer
+que não é regulável pelo condutor. Agora que sabemos que a Triumph escreve esse aviso
+quando o afinador não existe, a ausência dele aqui é **informação, não silêncio**.
+
+**Conclusão: `pos` era a leitura certa, e agora tem fundamento em vez de ser prudência.**
+A pré-carga traseira da Speed Triple RS existe, é manual, e a Triumph simplesmente não lhe
+publica valor de fábrica em lado nenhum — nem na tabela do amortecedor, nem no capítulo de
+afinação, nem no manual de oficina. Fica escrito na nota do perfil para quem lá voltar não
+repetir a investigação.
+
+**Estado:** 95 perfis, 89 afinadores com tabela por carga verificados (era 88). Motos
+visíveis sem perfil: 34, das quais 12 no default cru. Em `adj: "full"` sem `adjusters`
+sobram duas: DesertX V2 e MT-10.
