@@ -475,8 +475,10 @@ export const BIKES: Bike[] = [
   // Tracer 9 GT+: suspensão semi-ativa KADS (KYB Actimatic). Compressão/extensão são
   // eletrónicas — não há clickers manuais. Só a precarga traseira é manual.
   { id: "yamaha-tracer9",    brand: "Yamaha", model: "Tracer 9 GT+",          cc: "890cc", category: "sport_touring", adj: "full",    adjusters: { fPre: false, fComp: false, fReb: false, rPre: true, rComp: false, rReb: false } },
-  // MT-10: "fully adjustable KYB suspension — front and rear". yamahamotorsports.com
-  { id: "yamaha-mt10",       brand: "Yamaha", model: "MT-10",                 cc: "998cc", category: "naked",         adj: "full"    },
+  // MT-10 (MTN1000G): KYB mecânica nas duas pontas, os seis afinadores confirmados no
+  // manual do proprietário B67-28199-200. Atrás tem ainda compressão RÁPIDA e LENTA
+  // separadas. Não confundir com a MT-10 SP (MTN1000D/DP), que é Öhlins ERS eletrónica.
+  { id: "yamaha-mt10",       brand: "Yamaha", model: "MT-10",                 cc: "998cc", category: "naked",         adj: "full",    mfzProfileId: "yamaha_mt10_2016", adjusters: { fPre: true, fComp: true, fReb: true, rPre: true, rComp: true, rReb: true } },
   // MT-09: KYB front preload+rebound, rear preload+rebound — no compression either end
   { id: "yamaha-mt09",       brand: "Yamaha", model: "MT-09",                 cc: "890cc", category: "naked",         adj: "partial" },
   // MT-07: KYB front non-adjustable, rear preload+rebound

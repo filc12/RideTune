@@ -2086,3 +2086,40 @@ repetir a investigação.
 **Estado:** 95 perfis, 89 afinadores com tabela por carga verificados (era 88). Motos
 visíveis sem perfil: 34, das quais 12 no default cru. Em `adj: "full"` sem `adjusters`
 sobram duas: DesertX V2 e MT-10.
+
+### MT-10: à terceira, e tem seis afinadores mais um sétimo
+
+Chegaram dois manuais errados antes deste — os dois da **MT-10 SP** (`MTN1000D` e
+`MTN1000DP`), que é Öhlins ERS **eletrónica**, com compressão e extensão pelo painel
+(`Fr COM`, `Fr REB`, `Rr COM`, `Rr REB`) e só a pré-carga à mão. O que serve é o
+`MTN1000G`, código de publicação **B67-28199-200**. **A letra a seguir a MTN1000 é o que
+distingue as duas motos** — vale a pena escrever isto, porque o nome do ficheiro não
+distingue nada.
+
+**A MT-10 de série tem sete afinadores, não seis.** Atrás, a compressão está partida em
+**rápida** e **lenta**, com unidades diferentes: a rápida em **voltas** (3 do duro) e a
+lenta em **cliques** (12 do duro). Foram para `hsComp` e `lsComp`, como nas Kove e nas
+KTM de rali. O `comp` normal ficou com o valor da lenta, que é a que o condutor mexe.
+
+E as unidades trocam de ponta para ponta, o que é típico da Yamaha:
+
+| | Unidade | Padrão | Conta a partir de |
+|---|---|---|---|
+| Pré-carga frente | voltas | 9 | mole |
+| Compressão frente | cliques | 17 | duro |
+| Extensão frente | cliques | 6 | duro |
+| Pré-carga trás | **milímetros** | 81,5 mm (distância A) | — |
+| Compressão lenta trás | cliques | 12 | duro |
+| Compressão rápida trás | voltas | 3 | duro |
+| Extensão trás | cliques | 11 | duro |
+
+A pré-carga traseira não se conta: mede-se o comprimento da mola montada, e mais comprida
+é mais dura. Margens 77,5 a 85,5 mm. Precisa da chave especial do kit suplementar, e a
+contraporca aperta a 25 Nm contra o anel.
+
+**O manual não dá tabela por carga** — dá mole, padrão e duro. Este perfil leva os
+PADRÃO, e por isso não tem `weightPoints`.
+
+**Estado:** 96 perfis. Motos visíveis sem perfil: 33, das quais 11 no default cru. Em
+`adj: "full"` sem `adjusters` sobra **uma**: a DesertX V2, que continua sem manual porque
+é a 890 de 2026 e não existe ficheiro público que eu tenha encontrado.

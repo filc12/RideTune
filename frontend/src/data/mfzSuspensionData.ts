@@ -1550,6 +1550,28 @@ const YAMAHA_EXTRA: MfzProfile[] = [
     countNote: 'Fechar o afinador até ao fim no sentido de endurecer e contar a abrir. Frente: compressão 17 cliques, extensão 7 cliques; precarga ao contrário — fechar até parar no sentido de aliviar e apertar 6 voltas. Atrás: extensão 12 cliques, compressão lenta 12 cliques, compressão rápida 3 voltas. Precarga traseira mede-se pela distância A, não por cliques.',
     notes: 'Valores standard do manual oficial, versão YZF-R1 (a R1M tem suspensão Öhlins eletrónica, com compressão e extensão ajustadas pelo ecrã — não é este perfil). Extremos do manual: frente precarga 0 a 15 voltas, compressão 23 a 1, extensão 14 a 1. Atrás extensão 23 a 1, compressão lenta 18 a 1, compressão rápida 5,5 a 0 voltas. Confirmar sempre pelo sag.',
   },
+  {
+    id: 'yamaha_mt10_2016',
+    brand: 'Yamaha', model: 'MT-10', year: '2016+',
+    baseKg: 75,
+    source: 'Manual do proprietário Yamaha MT-10 / MTN1000G (B67-28199-200, oficial), pág. 5-22 a 5-26',
+    formula: 'yamaha',
+    dataQuality: 'oem_manual',
+    countNote: 'À FRENTE: a compressão e a extensão contam-se em CLIQUES a partir do mais duro (parafuso todo no sentido de endurecer, depois conta a abrir) e a pré-carga em VOLTAS a partir do mais mole, 9 voltas a endurecer. ATRÁS a pré-carga não se conta — mede-se a distância A da mola montada, 81,5 mm de fábrica; mais comprida é mais dura. A extensão traseira é em cliques do duro. A compressão traseira tem DOIS afinadores: a rápida em VOLTAS (3 do duro) e a lenta em CLIQUES (12 do duro).',
+    notes: 'MT-10 de série, KYB mecânica nas duas pontas. ⚠️ NÃO CONFUNDIR COM A MT-10 SP (MTN1000D/DP), que leva Öhlins ERS eletrónica com a compressão e a extensão reguladas pelo painel (Fr COM, Fr REB, Rr COM, Rr REB) e só a pré-carga à mão — se a SP entrar no catálogo, é entrada própria e do tipo eletrónico, como a Multistrada V4 S e a Tiger 1200.\n\nMargens de fábrica, do mole ao duro: à frente, pré-carga 0 a 15 voltas, extensão 14 a 1 cliques, compressão 23 a 1 cliques. Atrás, distância A de 77,5 a 85,5 mm, extensão 23 a 1 cliques, compressão rápida 5,5 a 0 voltas e compressão lenta 18 a 1 cliques.\n\nO amortecedor tem azoto a alta pressão — o manual avisa para não o desmontar nem o deitar fora sem passar por concessionário. A pré-carga traseira precisa da chave especial do kit de ferramentas suplementar, e a contraporca aperta a 25 Nm contra o anel.\n\nO manual não dá tabela por carga: dá mole, padrão e duro. Os valores deste perfil são os PADRÃO. Confirmar sempre pelo sag.',
+    front: {
+      preload: tu_s(9),
+      comp:    cl_h(17),
+      reb:     cl_h(6),
+    },
+    rear: {
+      preload: mm(81.5),
+      comp:    cl_h(12),
+      reb:     cl_h(11),
+      hsComp:  tu_h(3),
+      lsComp:  cl_h(12),
+    },
+  },
 ];
 
 // ─────────────────────────────────────────────
