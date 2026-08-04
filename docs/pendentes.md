@@ -2220,3 +2220,40 @@ valor. Está marcado como tal no perfil.
 | Ducati DesertX V2 | É a 890 de 2026; não encontrei manual publicado |
 
 **Estado:** 98 perfis. Motos visíveis sem perfil: 31, das quais 7 no default cru.
+
+### 390 Adventure fechada e Versys 650 com uma ausência confirmada
+
+**390 Adventure: o número que faltava apareceu.** O manual de 2022 (art. 3214576en) tem a
+secção 12.5 inteira. A extensão traseira é **10 cliques** do duro no standard — 15 em
+Comfort, 5 em Sport, 10 com carga máxima. Os dois manuais lidos, 2022 e 2023, dão
+exatamente os mesmos valores em todas as casas, o que é uma verificação cruzada de graça.
+
+Ficou também uma nota que só o manual de 2022 traz: **a precarga traseira tem 10 posições**,
+não é contínua. O perfil passou a `oem_manual` completo — só a precarga da frente é que
+não existe, e isso é a moto, não é lacuna.
+
+**Versys 650 (KLE650J): três afinadores, não quatro.** O manual do proprietário português
+`99824-0018` é um daqueles calhamaços multi-modelo da Kawasaki, e a leitura tem de ser
+feita com atenção aos códigos:
+
+- **Frente**, pág. 1192-1193: precarga no topo da bengala **esquerda**, extensão no topo da
+  **direita**. Sem compressão.
+- **Trás**, pág. 1231: precarga por afinador no suporte do poisa-pés traseiro direito.
+
+**A extensão traseira não existe**, e isto tem de ser lido com cuidado porque a evidência é
+pela negativa. O bloco do amortecedor tem o título «Amortecedor da suspensão traseira
+(KLE650J, KLZ1100A/B, ZX1100H)», mas a subsecção da extensão, **dentro desse mesmo bloco**,
+é titulada «Afinação da força de recuperação do amortecedor **(KLZ1100A/B, ZX1100H)**» — e
+omite a KLE650J. É a convenção do manual: quando uma subsecção só serve parte do grupo, os
+códigos são repetidos. Noutro sítio, quando serve todos os equipados, escreve «(modelos
+equipados)». A omissão aqui é deliberada.
+
+O default `partial` acertava em três e falhava na quarta.
+
+**Não saiu perfil da Versys 650**, e a razão é chata: os valores «Standard» deste manual
+vivem dentro de figuras, não de texto, e saem em branco na extração. Ficam os afinadores,
+que é o que estava a faltar. Para os números seria preciso o *service manual* Kawasaki,
+que é a via que já funcionou três vezes.
+
+**Estado:** 98 perfis. Motos visíveis sem perfil: 31, das quais **6** no default cru — as
+duas Honda, as duas Voge, a Tiger Sport 660 e a DesertX V2.

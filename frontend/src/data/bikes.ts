@@ -258,7 +258,13 @@ export const BIKES: Bike[] = [
   // ===== Kawasaki =====
   { id: "kawasaki-versys-1000", brand: "Kawasaki", model: "Versys 1000 SE",  cc: "1043cc", category: "adventure",     adj: "full",    mfzProfileId: "kawasaki_versys1000se_kecs" }, // KECS Skyhook electronic
   // Versys 650: front preload+rebound, rear preload+rebound — no compression either end
-  { id: "kawasaki-versys-650",  brand: "Kawasaki", model: "Versys 650",      cc: "649cc",  category: "adventure",     adj: "partial" },
+  // Versys 650 (KLE650J): manual do proprietário PT 99824-0018, pág. 1192-1193 e 1231.
+  // À frente, precarga no topo da bengala ESQUERDA e extensão no topo da DIREITA, sem
+  // compressão. Atrás só precarga, por afinador no suporte do poisa-pés traseiro direito:
+  // a subsecção de extensão do amortecedor, na mesma página, é titulada «(KLZ1100A/B,
+  // ZX1100H)» e NÃO inclui a KLE650J. Os valores standard vivem em figuras e não saem por
+  // extração de texto, por isso ficam só os afinadores.
+  { id: "kawasaki-versys-650",  brand: "Kawasaki", model: "Versys 650",      cc: "649cc",  category: "adventure",     adj: "partial", adjusters: { fPre: true, fComp: false, fReb: true, rPre: true, rComp: false, rReb: false } },
   // Ninja 1000SX: frente precarga+comp+ext; atrás precarga remota + extensão (sem compressão)
   { id: "kawasaki-1000sx",      brand: "Kawasaki", model: "Ninja 1000SX",    cc: "1043cc", category: "sport_touring", adj: "full",    adjusters: { fPre: true, fComp: true, fReb: true, rPre: true, rComp: false, rReb: true } },
   // Geração anterior (ZX1000WH/WJ): traseiro 190/50, não 190/55. Manual de oficina lido.
