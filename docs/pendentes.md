@@ -2000,3 +2000,45 @@ Speed Triple antes de assumir seja o que for.
 layout, como se fez com os manuais BMW e Kawasaki. Aí as colunas mantêm-se alinhadas. Ler
 página a página pelo HTML serve para **encontrar** e para **confirmar texto corrido** —
 não serve para tabelas de afinação.
+
+#### RESOLVIDO — o PDF em disco, e a tabela lê-se toda
+
+Chegou o *Owner's Handbook* completo e confirmou o que estava escrito acima: **por HTML as
+colunas não se leem, em disco leem-se todas**. A mesma tabela, extraída por layout, sai
+com os cabeçalhos por cima dos números e as notas de rodapé no sítio.
+
+E confirmou também que **eu tinha inferido bem a única coisa que me atrevi a inferir**: a
+coluna constante em 3,5 é mesmo a pré-carga da frente. As outras duas eram
+retorno 2/2/4/5,5/4 e compressão 1/2/5/7/5 — ou seja, se tivesse adivinhado, tinha 50%
+de hipóteses de trocar Track (retorno 2, compressão 1) e de pôr a moto ao contrário em
+pista.
+
+**A pré-carga traseira não existe, e é oficial.** O aviso que tinha aparecido na página da
+R aparece igual na da RS:
+
+> *«The rear suspension unit spring preload is not rider adjustable. Any attempt to adjust
+> the spring preload could result in a dangerous riding condition leading to loss of
+> motorcycle control, and an accident.»*
+
+Ficou `na` com a razão escrita, e o `adjusters` do catálogo passou a `rPre: false`. **A
+ficha comercial da Triumph diz «fully adjustable» para o Öhlins STX40** — é o erro do
+costume das fichas, e é o motivo pelo qual este catálogo se faz por manuais.
+
+**Um detalhe que só o manual dá:** na **RS** os afinadores COM e TEN estão no topo das
+DUAS bengalas; na **R** estão os dois só na bengala DIREITA. São motos diferentes na
+mesma página, e quem trocar afina metade da forquilha.
+
+Unidades: frente em **voltas**, trás em **cliques** com o primeiro batente a contar como 1
+— a mesma convenção da Speed Triple. Colunas de uso, à frente (retorno/compressão) e
+atrás: Track 2 e 1 / 8 e 7 · Sport 2 e 2 / 10 e 10 · Road 4 e 5 / 14 e 20 · Comfort 5,5 e
+7 / 20 e 20 · A dois 4 e 5 / 9 e 9. A pré-carga da frente é 3,5 voltas em todas.
+
+**Sobre a Speed Triple:** este manual reforça a hipótese mas continua a não a provar. A
+Street Triple RS e a Speed Triple 1200 RS são motos e manuais diferentes. O que mudou é
+que agora sabemos que a Triumph **escreve o aviso quando a pré-carga não existe** — logo,
+a ausência de aviso no manual da Speed Triple é informação, não silêncio. Vale a pena
+procurar a caixa de aviso lá antes de assumir.
+
+**Estado:** 95 perfis, 88 afinadores com tabela por carga verificados. Motos visíveis sem
+perfil: 34, das quais 12 no default cru. Em `adj: "full"` sem `adjusters` sobram **duas**:
+DesertX V2 e MT-10.

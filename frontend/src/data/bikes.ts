@@ -417,8 +417,10 @@ export const BIKES: Bike[] = [
   // Tiger Sport 660: Showa front preload only + rear preload only — no rebound/compression at all
   { id: "triumph-tiger-sport-660",  brand: "Triumph", model: "Tiger Sport 660",       cc: "660cc",  category: "sport_touring", adj: "fixed"   },
   // Street Triple RS: Showa 41 mm BPF com compressão + extensão + precarga; atrás Öhlins
-  // STX40 fully adjustable. Full nas duas pontas. triumphmotorcycles.com
-  { id: "triumph-st-rs",            brand: "Triumph", model: "Street Triple RS",      cc: "765cc",  category: "naked",         adj: "full"    },
+  // STX40 com compressão e extensão — mas a PRÉ-CARGA TRASEIRA NÃO É REGULÁVEL, e não é
+  // omissão: o Owner's Handbook põe-no em caixa de aviso (pág. 176). A ficha comercial
+  // dizia "fully adjustable", que é o erro do costume. Manual lido.
+  { id: "triumph-st-rs",            brand: "Triumph", model: "Street Triple RS",      cc: "765cc",  category: "naked",         adj: "full", mfzProfileId: "triumph_street_triple_rs", adjusters: { fPre: true, fComp: true, fReb: true, rPre: false, rComp: true, rReb: true } },
   // Speed Triple 1200 RS: Öhlins NIX30 Ø43 + Öhlins TTX36, ambos com precarga +
   // compressão + extensão MANUAIS. A Öhlins SmartEC (semi-ativa) é exclusiva da RR, não
   // desta RS — a dúvida anterior fica resolvida. triumphmotorcycles.com

@@ -1408,6 +1408,30 @@ const TRIUMPH: MfzProfile[] = [
       { kg: 150, fComp: 15, fReb: 15, rComp: 10, rReb: 10 },
     ],
   },
+  {
+    id: 'triumph_street_triple_rs',
+    brand: 'Triumph', model: 'Street Triple RS', year: '2020-2022',
+    baseKg: 75,
+    source: 'Owner’s Handbook Triumph Street Triple S / R / R-LRH / RS (ENG), pág. 173-176',
+    formula: 'cfmoto_interp',
+    dataQuality: 'oem_manual',
+    countNote: 'À FRENTE tudo em VOLTAS: a compressão (COM) e o retorno (TEN) contam-se a partir do mais duro — fechar no sentido horário até ao fim e contar a abrir. A pré-carga é ao contrário, 3,5 voltas a apertar desde a posição toda solta, com a chave Allen presa debaixo do assento do passageiro. ATRÁS é em CLIQUES, também a partir do duro, e o primeiro batente já conta como 1. A pré-carga traseira NÃO se regula.',
+    notes: 'Valores da coluna «Solo Riding - Road», que é como a moto sai da fábrica — o manual diz isso com todas as letras.\n\nA PRÉ-CARGA TRASEIRA NÃO É REGULÁVEL PELO CONDUTOR. Não é lacuna nossa: o manual põe-no em caixa de aviso, «any attempt to adjust the spring preload could result in a dangerous riding condition leading to loss of motorcycle control, and an accident». Vale para a RS e para a R. A R-LRH e a S de 660 é que têm, e só com Min/Max.\n\nREPARTIÇÃO PELAS BENGALAS: na RS os afinadores de compressão e de retorno estão no topo das DUAS bengalas — o manual mostra COM e TEN em cada uma. Na R estão os dois só na bengala DIREITA. Não confundir as duas motos.\n\nO manual dá mais três afinações por tipo de uso, à frente e atrás (retorno/compressão): Track 2 e 1 à frente, 8 e 7 atrás; Sport 2 e 2 à frente, 10 e 10 atrás; Comfort 5,5 e 7 à frente, 20 e 20 atrás. A pré-carga da frente fica sempre em 3,5 voltas, em todas as colunas.\n\nA dois, a frente não muda nada — só o amortecedor, que passa a 9 cliques nas duas vias. Confirmar sempre pelo sag.',
+    front: {
+      preload: tu_s(3.5),
+      comp:    tu_h(5),
+      reb:     tu_h(4),
+    },
+    rear: {
+      preload: na('A Triumph avisa que a pré-carga traseira não é regulável pelo condutor'),
+      comp:    cl_h(20),
+      reb:     cl_h(14),
+    },
+    weightPoints: [
+      { kg: 75,  fPre: 3.5, fComp: 5, fReb: 4, rComp: 20, rReb: 14 },
+      { kg: 150, fPre: 3.5, fComp: 5, fReb: 4, rComp: 9,  rReb: 9  },
+    ],
+  },
 ];
 
 const MACBOR: MfzProfile[] = [
