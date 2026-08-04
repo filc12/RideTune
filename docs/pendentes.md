@@ -1953,3 +1953,50 @@ pessoa. Não é afinação de parque de estacionamento, e a app devia dizê-lo.
 **Estado:** 94 perfis. Motos visíveis sem perfil: 35, das quais 13 no default cru. Em
 `adj: "full"` sem `adjusters` sobram **três**: DesertX V2, Street Triple RS e MT-10.
 Pressões continuam em 85 de 120 — a BMW não as publica no manual, o que já estava escrito.
+
+### Street Triple RS: o manualslib abre, as tabelas não se leem, e apareceu um aviso
+
+Fui pelo manualslib às páginas de suspensão do *Owner's Handbook* da Street Triple
+(manual `2611112`, 245 páginas, o mesmo de onde saíram as pressões da pág. 232). O site
+serve mesmo o texto. **Não escrevi um único número no catálogo, e explico porquê.**
+
+**As tabelas saem achatadas e a ordem das colunas muda entre extrações.** Puxei a mesma
+tabela da frente de duas edições diferentes do manual e os números vieram agrupados de
+maneiras incompatíveis. Na edição de 210 páginas a coluna constante aparecia no meio; na
+de 245 aparecia à cabeça. Os cabeçalhos «Compression Damping» e «Rebound Damping» vêm
+partidos em pedaços («Compress», «ion», «Damp-», «ing») e espalhados, e os expoentes das
+notas de rodapé desligam-se da coluna a que pertencem.
+
+Dá para inferir **uma** coisa com segurança, e só uma: na Street Triple RS a coluna que
+fica constante em **3,5** ao longo das cinco linhas é a pré-carga da frente — é a única
+que não faz sentido variar por tipo de utilização. As outras duas, com valores 2 / 2 / 4 /
+5,5 / 4 e 2 / 1 / 2 / 5 / 7, **não consigo atribuir**. Uma delas é compressão e a outra
+extensão, e trocá-las é o erro da Tiger 900 outra vez, numa moto de 765 cc que anda em
+pista. **Precisa da página à vista, não do texto achatado.**
+
+**O que a página 175 deu, e isso sim é sólido:** a tabela traseira da **Street Triple R**
+vem precedida de um aviso em caixa, citado à letra:
+
+> *«The rear suspension unit spring preload is not rider adjustable. Any attempt to adjust
+> the spring preload could result in a dangerous riding condition leading to loss of
+> motorcycle control, and an accident.»*
+
+E a tabela da R, ao contrário da da R-LRH que lhe está ao lado, **não tem coluna de
+pré-carga** — só compressão e extensão. A R-LRH tem, e é Min/Min/Min/Min/Max.
+
+**Porque é que isto interessa para lá da Street Triple:** é a primeira vez que apanhamos a
+Triumph a dizer, por escrito, que uma pré-carga traseira **não é regulável pelo condutor**
+em vez de simplesmente não a documentar. É exatamente o padrão do buraco da Speed Triple,
+descrito mais acima — tabela do amortecedor só com retorno e compressão, e nada sobre
+pré-carga. **Continua a não ser prova para a Speed Triple**, que é outra moto e outro
+manual, mas muda a hipótese mais provável: em vez de «anel roscado não documentado», passa
+a ser «pode simplesmente não existir». Vale a pena procurar este mesmo aviso no manual da
+Speed Triple antes de assumir seja o que for.
+
+**Não vi ainda a tabela traseira da RS** — está na página 176, e a 175 acaba na da R.
+
+**Como continuar por aqui, se alguém quiser:** o caminho é descarregar o PDF do manualslib
+(`/download/2611112/Triumph-Street-Triple-S.html`) e lê-lo em disco com extração por
+layout, como se fez com os manuais BMW e Kawasaki. Aí as colunas mantêm-se alinhadas. Ler
+página a página pelo HTML serve para **encontrar** e para **confirmar texto corrido** —
+não serve para tabelas de afinação.
