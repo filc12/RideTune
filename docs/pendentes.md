@@ -1906,3 +1906,50 @@ existe secção própria para ela (pág. 164), o que sugere que é ajustável e 
 Mas apareceu numa busca a frase de que na RS *não* é ajustável pelo condutor — vinda de
 um resumo de motor de busca, não de página lida. **Não vale nada até alguém abrir a
 página 164.** Fica como a primeira coisa a fazer por esta via.
+
+### As três BMW fechadas, e a BMW não conta a precarga como toda a gente
+
+Os três manuais chegaram e resolveram as três motos. O que demorou mais foi perceber que
+a BMW **não usa a mesma unidade que as outras marcas** em duas das seis casas.
+
+**A precarga não se conta.** Nem em voltas, nem em cliques, nem em milímetros de rosca à
+vista. A BMW prescreve o **sag**, com piloto de 85 kg em cima, e manda regular até lá
+chegar. Ficou como `pos` com o número na etiqueta, porque é o valor de fábrica e não uma
+lacuna:
+
+| | Sag à frente | Sag atrás |
+|---|---|---|
+| S 1000 RR | 40±2 mm | 35±2 mm (30±2 em pista) |
+| S 1000 R | 50 mm | 40 mm |
+| M 1000 RR | 35 mm | 30 mm |
+
+**O amortecimento da frente também não são cliques a contar de um limite** — são escalas
+graduadas pintadas nas bengalas, **amarela à esquerda para a compressão** e **vermelha à
+direita para a extensão**. A BMW diz «posição 5», não «5 cliques do duro». `pos` outra
+vez. Atrás é que se conta normalmente, a partir do duro: 5 cliques na RR e na M, 6 na R.
+
+Vale a pena reparar no que a tabela acima diz: a **M 1000 RR sai de origem exatamente nos
+valores que o manual da S 1000 RR reserva para a coluna de pista** — 35 e 30 mm. E a
+S 1000 R é a mais macia por larga margem, com 50 mm à frente.
+
+**Três avisos que ficaram nas notas:**
+
+A **S 1000 RR e a S 1000 R têm DDC como opção de fábrica**. Com DDC, o amortecimento é
+eletrónico e regula-se pelo menu — estes números não servem, só a precarga. A **M 1000 RR
+não tem versão com DDC**: o capítulo de afinação dela não tem sequer as variantes
+«with/without Dynamic Damping Control» que os outros dois manuais têm.
+
+A coluna de **pista da S 1000 RR não entrou nos weightPoints**, de propósito. Pista não é
+uma carga, é outra utilização, e misturar as duas coisas faria a app dar valores de pista
+a quem só engordou a mochila. Ficou escrita na nota.
+
+A **S 1000 R é a única com segunda carga**: a dois com bagagem, o amortecimento traseiro
+passa a 5 cliques nas duas vias. A frente não muda e a precarga continua a ser pelo sag.
+
+**Nota de método:** para mexer na precarga destas três é preciso elevador de motor — a
+BMW mede o sag com a moto ao alto e depois com o piloto em cima, com ajuda de segunda
+pessoa. Não é afinação de parque de estacionamento, e a app devia dizê-lo.
+
+**Estado:** 94 perfis. Motos visíveis sem perfil: 35, das quais 13 no default cru. Em
+`adj: "full"` sem `adjusters` sobram **três**: DesertX V2, Street Triple RS e MT-10.
+Pressões continuam em 85 de 120 — a BMW não as publica no manual, o que já estava escrito.

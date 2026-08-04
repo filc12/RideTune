@@ -1820,6 +1820,85 @@ const BMW_EXTRA: MfzProfile[] = [
     countNote: 'Só há afinadores atrás. Precarga: roda de ajuste até ao batente no sentido LOW e conta voltas para HIGH — 0 voltas só com piloto, 15 com carga, 30 com passageiro e carga. Extensão: parafuso até ao batente no sentido horário e conta cliques no sentido anti-horário — 8 só com piloto, 2 com carga ou com passageiro. Começa o ajuste pelo lado esquerdo da moto. À frente não há nada a mexer: o Telelever não tem afinadores.',
     notes: '⚠️ Este perfil é da R 1200 GS (código 0A01). A GS Adventure é o 0A02, com amortecedor e curso diferentes — os valores não se transferem. ⚠️ Se a tua moto tem Dynamic ESA, o amortecimento e a precarga regulam-se pelo ecrã e não por estes valores. O manual da BMW não dá pesos, dá três estados de carga; os kg deste perfil são a forma como os traduzimos para a app, mas os números dos afinadores são os do manual. A precarga é contínua (voltas), não tem cliques. Confirmar sempre pelo sag.',
   },
+  // ───────────────────────────────────────────
+  // As três desportivas de 999 cc. Manuais do condutor oficiais, do portal
+  // manuals.bmw-motorrad.com. Códigos de tipo: S 1000 RR = 0E21, S 1000 R = 0E51,
+  // M 1000 RR = 0E71.
+  //
+  // A BMW não conta a precarga em voltas nem em cliques em nenhuma das três: prescreve
+  // o SAG, em milímetros, com piloto de 85 kg. Por isso a precarga fica `pos` com o
+  // número de sag na etiqueta — é o valor de fábrica, não é lacuna.
+  //
+  // Os afinadores de amortecimento da frente são escalas GRADUADAS, não cliques a
+  // contar de um limite: compressão na escala AMARELA da bainha esquerda, extensão na
+  // escala VERMELHA da direita. Atrás é que se conta a partir do duro.
+  //
+  // baseKg = 85 nas três, porque é o piloto de referência da BMW.
+  // ───────────────────────────────────────────
+  {
+    id: 'bmw_s1000rr_2019',
+    brand: 'BMW', model: 'S 1000 RR', year: '2019+',
+    baseKg: 85,
+    source: 'Manual do condutor BMW S 1000 RR (código 0E21, ed. 05/2020, oficial), pág. 107-113',
+    formula: 'suzuki',
+    dataQuality: 'oem_manual',
+    countNote: 'A precarga das duas pontas não se conta — regula-se até a moto ficar com o sag prescrito, com o piloto em cima: 40±2 mm à frente e 35±2 mm atrás (30±2 mm em pista). À frente, a compressão lê-se na escala amarela da bainha ESQUERDA e a extensão na escala vermelha da DIREITA, ambas na posição 5. Atrás conta-se em CLIQUES a partir do duro: parafuso até ao batente no sentido +, depois 5 cliques para –.',
+    notes: 'Forquilha invertida de 45 mm. Os valores são os da versão SEM Dynamic Damping Control. ⚠️ Se a moto tem DDC (opção de fábrica), o amortecimento é eletrónico e regula-se pelo menu — estes números não se aplicam, só a precarga. O manual dá duas colunas, estrada e pista, ambas com piloto de 85 kg: em pista a compressão da frente sobe para a posição 7 (a extensão fica na 5), o sag traseiro baixa para 30±2 mm e a compressão e a extensão traseiras passam a 3 cliques. Não estão nos weightPoints de propósito — pista não é uma carga, é outra utilização. Para mexer na precarga é preciso elevador de motor: a BMW mede o sag com a moto ao alto e depois com o piloto em cima. Confirmar sempre pelo sag.',
+    front: {
+      preload: pos('Regular até 40±2 mm de sag com piloto de 85 kg', '40±2 mm'),
+      comp:    pos('Posição 5 da escala amarela, bainha esquerda (7 em pista)', 'pos. 5'),
+      reb:     pos('Posição 5 da escala vermelha, bainha direita', 'pos. 5'),
+    },
+    rear: {
+      preload: pos('Regular até 35±2 mm de sag com piloto de 85 kg (30±2 em pista)', '35±2 mm'),
+      comp:    cl_h(5),
+      reb:     cl_h(5),
+    },
+  },
+  {
+    id: 'bmw_s1000r_2021',
+    brand: 'BMW', model: 'S 1000 R', year: '2021+',
+    baseKg: 85,
+    source: 'Manual do condutor BMW S 1000 R (código 0E51, ed. 10/2020, oficial), pág. 120-127',
+    formula: 'cfmoto_interp',
+    dataQuality: 'oem_manual',
+    countNote: 'A precarga das duas pontas não se conta — regula-se até a moto ficar com o sag prescrito, com o piloto em cima: 50 mm à frente e 40 mm atrás. À frente, a compressão lê-se na escala amarela da bainha ESQUERDA e a extensão na escala vermelha da DIREITA, ambas na posição 4. Atrás conta-se em CLIQUES a partir do duro: parafuso até ao batente no sentido +, depois 6 cliques para –.',
+    notes: 'É a mais macia das três de série: sag maior nas duas pontas (50 e 40 mm contra 40 e 35 da RR) e escala da frente na posição 4 em vez da 5. Os valores são os da versão SEM Dynamic Damping Control. ⚠️ Se a moto tem DDC, o amortecimento é eletrónico e regula-se pelo menu. É a única das três cujo manual dá uma segunda carga: a dois com bagagem, o amortecimento traseiro passa a 5 cliques nas duas vias — a frente não muda, e a precarga continua a ser pelo sag. Confirmar sempre pelo sag.',
+    front: {
+      preload: pos('Regular até 50 mm de sag com piloto de 85 kg', '50 mm'),
+      comp:    pos('Posição 4 da escala amarela, bainha esquerda', 'pos. 4'),
+      reb:     pos('Posição 4 da escala vermelha, bainha direita', 'pos. 4'),
+    },
+    rear: {
+      preload: pos('Regular até 40 mm de sag, com piloto e com a carga que levar', '40 mm'),
+      comp:    cl_h(6),
+      reb:     cl_h(6),
+    },
+    weightPoints: [
+      { kg: 85,  rComp: 6, rReb: 6 },
+      { kg: 190, rComp: 5, rReb: 5 },
+    ],
+  },
+  {
+    id: 'bmw_m1000rr_2021',
+    brand: 'BMW', model: 'M 1000 RR', year: '2021+',
+    baseKg: 85,
+    source: 'Manual do condutor BMW M 1000 RR (código 0E71, ed. 09/2020, oficial), pág. 93-98',
+    formula: 'suzuki',
+    dataQuality: 'oem_manual',
+    countNote: 'A precarga das duas pontas não se conta — regula-se até a moto ficar com o sag prescrito, com o piloto em cima: 35 mm à frente e 30 mm atrás. À frente, a compressão lê-se na escala amarela da bainha ESQUERDA e a extensão na escala vermelha da DIREITA, ambas na posição 5. Atrás conta-se em CLIQUES a partir do duro: parafuso até ao batente no sentido +, depois 5 cliques para –.',
+    notes: 'É a mais dura das três de origem: 35 mm de sag à frente e 30 mm atrás, exatamente os valores que o manual da S 1000 RR reserva para a coluna de PISTA. Não há versão com DDC — o capítulo de afinação do manual da M não tem as variantes «with/without Dynamic Damping Control» que os outros dois têm, é tudo mecânico. O manual dá uma carga só, piloto de 85 kg. A M tem ainda ponto de articulação da forquilha traseira regulável em cinco posições e altura traseira regulável pelo tirante — nada disso está neste perfil, que só cobre os seis afinadores. Confirmar sempre pelo sag.',
+    front: {
+      preload: pos('Regular até 35 mm de sag com piloto de 85 kg', '35 mm'),
+      comp:    pos('Posição 5 da escala amarela, bainha esquerda', 'pos. 5'),
+      reb:     pos('Posição 5 da escala vermelha, bainha direita', 'pos. 5'),
+    },
+    rear: {
+      preload: pos('Regular até 30 mm de sag com piloto de 85 kg', '30 mm'),
+      comp:    cl_h(5),
+      reb:     cl_h(5),
+    },
+  },
 ];
 
 export const MFZ_PROFILES: MfzProfile[] = [

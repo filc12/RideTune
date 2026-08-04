@@ -169,10 +169,11 @@ export const BIKES: Bike[] = [
   { id: "bmw-f900-xr",       brand: "BMW", model: "F 900 XR (2020+)",      cc: "895cc",  category: "sport_touring", adj: "full", adjusters: { fPre: false, fComp: false, fReb: false, rPre: true, rComp: false, rReb: true } },
   // S 1000 RR / S 1000 R / M 1000 RR: forquilha invertida 45 mm com precarga + compressão +
   // extensão; atrás full floater pro com compressão + extensão + precarga. Full nas duas
-  // pontas — o default de `adj: "full"` está correto. bmwmotorcycles.com (technicaldata)
-  { id: "bmw-s1000rr",       brand: "BMW", model: "S 1000 RR",             cc: "999cc",  category: "sport",         adj: "full" },
-  { id: "bmw-s1000r",        brand: "BMW", model: "S 1000 R",              cc: "999cc",  category: "naked",         adj: "full" },
-  { id: "bmw-m1000rr",       brand: "BMW", model: "M 1000 RR",             cc: "999cc",  category: "sport",         adj: "full" },
+  // pontas — confirmado nos manuais do condutor oficiais (0E21, 0E51, 0E71), que dão os
+  // seis afinadores e os valores de fábrica. A precarga é prescrita em sag, não em voltas.
+  { id: "bmw-s1000rr",       brand: "BMW", model: "S 1000 RR",             cc: "999cc",  category: "sport",         adj: "full", mfzProfileId: "bmw_s1000rr_2019", adjusters: { fPre: true, fComp: true, fReb: true, rPre: true, rComp: true, rReb: true } },
+  { id: "bmw-s1000r",        brand: "BMW", model: "S 1000 R",              cc: "999cc",  category: "naked",         adj: "full", mfzProfileId: "bmw_s1000r_2021",  adjusters: { fPre: true, fComp: true, fReb: true, rPre: true, rComp: true, rReb: true } },
+  { id: "bmw-m1000rr",       brand: "BMW", model: "M 1000 RR",             cc: "999cc",  category: "sport",         adj: "full", mfzProfileId: "bmw_m1000rr_2021", adjusters: { fPre: true, fComp: true, fReb: true, rPre: true, rComp: true, rReb: true } },
 
   // ===== CF Moto =====
   // 800MT Sport/Explore: KYB fully adjustable front (preload+compression+rebound), rear (preload+rebound)
