@@ -3009,3 +3009,89 @@ utilizador — não há razão para guardar mais do que o necessário para ident
 
 **Ao ler os resultados, não tratar tudo como pedido:** uma pesquisa falhada tanto pode ser
 uma moto em falta como alguém a escrever mal o nome ou a procurar por cilindrada.
+
+---
+
+## 7 de agosto de 2026 — KTM: onde está a parede, e o primeiro manual a passá-la
+
+O bloco KTM é o maior que resta por confirmar: **17 perfis** ainda sem manual, numa marca
+com 14 utilizadores. O impedimento estava registado como «a leitura remota trunca antes do
+capítulo de afinação». Hoje ficou percebido exatamente onde.
+
+### A truncatura é por tamanho, e o corte cai por volta da página 62
+
+O `web_fetch` devolve cerca de **100 000 caracteres** e corta. Nos manuais KTM recentes o
+capítulo de afinação do chassis anda pela página 70 a 90 — **logo a seguir ao corte**. Não
+é uma questão de tentar outra vez nem outro espelho do mesmo PDF: o `ktmshop.se`, o
+`mobil.ktmshop.se` e o `print.ktm.com` servem o mesmo ficheiro.
+
+**Mas não é regra para todos.** O manual do 690 Enduro R de 2019 tem menos matéria antes
+do capítulo 10 e **coube**. Ou seja: vale sempre a pena tentar antes de pedir o ficheiro.
+Os manuais de modelo único e mais antigos passam; os recentes e multi-modelo não.
+
+### O documento «Setup instructions» não serve — e é bom saber para não o voltar a caçar
+
+A KTM publica, a par do manual, um PDF pequeno com o nome **Setup instructions** (sufixo
+`_SUI.pdf` em vez de `_OM.pdf`). Pelo nome parecia a resposta: pequeno, e sobre afinação.
+**Não é.** É o guia de montagem em concessionário antes da entrega — desempacotar, apertar
+o guiador, encher a bateria, regular o farol, binários de aperto. **Zero valores de
+suspensão.** Verificado no `25_3240261en` do 390 Adventure R.
+
+### 690 Enduro R 2019 — promovido a manual, e com uma correção
+
+Perfil `ktm_690_enduro_2019`, agora `oem_manual`, do manual art. **3213909en**, capítulo 10.
+
+**Os valores do mfzstudio batiam certo, todos.** Forquilha 15/15, amortecedor baixa 20,
+alta 2 voltas, recuperação 20 — é linha por linha a coluna «Standard» do manual. Boa
+notícia sobre a qualidade da fonte, mas não é razão para deixar de confirmar: foi
+precisamente ao confirmar que apareceu o erro.
+
+**A correção: a pré-carga traseira não existe.** O mfzstudio dava 18 mm. O manual não tem
+secção nenhuma de pré-carga — o capítulo 10 tem sete secções, nenhuma de mola — e a lista
+de comandos do capítulo 4 nomeia **quatro** afinadores: compressão e recuperação da
+forquilha, compressão e recuperação do amortecedor.
+
+**O teste que torna isto conclusivo em vez de argumento do silêncio:** no manual do 390
+Adventure R a mesma lista do capítulo 4 diz, com todas as letras, «Shock absorber, spring
+preload setting». **A KTM nomeia a pré-carga quando ela existe.** No 690 não a nomeia.
+
+### Por resolver: as duas tabelas do manual contradizem-se
+
+O manual dá quatro colunas — Comfort, Standard, Sport, Full payload — e diz «apertar
+aumenta o amortecimento», contando-se sempre a abrir a partir do batente duro.
+
+| | Comfort | Standard | Sport | Full payload |
+|---|---|---|---|---|
+| Forquilha comp. | 10 | 15 | 20 | 20 |
+| Forquilha rec. | 10 | 15 | 20 | 20 |
+| Amortecedor baixa | 25 | 20 | 10 | 10 |
+| Amortecedor alta | 2,5 voltas | 2 | 1 | 1 |
+| Amortecedor rec. | 25 | 20 | 10 | 10 |
+
+**O amortecedor está como se espera** — mais cliques abertos no Comfort, menos no Sport.
+**A forquilha está ao contrário**: 10 cliques no Comfort seria mais duro que os 20 do
+Sport. Uma das duas tabelas conta a partir do outro extremo, e o manual não o diz.
+
+**Não se inventou uma correção.** Ficou o valor Standard, que é 15 nas duas leituras
+possíveis, e a contradição ficou escrita no `notes` do perfil. Resolve-se com um manual de
+outro KTM que dê a mesma tabela com um afinador de sentido conhecido — não a palpite.
+
+### As outras três colunas não viraram `weightPoints`, de propósito
+
+Era tentador: quatro cenários parecem quatro pontos de carga. **Não são.** Comfort,
+Standard e Sport são estilo de condução, não peso, e só o «Full payload» é sequer sobre
+carga — e mesmo esse não diz a quantos quilos corresponde. Pôr-lhes quilos era inventar o
+eixo todo. Ficaram escritos no `notes`, em texto, que é onde a informação é honesta.
+
+**Uma coisa que a comparação deu de graça:** do Standard para o Full payload a forquilha
+anda 5 cliques. A fórmula `ktm` do projeto usa delta/20, portanto 5 cliques correspondem a
++100 kg — que é mais ou menos o que «carga máxima» significa numa mota destas. **A fórmula
+bate certo com o manual**, pelo menos à frente. Atrás anda 10 cliques para o mesmo delta,
+ou seja o dobro. Não chega para mudar nada, mas é o primeiro sinal medido de que a fórmula
+não é fantasia.
+
+### Nota de ambiente
+
+O `verificar-coerencia` **não corre no sandbox Linux**: o `node_modules` foi instalado no
+macOS e o esbuild traz binário por plataforma. Corre na máquina do Filipe e corre no CI,
+que faz `npm ci` no Linux. Não é avaria — é só onde se corre.

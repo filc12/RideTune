@@ -904,19 +904,31 @@ const KTM: MfzProfile[] = [
   {
     id: 'ktm_690_enduro_2019',
     brand: 'KTM', model: '690 Enduro R', year: '2019+',
-    baseKg: 75, source: 'mfzstudio.com/moto/ktm/', formula: 'ktm',
+    baseKg: 75,
+    source: "Owner's Manual 2019 690 Enduro R, art. 3213909en, cap. 10 (pág. 84-91)",
+    formula: 'ktm',
+    dataQuality: 'oem_manual',
+    countNote: 'Aperta no sentido horário até ao batente e conta os cliques a abrir, ao contrário. A alta velocidade do amortecedor conta-se em voltas, não em cliques.',
+    // A PRÉ-CARGA TRASEIRA FOI REMOVIDA, e é uma correção e não um esquecimento.
+    // O mfzstudio dava 18 mm. O manual não tem secção nenhuma de pré-carga: o
+    // capítulo 10 tem sete secções e nenhuma é de mola, e a lista de comandos do
+    // capítulo 4 nomeia quatro afinadores — compressão e recuperação da forquilha,
+    // compressão e recuperação do amortecedor. Nenhum de pré-carga. Comparação
+    // útil: no manual do 390 Adventure R a mesma lista diz «Shock absorber, spring
+    // preload setting», ou seja, a KTM nomeia-a quando ela existe. Aqui não nomeia.
     front: {
-      preload: na('Not externally adjustable / not listed'),
+      preload: na('O manual não indica regulação de pré-carga à frente'),
       comp:    cl_h(15),
       reb:     cl_h(15),
     },
     rear: {
-      preload: mm(18),
+      preload: na('O manual não indica regulação de pré-carga; a mola é de série'),
       comp:    na(),
       reb:     cl_h(20),
       hsComp:  tu_h(2),
       lsComp:  cl_h(20),
     },
+    notes: 'Valores da linha «Standard» do manual. As outras três linhas ficam aqui por não serem interpoláveis por peso — Comfort, Sport e Full payload são estilo de condução, não carga, e só a última é sequer sobre peso: forquilha comp/rec 10/10, 20/20 e 20/20; amortecedor baixa/alta/rec 25 cliques / 2,5 voltas / 25, depois 10 / 1 / 10 e 10 / 1 / 10. POR RESOLVER: a tabela da forquilha contradiz a do amortecedor. Contando sempre a abrir a partir do duro, e dizendo o manual que apertar aumenta o amortecimento, o Comfort da forquilha (10 cliques) fica MAIS DURO que o Sport (20). No amortecedor a progressão é a esperada (25 mole → 10 duro). Uma das duas tabelas conta a partir do outro extremo e o manual não o diz. Não se inventou aqui uma correção: fica o valor Standard, que é o mesmo nas duas leituras.',
   },
 ];
 
