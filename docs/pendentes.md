@@ -2795,3 +2795,45 @@ distingue gerações. Se a 700MT ADV entrar como moto própria, esta divisão pa
 importar — para a suspensão, não para as pressões.
 
 **Estado:** 93 de 120 linhas de pressão por manual, contra 85 ao início do dia.
+
+### 800 DSX Rally fechada, e o padrão da Voge Itália completo
+
+O manual espanhol tinha a tabela na pág. 168, fora do alcance. **A saída foi o italiano**,
+`UM-VOGE-VALICO-800RALLY-250917.pdf`, onde a mesma tabela está na pág. 105 e o texto
+chegou lá.
+
+**2,20 bar a solo e 2,50 com passageiro, à frente e atrás** — os mesmos valores das cinco
+Voge pequenas. O que lá estava era 2,3/2,3 e 2,5/2,9: **0,40 bar a mais atrás com
+passageiro**.
+
+Identidade cruzada em três pontos: o manual espanhol «800 DSX Rally» dá 90/90-21 e
+150/70 R18 na ficha interna; a imprensa italiana confirma 21/18, 798 cc e **amortecedor de
+direção**; e o próprio manual italiano descreve esse amortecedor de direção rotativo.
+
+**Retirados os valores de fora de estrada** (1,5 e 1,8), pela mesma razão do 800MT-X: o
+manual não os dá. Ficam duas motos de trail sem separador de fora de estrada, e é
+deliberado.
+
+### O padrão da Voge Itália, agora completo e reutilizável
+
+Todos os manuais seguem `vogeitaly.it/wp-content/uploads/UM-VOGE-<NOME>_<data>.pdf`, e os
+**nomes comerciais italianos** são a chave que faltava:
+
+| Gama internacional | Nome italiano |
+|---|---|
+| DSX | **Valico** |
+| ACX | **Trofeo** |
+| DSX Rally | **Valico ...RALLY** |
+
+Confirmados e usados hoje: Valico 525DSX, 625DSX, 650DSX, 900DSX, 800RALLY, Trofeo 525ACX,
+e ainda existem Valico 500DS/500DSX e 300 RALLY para quando entrarem no catálogo.
+
+**Vantagem dos italianos sobre os espanhóis:** a tabela de pressões aparece **muito mais
+cedo** (pág. 73-105 em vez de 152-168), portanto sobrevive à leitura remota. **Desvantagem:**
+não têm ficha técnica dentro, e a identidade tem de ser confirmada pela ficha separada ou
+por imprensa. **Os espanhóis são o inverso** — ficha técnica dentro, tabela longe demais.
+Usar os dois em conjunto é o que funciona.
+
+**Estado:** 94 de 120 linhas de pressão por manual, contra 85 ao início do dia. Nas duas
+marcas que somam 140 utilizadores restam **duas** linhas estimadas, e as duas são motos
+ocultas: CFMoto 1000 SR-R e Voge R625.
