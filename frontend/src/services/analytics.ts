@@ -99,8 +99,17 @@ export const Analytics = {
     track('bike_selected', props);
   },
 
-  /** Cálculo de suspensão executado. */
+  /**
+   * Cálculo de suspensão executado.
+   *
+   * O `bike_id` existe para uma pergunta só, mas é a mais importante que a app pode
+   * responder: QUE motos é que, no uso real, estão a receber números inventados pela
+   * heurística. O `confidence` sozinho diz quantos cálculos correm em
+   * `category_estimate`; sem o `bike_id` não diz em quais, e é o `bike_id` que
+   * transforma isso numa lista de manuais a caçar por ordem de procura.
+   */
   setupCalculated(props: {
+    bike_id:       string;
     confidence:    string;        // 'real_oem' | 'real_mfz' | 'brand_formula' | 'category_estimate'
     load_mode:     string;        // 'solo' | 'duo' | 'luggage' | 'duo_luggage'
     total_kg:      number;

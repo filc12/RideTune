@@ -86,6 +86,7 @@ export default function HomeScreen() {
     if (s.noData) return;
     isPremium().then(premium => {
       Analytics.setupCalculated({
+        bike_id:    bike.id,
         confidence: s.confidence,
         load_mode:  deriveMode(load),
         total_kg:   load.rider + (load.passenger ?? 0) + (load.luggage ?? 0),
