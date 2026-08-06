@@ -197,25 +197,22 @@ const CFMOTO: MfzProfile[] = [
   {
     id: 'cfmoto_700mt',
     brand: 'CFMOTO', model: '700MT', year: '2021+',
-    baseKg: 75, source: 'mfzstudio.com/moto/cfmoto/', formula: 'cfmoto_interp',
-    countNote: 'Rear rebound: CW to fully hard, ACW count out. Front compression: ACW soft → CW. Rear preload in turns (tu_soft). No rear compression adjuster.',
+    baseKg: 75,
+    source: 'Manual do proprietário CFMOTO 700MT (CF700-9F, oficial), pág. 81-83',
+    formula: 'ktm',
+    dataQuality: 'oem_manual',
+    countNote: 'As duas pontas contam-se a partir do MOLE: rodar o afinador até ao fim no sentido S (ou −) e contar os cliques a apertar no sentido H (ou +). À frente são 6 cliques, atrás são 4. A precarga traseira é por anel roscado com contraporca e não tem número de fábrica — a CFMOTO manda fazê-la em concessionário.',
+    notes: '⚠️ ESTE PERFIL FOI REESCRITO EM AGOSTO DE 2026 CONTRA O MANUAL, e o que lá estava antes vinha do mfzstudio.com com três erros a sério. Fica escrito porque é o caso mais claro de porque é que o catálogo se faz por manuais:\n\n1. Dizia que a forquilha tinha COMPRESSÃO e extensão, 10 cliques cada. O manual só descreve UM afinador à frente, o de extensão, e não menciona compressão nem precarga em lado nenhum.\n2. Dizia que a extensão traseira era 7 cliques contados do DURO. São 4 contados do MOLE — e o 7 que lá estava é, quase de certeza, o TOTAL de posições do afinador (7±1) lido como se fosse o valor de fábrica.\n3. Tinha uma tabela de quatro pontos de carga que o manual não tem. A CFMOTO dá um valor de fábrica único para cada afinador, sem tabela por peso.\n\nMargens do manual: extensão da frente 12±2 posições no total, extensão traseira 7±1.\n\nA CFMOTO repete três vezes na mesma página que estes ajustes devem ser feitos por concessionário autorizado, e avisa que o amortecedor tem azoto a alta pressão — não furar, não abrir, não deitar ao fogo.\n\nSem tabela por carga, o perfil usa a fórmula genérica em vez de interpolar: aos 75 kg mostra dados de manual, fora disso passa a fórmula da marca. É a leitura honesta — a CFMOTO não publicou curva nenhuma para esta moto.',
     front: {
-      preload: na('No front preload adjuster'),
-      comp: cl_s(10),
-      reb: cl_s(10),
+      preload: na('A forquilha não tem afinador de precarga'),
+      comp:    na('A forquilha não tem afinador de compressão'),
+      reb:     cl_s(6),
     },
     rear: {
-      preload: tu_s(6),   // turns CW from soft
-      comp: na('No rear compression adjuster'),
-      reb: cl_h(7),       // REVERSED vs other CFMOTO — cl_hard
+      preload: pos('Anel roscado com contraporca, sem valor de fábrica — a CFMOTO manda fazê-lo em concessionário', 'OFICINA'),
+      comp:    na('O amortecedor não tem afinador de compressão'),
+      reb:     cl_s(4),
     },
-    weightPoints: [
-      { kg: 75,  fComp: 10, fReb: 10, rPre: 6,  rReb: 7 },
-      { kg: 115, fComp: 10, fReb: 10, rPre: 9,  rReb: 4 },
-      { kg: 150, fComp: 14, fReb: 14, rPre: 10, rReb: 3 },
-      { kg: 190, fComp: 16, fReb: 16, rPre: 12, rReb: 1 },
-    ],
-    notes: 'Rear preload in turns (tu_soft). Rear rebound is cl_hard (opposite to front). No front preload or rear compression adjuster.',
   },
   {
     id: 'cfmoto_450mt',

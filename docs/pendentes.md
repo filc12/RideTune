@@ -2502,3 +2502,48 @@ mostra «OFICINA» em vez de um número.
 **Estado:** 104 perfis. Motos visíveis sem perfil: 27, das quais **2** no default cru —
 Honda NC750X e DesertX V2. Voge passa de 38% para **88% de cobertura**, com 59
 utilizadores.
+
+### CFMoto 700MT: o perfil mais usado da app estava errado em três coisas
+
+Vinha da consulta 2 do PostHog. **53,4% dos cálculos corriam sobre dados do
+`mfzstudio.com`** e não sobre manuais, e a suspeita caiu no 700MT: era o **único perfil
+CFMoto sem manual**, na marca com **81 utilizadores**, a maior da app.
+
+Confirmou-se, e pior do que se esperava. O manual oficial (**CF700-9F**, pág. 81-83,
+em `a.storyblok.com/f/176629/x/03fd1938b7/700mt.pdf` — CDN da própria CFMOTO) contradiz
+o perfil em três pontos:
+
+| | O que lá estava (mfzstudio) | O que o manual diz |
+|---|---|---|
+| Compressão da frente | 10 cliques | **não existe** — a forquilha só tem extensão |
+| Extensão traseira | 7 cliques do DURO | **4 cliques do MOLE** |
+| Tabela por carga | quatro pontos de peso | **não existe** — valor único por afinador |
+
+**O segundo erro é o mais instrutivo.** O manual diz «Factory setting: 4. Total available
+settings: 7±1». O 7 que estava no perfil como valor de fábrica é, quase de certeza, o
+**total de posições do afinador** lido como se fosse a afinação. E a direção estava
+invertida por cima disso. O perfil trazia até um comentário a dizer «REVERSED vs other
+CFMOTO», o que sugere que quem o escreveu reparou na anomalia e a racionalizou em vez de
+a questionar. É exatamente o padrão que o `verificar-coerencia` foi feito para apanhar —
+mas este passou-lhe ao lado, porque a curva inventada era internamente coerente.
+
+**A forquilha do 700MT tem UM afinador.** Extensão, 6 cliques do mole, de 12±2 no total.
+Sem compressão e sem precarga. O perfil antigo oferecia dois números para um afinador só.
+
+**O que muda no `confidence`:** o perfil tinha `weightPoints` sem `dataQuality`, e a
+`calcConfidence` classifica isso como `real_mfz` **em qualquer peso**. Ou seja, todos os
+cálculos do 700MT — na marca com mais utilizadores — contavam para os 53,4%. Agora, com
+manual e sem tabela por carga, dá `real_oem` ao peso base e `brand_formula` fora dele.
+É a leitura honesta: a CFMOTO **não publica curva por peso** para esta moto.
+
+**Efeito esperado na consulta 2:** o `real_mfz` deve cair de forma visível e o `real_oem`
+subir. Vale a pena voltar a correr daqui a um mês e comparar com a leitura de agosto,
+que ficou registada em `docs/posthog-consultas.md`.
+
+**Nota sobre os totais:** os «afinadores com tabela por carga verificados» do
+`verificar-coerencia` desceram de 90 para 86, e isso é bom — desapareceram quatro linhas
+de uma curva que ninguém publicou.
+
+**Sobram 18 perfis sem manual**, agora concentrados em marcas de baixa utilização: nove
+KTM (14 pessoas), quatro Kove (5), dois Honda Transalp (11), dois Suzuki V-Strom (6) e um
+Yamaha Ténéré (9). Nenhum tem o peso que o 700MT tinha.
