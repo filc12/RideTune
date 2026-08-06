@@ -147,6 +147,60 @@ se acrescenta, e estão na lista do que a suspensão modificada vai precisar.
 
 ---
 
+
+---
+
+## 7. Que motos correm sobre dados de terceiros
+
+A consulta 2 divide os cálculos por confiança. Quando o `real_mfz` for grande, esta diz
+**em que motos** — ou seja, que perfis vale a pena promover de `mfzstudio.com` a manual.
+
+Enquanto o `setup_calculated` não tiver `bike_id` acumulado (só começa a ter a partir do
+OTA de agosto de 2026), usa-se este substituto, que conta escolhas em vez de cálculos:
+
+```sql
+select
+  properties.bike_id                        as moto,
+  properties.brand                          as marca,
+  count(distinct person_id)                 as pessoas
+from events
+where event = 'bike_selected'
+  and properties.has_oem_data = true
+  and timestamp > now() - interval 90 day
+group by moto, marca
+order by pessoas desc
+limit 30
+```
+
+**Como usar:** cruzar a lista com os perfis que ainda não são `oem_manual`. Em agosto de
+2026 eram 19, concentrados assim: **CFMoto 700MT** (o único da marca sem manual, mas a
+CFMoto tem 81 utilizadores), **nove KTM** e **quatro Kove**. Uma moto muito escolhida cujo
+perfil ainda seja `mfz` é a candidata óbvia ao próximo manual.
+
+---
+
+## 8. Leitura de agosto de 2026, para comparar depois
+
+Primeira medição da consulta 2, para servir de marco:
+
+| Confiança | Cálculos | % |
+|---|---:|---:|
+| `real_mfz` | 351 | 53,4% |
+| `real_oem` | 156 | 23,7% |
+| `brand_formula` | 150 | 22,8% |
+| `category_estimate` | **0** | **0%** |
+
+**O `category_estimate` a zero é o resultado mais importante deste documento.** A
+heurística por categoria — a que inventa números quando não se sabe nada — **nunca chega
+a correr**. O medo que moldou boa parte do desenho do catálogo já não se aplica.
+
+O problema real é outro e mais fino: **mais de metade dos cálculos corre sobre dados do
+`mfzstudio.com`**, que é um sítio de terceiros, não um manual. E 22,8% corre sobre a
+fórmula da marca aplicada a motos que ainda não têm perfil nenhum.
+
+A meta deixa de ser «baixar o `category_estimate`» — está feito — e passa a ser **subir o
+`real_oem`** à custa do `real_mfz`.
+
 ## Notas
 
 - **A retenção de eventos no plano gratuito do PostHog é limitada.** Se alguma destas
