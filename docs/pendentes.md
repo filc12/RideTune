@@ -2547,3 +2547,66 @@ de uma curva que ninguém publicou.
 **Sobram 18 perfis sem manual**, agora concentrados em marcas de baixa utilização: nove
 KTM (14 pessoas), quatro Kove (5), dois Honda Transalp (11), dois Suzuki V-Strom (6) e um
 Yamaha Ténéré (9). Nenhum tem o peso que o 700MT tinha.
+
+### ERRO REVERTIDO: o 700MT foi reescrito a partir do manual de outra moto
+
+**Aconteceu a 4 de agosto de 2026 e foi corrigido no mesmo dia.** Fica escrito com
+detalhe porque a lição é mais valiosa do que o estrago.
+
+**O que se fez.** A consulta 2 do PostHog mostrou 53,4% dos cálculos a correr sobre
+dados do `mfzstudio.com`. A suspeita caiu no 700MT — único perfil CFMoto sem manual, na
+marca com 81 utilizadores. Procurou-se o manual, encontrou-se
+`a.storyblok.com/f/176629/x/03fd1938b7/700mt.pdf` — **na CDN da própria CFMOTO**, com a
+capa a dizer «OWNER'S MANUAL CF700-9F» e, por baixo, «700MT». O perfil foi reescrito a
+partir dele e subido para o Supabase.
+
+**Como se apanhou.** Ao ir buscar as pressões ao mesmo manual, a linha dos pneus dizia
+**120/70 ZR17 à frente e 160/60 ZR17 atrás**. Não é um pneu de trail. Foi isso que
+levantou a dúvida.
+
+**O manual é de outra moto.** Não é uma linha copiada por engano — são **cinco campos
+independentes** a não bater com a ficha oficial da CFMOTO UK:
+
+| | PDF «700MT» | 700MT real |
+|---|---|---|
+| Pneu à frente | 120/70 ZR17 | 110/80 R19 |
+| Pneu atrás | 160/60 ZR17 | 150/70 R17 |
+| Peso em ordem de marcha | 218 kg | 240 kg |
+| Distância entre eixos | 1418 mm | 1445 mm |
+| Potência | 49 kW @ 9000 | 50 kW @ 9500 |
+
+O que batia certo — 693 cc, 11,6:1 de compressão — é a **mecânica**, que a CFMOTO
+partilha entre modelos. O que não batia é tudo o que descreve o **chassis**.
+
+**Revertido**, no código e no Supabase, para o estado anterior.
+
+### As três lições
+
+**1. A capa de um PDF não é prova de que modelo ele descreve.** Já tínhamos apanhado
+nomes comerciais a divergir (Valico/DSX na Voge) e manuais multi-modelo a exigir leitura
+de códigos (ZX1002L/M contra N, MTN1000G contra D). Isto é pior: o documento **afirma**
+ser de um modelo e não é.
+
+**2. O teste barato existe e não foi feito.** Antes de escrever qualquer valor tirado de
+um manual, **confrontar dois ou três números de chassis** — medida de pneu, peso, distância
+entre eixos — com a ficha do fabricante. Leva um minuto e teria apanhado isto antes de
+tocar em dados. **Passa a ser regra.** Repare-se que a medida de pneu já estava no nosso
+catálogo: bastava compará-la.
+
+**3. O erro entrou justamente porque a investigação estava a correr bem.** Vinha de uma
+consulta certeira, sobre a moto certa, com uma hipótese correta — e encontrou-se um
+documento que parecia confirmá-la. Quanto melhor a pista, menos se questiona o que ela
+devolve.
+
+### O 700MT fica pior do que estava, e é preciso dizê-lo
+
+O perfil voltou aos valores do mfzstudio, mas a investigação deixou **prova nova de que
+esses também estão errados**: a ficha da CFMOTO UK diz que a moto tem forquilha de 43 mm
+com **precarga e extensão**, e o perfil diz que não tem precarga à frente e tem
+compressão. Um dos dois engana-se sobre que afinadores a moto tem.
+
+O perfil ficou marcado como **SOB SUSPEIÇÃO** na nota, e o `adjusters` foi retirado do
+catálogo em vez de se afirmar uma coisa que não sabemos.
+
+**Continua a ser a moto número um a precisar de manual** — e agora sabe-se que o
+candidato óbvio, o PDF da CDN da CFMOTO, não serve.

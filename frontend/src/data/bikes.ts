@@ -189,10 +189,10 @@ export const BIKES: Bike[] = [
   { id: "cfmoto-800mt-sport",   brand: "CF Moto", model: "800 MT Sport",   cc: "799cc", category: "adventure", adj: "full",    mfzProfileId: "cfmoto_800mt"  },
   { id: "cfmoto-800mt-explore", brand: "CF Moto", model: "800 MT Explore", cc: "799cc", category: "adventure", adj: "full",    mfzProfileId: "cfmoto_800mt"  },
   // 700MT: front rebound only (fixed compression & preload), rear preload+rebound
-  // 700 MT: o manual (CF700-9F, pág. 81-83) só descreve TRÊS afinadores — extensão à
-  // frente, precarga e extensão atrás. Sem compressão em nenhuma ponta e sem precarga
-  // na forquilha. O perfil antigo, do mfzstudio, inventava compressão à frente.
-  { id: "cfmoto-700mt",         brand: "CF Moto", model: "700 MT",         cc: "693cc", category: "adventure", adj: "partial",mfzProfileId: "cfmoto_700mt", adjusters: { fPre: false, fComp: false, fReb: true, rPre: true, rComp: false, rReb: true } },
+  // 700 MT: perfil SOB SUSPEIÇÃO, ver notas em mfzSuspensionData. A ficha da CFMOTO UK
+  // diz forquilha de 43 mm com precarga e extensão, e amortecedor idem; o perfil do
+  // mfzstudio diz o contrário. Sem `adjusters` de propósito, até haver manual do modelo.
+  { id: "cfmoto-700mt",         brand: "CF Moto", model: "700 MT",         cc: "693cc", category: "adventure", adj: "partial",mfzProfileId: "cfmoto_700mt"  },
   // 450MT: KYB fully adjustable confirmed (preload+compression+rebound both ends)
   { id: "cfmoto-450mt",         brand: "CF Moto", model: "450 MT",         cc: "449cc", category: "adventure", adj: "full",    mfzProfileId: "cfmoto_450mt"  },
   { id: "cfmoto-800nk",         brand: "CF Moto", model: "800 NK",         cc: "799cc", category: "naked",     adj: "partial",mfzProfileId: "cfmoto_800nk"  },
