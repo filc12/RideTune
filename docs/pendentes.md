@@ -2335,3 +2335,76 @@ Base e bundle ficam nos mesmos **100 perfis**, 74 deles por manual.
 chamá-lo diretamente mas a dependência não está no `package.json` — quem correr
 `npm run verificar-sync` num clone limpo apanha `command not found`. Funciona com
 `npx tsx`, mas o certo é `npm i -D tsx`.
+
+## Quem usa mesmo a app — e porque é que o catálogo tem andado a crescer no sítio errado
+
+**4 de agosto de 2026.** Primeira vez que se foi ao PostHog perguntar em vez de assumir.
+As duas consultas estão em `docs/posthog-consultas.md`. O resultado reorganiza as
+prioridades todas, por isso fica escrito aqui em vez de num comentário.
+
+### Utilizadores por marca, 90 dias
+
+| Marca | Pessoas | Motos no catálogo | Com perfil | Cobertura |
+|---|---:|---:|---:|---:|
+| **CF Moto** | **81** | 8 | 7 | 88% |
+| **Voge** | **59** | 8 | 3 | **38%** |
+| **QJ Motor** | **18** | 9 | 5 | 56% |
+| KTM | 14 | 15 | 12 | 80% |
+| Honda | 11 | 13 | 9 | 69% |
+| Yamaha | 9 | 12 | 8 | 67% |
+| Suzuki | 6 | 7 | 6 | 86% |
+| BMW | 5 | 10 | 4 | 40% |
+| Kove | 5 | 7 | 7 | 100% |
+| Kawasaki | 4 | 7 | 4 | 57% |
+| Triumph | 3 | 7 | 7 | 100% |
+| Ducati | 2 | 15 | 11 | 73% |
+| Aprilia | 1 | 5 | 3 | 60% |
+
+**As quatro marcas chinesas são 163 dos 218 utilizadores — 75%.** CFMoto, Voge, QJ e
+Kove. Não é uma tendência, é a base inteira.
+
+### O que isto diz que ninguém tinha percebido
+
+**A CFMoto é a prova de que o método funciona.** É a maior marca, com 81 pessoas, e não
+aparece uma única vez na consulta das motos sem dados — 88% de cobertura, a única em
+falta é a 1000 SR-R, que está oculta. Todo o esforço que se pôs nos manuais CFMoto
+pagou-se. Isto é importante: o problema não é a abordagem, é para onde ela tem apontado.
+
+**A Voge é a pior combinação possível.** Segunda marca com mais utilizadores, **38% de
+cobertura**, e **3 das 8 motos ocultas**. A moto mais usada da app inteira é a
+**Voge 900 DSX, com 45 pessoas** — 5,6× a segunda — e o perfil dela tem **quatro das
+seis células sem número**: os três afinadores da frente e a compressão traseira.
+A maior fatia da base olha para AJUSTA onde devia ver um valor.
+
+**A Triumph e a Kove estão a 100% de cobertura, para 3 e 5 pessoas.**
+
+### O teste que torna isto inatacável
+
+As nove motos em que se trabalhou a 4 de agosto — ZX-10R, MT-10, MT-09, X-ADV,
+Tiger Sport 660, S 1000 RR, S 1000 R, M 1000 RR, Street Triple RS — **estavam todas sem
+perfil até essa data**. Logo, quem as tivesse escolhido apareceria na consulta das motos
+sem dados. Aparece **uma pessoa**, na Street Triple RS. As outras oito: zero.
+
+O trabalho foi bom e corrigiu erros reais — duas motos estavam descritas ao contrário do
+que são. Mas serviu praticamente ninguém.
+
+### Ordem de trabalhos que sai daqui
+
+1. **Valores da frente da Voge 900 DSX.** 45 pessoas. Vale mais do que os nove perfis
+   de 4 de agosto somados. O documento já regista as tentativas falhadas (manual PT,
+   manual EN DS900X, OCR às figuras, fórum 900dsx.com) — mas nenhuma foi pela via dos
+   importadores nacionais, que foi o que resolveu a QJ.
+2. **As cinco Voge sem perfil**, três delas ocultas: 650 DSX, 525 DSX, 525 R, R625,
+   AC 525X.
+3. **QJ SRT 600 SX** — 8 pessoas, segunda moto mais escolhida sem dados, e está
+   `hidden: true`. Hoje nem a encontram no seletor.
+4. **Yamaha MT-07** — 6 pessoas, e é barata: temos a referência `1WS-28199-E3` e o
+   padrão do CDN da Yamaha.
+
+### Política de `hidden`, a rever
+
+Esconder uma moto é a decisão certa quando a alternativa é inventar números. Mas a
+SRT 600 SX tem 8 utilizadores conhecidos que a escolheram antes de ser ocultada, e hoje
+não a encontram. Talvez a resposta certa não seja esconder, mas mostrar com um estado
+honesto de «sem dados ainda» — a app já sabe dizer isso célula a célula. Fica como
+questão de produto, não de dados.
