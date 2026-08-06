@@ -2671,3 +2671,42 @@ manda o manual, que é o único que distingue solo de com passageiro. Ficou escr
 `source` de cada linha para ninguém "corrigir" isto mais tarde a partir da ficha.
 
 **Estado:** 89 de 120 linhas de pressão por manual, contra 85 ao início do dia.
+
+### 900 DSX: pressões corrigidas, e as Voge grandes NÃO usam os valores das pequenas
+
+A moto mais usada da app tinha as quatro pressões erradas.
+
+| | Estava | Manual | Erro |
+|---|---:|---:|---:|
+| Frente, solo | 2,50 | 2,20 | +0,30 |
+| Frente, a dois | 2,50 | 2,50 | — |
+| Trás, solo | 2,90 | 2,50 | **+0,40** |
+| Trás, a dois | 3,20 | 2,90 | +0,30 |
+
+**Lição que se teria perdido se não se lesse cada manual:** as quatro Voge pequenas
+(625, 650, 525 DSX, AC 525X, 525 R) dão **2,20 / 2,50 nas duas pontas**. A 900 DSX dá
+**2,20 / 2,50 à frente mas 2,50 / 2,90 atrás**. Se se tivesse assumido «a Voge usa sempre
+2,2 e 2,5», a moto com mais utilizadores ficava com **0,3 e 0,4 bar a menos** atrás.
+A regularidade dentro de uma marca é uma pista, nunca um atalho.
+
+**Verificação de identidade**, pela regra nova: dois manuais independentes, o espanhol
+«900DSX E5+» e o inglês «DS900X», batem em **cinco campos** — 90/90-21, 150/70 R17,
+238 kg em ordem de marcha, 443 kg de peso máximo e 161 kg no eixo dianteiro. São a mesma
+moto e são a nossa.
+
+**Nota de método sobre os manuais Voge espanhóis:** têm ficha técnica **dentro** (ao
+contrário dos italianos), o que permite verificar a identidade sem sair do documento. Mas
+a tabela de pressões está lá para o fim — pág. 152 na 900 DSX, pág. 168 na 800 Rally — e
+a leitura remota corta antes. **A saída é procurar a edição inglesa**, que costuma ser
+mais compacta: no caso da 900 DSX, o `DS900X-Owner-manual.pdf` do importador italiano
+chegou à página 78, onde está a tabela.
+
+### Fica por fazer
+
+**800 DSX Rally** — identidade já confirmada (90/90-21 e 150/70 R18, no próprio manual
+espanhol), mas a tabela de pressões está na pág. 168 e nenhuma das edições encontradas
+até agora lá chega. Falta a versão inglesa deste modelo.
+
+**R625** — continua sem manual e sem perfil, a única Voge ainda oculta.
+
+**Estado:** 90 de 120 linhas de pressão por manual, contra 85 ao início do dia.
