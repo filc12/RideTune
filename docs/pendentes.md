@@ -2870,3 +2870,30 @@ manual é preciso o PDF em disco, não a leitura remota.
 baixa utilização, e **nove são BMW, que não publica pressões no manual** — está
 documentado mais acima e não é lacuna nossa. As restantes são cinco Ducati, três Kawasaki,
 três Suzuki e seis avulsas.
+
+### Bug meu: a nota do 700MT partiu o bundle
+
+**Sintoma:** `npx eas-cli update` falhava com `SyntaxError: Unterminated string constant`
+em `mfzSuspensionData.ts:218`. **A app não compilava**, portanto o OTA nunca chegou a ser
+publicado — e o `verificar-coerencia` passava na mesma, porque o `tsx` tolerava.
+
+**Causa:** ao acrescentar a «PISTA NOVA» à nota do `cfmoto_700mt`, o script usou uma
+string de Python com `\n\n` lá dentro. Em Python isso são **quebras de linha a sério**, e
+foram escritas como tal no meio de uma string TypeScript delimitada por plicas. Uma string
+com plicas não pode atravessar linhas — e partiu-se ali.
+
+**Correção:** as três linhas voltaram a ser uma só, com `\n\n` escapado.
+
+**Como não repetir:** ao gerar TypeScript a partir de Python, o `\n` que se quer no
+resultado tem de ir escapado (`\\n` no código Python) ou a string de Python tem de ser
+`raw`. E, sobretudo, **o `verificar-coerencia` não é um teste de compilação** — passa
+sobre ficheiros que o Metro rejeita.
+
+**Verificação acrescentada de propósito depois disto:** varreram-se os quatro ficheiros de
+dados à procura de campos de texto (`notes`, `countNote`, `source`, `label`) que abram
+plica e não a fechem na mesma linha. Nenhum outro caso. Vale a pena repetir esse teste
+sempre que se editar estes ficheiros por script.
+
+**Lição de processo, que é a que interessa:** hoje já se tinha registado que o
+`tsc --noEmit` nunca chegou a correr até ao fim dentro do sandbox. Este bug teria sido
+apanhado por ele. **Compilar não é opcional antes de publicar.**
