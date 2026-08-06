@@ -2710,3 +2710,43 @@ até agora lá chega. Falta a versão inglesa deste modelo.
 **R625** — continua sem manual e sem perfil, a única Voge ainda oculta.
 
 **Estado:** 90 de 120 linhas de pressão por manual, contra 85 ao início do dia.
+
+### CFMoto 800MT-X e 450MT, e a fonte oficial que faltava
+
+**`cfmotoitaly.it/wp-content/uploads/CFMOTO-<Modelo>-Owner-manual.pdf`** — o importador
+italiano da CFMoto publica os manuais em PDF de texto, tal como o da Voge. Fica registado
+porque é a via limpa para a marca com mais utilizadores da app, e porque **não é a mesma
+que deu o desastre do 700MT** (essa era `a.storyblok.com`).
+
+| Moto | Estava | Manual | Maior erro |
+|---|---|---|---:|
+| 800MT-X | 2,3/2,3 · 2,5/2,9 · off 1,8/2,0 | **2,40 nas duas pontas**, valor único | trás a dois: **+0,50** |
+| 450MT | 2,3/2,3 · 2,5/2,9 | **2,25 nas duas pontas**, valor único | trás a dois: **+0,65** |
+
+**Verificação de identidade, e desta vez com uma vantagem:** os manuais CFMoto trazem a
+medida do pneu **duas vezes** — na ficha geral, ao princípio, e na secção «Tire
+Specifications», ao fim. Nos dois casos as duas coincidem entre si e com o catálogo. Foi
+exatamente essa coerência interna que **faltou** no PDF do 700MT, onde a ficha geral dava
+120/70 ZR17 numa moto de 19 polegadas. **A dupla menção passa a ser o teste rápido nos
+manuais CFMoto.**
+
+**Um aviso sobre resultados de pesquisa:** a pesquisa que encontrou o manual do 800MT-X
+resumia-o dizendo «220 kPa à frente, 250 kPa atrás». **O manual diz 240 nas duas.** Se se
+tivesse escrito o resumo em vez de abrir o documento, ficavam duas casas erradas. Resumos
+de motor de busca não são fonte.
+
+### Valores fora de estrada retirados do 800MT-X
+
+O 800MT-X tinha 1,8 e 2,0 bar de fora de estrada. **Não vêm de lado nenhum.** O manual
+tem uma secção inteira sobre condução fora de estrada e diz, textualmente, que «reducing
+the tire pressure appropriately can improve operating control, traction and stability» —
+**sem dar um único número**.
+
+Foram retirados. É uma perda de funcionalidade para quem tem essa moto, e é deliberada:
+mais vale a app não mostrar o separador de fora de estrada do que mostrar uma pressão que
+ninguém publicou, numa moto de 220 kg que vai para terra. A 800 DSX Rally da Voge tem o
+mesmo problema por resolver (1,5 e 1,8, também estimados).
+
+**Estado:** 92 de 120 linhas de pressão por manual, contra 85 ao início do dia.
+Nas duas marcas que somam 140 utilizadores restam quatro linhas estimadas: CFMoto 700MT
+e 1000 SR-R, Voge 800 DSX Rally e R625.
