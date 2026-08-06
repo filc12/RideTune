@@ -1681,16 +1681,17 @@ const VOGE: MfzProfile[] = [
     },
     rear: {
       preload: cl_s(6),
-      comp:    pos('Existe (parafuso no reservatório de gás) — o manual omite-a'),
+      // ⚠️ Único valor deste perfil que NÃO foi lido no manual da 900 DSX. Ver `notes`.
+      comp:    { ...cl_h(10), label: 'Inferido da 800 DSX Rally — o manual da 900 omite este valor' },
       reb:     cl_h(18),
     },
     weightPoints: [
-      { kg: 75,  rPre: 6,  rReb: 18 },
-      { kg: 115, rPre: 16, rReb: 16 },
-      { kg: 190, rPre: 21, rReb: 14 },
+      { kg: 75,  rPre: 6,  rComp: 10, rReb: 18 },
+      { kg: 115, rPre: 16, rComp: 8,  rReb: 16 },
+      { kg: 190, rPre: 21, rComp: 6,  rReb: 14 },
     ],
     countNote: 'Atrás: precarga a partir do mole (anti-horário até ao fim, depois conta a apertar) e extensão a partir do duro (horário até ao fim, depois conta a abrir). À frente o manual não prescreve valores — regula pelo sag e pela sensação.',
-    notes: 'As três cargas do manual são: só piloto (6 cliques de precarga, 18 de extensão), piloto com 3 malas (16±1 e 16±1) e piloto com passageiro e 3 malas (21±1 e 14±1). A compressão traseira EXISTE, por parafuso no reservatório de gás, mas este manual não a descreve — o manual do 800 DSX Rally, que tem o mesmo amortecedor e os mesmos valores de precarga e extensão ao clique, usa 10 / 8 / 6 cliques do duro para as mesmas três cargas. Não foi copiado para aqui por ser outro modelo. A frente não tem valores de fábrica em fonte nenhuma: confirmado no manual português, no manual inglês DS900X, por OCR às figuras, e no fórum 900dsx.com, onde os próprios proprietários não os encontram. CUIDADO com o artigo de 900dsx.com sobre a forquilha — ele numera os parafusos ao contrário do manual (diz "tornillo 2 = compresión, tornillo 3 = rebote", quando a Voge diz comando 2 = extensão na bainha ESQUERDA e comando 3 = compressão na DIREITA). Está a descrever uma forquilha genérica, não esta. Confirmar sempre pelo sag.',
+    notes: 'As três cargas do manual são: só piloto (6 cliques de precarga, 18 de extensão), piloto com 3 malas (16±1 e 16±1) e piloto com passageiro e 3 malas (21±1 e 14±1).\n\n⚠️ A COMPRESSÃO TRASEIRA (10 / 8 / 6) NÃO VEM DO MANUAL DESTA MOTO. O manual da 900 DSX descreve o afinador — parafuso no reservatório de gás — mas não lhe dá valores. Os números foram importados do manual da 800 DSX Rally em agosto de 2026, e a justificação é esta: as duas motos têm o mesmo amortecedor e os valores de precarga e extensão batem certo nos TRÊS pontos de carga (6/16/21 e 18/16/14, iguais ao clique). Dois afinadores idênticos em três cargas é prova forte de ser a mesma unidade com a mesma calibração. Não é prova de que o terceiro também seja — por isso está escrito aqui e etiquetado na própria célula. A decisão foi tomada depois de o PostHog mostrar que esta é a moto mais usada da app, com 45 utilizadores a olhar para uma célula vazia. Se aparecer um manual da 900 que contrarie estes números, ganha o manual.\n\nA frente não tem valores de fábrica em fonte nenhuma: confirmado no manual português, no manual inglês DS900X, por OCR às figuras, e no fórum 900dsx.com, onde os próprios proprietários não os encontram. CUIDADO com o artigo de 900dsx.com sobre a forquilha — ele numera os parafusos ao contrário do manual (diz "tornillo 2 = compresión, tornillo 3 = rebote", quando a Voge diz comando 2 = extensão na bainha ESQUERDA e comando 3 = compressão na DIREITA). Está a descrever uma forquilha genérica, não esta. Confirmar sempre pelo sag.',
   },
   {
     id: 'voge_800dsx_rally',

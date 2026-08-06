@@ -2408,3 +2408,41 @@ SRT 600 SX tem 8 utilizadores conhecidos que a escolheram antes de ser ocultada,
 não a encontram. Talvez a resposta certa não seja esconder, mas mostrar com um estado
 honesto de «sem dados ainda» — a app já sabe dizer isso célula a célula. Fica como
 questão de produto, não de dados.
+
+### Voge 900 DSX: a frente não existe em lado nenhum, e a compressão traseira foi decidida
+
+**A frente está encerrada, e a resposta é que a Voge nunca publicou aqueles valores.**
+Depois da consulta do PostHog tentou-se a via que faltava — o **service manual em
+espanhol** (`900dsx.com`, ed. 07/2025, Loncin). Não serve, e pela mesma razão que o
+service manual da Speed Triple não serviu: **manuais de oficina têm desmontagem, não
+afinação**. O capítulo 9 lista as peças da forquilha e como a tirar, e mais nada.
+
+São agora **cinco documentos independentes** sem os valores da frente: manual do
+proprietário português, manual inglês DS900X, OCR às figuras, fórum 900dsx.com e o
+service manual espanhol. Acrescente-se que a **800 DSX Rally**, cujo manual é o mais
+completo da gama Voge, também não prescreve amortecimento à frente — só dá a precarga,
+19 mm. Não é lacuna nossa. **Não voltar a procurar.**
+
+### A compressão traseira: valores importados, e porquê
+
+Estava vazia — «existe, por parafuso no reservatório de gás, mas o manual omite-a».
+Ficou preenchida com **10 / 8 / 6 cliques do duro**, importados do manual da
+**800 DSX Rally**.
+
+**A justificação, para quem lá voltar:** as duas motos têm o mesmo amortecedor, e a
+precarga e a extensão batem certo **nos três pontos de carga** — 6/16/21 e 18/16/14,
+iguais ao clique. Dois afinadores idênticos em três cargas é prova forte de ser a mesma
+unidade com a mesma calibração. **Não é prova de que o terceiro também seja**, e por isso
+o valor está etiquetado na própria célula («Inferido da 800 DSX Rally») e explicado na
+nota do perfil.
+
+**O que mudou face à decisão anterior de não copiar:** nada na evidência. Mudou o custo
+de não decidir. Enquanto era uma célula vazia entre muitas, a prudência era barata.
+Sabendo que esta é a moto mais usada da app e que são **45 pessoas** a olhar para um
+AJUSTA num afinador que a moto tem, a prudência passou a ter preço. Se aparecer um manual
+da 900 que contrarie estes números, ganha o manual.
+
+**Nota de método:** este é o segundo caso em que a 800 DSX Rally serve de referência para
+outra Voge — o primeiro foi o sentido de contagem da 625 DSX. É o manual mais completo da
+gama e vale a pena tratá-lo como a fonte de recurso da marca, sempre com a inferência
+escrita.
