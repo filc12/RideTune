@@ -9,6 +9,8 @@
     "ios": "expo run:ios",
     "web": "expo start --web",
     "lint": "expo lint",
+    "typecheck": "tsc --noEmit",
+    "verificar": "npm run typecheck && npm run verificar-coerencia",
     "verificar-sync": "tsx scripts/verificar-sync.ts",
     "verificar-coerencia": "tsx scripts/verificar-coerencia.ts"
   },

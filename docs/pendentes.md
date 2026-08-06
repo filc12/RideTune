@@ -2897,3 +2897,44 @@ sempre que se editar estes ficheiros por script.
 **Lição de processo, que é a que interessa:** hoje já se tinha registado que o
 `tsc --noEmit` nunca chegou a correr até ao fim dentro do sandbox. Este bug teria sido
 apanhado por ele. **Compilar não é opcional antes de publicar.**
+
+### CI: as verificações passam a correr sozinhas
+
+Não havia CI, nem hooks, nem `test`. Os três scripts de verificação existiam e só corriam
+quando alguém se lembrava — e o `verificar-sync` até tem escrito no cabeçalho que foi
+feito «para poder entrar num hook ou em CI». Nunca tinha entrado.
+
+**O que motivou:** dos três erros de 4 de agosto, dois teriam sido apanhados
+automaticamente. O erro de sintaxe que partiu o bundle passou por duas revisões e só
+apareceu no `eas update`, depois de duas tentativas falhadas. A divergência das fontes
+CFMoto entre o bundle e o Supabase esteve escondida até alguém correr o script à mão.
+
+**O que ficou:** `.github/workflows/verificar.yml`, a correr em cada push e em cada pull
+request para `main`, mais arranque manual pelo separador Actions.
+
+| Passo | Apanha |
+|---|---|
+| `npm ci` | `package.json` e `package-lock.json` dessincronizados |
+| `npm run typecheck` | erros de sintaxe e de tipo — **o bug de 4 de agosto** |
+| `npm run verificar-coerencia` | afinadores cuja curva por carga contradiz o tipo declarado |
+
+Um a dois minutos, sem rede, sem tocar em builds nem em OTA. **Não gasta cota do EAS.**
+
+**Dois atalhos novos no `package.json`**, para o mesmo estar à mão localmente:
+
+```
+npm run typecheck    # tsc --noEmit
+npm run verificar    # typecheck + verificar-coerencia
+```
+
+O `verificar` é o que vale a pena correr antes de publicar um OTA.
+
+**O que falta ligar, e é de propósito:** o `verificar-sync` está no ficheiro **comentado**.
+Precisa de `EXPO_PUBLIC_SUPABASE_URL` e `EXPO_PUBLIC_SUPABASE_ANON_KEY` em
+*Settings → Secrets and variables → Actions*. Enquanto não estiver ligado, uma divergência
+entre o código e a base continua a só se descobrir correndo o script à mão. Ficou de fora
+da primeira versão para a Action arrancar sem depender de configuração no GitHub.
+
+**Verificado antes de committar**, para a primeira execução não falhar por motivo tolo: o
+`typescript` (5.9.3) e o `tsx` (4.23.5) estão em `devDependencies` **e** no
+`package-lock.json`, e o `tsconfig.json` existe. O `npm ci` tem tudo o que precisa.

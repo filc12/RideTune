@@ -1,0 +1,75 @@
+# Verificações automáticas em cada push e em cada pull request.
+#
+# PORQUE É QUE ISTO EXISTE
+# Em 4 de agosto de 2026 um erro de sintaxe no `mfzSuspensionData.ts` passou por duas
+# revisões e só apareceu no `eas update`, que falhou a compilar. A app esteve com o
+# bundle partido no repositório sem ninguém saber. O `tsc` apanhava-o em segundos.
+# O `verificar-coerencia` não apanhou, e não devia mesmo — corre em `tsx`, que tolera
+# coisas que o Metro rejeita. NÃO é um teste de compilação.
+#
+# O QUE ESTE FICHEIRO FAZ E NÃO FAZ
+# Faz: verificação estática, sem rede, em um a dois minutos.
+# Não faz: build Android ou iOS, publicação de OTA, nada que gaste cota do EAS.
+#
+# O QUE FALTA LIGAR
+# O `verificar-sync` compara o bundle local com o Supabase e foi escrito de propósito
+# para entrar aqui — sai com código 1 a qualquer diferença. Precisa de duas variáveis,
+# que têm de ser postas em Settings → Secrets and variables → Actions:
+#   EXPO_PUBLIC_SUPABASE_URL
+#   EXPO_PUBLIC_SUPABASE_ANON_KEY
+# Depois disso, descomentar o último passo. Enquanto não estiver ligado, uma divergência
+# entre o código e a base só se descobre correndo o script à mão.
+
+name: Verificar
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  # Permite arrancar à mão pelo separador Actions do GitHub.
+  workflow_dispatch:
+
+jobs:
+  verificar:
+    name: Tipos e coerência dos dados
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        # Todo o projeto Expo vive em frontend/. O package.json da raiz não existe.
+        working-directory: frontend
+
+    steps:
+      - name: Obter o código
+        uses: actions/checkout@v4
+
+      - name: Instalar o Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+
+      # `npm ci` em vez de `npm install`: instala exatamente o que está no lockfile e
+      # falha se o package.json e o package-lock.json estiverem dessincronizados. É o
+      # que se quer numa verificação — reprodutível e sem surpresas.
+      - name: Instalar dependências
+        run: npm ci
+
+      # O passo que teria apanhado o erro de 4 de agosto.
+      - name: Verificar tipos (tsc)
+        run: npm run typecheck
+
+      # Apanha afinadores cuja tabela por carga contradiz o sentido de contagem
+      # declarado. Sai com código 1 se aparecer uma suspeita NOVA — as já investigadas
+      # estão na lista CONHECIDOS do próprio script, com a razão escrita.
+      - name: Verificar coerência dos dados de suspensão
+        run: npm run verificar-coerencia
+
+      # Por ligar. Ver a nota no topo deste ficheiro.
+      # - name: Verificar sincronia com o Supabase
+      #   env:
+      #     EXPO_PUBLIC_SUPABASE_URL: ${{ secrets.EXPO_PUBLIC_SUPABASE_URL }}
+      #     EXPO_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.EXPO_PUBLIC_SUPABASE_ANON_KEY }}
+      #   run: npx tsx scripts/verificar-sync.ts
