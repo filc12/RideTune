@@ -2750,3 +2750,48 @@ mesmo problema por resolver (1,5 e 1,8, também estimados).
 **Estado:** 92 de 120 linhas de pressão por manual, contra 85 ao início do dia.
 Nas duas marcas que somam 140 utilizadores restam quatro linhas estimadas: CFMoto 700MT
 e 1000 SR-R, Voge 800 DSX Rally e R625.
+
+### 700MT: pressões resolvidas pelo importador italiano, e a contradição da suspensão explicada
+
+Depois do desastre do PDF da storyblok, tentou-se a via que funcionou para o 800MT-X e a
+450MT: **`cfmotoitaly.it`**. Lá estão **dois** manuais, e é isso que muda tudo:
+
+- `UM-CFMOTO-700MT_230913.pdf` — a geração de 2023
+- `UM-CFMOTO-700MT-ADV_250407.pdf` — a **700MT ADV** de 2025
+
+**As pressões estão resolvidas, e com o melhor tipo de prova possível: as duas gerações
+dão exatamente o mesmo.** 2,25 bar à frente e 2,50 atrás, iguais a solo e com passageiro.
+Não é preciso decidir qual das gerações a app representa — para pressões, tanto faz.
+
+O que lá estava eram 2,50/2,50 à frente e 2,90/3,20 atrás. **Atrás com passageiro estava
+0,70 bar acima**, na moto mais usada da marca com mais utilizadores da app.
+
+Identidade confirmada por três fontes independentes: CFMOTO UK, imprensa italiana e o
+nosso próprio catálogo — 693 cc, 110/80 R19, 150/70 R17, 68 CV às 9500 rpm.
+
+### E a contradição da suspensão tem explicação: são duas motos
+
+A nota de suspeição do perfil dizia que a ficha da CFMOTO UK e o perfil do mfzstudio se
+contradiziam sobre que afinadores a moto tem. **Provavelmente estavam ambos certos, sobre
+gerações diferentes:**
+
+| | Forquilha | Amortecedor |
+|---|---|---|
+| **700MT 2023** (manual IT, pág. 55-56) | só regulação **hidráulica**, uma roda por bengala. **Sem precarga** | precarga por anel **mais** regulação hidráulica |
+| **700MT ADV 2025** (CFMOTO UK, imprensa IT) | regulável no **precarga** | regulável |
+
+**E há um detalhe que desmente o mfzstudio nas duas leituras:** o manual italiano descreve
+**uma única roda de regulação por bengala**, e nunca diz se é compressão ou extensão —
+usa «frenatura» genericamente. O perfil do mfzstudio atribui **dois** afinadores
+hidráulicos à frente, 10 cliques cada. Não pode estar certo em nenhuma das gerações.
+
+O perfil continua **SOB SUSPEIÇÃO** e sem `adjusters`, porque continua a faltar a peça
+decisiva: um manual que diga, para a geração que queremos representar, **qual dos
+afinadores hidráulicos é qual**. Mas a nota deixou de dizer «não se sabe porquê» e passa
+a dizer «sabe-se o quê e falta o quê».
+
+**Nota de catálogo por decidir:** a entrada `cfmoto-700mt` tem `year: '2021+'` e não
+distingue gerações. Se a 700MT ADV entrar como moto própria, esta divisão passa a
+importar — para a suspensão, não para as pressões.
+
+**Estado:** 93 de 120 linhas de pressão por manual, contra 85 ao início do dia.
