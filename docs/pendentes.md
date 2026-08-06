@@ -2446,3 +2446,59 @@ da 900 que contrarie estes números, ganha o manual.
 outra Voge — o primeiro foi o sentido de contagem da 625 DSX. É o manual mais completo da
 gama e vale a pena tratá-lo como a fonte de recurso da marca, sempre com a inferência
 escrita.
+
+### Quatro Voge fechadas pelos importadores nacionais, e duas saem das ocultas
+
+A via que destrancou a QJ — importadores nacionais em vez do site global — funciona
+igual para a Voge. Ficam registados os dois sítios, porque são reutilizáveis:
+
+- **`vogeitaly.it/wp-content/uploads/`** — ficheiros `UM-VOGE-<Modelo>_<data>.pdf`.
+  **Atenção aos nomes:** a Voge Itália não usa a nomenclatura internacional. **Valico**
+  é a gama DSX e **Trofeo** é a ACX. A AC 525X chama-se lá Trofeo 525ACX, e foi por isso
+  que nunca aparecia nas buscas.
+- **`vogespain.es/wp-content/uploads/`** — ficheiros `Manual-de-Propietario-Voge-*.pdf`.
+
+Os dois servem PDF de texto, sem anti-robô e sem OCR.
+
+**As quatro dizem exatamente a mesma coisa: um único afinador na moto inteira.**
+
+| Moto | Manual | Afinadores |
+|---|---|---|
+| 650 DSX | Valico 650DSX ABS (IT, 08/2021), pág. 39 | só precarga traseira |
+| 525 DSX | Valico 525DSX (IT, 07/2023), pág. 43 | só precarga traseira |
+| AC 525X | Trofeo 525ACX (IT, 12/2022), pág. 37 | só precarga traseira |
+| 525 R | Manual del propietario 525R (ES), pág. 42 | só precarga traseira |
+
+Nenhuma tem capítulo de afinação da frente, e em nenhuma a forquilha é descrita como
+regulável. As quatro passam a `adj: "fixed"` — a 650 DSX e a 525 R estavam em `partial`,
+o que lhes atribuía quatro afinadores inexistentes.
+
+**Duas saem das ocultas.** A 650 DSX e a 525 R estavam fora do seletor por falta de
+fonte. A política do catálogo diz «tira-se o `hidden` assim que aparecer o manual» — foi
+o que se fez. Fica só a **R625** oculta, de toda a marca.
+
+### O detalhe que mais interessa: a 650 DSX roda ao contrário
+
+Na **650 DSX**, o sentido horário **ALIVIA** a precarga:
+
+> *«ruotare in senso orario per ridurre il precarico, ruotare in senso antiorario per
+> aumentare il precarico»*
+
+Nas **525 DSX**, **AC 525X** e **525 R** é exatamente o inverso — horário endurece.
+
+Não é subtileza tipográfica: quem seguir a instrução errada amolece a moto quando queria
+endurecê-la, precisamente ao carregá-la para viajar a dois. Está escrito no `countNote`
+de cada uma das quatro, com aviso cruzado.
+
+**É mais uma prova de que não se copia entre modelos da mesma marca sem ler.** Já
+tínhamos o caso da 625 DSX, cujo manual inglês contradiz a física, e o da 900 DSX, cujo
+fórum numera os parafusos da forquilha ao contrário do manual.
+
+**A 525 R tem ainda um aviso que vale a pena a app repetir:** a Voge diz que a precarga
+precisa de ferramenta especial e que o trabalho deve ser entregue a oficina autorizada,
+com aviso de PERIGO a dizer que um ajuste ao acaso reduz o controlo da moto. A célula
+mostra «OFICINA» em vez de um número.
+
+**Estado:** 104 perfis. Motos visíveis sem perfil: 27, das quais **2** no default cru —
+Honda NC750X e DesertX V2. Voge passa de 38% para **88% de cobertura**, com 59
+utilizadores.

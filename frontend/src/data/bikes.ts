@@ -38,9 +38,18 @@
 //             (global.qjmotor.com usa um template genérico em TODOS os modelos —
 //             "Upside down telescopic forks" / "Telescopic coil spring oil damped".
 //             Confirmado no SRK 921 RR e no SRT 300 DX: nunca diz que é ajustável.)
-//   Voge:     voge-650dsx, voge-525r, voge-r625
-//             (a Voge não tem site global vivo: voge.eu e voge.com estão à venda,
-//             voge.it idem. Só restam importadores nacionais e imprensa.)
+//   Voge:     voge-r625 (só esta continua oculta)
+//             A Voge não tem site global vivo — voge.eu, voge.com e voge.it estão à
+//             venda. RESOLVIDO em agosto de 2026 pelos IMPORTADORES NACIONAIS, que
+//             publicam os manuais em PDF direto e legível:
+//               vogeitaly.it/wp-content/uploads/  (nomes «UM-VOGE-<Modelo>_<data>.pdf»,
+//                                                  e a Voge Itália usa nomes próprios:
+//                                                  Valico = DSX, Trofeo = ACX)
+//               vogespain.es/wp-content/uploads/  («Manual-de-Propietario-Voge-*.pdf»)
+//             Foi assim que saíram das ocultas a 650 DSX e a 525 R, e que ganharam
+//             perfil a 525 DSX e a AC 525X. É a mesma via que a qjmotor-russia.com
+//             abriu para a QJ: quando a marca não tem site global, vai-se aos
+//             importadores.
 //
 // FONTE NOVA E BOA para a QJ: qjmotor.pt, o importador oficial português. As fichas de
 // modelo separam frente e trás ("multi-regulável em pré-carga, compressão e extensão").
@@ -461,13 +470,17 @@ export const BIKES: Bike[] = [
   // família de amortecedor, documenta esse afinador como "adjustor 3 (at position of
   // air bottle)". Portanto full nas duas pontas — default correto, sem `adjusters`.
   { id: "voge-900dsx",  brand: "Voge", model: "900 DSX", cc: "895cc", category: "adventure", adj: "full",   mfzProfileId: "voge_900dsx" },
-  { id: "voge-650dsx",  brand: "Voge", model: "650 DSX", cc: "652cc", category: "adventure", adj: "partial", hidden: true },
+  // 650 DSX: sai das ocultas com o manual italiano (Valico 650DSX ABS, 08/2021). Um só
+  // afinador na moto inteira — precarga traseira. A forquilha não é regulável.
+  { id: "voge-650dsx",  brand: "Voge", model: "650 DSX", cc: "652cc", category: "adventure", adj: "fixed", mfzProfileId: "voge_650dsx", adjusters: { fPre: false, fComp: false, fReb: false, rPre: true, rComp: false, rReb: false } },
   // 525 DSX (DS525X): manual do proprietário Voge. Só tem "Adjust the rear shock
   // absorber", e lá dentro só precarga da mola — nem amortecimento atrás, nem qualquer
   // secção de afinação da frente. É exatamente o default do nível "fixed", por isso não
   // precisa de `adjusters`. Estava como "full", o que era muito otimista.
-  { id: "voge-525dsx",  brand: "Voge", model: "525 DSX", cc: "494cc", category: "adventure", adj: "fixed"   },
-  { id: "voge-525r",    brand: "Voge", model: "525 R",   cc: "494cc", category: "naked",     adj: "partial", hidden: true },
+  { id: "voge-525dsx",  brand: "Voge", model: "525 DSX", cc: "494cc", category: "adventure", adj: "fixed",   mfzProfileId: "voge_525dsx", adjusters: { fPre: false, fComp: false, fReb: false, rPre: true, rComp: false, rReb: false } },
+  // 525 R: sai das ocultas com o manual espanhol. Só precarga traseira, e a Voge manda
+  // fazê-la em oficina autorizada — ferramenta especial e aviso de perigo no manual.
+  { id: "voge-525r",    brand: "Voge", model: "525 R",   cc: "494cc", category: "naked",     adj: "fixed", mfzProfileId: "voge_525r", adjusters: { fPre: false, fComp: false, fReb: false, rPre: true, rComp: false, rReb: false } },
   // 625 DSX (DS 625X): manual do proprietário Voge. Os seis afinadores existem —
   // frente precarga + extensão (bainha esq.) + compressão (bainha dta.); atrás precarga
   // + extensão + compressão (ajustador 3, no reservatório). Default "full" correto.
@@ -480,7 +493,7 @@ export const BIKES: Bike[] = [
   { id: "voge-r625",         brand: "Voge", model: "R625",          cc: "625cc", category: "naked",     adj: "full", hidden: true },
   // AC 525X: manual do proprietário Voge. Igual à 525 DSX — só "Adjustment of rear shock
   // absorber" com precarga da mola, sem amortecimento atrás e sem afinação à frente.
-  { id: "voge-ac525x",       brand: "Voge", model: "AC 525X",       cc: "494cc", category: "scrambler", adj: "fixed"   },
+  { id: "voge-ac525x",       brand: "Voge", model: "AC 525X",       cc: "494cc", category: "scrambler", adj: "fixed",   mfzProfileId: "voge_ac525x", adjusters: { fPre: false, fComp: false, fReb: false, rPre: true, rComp: false, rReb: false } },
 
   // ===== Yamaha =====
   { id: "yamaha-tenere-w",   brand: "Yamaha", model: "Ténéré 700 World Raid", cc: "689cc", category: "adventure",     adj: "full",    mfzProfileId: "yamaha_t700_world_raid_2026" }, // KYB fully adjustable (Ohlins is only the steering damper)
