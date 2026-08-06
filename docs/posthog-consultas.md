@@ -211,6 +211,39 @@ fórmula da marca aplicada a motos que ainda não têm perfil nenhum.
 A meta deixa de ser «baixar o `category_estimate`» — está feito — e passa a ser **subir o
 `real_oem`** à custa do `real_mfz`.
 
+### Quem corre sobre dados fracos usa a app três vezes mais
+
+A primeira execução da consulta 3, no mesmo dia, acrescentou o que a 2 não mostra — a
+contagem de **pessoas** por trás dos cálculos:
+
+| Confiança | Cálculos | Pessoas | Cálculos por pessoa |
+|---|---:|---:|---:|
+| `real_mfz` | 351 | 48 | **7,3** |
+| `brand_formula` | 150 | 60 | **2,5** |
+
+**Menos gente, muito mais utilização.** O `real_mfz` não é só a maior fatia dos cálculos
+— é a fatia dos utilizadores mais activos.
+
+**Duas leituras, e os dados não as distinguem:** ou são simplesmente os mais dedicados,
+ou estão a recalcular repetidamente porque a resposta não os satisfaz. A segunda
+hipótese seria má notícia e vale a pena tê-la em mente — o `setup_calculated` dispara a
+cada mudança de moto ou de carga, portanto sete cálculos por pessoa tanto pode ser
+exploração como insatisfação.
+
+**Ressalva:** uma pessoa pode contar nos dois grupos, se tiver motos diferentes ou
+mudar de carga. Os 48 e os 60 não somam para um total limpo.
+
+### A janela não interessa — os dados são todos recentes
+
+A consulta 2 usa **30 dias** e a 3 usa **90**, e ambas devolvem os mesmos 351 e 150.
+Ou seja, **não há um único evento com mais de 30 dias**. Ou é a retenção do plano
+gratuito do PostHog a cortar, ou a utilização é toda recente.
+
+Consequência prática, para não se tirarem conclusões erradas: **comparações «mês a mês»
+não têm história atrás.** A leitura de agosto de 2026 registada acima é o primeiro marco
+que existe, e o próximo só ganha significado depois de passar tempo suficiente. Se uma
+consulta com janela de 90 ou 180 dias vier curta, é isto e não falta de utilizadores.
+
 ## Notas
 
 - **A retenção de eventos no plano gratuito do PostHog é limitada.** Se alguma destas
