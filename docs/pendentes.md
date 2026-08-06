@@ -2610,3 +2610,64 @@ catálogo em vez de se afirmar uma coisa que não sabemos.
 
 **Continua a ser a moto número um a precisar de manual** — e agora sabe-se que o
 candidato óbvio, o PDF da CDN da CFMOTO, não serve.
+
+### Pressões Voge: quatro linhas corrigidas, e a regra de verificação a funcionar
+
+Primeira aplicação da regra que saiu do erro do 700MT: **cada manual tem de provar que é
+da moto certa antes de se lhe tirar um número.**
+
+**Como se verificou cada uma.** Os manuais italianos da Voge **não têm ficha técnica lá
+dentro** — não dá para confrontar internamente. Mas o mesmo importador publica **fichas
+técnicas separadas por modelo**, e é esse o par de verificação:
+
+```
+vogeitaly.it/wp-content/uploads/UM-VOGE-<Modelo>_<data>.pdf   ← manual
+vogeitaly.it/wp-content/uploads/<MODELO>_<data>.pdf           ← ficha técnica
+```
+
+| Moto | Medida confirmada | Fonte da confirmação |
+|---|---|---|
+| 650 DSX | 110/80 R19 · 150/70 R17 | ficha `VALICO-650DSX_2312` |
+| 525 DSX | 110/80 R19 · 150/70 R17 | ficha `VALICO-525DSX_2312` |
+| AC 525X | 110/80 R19 · 150/70 R17 | ficha `TROFEO-525ACX-Scrambler` |
+| 525 R | 120/70 ZR17 · 160/60 ZR17 | imprensa espanhola, ficha do importador |
+
+As quatro batem com as medidas que já estavam no catálogo. **Só depois disso é que se
+escreveu.**
+
+De caminho, as fichas confirmaram o trabalho de suspensão de hoje: tanto a do 525DSX como
+a do 650DSX dizem «Ammortizzatore singolo a **precarico regolabile**», exatamente o que os
+manuais tinham dito — um só afinador na moto.
+
+### Os valores, e o erro que estava lá
+
+**As quatro motos, mais a 625 DSX de manhã, dão todas o mesmo: 2,20 bar a solo e 2,50 com
+passageiro, à frente e atrás.** Cinco modelos, quatro manuais, três línguas.
+
+O que lá estava eram estimativas de categoria, e estavam mal na mesma direção:
+
+| Moto | Estava (trás, solo) | Manual | Erro |
+|---|---:|---:|---:|
+| 650 DSX | 2,90 | 2,20 | **+0,70** |
+| 525 DSX | 2,50 | 2,20 | +0,30 |
+| AC 525X | 2,50 | 2,20 | +0,30 |
+| 525 R | 2,90 | 2,20 | **+0,70** |
+
+Setenta centésimas a mais num pneu traseiro não é detalhe — é menos borracha no chão numa
+moto de trail.
+
+### Conflito registado: a ficha técnica não serve para pressões
+
+As fichas técnicas divergem dos manuais, e **divergem de maneira diferente conforme o
+modelo**:
+
+- **525 DSX** — ficha diz 2,30 à frente. Esse valor **não existe no manual**.
+- **650 DSX** — ficha diz 2,20 à frente e 2,50 atrás. O 2,20 é o valor a solo do manual;
+  o 2,50 é o valor **com passageiro**. A ficha mistura os dois estados de carga.
+
+Conclusão para o futuro: **as fichas técnicas da Voge servem para confirmar a identidade
+da moto — medidas, peso, tipo de suspensão — e não para tirar pressões.** Para pressões,
+manda o manual, que é o único que distingue solo de com passageiro. Ficou escrito na
+`source` de cada linha para ninguém "corrigir" isto mais tarde a partir da ficha.
+
+**Estado:** 89 de 120 linhas de pressão por manual, contra 85 ao início do dia.
