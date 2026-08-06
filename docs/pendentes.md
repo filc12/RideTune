@@ -3095,3 +3095,44 @@ não é fantasia.
 O `verificar-coerencia` **não corre no sandbox Linux**: o `node_modules` foi instalado no
 macOS e o esbuild traz binário por plataforma. Corre na máquina do Filipe e corre no CI,
 que faz `npm ci` no Linux. Não é avaria — é só onde se corre.
+
+### Adenda: o 1190 Adventure R coube, e resolveu a dúvida do 690
+
+O manual do **1190 Adventure R de 2014** (art. 3213107en) também passou por baixo do corte —
+o capítulo 12 fica na página 87. **Os sete valores do mfzstudio batiam certo, um a um.** Nada
+a corrigir; só promovido a `oem_manual` com a fonte a apontar para o manual.
+
+**E fecha a dúvida que ficou aberta acima.** O manual do 1190 descreve o afinador da
+forquilha com exatamente as mesmas palavras do 690 — apertar até ao batente, contar a abrir,
+apertar aumenta o amortecimento — e dá **17 / 12 / 7 / 7**: Comfort mole, Sport duro, na
+ordem esperada. Portanto **não existe uma convenção diferente para forquilhas KTM**. É o
+manual do 690 que está fora do padrão da própria marca. Continua sem se lhe mexer, porque a
+coluna Standard é a mesma nas duas leituras, mas já não é uma incógnita — é uma anomalia
+identificada, e isso muda o que se faz com ela.
+
+### Primeiro sinal medido de que a fórmula `ktm` falha na pré-carga
+
+A comparação Standard → Full payload do 1190 dá um número que vale a pena guardar:
+
+| | Standard | Full payload | Salto |
+|---|---|---|---|
+| Pré-carga da forquilha | 5 voltas | 8 voltas | +3 |
+| Pré-carga do amortecedor | **4 voltas** | **16 voltas** | **+12** |
+| Amortecimento (todos) | — | — | 2 a 5 cliques |
+
+A fórmula `ktm` do projeto move a pré-carga a **delta/25 voltas**. Para chegar às 16 voltas
+precisaria de **mais 300 kg** em cima da mota. Ou seja: **a app está a carregar muito pouco
+a pré-carga traseira** de quem anda com bagagem ou com passageiro nesta mota.
+
+**Não é caso para mudar a fórmula já,** por duas razões: é uma mota só, e o manual não diz a
+quantos quilos corresponde «Full payload», portanto o denominador continua por medir. Mas é
+a primeira evidência de manual — e não de intuição — de que a parte da pré-carga da fórmula
+está subdimensionada. **Se aparecer o mesmo padrão no 890 ou no 1290, deixa de ser um caso
+isolado e passa a ser um defeito a corrigir.** É a coisa concreta a verificar no próximo
+manual KTM que se abrir.
+
+### Onde ficou o bloco KTM
+
+Confirmados por manual: **1190 Adventure R** e **690 Enduro R 2019**. Faltam quinze perfis.
+Dos que se tentou, o **790 Adventure R 2019** não coube — o corte cai na página 140 e o
+capítulo 12 começa na 168. Para esses, o caminho é o ficheiro em disco.

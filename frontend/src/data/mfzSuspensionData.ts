@@ -667,7 +667,11 @@ const KTM: MfzProfile[] = [
   {
     id: 'ktm_1190_adv_r_2013',
     brand: 'KTM', model: '1190 Adventure R', year: '2013-2016',
-    baseKg: 75, source: 'mfzstudio.com/moto/ktm/', formula: 'ktm',
+    baseKg: 75,
+    source: "Owner's Manual 2014 1190 Adventure R, art. 3213107en, cap. 12 (pág. 87-94)",
+    formula: 'ktm',
+    dataQuality: 'oem_manual',
+    countNote: 'O amortecimento conta-se a apertar até ao batente duro e depois a abrir. A pré-carga é ao contrário: abre-se toda até ao fim mole e conta-se a apertar.',
     front: {
       preload: tu_s(5),
       comp:    cl_h(12),
@@ -680,7 +684,7 @@ const KTM: MfzProfile[] = [
       hsComp:  tu_h(1.5),
       lsComp:  cl_h(10),
     },
-    notes: '1190 Adventure with EDS (Electronic Damping System) is NOT included — manual click version only.',
+    notes: '1190 Adventure with EDS (Electronic Damping System) is NOT included — manual click version only. Valores da coluna «Standard». Os sete valores que aqui estavam, vindos do mfzstudio, batiam certo com o manual um a um — não houve nada a corrigir. A coluna «Full payload» do manual, que fica de fora por não trazer quilos associados: forquilha pré-carga 8 voltas, comp. 7, rec. 7; amortecedor pré-carga 16 voltas, baixa 8, alta 1 volta, rec. 8. ATENÇÃO ao salto da pré-carga traseira — de 4 para 16 voltas, quatro vezes mais. A fórmula ktm do projeto move a pré-carga a delta/25 voltas, o que só daria 16 voltas com mais 300 kg em cima. Para esta mota a fórmula fica muito curta a carregar atrás.',
   },
   {
     id: 'ktm_890_adv_r_2021',
@@ -928,7 +932,7 @@ const KTM: MfzProfile[] = [
       hsComp:  tu_h(2),
       lsComp:  cl_h(20),
     },
-    notes: 'Valores da linha «Standard» do manual. As outras três linhas ficam aqui por não serem interpoláveis por peso — Comfort, Sport e Full payload são estilo de condução, não carga, e só a última é sequer sobre peso: forquilha comp/rec 10/10, 20/20 e 20/20; amortecedor baixa/alta/rec 25 cliques / 2,5 voltas / 25, depois 10 / 1 / 10 e 10 / 1 / 10. POR RESOLVER: a tabela da forquilha contradiz a do amortecedor. Contando sempre a abrir a partir do duro, e dizendo o manual que apertar aumenta o amortecimento, o Comfort da forquilha (10 cliques) fica MAIS DURO que o Sport (20). No amortecedor a progressão é a esperada (25 mole → 10 duro). Uma das duas tabelas conta a partir do outro extremo e o manual não o diz. Não se inventou aqui uma correção: fica o valor Standard, que é o mesmo nas duas leituras.',
+    notes: 'Valores da linha «Standard» do manual. As outras três linhas ficam aqui por não serem interpoláveis por peso — Comfort, Sport e Full payload são estilo de condução, não carga, e só a última é sequer sobre peso: forquilha comp/rec 10/10, 20/20 e 20/20; amortecedor baixa/alta/rec 25 cliques / 2,5 voltas / 25, depois 10 / 1 / 10 e 10 / 1 / 10. POR RESOLVER: a tabela da forquilha contradiz a do amortecedor. Contando sempre a abrir a partir do duro, e dizendo o manual que apertar aumenta o amortecimento, o Comfort da forquilha (10 cliques) fica MAIS DURO que o Sport (20). No amortecedor a progressão é a esperada (25 mole → 10 duro). Uma das duas tabelas conta a partir do outro extremo e o manual não o diz. Não se inventou aqui uma correção: fica o valor Standard, que é o mesmo nas duas leituras. CONFIRMADO como anomalia deste manual: o manual do 1190 Adventure R descreve o afinador da forquilha exatamente com as mesmas palavras e dá 17 / 12 / 7 / 7 — Comfort mole, Sport duro, na ordem esperada. É o 690 que está fora do padrão da própria marca, não uma convenção diferente para forquilhas.',
   },
 ];
 
