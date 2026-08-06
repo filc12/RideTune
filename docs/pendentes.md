@@ -2837,3 +2837,36 @@ Usar os dois em conjunto é o que funciona.
 **Estado:** 94 de 120 linhas de pressão por manual, contra 85 ao início do dia. Nas duas
 marcas que somam 140 utilizadores restam **duas** linhas estimadas, e as duas são motos
 ocultas: CFMoto 1000 SR-R e Voge R625.
+
+### Limite descoberto: os manuais KTM grandes não se leem à distância
+
+Tentou-se subir os nove perfis KTM de `mfzstudio` a manual, a começar pela 890 Adventure R.
+**Não dá por leitura remota, e vale a pena perceber porquê para não se repetir.**
+
+O manual (art. `3214269en`, 2021) abre bem em `ktmshop.se` e a identidade confirma-se
+logo na capa e na linha «This document is valid for the following models: 890 ADVENTURE R
+EU (F9703U7), 890 ADVENTURE R RALLY EU (F9703UD)». Mas o capítulo **12 «Tuning the
+chassis» está na página 177**, e a extração remota chega por volta da **página 141**.
+
+**A regra que sai daqui:** nos manuais KTM, o que decide não é a marca, é o **tamanho do
+manual**. Na 390 Adventure o capítulo está na pág. 59 e leu-se inteiro; no 790 Duke está
+na 130 e só se apanhou o índice; na 890 Adventure R está na 177 e nem isso adiantou.
+**Motos pequenas leem-se, motos grandes não.**
+
+**O que o índice dá, e não é nada:** confirma que afinadores a moto tem. Na 890 Adventure R
+são as secções 12.2 a 12.10 — compressão, extensão e precarga à frente, e atrás precarga,
+extensão e compressão **separada em alta e baixa velocidade**. Isso bate certo com o perfil
+que já lá está, portanto não houve correção a fazer.
+
+**Verificação de passagem, e está tudo bem:** o perfil marca a compressão traseira como
+`na()` e enche o `hsComp` e o `lsComp`. Parecia poder mostrar «N/A» numa moto que tem dois
+afinadores, mas não mostra — o `SuspensionBlock` passa `forceSet={hasHsLs}` e a célula
+rende como ajustável. O `DataCell` já trata do caso.
+
+**Os nove perfis KTM ficam como estão**, com 14 utilizadores entre eles. Para os subir a
+manual é preciso o PDF em disco, não a leitura remota.
+
+**Onde ficam as pressões:** 94 de 120 por manual. As 26 que faltam estão em marcas de
+baixa utilização, e **nove são BMW, que não publica pressões no manual** — está
+documentado mais acima e não é lacuna nossa. As restantes são cinco Ducati, três Kawasaki,
+três Suzuki e seis avulsas.
