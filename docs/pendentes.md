@@ -3136,3 +3136,34 @@ manual KTM que se abrir.
 Confirmados por manual: **1190 Adventure R** e **690 Enduro R 2019**. Faltam quinze perfis.
 Dos que se tentou, o **790 Adventure R 2019** não coube — o corte cai na página 140 e o
 capítulo 12 começa na 168. Para esses, o caminho é o ficheiro em disco.
+
+### A lista de manuais KTM a descarregar, com os links
+
+Tentados e **não cabem** na leitura remota: 1290 Super Adventure R de 2021 e de 2018, 890
+Adventure R de 2022, 790 Adventure R de 2019. Não é falta de sorte nem vale tentar outro
+espelho — **todos os manuais KTM de 2018 para cá passam do corte**. Os dois que couberam
+(690 Enduro R de 2019 e 1190 Adventure R de 2014) são os mais curtos da amostra.
+
+Para os restantes o caminho é o ficheiro em disco. **Guardar em `~/dev/manuais-ktm/`**, que
+é fora do repositório — são PDFs de vários MB e não têm de ir para o git.
+
+| Perfil por confirmar | Manual | Ficheiro |
+|---|---|---|
+| `ktm_890_adv_r_2021` | 890 Adventure R 2022 | [`22_3214536_en_OM.pdf`](https://mobil.ktmshop.se/bike-manuals/22_3214536_en_OM.pdf) |
+| `ktm_1290_adv_r_2021` | 1290 Super Adventure R 2021 | [`21_3214297_en_OM.pdf`](https://www.ktmshop.se/bike-manuals/21_3214297_en_OM.pdf) |
+| `ktm_1290_sadv_s_electronic` | 1290 Super Adventure S 2021 | [`21_3214295_en_OM.pdf`](https://www.ktmshop.se/bike-manuals/21_3214295_en_OM.pdf) |
+| `ktm_790_adv_r_2019` | 790 Adventure R 2019 | [`19_3213919_en_OM.pdf`](https://www.ktmshop.se/bike-manuals/19_3213919_en_OM.pdf) |
+| `ktm_390_adv_r_2025` | 390 Adventure R 2025 | [`25_3240182_en_BA.pdf`](https://mobil.ktmshop.se/bike-manuals/25_3240182_en_BA.pdf) |
+| `ktm_excf_4t_2024` | 350 EXC-F 2024 | [`24_3214840_en_OM.pdf`](https://www.ktmshop.se/bike-manuals/24_3214840_en_OM.pdf) |
+| `ktm_exc_2t_2024` | 250/300 EXC 2024 | [`24_3214838_en_OM.pdf`](https://www.ktmshop.se/bike-manuals/24_3214838_en_OM.pdf) |
+
+**Os dois primeiros são os que interessam mais**, e não por serem os mais usados: são os que
+respondem à pergunta da pré-carga. Se o 890 e o 1290 mostrarem o mesmo salto que o 1190 —
+pré-carga traseira a multiplicar-se por quatro entre Standard e carga máxima — deixa de ser
+um caso isolado e a fórmula `ktm` tem defeito a corrigir. Se não mostrarem, o 1190 é uma
+mota com um afinador de curso longo e não se mexe em nada.
+
+**Nota sobre os anos.** Os manuais que aqui estão são do ano que se encontrou, nem sempre o
+ano do perfil. Ao ler, confirmar primeiro a linha «This document is valid for the following
+models» e dois ou três números de chassis contra a ficha do modelo — foi por saltar esse
+passo que se escreveu um dia a CFMoto 700MT a partir da mota errada.
