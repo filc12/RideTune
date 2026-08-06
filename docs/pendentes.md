@@ -2938,3 +2938,47 @@ da primeira versão para a Action arrancar sem depender de configuração no Git
 **Verificado antes de committar**, para a primeira execução não falhar por motivo tolo: o
 `typescript` (5.9.3) e o `tsx` (4.23.5) estão em `devDependencies` **e** no
 `package-lock.json`, e o `tsconfig.json` existe. O `npm ci` tem tudo o que precisa.
+
+### O CI apanhou código morto ao primeiro arranque
+
+A primeira execução da Action falhou com **10 erros de tipo**. Nenhum vinha do trabalho de
+dados — vinham todos de **`src/components/SettingsScreen.tsx`, um ficheiro que ninguém
+importa**.
+
+**O que era:** um ecrã de definições com 24 `className=` de Tailwind, num projeto que
+**não tem NativeWind instalado**. O ecrã a sério é o `app/settings.tsx`, que não usa
+`className` nenhum. Entrou no repositório algures na altura do sistema freemium e nunca
+foi ligado a nada. **Apagado.**
+
+Não era só ruído: se alguém o reaproveitasse, os `className` **não fariam nada em tempo de
+execução**, porque a biblioteca que os interpreta não existe no projeto. Era uma armadilha
+à espera.
+
+### Porque é que passava localmente e falhava no CI — vale a pena perceber
+
+O `expo-env.d.ts` contém uma linha só:
+
+```ts
+/// <reference types="expo/types" />
+```
+
+É isso que puxa `expo/types/react-native-web.d.ts`, que **declara `className` em
+componentes React Native** (para o suporte web). Com essa declaração activa, os 24
+`className` do ficheiro morto eram aceites.
+
+**E esse ficheiro está no `.gitignore`** — por indicação do próprio Expo, que escreve lá
+dentro «this file should not be edited and should be in your git ignore». Existe em
+qualquer máquina onde o Expo tenha corrido; **não existe num checkout limpo**.
+
+**A lição é maior do que este caso:** o ambiente local tem ficheiros gerados que o CI não
+tem — o `expo-env.d.ts` e o `.expo/types/router.d.ts`, ambos ignorados pelo git. Sempre
+que o CI acusar erros que não se reproduzem localmente, **esta é a primeira hipótese a
+verificar**, e não um defeito da Action.
+
+### Correção minha, para registo
+
+Ao longo do dia corri o `tsc` várias vezes e disse que passava. **Estava a filtrar a saída**
+com `grep` pelos ficheiros de dados que tinha acabado de editar, portanto só via os erros
+desses ficheiros. Os dez erros do `SettingsScreen.tsx` estavam lá o tempo todo e nunca
+apareceram. **Filtrar a saída de um verificador transforma-o noutra coisa** — e foi
+precisamente por isso que a Action valeu a pena logo no primeiro arranque.
