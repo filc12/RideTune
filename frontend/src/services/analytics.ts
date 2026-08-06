@@ -88,6 +88,30 @@ export const Analytics = {
     track('onboarding_completed');
   },
 
+  /**
+   * Pesquisa no seletor que não devolveu nada.
+   *
+   * É o único ponto cego que restava na instrumentação. O `bike_selected` diz que motos
+   * as pessoas escolhem e quais delas não têm dados; não diz nada sobre as motos que
+   * **nem sequer existem** no catálogo, porque essas nunca chegam a ser escolhidas — a
+   * pessoa procura, não encontra e vai-se embora. Foi por comentário de um utilizador que
+   * se percebeu que faltava a BMW R1200GS LC, não por medição.
+   *
+   * O `termo` vem truncado a 40 caracteres. É texto que o utilizador escreveu, e ainda que
+   * na prática seja sempre um nome de mota, não há razão para guardar mais do que o
+   * necessário para identificar o modelo.
+   *
+   * Quem dispara isto tem de garantir DUAS coisas, ou o evento fica inútil e barulhento:
+   * esperar que a escrita assente (o utilizador a escrever «bmw» passa por «b» e «bm»,
+   * que não são pesquisas falhadas) e não repetir o mesmo termo na mesma sessão.
+   */
+  bikeSearchEmpty(props: {
+    termo:      string;
+    comprimento: number;
+  }): void {
+    track('bike_search_empty', props);
+  },
+
   /** Utilizador seleccionou uma mota no picker. */
   bikeSelected(props: {
     bike_id:   string;

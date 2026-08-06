@@ -244,6 +244,44 @@ não têm história atrás.** A leitura de agosto de 2026 registada acima é o p
 que existe, e o próximo só ganha significado depois de passar tempo suficiente. Se uma
 consulta com janela de 90 ou 180 dias vier curta, é isto e não falta de utilizadores.
 
+---
+
+## 9. Que motos as pessoas procuram e NÃO existem
+
+O ponto cego que faltava fechar. As consultas 1 e 3 só falam de motos **que estão no
+catálogo** — quem procura uma que não existe nunca chega a escolher nada, e até agosto de
+2026 saía da app sem deixar rasto. Foi por comentário de um utilizador que se percebeu que
+faltava a BMW R1200GS LC, não por medição.
+
+O evento `bike_search_empty` só começa a ter dados **depois do OTA de agosto de 2026**.
+
+```sql
+select
+  properties.termo                          as procurou,
+  count()                                   as vezes,
+  count(distinct person_id)                 as pessoas
+from events
+where event = 'bike_search_empty'
+  and timestamp > now() - interval 90 day
+group by procurou
+order by pessoas desc
+limit 40
+```
+
+**Como ler.** Cada linha é uma moto que alguém quis e a app não tinha. Ordena-se por
+`pessoas`: se cinco pessoas diferentes escreveram «r1200gs», é uma moto a acrescentar; se
+foi uma pessoa quinze vezes, é uma pessoa insistente.
+
+**O que o evento já filtra, para não teres de o fazer aqui:** só dispara com **três ou
+mais caracteres**, só **1,2 segundos depois da última tecla** — quem escreve «bmw» passa
+por «b» e «bm», que não são pesquisas falhadas — e **não repete o mesmo termo** enquanto o
+seletor estiver aberto.
+
+**Cuidado ao interpretar:** o termo vem normalizado, sem acentos e em minúsculas, e
+truncado a 40 caracteres. E uma pesquisa falhada nem sempre é uma moto em falta — pode ser
+alguém a escrever mal o nome, ou a procurar por cilindrada. Vale a pena olhar para os
+termos antes de os tratar como pedidos.
+
 ## Notas
 
 - **A retenção de eventos no plano gratuito do PostHog é limitada.** Se alguma destas

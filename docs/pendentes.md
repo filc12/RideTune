@@ -2982,3 +2982,30 @@ com `grep` pelos ficheiros de dados que tinha acabado de editar, portanto só vi
 desses ficheiros. Os dez erros do `SettingsScreen.tsx` estavam lá o tempo todo e nunca
 apareceram. **Filtrar a saída de um verificador transforma-o noutra coisa** — e foi
 precisamente por isso que a Action valeu a pena logo no primeiro arranque.
+
+### Fechado o último ponto cego: pesquisas sem resultados
+
+Até agora a app media motos **que existem** no catálogo. Quem procurava uma que não existe
+saía sem deixar rasto — e é assim que se descobrem lacunas como a BMW R1200GS LC, que veio
+por comentário de um utilizador e não por medição.
+
+Novo evento **`bike_search_empty`**, com o termo procurado. Consulta 9 no
+`docs/posthog-consultas.md`. **Só tem dados depois do OTA.**
+
+**As três salvaguardas, que são o que separa isto de ruído:**
+
+- **Mínimo de 3 caracteres.** Com um ou dois quase tudo dá resultados, e o que não dá não
+  é interpretável.
+- **1,2 segundos depois da última tecla.** Sem isto, quem escreve «bmw» gerava três
+  eventos falhados — «b», «bm» e «bmw» — e os dois primeiros não são pesquisas, são
+  alguém a meio de escrever.
+- **Não repete o mesmo termo** enquanto o seletor estiver aberto. Apagar uma letra e
+  voltar a escrevê-la não conta como segunda procura. O conjunto limpa-se a cada abertura,
+  portanto duas sessões separadas contam as duas.
+
+**Sobre o texto guardado:** vem normalizado (sem acentos, minúsculas) e truncado a 40
+caracteres. Na prática é sempre um nome de mota, mas é texto livre escrito pelo
+utilizador — não há razão para guardar mais do que o necessário para identificar o modelo.
+
+**Ao ler os resultados, não tratar tudo como pedido:** uma pesquisa falhada tanto pode ser
+uma moto em falta como alguém a escrever mal o nome ou a procurar por cilindrada.

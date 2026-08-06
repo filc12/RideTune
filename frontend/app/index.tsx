@@ -620,6 +620,32 @@ function BikePicker({ open, onClose, onPick, selectedId, t }: { open: boolean; o
     ? getSelectableOemBikes().filter((b) => rtNorm(b.brand + " " + b.model).includes(q)).slice(0, 60)
     : [];
 
+  // Regista pesquisas que não devolvem nada — as motos que faltam ao catálogo por
+  // completo. Ver a nota do `bikeSearchEmpty` em services/analytics.
+  //
+  // Duas salvaguardas, sem as quais isto seria só ruído:
+  //   1. Espera 1,2 s depois da última tecla. Quem escreve "bmw" passa por "b" e "bm",
+  //      e nenhuma dessas é uma pesquisa falhada — é alguém a meio de escrever.
+  //   2. Não repete o mesmo termo enquanto o picker estiver aberto. Apagar uma letra e
+  //      voltar a escrevê-la não conta como segunda pesquisa.
+  // Mínimo de 3 caracteres: com um ou dois, quase tudo dá resultados e o que não dá não
+  // é interpretável.
+  const jaRegistados = React.useRef<Set<string>>(new Set());
+  React.useEffect(() => {
+    if (q.length < 3 || searchResults.length > 0) return;
+    if (jaRegistados.current.has(q)) return;
+    const timer = setTimeout(() => {
+      jaRegistados.current.add(q);
+      Analytics.bikeSearchEmpty({ termo: q.slice(0, 40), comprimento: q.length });
+    }, 1200);
+    return () => clearTimeout(timer);
+  }, [q, searchResults.length]);
+
+  // Cada abertura do picker é uma sessão de pesquisa nova.
+  React.useEffect(() => {
+    if (open) jaRegistados.current.clear();
+  }, [open]);
+
   const stepTitle =
     step === "cat"   ? t("picker.title" as never) :
     step === "brand" ? t(`bike.cat.${selCat}` as never) :
