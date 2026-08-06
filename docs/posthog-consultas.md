@@ -59,13 +59,15 @@ Os valores de `confidence` são `real_oem`, `real_mfz`, `brand_formula` e
 conhecida da marca aplicada a uma base real; o **`category_estimate` é a heurística
 pura** — números que ninguém publicou.
 
-**Objetivo:** ver o `category_estimate` a descer ao longo do tempo. Se subir, quer
-dizer que estão a entrar utilizadores com motos que o catálogo não cobre, e a
-consulta 1 diz quais.
+**Objetivo, revisto em agosto de 2026:** o `category_estimate` já está a **zero** — ver
+a secção 8. Deixou de ser a métrica a vigiar. O que interessa agora é ver o **`real_oem`
+a subir à custa do `real_mfz`**, ou seja, dados de manual a substituir dados de
+terceiros. Se o `category_estimate` alguma vez voltar a aparecer, é sinal de que entrou
+gente com motos que o catálogo não cobre de todo, e a consulta 1 diz quais.
 
 ---
 
-## 3. Que motos geram números inventados no uso real
+## 3. Que motos correm sobre dados fracos, no uso real
 
 Precisa do `bike_id` no `setup_calculated`, acrescentado em agosto de 2026. **Só tem
 dados a partir daí** — antes disso o evento não levava a moto.
@@ -77,15 +79,26 @@ voltar; quem calcula setups repetidamente é quem está mesmo a usar a app.
 ```sql
 select
   properties.bike_id                        as moto,
+  properties.confidence                     as confianca,
   count()                                   as calculos,
   count(distinct person_id)                 as pessoas
 from events
 where event = 'setup_calculated'
-  and properties.confidence = 'category_estimate'
+  and properties.confidence in ('real_mfz', 'brand_formula')
   and timestamp > now() - interval 90 day
-group by moto
+group by moto, confianca
 order by calculos desc
 ```
+
+**Porque é que não filtra por `category_estimate`:** filtrava, até agosto de 2026, e
+devolvia **zero linhas**. Não era avaria — é que o `category_estimate` **nunca chega a
+correr** (secção 8). Uma consulta que pergunta por uma coisa que não acontece devolve
+vazio para sempre e não ensina nada.
+
+O alvo passou a ser o `real_mfz`, que é dados de terceiros, e o `brand_formula`, que é a
+fórmula da marca aplicada a motos sem perfil. Uma moto no topo desta lista com
+`real_mfz` precisa de manual para o perfil que já tem; com `brand_formula`, precisa de
+perfil de raiz.
 
 ---
 
@@ -144,9 +157,6 @@ order by pessoas desc
 A app está traduzida em seis línguas. Vale a pena saber se todas se justificam antes
 de as manter em cada funcionalidade nova — as traduções são custo fixo em tudo o que
 se acrescenta, e estão na lista do que a suspensão modificada vai precisar.
-
----
-
 
 ---
 
