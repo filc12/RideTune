@@ -3579,3 +3579,73 @@ sag, e é a razão de o `baseKg` deles ser 85 e não 75 — vem do manual, não 
 
 Vale a pena ter presente que **há marcas que não se deixam reduzir a uma tabela de cliques**,
 e que forçá-las a isso seria inventar. Para essas, o ecrã de sag da app é o caminho certo.
+
+---
+
+# ESTADO EM 7 DE AGOSTO DE 2026 — o que fica aberto
+
+Secção de fecho. As de cima contam como se chegou aqui; esta diz o que falta, e substitui
+as listas soltas que ficaram espalhadas pelas partes I a VII.
+
+**Onde estão os dados:** 104 perfis de suspensão, **83 confirmados por manual**. 120 linhas
+de pressão, 94 por manual. Código e Supabase em sincronia.
+
+## 1. Manuais por abrir — é o que desbloqueia quase tudo
+
+**Carga útil (`payloadKg`): faltam 19 dos 24 perfis com pontos de carga.** Basta a ficha
+técnica. Por ordem de quanto rendem:
+
+- **CFMoto** — 800MT, 800MT-X, 1000MT-X, 450MT, 800NK. Marca com mais utilizadores (81), e
+  já mostrou o problema na 700MT.
+- **Voge** — 900 DSX, 800 DSX Rally. Segunda marca (59), e as duas têm o ponto de cima em
+  190 tal como a 625 DSX, que excedeu.
+- **Honda Transalp** (3 perfis) — a mais intrigante das restantes: tem cinco pontos de carga
+  (75/95/120/150/190) cuja origem não se conseguiu reconstituir. Ou a Honda publicou ali uma
+  tabela mesmo — ao contrário do X-ADV, que não tem nenhuma — ou alguém os inventou.
+- **Suzuki V-Strom 1050DE e 800DE** — pontos 80/100/155/175, números demasiado específicos
+  para virem do hábito. Cheira a tabela real por confirmar.
+- Restantes: BMW R 1200 GS LC, Triumph Tiger 900 GT e Rally Pro, Scrambler 1200 XE, Street
+  Triple RS, Aprilia Tuareg 660, Ducati Hypermotard 698.
+
+**Perfis de suspensão sem manual: 21**, dos quais **15 são KTM**. Os links diretos estão na
+secção «A lista de manuais KTM a descarregar». Guardar em `~/dev/manuais-ktm/`.
+
+**Dois casos à parte, que não são de carga:** a Honda NC750X e a Ducati DesertX V2 aparecem
+no seletor sem `adjusters` — a app assume o default do nível `adj`. Se a DesertX V2 de 2026
+não existir mesmo, o honesto é marcá-la `hidden` em vez de a deixar a correr sobre um
+palpite.
+
+## 2. Decisões por tomar, não trabalho por fazer
+
+**A pré-carga da `honda` e da `suzuki`.** As duas movem `tu_soft` a um quarto do ritmo da
+`ktm`, para o mesmo tipo de afinador. Não se sabe qual está certa e há indício de que a
+diferença possa ser deliberada — na DesertX a pré-carga da frente não mexe nada com a carga,
+na KTM mexe 3 a 6 voltas. **Não uniformizar por gosto de simetria.** O caminho é o
+`preloadKgPerTurn`, mota a mota, à medida que os manuais aparecem.
+
+**O 1190 Adventure R** é o terceiro caso conhecido do salto de pré-carga (+12 voltas) e ficou
+sem `preloadKgPerTurn` de propósito: o peso máximo autorizado está na ficha técnica, que fica
+depois do corte da leitura remota.
+
+**Alargar o `preloadKgPerTurn` aos cliques** (`cl_soft`). Hoje só se aplica a voltas. A
+DesertX e várias Honda têm a pré-carga em cliques. Fazer **quando houver uma segunda mota a
+pedi-lo**, não por antecipação.
+
+## 3. Infraestrutura
+
+**`verificar-sync` continua desligado no CI.** Precisa de dois secrets em Settings → Secrets
+and variables → Actions: `EXPO_PUBLIC_SUPABASE_URL` e `EXPO_PUBLIC_SUPABASE_ANON_KEY`.
+Depois é descomentar o último passo do `verificar.yml`. Enquanto não estiver ligado, uma
+divergência entre o código e a base só se descobre correndo o script à mão.
+
+## 4. Produto — o que os números pedem
+
+**Reler as consultas 2, 3 e 9 do `posthog-consultas.md`** passadas duas a três semanas do OTA
+de agosto. A 2 e a 3 dizem se o `real_oem` subiu à custa do `real_mfz`; a 9 é a primeira
+leitura de sempre das motos que as pessoas procuram e não existem.
+
+**A pergunta por responder:** pneus 38 % e sag 36 % contra diário 9 % e setups 6 %. Se a app
+está a ser usada para consultar e não para registar, há duas funcionalidades a receber
+trabalho que ninguém pediu. **Não se decide por opinião** — decide-se cruzando
+`diary_entry_created` e `setup_saved` com quem abre esses ecrãs, que é uma consulta que
+ainda não está escrita.
