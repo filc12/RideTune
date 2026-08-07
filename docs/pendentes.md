@@ -3819,3 +3819,61 @@ técnicas e em bases de manuais de terceiros. **Não foram usados.** Um número 
 tirado de um agregador tem exactamente o mesmo estatuto que os números do mfzstudio que
 passámos o dia a corrigir — e a Aprilia é bom exemplo: o agregador dava 75 kg de carga útil,
 que é menos do que pesa o condutor, portanto está obviamente mal lido.
+
+---
+
+## 7 de agosto de 2026, parte XI — peso em libras, a pedido de um utilizador
+
+### O que já lá estava, e mudou o âmbito
+
+Antes de escrever seja o que for: **o ecrã de pneus já mostrava PSI** ao lado de bar. A
+metade mais óbvia do pedido estava feita há muito. O que faltava era o peso — e o peso é
+diferente das pressões por uma razão que decide o desenho todo: **não é só mostrado, é
+escrito**. O utilizador põe o peso dele no onboarding, no ecrã de carga e no perfil.
+
+### A regra: métrico por dentro, imperial nas pontas
+
+Tudo o que está gravado continua em quilos — setups, perfis, diário, Supabase. A conversão
+acontece só no que se mostra e no que se lê dos botões.
+
+**Porquê, e não guardar na unidade escolhida:** quem já usa a app tem registos em quilos. Se
+a unidade passasse a fazer parte do dado, um `75` gravado ficava ambíguo para sempre — 75
+quilos ou 75 libras? — e não há forma de descobrir depois. Assim, mudar de unidade nas
+Definições **nunca reescreve nada**.
+
+### O erro que este desenho convida, e o teste que o impede
+
+Converter nas pontas faz o número fugir se não se tiver cuidado: escolhe-se 165 lb, guarda-se
+74,84 kg, e ao reabrir aparece 164 ou 166. **Ninguém reporta um bug assim** — assume que se
+enganou — mas mina a confiança em tudo o resto.
+
+A regra que o evita é não arredondar ao guardar. O valor em quilos fica fraccionário de
+propósito; só o que se mostra é inteiro.
+
+**`npm run verificar-unidades`**, ligado ao CI, percorre **as 287 libras e os 131 quilos que
+a app deixa escolher, um a um**, e confirma que ir e voltar dá o mesmo número. Verifica
+também que os limites convertidos não deixam sair do intervalo — o máximo do condutor dá
+286 lb, que de volta são 129,7 kg e não 130,1 — e tem quatro âncoras de cabeça (75 kg = 165
+lb) que apanham uma constante trocada, coisa que os outros dois testes não apanhariam:
+**uma conversão consistentemente errada é consistentemente estável.**
+
+### Decisões que vale a pena não reabrir sem razão
+
+**Só o peso.** O sag fica em milímetros e os valores em mm dos manuais também. Esses números
+são citações — convertê-los a polegadas é acrescentar arredondamento a dados que hoje estão
+certos, e mesmo nos EUA quem afina suspensão mede o sag em mm.
+
+**A predefinição vem da região do telemóvel**, mas usando o `Intl` do motor de JavaScript e
+**não o `expo-localization`**. A razão é prática e não estética: o `expo-localization` é
+módulo nativo, e acrescentá-lo obrigava a uma compilação nova em vez de uma actualização por
+OTA. Se o `Intl` falhar, fica métrico, que é o que a app sempre fez.
+
+**A preferência guardada distingue «nunca escolheu» de «escolheu métrico».** O valor por
+omissão no armazenamento é string vazia. Sem isso, quem escolhesse métrico nos EUA voltava a
+ver libras no arranque seguinte.
+
+### Instrumentação
+
+Evento `units_changed`, com `automatico: false` — consulta 11 no `posthog-consultas.md`. Só
+dispara quando alguém vai às Definições mudar de propósito. **A escolha automática não
+dispara evento**, porque contá-la seria confundir geografia com vontade.

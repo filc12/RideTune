@@ -4,6 +4,7 @@ import { Stack } from "expo-router";
 import { ThemeProvider, DarkTheme } from "@react-navigation/native";
 import * as SplashScreen from "expo-splash-screen";
 import { LanguageProvider } from "@/src/i18n";
+import { UnitsProvider } from "@/src/units";
 import { SplashAnimated } from "@/src/components/SplashAnimated";
 import * as Sentry from '@sentry/react-native';
 import { initOemData } from "@/src/services/oem-data";
@@ -43,6 +44,7 @@ function RootLayout() {
 
   return (
     <LanguageProvider>
+      <UnitsProvider>
       <View style={rootStyles.bg}>
       <ThemeProvider value={RideTuneTheme}>
         <Stack screenOptions={{
@@ -54,6 +56,7 @@ function RootLayout() {
       </ThemeProvider>
       </View>
       {!splashDone && <SplashAnimated onFinish={() => setSplashDone(true)} />}
+      </UnitsProvider>
     </LanguageProvider>
   );
 }

@@ -18,6 +18,8 @@ import {
 } from 'lucide-react-native';
 import * as Updates from 'expo-updates';
 import { useT } from '@/src/i18n';
+import { useUnits } from "@/src/units";
+import { Analytics } from "@/src/services/analytics";
 import { useScreenView } from '@/src/hooks/useScreenView';
 import { refreshOemData } from '@/src/services/oem-data';
 
@@ -45,6 +47,7 @@ export default function SettingsScreen() {
   useScreenView("definicoes");
   const router = useRouter();
   const { t } = useT();
+  const { units, setUnits } = useUnits();
   const [modalVisible, setModalVisible] = useState(false);
   const [modalTitle, setModalTitle] = useState('');
   const [modalContent, setModalContent] = useState('');
@@ -105,6 +108,41 @@ export default function SettingsScreen() {
           <View style={{ alignItems: 'center', marginBottom: 28 }}>
             <Text style={{ color: '#ffffff', fontSize: 24, fontWeight: '800', letterSpacing: -0.5 }}>RideTune</Text>
             <Text style={{ color: '#94a3b8', fontSize: 13, marginTop: 4 }}>{t('settings.tagline')}</Text>
+          </View>
+
+          {/* Section: Unidades */}
+          <Text style={{ color: '#38bdf8', fontSize: 12, fontWeight: '700', textTransform: 'uppercase', letterSpacing: 1, marginBottom: 12, marginLeft: 4 }}>
+            {t('settings.sec.units')}
+          </Text>
+
+          <View style={{ backgroundColor: '#111827', borderRadius: 16, padding: 16, borderWidth: 1, borderColor: 'rgba(255, 255, 255, 0.05)', marginBottom: 24 }}>
+            <Text style={{ color: '#ffffff', fontSize: 15, fontWeight: '600' }}>{t('settings.units.weight')}</Text>
+            <Text style={{ color: '#94a3b8', fontSize: 12, marginTop: 2, marginBottom: 12 }}>{t('settings.units.sub')}</Text>
+            <View style={{ flexDirection: 'row', gap: 10 }}>
+              {(['metric', 'imperial'] as const).map((u) => {
+                const activo = units === u;
+                return (
+                  <TouchableOpacity
+                    key={u}
+                    onPress={() => { setUnits(u); Analytics.unitsChanged({ units: u, automatico: false }); }}
+                    testID={`units-${u}`}
+                    style={{
+                      flex: 1,
+                      paddingVertical: 12,
+                      borderRadius: 12,
+                      alignItems: 'center',
+                      backgroundColor: activo ? 'rgba(56, 189, 248, 0.15)' : 'rgba(255, 255, 255, 0.04)',
+                      borderWidth: 1,
+                      borderColor: activo ? '#38bdf8' : 'rgba(255, 255, 255, 0.08)',
+                    }}
+                  >
+                    <Text style={{ color: activo ? '#38bdf8' : '#94a3b8', fontSize: 14, fontWeight: '700' }}>
+                      {u === 'metric' ? t('settings.units.metric') : t('settings.units.imperial')}
+                    </Text>
+                  </TouchableOpacity>
+                );
+              })}
+            </View>
           </View>
 
           {/* Section: Comunidade & Setups */}

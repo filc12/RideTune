@@ -73,6 +73,11 @@ jobs:
       - name: Verificar pré-carga contra os manuais
         run: npm run verificar-precarga
 
+      # A app é métrica por dentro e converte só na apresentação. Isto confirma que o
+      # número não foge ao ir a quilos e voltar — 287 valores em libras, um a um.
+      - name: Verificar conversão de unidades
+        run: npm run verificar-unidades
+
       # Por ligar. Ver a nota no topo deste ficheiro.
       # - name: Verificar sincronia com o Supabase
       #   env:

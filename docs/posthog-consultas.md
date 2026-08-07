@@ -348,6 +348,35 @@ suficiente para se ver com esta amostra — e não para afinar percentagens.
 
 ---
 
+## 11. Alguém usa o sistema imperial?
+
+Acrescentado em agosto de 2026 a pedido de **um** utilizador. Uma amostra de um não decide
+nada — isto diz se havia mais gente calada.
+
+```sql
+select
+  properties.units       as sistema,
+  properties.automatico  as veio_do_telemovel,
+  count(distinct person_id) as pessoas
+from events
+where event = 'units_changed'
+  and timestamp > now() - interval 90 day
+group by sistema, veio_do_telemovel
+order by pessoas desc
+```
+
+**A distinção que interessa** está no `automatico`. A `false` são pessoas que foram às
+Definições mudar de propósito — isso é vontade. A `true` seria quem abriu a app já em
+libras por ter o telemóvel configurado nos EUA, e mede alcance, não vontade. Neste momento
+só se regista o caso `false`, porque a escolha automática não dispara evento: seria contar
+como interesse aquilo que é apenas geografia.
+
+**Como ler:** se ao fim de um mês só o autor do pedido tiver mexido nisto, a funcionalidade
+custou pouco e fica. Se aparecerem dez, vale a pena olhar para o resto — a pressão já mostra
+PSI, mas o sag continua em milímetros, e foi decisão deliberada que se pode rever com dados.
+
+---
+
 ## Notas
 
 - **A retenção de eventos no plano gratuito do PostHog é limitada.** Se alguma destas

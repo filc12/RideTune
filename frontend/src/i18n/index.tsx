@@ -485,11 +485,16 @@ const PT: Dict = {
   "profiles.modal.new": "Novo perfil",
   "profiles.modal.edit": "Editar perfil",
   "profiles.name_ph": "Nome (ex: Filipe)",
-  "profiles.weight_ph": "Peso com equipamento (kg)",
+  "profiles.weight_ph": "Peso com equipamento",
   "profiles.delete.title": "Apagar perfil?",
   "profiles.delete.confirm": "Apagar {name}?",
   "tools.diary": "Diário de Viagem",
   "tools.diary.desc": "Regista sensações e alterações ao setup",
+  "settings.sec.units": "Unidades",
+  "settings.units.weight": "Peso",
+  "settings.units.sub": "Só muda o que vês. Os dados dos manuais ficam como estão.",
+  "settings.units.metric": "Quilos (kg)",
+  "settings.units.imperial": "Libras (lb)",
 };
 
 const EN: Dict = {
@@ -951,11 +956,16 @@ const EN: Dict = {
   "profiles.modal.new": "New profile",
   "profiles.modal.edit": "Edit profile",
   "profiles.name_ph": "Name (e.g. Filipe)",
-  "profiles.weight_ph": "Weight with gear (kg)",
+  "profiles.weight_ph": "Weight with gear",
   "profiles.delete.title": "Delete profile?",
   "profiles.delete.confirm": "Delete {name}?",
   "tools.diary": "Ride Diary",
   "tools.diary.desc": "Record ride sensations and setup changes",
+  "settings.sec.units": "Units",
+  "settings.units.weight": "Weight",
+  "settings.units.sub": "Changes what you see, nothing else. Manual data stays as published.",
+  "settings.units.metric": "Kilograms (kg)",
+  "settings.units.imperial": "Pounds (lb)",
 };
 
 const ES: Dict = {
@@ -1418,11 +1428,16 @@ const ES: Dict = {
   "profiles.modal.new": "Nuevo perfil",
   "profiles.modal.edit": "Editar perfil",
   "profiles.name_ph": "Nombre (ej: Filipe)",
-  "profiles.weight_ph": "Peso con equipamiento (kg)",
+  "profiles.weight_ph": "Peso con equipamiento",
   "profiles.delete.title": "¿Eliminar perfil?",
   "profiles.delete.confirm": "¿Eliminar {name}?",
   "tools.diary": "Diario de Ruta",
   "tools.diary.desc": "Registra sensaciones y cambios de setup",
+  "settings.sec.units": "Unidades",
+  "settings.units.weight": "Peso",
+  "settings.units.sub": "Solo cambia lo que ves. Los datos de los manuales no se tocan.",
+  "settings.units.metric": "Kilos (kg)",
+  "settings.units.imperial": "Libras (lb)",
 };
 
 const FR: Dict = {
@@ -1883,11 +1898,16 @@ const FR: Dict = {
   "profiles.modal.new": "Nouveau profil",
   "profiles.modal.edit": "Modifier le profil",
   "profiles.name_ph": "Nom (ex : Filipe)",
-  "profiles.weight_ph": "Poids avec équipement (kg)",
+  "profiles.weight_ph": "Poids avec équipement",
   "profiles.delete.title": "Supprimer le profil ?",
   "profiles.delete.confirm": "Supprimer {name} ?",
   "tools.diary": "Journal de bord",
   "tools.diary.desc": "Notez vos sensations et réglages",
+  "settings.sec.units": "Unités",
+  "settings.units.weight": "Poids",
+  "settings.units.sub": "Change seulement l’affichage. Les données des manuels restent intactes.",
+  "settings.units.metric": "Kilogrammes (kg)",
+  "settings.units.imperial": "Livres (lb)",
 };
 
 const DE: Dict = {
@@ -2256,7 +2276,7 @@ const DE: Dict = {
   "profiles.modal.new": "Neues Profil",
   "profiles.modal.edit": "Profil bearbeiten",
   "profiles.name_ph": "Name (z.B. Filipe)",
-  "profiles.weight_ph": "Gewicht mit Ausrüstung (kg)",
+  "profiles.weight_ph": "Gewicht mit Ausrüstung",
   "profiles.delete.title": "Profil löschen?",
   "profiles.delete.confirm": "{name} löschen?",
   "tools.diary": "Fahrttagebuch",
@@ -2351,6 +2371,11 @@ const DE: Dict = {
   "count.kove_800x_rally": "↻ Im Uhrzeigersinn bis hart (0), Klicks gegen UZS zählen. Hintere Druckstufe in Hoch- und Niedriggeschwindigkeit aufgeteilt. Vordere Zugstufe unterscheidet sich von Standard.",
   "count.yamaha_t700_2019": "↻ Im Uhrzeigersinn bis hart (0), Klicks gegen UZS zählen. Hintere Vorspannung: ↺ gegen UZS bis Anschlag, Klicks UZS zählen. Kein vorderer Vorspannungs-Einsteller.",
   "count.yamaha_t700_2025": "↻ Im Uhrzeigersinn bis hart (0), Klicks gegen UZS zählen. Vordere Vorspannung: Abstand A in mm, ~15 mm Bereich (beide Gabelbeine gleich halten). Hintere Vorspannung: ↺ gegen UZS, Klicks UZS zählen.",
+  "settings.sec.units": "Einheiten",
+  "settings.units.weight": "Gewicht",
+  "settings.units.sub": "Ändert nur die Anzeige. Die Handbuchdaten bleiben unverändert.",
+  "settings.units.metric": "Kilogramm (kg)",
+  "settings.units.imperial": "Pfund (lb)",
 };
 
 
@@ -2479,7 +2504,7 @@ const IT: Dict = {
   "profiles.modal.new": "Nuovo profilo",
   "profiles.modal.edit": "Modifica profilo",
   "profiles.name_ph": "Nome (es: Filipe)",
-  "profiles.weight_ph": "Peso con equipaggiamento (kg)",
+  "profiles.weight_ph": "Peso con equipaggiamento",
   "profiles.delete.title": "Eliminare il profilo?",
   "profiles.delete.confirm": "Eliminare {name}?",
   // --- Lote D2: hiw (IT) ---
@@ -2828,6 +2853,11 @@ const IT: Dict = {
   "common.cancel": "Annulla",
   "common.save": "Salva",
   "common.clicks": "click",
+  "settings.sec.units": "Unità",
+  "settings.units.weight": "Peso",
+  "settings.units.sub": "Cambia solo ciò che vedi. I dati dei manuali restano invariati.",
+  "settings.units.metric": "Chilogrammi (kg)",
+  "settings.units.imperial": "Libbre (lb)",
 };
 
 const DICTS: Record<Lang, Dict> = { pt: PT, en: EN, es: ES, fr: FR, de: DE, it: IT };

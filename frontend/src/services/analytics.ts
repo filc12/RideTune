@@ -18,6 +18,7 @@
  *   backup_imported        — backup JSON importado com sucesso
  *   diary_entry_created    — nova entrada no diário de viagem
  *   language_changed       — utilizador mudou idioma
+ *   units_changed          — utilizador mudou entre métrico e imperial
  *   screen_viewed          — ecrã principal visitado
  */
 
@@ -175,6 +176,21 @@ export const Analytics = {
   /** Nova entrada no diário de viagem. */
   diaryEntryCreated(): void {
     track('diary_entry_created');
+  },
+
+  /**
+   * Utilizador mudou o sistema de unidades.
+   *
+   * Existe pela mesma razão que o `language_changed`: sem isto não há como saber se a
+   * funcionalidade serve alguém. Foi pedida por um utilizador, o que é uma amostra de um —
+   * este evento diz se era um caso isolado ou se havia mais gente calada à espera.
+   *
+   * O `automatico` distingue quem foi às Definições mudar de propósito de quem simplesmente
+   * abriu a app com o telemóvel configurado nos EUA. São coisas muito diferentes: a segunda
+   * mede alcance, a primeira mede vontade.
+   */
+  unitsChanged(props: { units: string; automatico: boolean }): void {
+    track('units_changed', props);
   },
 
   /** Utilizador mudou o idioma. */

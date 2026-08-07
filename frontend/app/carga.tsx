@@ -15,6 +15,8 @@ import { getActiveProfile, updateProfile, type RiderProfile } from "@/src/utils/
 import { tapSuccess } from "@/src/utils/haptics";
 import { HapticButton } from "@/src/components/HapticButton";
 import { useScreenView } from "@/src/hooks/useScreenView";
+import { useUnits } from "@/src/units";
+import { limitesPeso, pesoParaGuardar, pesoParaMostrar, simboloPeso, type UnitSystem } from "@/src/utils/units";
 
 const RIDER_BOUNDS = { min: 40, max: 130, step: 1 };
 const PASSENGER_BOUNDS = { min: 0, max: 120, step: 1 };
@@ -24,6 +26,7 @@ export default function CargaScreen() {
   const navPad = useBottomNavClearance();
   useScreenView("carga");
   const { t } = useT();
+  const { units } = useUnits();
   const router = useRouter();
   const [load, setLoad] = useState<Load>({ rider: 75, passenger: 0, luggage: 0 });
   const [bikeId, setBikeId] = useState<string | null>(null);
@@ -105,6 +108,7 @@ export default function CargaScreen() {
               label={t("carga.rider")}
               value={load.rider}
               bounds={RIDER_BOUNDS}
+              units={units}
               onChange={(v) => update("rider", v, RIDER_BOUNDS)}
               testID="rider-row"
             />
@@ -113,6 +117,7 @@ export default function CargaScreen() {
               label={t("carga.passenger")}
               value={load.passenger}
               bounds={PASSENGER_BOUNDS}
+              units={units}
               onChange={async (v) => {
               const { canUseLoadMode } = await import("@/src/services/premium");
               const allowed = await canUseLoadMode("duo");
@@ -126,6 +131,7 @@ export default function CargaScreen() {
               label={t("carga.luggage")}
               value={load.luggage}
               bounds={LUGGAGE_BOUNDS}
+              units={units}
               onChange={async (v) => {
               const { canUseLoadMode } = await import("@/src/services/premium");
               const allowed = await canUseLoadMode("malas");
@@ -138,7 +144,7 @@ export default function CargaScreen() {
             <View style={st.totalCard}>
               <View>
                 <Text style={st.totalLabel}>{t("carga.total")}</Text>
-                <Text style={st.totalValue}>{total} <Text style={st.totalUnit}>{t("carga.kg")}</Text></Text>
+                <Text style={st.totalValue}>{pesoParaMostrar(total, units)} <Text style={st.totalUnit}>{simboloPeso(units)}</Text></Text>
               </View>
               <View style={st.previewRight}>
                 <Text style={st.previewLabel}>Sag</Text>
@@ -197,16 +203,30 @@ function WeightRow({
   value,
   bounds,
   onChange,
+  units,
   testID,
 }: {
   icon: keyof typeof MaterialCommunityIcons.glyphMap;
   label: string;
+  /** Sempre em quilos — é o que o resto da app usa. */
   value: number;
+  /** Sempre em quilos. */
   bounds: { min: number; max: number; step: number };
+  /** Devolve sempre quilos. */
   onChange: (v: number) => void;
+  units: UnitSystem;
   testID?: string;
 }) {
-  const pct = ((value - bounds.min) / (bounds.max - bounds.min)) * 100;
+  // A conversão vive toda aqui dentro: quem chama continua a falar em quilos e nem sabe
+  // que existe outro sistema. Os botões mexem de UMA UNIDADE MOSTRADA de cada vez — quem
+  // anda em libras carrega em «+1» e sobe uma libra, não 0,45.
+  const lim      = limitesPeso(bounds.min, bounds.max, units);
+  const mostrado = pesoParaMostrar(value, units);
+  const passo    = (d: number) => {
+    const alvo = Math.min(lim.max, Math.max(lim.min, mostrado + d));
+    onChange(pesoParaGuardar(alvo, units));
+  };
+  const pct = ((mostrado - lim.min) / (lim.max - lim.min)) * 100;
   return (
     <View style={st.weightRow} testID={testID}>
       <View style={st.weightHead}>
@@ -215,8 +235,8 @@ function WeightRow({
         </View>
         <Text style={st.weightLabel}>{label}</Text>
         <Text style={st.weightValue}>
-          {value}
-          <Text style={st.weightUnit}> kg</Text>
+          {mostrado}
+          <Text style={st.weightUnit}> {simboloPeso(units)}</Text>
         </Text>
       </View>
       <View style={st.barTrack}>
@@ -226,7 +246,7 @@ function WeightRow({
         <HapticButton
           activeOpacity={0.8}
           style={st.stepBtn}
-          onPress={() => onChange(value - 5)}
+          onPress={() => passo(-5)}
           testID={`${testID}-minus5`}
         >
           <Text style={st.stepLabel}>−5</Text>
@@ -234,7 +254,7 @@ function WeightRow({
         <HapticButton
           activeOpacity={0.8}
           style={st.stepBtn}
-          onPress={() => onChange(value - 1)}
+          onPress={() => passo(-1)}
           testID={`${testID}-minus1`}
         >
           <Text style={st.stepLabel}>−1</Text>
@@ -243,7 +263,7 @@ function WeightRow({
         <HapticButton
           activeOpacity={0.8}
           style={st.stepBtn}
-          onPress={() => onChange(value + 1)}
+          onPress={() => passo(+1)}
           testID={`${testID}-plus1`}
         >
           <Text style={st.stepLabel}>+1</Text>
@@ -251,7 +271,7 @@ function WeightRow({
         <HapticButton
           activeOpacity={0.8}
           style={st.stepBtn}
-          onPress={() => onChange(value + 5)}
+          onPress={() => passo(+5)}
           testID={`${testID}-plus5`}
         >
           <Text style={st.stepLabel}>+5</Text>

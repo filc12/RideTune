@@ -7,6 +7,8 @@ import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import { C, ScreenHeader } from "@/src/components/ScreenHeader";
 import { BottomNav, useBottomNavClearance } from "@/src/components/BottomNav";
 import { useT } from "@/src/i18n";
+import { useUnits } from "@/src/units";
+import { pesoParaMostrar, simboloPeso } from "@/src/utils/units";
 import { deleteSetup, listSetups, saveSetup, type SavedSetup } from "@/src/utils/setups";
 import { useRouter } from "expo-router";
 import { calcSetupById, getLoad, saveLoad } from "@/src/utils/suspension";
@@ -24,6 +26,7 @@ export default function SetupsScreen() {
   const navPad = useBottomNavClearance();
   useScreenView("setups");
   const { t } = useT();
+  const { units } = useUnits();
   const router = useRouter();
   const [items, setItems] = useState<SavedSetup[]>([]);
   const [open, setOpen] = useState(false);
@@ -147,7 +150,7 @@ export default function SetupsScreen() {
                     <Text style={st.rowTitle}>{s.name}</Text>
                     {s.confidence && <ConfidenceBadge level={s.confidence} compact />}
                     <Text style={st.rowMeta}>
-                      {s.bikeLabel} · {s.load.rider + s.load.passenger + s.load.luggage}kg · {t("card.sag" as never)} {s.setup.sag}mm
+                      {s.bikeLabel} · {pesoParaMostrar(s.load.rider + s.load.passenger + s.load.luggage, units)}{simboloPeso(units)} · {t("card.sag" as never)} {s.setup.sag}mm
                     </Text>
                   </View>
                   <HapticButton

@@ -10,10 +10,11 @@
     "web": "expo start --web",
     "lint": "expo lint",
     "typecheck": "tsc --noEmit",
-    "verificar": "npm run typecheck && npm run verificar-coerencia && npm run verificar-precarga",
+    "verificar": "npm run typecheck && npm run verificar-coerencia && npm run verificar-precarga && npm run verificar-unidades",
     "verificar-sync": "tsx scripts/verificar-sync.ts",
     "verificar-coerencia": "tsx scripts/verificar-coerencia.ts",
-    "verificar-precarga": "tsx scripts/verificar-precarga.ts"
+    "verificar-precarga": "tsx scripts/verificar-precarga.ts",
+    "verificar-unidades": "tsx scripts/verificar-unidades.ts"
   },
   "dependencies": {
     "@babel/runtime": "^7.20.6",

@@ -8,6 +8,8 @@ import { saveLoad, getLoad } from "@/src/utils/suspension";
 import { storage } from "@/src/utils/storage";
 import { C } from "@/src/theme";
 import { Analytics } from "@/src/services/analytics";
+import { useUnits } from "@/src/units";
+import { limitesPeso, pesoParaGuardar, pesoParaMostrar, simboloPeso } from "@/src/utils/units";
 
 const K_ONBOARDED = "ridetune.onboarded";
 type Step = "lang" | "welcome" | "name" | "weight" | "safety";
@@ -61,6 +63,15 @@ export default function OnboardingScreen() {
   const [step, setStep] = useState<Step>("lang");
   const [name, setName] = useState("");
   const [weight, setWeight] = useState("75");
+  const { units } = useUnits();
+  // O `weight` é sempre quilos, como tudo o resto da app. Os botões mexem na unidade que
+  // está a ser mostrada — uma libra de cada vez para quem anda em libras.
+  const limPeso   = limitesPeso(40, 130, units);
+  const pesoVisto = pesoParaMostrar(parseFloat(weight) || 75, units);
+  const passoPeso = (d: number) => {
+    const alvo = Math.min(limPeso.max, Math.max(limPeso.min, pesoVisto + d));
+    setWeight(String(pesoParaGuardar(alvo, units)));
+  };
 
   const handleFinish = async () => {
     try {
@@ -120,14 +131,14 @@ export default function OnboardingScreen() {
             <Text style={st.title}>{t("onb.weight.title")}<Text style={st.accent}>{t("onb.weight.accent")}</Text></Text>
             <Text style={st.sub}>{t("onb.weight.sub")}</Text>
             <View style={st.weightRow}>
-              <TouchableOpacity style={st.weightBtn} onPress={() => setWeight(String(Math.max(40, parseInt(weight) - 5)))}><Text style={st.weightBtnLabel}>-5</Text></TouchableOpacity>
-              <TouchableOpacity style={st.weightBtn} onPress={() => setWeight(String(Math.max(40, parseInt(weight) - 1)))}><Text style={st.weightBtnLabel}>-1</Text></TouchableOpacity>
+              <TouchableOpacity style={st.weightBtn} onPress={() => passoPeso(-5)}><Text style={st.weightBtnLabel}>-5</Text></TouchableOpacity>
+              <TouchableOpacity style={st.weightBtn} onPress={() => passoPeso(-1)}><Text style={st.weightBtnLabel}>-1</Text></TouchableOpacity>
               <View style={st.weightDisplay}>
-                <Text style={st.weightValue}>{weight}</Text>
-                <Text style={st.weightUnit}>kg</Text>
+                <Text style={st.weightValue}>{pesoVisto}</Text>
+                <Text style={st.weightUnit}>{simboloPeso(units)}</Text>
               </View>
-              <TouchableOpacity style={st.weightBtn} onPress={() => setWeight(String(Math.min(130, parseInt(weight) + 1)))}><Text style={st.weightBtnLabel}>+1</Text></TouchableOpacity>
-              <TouchableOpacity style={st.weightBtn} onPress={() => setWeight(String(Math.min(130, parseInt(weight) + 5)))}><Text style={st.weightBtnLabel}>+5</Text></TouchableOpacity>
+              <TouchableOpacity style={st.weightBtn} onPress={() => passoPeso(1)}><Text style={st.weightBtnLabel}>+1</Text></TouchableOpacity>
+              <TouchableOpacity style={st.weightBtn} onPress={() => passoPeso(5)}><Text style={st.weightBtnLabel}>+5</Text></TouchableOpacity>
             </View>
             <TouchableOpacity style={st.btn} onPress={() => setStep("safety")} activeOpacity={0.9}>
               <Text style={st.btnLabel}>{t("onb.next")}</Text>

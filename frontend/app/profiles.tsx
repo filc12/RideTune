@@ -7,6 +7,8 @@ import { useRouter } from "expo-router";
 
 import { C, ScreenHeader } from "@/src/components/ScreenHeader";
 import { useT } from "@/src/i18n";
+import { useUnits } from "@/src/units";
+import { pesoParaGuardar, pesoParaMostrar, simboloPeso } from "@/src/utils/units";
 import { BottomNav, useBottomNavClearance } from "@/src/components/BottomNav";
 import {
   listProfiles, saveProfile, updateProfile, deleteProfile,
@@ -21,6 +23,7 @@ export default function ProfilesScreen() {
   const navPad = useBottomNavClearance();
   useScreenView("perfis");
   const { t } = useT();
+  const { units } = useUnits();
   const router = useRouter();
   const [profiles, setProfiles] = useState<RiderProfile[]>([]);
   const [activeId, setActiveId] = useState<string>("");
@@ -43,19 +46,23 @@ export default function ProfilesScreen() {
   const onAdd = () => {
     setEditTarget(null);
     setName("");
-    setWeight("75");
+    setWeight(String(pesoParaMostrar(75, units)));
     setModalOpen(true);
   };
 
   const onEdit = (p: RiderProfile) => {
     setEditTarget(p);
     setName(p.name);
-    setWeight(String(p.weightKg));
+    setWeight(String(pesoParaMostrar(p.weightKg, units)));
     setModalOpen(true);
   };
 
   const onSave = async () => {
-    const w = parseInt(weight) || 75;
+    // O campo está na unidade que o utilizador vê; o que se guarda é sempre quilos.
+    // O valor por omissão é o equivalente a 75 kg na unidade mostrada, e não 75 à letra —
+    // 75 libras seriam 34 quilos, e ninguém com esse peso anda de mota.
+    const escrito = parseInt(weight) || pesoParaMostrar(75, units);
+    const w = pesoParaGuardar(escrito, units);
     const trimmed = name.trim() || "Rider";
     if (editTarget) {
       await updateProfile(editTarget.id, { name: trimmed, weightKg: w });
@@ -129,7 +136,7 @@ export default function ProfilesScreen() {
                     </View>
                     <View style={{ flex: 1 }}>
                       <Text style={st.rowName}>{p.name}</Text>
-                      <Text style={st.rowMeta}>{p.weightKg} kg</Text>
+                      <Text style={st.rowMeta}>{pesoParaMostrar(p.weightKg, units)} {simboloPeso(units)}</Text>
                     </View>
                     {!isActive && (
                       <TouchableOpacity onPress={() => onActivate(p)} style={st.activateBtn} testID={`activate-${p.id}`}>
@@ -172,7 +179,7 @@ export default function ProfilesScreen() {
           <TextInput
             value={weight}
             onChangeText={setWeight}
-            placeholder={t("profiles.weight_ph")}
+            placeholder={`${t("profiles.weight_ph")} (${simboloPeso(units)})`}
             placeholderTextColor={C.textMute}
             keyboardType="numeric"
             style={st.input}
