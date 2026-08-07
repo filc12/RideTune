@@ -10,9 +10,13 @@ perguntar qual era a fonte das curvas de amortecimento. O texto diz o que
 temos: regulações de fábrica do manual do proprietário, onde existem, e uma
 distinção visível quando não existem.
 
-**Números usados (verificados em 27/07/2026):** 110 motos, 14 marcas,
-66 perfis de suspensão (34 de manual oficial), 109 fichas de pressão de pneus,
-6 idiomas.
+**Números usados (verificados em 07/08/2026):** 120 motos visíveis, 14 marcas,
+104 perfis de suspensão (**85 de manual oficial**), 120 fichas de pressão de pneus
+(94 de manual oficial), 6 idiomas.
+
+**O que mudou desde 27/07:** os perfis confirmados por manual passaram de 34 para 85 —
+duas vezes e meia mais. É o número que interessa comunicar, porque é o que distingue esta
+app de qualquer folha de cálculo copiada da internet. As motos passaram de 110 para 120.
 
 ---
 
@@ -30,7 +34,7 @@ Afinação real para a tua carga
 
 **Texto promocional** (170 caracteres — pode mudar sem nova versão)
 ```
-Novo: BMW R 1200 GS LC e Yamaha XT1200Z Super Ténéré, ambas verificadas pelo manual oficial. Já são 110 motos.
+85 dos 104 perfis de suspensão são agora lidos directamente do manual do fabricante — eram 34 há duas semanas. 120 motos.
 ```
 
 **Descrição**
@@ -56,7 +60,7 @@ Onde o fabricante publica tabelas por carga, a app interpola entre os pontos
 reais. Onde não publica, usa a fórmula conhecida da marca e diz-te que o fez.
 
 O QUE ENCONTRAS
-• 110 motos de 14 marcas — de adventure a supermoto
+• 120 motos de 14 marcas — de adventure a supermoto
 • Valores de suspensão à frente e atrás, por carga
 • Sag: quanto medir e como
 • Pressões de pneus de fábrica, a solo e com carga
@@ -96,7 +100,7 @@ Real setup for your real load
 
 **Promotional text**
 ```
-New: BMW R 1200 GS LC and Yamaha XT1200Z Super Ténéré, both verified against the official manual. 110 bikes and counting.
+85 of 104 suspension profiles now come straight from the manufacturer's manual — up from 34 two weeks ago. 120 bikes.
 ```
 
 **Description**
@@ -122,7 +126,7 @@ real points. Where it doesn't, it uses the brand's known formula and tells you
 so.
 
 WHAT YOU GET
-• 110 bikes across 14 brands — adventure to supermoto
+• 120 bikes across 14 brands — adventure to supermoto
 • Front and rear suspension values, by load
 • Sag: what to measure and how
 • Factory tyre pressures, solo and loaded
@@ -162,7 +166,7 @@ Ajuste real para tu carga
 
 **Texto promocional**
 ```
-Nuevo: BMW R 1200 GS LC y Yamaha XT1200Z Super Ténéré, ambas verificadas con el manual oficial. Ya son 110 motos.
+85 de los 104 perfiles de suspensión se leen ya del manual del fabricante — eran 34 hace dos semanas. 120 motos.
 ```
 
 **Descripción**
@@ -188,7 +192,7 @@ Donde el fabricante publica tablas por carga, la app interpola entre los puntos
 reales. Donde no las publica, usa la fórmula conocida de la marca y te lo dice.
 
 QUÉ ENCUENTRAS
-• 110 motos de 14 marcas — de trail a supermoto
+• 120 motos de 14 marcas — de trail a supermoto
 • Valores de suspensión delante y detrás, según la carga
 • Sag: qué medir y cómo
 • Presiones de neumáticos de fábrica, solo y con carga
@@ -228,7 +232,7 @@ Réglage réel selon ta charge
 
 **Texte promotionnel**
 ```
-Nouveau : BMW R 1200 GS LC et Yamaha XT1200Z Super Ténéré, vérifiées sur le manuel officiel. Déjà 110 motos.
+85 des 104 profils de suspension viennent désormais du manuel constructeur — contre 34 il y a deux semaines. 120 motos.
 ```
 
 **Description**
@@ -254,7 +258,7 @@ Là où le constructeur publie des tableaux par charge, l'app interpole entre le
 points réels. Sinon, elle applique la formule connue de la marque et te le dit.
 
 CE QUE TU TROUVES
-• 110 motos de 14 marques — du trail au supermotard
+• 120 motos de 14 marques — du trail au supermotard
 • Valeurs de suspension avant et arrière, selon la charge
 • Sag : quoi mesurer et comment
 • Pressions de pneus d'usine, seul et en charge
@@ -294,7 +298,7 @@ Fahrwerk für deine Zuladung
 
 **Werbetext**
 ```
-Neu: BMW R 1200 GS LC und Yamaha XT1200Z Super Ténéré, beide anhand des offiziellen Handbuchs geprüft. Bereits 110 Motorräder.
+85 von 104 Fahrwerksprofilen stammen jetzt direkt aus dem Herstellerhandbuch — vor zwei Wochen waren es 34. 120 Motorräder.
 ```
 
 **Beschreibung**
@@ -321,7 +325,7 @@ zwischen den echten Punkten. Wo nicht, nutzt sie die bekannte Markenformel und
 sagt dir das.
 
 WAS DU BEKOMMST
-• 110 Motorräder von 14 Marken — von Adventure bis Supermoto
+• 120 Motorräder von 14 Marken — von Adventure bis Supermoto
 • Fahrwerkswerte vorn und hinten, nach Zuladung
 • Negativfederweg: was messen und wie
 • Werks-Reifendrücke, solo und beladen
@@ -361,7 +365,7 @@ Assetto reale per il carico
 
 **Testo promozionale**
 ```
-Novità: BMW R 1200 GS LC e Yamaha XT1200Z Super Ténéré, entrambe verificate sul manuale ufficiale. Già 110 moto.
+85 dei 104 profili di sospensione arrivano ora dal manuale del costruttore — erano 34 due settimane fa. 120 moto.
 ```
 
 **Descrizione**
@@ -387,7 +391,7 @@ Dove il costruttore pubblica tabelle per carico, l'app interpola tra i punti
 reali. Dove non le pubblica, usa la formula nota del marchio e te lo dice.
 
 COSA TROVI
-• 110 moto di 14 marchi — dall'adventure al supermotard
+• 120 moto di 14 marchi — dall'adventure al supermotard
 • Valori di sospensione anteriore e posteriore, per carico
 • Sag: cosa misurare e come
 • Pressioni gomme di fabbrica, da solo e carico
@@ -430,6 +434,86 @@ vezes.
 **Categoria sugerida:** Desporto, ou Utilidades como secundária. A concorrência
 em Desporto é menor e o público está mais próximo.
 
-**Antes de submeter, atualiza os números.** Estão certos em 27/07/2026: 110 motos
-e 14 marcas. Se acrescentares motos entretanto, corrige — é o tipo de detalhe que
-custa credibilidade se estiver errado.
+**Antes de submeter, atualiza os números.** Estão certos em 07/08/2026: 120 motos
+visíveis, 14 marcas, 85 dos 104 perfis por manual. Se acrescentares motos entretanto,
+corrige — é o tipo de detalhe que custa credibilidade se estiver errado.
+
+Para os obteres sem contar à mão:
+
+```bash
+cd frontend && python3 - <<'EOF'
+import re, json
+b=open('src/data/bikes.ts',encoding='utf-8').read()
+motos=len(re.findall(r'\{ id: "', b)); ocultas=len(re.findall(r'hidden: true', b))
+s=open('src/data/mfzSuspensionData.ts',encoding='utf-8').read()
+p=open('src/data/tirePressure.ts',encoding='utf-8').read()
+linhas=re.findall(r'\{"bikeId".*?\}', p)
+print(f"motos visíveis: {motos-ocultas}")
+print(f"marcas: {len(set(re.findall(chr(98)+chr(114)+'and: .([^.]+).', b)))}")
+print(f"perfis: {len(re.findall(chr(10)+'    id: .', s))}  de manual: {s.count(chr(100)+'ataQuality: ' + chr(39) + 'oem_manual' + chr(39))}")
+print(f"pressões: {len(linhas)}  de manual: {sum(1 for l in linhas if json.loads(l).get('dataQuality')=='oem_manual')}")
+EOF
+```
+
+---
+
+## O que se pode adiantar enquanto a conta Apple não abre
+
+Escrito em 7 de agosto de 2026, com a adesão ao Developer Program parada há nove dias.
+A ideia é que o dia em que a conta abrir seja de submeter e não de começar.
+
+### 1. Capturas de ecrã em iOS — e não é preciso conta nenhuma
+
+**Esta é a que rende mais.** As capturas que estão em `store-assets/` são de Android, com
+tamanhos que a Apple não aceita — 1129×2454, 1216×2504 e por aí. A App Store exige medidas
+exactas.
+
+**E dá para as tirar hoje:** o projecto nativo iOS já existe em `frontend/ios/`, e correr no
+**Simulador** não exige conta de programador paga. Só o Xcode.
+
+```bash
+cd frontend && npx expo run:ios
+```
+
+Escolhe no Xcode um iPhone 16 Pro Max (dá 1290×2796, que serve para o tamanho de 6,9") e um
+iPhone 11 Pro Max ou 14 Plus (1284×2778, para o de 6,5"). Estes dois tamanhos chegam: a
+Apple redimensiona para os restantes. Captura com **Cmd+S** no simulador.
+
+Quantas: até dez por tamanho, e valem mais três boas do que dez repetidas. As que contam
+são as que mostram a proposta — o ecrã de setup com valores, o de pneus com as duas
+pressões, e o seletor de motos a provar a dimensão do catálogo.
+
+### 2. Chave do RevenueCat para iOS
+
+O `EXPO_PUBLIC_REVENUECAT_IOS_KEY` está a `POR_PREENCHER_appl_xxx` nos quatro perfis do
+`eas.json`. Sem ela o premium não funciona no iOS — a app instala, mas quem tentar comprar
+bate em nada.
+
+**Criar o projecto iOS no RevenueCat não depende da Apple.** A chave pública fica logo
+disponível. O que só se faz depois é ligar os produtos ao App Store Connect.
+
+### 3. Política de privacidade numa página pública
+
+A app tem o texto num modal, mas a App Store Connect pede um **URL**, não texto colado.
+Publicar em `ridetune.app/privacidade` — e serve para os dois sistemas.
+
+### 4. As respostas do questionário de privacidade
+
+A Apple pergunta, campo a campo, que dados são recolhidos e para quê. Vale a pena ter a
+resposta escrita antes, porque responder à pressa é como se declara de mais.
+
+O que a RideTune recolhe, e é pouco: **PostHog** com identificador anónimo, sem nome nem
+email, para uso da app; **Sentry** para relatórios de erro; **RevenueCat** para compras. Não
+há conta de utilizador, não há localização, não há contactos. Na terminologia da Apple isto
+é *Usage Data* e *Diagnostics*, ambos **não associados à identidade** — que é a distinção
+que mais interessa acertar.
+
+### 5. Números da ficha
+
+Já actualizados nesta versão do documento. Reconfirmar no dia da submissão com o comando
+que está nas notas de preenchimento.
+
+### O que NÃO dá para adiantar
+
+Os produtos de compra no App Store Connect, o TestFlight e a submissão em si. Todos
+precisam da conta activa.
