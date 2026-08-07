@@ -3587,8 +3587,9 @@ e que forçá-las a isso seria inventar. Para essas, o ecrã de sag da app é o 
 Secção de fecho. As de cima contam como se chegou aqui; esta diz o que falta, e substitui
 as listas soltas que ficaram espalhadas pelas partes I a VII.
 
-**Onde estão os dados:** 104 perfis de suspensão, **83 confirmados por manual**. 120 linhas
-de pressão, 94 por manual. Código e Supabase em sincronia.
+**Onde estão os dados:** 104 perfis de suspensão, **85 confirmados por manual**. 120 linhas
+de pressão, 94 por manual. Dez perfis com a carga útil do manual. Código e Supabase em
+sincronia. (Números de 7 de agosto ao fim do dia — ver as partes VII a X.)
 
 ## 1. Manuais por abrir — é o que desbloqueia quase tudo
 
@@ -3761,3 +3762,60 @@ Falta o manual DL1050DE, secções 2-143 e 2-147. A leitura remota trunca antes.
 ### Estado dos números
 
 **104 perfis, 85 por manual. 10 com carga útil do manual.**
+
+---
+
+## 7 de agosto de 2026, parte X — varredura às tabelas de carga, e o balanço
+
+Depois de a V-Strom 800DE se ter revelado errada, a pergunta certa deixou de ser «que
+manuais faltam» e passou a ser **«quantas outras tabelas de carga foram inventadas?»**.
+
+### A varredura
+
+Todos os 24 perfis com pontos de carga, cruzando duas coisas: se estão confirmados por
+manual, e se o amortecimento varia com a carga — que é a assinatura da tabela inventada,
+porque poucos fabricantes publicam isso.
+
+**Resultado: 22 dos 24 estão confirmados por manual.** Os dois que não estão:
+
+- **Suzuki V-Strom 1050DE** — já marcada sob suspeição na parte IX.
+- **Honda XL750 Transalp 2023** — os pontos são estimativa assumida, e o próprio perfil
+  sempre o disse («position estimated»). O amortecimento não varia, portanto o risco é só
+  nos quilos.
+
+**Não há problema sistémico.** A V-Strom era um perfil por confirmar, não a ponta de um
+iceberg. Foi bom perguntar.
+
+### Prova disso: a Speed Triple 1200 RS, verificada valor a valor
+
+Para confirmar que as tabelas marcadas como «manual» são mesmo do manual, pegou-se numa ao
+acaso e comparou-se com o handbook em disco. **Bate tudo:**
+
+| | Solo (manual) | Perfil | Passageiro (manual) | Perfil |
+|---|---:|---:|---:|---:|
+| Pré-carga frente | 4 voltas | 4 | 4 voltas | 4 |
+| Frente comp. / ext. | 15 / 15 | 15 / 15 | 15 / 15 | 15 / 15 |
+| Trás compressão | 20 | 20 | 10 | 10 |
+| Trás extensão | 16 | 16 | 10 | 10 |
+
+Inclui o pormenor de a Triumph não publicar valor de pré-carga traseira nesta mota — o
+perfil marca-a `pos` com a nota, em vez de inventar um número.
+
+### O que ficou por fazer, e porquê — não é falta de procurar
+
+**Carga útil, 14 perfis sem ela.** Divididos por razão:
+
+- **CFMoto 800MT, 800MT-X, 1000MT-X, 800NK** — a CFMoto **não a publica** nos manuais destes
+  modelos. O manual italiano do 800MT-X diz textualmente que está numa etiqueta colada na
+  mota. Caminho: fotografar a etiqueta.
+- **Triumph Tiger 900 GT e Rally Pro, Scrambler 1200 XE** — os handbooks estão em
+  `api.triumphtechnicalinformation.com`, que **exige sessão** e devolve vazio a quem chega de
+  fora. Caminho: descarregar pelo site da Triumph, com conta.
+- **BMW R 1200 GS LC, Aprilia Tuareg 660, Ducati Hypermotard 698, Honda Transalp 2023 e 2026,
+  Suzuki V-Strom 1050DE** — sem fonte aberta encontrada. Caminho: PDF em disco.
+
+**Nota sobre fontes secundárias.** Apareceram valores de carga útil em sites de fichas
+técnicas e em bases de manuais de terceiros. **Não foram usados.** Um número de carga útil
+tirado de um agregador tem exactamente o mesmo estatuto que os números do mfzstudio que
+passámos o dia a corrigir — e a Aprilia é bom exemplo: o agregador dava 75 kg de carga útil,
+que é menos do que pesa o condutor, portanto está obviamente mal lido.
