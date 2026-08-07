@@ -3877,3 +3877,69 @@ ver libras no arranque seguinte.
 Evento `units_changed`, com `automatico: false` — consulta 11 no `posthog-consultas.md`. Só
 dispara quando alguém vai às Definições mudar de propósito. **A escolha automática não
 dispara evento**, porque contá-la seria confundir geografia com vontade.
+
+---
+
+## 7 de agosto de 2026, parte XII — auditoria às pressões de todo-o-terreno
+
+A pergunta era se se podia acrescentar pressão de todo-o-terreno às restantes Adventure.
+Ao ir ver de onde vinham as que já existiam, apareceu o contrário: **quatro das dez não
+tinham fonte nenhuma.**
+
+### O que havia, e o que era
+
+| Mota | Estado |
+|---|---|
+| Aprilia Tuareg 660 | ✓ manual: «fora de estrada 2,0 nas duas rodas» |
+| Ducati DesertX 937 | ✓ manual: «1,8 e 2,0 à frente; 1,8 e 2,2 atrás» |
+| Ducati Multistrada V4 Rally | ✓ manual, **mas para outro pneu** — ver mais abaixo |
+| Yamaha Ténéré 700 | ✓ manual: secção «Off-road riding», 200 kPa nas duas rodas |
+| DesertX V2 e DesertX Rally | herdados do 937, já marcados `estimated_spec` |
+| **Honda Africa Twin ×3** | **✗ sem fonte — RETIRADOS** |
+| **KTM 1190 Adventure R** | **✗ sem fonte — RETIRADOS** |
+
+### Porque é que as Honda saíram
+
+A fonte citada é a etiqueta de pneus do manual, que dá **só pressões de estrada** — 225/250
+kPa a solo e 225/280 a dois. Os 1,5 e 1,8 bar de todo-o-terreno não constavam dela nem de
+mais lado nenhum, e a linha estava marcada `oem_manual`. Eram números sem origem
+apresentados como dados de fábrica.
+
+**Porque é que se retiraram em vez de se marcarem como estimativa:** a `dataQuality` é por
+linha e não por campo, e as pressões de estrada destas motas **vêm mesmo do manual**.
+Rebaixar a linha toda lançaria dúvida sobre dados que estão certos. Sem forma de marcar só
+um campo, a escolha honesta é não publicar o que não se sabe.
+
+### Porque é que a KTM saiu, e é a mais conclusiva
+
+Não é «não encontrámos» — é que **a KTM não publica pressão de todo-o-terreno**. Nos
+manuais do 890 Adventure R e do 1290 Super Adventure R, que são os modelos mais virados
+para fora de estrada, a ficha dá uma pressão única: **2,4 à frente e 2,9 atrás, para solo,
+com passageiro E com carga máxima.** Não há coluna de piso nenhuma. Dois manuais
+independentes, mesma resposta.
+
+### A resposta à pergunta original: não dá para alargar, e a razão é física
+
+**A pressão de todo-o-terreno não é uma propriedade da mota.** Depende do pneu, do piso, da
+velocidade e de haver ou não câmara-de-ar. A Ducati Multistrada V4 Rally prova-o dentro do
+mesmo manual: os 1,6 bar são para o **Scorpion Rally**, o pneu de tacos, e não para o
+Scorpion Trail II que a mota calça de série.
+
+Qualquer regra do tipo «menos 25 % da pressão de estrada» seria o `category_estimate` outra
+vez — mas desta vez num número onde errar tem consequência física: baixar demasiado num
+pneu sem câmara descola-o da jante, e isso não avisa.
+
+**Só quatro fabricantes de todo o catálogo publicam alguma coisa:** Aprilia, Ducati, Yamaha
+e mais ninguém. Não é falta de procurar.
+
+### Por resolver: o aviso do pneu não chega a quem não lê português
+
+Encontrado ao investigar isto, e é um defeito real de honestidade do ecrã. O
+`fonteLegivel()` do `app/pneus.tsx` corta a fonte no primeiro travessão para quem não está
+em português — e é **depois** do travessão que vive a ressalva «estes valores são para o
+pneu de tacos». Um utilizador inglês vê 1,6 bar na Multistrada Rally sem saber que é para
+um pneu que ele provavelmente não tem.
+
+Três saídas possíveis, por ordem de esforço: pôr a ressalva **antes** do travessão nas três
+motas que têm dados reais; ou criar um campo próprio para a condição do pneu, mostrado no
+separador de todo-o-terreno; ou traduzir as fontes, que é o problema de fundo e o maior.
