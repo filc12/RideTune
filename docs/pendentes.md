@@ -3649,3 +3649,58 @@ está a ser usada para consultar e não para registar, há duas funcionalidades 
 trabalho que ninguém pediu. **Não se decide por opinião** — decide-se cruzando
 `diary_entry_created` e `setup_saved` com quem abre esses ecrãs, que é uma consulta que
 ainda não está escrita.
+
+---
+
+## 7 de agosto de 2026, parte VIII — mais três cargas úteis, buscadas em vez de pedidas
+
+Em vez de esperar pelos manuais, foram buscados aos sites dos importadores. **Oito dos 24
+perfis com pontos de carga têm agora a carga útil do manual.**
+
+| Mota | Carga útil | Ponto mais alto | |
+|---|---:|---:|---|
+| CFMoto 700MT | 165 kg | 190 | excede (conhecido) |
+| CFMoto 450MT | **170 kg** | 115 | ok |
+| Voge 625 DSX | 183 kg | 190 | excede (conhecido) |
+| Triumph Speed Triple 1200 RS | 195 kg | 150 | ok |
+| Voge 900 DSX | **205 kg** | 190 | ok |
+| Voge 800 DSX Rally | **205 kg** | 190 | ok |
+| BMW S 1000 R | 208 kg | 190 | ok |
+| Ducati DesertX | 242 kg | 150 | ok |
+
+**A suspeita sobre os Voge não se confirmou, e ainda bem.** Achava-se que o 900 DSX e o 800
+Rally repetissem o excesso do 625 por terem o mesmo ponto de 190. Não repetem: as duas
+grandes têm 205 kg de carga útil e o ponto cabe. **O 625 é que é a mota pequena da família**,
+com 183, e é só nela que os 190 passam. Palpite razoável, e errado — foi preciso ir ver.
+
+### Onde estão os manuais, para a próxima
+
+- **Voge**: os italianos (`vogeitaly.it/wp-content/uploads/UM-VOGE-VALICO-*.pdf`) têm a
+  secção de suspensão mas **não têm ficha técnica**. Os espanhóis
+  (`vogespain.es/wp-content/uploads/Manual-de-Propietario-Voge-*-Espanol.pdf`) **têm ficha
+  técnica e dão a carga útil directa**. Para carga útil, usar sempre os espanhóis.
+- **CFMoto**: o italiano do 450MT (`cfmotoitaly.it/wp-content/uploads/CFMOTO-450MT-Owner-manual.pdf`)
+  dá o peso máximo e a tara. Os americanos estão em `cfmotousa.com/owners-manuals` **com
+  outros nomes** — o 800MT é o **Ibex 800 S**, o 450MT é o **Ibex 450**.
+
+### O manual do 800 DSX Rally contradiz-se, e a ficha ganha
+
+O texto de segurança diz «carga máxima: 150 kg»; a ficha técnica diz «capacidad de carga
+205 kg». **Vale a ficha**, e a razão é aritmética e não preferência: 227 kg de peso em ordem
+de marcha mais 205 de carga dão exactamente os 432 de peso máximo que a mesma tabela publica,
+e os pesos por roda (113 + 114) também somam 227. **O 150 não bate com nada** — parece
+copiado de um modelo mais pequeno. Fica escrito no perfil.
+
+### O que não se conseguiu, e porquê
+
+**CFMoto 800MT, 800MT-X, 1000MT-X e 800NK.** O manual italiano do 800MT-X diz, com todas as
+letras, que a carga máxima admissível está **numa etiqueta colada na mota** e não a publica.
+Os manuais americanos dos equivalentes Ibex também não a trazem na ficha. Ou seja: **não é
+falta de procurar, é a CFMoto a não publicar** — ao contrário do que faz na 700MT e na 450MT.
+
+Para essas quatro, o caminho é fotografar a etiqueta da mota ou pedir a ficha de
+homologação. Não vale a pena voltar a procurar nos manuais.
+
+Continuam por confirmar, com manual por abrir: Honda Transalp (3), Suzuki V-Strom (2),
+BMW R 1200 GS LC, Triumph Tiger 900 GT e Rally Pro, Scrambler 1200 XE, Street Triple RS,
+Aprilia Tuareg 660, Ducati Hypermotard 698.

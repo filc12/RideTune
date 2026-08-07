@@ -298,6 +298,7 @@ const CFMOTO: MfzProfile[] = [
     // todos eles, à frente e atrás. Os valores anteriores (11/12/14) eram
     // estimativas, não constavam de nenhum manual.
     baseKg: 75, source: 'CFMOTO 450MT Owner\'s Manual p.140 (official)', formula: 'cfmoto_interp',
+    payloadKg: 170,   // 355 kg de peso máximo menos 185 kg de tara (manual EN, cfmotoitaly.it, pág. 17 e 24)
     dataQuality: 'oem_manual',
     countNote: 'Damping: S direction (anticlockwise) to the end, then H (clockwise) and count to 10 = factory. Rear preload: from factory setting (spring height 8 inch), turn the adjuster nut clockwise to add.',
     front: {
@@ -1794,6 +1795,7 @@ const VOGE: MfzProfile[] = [
     id: 'voge_900dsx',
     brand: 'Voge', model: '900 DSX', year: '2023+',
     baseKg: 75, source: 'Manual do proprietário Voge 900 DSX (PT, oficial)', formula: 'cfmoto_interp',
+    payloadKg: 205,   // «Carga máxima 205 kg, incluido conductor, equipaje y accesorios» (manual ES 900DSX E5+); confere com 443 de máximo menos 238 de tara
     dataQuality: 'oem_manual',
     front: {
       preload: pos('Ajustável (comando 1) — o manual não dá valor de fábrica'),
@@ -1818,6 +1820,7 @@ const VOGE: MfzProfile[] = [
     id: 'voge_800dsx_rally',
     brand: 'Voge', model: '800 DSX Rally', year: '2024+',
     baseKg: 75, source: 'Manual do proprietário Voge 800 DSX Rally (EN, oficial)', formula: 'cfmoto_interp',
+    payloadKg: 205,   // «Capacidad de carga 205 kg» na ficha do manual ES 800DSX Rally; confere com 432 de máximo menos 227 de tara
     dataQuality: 'oem_manual',
     front: {
       preload: mm(19),
@@ -1835,7 +1838,7 @@ const VOGE: MfzProfile[] = [
       { kg: 190, rPre: 21, rComp: 6,  rReb: 14 },
     ],
     countNote: 'Atrás: precarga a partir do mole, extensão e compressão a partir do duro (a compressão é o ajustador 3, no reservatório de gás). Precarga da frente em mm de altura, 19 mm de fábrica (intervalo 4 a 19). Compressão e extensão da frente têm 10 posições cada e o manual manda escolher por preferência.',
-    notes: 'É o perfil Voge mais completo: o único cujo manual dá valor de fábrica para a precarga da frente (19 mm). As três cargas são só piloto, piloto com 3 malas e piloto com passageiro e 3 malas. Confirmar sempre pelo sag.',
+    notes: 'É o perfil Voge mais completo: o único cujo manual dá valor de fábrica para a precarga da frente (19 mm). As três cargas são só piloto, piloto com 3 malas e piloto com passageiro e 3 malas. Confirmar sempre pelo sag. ATENÇÃO ao manual espanhol: contradiz-se sobre a carga. O texto de segurança diz «carga máxima: 150 kg» e a ficha técnica diz «capacidad de carga 205 kg». Vale a ficha: 227 kg de peso em ordem de marcha mais 205 de carga dão exactamente os 432 de peso máximo que a mesma tabela publica, e os pesos por roda (113 + 114) também somam 227. O 150 do texto não bate com nada — é provavelmente copiado de um modelo mais pequeno.',
   },
   {
     id: 'voge_625dsx',
