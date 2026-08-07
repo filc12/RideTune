@@ -3404,3 +3404,74 @@ manual e falhar por uma volta.
 
 **Foi o próprio teste a apanhá-lo, antes de chegar a correr.** É exactamente para isto que
 ele existe: sem ele, o erro entrava no OTA e ninguém o via.
+
+---
+
+## 7 de agosto de 2026, parte V — a Honda não é mensurável, e apareceu uma contradição no código
+
+Foi ao item «medir a `honda` e a `suzuki` com o mesmo método do KTM». **Não dá**, e a razão
+vale a pena ficar escrita para não se voltar a tentar.
+
+### A Honda não publica tabela de carga
+
+Lido o manual do X-ADV, que está em disco. A Honda descreve o afinador ao pormenor — 15
+voltas de curso à frente, 7 de fábrica a contar do mais mole; anel de 10 posições atrás,
+a 4 de fábrica — e depois diz apenas **«to suit the load or the road surface»**. Não há
+coluna de carga, não há «full payload», não há nada a partir de que se derive um ritmo.
+
+O perfil do X-ADV está certo em tudo contra este manual. Simplesmente **não há como medir a
+constante da Honda pelo caminho que funcionou com a KTM.**
+
+### Mas o código tem uma contradição consigo próprio
+
+A ver as fórmulas para isto, deu-se com isto no `adjustHonda`:
+
+```
+/** Honda formula — same damping as KTM, preload turns same as KTM */
+case "tu_soft": return clamp(roundQuarter(base + Math.round(delta / 25) * 0.25), 0, 20);
+```
+
+Contra a da KTM:
+
+```
+case 'tu_soft': return clamp(base + Math.round(delta / 25), 0, 20);
+```
+
+**O comentário diz que são iguais e não são — a da Honda tem um `* 0.25`.** Para um
+passageiro de 75 kg, a KTM abre 3 voltas de pré-carga e a Honda abre 0,75. **Quatro vezes
+menos, para o mesmo tipo de afinador.** A `suzuki` tem a mesma linha, e serve de fórmula a
+motas Ducati, Kawasaki, Aprilia e Suzuki — cerca de dezassete perfis ao todo.
+
+**Não se uniformizou, e não por preguiça.** Não se sabe qual das duas está certa, e há uma
+pista concreta de que a diferença pode ser deliberada: na tabela por carga do manual da
+Ducati DesertX, a pré-carga da **frente não mexe nada** entre andar sozinho e andar com
+passageiro — 2 voltas nas quatro linhas. Os manuais KTM mandam abrir 3 a 6. **Marcas
+diferentes fazem coisas diferentes**, e uniformizar por gosto de simetria estragava metade
+dos casos para arranjar a outra metade.
+
+O que se fez foi **pôr os comentários a dizer a verdade** sobre o que o código faz, com o
+número concreto do desvio. Um comentário errado é pior do que comentário nenhum: manda quem
+lê para o lado errado com confiança.
+
+**A saída não é escolher uma constante — é o `preloadKgPerTurn`,** que põe o ritmo por mota
+a partir do manual e vai tornando a fórmula da marca cada vez menos usada. É o mesmo
+caminho que resolveu a KTM.
+
+### Correção de dados na DesertX
+
+O manual da DesertX **tem** tabela por carga, e o perfil já a usava. Mas o ponto do meio
+estava em **100 kg**, que não vinha de lado nenhum. O manual diz, na pág. 48, que a bagagem
+não pode passar dos **30 kg** — 10 por mala lateral, 5 no top case, 5 na bolsa de depósito.
+A linha «rider only + bags» é portanto **75 + 30 = 105 kg**. Corrigido.
+
+**Porque é que 5 kg importam:** entre 75 e 105 a pré-carga traseira anda 11 cliques, e entre
+105 e 150 anda 9. A resposta desta mota **não é linear** — é muito mais sensível em carga
+baixa. Com o ponto mal colocado, todo o troço de baixo ficava inclinado a mais. É também a
+melhor ilustração de por que razão uma constante única por marca nunca vai chegar: **nem
+dentro da mesma mota a relação é constante.**
+
+### O que fica em aberto
+
+O `preloadKgPerTurn` só se aplica a `tu_soft`. A pré-carga da DesertX é `cl_soft`, e a de
+várias Honda também. **Se o campo se mostrar útil, faz sentido alargá-lo aos cliques** — mas
+só quando houver uma segunda mota a pedi-lo, não por antecipação.

@@ -2371,7 +2371,7 @@ export const MFZ_PROFILES: MfzProfile[] = [
     formula: 'cfmoto_interp',
     dataQuality: 'oem_manual',
     countNote: 'À frente conta-se em VOLTAS a partir do mais duro (regulador todo no sentido horário). A pré-carga da frente também é em voltas, a apertar desde a posição toda solta, e cada volta vale 1 mm. Atrás, o retorno e a compressão são em voltas desde o mais duro, mas a pré-carga é em cliques.',
-    notes: 'Kayaba nas duas pontas, 46 mm à frente, 230 mm de curso. O manual dá uma tabela por carga e outra por tipo de uso. À frente, os valores NÃO mudam com a carga: são sempre 2 voltas de retorno, 2 de compressão e 2 de pré-carga. Só o amortecedor muda. Para fora de estrada o manual sugere Off Road Standard (1,5 / 1,5 / 4 à frente) e Off Road Sport (1,25 / 1 / 8).',
+    notes: 'Kayaba nas duas pontas, 46 mm à frente, 230 mm de curso. O manual dá uma tabela por carga e outra por tipo de uso. À frente, os valores NÃO mudam com a carga: são sempre 2 voltas de retorno, 2 de compressão e 2 de pré-carga. Só o amortecedor muda. Para fora de estrada o manual sugere Off Road Standard (1,5 / 1,5 / 4 à frente) e Off Road Sport (1,25 / 1 / 8). O ponto de 105 kg é o condutor de 75 mais os 30 kg que o manual admite de bagagem (pág. 48: 10 kg por mala lateral, 5 no top case, 5 na bolsa de depósito). Estava em 100, que não vinha de lado nenhum.',
     front: {
       preload: tu_s(2),
       comp: tu_h(2),
@@ -2384,7 +2384,10 @@ export const MFZ_PROFILES: MfzProfile[] = [
     },
     weightPoints: [
       { kg: 75,  fPre: 2, fComp: 2, fReb: 2, rPre: 6,  rComp: 3,   rReb: 1.75 },
-      { kg: 100, fPre: 2, fComp: 2, fReb: 2, rPre: 17, rComp: 2.5, rReb: 1.75 },
+      // 105 e não 100: o manual limita a bagagem a 30 kg no total — 10 kg por mala
+      // lateral, 5 no top case e 5 na bolsa de depósito (pág. 48). A linha «rider only
+      // + bags» da tabela é portanto o condutor de 75 kg mais esses 30.
+      { kg: 105, fPre: 2, fComp: 2, fReb: 2, rPre: 17, rComp: 2.5, rReb: 1.75 },
       { kg: 150, fPre: 2, fComp: 2, fReb: 2, rPre: 26, rComp: 2,   rReb: 1.5 },
     ],
   },

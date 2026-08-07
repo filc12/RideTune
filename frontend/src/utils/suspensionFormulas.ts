@@ -57,7 +57,20 @@ function adjustYamaha(base: number, total: number, type: VType): number {
 }
 
 /**
- * Honda formula — same damping as KTM, preload turns same as KTM
+ * Honda formula — amortecimento igual ao da KTM.
+ *
+ * A PRÉ-CARGA EM VOLTAS NÃO É IGUAL À DA KTM, ao contrário do que este comentário dizia
+ * até 7 de agosto de 2026. A KTM faz `base + round(delta/25)`; esta faz o mesmo vezes
+ * 0,25. Para um passageiro de 75 kg, a KTM abre 3 voltas e esta abre 0,75 — quatro vezes
+ * menos, para o mesmo tipo de afinador.
+ *
+ * NÃO SE UNIFORMIZOU, e a razão é que não se sabe qual das duas está certa. Pode bem ser
+ * de propósito: a tabela por carga do manual da Ducati DesertX mostra a pré-carga da
+ * FRENTE a não mexer nada entre andar sozinho e andar com passageiro, enquanto os manuais
+ * KTM mandam abrir 3 a 6 voltas. Marcas diferentes fazem coisas diferentes.
+ *
+ * O caminho de saída não é escolher uma constante — é o `preloadKgPerTurn`, que põe o
+ * ritmo por mota a partir do manual. Ver `docs/pendentes.md`.
  */
 function adjustHonda(base: number, total: number, type: VType): number {
   const delta = total - 75;
@@ -72,7 +85,11 @@ function adjustHonda(base: number, total: number, type: VType): number {
 }
 
 /**
- * Suzuki — same as KTM damping, preload same direction
+ * Suzuki — amortecimento igual ao da KTM.
+ *
+ * A pré-carga em voltas tem o mesmo desvio de quatro vezes descrito no `adjustHonda`, e
+ * pela mesma razão: nunca foi medida contra manual nenhum. Serve de fórmula a motas
+ * Ducati, Kawasaki, Aprilia e Suzuki, que não têm por que se comportar todas igual.
  */
 function adjustSuzuki(base: number, total: number, type: VType): number {
   const delta = total - 75;
