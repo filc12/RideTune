@@ -282,11 +282,75 @@ truncado a 40 caracteres. E uma pesquisa falhada nem sempre é uma moto em falta
 alguém a escrever mal o nome, ou a procurar por cilindrada. Vale a pena olhar para os
 termos antes de os tratar como pedidos.
 
+## 10. A app é para consultar ou para registar?
+
+A pergunta de produto que está por responder desde agosto de 2026, e a única em cima da
+mesa que pode **tirar** trabalho em vez de acrescentar.
+
+**O que se sabe:** pneus 38 % e sag 36 % de pessoas, contra diário 9 % e setups 6 %. Mas
+isso são **aberturas de ecrã**. Abrir o diário uma vez por curiosidade e escrever nele todas
+as semanas contam igual, e são coisas opostas.
+
+**O que falta saber:** dos que abrem, quantos chegam a escrever alguma coisa.
+
+```sql
+select
+  count(distinct if(event = 'screen_viewed' and properties.screen = 'diario', person_id, null)) as diario_abriram,
+  count(distinct if(event = 'diary_entry_created',                            person_id, null)) as diario_escreveram,
+  count(distinct if(event = 'screen_viewed' and properties.screen = 'setups',  person_id, null)) as setups_abriram,
+  count(distinct if(event = 'setup_saved',                                     person_id, null)) as setups_guardaram,
+  count(distinct if(event = 'setup_calculated',                                person_id, null)) as calcularam
+from events
+where timestamp > now() - interval 90 day
+```
+
+E a segunda metade, que separa quem experimentou de quem usa:
+
+```sql
+select
+  event                                          as accao,
+  count(distinct person_id)                      as pessoas,
+  count()                                        as vezes,
+  round(count() / count(distinct person_id), 1)  as por_pessoa
+from events
+where event in ('diary_entry_created', 'setup_saved')
+  and timestamp > now() - interval 90 day
+group by accao
+```
+
+### A leitura, escrita ANTES de ver os números
+
+Isto é de propósito. Uma pergunta de produto respondida depois de se olhar para os dados
+arranja-se sempre uma história que justifique o que já se queria fazer.
+
+**Se a conversão for alta e o «por pessoa» também** — digamos, metade dos que abrem escrevem,
+e escrevem várias vezes — então o diário **é** usado, só que por pouca gente. Nesse caso o
+número baixo é de descoberta, não de valor: a funcionalidade está escondida, e o trabalho
+certo é dar-lhe visibilidade, não mexer-lhe por dentro.
+
+**Se a conversão for alta mas o «por pessoa» for perto de 1** — as pessoas experimentam,
+gostam do que veem, e não voltam. É o pior dos casos, porque parece bom nas contagens. Quer
+dizer que falta uma razão para voltar, e essa razão não se acrescenta com mais campos no
+formulário.
+
+**Se a conversão for baixa** — abrem e não escrevem — o problema é o ecrã, não o conceito.
+Vale a pena um arranjo, mas pequeno e com prazo.
+
+**Se os números forem baixos nas duas pontas**, a resposta honesta é que a app é de consulta,
+e o diário e os setups devem ser **congelados** — não apagados, que partiria dados de quem os
+usa, mas fora da lista do que recebe trabalho. Cada funcionalidade viva custa em traduções
+(seis línguas), em testes e em atenção a cada alteração dos dados.
+
+**Ressalva de tamanho.** Com 218 utilizadores no total, os 16 do diário e os 11 dos setups
+são poucos para conclusões finas. Diferenças de dois ou três não querem dizer nada. Isto
+serve para distinguir «quase ninguém» de «alguns, a sério», que é uma diferença grande o
+suficiente para se ver com esta amostra — e não para afinar percentagens.
+
+---
+
 ## Notas
 
 - **A retenção de eventos no plano gratuito do PostHog é limitada.** Se alguma destas
   janelas de 90 ou 180 dias vier vazia, é por isso e não por não haver utilizadores.
-- **Falta um evento que daria jeito:** pesquisa no seletor sem resultados. Diria quais
-  as motos que as pessoas procuram e **nem sequer existem** no catálogo — hoje só
-  sabemos das que existem sem dados. Foi assim que se percebeu que faltava a
-  R1200GS LC, mas por comentário de utilizador, não por medição.
+- **Aquele evento que fazia falta já existe:** é o `bike_search_empty`, consulta 9. A nota
+  antiga dizia que faltava; foi acrescentado em agosto de 2026.

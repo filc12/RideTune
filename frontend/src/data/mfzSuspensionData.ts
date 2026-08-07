@@ -1066,11 +1066,17 @@ const SUZUKI: MfzProfile[] = [
       comp:    na('KYB shock — compression not adjustable'),
       reb:     tu_h(1.25),
     },
+    // O `fPre` foi retirado destas linhas em 7 de agosto de 2026. Trazia 4/5/7/7, mas a
+    // pré-carga da frente desta mota é do tipo `pos` (entalhe 1 a 7) e a app NUNCA ajusta
+    // valores `pos` — aqueles números não chegavam a ser lidos por ninguém. Dados mortos
+    // são piores do que dados em falta: dão uma ideia de precisão que não existe, e quem
+    // vier a seguir perde tempo a tentar perceber de onde vieram.
+    // Uma verificação a todo o catálogo confirmou que este era o ÚNICO caso.
     weightPoints: [
-      { kg: 80,  fPre: 4, fComp: 8, fReb: 8, rPre: 11, rReb: 1.25 },
-      { kg: 100, fPre: 5, fComp: 7, fReb: 7, rPre: 13, rReb: 1 },
-      { kg: 155, fPre: 7, fComp: 4, fReb: 4, rPre: 16, rReb: 0.25 },
-      { kg: 175, fPre: 7, fComp: 3, fReb: 3, rPre: 18, rReb: 0.25 },
+      { kg: 80,  fComp: 8, fReb: 8, rPre: 11, rReb: 1.25 },
+      { kg: 100, fComp: 7, fReb: 7, rPre: 13, rReb: 1 },
+      { kg: 155, fComp: 4, fReb: 4, rPre: 16, rReb: 0.25 },
+      { kg: 175, fComp: 3, fReb: 3, rPre: 18, rReb: 0.25 },
     ],
     notes: 'Front preload is a stepped groove adjuster (positions 1-7, not clicks); position estimated from load. Damping counts turns/clicks OUT from fully hard. Rear shock (KYB) has no compression adjuster. Starting point — confirm by sag. ⚠️ SOB SUSPEIÇÃO desde 7 de agosto de 2026, e por uma razão concreta e não por desconfiança geral. A V-Strom 800DE tinha uma tabela de carga com EXACTAMENTE a mesma forma — mesmos quilos (80/100/155/175), amortecimento a descer com a carga, pré-carga traseira a subir devagarinho — e ao ser confrontada com o manual oficial revelou-se errada: a Suzuki manda 28 cliques de pré-carga traseira com passageiro e a tabela dava 17. As duas vieram do mesmo sítio e têm o mesmo desenho, portanto há motivo sério para duvidar desta também. SEGUNDO PROBLEMA, este visível sem manual nenhum: a pré-carga da frente está declarada como `pos` (posição de entalhe 1 a 7), e valores `pos` NÃO são ajustados pela app — mas a tabela de carga traz fPre 4/5/7/7, que nunca chega a ser usado. São dados mortos a dar ideia de precisão que não existe. O QUE FALTA: o manual DL1050DE, secções 2-143 e 2-147. A leitura remota trunca antes disso; é preciso o PDF em disco.',
   },
