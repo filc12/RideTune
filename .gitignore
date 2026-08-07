@@ -95,3 +95,10 @@ frontend/build-*.apk
 # Android build artifacts (EAS local builds)
 *.aab
 *.apk
+
+# Credenciais da Apple. O .p8 é a chave privada de compra integrada do App Store
+# Connect: descarrega-se UMA única vez e não se pode voltar a obter — só revogar e
+# criar outra. Não tem lugar nenhum no repositório.
+*.p8
+AuthKey_*.p8
+SubscriptionKey_*.p8
