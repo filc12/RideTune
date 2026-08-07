@@ -517,3 +517,55 @@ que está nas notas de preenchimento.
 
 Os produtos de compra no App Store Connect, o TestFlight e a submissão em si. Todos
 precisam da conta activa.
+
+---
+
+## Privacidade — o que a App Store Connect vai pedir
+
+### Os dois URL, prontos a colar
+
+| Campo | URL |
+|---|---|
+| **Privacy Policy URL** (obrigatório) | `https://ridetune.app/privacy` |
+| **Support URL** (obrigatório) | `https://ridetune.app/contact` |
+
+Já existem, em seis línguas, e cobrem o que interessa: sem contas, dados no dispositivo,
+PostHog anónimo, Sentry, RevenueCat.
+
+**Corrigido em 8 de agosto de 2026:** a secção «Compras» dizia que tudo era processado pela
+Faturação da Google Play e que os dados de pagamento ficavam «com a Google». No iOS é a
+Apple. Ficaria **factualmente errado** logo no dia do lançamento, e é dos textos que o
+revisor lê. Passou a dizer «a loja de onde instalaste a app — Google Play no Android, App
+Store no iOS», nas seis línguas.
+
+### As respostas do questionário de privacidade
+
+A Apple pergunta campo a campo. Vale a pena ter isto decidido antes, porque à pressa
+declara-se de mais — e o que se declara aparece na ficha da app, na secção «Privacidade do
+app», para toda a gente ver.
+
+**O que a RideTune recolhe, e é pouco:**
+
+| Tipo de dados (termo da Apple) | Recolhido? | Ligado à identidade? | Para quê |
+|---|---|---|---|
+| **Usage Data** → *Product Interaction* | Sim | **Não** | PostHog: que ecrãs abrem, que motos escolhem |
+| **Diagnostics** → *Crash Data* | Sim | **Não** | Sentry: relatórios de falha |
+| **Purchases** → *Purchase History* | Sim | **Não** | RevenueCat: validar e restaurar a compra |
+| Contactos, localização, identificadores, saúde, financeiros | **Não** | — | — |
+
+**As duas perguntas onde é fácil errar:**
+
+*«Are these data linked to the user's identity?»* → **Não**, nos três casos. Não há contas,
+não há email, o identificador é aleatório e gerado no dispositivo.
+
+*«Are these data used for tracking?»* → **Não**. «Tracking» tem um sentido preciso na Apple:
+cruzar os dados com os de outras empresas para publicidade. A RideTune não o faz. Responder
+que sim obrigaria a pedir permissão de rastreio ao utilizador — um pedido que a app não
+precisa de fazer e que só afugenta gente.
+
+### Por fazer quando o iOS estiver no ar
+
+O site diz **«Get the app on Google Play»** e **«Rate it on Google Play»** em todas as
+línguas, e o `site.config.ts` só tem `PLAY_URL`. Está certo hoje, porque a app só existe no
+Android — mas no dia do lançamento passa a estar errado. Acrescentar `APP_STORE_URL` e pôr
+os dois botões. **Não se muda antes**, ou manda-se gente para uma loja onde a app não está.
