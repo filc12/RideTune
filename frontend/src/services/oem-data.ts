@@ -217,6 +217,7 @@ type DbSuspRow = {
   rear:          MfzProfile['rear'];
   weight_points: MfzProfile['weightPoints'] | null;
   preload_kg_per_turn: MfzProfile['preloadKgPerTurn'] | null;
+  payload_kg: number | null;
   count_note:    string | null;
   notes:         string | null;
   data_quality:  string | null;
@@ -280,6 +281,7 @@ async function _fetchFromSupabase(): Promise<void> {
     // Ritmo de pré-carga medido no manual desta mota. Ausente na esmagadora maioria
     // das linhas, e isso é o normal — sem ele a mota segue a fórmula da marca.
     preloadKgPerTurn: row.preload_kg_per_turn ?? undefined,
+    payloadKg:        row.payload_kg ?? undefined,
     countNote:    row.count_note ?? undefined,
     notes:        row.notes ?? undefined,
     dataQuality:  (row.data_quality ?? undefined) as MfzProfile['dataQuality'],

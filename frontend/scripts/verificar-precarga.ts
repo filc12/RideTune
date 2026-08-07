@@ -107,3 +107,60 @@ if (falhas) {
 }
 
 console.log('✓ Todos os perfis com pré-carga medida reproduzem a coluna do manual.');
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Segunda verificação: pontos de carga acima da carga útil da mota
+// ─────────────────────────────────────────────────────────────────────────────
+/**
+ * Um ponto de carga acima do que a mota pode levar significa que o troço de cima da curva
+ * está esticado — e a interpolação devolve de menos a toda a gente que ande carregada.
+ *
+ * Nem sempre é erro nosso: às vezes é o manual a contradizer-se, com a tabela de sugestões
+ * a descrever uma configuração que excede a carga útil publicada noutra página. Esses casos
+ * ficam aqui em baixo, com a razão. Qualquer caso NOVO faz o script falhar.
+ */
+const EXCEDENTES_CONHECIDOS: Record<string, string> = {
+  cfmoto_700mt:
+    'O manual contradiz-se. Carga útil de 165 kg, mas a tabela de sugestões da CFMoto tem ' +
+    'uma linha «duas pessoas + três caixas» que, com as 40 kg de bagagem que a convenção ' +
+    'assume, dá 190. Os valores são os que o fabricante manda pôr nessa configuração.',
+  voge_625dsx:
+    'Mesma contradição, mais pequena. Carga útil de 183 kg e o ponto de cima em 190 — a ' +
+    'Voge descreve «condutor com passageiro e 3 malas» sem dizer quanto pesam as malas.',
+};
+
+console.log('\nPontos de carga contra a carga útil do manual\n');
+
+let excedentes = 0;
+
+for (const p of MFZ_PROFILES) {
+  if (!p.payloadKg || !p.weightPoints?.length) continue;
+
+  const topo = Math.max(...p.weightPoints.map(w => w.kg));
+  const nome = `${p.brand} ${p.model}`;
+
+  if (topo <= p.payloadKg) {
+    console.log(`✓ ${nome.padEnd(30)} topo ${topo} kg   carga útil ${p.payloadKg} kg`);
+    continue;
+  }
+
+  const conhecido = EXCEDENTES_CONHECIDOS[p.id];
+  if (conhecido) {
+    console.log(`~ ${nome.padEnd(30)} topo ${topo} kg   carga útil ${p.payloadKg} kg  (conhecido)`);
+    continue;
+  }
+
+  console.log(`✗ ${nome.padEnd(30)} topo ${topo} kg   carga útil ${p.payloadKg} kg  ← NOVO`);
+  excedentes++;
+}
+
+if (excedentes) {
+  console.log(
+    `\n✗ ${excedentes} perfis com o ponto de carga mais alto acima da carga útil.\n` +
+    '  Ou os quilos do ponto estão mal, ou a carga útil está mal, ou é o manual a\n' +
+    '  contradizer-se — nesse caso, juntar a EXCEDENTES_CONHECIDOS com a razão escrita.'
+  );
+  process.exit(1);
+}
+
+console.log('\n✓ Nenhum ponto de carga novo acima da carga útil.');

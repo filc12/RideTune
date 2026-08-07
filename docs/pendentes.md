@@ -3530,3 +3530,52 @@ meio em 100 kg quando o manual limitava a bagagem a 30 e o valor era 105.
 A mesma conta — carga útil contra o ponto mais alto — falta fazer às outras CFMoto
 (800MT, 800MT-X, 1000MT-X, 450MT) e às Kove e QJ que usem pontos de carga. Precisa do peso
 máximo autorizado de cada uma, que vem na ficha técnica do respectivo manual.
+
+---
+
+## 7 de agosto de 2026, parte VII — a auditoria da carga útil passa a correr sozinha
+
+Feita a verificação a todos os perfis com pontos de carga cujo manual está em disco. **São
+24 perfis com pontos de carga; cinco tinham manual à mão.**
+
+| Mota | Ponto mais alto | Carga útil do manual | |
+|---|---:|---:|---|
+| CFMoto 700MT | 190 kg | **165 kg** | excede |
+| Voge 625 DSX | 190 kg | **183 kg** | excede |
+| BMW S 1000 R | 190 kg | 208 kg | ok |
+| Triumph Speed Triple 1200 RS | 150 kg | 195 kg | ok |
+| Ducati DesertX | 150 kg | 242 kg | ok |
+
+**A Voge repete o padrão da CFMoto**, e por isso deixou de ser anedota. O manual dá três
+casos — condutor só, condutor com 3 malas, condutor com passageiro e 3 malas — e nunca diz
+quanto pesam as malas. A convenção do projeto assume 40 kg, e com isso o caso mais pesado
+dá 190, sete quilos acima da «loading capacity» de 183 que o mesmo manual publica.
+
+Reparo lateral que confirma que o mapeamento está bem feito: **a Voge não tem caso de «dois
+sem bagagem»**, e é por isso que os perfis Voge saltam de 115 para 190 sem passar por 150.
+Não é lacuna, é fidelidade ao manual.
+
+### Campo novo `payloadKg`, e a auditoria vira teste
+
+Em vez de repetir isto à mão de cada vez que aparece um manual, a carga útil passou a ser
+um campo do perfil e o `verificar-precarga` ganhou uma segunda verificação: compara-a com o
+ponto de carga mais alto e **falha se aparecer um caso novo**. Os dois casos conhecidos
+estão numa lista de exceções com a razão escrita, no mesmo estilo dos CONHECIDOS do
+`verificar-coerencia`.
+
+Preenchido em cinco perfis, todos com o número tirado do manual. Vem escrito de duas
+maneiras conforme a marca — a Voge, a BMW e a Triumph dão-na directa; a CFMoto e a Ducati
+dão o peso máximo e a tara, e subtrai-se.
+
+**Porque é que isto importa e não é burocracia:** um ponto de carga acima do que a mota
+aguenta estica o troço de cima da curva, e a interpolação passa a devolver **de menos a toda
+a gente que ande carregada** — que é justamente quem mais precisa do ajuste.
+
+### O que a BMW faz e obriga a pensar diferente
+
+O manual da S 1000 R não dá cliques por carga. Dá **sag**: 50 mm à frente e 40 mm atrás, com
+piloto de 85 kg. É por isso que os perfis BMW têm as pré-cargas como `pos` com a medida de
+sag, e é a razão de o `baseKg` deles ser 85 e não 75 — vem do manual, não é arbitrário.
+
+Vale a pena ter presente que **há marcas que não se deixam reduzir a uma tabela de cliques**,
+e que forçá-las a isso seria inventar. Para essas, o ecrã de sag da app é o caminho certo.

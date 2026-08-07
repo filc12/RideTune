@@ -128,6 +128,26 @@ export interface MfzProfile {
    * que é o comportamento de sempre.
    */
   preloadKgPerTurn?: { front?: number; rear?: number };
+  /**
+   * Carga útil da mota em quilos, tirada do manual: quanto ela pode levar de condutor,
+   * passageiro, bagagem e acessórios. NÃO inclui a mota.
+   *
+   * Vem escrito de duas maneiras conforme a marca. Umas dão-na directa — a Voge chama-lhe
+   * «loading capacity», a BMW «maximum payload», a Triumph «maximum payload». Outras dão
+   * o peso máximo total e a tara, e subtrai-se: a CFMoto 700MT diz 405 kg de máximo e
+   * 240 de tara, logo 165.
+   *
+   * PARA QUE SERVE: o `verificar-precarga` compara-a com o ponto de carga mais alto do
+   * perfil. Quando o ponto passa a carga útil, a app está a interpolar por cima do que a
+   * mota pode legalmente levar — e isso quer dizer que o troço de cima da curva está
+   * esticado, portanto toda a gente que ande carregada recebe de menos.
+   *
+   * Nem sempre é erro nosso. Na 700MT e na Voge 625 DSX é o próprio manual a contradizer-se:
+   * a tabela de sugestões descreve «duas pessoas + três malas», que excede a carga útil que
+   * o mesmo manual publica noutra página. Esses casos estão na lista de exceções do script,
+   * com a razão escrita.
+   */
+  payloadKg?: number;
   countNote?: string;
   notes?: string;
   dataQuality?: DataQuality;
@@ -246,6 +266,7 @@ const CFMOTO: MfzProfile[] = [
     id: 'cfmoto_700mt',
     brand: 'CFMOTO', model: '700MT', year: '2021+',
     baseKg: 75,
+    payloadKg: 165,   // 405 kg de peso máximo total menos 240 kg de tara (manual PT v250708, pág. 24 e 14)
     source: 'Manual do propriet\u00e1rio CFMOTO 700MT ADV (PT, MP_700MT ADV_v250708), p\u00e1g. 141-146 e ficha t\u00e9cnica p\u00e1g. 14',
     formula: 'cfmoto_interp',
     dataQuality: 'oem_manual',
@@ -1527,6 +1548,7 @@ const TRIUMPH: MfzProfile[] = [
     id: 'triumph_speed1200rs',
     brand: 'Triumph', model: 'Speed Triple 1200 RS', year: '2021+',
     baseKg: 75,
+    payloadKg: 195,   // «Maximum Payload» na ficha técnica do manual Speed Triple 1200 RR/RS de 2023
     source: 'Owner’s Handbook Triumph Speed Triple 1200 RR / RS (2023, ENG), pág. 141-145, e Service Manual Speed Triple RS, secção Front Suspension',
     formula: 'cfmoto_interp',
     dataQuality: 'oem_manual',
@@ -1819,6 +1841,7 @@ const VOGE: MfzProfile[] = [
     id: 'voge_625dsx',
     brand: 'Voge', model: '625 DSX (DS 625X)', year: '2024+',
     baseKg: 75, source: 'Manual do proprietário Voge DS 625X (EN, oficial)', formula: 'cfmoto_interp',
+    payloadKg: 183,   // «Loading capacity» na ficha técnica do manual DS625X
     dataQuality: 'oem_manual',
     front: {
       preload: pos('Ajustável (ajustador 1, chave de bocas 14 Nm) — sem valor de fábrica'),
@@ -1836,7 +1859,7 @@ const VOGE: MfzProfile[] = [
       { kg: 190, rComp: 6,  rReb: 6  },
     ],
     countNote: 'Atrás: extensão (ajustador 2, no corpo do amortecedor, lado esquerdo) e compressão (ajustador 3, no reservatório de gás) contam-se a partir do DURO — fechar até ao fim no sentido de endurecer e contar a abrir. A precarga traseira é em voltas a partir da posição de entrega, não a partir de um limite — por isso não tem número absoluto. Para encontrar a posição 1: apertar com 0,5 Nm até parar e voltar atrás com 0,5 Nm, até sentir a esfera cair na ranhura.',
-    notes: 'Cargas do manual: só piloto (extensão e compressão 10 cliques, precarga na posição de entrega), piloto com 3 malas (8±1 e 8, precarga +2 voltas) e piloto com passageiro e 3 malas (6±1 e 6, precarga +3 voltas). ATENÇÃO ao sentido de contagem: o manual escreve "anti-clockwise to limit, then clockwise by N positions", o que daria contagem a partir do mole e faria o amortecimento ALIVIAR com a carga — fisicamente ao contrário. Foi assumido erro de tradução e alinhado com a 800 DSX Rally, que tem o mesmo amortecedor e a mesma curva 10/8/6 a contar do duro. O mesmo manual tem um erro de tradução confirmado no ajustador 3, cujo título diz "compression damping" e o corpo do texto diz "returning damping" — a Voge inglesa não é de confiança nas etiquetas. O que o manual SIM confirma sem ambiguidade é a identidade dos afinadores: 2 = extensão, 3 = compressão (no reservatório), portanto não há troca entre os dois. Confirmar sempre pelo sag.',
+    notes: 'Cargas do manual: só piloto (extensão e compressão 10 cliques, precarga na posição de entrega), piloto com 3 malas (8±1 e 8, precarga +2 voltas) e piloto com passageiro e 3 malas (6±1 e 6, precarga +3 voltas). ATENÇÃO ao sentido de contagem: o manual escreve "anti-clockwise to limit, then clockwise by N positions", o que daria contagem a partir do mole e faria o amortecimento ALIVIAR com a carga — fisicamente ao contrário. Foi assumido erro de tradução e alinhado com a 800 DSX Rally, que tem o mesmo amortecedor e a mesma curva 10/8/6 a contar do duro. O mesmo manual tem um erro de tradução confirmado no ajustador 3, cujo título diz "compression damping" e o corpo do texto diz "returning damping" — a Voge inglesa não é de confiança nas etiquetas. O que o manual SIM confirma sem ambiguidade é a identidade dos afinadores: 2 = extensão, 3 = compressão (no reservatório), portanto não há troca entre os dois. Confirmar sempre pelo sag. CARGA ÚTIL: a ficha do manual dá «loading capacity» de 183 kg (206 kg de tara, 389 de máximo). O ponto de carga mais alto deste perfil está em 190, sete acima — porque a linha «condutor com passageiro e 3 malas» do manual não diz quanto pesam as malas, e a convenção do projeto assume 40 kg. Fica registado; os valores são os do manual.',
   },
   {
     id: 'voge_650dsx',
@@ -2165,6 +2188,7 @@ const BMW_EXTRA: MfzProfile[] = [
     id: 'bmw_s1000r_2021',
     brand: 'BMW', model: 'S 1000 R', year: '2021+',
     baseKg: 85,
+    payloadKg: 208,   // «Maximum payload» na ficha técnica do manual S 1000 R (RM 1020)
     source: 'Manual do condutor BMW S 1000 R (código 0E51, ed. 10/2020, oficial), pág. 120-127',
     formula: 'cfmoto_interp',
     dataQuality: 'oem_manual',
@@ -2394,6 +2418,7 @@ export const MFZ_PROFILES: MfzProfile[] = [
     id: 'ducati_desertx_kayaba',
     brand: 'Ducati', model: 'DesertX', year: '2022-2025',
     baseKg: 75,
+    payloadKg: 242,   // 465 kg de máximo autorizado menos 223 kg em ordem de marcha (manual 25 ED02, pág. 48)
     source: 'Manual do proprietário Ducati DesertX (EN, ed. 25 ED02), pág. 57-60',
     formula: 'cfmoto_interp',
     dataQuality: 'oem_manual',
