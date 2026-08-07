@@ -4125,3 +4125,54 @@ cd frontend && npx expo run:ios --device "iPhone 16 Pro Max"
 
 O Xcode instalado não traz runtimes de iOS nem aparelhos criados — as duas primeiras linhas
 resolvem isso, e o sintoma de faltarem é `xcrun simctl list devices available` vir vazio.
+
+---
+
+## 8 de agosto de 2026, parte II — a conta Apple saiu, e o iOS destrancou
+
+A adesão ao Developer Program foi aprovada ao fim de dez dias. O que se fez a seguir, pela
+ordem em que tem de ser feito — há dependências e a ordem errada faz perder tempo.
+
+### Feito
+
+| Passo | Resultado |
+|---|---|
+| App ID no portal Apple | `com.ridetune.app`, explícito, **sem capabilities** |
+| App no App Store Connect | criada |
+| Chave de compra integrada (.p8) | Key ID `2P4BB58NRH` |
+| App iOS no RevenueCat | criada com a P8 |
+| Chave pública iOS | `appl_TiOoTYmhcREKOiUeBtLAtoYiTQM`, nos quatro perfis do `eas.json` |
+
+**Team ID: `B4MB4K336U`** — aparece no canto do portal e é preciso de vez em quando.
+
+**Nenhuma capability foi marcada no App ID**, de propósito. A app não usa push, iCloud,
+Sign in with Apple nem Apple Pay, e as compras integradas **não** precisam de capability —
+funcionam por omissão. Marcar a mais complica a assinatura e gera avisos na submissão.
+
+### O guarda que se pôs no código, e porquê
+
+O teste de «tenho chave?» era `API_KEY.length > 0`. O marcador `POR_PREENCHER_appl_xxx`
+não é vazio, portanto **passava**: a app dava as compras por disponíveis, mostrava o
+paywall, e só falhava quando alguém tentasse pagar. É o pior sítio possível para falhar, e
+na App Store é motivo de rejeição — há funcionalidade premium que ninguém consegue comprar.
+
+Passou a verificar-se o **prefixo**: `appl_` no iOS, `goog_` no Android. Apanha o marcador
+por preencher e apanha também a troca das chaves entre plataformas, que é o engano clássico
+e que o comentário existente avisava sem conseguir impedir.
+
+### `*.p8` no .gitignore
+
+A chave privada da Apple descarrega-se **uma vez só** e não se pode voltar a obter — apenas
+revogar e criar outra. Não tem lugar no repositório. Ficou ignorada por três padrões, para
+apanhar os nomes que a Apple gera.
+
+### A seguir
+
+1. **Produto de compra** no App Store Connect: não-consumível, ID `ridetune_premium_lifetime`,
+   igual ao do Android. Falta decidir o escalão de preço — a Apple trabalha por degraus, não
+   aceita qualquer valor.
+2. **Offering no RevenueCat** com esse produto, senão o `offerings.current.availablePackages[0]`
+   que a app lê vem vazio e o paywall fica sem preço.
+3. **Build e TestFlight.**
+4. **Ficha da app**: textos já escritos em seis línguas no `app-store-ficha.md`, capturas
+   já feitas a 1320×2868, política de privacidade e suporte já no ar.

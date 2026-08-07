@@ -28,6 +28,26 @@ const API_KEY = Platform.select({
   default: undefined,
 }) ?? "";
 
+/**
+ * A chave é mesmo uma chave, ou é um marcador por preencher?
+ *
+ * PORQUE É QUE ISTO EXISTE. Até 8 de agosto de 2026 o teste era só `API_KEY.length > 0`,
+ * e a chave de iOS no `eas.json` era o literal `POR_PREENCHER_appl_xxx`. Isso não é vazio,
+ * portanto passava: a app dava as compras por disponíveis, mostrava o paywall, e só
+ * falhava no momento em que alguém tentava pagar. É o pior sítio possível para falhar —
+ * e na App Store é motivo de rejeição, porque há funcionalidade premium que ninguém
+ * consegue comprar.
+ *
+ * A RevenueCat prefixa as chaves por loja: `appl_` para a App Store, `goog_` para a Google
+ * Play. Verificar o prefixo apanha duas coisas de uma vez — o marcador por preencher, e a
+ * troca das chaves entre plataformas, que é o engano clássico e que o comentário aqui em
+ * cima já avisava sem conseguir impedir.
+ */
+function chaveValida(k: string): boolean {
+  const prefixo = Platform.OS === "ios" ? "appl_" : "goog_";
+  return k.startsWith(prefixo);
+}
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PurchasesModule = any;
 
@@ -45,7 +65,7 @@ function getPurchases(): PurchasesModule | null {
 }
 
 export function isBillingAvailable(): boolean {
-  if (available === null) available = getPurchases() !== null && API_KEY.length > 0;
+  if (available === null) available = getPurchases() !== null && chaveValida(API_KEY);
   return available;
 }
 
@@ -56,7 +76,7 @@ export async function initPurchases(): Promise<void> {
     return;
   }
   const Purchases = getPurchases();
-  if (!Purchases || !API_KEY || configured) return;
+  if (!Purchases || !chaveValida(API_KEY) || configured) return;
   try {
     Purchases.configure({ apiKey: API_KEY });
     configured = true;
