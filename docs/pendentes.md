@@ -3943,3 +3943,55 @@ um pneu que ele provavelmente não tem.
 Três saídas possíveis, por ordem de esforço: pôr a ressalva **antes** do travessão nas três
 motas que têm dados reais; ou criar um campo próprio para a condição do pneu, mostrado no
 separador de todo-o-terreno; ou traduzir as fontes, que é o problema de fundo e o maior.
+
+---
+
+## 7 de agosto de 2026, parte XIII — o pneu passa a aparecer, e o plano das marcas de pneus não pega
+
+### O defeito de honestidade, corrigido
+
+Campo novo `offroadTyre` na tabela de pressões: **o pneu a que as pressões de todo-o-terreno
+se referem, tal como o manual o nomeia.** Aparece no separador de todo-o-terreno, num aviso
+a amarelo.
+
+Resolve o problema encontrado na parte XII: o `fonteLegivel()` corta a fonte no primeiro
+travessão para quem não está em português, e era **depois** do travessão que vivia a ressalva
+«estes valores são para o pneu de tacos». Um utilizador inglês via 1,6 bar na Multistrada
+Rally sem saber que era para um pneu que provavelmente não tem.
+
+**Porque é que um campo próprio e não mexer no texto da fonte:** o nome do pneu é nome
+próprio — «Pirelli Scorpion Rally STR» é igual nas seis línguas. Só a frase de enquadramento
+precisou de tradução. Mover a ressalva para antes do travessão resolvia num caso e deixava o
+problema de fundo de pé.
+
+Preenchido em quatro linhas, todas com o nome tirado do manual. A ficha da DesertX nomeia-o
+explicitamente: «Make and type: Pirelli Scorpion Rally STR», e dá as pressões de todo-o-terreno
+logo a seguir — 1,8 bar a solo, 2,0 à frente e 2,2 atrás com passageiro.
+
+### O plano de cruzar com as marcas de pneus: não pega, e é bom sabê-lo antes
+
+A ideia era boa — ir aos sites oficiais buscar o pneu de série e depois às marcas de pneus
+buscar as pressões de todo-o-terreno. **A segunda metade não existe.**
+
+As marcas de pneus **remetem para o fabricante da mota**. A Michelin di-lo directamente:
+«recommended pressures are related to the bike and not the tires». A Pirelli, para os pneus
+Rally, publica apenas **um mínimo — 1,6 bar (24 psi)** — e uma faixa genérica de trabalho de
+2,2 a 2,5 bar a quente, com a nota de que a pressão depende da carga e do veículo.
+
+E faz sentido: a pressão certa depende do peso que vai em cima, e disso o fabricante do pneu
+não sabe nada. Quem sabe é quem fez a mota. **Não há tabela para cruzar.**
+
+**O que daí se aproveita, e não é nada:** o mínimo da Pirelli explica os números que temos.
+A Multistrada V4 Rally traz 1,6 bar, que é exactamente o mínimo do fabricante do pneu; a
+DesertX traz 1,8, com folga. Ou seja, os manuais estão a trabalhar contra esse limite. Serve
+de teste de sanidade a qualquer valor futuro: **abaixo de 1,6 bar não se escreve nada sem
+fonte muito boa**, porque é território onde o pneu descola da jante.
+
+### O que sobra, e é o caminho certo
+
+Varrer os manuais das motas **Adventure** à procura de quem publique pressões de
+todo-o-terreno, como fazem a Ducati, a Aprilia e a Yamaha. Pela amostra até agora, a maioria
+não publica — a KTM está provada que não, a Honda também não, a CFMoto nem carga útil dá.
+
+Não vai cobrir o catálogo. Mas cada mota que aparecer é dado real, e as que não aparecerem
+ficam sem separador de todo-o-terreno, que é a resposta honesta.

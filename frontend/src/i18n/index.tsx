@@ -495,6 +495,7 @@ const PT: Dict = {
   "settings.units.sub": "Só muda o que vês. Os dados dos manuais ficam como estão.",
   "settings.units.metric": "Quilos (kg)",
   "settings.units.imperial": "Libras (lb)",
+  "pneus.offroad_tyre": "Estes valores são para o pneu",
 };
 
 const EN: Dict = {
@@ -966,6 +967,7 @@ const EN: Dict = {
   "settings.units.sub": "Changes what you see, nothing else. Manual data stays as published.",
   "settings.units.metric": "Kilograms (kg)",
   "settings.units.imperial": "Pounds (lb)",
+  "pneus.offroad_tyre": "These values are for the tyre",
 };
 
 const ES: Dict = {
@@ -1438,6 +1440,7 @@ const ES: Dict = {
   "settings.units.sub": "Solo cambia lo que ves. Los datos de los manuales no se tocan.",
   "settings.units.metric": "Kilos (kg)",
   "settings.units.imperial": "Libras (lb)",
+  "pneus.offroad_tyre": "Estos valores son para el neumático",
 };
 
 const FR: Dict = {
@@ -1908,6 +1911,7 @@ const FR: Dict = {
   "settings.units.sub": "Change seulement l’affichage. Les données des manuels restent intactes.",
   "settings.units.metric": "Kilogrammes (kg)",
   "settings.units.imperial": "Livres (lb)",
+  "pneus.offroad_tyre": "Ces valeurs sont pour le pneu",
 };
 
 const DE: Dict = {
@@ -2376,6 +2380,7 @@ const DE: Dict = {
   "settings.units.sub": "Ändert nur die Anzeige. Die Handbuchdaten bleiben unverändert.",
   "settings.units.metric": "Kilogramm (kg)",
   "settings.units.imperial": "Pfund (lb)",
+  "pneus.offroad_tyre": "Diese Werte gelten für den Reifen",
 };
 
 
@@ -2858,6 +2863,7 @@ const IT: Dict = {
   "settings.units.sub": "Cambia solo ciò che vedi. I dati dei manuali restano invariati.",
   "settings.units.metric": "Chilogrammi (kg)",
   "settings.units.imperial": "Libbre (lb)",
+  "pneus.offroad_tyre": "Questi valori sono per lo pneumatico",
 };
 
 const DICTS: Record<Lang, Dict> = { pt: PT, en: EN, es: ES, fr: FR, de: DE, it: IT };

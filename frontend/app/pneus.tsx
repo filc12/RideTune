@@ -269,6 +269,22 @@ export default function PneusScreen() {
                 )}
               </View>
 
+              {/* A que pneu se referem estas pressões.
+                  Fora de estrada a pressão é do PNEU e não da mota: o manual da
+                  Multistrada V4 Rally dá 1,6 bar, mas para o pneu de tacos, e a mota sai
+                  de fábrica com um misto. Sem isto o número aparecia sem a condição — e a
+                  ressalva que existia na fonte só se via em português, porque o texto é
+                  cortado no primeiro travessão para as outras línguas.
+                  O nome do pneu é nome próprio e é igual nas seis línguas. */}
+              {mode === "offroad" && pressure.offroadTyre && (
+                <View style={st.tyreNote}>
+                  <MaterialCommunityIcons name="information-outline" size={16} color={C.warn} />
+                  <Text style={st.tyreNoteTxt}>
+                    {t("pneus.offroad_tyre")}: <Text style={st.tyreNoteName}>{pressure.offroadTyre}</Text>
+                  </Text>
+                </View>
+              )}
+
               {/* Tamanho dos pneus */}
               {(pressure.frontSize || pressure.rearSize) && (
                 <View style={st.sizeCard}>
@@ -380,6 +396,9 @@ const st = StyleSheet.create({
   pressUnit:     { color: C.accent, fontSize: 13, fontWeight: "700" },
   pressPsi:      { color: C.textDim, fontSize: 11, marginTop: 4 },
 
+  tyreNote:     { flexDirection: "row", alignItems: "center", gap: 8, padding: 12, borderRadius: 12, backgroundColor: "rgba(244,178,62,0.08)", borderWidth: 1, borderColor: "rgba(244,178,62,0.3)", marginTop: 12 },
+  tyreNoteTxt:  { flex: 1, color: C.textDim, fontSize: 12, lineHeight: 17 },
+  tyreNoteName: { color: C.warn, fontWeight: "700" },
   sizeCard: {
     padding: 16,
     borderRadius: 14,

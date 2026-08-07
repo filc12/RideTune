@@ -61,6 +61,19 @@ export type TirePressure = {
   rearLoadedBar:   number | null;  // null = igual ao solo
   frontOffRoadBar: number | null;  // null = sem modo off-road
   rearOffRoadBar:  number | null;
+  /**
+   * O pneu a que as pressões de todo-o-terreno se referem, tal como o manual o nomeia.
+   *
+   * Existe porque a pressão fora de estrada NÃO é uma propriedade da mota — é do pneu. O
+   * manual da Multistrada V4 Rally dá 1,6 bar, mas para o Pirelli Scorpion Rally, o de
+   * tacos; a mota sai de fábrica com o Scorpion Trail II, e nesse os 1,6 não se aplicam.
+   * Sem este campo a app mostrava o número sem a condição, e quem não lê português nem
+   * sequer via a ressalva na fonte.
+   *
+   * É nome próprio, portanto não precisa de tradução — é a mesma coisa nas seis línguas.
+   * Preencher SÓ com o que o manual nomear; `null` quando o manual não diz.
+   */
+  offroadTyre:     string | null;
   frontSize:       string | null;
   rearSize:        string | null;
   source:          string;
@@ -178,6 +191,7 @@ type DbTirePressureRow = {
   rear_loaded_bar:   number | null;
   front_offroad_bar: number | null;
   rear_offroad_bar:  number | null;
+  offroad_tyre:      string | null;
   front_size:        string | null;
   rear_size:         string | null;
   source:            string;
@@ -309,6 +323,7 @@ async function _fetchFromSupabase(): Promise<void> {
     rearLoadedBar:   row.rear_loaded_bar,
     frontOffRoadBar: row.front_offroad_bar,
     rearOffRoadBar:  row.rear_offroad_bar,
+    offroadTyre:     row.offroad_tyre ?? null,
     frontSize:       row.front_size,
     rearSize:        row.rear_size,
     source:          row.source,
