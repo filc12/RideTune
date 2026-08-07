@@ -3167,3 +3167,66 @@ mota com um afinador de curso longo e não se mexe em nada.
 ano do perfil. Ao ler, confirmar primeiro a linha «This document is valid for the following
 models» e dois ou três números de chassis contra a ficha do modelo — foi por saltar esse
 passo que se escreveu um dia a CFMoto 700MT a partir da mota errada.
+
+---
+
+## 7 de agosto de 2026, parte II — a fórmula `ktm` está errada na pré-carga, e agora há prova
+
+Chegaram os dois manuais que faltavam para responder à pergunta: **890 Adventure R de 2022**
+(art. 3214536en) e **1290 Super Adventure R de 2021** (art. 3214297en). Nos dois, os valores
+que lá estavam batiam certo com o manual, um a um. Promovidos a `oem_manual`. São 82 perfis
+por manual em 104.
+
+### A prova
+
+O que se queria medir era o salto da pré-carga traseira entre a afinação normal e a de carga
+máxima. Com o 1190 de ontem, são três motos:
+
+| Mota | Standard | Full payload | Salto |
+|---|---:|---:|---:|
+| 890 Adventure R | 4 voltas | 10 voltas | **+6** |
+| 1190 Adventure R | 4 voltas | 16 voltas | **+12** |
+| 1290 Super Adventure R | 5 voltas (Street) | **26 voltas** | **+21** |
+
+A fórmula `ktm` do projeto move a pré-carga a **delta/25 voltas**. Para uma carga máxima
+realista — digamos mais 100 kg entre passageiro e bagagem — dá **+4 voltas**. Os manuais
+pedem seis, doze e vinte e uma.
+
+**Não é um caso isolado nem um afinador esquisito de uma mota.** São três motos de três
+gerações diferentes, e o erro cresce com a cilindrada. No 1290 a app está a dar **um quinto**
+da pré-carga que o fabricante manda pôr.
+
+### Porque é que ainda não se mudou a fórmula
+
+Duas razões, e a segunda é a séria.
+
+**A primeira:** o «Full payload» dos manuais KTM **não diz a quantos quilos corresponde**.
+Sem denominador, qualquer constante nova que se escolha é escolhida a olho — trocava-se um
+número errado por outro número inventado, com a diferença de que o novo teria ar de fundado.
+
+**A segunda:** a constante é partilhada por **todos** os perfis com `formula: 'ktm'`, e a
+maioria ainda não foi confirmada por manual. Mudá-la agora mexe em motos sobre as quais não
+se sabe nada, com base em três que se conhece bem.
+
+### O que se sabe já, e que vale para a decisão
+
+O amortecimento **não** tem este problema: os saltos são de 2 a 5 cliques, que é o que a
+delta/20 dá. **É só a pré-carga.** E faz sentido físico — pré-carga é o que compensa peso;
+amortecimento é o que controla o movimento. Uma fórmula só para as duas coisas era sempre
+uma simplificação.
+
+**Reparo do 890 que confirma isto pelo lado contrário:** naquela mota o amortecimento da
+forquilha é **15/15 no Standard e 15/15 na carga máxima** — não mexe de todo. Só mexem as
+pré-cargas e o amortecedor.
+
+**A correção mínima defensável**, quando se decidir mexer, é separar a constante da pré-carga
+da do amortecimento e deixá-la por mota em vez de por marca — as três que se conhece dão
+constantes muito diferentes entre si, portanto uma constante única de marca vai continuar
+errada em duas delas seja qual for o valor.
+
+### Correção de dados aproveitada no 890
+
+A pré-carga da frente estava como `pos('+0 factory baseline')` — texto, que a app mostra e
+não ajusta. O manual descreve o afinador contável em voltas a partir do fim mole, com +0 no
+Standard e +3 na carga máxima. Passou a `tu_soft(0)`, portanto **acompanha o peso** em vez de
+ficar uma etiqueta fixa. O 790 Adventure R tem a mesma etiqueta e fica à espera do manual.

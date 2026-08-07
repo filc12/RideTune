@@ -633,7 +633,11 @@ const KTM: MfzProfile[] = [
   {
     id: 'ktm_1290_adv_r_2021',
     brand: 'KTM', model: '1290 Super Adventure R', year: '2021+',
-    baseKg: 75, source: 'mfzstudio.com/moto/ktm/', formula: 'ktm',
+    baseKg: 75,
+    source: "Owner's Manual 2021 1290 Super Adventure R, art. 3214297en, cap. 12 (pág. 80-87)",
+    formula: 'ktm',
+    dataQuality: 'oem_manual',
+    countNote: 'O amortecimento conta-se a apertar até ao batente duro e depois a abrir. As duas pré-cargas são ao contrário: abrem-se todas até ao fim mole e contam-se a apertar.',
     front: {
       preload: tu_s(0),
       comp:    cl_h(15),
@@ -646,7 +650,7 @@ const KTM: MfzProfile[] = [
       hsComp:  tu_h(1.5),
       lsComp:  cl_h(15),
     },
-    notes: 'Rear preload has two baseline modes: Street (5 turns) and Offroad (1 turn). 1290 Super Adventure S uses semi-active suspension and is NOT included.',
+    notes: 'Rear preload has two baseline modes: Street (5 turns) and Offroad (1 turn). 1290 Super Adventure S uses semi-active suspension and is NOT included. Valores confirmados no manual, um a um, incluindo os dois modos de pré-carga — o manual não tem coluna «Standard» única para a pré-carga traseira, tem mesmo «Standard Street» e «Standard Offroad». Coluna «Full payload»: forquilha pré-carga 6 voltas, comp. 10, rec. 10; amortecedor baixa 7, alta 1 volta, rec. 7, e pré-carga 26 VOLTAS. É o salto de pré-carga mais violento de todos os KTM lidos até agora — de 5 (Street) para 26.',
   },
   {
     id: 'ktm_1290_sadv_s_electronic',
@@ -689,9 +693,17 @@ const KTM: MfzProfile[] = [
   {
     id: 'ktm_890_adv_r_2021',
     brand: 'KTM', model: '890 Adventure R', year: '2021-2024',
-    baseKg: 75, source: 'mfzstudio.com/moto/ktm/', formula: 'ktm',
+    baseKg: 75,
+    source: "Owner's Manual 2022 890 Adventure R, art. 3214536en, cap. 12 (pág. 78-85)",
+    formula: 'ktm',
+    dataQuality: 'oem_manual',
+    countNote: 'O amortecimento conta-se a apertar até ao batente duro e depois a abrir. As duas pré-cargas são ao contrário: abrem-se todas até ao fim mole e contam-se a apertar. A da frente é de manípulo em T e faz-se à mão, sem ferramenta, e só engata nos valores inteiros.',
     front: {
-      preload: pos('+0 factory baseline (external preload adjuster)'),
+      // Era pos('+0 factory baseline'), texto que a app não sabia ajustar por peso.
+      // O manual descreve o afinador como contável em voltas a partir do fim mole e
+      // dá +0 no Standard e +3 na carga máxima — portanto é tu_soft(0) e passa a
+      // acompanhar o peso do condutor em vez de ficar uma etiqueta fixa.
+      preload: tu_s(0),
       comp:    cl_h(15),
       reb:     cl_h(15),
     },
@@ -702,6 +714,7 @@ const KTM: MfzProfile[] = [
       hsComp:  tu_h(1.5),
       lsComp:  cl_h(15),
     },
+    notes: 'Valores da coluna «Standard». Os do mfzstudio batiam certo, um a um. Coluna «Full payload» do manual, que fica de fora por não trazer quilos associados: forquilha pré-carga +3, comp. 15, rec. 15; amortecedor pré-carga 10 voltas, baixa 7, alta 0,5 voltas, rec. 5. Reparar que o amortecimento da forquilha NÃO muda com a carga nesta mota — 15/15 no Standard e 15/15 na carga máxima. Quem muda é tudo o resto.',
   },
   {
     id: 'ktm_790_adv_r_2019',
