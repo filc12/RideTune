@@ -3380,3 +3380,27 @@ erro que esta secção corrige. Fica à espera do PDF.
 
 Vale a pena olhar para as outras marcas com o mesmo olho. A `honda` e a `suzuki` usam
 também 25 kg por volta, herdado do mesmo sítio, e nunca foi medido contra manual nenhum.
+
+### Sequela imediata: o script rebentou, e a razão valia a correção
+
+O `npm run verificar-precarga` falhou logo à primeira, fora da app. Causa: importava o
+`getRealSuspension`, que importa o `oem-data`, que importa o **armazenamento** e o
+**Sentry** — coisas que só existem dentro da app.
+
+**As fórmulas passaram para `src/utils/suspensionFormulas.ts`**, sem importar nada além dos
+tipos dos dados. O `suspensionReal.ts` passa a chamá-las de lá.
+
+Não é arrumação por gosto. **Enquanto a aritmética viveu enterrada num ficheiro que arrasta
+metade da app, não havia forma de lhe passar um número e ver o que saía** — e foi assim que
+um erro de pré-carga viveu meses sem ninguém dar por ele. Agora qualquer script lhe chama
+directamente.
+
+### E uma conta que não fechava
+
+O ritmo do 1290 estava escrito como 6 kg por volta, arredondado de 130/21. Com 6 certos, a
+conta dá 21,67 voltas, que arredonda para **22** — e o manual pede 21. O valor correcto é
+**6,2**, e aí dá 20,97 → 21. Uma casa decimal a fazer a diferença entre bater certo com o
+manual e falhar por uma volta.
+
+**Foi o próprio teste a apanhá-lo, antes de chegar a correr.** É exactamente para isto que
+ele existe: sem ele, o erro entrava no OTA e ninguém o via.

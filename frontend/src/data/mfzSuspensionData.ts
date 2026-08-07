@@ -665,10 +665,10 @@ const KTM: MfzProfile[] = [
     // Do manual: 450 kg de peso máximo autorizado, 228 kg sem combustível, 23 L de
     // depósito (~17 kg) → 205 kg de carga útil, 130 kg acima dos 75 de base.
     // «Full payload» pede +6 voltas à frente e +21 atrás sobre o Standard Street.
-    // 130/6 = 22 kg por volta à frente; 130/21 = 6 atrás.
+    // 130/6 = 22 kg por volta à frente; 130/21 = 6,2 atrás.
     // Os 6 kg por volta de trás são a razão de ser deste campo: a fórmula da marca usa
     // 25, portanto dava um quarto da pré-carga. O manípulo tem 26 voltas de curso útil.
-    preloadKgPerTurn: { front: 22, rear: 6 },
+    preloadKgPerTurn: { front: 22, rear: 6.2 },
     front: {
       preload: tu_s(0),
       comp:    cl_h(15),

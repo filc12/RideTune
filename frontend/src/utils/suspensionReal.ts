@@ -15,6 +15,7 @@ import {
   type VType,
 } from '../data/mfzSuspensionData';
 import { getOemSuspMap } from '../services/oem-data';
+import { applyFormula, roundQuarter } from './suspensionFormulas';
 
 // ─────────────────────────────────────────────
 // Output types
@@ -81,136 +82,6 @@ const COUNT_INSTRUCTIONS: Record<VType, string> = {
 // ─────────────────────────────────────────────
 // Adjustment formulas (mirroring mfzstudio.com logic)
 // ─────────────────────────────────────────────
-
-function clamp(v: number, min: number, max: number): number {
-  return Math.max(min, Math.min(max, v));
-}
-
-function roundQuarter(v: number): number {
-  return Math.round(v * 4) / 4;
-}
-
-/**
- * KTM formula (from mfzstudio.com/moto/ktm/ JS):
- *   damping clicks: base - round(delta/20), clamped 1-30
- *   preload turns:  base + round(delta/25), clamped 0-20
- *   preload mm:     base + round(delta/18), clamped 0-40
- *   damping turns:  base - round(delta/25)*0.25, rounded to 0.25 steps
- */
-function adjustKtm(base: number, total: number, type: VType): number {
-  const delta = total - 75;
-  switch (type) {
-    case 'cl_hard': return clamp(base - Math.round(delta / 20), 1, 30);
-    case 'tu_hard': return clamp(roundQuarter(base - Math.round(delta / 25) * 0.25), 0.25, 4);
-    case 'tu_soft': return clamp(base + Math.round(delta / 25), 0, 20);
-    case 'mm':      return clamp(base + Math.round(delta / 18), 0, 40);
-    default:        return base;
-  }
-}
-
-/**
- * Yamaha formula (from mfzstudio.com/moto/yamaha/ JS):
- *   damping clicks: base - round(delta/20), clamped 1-30
- *   preload clicks: base + round(delta/15), clamped 0-30
- *   preload mm (T7 2025+/World Raid front, Distance A): base - round(delta/10) — more load = less distance = more preload (firmer)
- */
-function adjustYamaha(base: number, total: number, type: VType): number {
-  const delta = total - 75;
-  switch (type) {
-    case 'cl_hard': return clamp(base - Math.round(delta / 20), 1, 30);
-    case 'cl_soft': return clamp(base + Math.round(delta / 15), 0, 30);
-    case 'mm':      return clamp(base - Math.round(delta / 10), 0, 40); // mm = Distance A: more load -> LESS distance -> MORE preload (firmer)
-    default:        return base;
-  }
-}
-
-/**
- * Honda formula — same damping as KTM, preload turns same as KTM
- */
-function adjustHonda(base: number, total: number, type: VType): number {
-  const delta = total - 75;
-  switch (type) {
-    case "cl_hard": return clamp(base - Math.round(delta / 20), 1, 30);
-    case "tu_hard": return clamp(roundQuarter(base - Math.round(delta / 25) * 0.25), 0.25, 4);
-    case "cl_soft": return clamp(base + Math.round(delta / 20), 0, 30);
-    case "tu_soft": return clamp(roundQuarter(base + Math.round(delta / 25) * 0.25), 0, 20);
-    case "mm":      return clamp(base + Math.round(delta / 18), 0, 40);
-    default:        return base;
-  }
-}
-
-/**
- * Suzuki — same as KTM damping, preload same direction
- */
-function adjustSuzuki(base: number, total: number, type: VType): number {
-  const delta = total - 75;
-  switch (type) {
-    case "cl_hard": return clamp(base - Math.round(delta / 20), 1, 30);
-    case "tu_hard": return clamp(roundQuarter(base - Math.round(delta / 25) * 0.25), 0.25, 4);
-    case "cl_soft": return clamp(base + Math.round(delta / 20), 0, 30);
-    case "tu_soft": return clamp(roundQuarter(base + Math.round(delta / 25) * 0.25), 0, 20);
-    case "mm":      return clamp(base + Math.round(delta / 18), 0, 40);
-    default:        return base;
-  }
-}
-/**
- * Kove formula — cl_hard damping only (preload is always pos/na on Kove models)
- */
-function adjustKove(base: number, total: number, type: VType): number {
-  const delta = total - 75;
-  switch (type) {
-    case 'cl_hard': return clamp(base - Math.round(delta / 20), 1, 30);
-    default:        return base;
-  }
-}
-
-/**
- * Pré-carga com o ritmo medido no manual desta mota, em vez do da marca.
- *
- * As fórmulas por marca assumem que uma volta de pré-carga vale sempre os mesmos quilos
- * — a `ktm` usa 25. Nos manuais isso varia muito de mota para mota, porque depende do
- * passo da rosca do manípulo: no 890 Adventure R uma volta atrás vale 27 kg, no 1290
- * Super Adventure R vale 6. Quando o `preloadKgPerTurn` do perfil traz o valor do manual,
- * é esse que manda; sem ele, nada muda e a mota segue a fórmula da marca.
- *
- * Devolve `null` quando não há valor medido, para quem chama seguir o caminho normal.
- */
-function preloadMedida(
-  profile: MfzProfile,
-  base: number,
-  total: number,
-  type: VType,
-  eixo?: 'front' | 'rear'
-): number | null {
-  if (type !== 'tu_soft' || !eixo) return null;
-  const kgPorVolta = profile.preloadKgPerTurn?.[eixo];
-  if (!kgPorVolta) return null;
-  return clamp(base + Math.round((total - profile.baseKg) / kgPorVolta), 0, 30);
-}
-
-function applyFormula(
-  profile: MfzProfile,
-  base: number,
-  total: number,
-  type: VType,
-  eixo?: 'front' | 'rear'
-): number {
-  const medida = preloadMedida(profile, base, total, type, eixo);
-  if (medida !== null) return medida;
-
-  switch (profile.formula) {
-    case 'ktm':     return adjustKtm(base, total, type);
-    case 'yamaha':  return adjustYamaha(base, total, type);
-    case 'honda':   return adjustHonda(base, total, type);
-    case 'kove':    return adjustKove(base, total, type);
-    case 'suzuki':  return adjustSuzuki(base, total, type);
-    // 'cfmoto_interp' só chega aqui se os weightPoints faltarem (dados
-    // corrompidos ou incompletos). Nesse caso NÃO devolver o valor base — isso
-    // congela o setup em qualquer carga e parece à app estar avariada.
-    // Usar a fórmula genérica KTM como rede de segurança.
-    default:        return adjustKtm(base, total, type);
-  }
-}
 
 // ─────────────────────────────────────────────
 // CFMOTO multi-weight interpolation

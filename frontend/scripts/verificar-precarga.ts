@@ -19,7 +19,24 @@
  * quem apanha erros de sintaxe é o `npm run typecheck`.
  */
 
-import { getRealSuspension } from '../src/utils/suspensionReal';
+import { MFZ_PROFILES } from '../src/data/mfzSuspensionData';
+import { applyFormula } from '../src/utils/suspensionFormulas';
+
+/**
+ * Porque é que não se chama o `getRealSuspension`: esse importa o `oem-data`, que importa
+ * o armazenamento e o Sentry, que só existem dentro da app — fora dela rebenta. As
+ * fórmulas vivem agora no `suspensionFormulas.ts`, sem dependências, precisamente para
+ * poderem ser chamadas daqui.
+ */
+function precarga(id: string, totalKg: number): { frente: number | null; tras: number | null } | null {
+  const p = MFZ_PROFILES.find(x => x.id === id);
+  if (!p) return null;
+  const um = (sv: typeof p.front.preload, eixo: 'front' | 'rear') =>
+    sv.type === 'na' || sv.type === 'pos' || sv.v === null
+      ? null
+      : applyFormula(p, sv.v, totalKg, sv.type, eixo);
+  return { frente: um(p.front.preload, 'front'), tras: um(p.rear.preload, 'rear') };
+}
 
 type Caso = {
   id: string;
@@ -57,9 +74,9 @@ let falhas = 0;
 console.log('Pré-carga na carga máxima do manual\n');
 
 for (const c of CASOS) {
-  // A app recebe condutor + passageiro + bagagem. A carga máxima do manual é o total
-  // que a mota pode levar, portanto entra como 75 kg de condutor mais o resto.
-  const r = getRealSuspension(c.id, 75, c.cargaMaxKg - 75, 0);
+  // A carga máxima do manual é o peso total que a mota pode levar — condutor incluído.
+  // É esse total que as fórmulas recebem.
+  const r = precarga(c.id, c.cargaMaxKg);
 
   if (!r) {
     console.log(`✗ ${c.nome}: perfil não encontrado (id ${c.id})`);
@@ -67,8 +84,8 @@ for (const c of CASOS) {
     continue;
   }
 
-  const frente = r.front.preload.value;
-  const tras   = r.rear.preload.value;
+  const frente = r.frente;
+  const tras   = r.tras;
   const okF    = frente === c.frente;
   const okT    = tras   === c.tras;
 
