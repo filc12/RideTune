@@ -164,12 +164,40 @@ function adjustKove(base: number, total: number, type: VType): number {
   }
 }
 
+/**
+ * Pré-carga com o ritmo medido no manual desta mota, em vez do da marca.
+ *
+ * As fórmulas por marca assumem que uma volta de pré-carga vale sempre os mesmos quilos
+ * — a `ktm` usa 25. Nos manuais isso varia muito de mota para mota, porque depende do
+ * passo da rosca do manípulo: no 890 Adventure R uma volta atrás vale 27 kg, no 1290
+ * Super Adventure R vale 6. Quando o `preloadKgPerTurn` do perfil traz o valor do manual,
+ * é esse que manda; sem ele, nada muda e a mota segue a fórmula da marca.
+ *
+ * Devolve `null` quando não há valor medido, para quem chama seguir o caminho normal.
+ */
+function preloadMedida(
+  profile: MfzProfile,
+  base: number,
+  total: number,
+  type: VType,
+  eixo?: 'front' | 'rear'
+): number | null {
+  if (type !== 'tu_soft' || !eixo) return null;
+  const kgPorVolta = profile.preloadKgPerTurn?.[eixo];
+  if (!kgPorVolta) return null;
+  return clamp(base + Math.round((total - profile.baseKg) / kgPorVolta), 0, 30);
+}
+
 function applyFormula(
   profile: MfzProfile,
   base: number,
   total: number,
-  type: VType
+  type: VType,
+  eixo?: 'front' | 'rear'
 ): number {
+  const medida = preloadMedida(profile, base, total, type, eixo);
+  if (medida !== null) return medida;
+
   switch (profile.formula) {
     case 'ktm':     return adjustKtm(base, total, type);
     case 'yamaha':  return adjustYamaha(base, total, type);
@@ -346,8 +374,13 @@ export function getRealSuspension(
       return interp ?? sv.v;
     }
 
-    // Other brands: apply adjustment formula
-    return applyFormula(profile, sv.v, total, sv.type);
+    // Other brands: apply adjustment formula.
+    // O eixo vai junto porque a pré-carga medida no manual é diferente à frente e atrás
+    // — no 890 a mesma carga pede 3 voltas numa ponta e 6 na outra.
+    const eixo = wpField?.startsWith('f') ? 'front' as const
+               : wpField?.startsWith('r') ? 'rear'  as const
+               : undefined;
+    return applyFormula(profile, sv.v, total, sv.type, eixo);
   }
 
   const front = profile.front;

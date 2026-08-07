@@ -67,6 +67,12 @@ jobs:
       - name: Verificar coerência dos dados de suspensão
         run: npm run verificar-coerencia
 
+      # Confirma que os perfis com pré-carga medida no manual continuam a reproduzir a
+      # coluna «Full payload» desse manual. Apanha alterações à fórmula, ao valor base ou
+      # ao preloadKgPerTurn que estraguem contas já verificadas.
+      - name: Verificar pré-carga contra os manuais
+        run: npm run verificar-precarga
+
       # Por ligar. Ver a nota no topo deste ficheiro.
       # - name: Verificar sincronia com o Supabase
       #   env:

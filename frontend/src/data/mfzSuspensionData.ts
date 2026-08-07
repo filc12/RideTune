@@ -80,6 +80,27 @@ export interface MfzProfile {
   front: Axle;
   rear: Axle;
   weightPoints?: WeightPoint[];
+  /**
+   * Quantos quilos de carga vale UMA VOLTA de pré-carga, nesta mota, medido no manual.
+   *
+   * PORQUE É QUE ISTO EXISTE. As fórmulas por marca tratam a pré-carga como se a rosca
+   * fosse igual em todas as motos da marca — a `ktm` usa uma volta por cada 25 kg. Não é.
+   * O manípulo do 1290 Super Adventure R tem 26 voltas de curso útil e o do 890 tem 10;
+   * a mesma volta não move a mesma mola. Medido nos manuais, a traseira do 890 dá 27 kg
+   * por volta e a do 1290 dá 6. Uma constante de marca não pode servir as duas.
+   *
+   * COMO SE CALCULA, a partir do manual e sem adivinhar nada:
+   *   carga útil   = peso máximo autorizado − (peso sem combustível + depósito cheio)
+   *   voltas       = pré-carga na coluna «Full payload» − pré-carga na coluna «Standard»
+   *   kg por volta = (carga útil − baseKg) / voltas
+   *
+   * Frente e trás são separados de propósito: no 890 a mesma carga pede 3 voltas à frente
+   * e 6 atrás, porque as roscas são diferentes.
+   *
+   * Só preencher com número saído de um manual. Sem isto, a mota cai na fórmula da marca,
+   * que é o comportamento de sempre.
+   */
+  preloadKgPerTurn?: { front?: number; rear?: number };
   countNote?: string;
   notes?: string;
   dataQuality?: DataQuality;
@@ -641,19 +662,31 @@ const KTM: MfzProfile[] = [
     formula: 'ktm',
     dataQuality: 'oem_manual',
     countNote: 'O amortecimento conta-se a apertar até ao batente duro e depois a abrir. As duas pré-cargas são ao contrário: abrem-se todas até ao fim mole e contam-se a apertar.',
+    // Do manual: 450 kg de peso máximo autorizado, 228 kg sem combustível, 23 L de
+    // depósito (~17 kg) → 205 kg de carga útil, 130 kg acima dos 75 de base.
+    // «Full payload» pede +6 voltas à frente e +21 atrás sobre o Standard Street.
+    // 130/6 = 22 kg por volta à frente; 130/21 = 6 atrás.
+    // Os 6 kg por volta de trás são a razão de ser deste campo: a fórmula da marca usa
+    // 25, portanto dava um quarto da pré-carga. O manípulo tem 26 voltas de curso útil.
+    preloadKgPerTurn: { front: 22, rear: 6 },
     front: {
       preload: tu_s(0),
       comp:    cl_h(15),
       reb:     cl_h(15),
     },
     rear: {
-      preload: { v: null, type: 'pos', label: 'Street: 5 turns / Offroad: 1 turn (from fully ACW soft)' },
+      // Era pos('Street: 5 turns / Offroad: 1 turn'), texto que a app mostrava sem nunca
+      // ajustar — nesta mota a pré-carga traseira ficava congelada em qualquer carga, que
+      // é o pior sítio para isso acontecer. Passou ao valor de estrada, 5 voltas, que é o
+      // que a esmagadora maioria usa, e o de todo-o-terreno vive nas notas. Agora acompanha
+      // o peso, e ao ritmo do manual.
+      preload: tu_s(5),
       comp:    na(),
       reb:     cl_h(15),
       hsComp:  tu_h(1.5),
       lsComp:  cl_h(15),
     },
-    notes: 'Rear preload has two baseline modes: Street (5 turns) and Offroad (1 turn). 1290 Super Adventure S uses semi-active suspension and is NOT included. Valores confirmados no manual, um a um, incluindo os dois modos de pré-carga — o manual não tem coluna «Standard» única para a pré-carga traseira, tem mesmo «Standard Street» e «Standard Offroad». Coluna «Full payload»: forquilha pré-carga 6 voltas, comp. 10, rec. 10; amortecedor baixa 7, alta 1 volta, rec. 7, e pré-carga 26 VOLTAS. É o salto de pré-carga mais violento de todos os KTM lidos até agora — de 5 (Street) para 26.',
+    notes: 'A pré-carga traseira tem DOIS pontos de partida no manual: Street 5 voltas e Offroad 1 volta. O perfil usa o de estrada; para andar fora de estrada, abrir 4 voltas a menos. 1290 Super Adventure S uses semi-active suspension and is NOT included. Valores confirmados no manual, um a um, incluindo os dois modos de pré-carga — o manual não tem coluna «Standard» única para a pré-carga traseira, tem mesmo «Standard Street» e «Standard Offroad». Coluna «Full payload»: forquilha pré-carga 6 voltas, comp. 10, rec. 10; amortecedor baixa 7, alta 1 volta, rec. 7, e pré-carga 26 VOLTAS. É o salto de pré-carga mais violento de todos os KTM lidos até agora — de 5 (Street) para 26.',
   },
   {
     id: 'ktm_1290_sadv_s_electronic',
@@ -701,6 +734,13 @@ const KTM: MfzProfile[] = [
     formula: 'ktm',
     dataQuality: 'oem_manual',
     countNote: 'O amortecimento conta-se a apertar até ao batente duro e depois a abrir. As duas pré-cargas são ao contrário: abrem-se todas até ao fim mole e contam-se a apertar. A da frente é de manípulo em T e faz-se à mão, sem ferramenta, e só engata nos valores inteiros.',
+    // Do manual: 450 kg de peso máximo autorizado, 200 kg sem combustível, 20 L de
+    // depósito (~15 kg) → 235 kg de carga útil, ou seja 160 kg acima dos 75 de base.
+    // A coluna «Full payload» pede +3 voltas à frente e +6 atrás sobre o Standard.
+    // 160/3 = 53 kg por volta à frente; 160/6 = 27 atrás.
+    // Nota: os 27 de trás são praticamente os 25 da fórmula da marca — nesta mota a
+    // fórmula já estava certa. Fica escrito à mesma, para deixar de ser coincidência.
+    preloadKgPerTurn: { front: 53, rear: 27 },
     front: {
       // Era pos('+0 factory baseline'), texto que a app não sabia ajustar por peso.
       // O manual descreve o afinador como contável em voltas a partir do fim mole e

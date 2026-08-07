@@ -3301,3 +3301,82 @@ este o único perfil dela por confirmar. A pressão já estava certa (2,25 / 2,5
 uma terceira fonte a confirmá-la.
 
 **São 83 perfis por manual em 104.**
+
+---
+
+## 7 de agosto de 2026, parte IV — a pré-carga passa a ter ritmo próprio por mota
+
+Implementada a correção que a parte II deixou em aberto. Mas primeiro:
+
+### Correção ao que escrevi na parte II
+
+Escrevi que no 1290 a app dava «um quinto da pré-carga que o fabricante manda». **O número
+estava mal fundamentado.** Comparei o salto do manual contra o que a fórmula dá para «mais
+100 kg» — e os 100 kg eram um palpite meu, porque o manual não diz a que carga corresponde
+a coluna «Full payload».
+
+**Passou a haver forma de saber.** Os manuais KTM dão, noutra página, o **peso máximo
+autorizado** e o **peso da mota sem combustível**. A carga útil é a diferença, descontado o
+depósito. É aritmética, não é estimativa:
+
+| | Máx. autorizado | Sem combustível | Depósito | **Carga útil** |
+|---|---:|---:|---:|---:|
+| 890 Adventure R | 450 kg | 200 kg | 20 L (~15 kg) | **235 kg** |
+| 1290 Super Adventure R | 450 kg | 228 kg | 23 L (~17 kg) | **205 kg** |
+
+E com isso os kg por volta de pré-carga saem certos:
+
+| | Voltas (frente / trás) | **kg por volta** |
+|---|---|---|
+| 890 Adventure R | +3 / +6 | 53 à frente, **27 atrás** |
+| 1290 Super Adventure R | +6 / +21 | 22 à frente, **6 atrás** |
+
+**O diagnóstico verdadeiro é mais estreito e mais interessante do que o que eu tinha dito.**
+A fórmula usa 25 kg por volta. No 890 isso são os 27 do manual — **a fórmula estava certa**.
+No 1290 são 6, e aí sim está errada por um factor de quatro.
+
+Ou seja: **a constante não é uma propriedade da marca, é do afinador.** O manípulo do 1290
+tem 26 voltas de curso útil e o do 890 tem 10; a mesma volta não move a mesma mola. Nenhum
+número único de marca vai servir os dois, e é por isso que o defeito passou despercebido —
+a KTM de aventura mais comum é justamente aquela em que a fórmula acerta.
+
+### O que se fez
+
+Campo novo e **opcional** no `MfzProfile`:
+
+```ts
+preloadKgPerTurn?: { front?: number; rear?: number }
+```
+
+Quando existe, manda; quando não existe, **nada muda** e a mota segue a fórmula da marca
+como sempre seguiu. Preenchido em duas motas, as duas com número saído do manual. Frente e
+trás separados porque as roscas são diferentes — no 890 a mesma carga pede 3 voltas à frente
+e 6 atrás.
+
+**Correção aproveitada no 1290, e é a que mais vale.** A pré-carga traseira estava como
+`pos('Street: 5 turns / Offroad: 1 turn')` — texto. A app mostrava-o e **nunca ajustava
+nada**: naquela mota a pré-carga traseira estava congelada em qualquer carga. Passou a
+`tu_soft(5)`, o valor de estrada, com o modo de todo-o-terreno a viver nas notas. Agora
+acompanha o peso, e ao ritmo do manual.
+
+Portanto o defeito real, nesta mota, não era a fórmula estar curta — **era não haver fórmula
+nenhuma a correr.**
+
+### Script novo: `npm run verificar-precarga`
+
+Um teste de regressão, ligado ao CI. Pega nos perfis com pré-carga medida, pede à app o
+setup à carga máxima do manual, e compara com a coluna «Full payload». Sai com código 1 a
+qualquer divergência.
+
+Apanha três coisas que de outra forma passariam: alguém mexer na fórmula, alguém mexer no
+valor base de um destes perfis, ou alguém pôr um `preloadKgPerTurn` mal calculado.
+
+### Por fazer
+
+O **1190 Adventure R** é o terceiro caso conhecido (+12 voltas) e ficou **sem** o campo, de
+propósito: o peso máximo autorizado está na ficha técnica, que fica depois do corte da
+leitura remota. Sem esse número, o kg por volta era escolhido a olho — que é exactamente o
+erro que esta secção corrige. Fica à espera do PDF.
+
+Vale a pena olhar para as outras marcas com o mesmo olho. A `honda` e a `suzuki` usam
+também 25 kg por volta, herdado do mesmo sítio, e nunca foi medido contra manual nenhum.
