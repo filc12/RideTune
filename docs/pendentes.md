@@ -3704,3 +3704,60 @@ homologação. Não vale a pena voltar a procurar nos manuais.
 Continuam por confirmar, com manual por abrir: Honda Transalp (3), Suzuki V-Strom (2),
 BMW R 1200 GS LC, Triumph Tiger 900 GT e Rally Pro, Scrambler 1200 XE, Street Triple RS,
 Aprilia Tuareg 660, Ducati Hypermotard 698.
+
+---
+
+## 7 de agosto de 2026, parte IX — a V-Strom 800DE estava errada, e a irmã fica sob suspeição
+
+Continuação da caça aos manuais. Apanhou-se o erro mais consequente do dia.
+
+### Confirmados por manual, sem correções
+
+- **Triumph Street Triple RS** — «Maximum Payload» 195 kg. Ponto de cima 150, cabe.
+- **Honda XL750 Transalp 2025** — manual oficial 32MLC810. Pré-carga da frente 6 voltas de
+  15 possíveis, traseira na posição 2 de 7. **Os dois valores base batem certo**, e o perfil
+  passou a `oem_manual`. Carga útil 207 kg, com o limite de bagagem em 19,5 kg.
+
+**MAS os pontos de carga da Transalp continuam a ser estimativa,** e agora sabe-se com
+certeza: o manual diz apenas «to suit the load or the road surface» e **não traz tabela
+nenhuma por carga**, tal como o do X-ADV. Os 95, 120, 150 e 190 kg não vêm de fonte nenhuma.
+Está escrito no perfil, para ninguém os tomar por dados de fábrica.
+
+### V-Strom 800DE: duas correções, uma delas grande
+
+O manual oficial DL800DE deu as duas.
+
+**A pequena:** a compressão da frente estava a 1,5 voltas. Esse é o valor da **extensão** —
+o manual manda 2,25 para a compressão. Alguém copiou a linha errada.
+
+**A grande, e é a que afecta gente:** a pré-carga traseira com passageiro. O manual é
+inequívoco — «default setting (one passenger): **12 clicks**» e «reference setting (two
+passengers): **28 clicks**». A tabela que lá estava dava **17** aos 155 kg. **Onze cliques a
+menos** do que a Suzuki manda pôr, exactamente para quem anda a dois, que é quem mais precisa.
+
+A tabela foi refeita com os dois pontos que o manual dá, e mais nenhum. **O amortecimento
+deixou de variar com a carga** — não por descuido, mas porque o manual dá um valor padrão
+único e a variação que lá estava não vinha de lado nenhum.
+
+**Armadilha registada:** este manual cobre a **V-Strom 800 e a 800DE**, com secções separadas
+e valores diferentes — a pré-carga da frente da 800 é 5 voltas e a da DE é 6. Ao ler, é
+obrigatório confirmar o cabeçalho «(V-STROM 800DE)» antes de copiar seja o que for. É o
+mesmo género de erro que estragou a CFMoto 700MT em agosto.
+
+### V-Strom 1050DE: sob suspeição, com motivo
+
+Não se lhe mexeu, mas ficou marcada. **A razão é concreta e não desconfiança geral:** tem uma
+tabela de carga com exactamente a mesma forma da que se acabou de provar errada — os mesmos
+quilos (80/100/155/175), o amortecimento a descer com a carga, a pré-carga traseira a subir
+devagarinho. Mesma origem, mesmo desenho, e a irmã falhou por onze cliques.
+
+**Segundo problema, este visível sem manual nenhum:** a pré-carga da frente está declarada
+como `pos` (entalhe 1 a 7), e a app **não ajusta valores `pos`** — mas a tabela de carga traz
+`fPre: 4/5/7/7`, que nunca chega a ser lido. São dados mortos a dar uma ideia de precisão que
+não existe.
+
+Falta o manual DL1050DE, secções 2-143 e 2-147. A leitura remota trunca antes.
+
+### Estado dos números
+
+**104 perfis, 85 por manual. 10 com carga útil do manual.**

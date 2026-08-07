@@ -375,7 +375,11 @@ const HONDA: MfzProfile[] = [
   {
     id: 'honda_transalp_2025',
     brand: 'Honda', model: 'XL750 Transalp', year: '2025',
-    baseKg: 75, source: 'mfzstudio.com/moto/honda/', formula: 'cfmoto_interp',
+    baseKg: 75,
+    source: 'Manual do proprietário Honda XL750-S Transalp 2025 (32MLC810, oficial), pág. 144-145',
+    formula: 'cfmoto_interp',
+    dataQuality: 'oem_manual',
+    payloadKg: 207,   // «maximum weight capacity» 207 kg no manual oficial XL750-S de 2025 (32MLC810); a bagagem não pode passar de 19,5 kg
     front: {
       preload: tu_s(6),
       comp:    na('Not adjustable on this model'),
@@ -393,7 +397,7 @@ const HONDA: MfzProfile[] = [
       { kg: 150, rPre: 5 },
       { kg: 190, rPre: 7 },
     ],
-    notes: 'Transalp 2025: revised internal valving (firmer rear, softer front) but still preload-only. Rear preload is a 7-position step adjuster (1=soft ... 7=hard); position estimated from load. Confirm by sag.',
+    notes: 'Transalp 2025: revised internal valving (firmer rear, softer front) but still preload-only. Rear preload is a 7-position step adjuster (1=soft ... 7=hard); position estimated from load. Confirm by sag. CONFIRMADO no manual oficial de 2025: a pré-carga da frente tem 15 voltas de curso e a de fábrica são 6 a contar do fim mole; a de trás tem 7 posições e a de fábrica é a 2. Os dois valores base batem certo. MAS OS PONTOS DE CARGA CONTINUAM A SER ESTIMATIVA: o manual diz apenas «to suit the load or the road surface» e não traz tabela nenhuma por carga — tal como o do X-ADV. Os 95, 120, 150 e 190 kg não vêm de fonte nenhuma e não há como os confirmar por manual.',
   },
   {
     id: 'honda_transalp_2026',
@@ -1068,15 +1072,21 @@ const SUZUKI: MfzProfile[] = [
       { kg: 155, fPre: 7, fComp: 4, fReb: 4, rPre: 16, rReb: 0.25 },
       { kg: 175, fPre: 7, fComp: 3, fReb: 3, rPre: 18, rReb: 0.25 },
     ],
-    notes: 'Front preload is a stepped groove adjuster (positions 1-7, not clicks); position estimated from load. Damping counts turns/clicks OUT from fully hard. Rear shock (KYB) has no compression adjuster. Starting point — confirm by sag.',
+    notes: 'Front preload is a stepped groove adjuster (positions 1-7, not clicks); position estimated from load. Damping counts turns/clicks OUT from fully hard. Rear shock (KYB) has no compression adjuster. Starting point — confirm by sag. ⚠️ SOB SUSPEIÇÃO desde 7 de agosto de 2026, e por uma razão concreta e não por desconfiança geral. A V-Strom 800DE tinha uma tabela de carga com EXACTAMENTE a mesma forma — mesmos quilos (80/100/155/175), amortecimento a descer com a carga, pré-carga traseira a subir devagarinho — e ao ser confrontada com o manual oficial revelou-se errada: a Suzuki manda 28 cliques de pré-carga traseira com passageiro e a tabela dava 17. As duas vieram do mesmo sítio e têm o mesmo desenho, portanto há motivo sério para duvidar desta também. SEGUNDO PROBLEMA, este visível sem manual nenhum: a pré-carga da frente está declarada como `pos` (posição de entalhe 1 a 7), e valores `pos` NÃO são ajustados pela app — mas a tabela de carga traz fPre 4/5/7/7, que nunca chega a ser usado. São dados mortos a dar ideia de precisão que não existe. O QUE FALTA: o manual DL1050DE, secções 2-143 e 2-147. A leitura remota trunca antes disso; é preciso o PDF em disco.',
   },
   {
     id: 'suzuki_vstrom_800de',
     brand: 'Suzuki', model: 'V-Strom 800DE', year: '2023+',
-    baseKg: 75, source: 'mfzstudio.com/moto/suzuki/', formula: 'cfmoto_interp',
+    baseKg: 75,
+    source: "Manual do proprietário Suzuki DL800DE (DL800DEM4, oficial), págs. 2-118 a 2-126",
+    formula: 'cfmoto_interp',
+    dataQuality: 'oem_manual',
+    countNote: 'A pré-carga da frente conta-se em voltas a partir do fim mole (abrir tudo ao contrário dos ponteiros e depois apertar 6). A de trás conta-se em cliques do manípulo, do lado LOW para o HIGH. Os quatro afinadores de amortecimento contam ao contrário: apertar até ao batente e abrir as voltas indicadas.',
     front: {
       preload: tu_s(6),
-      comp:    tu_h(1.5),
+      // Era tu_h(1.5). O manual diz «counterclockwise 2-1/4 turns» para a compressão da
+      // frente e 1-1/2 só para a extensão — estavam ambas com o valor da extensão.
+      comp:    tu_h(2.25),
       reb:     tu_h(1.5),
     },
     rear: {
@@ -1084,13 +1094,16 @@ const SUZUKI: MfzProfile[] = [
       comp:    tu_h(1.5),
       reb:     tu_h(1.75),
     },
+    // A tabela anterior tinha quatro pontos (80/100/155/175) que faziam a pré-carga
+    // traseira ir de 12 a 19 cliques. O manual dá DOIS pontos e são outros: 12 cliques
+    // a solo e 28 com passageiro. Aos 155 kg a tabela antiga mandava 17 — onze cliques
+    // abaixo do que a Suzuki manda pôr. E o amortecimento não muda com a carga: o manual
+    // dá um valor padrão só, e a variação que aqui estava não vinha de lado nenhum.
     weightPoints: [
-      { kg: 80,  fPre: 6,  fComp: 1.5,  fReb: 1.5,  rPre: 12, rComp: 1.5,  rReb: 1.75 },
-      { kg: 100, fPre: 8,  fComp: 1.25, fReb: 1.25, rPre: 14, rComp: 1.25, rReb: 1.5 },
-      { kg: 155, fPre: 11, fComp: 0.5,  fReb: 0.5,  rPre: 17, rComp: 0.5,  rReb: 0.75 },
-      { kg: 175, fPre: 13, fComp: 0.25, fReb: 0.25, rPre: 19, rComp: 0.25, rReb: 0.5 },
+      { kg: 75,  fPre: 6, fComp: 2.25, fReb: 1.5, rPre: 12, rComp: 1.5, rReb: 1.75 },
+      { kg: 150, fPre: 6, fComp: 2.25, fReb: 1.5, rPre: 28, rComp: 1.5, rReb: 1.75 },
     ],
-    notes: 'Front preload in turns; rear preload in clicks. Damping counts turns OUT from fully hard (fewer turns = more damping). All six adjusters active. Starting point — confirm by sag.',
+    notes: 'Front preload in turns; rear preload in clicks. Damping counts turns OUT from fully hard (fewer turns = more damping). All six adjusters active. Starting point — confirm by sag. RECONSTRUÍDO do manual oficial em 7 de agosto de 2026, e com duas correções. A primeira: a compressão da frente estava a 1,5 voltas, que é o valor da EXTENSÃO — o manual manda 2,25. A segunda, e mais séria: a pré-carga traseira com passageiro. O manual diz «default setting (one passenger): 12 clicks» e «reference setting (two passengers): 28 clicks», e a tabela antiga dava 17 aos 155 kg. Quem andasse a dois recebia onze cliques a menos de pré-carga do que a Suzuki manda. CUIDADO AO LER ESTE MANUAL: cobre a V-Strom 800 E a 800DE, com secções separadas e valores diferentes — a pré-carga da frente da 800 é 5 voltas e a da DE é 6. Confirmar sempre o cabeçalho «(V-STROM 800DE)» antes de copiar um número.',
   },
   {
     id: 'suzuki_drz4s_2025',
@@ -1594,6 +1607,7 @@ const TRIUMPH: MfzProfile[] = [
     id: 'triumph_street_triple_rs',
     brand: 'Triumph', model: 'Street Triple RS', year: '2020-2022',
     baseKg: 75,
+    payloadKg: 195,   // «Maximum Payload» na ficha do Owner's Handbook da Street Triple
     source: 'Owner’s Handbook Triumph Street Triple S / R / R-LRH / RS (ENG), pág. 173-176',
     formula: 'cfmoto_interp',
     dataQuality: 'oem_manual',
