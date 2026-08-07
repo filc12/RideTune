@@ -3475,3 +3475,58 @@ dentro da mesma mota a relação é constante.**
 O `preloadKgPerTurn` só se aplica a `tu_soft`. A pré-carga da DesertX é `cl_soft`, e a de
 várias Honda também. **Se o campo se mostrar útil, faz sentido alargá-lo aos cliques** — mas
 só quando houver uma segunda mota a pedi-lo, não por antecipação.
+
+---
+
+## 7 de agosto de 2026, parte VI — de onde vêm os quilos dos pontos de carga
+
+Depois da correção da DesertX ficou a pergunta óbvia: **e os outros pontos de carga, de onde
+vieram?** A resposta é que havia uma convenção implícita, usada em toda a CFMoto, que nunca
+esteve escrita em lado nenhum.
+
+### A convenção 75 / 115 / 150 / 190
+
+Os manuais CFMoto dão as linhas por descrição, não por quilos:
+
+| Linha do manual | Quilos que o perfil usa |
+|---|---:|
+| «uma pessoa (75 kg)» | 75 |
+| «uma pessoa (75 kg) + carga (três caixas)» | **115** |
+| «uma pessoa (75 kg) + uma pessoa (75 kg)» | 150 |
+| «duas pessoas + carga (três caixas)» | **190** |
+
+**Os 75 e os 150 vêm do manual. Os 115 e os 190 assumem 40 kg de bagagem** — número que
+nenhum manual CFMoto publica. É interpretação, e razoável, mas é interpretação. Está agora
+escrita no tipo `WeightPoint`, que é onde quem for acrescentar pontos a vai ver.
+
+### E a 700MT anda sobrecarregada na última linha — do manual, não nossa
+
+Verificando essa assunção contra a ficha da 700MT: **405 kg de peso máximo total, 240 kg de
+tara → 165 kg de carga útil.** O último ponto da tabela está em **190 kg**.
+
+**Não é erro dos dados.** É a própria tabela de sugestões da CFMoto a descrever «duas
+pessoas + três caixas», que com 40 kg de bagagem dá 190 kg — vinte e cinco acima do limite
+que o mesmo manual publica noutra página. O manual contradiz-se.
+
+Os valores ficam como estão: são o que o fabricante manda pôr nessa configuração, e alguém
+que ande assim carregado precisa deles. O que se fez foi **escrevê-lo no perfil**, para que
+o último ponto não seja lido como carga recomendada.
+
+### Porque é que não se mexeu em mais nada
+
+Foi tentador «corrigir» o ponto para 165. Seria errado por duas razões. A primeira é que os
+valores de suspensão dessa linha são os da configuração que a CFMoto descreve, não os de
+165 kg — mudar o rótulo sem mudar os valores inclinava a curva. A segunda é que não se sabe
+quanto pesam as «três caixas»; os 40 kg são tão assumidos como os 15 que dariam para caber
+no limite.
+
+**A regra que fica**, e é a mesma que a DesertX ensinou: **os quilos de um ponto de carga
+tiram-se do manual, não do hábito.** Quando o manual não os dá, a assunção escreve-se ao
+lado. Foi por se ter copiado o hábito em silêncio que a DesertX passou meses com o ponto do
+meio em 100 kg quando o manual limitava a bagagem a 30 e o valor era 105.
+
+### Por verificar, quando os manuais aparecerem
+
+A mesma conta — carga útil contra o ponto mais alto — falta fazer às outras CFMoto
+(800MT, 800MT-X, 1000MT-X, 450MT) e às Kove e QJ que usem pontos de carga. Precisa do peso
+máximo autorizado de cada uma, que vem na ficha técnica do respectivo manual.

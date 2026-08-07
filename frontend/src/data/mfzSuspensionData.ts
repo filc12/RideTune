@@ -48,7 +48,34 @@ export interface Axle {
   lsComp?: SuspVal;  // low-speed compression
 }
 
-/** Weight breakpoint for interpolation (CFMOTO multi-load data) */
+/**
+ * Ponto de carga para interpolação.
+ *
+ * O `kg` é a carga que a mota leva — condutor mais passageiro mais bagagem. NÃO inclui a
+ * mota. É o mesmo total que o `getRealSuspension` recebe.
+ *
+ * A CONVENÇÃO 75 / 115 / 150 / 190, que aparece em toda a CFMoto e não estava escrita em
+ * lado nenhum. Os manuais CFMoto dão as linhas por descrição, não por quilos:
+ *
+ *   «uma pessoa (75 kg)»                              →  75
+ *   «uma pessoa (75 kg) + carga (três caixas)»        → 115
+ *   «uma pessoa (75 kg) + uma pessoa (75 kg)»         → 150
+ *   «uma pessoa + uma pessoa + carga (três caixas)»   → 190
+ *
+ * Os 75 e os 150 vêm do manual. **Os 115 e os 190 assumem 40 kg nas três malas**, número
+ * que nenhum manual CFMoto dá. É uma interpretação, e é razoável — três malas cheias
+ * andam por aí — mas é uma interpretação e convém saber-se.
+ *
+ * CUIDADO com o ponto de cima em motas de carga útil baixa. A 700MT admite 405 kg no
+ * total e pesa 240, ou seja **165 kg de carga útil**: os 190 kg do último ponto estão 25 kg
+ * acima do que a mota pode legalmente levar. Não é erro dos dados — é a própria tabela da
+ * CFMoto a descrever uma configuração que excede o limite que o mesmo manual publica. Fica
+ * registado para que ninguém leia o último ponto como carga recomendada.
+ *
+ * AO ACRESCENTAR PONTOS NOVOS, tirar os quilos do manual e não do hábito. Foi por se ter
+ * copiado o hábito que a Ducati DesertX ficou meses com o ponto do meio em 100 kg quando o
+ * manual limita a bagagem a 30 e o valor certo era 105.
+ */
 export interface WeightPoint {
   kg: number;
   fPre?: number;
@@ -239,7 +266,7 @@ const CFMOTO: MfzProfile[] = [
       { kg: 150, fComp: 14, fReb: 14, rPre: 10, rReb: 3 },
       { kg: 190, fComp: 16, fReb: 16, rPre: 12, rReb: 1 },
     ],
-    notes: 'Reconstruído do manual do proprietário da 700MT ADV (PT, v250708). SAIU DE SUSPEIÇÃO, e o desfecho é o oposto do esperado: os valores do mfzstudio estavam TODOS certos, incluindo os quatro pontos de carga, e a anomalia que os pusera em causa é real. A extensão traseira CONTA-SE MESMO DO DURO, ao contrário da frente e ao contrário das outras CFMoto — o manual escreve as duas instruções lado a lado, na mesma página. Também caiu a segunda dúvida: a ficha da CFMOTO UK dizia que a forquilha tem pré-carga, e o manual diz «Não ajustável». Vale o manual. IDENTIDADE, desta vez verificada antes de escrever seja o que for: 110/80 R19 e 150/70 R17, 1445 mm entre eixos, 240 kg de tara, 50 kW às 9500 rpm, código CF700-9A. Cinco campos, todos a bater com a mota certa. O PDF errado de agosto de 2026 dizia 120/70 ZR17, 1418 mm, 218 kg, 49 kW às 9000 e código CF700-9F. A COERÊNCIA INTERNA da tabela: à frente os cliques SOBEM com a carga (10, 10, 14, 16) e atrás DESCEM (7, 4, 3, 1). Parece contraditório e não é — como as duas pontas contam de extremos opostos, as duas séries endurecem à medida que o peso sobe. É a melhor prova de que os sentidos estão bem lidos. A pré-carga confirma-se por aritmética: 6 voltas de fábrica, mola livre a 166 mm, 1,5 mm por volta, dá 157 mm — que é exactamente o comprimento de fábrica que a ficha técnica indica. FICA DE FORA, de propósito, a quinta linha da tabela: «uma pessoa (75 kg) + estrada irregular contínua» → pré-carga 6 voltas, extensão traseira 8, frente 8/8. É modo de piso, não é peso, e não se interpola por quilos. A 800MT-X tem uma quinta linha do mesmo género e também ficou de fora.',
+    notes: 'Reconstruído do manual do proprietário da 700MT ADV (PT, v250708). SAIU DE SUSPEIÇÃO, e o desfecho é o oposto do esperado: os valores do mfzstudio estavam TODOS certos, incluindo os quatro pontos de carga, e a anomalia que os pusera em causa é real. A extensão traseira CONTA-SE MESMO DO DURO, ao contrário da frente e ao contrário das outras CFMoto — o manual escreve as duas instruções lado a lado, na mesma página. Também caiu a segunda dúvida: a ficha da CFMOTO UK dizia que a forquilha tem pré-carga, e o manual diz «Não ajustável». Vale o manual. IDENTIDADE, desta vez verificada antes de escrever seja o que for: 110/80 R19 e 150/70 R17, 1445 mm entre eixos, 240 kg de tara, 50 kW às 9500 rpm, código CF700-9A. Cinco campos, todos a bater com a mota certa. O PDF errado de agosto de 2026 dizia 120/70 ZR17, 1418 mm, 218 kg, 49 kW às 9000 e código CF700-9F. A COERÊNCIA INTERNA da tabela: à frente os cliques SOBEM com a carga (10, 10, 14, 16) e atrás DESCEM (7, 4, 3, 1). Parece contraditório e não é — como as duas pontas contam de extremos opostos, as duas séries endurecem à medida que o peso sobe. É a melhor prova de que os sentidos estão bem lidos. A pré-carga confirma-se por aritmética: 6 voltas de fábrica, mola livre a 166 mm, 1,5 mm por volta, dá 157 mm — que é exactamente o comprimento de fábrica que a ficha técnica indica. FICA DE FORA, de propósito, a quinta linha da tabela: «uma pessoa (75 kg) + estrada irregular contínua» → pré-carga 6 voltas, extensão traseira 8, frente 8/8. É modo de piso, não é peso, e não se interpola por quilos. A 800MT-X tem uma quinta linha do mesmo género e também ficou de fora. CARGA ÚTIL: o manual dá 405 kg de peso máximo total e 240 kg de tara, o que deixa 165 kg para condutor, passageiro e bagagem. O último ponto de carga desta tabela está em 190 kg, portanto 25 kg ACIMA do que a mota pode levar — não por erro nosso, mas porque a linha «duas pessoas + três caixas» da própria CFMoto já excede o limite que o mesmo manual publica. Os valores ficam como estão, que é o que o fabricante manda pôr nessa configuração; quem lá chegar deve saber que vai sobrecarregado.',
   },
   {
     id: 'cfmoto_450mt',
