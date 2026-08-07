@@ -4046,3 +4046,82 @@ todo-o-terreno, o que é duvidoso por serem menos vocacionadas.
 — que é a resposta honesta e a que o utilizador merece. Se um dia se quiser dar orientação
 genérica, que seja texto explicativo assumido como tal, com o mínimo de 1,6 bar da Pirelli
 como limite inferior absoluto, e nunca um número por mota a fingir que veio de fábrica.
+
+---
+
+## 8 de agosto de 2026 — a app estava presa no iOS, e ninguém sabia
+
+Ao preparar as capturas de ecrã para a App Store, correu-se a app **no simulador de iPhone
+pela primeira vez**. Desenhava tudo bem e não respondia a um único toque.
+
+### O diagnóstico, e como se distinguiu de um falso alarme
+
+Primeiro confirmar que o problema era da app e não do simulador: o botão Home respondia,
+os toques dentro da app não. Depois, o log do Metro deu a causa em texto:
+
+```
+[UIKitCore] Attempt to present <RCTFabricModalHostViewController: 0x1360c9400>
+on <UIViewController: 0x106e09800> which is already presenting
+<RCTFabricModalHostViewController: 0x1360c8a00>.
+```
+
+**Duas modais apresentadas ao mesmo tempo.** No iOS cada `Modal` do React Native é um view
+controller, e o UIKit recusa apresentar o segundo enquanto o primeiro estiver no ar. A
+segunda nunca aparece, a primeira fica montada — invisível, em ecrã inteiro, a engolir os
+toques. O ecrã continua a desenhar-se e a app fica morta.
+
+**Porque é que nunca deu no Android:** lá o mesmo código convive sem se queixar. O
+`app.json` tem `newArchEnabled: true`, e é na arquitetura nova que o iOS aperta.
+
+### Os dois sítios, ambos no `app/index.tsx`
+
+**Trocar de mota.** O seletor está aberto, escolhe-se outra mota, e o código fazia
+`setSwitchModal({ visible: true })` **sem nunca fechar o seletor**. Duas ao mesmo tempo.
+
+**Gravar a troca sem premium.** Fechava-se a modal de troca e abria-se a premium no mesmo
+ciclo — dispensar e apresentar em simultâneo, a mesma família de erro.
+
+### A correção: as modais passam a ser servidas à vez
+
+Uma fila. Fecha-se uma, guarda-se o que vem a seguir, e só se abre quando o `onDismiss`
+confirmar que a primeira saiu de facto. O `onDismiss` foi acrescentado ao `BikePicker` e ao
+`SwitchBikeModal`.
+
+**A parte que quase corria mal:** o `onDismiss` **só existe no iOS**. Usar a fila nas duas
+plataformas trocava um ecrã preso no iOS por uma janela que nunca abre no Android — pior,
+porque não dá erro nenhum e ninguém repara. Por isso o `agendar()` só enfileira no iOS; no
+Android abre já, como sempre fez.
+
+### A regra que fica
+
+**Nunca mudar duas modais no mesmo ciclo de render.** Está escrita em comentário no
+`index.tsx`, junto à fila.
+
+Varridos os outros seis ecrãs com modais — `carga`, `setups`, `profiles`, `diary`,
+`settings` e `diagnostico`. **Nenhum tem o padrão perigoso:** as modais abrem sempre a
+partir do ecrã principal, nunca de dentro de outra, e onde há premium existe um `return`
+que impede a segunda.
+
+### O que isto diz sobre o resto
+
+**Foi a primeira vez que a app correu em iOS.** Encontrou-se um defeito que a tornava
+inutilizável — e teria sido recusada pela Apple à primeira, porque «a app não responde» é
+dos motivos de rejeição mais comuns.
+
+Não há razão para acreditar que seja o único. As capturas de ecrã para a App Store obrigam
+a passar por todos os ecrãs, e isso **é o teste de fumo que nunca se fez**. Vale a pena
+fazê-lo com atenção em vez de à pressa.
+
+**Como correr no simulador,** para não se voltar a perder tempo com isto:
+
+```bash
+xcodebuild -downloadPlatform iOS          # só na primeira vez, vários GB
+xcrun simctl create "iPhone 16 Pro Max" \
+  com.apple.CoreSimulator.SimDeviceType.iPhone-16-Pro-Max \
+  com.apple.CoreSimulator.SimRuntime.iOS-26-5
+open -a Simulator
+cd frontend && npx expo run:ios --device "iPhone 16 Pro Max"
+```
+
+O Xcode instalado não traz runtimes de iOS nem aparelhos criados — as duas primeiras linhas
+resolvem isso, e o sintoma de faltarem é `xcrun simctl list devices available` vir vazio.

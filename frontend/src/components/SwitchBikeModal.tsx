@@ -11,15 +11,21 @@ interface SwitchBikeModalProps {
   onSave: () => void;     // Guardar config (Premium) e trocar
   onDiscard: () => void;  // Trocar sem guardar
   onClose: () => void;    // Cancelar
+  /**
+   * Chamado no iOS depois de a modal ter DESAPARECIDO de facto, não quando se pede
+   * que desapareça. É a diferença que interessa: no iOS só pode haver uma modal
+   * apresentada de cada vez, e abrir a seguinte antes desta sair deixa o ecrã preso.
+   */
+  onDismissed?: () => void;
 }
 
 export function SwitchBikeModal({
-  visible, fromLabel, toLabel, onSave, onDiscard, onClose,
+  visible, fromLabel, toLabel, onSave, onDiscard, onClose, onDismissed,
 }: SwitchBikeModalProps) {
   const { t } = useT();
 
   return (
-    <Modal transparent visible={visible} animationType="fade" onRequestClose={onClose}>
+    <Modal transparent visible={visible} animationType="fade" onRequestClose={onClose} onDismiss={onDismissed}>
       <Pressable style={st.backdrop} onPress={onClose} />
       <View style={st.sheet}>
         <View style={st.iconWrap}>

@@ -65,6 +65,59 @@ export default function HomeScreen() {
   const [pickerOpen, setPickerOpen] = useState(false);
   const [premiumModal, setPremiumModal] = useState<{ visible: boolean; feature?: string }>({ visible: false });
   const [switchModal, setSwitchModal] = useState<{ visible: boolean; target: Bike | null }>({ visible: false, target: null });
+
+  /**
+   * FILA DE MODAIS — existe por causa do iOS, e é obrigatória desde a arquitetura nova.
+   *
+   * No iOS cada `Modal` do React Native é um view controller apresentado pelo UIKit, e o
+   * UIKit RECUSA apresentar um segundo enquanto o primeiro estiver no ar. Quando isso
+   * acontece, o log diz «Attempt to present ... which is already presenting ...», a
+   * segunda modal nunca aparece e a primeira fica montada, invisível, por cima de tudo.
+   * O ecrã continua a desenhar-se normalmente e deixa de responder a qualquer toque.
+   *
+   * No Android o mesmo código convive sem se queixar — foi por isso que isto viveu meses
+   * sem ninguém dar por nada, e só apareceu ao correr a app no simulador de iPhone pela
+   * primeira vez, em 8 de agosto de 2026.
+   *
+   * A regra passa a ser: NUNCA mudar duas modais no mesmo ciclo. Fecha-se uma, guarda-se
+   * aqui o que vem a seguir, e só se abre quando o `onDismiss` confirmar que a primeira
+   * saiu mesmo. O `onDismiss` só existe no iOS; no Android o fluxo antigo continua a
+   * funcionar porque lá a segunda abre à mesma.
+   */
+  const [proxima, setProxima] = useState<
+    | { tipo: "switch"; target: Bike }
+    | { tipo: "premium"; feature: string }
+    | null
+  >(null);
+
+  const mostrar = useCallback((m: { tipo: "switch"; target: Bike } | { tipo: "premium"; feature: string }) => {
+    if (m.tipo === "switch") setSwitchModal({ visible: true, target: m.target });
+    else setPremiumModal({ visible: true, feature: m.feature });
+  }, []);
+
+  /**
+   * Agendar a modal seguinte.
+   *
+   * O `onDismiss` do `Modal` SÓ EXISTE NO iOS. Se a fila fosse usada em toda a parte, no
+   * Android a modal agendada nunca chegaria a abrir — trocávamos um ecrã preso no iOS por
+   * uma funcionalidade morta no Android, que é pior porque não dá erro nenhum.
+   *
+   * Por isso: no iOS agenda-se e espera-se pela confirmação de saída; no Android abre-se
+   * já, que é o que sempre fez e sempre funcionou.
+   */
+  const agendar = useCallback(
+    (m: { tipo: "switch"; target: Bike } | { tipo: "premium"; feature: string }) => {
+      if (Platform.OS === "ios") setProxima(m);
+      else mostrar(m);
+    },
+    [mostrar],
+  );
+
+  const abrirProxima = useCallback(() => {
+    if (!proxima) return;
+    mostrar(proxima);
+    setProxima(null);
+  }, [proxima, mostrar]);
   const [safetyInfo, setSafetyInfo] = useState(false);
 
   const refresh = useCallback(async () => {
@@ -113,17 +166,21 @@ export default function HomeScreen() {
     tapMedium();
     // Mesma mota ou primeira escolha -> troca direta, sem aviso.
     if (!bike || bike.id === b.id) { await doSwitchBike(b); return; }
-    // Trocar para mota diferente -> abre o modal com o visual da app.
-    setSwitchModal({ visible: true, target: b });
-  }, [bike, doSwitchBike]);
+    // Trocar para mota diferente. O seletor TEM de fechar primeiro: no iOS não se pode
+    // apresentar a modal de troca por cima dele. A troca fica em fila e abre quando o
+    // seletor confirmar que saiu.
+    setPickerOpen(false);
+    agendar({ tipo: "switch", target: b });
+  }, [bike, doSwitchBike, agendar]);
 
   const onSwitchSave = useCallback(async () => {
     const target = switchModal.target;
     if (!bike || !target) return;
     const premium = await isPremium();
     if (!premium) {
+      // Mesma regra: fecha-se a modal de troca e a premium espera pela confirmação.
       setSwitchModal({ visible: false, target: null });
-      setPremiumModal({ visible: true, feature: "premium.feature.setups" });
+      agendar({ tipo: "premium", feature: "premium.feature.setups" });
       Analytics.premiumModalShown({ feature: "premium.feature.setups" });
       setPickerOpen(false);
       return;
@@ -141,7 +198,7 @@ export default function HomeScreen() {
     } catch {}
     setSwitchModal({ visible: false, target: null });
     await doSwitchBike(target);
-  }, [bike, load, switchModal.target, doSwitchBike]);
+  }, [bike, load, switchModal.target, doSwitchBike, agendar]);
 
   const onSwitchDiscard = useCallback(async () => {
     const target = switchModal.target;
@@ -360,7 +417,7 @@ export default function HomeScreen() {
         <BottomNav active="home" />
       </SafeAreaView>
 
-      <BikePicker open={pickerOpen} onClose={() => setPickerOpen(false)} onPick={onPickBike} selectedId={bike?.id} t={t} />
+      <BikePicker open={pickerOpen} onClose={() => setPickerOpen(false)} onPick={onPickBike} selectedId={bike?.id} t={t} onDismissed={abrirProxima} />
       <PremiumModal visible={premiumModal.visible} feature={premiumModal.feature} onClose={() => setPremiumModal({ visible: false })} />
       <SwitchBikeModal
         visible={switchModal.visible}
@@ -369,6 +426,7 @@ export default function HomeScreen() {
         onSave={onSwitchSave}
         onDiscard={onSwitchDiscard}
         onClose={() => setSwitchModal({ visible: false, target: null })}
+        onDismissed={abrirProxima}
       />
 
       <Modal transparent visible={safetyInfo} animationType="fade" onRequestClose={() => setSafetyInfo(false)}>
@@ -590,7 +648,7 @@ function rtNorm(s: string): string {
   return s.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim();
 }
 
-function BikePicker({ open, onClose, onPick, selectedId, t }: { open: boolean; onClose: () => void; onPick: (b: Bike) => void; selectedId?: string; t: (k: never) => string }) {
+function BikePicker({ open, onClose, onPick, selectedId, t, onDismissed }: { open: boolean; onClose: () => void; onPick: (b: Bike) => void; selectedId?: string; t: (k: never) => string; onDismissed?: () => void }) {
   const [step, setStep] = React.useState<"cat" | "brand" | "model">("cat");
   const [selCat, setSelCat] = React.useState<string | null>(null);
   const [selBrand, setSelBrand] = React.useState<string | null>(null);
@@ -652,7 +710,7 @@ function BikePicker({ open, onClose, onPick, selectedId, t }: { open: boolean; o
     selBrand ?? "";
 
   return (
-    <Modal visible={open} animationType="slide" transparent onRequestClose={handleClose}>
+    <Modal visible={open} animationType="slide" transparent onRequestClose={handleClose} onDismiss={onDismissed}>
       <Pressable style={styles.modalBackdrop} onPress={handleClose} />
       <View style={[styles.pickerKav, kbHeight > 0 && styles.pickerKavTop]} pointerEvents="box-none">
       <View style={styles.sheet} testID="bike-picker">
