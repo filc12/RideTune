@@ -3995,3 +3995,54 @@ não publica — a KTM está provada que não, a Honda também não, a CFMoto ne
 
 Não vai cobrir o catálogo. Mas cada mota que aparecer é dado real, e as que não aparecerem
 ficam sem separador de todo-o-terreno, que é a resposta honesta.
+
+---
+
+## 7 de agosto de 2026, parte XIV — varredura às Adventure: quem publica pressão de todo-o-terreno
+
+**73 motos Adventure no catálogo.** Varridos todos os manuais que estavam à mão — dez, de
+nove marcas. O resultado é claro e poupa trabalho futuro.
+
+### Publicam
+
+| Marca | Prova |
+|---|---|
+| **Ducati** | Ficha da DesertX: «1,8 bar (off-road, rider only); 2,0 (off-road, rider and passenger)», com o pneu nomeado — Pirelli Scorpion Rally STR |
+| **Yamaha** | Ténéré 700, secção «Off-road riding»: 200 kPa à frente e atrás |
+| **Aprilia** | Tuareg 660: «fora de estrada 2,0 nas duas rodas» |
+
+**Já estão todas no catálogo.** Não há nada por colher nestas três marcas além dos modelos
+cujos manuais ainda não se abriram.
+
+### Não publicam — verificado, não presumido
+
+| Marca | O que o manual diz |
+|---|---|
+| **KTM** | 890 Adventure R e 1290 Super Adventure R: pressão única 2,4/2,9 para solo, com passageiro E carga máxima. Sem coluna de piso. |
+| **Honda** | X-ADV, Transalp 2025 e Africa Twin: nada. Só a etiqueta com pressões de estrada. |
+| **CFMoto** | 700MT: diz «reduzir a pressão dos pneus pode ajudar a obter melhor controlo» e **não dá valor nenhum**. 450MT: nada. |
+| **Voge** | DS625X e 900DSX: nada. |
+| **Suzuki** | V-Strom 800DE: nada. O G-Mode é regulação de tracção, não de pressão. |
+
+O caso da CFMoto é o mais revelador: **sabe que se deve baixar e não diz quanto.** É a
+posição da maioria da indústria — reconhecer a prática sem assumir responsabilidade por um
+número.
+
+### O que isto quer dizer, na prática
+
+**A cobertura de todo-o-terreno vai ficar em três marcas.** Não por falta de trabalho: das
+nove marcas verificadas, seis não publicam nada e duas dessas — CFMoto e Voge — são as que
+têm mais utilizadores da app.
+
+E as três que publicam já estão feitas. **O trabalho que resta não é varrer mais manuais, é
+abrir os manuais Ducati que faltam** — a Ducati é a única marca com muitos modelos Adventure
+no catálogo (dez) e o hábito de publicar. As quatro que têm dados são as DesertX e a
+Multistrada V4 Rally; falta ver se as Multistrada V2 e V4 de estrada trazem coluna de
+todo-o-terreno, o que é duvidoso por serem menos vocacionadas.
+
+### A regra que fica escrita
+
+**Não se inventa pressão de todo-o-terreno.** Sem valor no manual, a mota fica sem separador
+— que é a resposta honesta e a que o utilizador merece. Se um dia se quiser dar orientação
+genérica, que seja texto explicativo assumido como tal, com o mínimo de 1,6 bar da Pirelli
+como limite inferior absoluto, e nunca um número por mota a fingir que veio de fábrica.
