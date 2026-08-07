@@ -3230,3 +3230,74 @@ A pré-carga da frente estava como `pos('+0 factory baseline')` — texto, que a
 não ajusta. O manual descreve o afinador contável em voltas a partir do fim mole, com +0 no
 Standard e +3 na carga máxima. Passou a `tu_soft(0)`, portanto **acompanha o peso** em vez de
 ficar uma etiqueta fixa. O 790 Adventure R tem a mesma etiqueta e fica à espera do manual.
+
+---
+
+## 7 de agosto de 2026, parte III — a CFMoto 700MT sai de suspeição, e o desfecho é o contrário do esperado
+
+Chegou o manual português da **700MT ADV** (`MP_700MT ADV_v250708`). Este perfil estava
+marcado a vermelho desde o dia em que o reescrevi a partir da mota errada. **Estava certo o
+tempo todo.** Todos os valores, incluindo os quatro pontos de carga.
+
+### Primeiro o teste de identidade, que da outra vez se saltou
+
+| | Este manual | O PDF errado de agosto |
+|---|---|---|
+| Pneus | 110/80 R19 · 150/70 R17 | 120/70 ZR17 · 160/60 ZR17 |
+| Distância entre eixos | 1445 mm | 1418 mm |
+| Tara | 240 kg | 218 kg |
+| Potência | 50 kW às 9500 | 49 kW às 9000 |
+| Código | **CF700-9A** | CF700-9F |
+
+Cinco campos, todos a bater com a 700MT verdadeira. E a medida dos pneus aparece **duas
+vezes** no documento — ficha geral e secção dos pneus — que é o teste de coerência interna
+rápido dos manuais CFMoto.
+
+### As duas dúvidas que puseram o perfil em causa, resolvidas em sentidos opostos
+
+**A anomalia era verdadeira.** Duvidava-se de que a extensão traseira se contasse do lado
+duro quando todas as outras CFMoto contam do mole. **Conta-se mesmo**, e o manual escreve as
+duas instruções lado a lado, na mesma página, por baixo da tabela:
+
+> «Rode a suspensão dianteira no sentido contrário ao dos ponteiros do relógio até ao fim e,
+> em seguida, rode-a no sentido dos ponteiros do relógio para aumentar o amortecimento. Rode
+> a suspensão traseira no sentido dos ponteiros do relógio até à mudança máxima e, em
+> seguida, rode-a no sentido contrário ao dos ponteiros do relógio para diminuir.»
+
+**Lição, e é a que fica:** o comentário original dizia «sentido inverso das outras CFMoto» e
+eu li isso como sinal de que quem escreveu tinha racionalizado um erro. Era o contrário — era
+alguém a registar uma irregularidade real. **Uma irregularidade assinalada não é a mesma
+coisa que uma irregularidade inventada,** e não se distinguem sem a fonte.
+
+**A outra dúvida caiu para o lado do manual.** A ficha da CFMOTO UK diz que a forquilha tem
+pré-carga; a ficha técnica do manual diz, em duas linhas, **«Não ajustável»** — à frente na
+pré-carga e atrás na compressão. Ficha comercial contra manual, ganha o manual.
+
+### A tabela parece contraditória e é isso que prova que está bem lida
+
+| Estado | Pré-carga trás | Extensão trás | Frente comp. | Frente ext. |
+|---|---:|---:|---:|---:|
+| Fábrica (solo, 75 kg) | 6 voltas | 7 | 10 | 10 |
+| + carga (três caixas) | 9 | 4 | 10 | 10 |
+| + passageiro | 10 | 3 | 14 | 14 |
+| + passageiro + carga | 12 | 1 | 16 | 16 |
+
+À frente os cliques **sobem** com o peso; atrás **descem**. Parece disparate — e não é: como
+as duas pontas contam de extremos opostos, **as duas séries estão a endurecer** à medida que
+a carga aumenta. Se estivessem ambas a subir é que havia problema.
+
+**A pré-carga fecha por aritmética,** que é a melhor confirmação que há: 6 voltas de fábrica,
+mola livre a 166 mm, cada volta vale 1,5 mm → 166 − 9 = **157 mm**, que é exactamente o
+comprimento de fábrica que a ficha técnica indica noutra página.
+
+**Ficou de fora a quinta linha** — «uma pessoa + estrada irregular contínua», que dá 6 voltas
+de pré-carga e 8/8/8 de amortecimento. É modo de piso, não é peso, e não se interpola por
+quilos. A 800MT-X tem uma linha do mesmo género e também ficou de fora, pela mesma razão.
+
+### Estado
+
+A CFMoto passa a **100 % por manual** — é a marca com mais utilizadores da app, 81, e era
+este o único perfil dela por confirmar. A pressão já estava certa (2,25 / 2,50 bar) e ganhou
+uma terceira fonte a confirmá-la.
+
+**São 83 perfis por manual em 104.**

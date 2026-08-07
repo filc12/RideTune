@@ -197,17 +197,20 @@ const CFMOTO: MfzProfile[] = [
   {
     id: 'cfmoto_700mt',
     brand: 'CFMOTO', model: '700MT', year: '2021+',
-    baseKg: 75, source: 'mfzstudio.com/moto/cfmoto/', formula: 'cfmoto_interp',
-    countNote: 'Rear rebound: CW to fully hard, ACW count out. Front compression: ACW soft \u2192 CW. Rear preload in turns (tu_soft). No rear compression adjuster.',
+    baseKg: 75,
+    source: 'Manual do propriet\u00e1rio CFMOTO 700MT ADV (PT, MP_700MT ADV_v250708), p\u00e1g. 141-146 e ficha t\u00e9cnica p\u00e1g. 14',
+    formula: 'cfmoto_interp',
+    dataQuality: 'oem_manual',
+    countNote: 'AS DUAS PONTAS CONTAM-SE AO CONTR\u00c1RIO UMA DA OUTRA, e \u00e9 o pr\u00f3prio manual que o diz. \u00c0 FRENTE: roda at\u00e9 ao fim no sentido contr\u00e1rio ao dos ponteiros (fica no mais mole) e depois conta a apertar \u2014 de f\u00e1brica, 10 cliques nos dois afinadores, num curso de 20 \u00b1 2. ATR\u00c1S: roda at\u00e9 ao fim no sentido dos ponteiros (fica no mais duro) e depois conta a abrir \u2014 de f\u00e1brica, 7 cliques num curso de 15 \u00b1 2. A pr\u00e9-carga traseira \u00e9 por anel, 6 voltas a partir da mola livre, e cada volta vale 1,5 mm.',
     front: {
-      preload: na('No front preload adjuster'),
+      preload: na('A ficha t\u00e9cnica do manual diz \u00abN\u00e3o ajust\u00e1vel\u00bb'),
       comp: cl_s(10),
       reb: cl_s(10),
     },
     rear: {
-      preload: tu_s(6),   // turns CW from soft
-      comp: na('No rear compression adjuster'),
-      reb: cl_h(7),       // REVERSED vs other CFMOTO \u2014 cl_hard
+      preload: tu_s(6),   // 6 voltas a partir da mola livre; 157 mm de 166, a 1,5 mm por volta
+      comp: na('A ficha t\u00e9cnica do manual diz \u00abN\u00e3o ajust\u00e1vel\u00bb'),
+      reb: cl_h(7),       // conta-se do DURO, ao contr\u00e1rio da frente \u2014 confirmado no manual
     },
     weightPoints: [
       { kg: 75,  fComp: 10, fReb: 10, rPre: 6,  rReb: 7 },
@@ -215,7 +218,7 @@ const CFMOTO: MfzProfile[] = [
       { kg: 150, fComp: 14, fReb: 14, rPre: 10, rReb: 3 },
       { kg: 190, fComp: 16, fReb: 16, rPre: 12, rReb: 1 },
     ],
-    notes: '\u26a0\ufe0f PERFIL SOB SUSPEI\u00c7\u00c3O \u2014 N\u00c3O CONFIAR SEM VERIFICAR. Os valores s\u00e3o do mfzstudio.com e h\u00e1 duas raz\u00f5es independentes para duvidar deles.\n\nA PRIMEIRA \u00e9 interna: diz que a extens\u00e3o traseira se conta do DURO quando todas as outras CFMoto contam do MOLE. O pr\u00f3prio perfil trazia um coment\u00e1rio a assinalar a anomalia \u2014 \u00absentido inverso das outras CFMoto\u00bb \u2014 o que sugere que quem o escreveu reparou e racionalizou em vez de questionar.\n\nA SEGUNDA vem da ficha oficial da CFMOTO UK, que diz que o 700MT tem forquilha de 43 mm com PRECARGA e extens\u00e3o, e amortecedor com precarga e extens\u00e3o. Este perfil diz o contr\u00e1rio: marca a precarga da frente como inexistente e p\u00f5e-lhe compress\u00e3o. Um dos dois est\u00e1 errado sobre que afinadores a moto tem.\n\nHIST\u00d3RICO, para n\u00e3o se repetir: em agosto de 2026 este perfil foi reescrito a partir de um PDF chamado 700mt.pdf, na CDN da pr\u00f3pria CFMOTO, com a capa a dizer \u00abCF700-9F \u2014 700MT\u00bb. A reescrita foi REVERTIDA no mesmo dia. O manual descreve outra moto: 120/70 ZR17 \u00e0 frente e 160/60 ZR17 atr\u00e1s, 218 kg, 1418 mm de dist\u00e2ncia entre eixos, 49 kW \u00e0s 9000 rpm. O 700MT real tem 110/80 R19 e 150/70 R17, 240 kg, 1445 mm e 50 kW \u00e0s 9500. N\u00e3o \u00e9 uma linha copiada por engano \u2014 s\u00e3o cinco campos independentes a n\u00e3o bater. A capa de um PDF n\u00e3o \u00e9 prova de que modelo ele descreve.\n\nPISTA NOVA (agosto 2026, manuais italianos do importador cfmotoitaly.it): as DUAS gerações estão descritas, e são DIFERENTES entre si — o que explica a contradição acima. O manual de 2023 (UM-CFMOTO-700MT_230913, pág. 55-56) diz que a forquilha é regulável apenas HIDRAULICAMENTE, por uma roda de regulação em cada bengala, e NÃO menciona precarga à frente; atrás dá precarga mecânica por anel MAIS uma regulação hidráulica. Já a CFMOTO UK e a imprensa italiana descrevem a 700MT ADV de 2025 com forquilha regulável no PRECARGA. Ou seja, provavelmente mudou de geração e a app tem de decidir qual representa. Nota adicional: o manual italiano nunca diz se a regulação hidráulica é compressão ou extensão — usa «frenatura» genericamente. Isso sozinho já desmente o perfil do mfzstudio, que atribui DOIS afinadores hidráulicos à frente quando o manual descreve uma roda só por bengala.\n\nO QUE FALTA: um manual que diga, para a geração que queremos representar, qual dos afinadores hidráulicos é qual. Esta moto \u00e9 a candidata n\u00famero um do cat\u00e1logo \u2014 a CFMoto \u00e9 a marca com mais utilizadores da app e este \u00e9 o \u00fanico perfil dela sem manual.',
+    notes: 'Reconstruído do manual do proprietário da 700MT ADV (PT, v250708). SAIU DE SUSPEIÇÃO, e o desfecho é o oposto do esperado: os valores do mfzstudio estavam TODOS certos, incluindo os quatro pontos de carga, e a anomalia que os pusera em causa é real. A extensão traseira CONTA-SE MESMO DO DURO, ao contrário da frente e ao contrário das outras CFMoto — o manual escreve as duas instruções lado a lado, na mesma página. Também caiu a segunda dúvida: a ficha da CFMOTO UK dizia que a forquilha tem pré-carga, e o manual diz «Não ajustável». Vale o manual. IDENTIDADE, desta vez verificada antes de escrever seja o que for: 110/80 R19 e 150/70 R17, 1445 mm entre eixos, 240 kg de tara, 50 kW às 9500 rpm, código CF700-9A. Cinco campos, todos a bater com a mota certa. O PDF errado de agosto de 2026 dizia 120/70 ZR17, 1418 mm, 218 kg, 49 kW às 9000 e código CF700-9F. A COERÊNCIA INTERNA da tabela: à frente os cliques SOBEM com a carga (10, 10, 14, 16) e atrás DESCEM (7, 4, 3, 1). Parece contraditório e não é — como as duas pontas contam de extremos opostos, as duas séries endurecem à medida que o peso sobe. É a melhor prova de que os sentidos estão bem lidos. A pré-carga confirma-se por aritmética: 6 voltas de fábrica, mola livre a 166 mm, 1,5 mm por volta, dá 157 mm — que é exactamente o comprimento de fábrica que a ficha técnica indica. FICA DE FORA, de propósito, a quinta linha da tabela: «uma pessoa (75 kg) + estrada irregular contínua» → pré-carga 6 voltas, extensão traseira 8, frente 8/8. É modo de piso, não é peso, e não se interpola por quilos. A 800MT-X tem uma quinta linha do mesmo género e também ficou de fora.',
   },
   {
     id: 'cfmoto_450mt',
