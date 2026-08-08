@@ -20,7 +20,7 @@ export type LegalDict = {
 
 const en: LegalDict = {
   back: "← Back to RideTune",
-  lastUpdated: "Last updated: July 2026",
+  lastUpdated: "Last updated: August 2026",
   privacyTitle: "Privacy Policy",
   privacySections: [
     ["Overview", "RideTune is a motorcycle suspension setup app. We built it to work without accounts, without sign-ups and with as little data as possible. This page explains what little data the app touches and why."],
@@ -53,7 +53,7 @@ const en: LegalDict = {
 
 const pt: LegalDict = {
   back: "← Voltar à RideTune",
-  lastUpdated: "Última atualização: julho de 2026",
+  lastUpdated: "Última atualização: agosto de 2026",
   privacyTitle: "Política de Privacidade",
   privacySections: [
     ["Resumo", "A RideTune é uma app de afinação de suspensão de motos. Construímo-la para funcionar sem contas, sem registos e com o mínimo de dados possível. Esta página explica os poucos dados que a app usa e porquê."],
@@ -86,7 +86,7 @@ const pt: LegalDict = {
 
 const es: LegalDict = {
   back: "← Volver a RideTune",
-  lastUpdated: "Última actualización: julio de 2026",
+  lastUpdated: "Última actualización: agosto de 2026",
   privacyTitle: "Política de Privacidad",
   privacySections: [
     ["Resumen", "RideTune es una app de ajuste de suspensión de motos. La creamos para funcionar sin cuentas, sin registros y con la menor cantidad de datos posible. Esta página explica los pocos datos que la app utiliza y por qué."],
@@ -119,7 +119,7 @@ const es: LegalDict = {
 
 const fr: LegalDict = {
   back: "← Retour à RideTune",
-  lastUpdated: "Dernière mise à jour : juillet 2026",
+  lastUpdated: "Dernière mise à jour : août 2026",
   privacyTitle: "Politique de confidentialité",
   privacySections: [
     ["Aperçu", "RideTune est une app de réglage de suspension moto. Nous l'avons conçue pour fonctionner sans comptes, sans inscription et avec le moins de données possible. Cette page explique les rares données que l'app utilise et pourquoi."],
@@ -152,7 +152,7 @@ const fr: LegalDict = {
 
 const de: LegalDict = {
   back: "← Zurück zu RideTune",
-  lastUpdated: "Zuletzt aktualisiert: Juli 2026",
+  lastUpdated: "Zuletzt aktualisiert: August 2026",
   privacyTitle: "Datenschutzerklärung",
   privacySections: [
     ["Überblick", "RideTune ist eine App zur Fahrwerksabstimmung von Motorrädern. Wir haben sie so gebaut, dass sie ohne Konten, ohne Anmeldung und mit so wenig Daten wie möglich funktioniert. Diese Seite erklärt, welche wenigen Daten die App verwendet und warum."],
@@ -185,7 +185,7 @@ const de: LegalDict = {
 
 const it: LegalDict = {
   back: "← Torna a RideTune",
-  lastUpdated: "Ultimo aggiornamento: luglio 2026",
+  lastUpdated: "Ultimo aggiornamento: agosto 2026",
   privacyTitle: "Informativa sulla privacy",
   privacySections: [
     ["Panoramica", "RideTune è un'app per la taratura della sospensione delle moto. L'abbiamo creata per funzionare senza account, senza registrazioni e con il minor numero di dati possibile. Questa pagina spiega i pochi dati che l'app utilizza e perché."],
