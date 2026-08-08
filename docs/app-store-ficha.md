@@ -611,3 +611,56 @@ O site diz **«Get the app on Google Play»** e **«Rate it on Google Play»** e
 línguas, e o `site.config.ts` só tem `PLAY_URL`. Está certo hoje, porque a app só existe no
 Android — mas no dia do lançamento passa a estar errado. Acrescentar `APP_STORE_URL` e pôr
 os dois botões. **Não se muda antes**, ou manda-se gente para uma loja onde a app não está.
+
+---
+
+## Submissão do iOS — 8 de agosto de 2026
+
+Enviada às 22:04. ID `94900ef8-5fdf-41f1-9763-e53fac6e35f8`. Dois itens no mesmo
+envio, como a Apple obriga na primeira compra não consumível: **iOS app 1.1.5 (1)**
+e **RideTune Premium Lifetime**.
+
+**Decisões tomadas no dia, para não se repetir a discussão:**
+
+| Campo | Valor | Porquê |
+|---|---|---|
+| Versão | 1.1.5 | Alinhada com o `app.json`, que é partilhado com o Android. Baixar para 1.0 fazia o Android regredir. |
+| Lançamento | **Manual** | A app espera por nós depois de aprovada. Dá tempo de publicar o site e escolher o dia. |
+| Direitos sobre o conteúdo | **Não** | Mostramos factos extraídos de manuais, não redistribuímos conteúdo. Nomes de motos são uso nominativo. |
+| Conteúdo gerado por utilizadores | **Não** | A app envia setups mas não mostra os dos outros. Ver secção acima. |
+| Necessário iniciar sessão | **Desmarcado** | Não há contas. Estava marcado por omissão e teria travado a revisão. |
+| Categorias | Desporto / Utilitários | Menos concorrência em Desporto e o público está mais próximo. |
+
+**Duas chaves de API na conta Apple, com finalidades distintas:**
+
+- `WBTNG26AZD` — Administração. Usada pelo RevenueCat para ler o estado dos produtos.
+- `H2767GFA3H` — Gestor de apps. Usada pelo `eas submit`. Configurada no `eas.json`;
+  o `.p8` vive em `frontend/` e está coberto pelo `*.p8` do `.gitignore`.
+
+A segunda existe porque o `eas submit` queria criar uma chave sozinho, e para isso
+exige a palavra-passe da Apple — a API deles não deixa uma chave criar outra chave.
+Criá-la à mão evita a palavra-passe e dá privilégio mínimo.
+
+### ⚠️ O que ficou por fazer
+
+**A compra nunca foi testada de ponta a ponta.** O paywall abre e mostra o preço
+vindo da App Store, mas nenhuma transação chegou ao RevenueCat — «Recent
+Transactions: No transactions yet». Tentou-se no simulador e não foi possível:
+a conta sandbox nunca ficou activa, e a loja manteve-se americana ($12.99 em vez
+de 14,99 €).
+
+Verificado por observação directa, e é o que dá confiança para submeter sem o
+teste: a chave `appl_` funciona, o entitlement `premium` tem o produto ligado, o
+pacote está na offering `default` e é encontrado pelo identificador, o produto
+está «Ready to Submit». E é o mesmo código que já vendeu a 288 pessoas no Android.
+
+**Testar assim que houver um iPhone.** O grupo «Interno» do TestFlight já existe
+com a compilação 1. Instalar, comprar, confirmar que o premium desbloqueia, e
+testar o «Restaurar compras» — que é o caminho de quem reinstala e o que mais
+falha quando ninguém o exercita.
+
+**Regulamento de Serviços Digitais.** Declarado como comerciante. Se ficar preso
+em revisão, a app não pode ser distribuída na UE mesmo depois de aprovada.
+
+**Site.** O `site.config.ts` só tem `PLAY_URL` e todas as línguas dizem «Get the
+app on Google Play». Certo hoje, errado no dia do lançamento.
