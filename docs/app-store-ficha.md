@@ -538,6 +538,26 @@ Apple. Ficaria **factualmente errado** logo no dia do lançamento, e é dos text
 revisor lê. Passou a dizer «a loja de onde instalaste a app — Google Play no Android, App
 Store no iOS», nas seis línguas.
 
+**Segunda correcção, no mesmo dia:** a política prometia uma coisa que a app não faz. Dizia,
+em três sítios e em seis línguas, «podes ver e apagar os teus setups partilhados a qualquer
+momento na app». O `deleteMySetup` existe no `community.ts` mas não está ligado a ecrã
+nenhum — não há forma de apagar nada de dentro da app. Uma política que promete uma via de
+eliminação inexistente é das coisas que o revisor consegue verificar, e é também um
+compromisso que não se cumpre perante quem o leia. Passou a dizer que a remoção se pede por
+email para `support@ridetune.app` com a ligação do setup.
+
+Corrigiu-se também «publicado em ridetune.app **e dentro da app**»: a app não mostra setups
+da comunidade. A cláusula «Licença de exibição» mantém a menção à app de propósito — essa
+concede o direito de exibir, não afirma que a funcionalidade existe.
+
+**A alternativa era ligar o ecrã** e cumprir o texto original. Se um dia se ligar, é preciso
+voltar aqui e reverter estas três frases.
+
+**⚠️ O site em produção pode estar atrasado.** Estas correcções estão no `legal.ts`, mas
+`ridetune.app/privacy` só as mostra depois do deploy. Confirmar com um `web_fetch` ao URL
+real antes de submeter à Apple — foi assim que se apanhou a primeira, que estava commitada
+mas não publicada.
+
 ### As respostas do questionário de privacidade
 
 A Apple pergunta campo a campo. Vale a pena ter isto decidido antes, porque à pressa
@@ -551,7 +571,29 @@ app», para toda a gente ver.
 | **Usage Data** → *Product Interaction* | Sim | **Não** | PostHog: que ecrãs abrem, que motos escolhem |
 | **Diagnostics** → *Crash Data* | Sim | **Não** | Sentry: relatórios de falha |
 | **Purchases** → *Purchase History* | Sim | **Não** | RevenueCat: validar e restaurar a compra |
+| **User Content** → *Other User Content* | Sim | **Não** | Setups partilhados para a comunidade (Supabase) |
 | Contactos, localização, identificadores, saúde, financeiros | **Não** | — | — |
+
+**A quarta linha foi acrescentada a 8 de agosto de 2026**, no dia em que o questionário foi
+preenchido. Esta tabela tinha três linhas e esquecia os setups da comunidade: o
+`community.ts` envia para o Supabase a moto, a carga, o sag, os cliques, um país e uma nota
+opcionais. Isso é conteúdo do utilizador transmitido para fora do dispositivo, e na
+terminologia da Apple é *User Content → Other User Content*. Sub-declarar é o que dá remoção
+da app **depois** de estar no ar; declarar com exactidão não custa nada.
+
+### Conteúdo gerado por utilizadores: porque é que a resposta é «Não»
+
+Na classificação etária, a pergunta «Conteúdo gerado por utilizadores» fala em **ampla
+distribuição** de conteúdo criado por utilizadores como componente da experiência da app.
+
+A app **envia** setups para a comunidade mas **não mostra** os dos outros: o `community.ts`
+exporta `getCommunitySetups`, `voteSetup`, `listMySetups` e `deleteMySetup`, e o
+`app/setups.tsx` só importa `submitSetup`. A biblioteca da comunidade vive no site. Por isso
+a resposta é «Não», e a app fica em **4+** sem as obrigações da diretriz 1.2 — filtragem,
+botão de denúncia, bloquear utilizadores — que não teriam onde ser postas.
+
+**Isto deixa de ser verdade no dia em que a app passar a mostrar setups de outros.** Nesse
+dia, a resposta muda e a diretriz 1.2 passa a aplicar-se.
 
 **As duas perguntas onde é fácil errar:**
 

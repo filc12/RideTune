@@ -17,6 +17,37 @@ import { isForceFreeBuild, setPremiumStatusFromStore } from "@/src/services/prem
 export const ENTITLEMENT_ID = "premium";
 
 /**
+ * O identificador do produto nas duas lojas. É o mesmo na App Store e na Google Play,
+ * de propósito — poupa um `Platform.select` e evita que as duas divirjam com o tempo.
+ */
+export const PRODUCT_ID = "ridetune_premium_lifetime";
+
+/**
+ * O pacote vitalício dentro da offering actual.
+ *
+ * PORQUE É QUE ISTO NÃO É `availablePackages[0]`. Era, até 8 de agosto de 2026. A offering
+ * `default` da RevenueCat foi criada a partir do modelo deles e ficou com três pacotes:
+ * `$rc_monthly`, `$rc_annual` e `$rc_lifetime`, por esta ordem. Os dois primeiros só têm
+ * produtos da Test Store, que a App Store e a Google Play não sabem resolver — por isso o
+ * SDK deita-os fora e o vitalício acaba mesmo na posição 0. Funcionava por acidente.
+ *
+ * O acidente desfaz-se sozinho no dia em que alguém acrescentar um pacote real acima do
+ * vitalício, ou ligar a Test Store numa build de teste. Nesse dia a app cobra o produto
+ * errado, e é o pior sítio possível para descobrir um bug. Procurar pelo identificador do
+ * produto custa uma linha e não depende de ordem nenhuma.
+ *
+ * O `?? [0]` fica como rede: se um dia o identificador mudar de um lado e não do outro, a
+ * app continua a vender alguma coisa em vez de dizer "unavailable" a toda a gente.
+ */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function pacoteVitalicio(offerings: any): any {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const pacotes: any[] | undefined = offerings?.current?.availablePackages;
+  if (!pacotes?.length) return null;
+  return pacotes.find(p => p?.product?.identifier === PRODUCT_ID) ?? pacotes[0];
+}
+
+/**
  * A RevenueCat tem uma chave por loja — a de Android não funciona na App Store.
  * Sem a chave certa, `isBillingAvailable()` devolve false e a app fica sem compras:
  * em iOS isso e' motivo de rejeicao, porque ha funcionalidade premium que ninguem
@@ -111,7 +142,7 @@ export async function getLifetimePrice(): Promise<string | null> {
   if (!Purchases || !configured) return null;
   try {
     const offerings = await Purchases.getOfferings();
-    const pkg = offerings?.current?.availablePackages?.[0];
+    const pkg = pacoteVitalicio(offerings);
     return pkg?.product?.priceString ?? null;
   } catch {
     return null;
@@ -126,7 +157,7 @@ export async function purchaseLifetime(): Promise<PurchaseResult> {
   if (!Purchases || !configured) return "unavailable";
   try {
     const offerings = await Purchases.getOfferings();
-    const pkg = offerings?.current?.availablePackages?.[0];
+    const pkg = pacoteVitalicio(offerings);
     if (!pkg) return "unavailable";
     const { customerInfo } = await Purchases.purchasePackage(pkg);
     const active = await applyCustomerInfo(customerInfo);
