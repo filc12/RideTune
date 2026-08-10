@@ -173,6 +173,11 @@ export const BIKES: Bike[] = [
   // F 900 GS (2024+): forquilha 43 mm precarga+comp+ext; atrás precarga hidráulica +
   // extensão (sem compressão). bmwmotorcycles.com
   { id: "bmw-f900-gs",       brand: "BMW", model: "F 900 GS (2024+)",      cc: "895cc",  category: "adventure",     adj: "full", adjusters: { fPre: true, fComp: true, fReb: true, rPre: true, rComp: false, rReb: true } },
+  // F 800 GS Adventure (2013-2018): pedida por um utilizador. A forquilha invertida de
+  // 43 mm não tem afinador nenhum — confirmado no manual, cuja secção de suspensão só
+  // fala da traseira. Atrás há precarga (roda de ajuste, por baixo do assento) e um
+  // único parafuso de amortecimento.
+  { id: "bmw-f800-gs-adv",   brand: "BMW", model: "F 800 GS Adventure (2013-2018)", cc: "798cc", category: "adventure", adj: "full", mfzProfileId: "bmw_f800gsa_2013", adjusters: { fPre: false, fComp: false, fReb: false, rPre: true, rComp: false, rReb: true } },
   // F 900 XR (2020+): a BMW lista a forquilha 43 mm SEM qualquer ajuste; atrás precarga
   // hidráulica + extensão. Dynamic ESA é opcional. bmwmotorcycles.com
   { id: "bmw-f900-xr",       brand: "BMW", model: "F 900 XR (2020+)",      cc: "895cc",  category: "sport_touring", adj: "full", adjusters: { fPre: false, fComp: false, fReb: false, rPre: true, rComp: false, rReb: true } },

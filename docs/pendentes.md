@@ -4176,3 +4176,52 @@ apanhar os nomes que a Apple gera.
 3. **Build e TestFlight.**
 4. **Ficha da app**: textos já escritos em seis línguas no `app-store-ficha.md`, capturas
    já feitas a 1320×2868, política de privacidade e suporte já no ar.
+
+---
+
+## BMW: o manual publica suspensão, ao contrário das pressões (8 ago 2026)
+
+Está escrito mais acima que as BMW ficam «tudo `na`, como a BMW com ESA». **Isso é
+verdade para as pressões de pneus e falso para a suspensão.**
+
+A BMW não publica pressões no manual — só o autocolante debaixo do assento, e isso
+mantém-se. Mas publica **regulações de suspensão por estado de carga**, no formato que
+o `weightPoints` usa. Verificado no manual da F 800 GS Adventure, secções «Spring
+preload» e «Damping»:
+
+| Estado | Precarga trás | Amortecimento trás |
+|---|---|---|
+| Um ocupante, sem carga | fim do curso anti-horário (0) | 1,5 voltas a abrir |
+| Um ocupante, com carga | 12 voltas | 1,5 voltas a abrir |
+| Dois ocupantes, com carga | até ao batente, **sem número** | 1 volta a abrir |
+
+A R 1200 GS LC já estava assim, com 0/15/30 voltas. Ou seja: o padrão existe e
+funciona para pelo menos duas BMW.
+
+**Vale a pena varrer as restantes sete BMW do catálogo por este ângulo.** As que têm
+Dynamic ESA continuam a ser `na` — aí a regulação é mesmo por ecrã — mas as de
+suspensão convencional devem ter tabela.
+
+### O buraco da F 800 GS Adventure
+
+Para «dois ocupantes com carga» a BMW manda rodar o manípulo até ao batente e **não diz
+quantas voltas**. O terceiro `weightPoint` ficou sem `rPre` de propósito: a interpolação
+fixa nas 12 voltas do ponto anterior, que é MENOS do que a BMW manda, e o `countNote`
+avisa disso por escrito.
+
+Fecha-se de duas maneiras: medindo o curso total do manípulo numa moto a sério, ou
+encontrando-o no manual de reparação (Reparaturanleitung), que costuma dá-lo. Enquanto
+não se fechar, quem anda a dois e carregado recebe menos precarga do que devia.
+
+### Pedidas por utilizador e ainda por fazer
+
+Vieram as quatro no mesmo pedido; só a F 800 GS Adventure ficou feita.
+
+- **BMW G 450 X (2008-2011)** — enduro, produção pequena, fora de linha
+- **BMW G 650 Xchallenge (2007-2009)** — idem
+- **Husaberg TE 300 (2013)** — obriga a criar uma 15.ª marca, e a Husaberg foi absorvida
+  pela Husqvarna em 2014. Sendo enduro de competição, é provável que o manual dê
+  regulações WP standard; a KTM e a Husaberg publicam-nas, ao contrário da BMW.
+
+Nenhuma é comum, mas todas foram pedidas por alguém — e uma moto rara que alguém quer
+vale mais do que uma comum que ninguém procura.

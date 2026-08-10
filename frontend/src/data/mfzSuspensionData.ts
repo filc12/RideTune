@@ -2172,6 +2172,45 @@ const BMW_EXTRA: MfzProfile[] = [
     countNote: 'Só há afinadores atrás. Precarga: roda de ajuste até ao batente no sentido LOW e conta voltas para HIGH — 0 voltas só com piloto, 15 com carga, 30 com passageiro e carga. Extensão: parafuso até ao batente no sentido horário e conta cliques no sentido anti-horário — 8 só com piloto, 2 com carga ou com passageiro. Começa o ajuste pelo lado esquerdo da moto. À frente não há nada a mexer: o Telelever não tem afinadores.',
     notes: '⚠️ Este perfil é da R 1200 GS (código 0A01). A GS Adventure é o 0A02, com amortecedor e curso diferentes — os valores não se transferem. ⚠️ Se a tua moto tem Dynamic ESA, o amortecimento e a precarga regulam-se pelo ecrã e não por estes valores. O manual da BMW não dá pesos, dá três estados de carga; os kg deste perfil são a forma como os traduzimos para a app, mas os números dos afinadores são os do manual. A precarga é contínua (voltas), não tem cliques. Confirmar sempre pelo sag.',
   },
+  {
+    id: 'bmw_f800gsa_2013',
+    brand: 'BMW', model: 'F 800 GS Adventure', year: '2013-2018',
+    baseKg: 85,
+    source: "Rider's Manual BMW F 800 GS Adventure, secções «Spring preload» e «Damping» (págs. 47 e 48 da numeração da BMW)",
+    formula: 'cfmoto_interp',
+    dataQuality: 'oem_manual',
+    front: {
+      // A forquilha invertida de 43 mm da F 800 GS e GSA não tem afinadores nenhuns.
+      // Confirmado pelo próprio manual: a secção da suspensão só fala da traseira.
+      preload: na('A forquilha não tem afinador de precarga'),
+      comp:    na('A forquilha não tem afinador de compressão'),
+      reb:     na('A forquilha não tem afinador de extensão'),
+    },
+    rear: {
+      preload: tu_s(0),
+      comp:    na('O amortecedor só tem um afinador de amortecimento'),
+      // A BMW chama-lhe apenas «damping» e há um único parafuso. Fica na extensão porque
+      // é o que este amortecedor regula; não inventámos um segundo afinador que não existe.
+      reb:     tu_h(1.5),
+    },
+    // Como na R 1200 GS LC: o manual dá TRÊS ESTADOS DE CARGA, não pesos. Os kg são a
+    // nossa leitura desses estados — os números dos afinadores é que são da BMW. Os
+    // quilos são os mesmos que se usaram na R 1200 GS LC de propósito, para que duas
+    // BMW com a mesma linguagem de manual não apareçam com pesos diferentes.
+    //
+    // O TERCEIRO PONTO NÃO TEM PRECARGA, E ISSO É DELIBERADO. Para «dois ocupantes com
+    // carga» a BMW não dá um número: manda rodar o manípulo até ao batente. Sem saber
+    // quantas voltas tem o curso, qualquer número seria inventado. Deixado por preencher,
+    // a interpolação devolve as 12 voltas do ponto anterior — que é menos do que a BMW
+    // manda, e por isso o `countNote` diz explicitamente para rodar até ao fim.
+    weightPoints: [
+      { kg: 85,  rPre: 0,  rReb: 1.5 },  // um ocupante, sem carga
+      { kg: 115, rPre: 12, rReb: 1.5 },  // um ocupante, com carga
+      { kg: 185,           rReb: 1 },    // dois ocupantes, com carga — precarga: ver acima
+    ],
+    countNote: 'Só há afinadores atrás, e chega-se a eles tirando o assento. Precarga: roda de ajuste no fim do curso no sentido anti-horário e conta voltas no sentido horário — 0 só com piloto, 12 com piloto e carga. Com passageiro E carga, a BMW manda rodar até ao batente no sentido horário e não dá número de voltas; a app mostra 12 porque é o último valor que o manual quantifica. Amortecimento: parafuso até ao batente no sentido horário e conta voltas para trás — 1,5 voltas sozinho ou com carga, 1 volta com passageiro e carga.',
+    notes: '⚠️ Precarga com passageiro e carga: o manual não dá voltas, manda apertar até ao fim. A app não inventa esse número — mostra as 12 voltas do estado anterior. Se andas a dois e carregado, aperta até ao batente. ⚠️ Se a tua moto tem ESA, a precarga e o amortecimento escolhem-se no comando e estes valores não se aplicam. À frente não há nada a mexer: a forquilha não tem afinadores, e é por isso que aparece tudo N/A. Os valores de amortecimento são os «basic settings» da BMW sem ESA. Como em todas as BMW, o manual dá estados de carga e não pesos; os quilos são a nossa tradução. Confirmar sempre pelo sag.',
+  },
   // ───────────────────────────────────────────
   // As três desportivas de 999 cc. Manuais do condutor oficiais, do portal
   // manuals.bmw-motorrad.com. Códigos de tipo: S 1000 RR = 0E21, S 1000 R = 0E51,
