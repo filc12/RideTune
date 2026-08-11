@@ -4465,3 +4465,45 @@ procurado nos sítios errados.
 ### Estado final das pressões
 
 **Zero motos sem pressões.** A regra do dono da app está cumprida em toda a base.
+
+### As nove BMW não se resolvem pelo manual: a BMW mudou de prática em 2019
+
+Abriram-se três manuais no servidor oficial, escolhidos para cobrir a gama: **R 1250 GS**
+(`R_0M01_RM_0321_01`), **R 1300 GS** (`R_0M21_RM_0223_01`) e **S 1000 RR**
+(`S_0E21_RM_0520_01`). Nos três, **procura por qualquer número seguido de «bar»: zero
+ocorrências.** Não é o corte da leitura — é que o número não está lá.
+
+O que está lá é isto, na vista geral do que há debaixo do banco da R 1250 GS:
+
+```
+1 Toolkit      2 Rider's manual      3 Tyre pressures table      4 Payload table
+```
+
+**A tabela de pressões é um autocolante debaixo do banco, e o manual limita-se a apontar
+para ele.** É exactamente a prática que este ficheiro já tinha descrito — só que estava
+descrita como se valesse para toda a BMW moderna.
+
+### A regra correta, agora com a fronteira no sítio certo
+
+- **Até à R 1200 GS LC (manual de 2013):** os valores vêm impressos no manual. Confirmado.
+- **De 2019 em diante (R 1250 GS, R 1300 GS, S 1000 RR e a geração toda):** o manual manda
+  ler a chapa. Confirmado em três modelos de classes diferentes.
+
+Ficam por abrir cinco — F 900 GS, F 900 XR, M 1000 RR, R 1250 RT, S 1000 R. **Não foram
+lidas**, e não se declara aqui que seguem o mesmo padrão; declara-se que são todas de 2019
+para cá e usam o mesmo molde de manual, portanto a expectativa é baixa. Se alguém quiser
+gastar as leituras, o método está aí.
+
+### O palpite de 2,5 / 2,9 ganhou duas provas, e continua a não estar provado
+
+As nove estão em `estimated_spec` com 2,5 / 2,9 assumido. Entretanto apareceram dois
+documentos BMW reais com exactamente esse par:
+
+1. **Manual da R 1200 GS LC** — 2,5 bar à frente, 2,9 atrás.
+2. **Chapa fotografada de uma F 800 R** (pneu 120/70 ZR17) — 2,5 / 2,9, e igual nas três
+   linhas de carga.
+
+Duas classes de moto muito diferentes, o mesmo par. **É a figura de casa da BMW.** Isso
+torna o palpite bastante mais sólido do que era — mas não prova nenhuma das nove em
+concreto, e por isso **ficam como estão, em `estimated_spec` e com «por confirmar»**. Só a
+chapa de cada moto fecha cada uma.
