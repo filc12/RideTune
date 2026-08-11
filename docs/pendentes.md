@@ -4274,3 +4274,53 @@ Ficou em `pos`, com a tabela escrita no rótulo. Funciona, mas não interpola: q
 
 Acrescentar um tipo `bar` toca nas fórmulas, no arredondamento e no ecrã. Por uma moto
 não compensa; se aparecer outra com suspensão pneumática, compensa.
+
+## 11 de agosto de 2026 — as pressões que faltavam: começou pela KTM 690 Enduro R
+
+Regra nova, do dono da app: **toda a moto tem de mostrar pressões**. Primeiro o manual;
+se não houver, fóruns e sítios de referência, com a app a assinalar que não são oficiais.
+
+Cinco motos estavam sem qualquer linha: `ktm-690-enduro-r`, `kove-450-rally-factory`,
+`kove-800x-e5`, `bmw-r1200gs-lc`, `bmw-f800-gs-adv`.
+
+### 690 Enduro R — saiu oficial, e com os três estados
+
+Manual do proprietário de 2021, secção **13.7 «Checking tire pressure»**:
+
+| | Frente | Trás |
+|---|---|---|
+| Fora de estrada, solo | 1,5 bar | 1,5 bar |
+| Estrada, solo | 1,8 bar | 1,8 bar |
+| Com passageiro / carga máxima | 2,2 bar | 2,2 bar |
+
+`oem_manual`, escrita no bundle e no Supabase. É das poucas fichas da app com valor de
+fora de estrada vindo do fabricante.
+
+**As medidas dos pneus ficaram vazias de propósito.** Aparecem no capítulo 21 do manual,
+que não foi lido. 90/90-21 e 140/80-18 é o que toda a gente diz da 690 Enduro R, mas
+«toda a gente diz» não é fonte. Preenche-se quando se abrir a página 120.
+
+### O que voltou a falhar, e o atalho que resolveu
+
+O PDF oficial (`19_3213909_en_OM.pdf`, art. 3213909en) foi buscado e **cortou outra vez
+aos ~102 000 caracteres**, antes do capítulo 13. É o mesmo limite já documentado acima.
+
+O que resolveu foi a **ManualsLib com a página exacta no URL** —
+`.../Ktm-690-Enduro-R-2021.html?page=83` — que devolve o texto daquela página e mais nada.
+Não é um blogue: é o manual da KTM alojado por terceiros, o mesmo caminho já usado para a
+F 800 GS Adventure.
+
+**Isto muda o método para os manuais grandes.** Em vez de puxar o PDF inteiro e torcer
+para o corte cair depois da secção, procura-se `<marca> <modelo> checking tire pressure
+manualslib`, tira-se o número da página do título do resultado e busca-se só essa página.
+Uma ida à rede, sem PDF em disco, sem pedir o ficheiro ao dono da app.
+
+### Continuam por resolver
+
+**`bmw-r1200gs-lc` e `bmw-f800-gs-adv`** — a BMW moderna não publica pressões no manual,
+já confirmado. Ficam pela **chapa debaixo do banco**, que é oficial e está na moto. Uma
+fotografia resolve as duas.
+
+**`kove-450-rally-factory` e `kove-800x-e5`** — manuais Kove por encontrar, e a Kove tem
+pouca presença documental em inglês. Provável que acabem em fonte de terceiros com a nota
+de não oficiais.
