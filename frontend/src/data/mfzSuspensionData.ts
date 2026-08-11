@@ -2211,6 +2211,52 @@ const BMW_EXTRA: MfzProfile[] = [
     countNote: 'Só há afinadores atrás, e chega-se a eles tirando o assento. Precarga: roda de ajuste no fim do curso no sentido anti-horário e conta voltas no sentido horário — 0 só com piloto, 12 com piloto e carga. Com passageiro E carga, a BMW manda rodar até ao batente no sentido horário e não dá número de voltas; a app mostra 12 porque é o último valor que o manual quantifica. Amortecimento: parafuso até ao batente no sentido horário e conta voltas para trás — 1,5 voltas sozinho ou com carga, 1 volta com passageiro e carga.',
     notes: '⚠️ Precarga com passageiro e carga: o manual não dá voltas, manda apertar até ao fim. A app não inventa esse número — mostra as 12 voltas do estado anterior. Se andas a dois e carregado, aperta até ao batente. ⚠️ Se a tua moto tem ESA, a precarga e o amortecimento escolhem-se no comando e estes valores não se aplicam. À frente não há nada a mexer: a forquilha não tem afinadores, e é por isso que aparece tudo N/A. Os valores de amortecimento são os «basic settings» da BMW sem ESA. Como em todas as BMW, o manual dá estados de carga e não pesos; os quilos são a nossa tradução. Confirmar sempre pelo sag.',
   },
+  {
+    id: 'bmw_g450x_2009',
+    brand: 'BMW', model: 'G 450 X', year: '2008-2011',
+    baseKg: 85,
+    source: "Owner's Manual BMW G 450 X (oficial), secções «Spring preload» e «Damping», págs. 35 a 40 da numeração BMW",
+    formula: 'suzuki',
+    dataQuality: 'oem_manual',
+    front: {
+      preload: na('O manual não indica afinador de precarga à frente'),
+      comp:    cl_h(10),
+      reb:     cl_h(12),
+    },
+    rear: {
+      // A BMW não conta a precarga: prescreve o sag e, para desvios grandes de peso,
+      // manda trocar a mola. É o mesmo padrão das três desportivas de 999 cc.
+      preload: pos('Regular pelo sag: 35-40 mm estático e 105-110 mm com piloto de 85 kg', '35-40 mm'),
+      comp:    cl_h(12),
+      reb:     cl_h(20),
+    },
+    countNote: 'Todos os amortecimentos se contam a partir do duro. À frente: parafuso de cima até ao batente no «+» e depois 12 cliques para «−» (extensão); parafuso de baixo até ao batente no sentido horário e depois 10 cliques ao contrário (compressão). Ambas as bengalas têm de ficar iguais. Atrás: manípulo de baixo todo à direita e depois 20 cliques atrás (extensão); manípulo de cima todo à direita e depois 12 cliques atrás (compressão). A precarga não tem cliques — regula-se pelos anéis até o sag ficar certo.',
+    notes: 'Enduro de competição com suspensão Öhlins atrás. O manual diz que a regulação de fábrica é para um piloto de 85 kg e que diferenças pequenas de peso se compensam na precarga — mas que para diferenças grandes é preciso MUDAR A MOLA, não apertar mais. Por isso este perfil não tem tabela por carga: a BMW não a dá, e acima de certo peso a resposta certa é outra mola, não outro número. Os valores de amortecimento são todos com depósito cheio e piloto de 85 kg. Confirmar sempre pelo sag: 35-40 mm estático e 105-110 mm com o piloto em cima.',
+  },
+  {
+    id: 'bmw_g650x_2007',
+    brand: 'BMW', model: 'G 650 Xchallenge', year: '2007-2009',
+    baseKg: 85,
+    source: "Rider's Manual BMW G 650 Xchallenge (código 0165, ed. 07/2007, oficial), págs. 34 a 40 da numeração BMW",
+    formula: 'suzuki',
+    dataQuality: 'oem_manual',
+    front: {
+      preload: na('O manual não indica afinador de precarga à frente'),
+      comp:    cl_h(11),
+      reb:     cl_h(11),
+    },
+    rear: {
+      // Não tem mola de aço: é o Air Damping System, uma câmara de ar. A "precarga"
+      // regula-se com uma bomba, em bar. O manual dá TRÊS valores com PESOS REAIS, o
+      // que é raro numa BMW — mas o modelo de dados da app não tem unidade `bar`, por
+      // isso fica em `pos` com a tabela no rótulo. Ver o pendentes.md.
+      preload: pos('Air Damping System, por peso total: 6 bar (piloto 65 kg), 6,7 bar (piloto 85 kg), 10,5 bar (dois ocupantes, 150 kg)', '6,7 bar'),
+      comp:    na('O Air Damping System tem um único comando de amortecimento'),
+      reb:     pos('Duas posições só: parafuso na horizontal = forte, na vertical = fraco', '2 posições'),
+    },
+    countNote: 'À frente conta-se a partir do duro: parafuso até ao batente no «+» e depois 11 cliques para «−», tanto na compressão como na extensão. Atrás não há cliques nenhuns. A precarga faz-se com a bomba pneumática que vive debaixo do assento, enchendo ou esvaziando o Air Damping System, e confirma-se pelo nível de bolha: a moto deve ficar horizontal com o piloto e a carga em cima. O amortecimento de trás tem duas posições apenas, e cada uma engata com um estalido audível.',
+    notes: '⚠️ Esta moto não tem mola de aço atrás. O Air Damping System é uma câmara de ar, e o que aqui se chama precarga é pressão em bar, regulada com a bomba de bordo. Enche-se sempre a frio: depois de andar fora de estrada o ar aquece, expande e a leitura sai errada. A BMW recomenda encher ligeiramente acima do necessário e depois sangrar já sentado em cima, até o indicador de inclinação ficar horizontal. Os 6,7 bar que a app mostra são o valor do manual para piloto de 85 kg com equipamento; para 65 kg são 6 bar e para dois ocupantes a 150 kg são 10,5 bar, mas isso exige o kit de passageiro de origem. Confirmar sempre pelo nível de bolha.',
+  },
   // ───────────────────────────────────────────
   // As três desportivas de 999 cc. Manuais do condutor oficiais, do portal
   // manuals.bmw-motorrad.com. Códigos de tipo: S 1000 RR = 0E21, S 1000 R = 0E51,

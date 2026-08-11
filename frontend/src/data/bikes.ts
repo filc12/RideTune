@@ -173,6 +173,14 @@ export const BIKES: Bike[] = [
   // F 900 GS (2024+): forquilha 43 mm precarga+comp+ext; atrás precarga hidráulica +
   // extensão (sem compressão). bmwmotorcycles.com
   { id: "bmw-f900-gs",       brand: "BMW", model: "F 900 GS (2024+)",      cc: "895cc",  category: "adventure",     adj: "full", adjusters: { fPre: true, fComp: true, fReb: true, rPre: true, rComp: false, rReb: true } },
+  // G 450 X (2008-2011) e G 650 Xchallenge (2007-2009): pedidas por um utilizador, ambas
+  // do manual oficial. À frente as duas têm compressão e extensão mas o manual não indica
+  // precarga. Atrás são mundos diferentes: a G 450 X tem Öhlins com mola, cliques de
+  // compressão e extensão e precarga por sag; a Xchallenge não tem mola nenhuma — é o Air
+  // Damping System, uma câmara de ar regulada em bar, com um único comando de
+  // amortecimento de duas posições.
+  { id: "bmw-g450x",         brand: "BMW", model: "G 450 X (2008-2011)",           cc: "449cc", category: "supermoto", adj: "full", mfzProfileId: "bmw_g450x_2009", adjusters: { fPre: false, fComp: true, fReb: true, rPre: true, rComp: true, rReb: true } },
+  { id: "bmw-g650x",         brand: "BMW", model: "G 650 Xchallenge (2007-2009)",  cc: "652cc", category: "supermoto", adj: "full", mfzProfileId: "bmw_g650x_2007", adjusters: { fPre: false, fComp: true, fReb: true, rPre: true, rComp: false, rReb: true } },
   // F 800 GS Adventure (2013-2018): pedida por um utilizador. A forquilha invertida de
   // 43 mm não tem afinador nenhum — confirmado no manual, cuja secção de suspensão só
   // fala da traseira. Atrás há precarga (roda de ajuste, por baixo do assento) e um

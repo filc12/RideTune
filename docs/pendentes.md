@@ -4225,3 +4225,52 @@ Vieram as quatro no mesmo pedido; só a F 800 GS Adventure ficou feita.
 
 Nenhuma é comum, mas todas foram pedidas por alguém — e uma moto rara que alguém quer
 vale mais do que uma comum que ninguém procura.
+
+---
+
+## Correcção: a BMW publica pressões — nos manuais antigos (8 ago 2026)
+
+Está escrito mais acima, em maiúsculas, que **«nenhuma BMW pode chegar a `oem_manual`
+por via do manual»** quanto a pressões. Isso foi concluído a partir de UM manual, o da
+R 1250 GS Adventure, e generalizado a nove motos. Estava errado.
+
+Os manuais da **G 450 X** e da **G 650 Xchallenge** publicam as pressões em texto, na
+tabela de dados técnicos:
+
+- **G 450 X** — 1,2 bar nas duas rodas, piloto sozinho, pneu frio. 1,0 bar para «sport
+  riding». Não há valor com carga: a moto não leva passageiro.
+- **G 650 Xchallenge** — frente 1,8 solo e 1,9 com passageiro ou carga; trás 2,0 e 2,2.
+
+A leitura correcta não é «a BMW publica» nem «a BMW não publica», é: **os manuais
+modernos remetem para o autocolante debaixo do assento; os de 2007-2009 traziam os
+valores impressos.** Vale a pena reabrir os manuais das BMW mais antigas do catálogo
+antes de as dar como impossíveis.
+
+**A lição de método, que é a parte que interessa:** um manual não é uma marca. A
+conclusão anterior tinha uma amostra de um e foi aplicada a nove.
+
+### As duas motos, ambas do manual
+
+Suspensão e pressões, tudo `oem_manual`. À frente as duas têm compressão e extensão em
+cliques a contar do duro, e o manual não indica precarga.
+
+**G 450 X** — Öhlins atrás. Precarga não se conta: regula-se pelo sag (35-40 mm estático,
+105-110 mm com piloto de 85 kg), e o manual diz que para desvios grandes de peso se
+**muda a mola**, não se aperta mais. Por isso o perfil não tem tabela por carga.
+
+**G 650 Xchallenge** — não tem mola atrás. É o Air Damping System, uma câmara de ar
+regulada com bomba, e o manual dá **três valores com pesos reais**: 6 bar para piloto de
+65 kg, 6,7 bar para 85 kg, 10,5 bar para dois ocupantes a 150 kg. O amortecimento
+traseiro tem duas posições apenas.
+
+### Falta uma unidade `bar` no modelo de dados
+
+A tabela do Air Damping System é dos melhores dados de carga que a app tem — pesos reais
+e valores reais — e **não cabe no modelo**. Os `SuspVal` são cliques, voltas, milímetros,
+posição ou N/A. Não há `bar`.
+
+Ficou em `pos`, com a tabela escrita no rótulo. Funciona, mas não interpola: quem pesar
+75 kg não recebe nada entre os 6 e os 6,7 bar.
+
+Acrescentar um tipo `bar` toca nas fórmulas, no arredondamento e no ecrã. Por uma moto
+não compensa; se aparecer outra com suspensão pneumática, compensa.
