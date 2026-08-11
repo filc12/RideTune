@@ -70,7 +70,29 @@ function fonteLegivel(
   t: (k: never) => string,
 ): string {
   if (!source) return "";
-  if (lang === "pt") return source;            // em português mostra-se tudo, como sempre
+
+  /**
+   * O aviso de «por confirmar» aplica-se a TODAS as línguas.
+   *
+   * Até 11 de agosto de 2026 não era assim. O `return source` do português vinha antes
+   * desta verificação, por isso quem tinha a app em português — o maior grupo de
+   * utilizadores — via a fonte em bruto e nunca via a ressalva. Ficava a ler um número
+   * de pressão com ar de facto, quando não estava confirmado em manual nenhum.
+   *
+   * Pressão de pneus é o único dado desta app onde estar errado magoa alguém: a menos
+   * gera calor, e calor rebenta carcaças a velocidade de auto-estrada. A ressalva é
+   * parte do dado, não um enfeite para estrangeiros.
+   */
+  const naoConfirmado = dataQuality !== "oem_manual";
+  const aviso = naoConfirmado ? t("pneus.src.unconfirmed" as never) : "";
+  const avisoUtil = aviso && !aviso.startsWith("pneus.") ? aviso : "";
+
+  if (lang === "pt") {
+    // Em português mostra-se a fonte inteira, como sempre — mas com o aviso colado,
+    // e sem o repetir quando o próprio texto da fonte já o diz.
+    if (!avisoUtil || /por confirmar/i.test(source)) return source;
+    return `${source} — ${avisoUtil}`;
+  }
 
   const cabeca = source.split("—")[0].trim();
   let texto = cabeca;
@@ -89,10 +111,7 @@ function fonteLegivel(
   // «pág. 2-11 e 2-38» → o «e» é a única palavra que sobra entre números
   texto = texto.replace(/(\d)\s+e\s+(\d)/g, "$1, $2");
 
-  if (dataQuality !== "oem_manual") {
-    const aviso = t("pneus.src.unconfirmed" as never);
-    if (aviso && !aviso.startsWith("pneus.")) texto += ` — ${aviso}`;
-  }
+  if (avisoUtil) texto += ` — ${avisoUtil}`;
   return texto;
 }
 
