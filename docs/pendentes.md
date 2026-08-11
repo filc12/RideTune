@@ -4371,3 +4371,49 @@ A tabela tem R1200GS, mas na secção **Hex-Head**, que acaba em 2012. A app tem
 outra seria repetir o erro da regra das pressões BMW.
 
 Fica à espera de fonte da geração certa ou de fotografia da chapa da moto.
+
+### As duas Kove: uma saiu por manual, a outra teve de ser interpretada
+
+**Kove 800X — `oem_manual`, e sem drama.** Manual do proprietário **KY800X**, secção
+«Checking tire pressure»: **2,3 bar (33 psi) à frente, 2,5 bar (36 psi) atrás**, a solo.
+Pneus 90/90-21 e 150/70-R18. O manual não dá valores com passageiro nem para fora de
+estrada, portanto esses campos ficam vazios. Nota útil: **as jantes são para pneu sem
+câmara e o manual proíbe montar câmara.**
+
+**Kove 450 Rally — o manual dá números, mas não para a nossa versão.** Manual de manutenção
+(276 páginas), pág. 61:
+
+| Edição **Regular** | Frente | Trás |
+|---|---|---|
+| Pneu sem câmara | 200 kPa = 2,0 bar | 200 kPa = 2,0 bar |
+| Pneu com câmara | 100 kPa = 1,0 bar | 100 kPa = 1,0 bar |
+
+Duas armadilhas nisto:
+
+1. **A app tem a edição Factory, e o manual só publica a Regular.** Não é distração a ler —
+   o manual separa as duas edições noutros sítios, tem calendários de manutenção distintos
+   nas páginas 34 e 35. Na secção dos pneus escreve «Regular edition» duas vezes e não diz
+   nada da Factory.
+2. **A diferença de 2,0 para 1,0 bar é o dobro, e não é estrada contra terra — é o tipo de
+   pneu.** Sem câmara leva 2,0, com câmara leva 1,0.
+
+**Decisão, tomada com o dono da app:** os 2,0 ficam como estrada e os 1,0 como fora de
+estrada, em `estimated_spec`, com o raciocínio inteiro no `source`. É a leitura que dá ao
+piloto os dois números certos em campos que ele percebe — mas **a separação por piso é
+nossa, não do manual**, e isso tem de continuar escrito.
+
+### O manual do proprietário e o manual de manutenção não trazem a mesma coisa
+
+Na Kove 450 Rally o **manual do proprietário** (92 páginas) descreve como verificar a
+pressão e **não dá um único número**. Quem dá é o **manual de manutenção** (276 páginas),
+na pág. 61. Foram lidos os dois.
+
+**Quando o manual do proprietário falha, procurar o de manutenção antes de desistir.** É o
+oposto do hábito, que é ir sempre ao do proprietário e parar aí.
+
+### Custo de uma página errada
+
+Para chegar à pág. 61 gastou-se antes uma leitura da pág. 143, escolhida por ter no título
+«Maintenance Information» — que era do sistema de arrefecimento. **O índice lateral da
+ManualsLib traz o título de cada página; ler o índice antes custa uma linha e poupa uma ida
+inteira à rede.**
