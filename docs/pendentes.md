@@ -4417,3 +4417,51 @@ Para chegar à pág. 61 gastou-se antes uma leitura da pág. 143, escolhida por 
 «Maintenance Information» — que era do sistema de arrefecimento. **O índice lateral da
 ManualsLib traz o título de cada página; ler o índice antes custa uma linha e poupa uma ida
 inteira à rede.**
+
+### A BMW publica os manuais no site dela, e isso derruba uma crença deste projeto
+
+Sem fotografia da chapa, procurou-se de novo — e apareceu **`manuals.bmw-motorrad.com`**,
+o servidor de manuais da própria BMW Motorrad. Não é um espelho nem um revendedor: é a
+fonte.
+
+O manual da R 1200 GS LC é o **`R_0A11_RM_0213_R1200GS_07.pdf`**. Secção «Checking tire
+pressure»:
+
+| | Frio |
+|---|---|
+| Frente | **2,5 bar** (36,3 psi) |
+| Trás | **2,9 bar** (42,1 psi) |
+
+**Um único par, sem distinguir solo de dois ocupantes** — a BMW simplificou para o pior
+caso. Encaixa no modelo com `frontLoadedBar` e `rearLoadedBar` a `null`, que já significa
+«igual ao solo».
+
+**Confirmou-se que é mesmo a LC e não a Hex-Head.** O manual tem indicador de nível de
+refrigerante, depósito de refrigerante e indicação de temperatura do líquido — nada disso
+existe na R 1200 GS arrefecida a ar e óleo. A data no nome do ficheiro, 0213, é o mês de
+lançamento da LC.
+
+**Fora de estrada: a BMW avisa mas não dá número.** Diz que uma pressão reduzida para fora
+de estrada piora o comportamento em asfalto e manda repor a correta. Nunca escreve quanto.
+Isto confirma, agora com o manual à frente, o que já se suspeitava.
+
+### Nove BMW ficaram a 2,5 / 2,9 «por confirmar», e agora dá para confirmar
+
+A descoberta do servidor da BMW abre a porta a estas, todas com o mesmo par assumido e a
+mesma frase de fonte:
+
+`bmw-1250-gs`, `bmw-f900-gs`, `bmw-f900-xr`, `bmw-m1000rr`, `bmw-r1250-rt`,
+`bmw-r1300-gs`, `bmw-r1300-gs-adv`, `bmw-s1000r`, `bmw-s1000rr`.
+
+A LC ter saído exatamente 2,5 / 2,9 é bom sinal para a suposição, mas **não a prova para as
+outras nove** — prova só que o palpite acertou uma vez. São nove manuais a abrir no site da
+BMW, e o método já está afinado: buscar o PDF e procurar `psi` com contexto, que a secção
+aparece sempre com o valor em psi ao lado do bar.
+
+**Correção a uma nota antiga deste ficheiro.** Ficou escrito que a BMW moderna não publica
+pressões no manual. **É falso.** Publica, no servidor dela. O que aconteceu foi ter-se
+procurado nos sítios errados.
+
+### Estado final das pressões
+
+**Zero motos sem pressões.** A regra do dono da app está cumprida em toda a base.
