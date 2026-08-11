@@ -4324,3 +4324,50 @@ fotografia resolve as duas.
 **`kove-450-rally-factory` e `kove-800x-e5`** — manuais Kove por encontrar, e a Kove tem
 pouca presença documental em inglês. Provável que acabem em fonte de terceiros com a nota
 de não oficiais.
+
+### A tabela da A&S Powersports, e como se validou uma fonte de terceiros
+
+Chegou por fotografia uma tabela de pressões BMW de um concessionário americano, a **A&S
+Powersports**. Fonte de terceiros — mas passou um teste que vale a pena registar, porque é
+o método a repetir com qualquer tabela destas.
+
+**Validou-se contra os manuais que a app já tem.** A tabela inclui a G450X e a
+G650X-Challenge, cujos valores oficiais foram lidos dos manuais no dia anterior:
+
+| | Tabela (psi) | Manual (bar → psi) |
+|---|---|---|
+| G450X solo | 17 / 17 | 1,2 / 1,2 → 17,4 / 17,4 |
+| G650X solo | 26 / 29 | 1,8 / 2,0 → 26,1 / 29,0 |
+| G650X a dois | 28 / 32 | 1,9 / 2,2 → 27,6 / 31,9 |
+
+Seis valores, seis acertos ao psi. Não é um sítio a copiar de outro: é conversão fiel dos
+manuais. **Uma tabela de terceiros que contenha motos já confirmadas pode ser auditada
+assim** — e é melhor evidência do que a regra dos dois sítios independentes, que só prova
+que duas pessoas leram a mesma coisa.
+
+**Aviso sobre ler fotografias tortas.** A primeira imagem chegou desfocada e leram-se mal
+dois valores: 28/30 em vez de 28/32 na G650X, e 32/36 e 32/42 em vez de 32/35 e 35/40 na
+F800GS. Com os valores errados a tabela parecia ter uma discrepância de 2 psi que não
+existia. **Pedir sempre a versão legível antes de concluir seja o que for.**
+
+### F 800 GS Adventure — resolvida por analogia, e a analogia está na própria tabela
+
+A tabela não tem a Adventure, só a **F800GS**: 32/35 psi a solo, 35/40 a dois — ou seja
+**2,2 / 2,4 bar** a solo e **2,4 / 2,8** a dois.
+
+A objeção óbvia é que a Adventure pesa mais 20 kg e leva depósito de 24 litros, logo podia
+levar mais atrás. **A tabela responde sozinha:** a R1200GS e a R1200GS Adventure têm
+valores idênticos, e a R1150GS e a R1150GS Adventure também. Em dois pares de modelos
+independentes a BMW não distingue a versão Adventure. Somando que a F800GS e a GSA
+partilham rodas e pneus, a transferência é defensável.
+
+Ficou `estimated_spec`, com o raciocínio inteiro escrito no `source`. Não é oficial e a app
+di-lo.
+
+### R 1200 GS LC continua sem dados, e a tabela não serve
+
+A tabela tem R1200GS, mas na secção **Hex-Head**, que acaba em 2012. A app tem a **LC**, de
+2013 em diante — outra geração, outro motor, outra suspensão. Passar valores de uma para a
+outra seria repetir o erro da regra das pressões BMW.
+
+Fica à espera de fonte da geração certa ou de fotografia da chapa da moto.
