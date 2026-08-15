@@ -4507,3 +4507,47 @@ Duas classes de moto muito diferentes, o mesmo par. **É a figura de casa da BMW
 torna o palpite bastante mais sólido do que era — mas não prova nenhuma das nove em
 concreto, e por isso **ficam como estão, em `estimated_spec` e com «por confirmar»**. Só a
 chapa de cada moto fecha cada uma.
+
+## 15 de agosto de 2026 — o paywall estava a anunciar um produto que não existe
+
+Dois sintomas que pareciam separados e eram o mesmo estrago, os dois introduzidos a 8 de
+agosto por mim.
+
+**iOS: o paywall mostrava US$ 12,99**, com o produto na App Store a 14,99 €. Apareceu no
+vídeo gravado para a revisão da Apple — ou seja, ia seguir para lá um preço que não existe
+no App Store Connect.
+
+Não havia preço fixo no código; procurou-se. O valor vinha do `priceString` de **um pacote
+da Test Store**. O produto da App Store ainda não é resolúvel porque a app nunca foi
+aprovada, o SDK deitou-o fora, e o `?? pacotes[0]` que eu tinha escrito como rede de
+segurança serviu o primeiro que sobrou. A rede fazia o contrário do que o comentário dela
+prometia: em vez de proteger, anunciava e teria cobrado o produto errado.
+
+Removida. Sem produto certo, não há preço e a compra devolve `unavailable`. **Mais vale não
+vender nada do que vender outra coisa.** Foi seguro removê-la porque o identificador é mesmo
+igual nas duas lojas — confirmado na coluna `Sku Id` das quatro vendas reais de julho na
+Google Play, e não por leitura de documentação.
+
+**Android: o preço desapareceu de vez.** Causa diferente, mesma data. A 8 de agosto passou a
+exigir-se o prefixo `goog_` na chave. As chaves estão corretas no `eas.json` e vão nas
+builds do EAS — mas **o `eas update` corrido a partir do portátil não lê o `eas.json`, lê os
+ficheiros `.env` locais**. E o `.env.local` só tinha a chave de iOS, acrescentada nesse
+mesmo dia. Todos os OTA desde então foram para os telemóveis com a chave de Android vazia,
+por cima de uma build da Play Store que estava boa.
+
+Confirmação: `eas update:list` mostra o último update a 8 de agosto, e o `.env.local` tinha
+uma única chave.
+
+Chave de Android acrescentada ao `.env.local`, e a armadilha escrita no `.env.example`, que
+esse está no git e é onde alguém vai olhar.
+
+### Consequência incómoda para o vídeo da Apple
+
+Com a rede removida, é provável que o paywall no TestFlight passe a **não mostrar preço
+nenhum** até a app ser aprovada, porque é a aprovação que torna o produto resolúvel.
+Troca-se um preço errado por preço nenhum.
+
+É o certo para quem usa a app, e é discutível para a revisão, que quer ver título e preço.
+Mas anunciar 12,99 dólares com 14,99 euros no App Store Connect é uma discrepância que eles
+podem apanhar — e essa conversa acaba pior do que «o preço ainda não carrega em sandbox».
+Se não aparecer preço na regravação, isso explica-se por escrito na resposta.
