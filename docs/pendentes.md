@@ -4600,3 +4600,39 @@ loja, que é o que o `restorePurchases()` usa.
 A app da App Store está registada na RevenueCat como **«RiideTune»**, com dois ii. É nome
 interno, não chega ao utilizador, mas convém corrigir antes que alguém o copie para sítio
 visível.
+
+### Offering limpa — 15 de agosto de 2026
+
+Feito no painel, com autorização explícita do dono da app e com o estado mostrado antes de
+gravar. Confirmação da RevenueCat: *«Offering "The standard set of packages (default)" was
+updated.»*
+
+**Antes:** três pacotes.
+
+| Pacote | Test Store | Android | iOS |
+|---|---|---|---|
+| `$rc_monthly` | Monthly | — | — |
+| `$rc_annual` | Yearly | — | — |
+| `$rc_lifetime` | Lifetime | `ridetune_premium_lifetime` | RideTune Premium Lifetime |
+
+**Depois:** um pacote.
+
+| Pacote | Test Store | Android | iOS |
+|---|---|---|---|
+| `$rc_lifetime` | — | `ridetune_premium_lifetime` | RideTune Premium Lifetime |
+
+Os dois pacotes apagados só tinham produtos da Test Store, com Android e iOS a «No product»
+— não serviam ninguém. O `lifetime` da Test Store saiu do pacote vitalício, que é de onde
+vinham os US$ 12,99.
+
+**Nota de método, para quem vier a mexer nisto pelo browser.** Os cliques por coordenadas
+falharam duas vezes e uma delas abriu o dropdown do **Android** em vez do da Test Store —
+a um clique de distância de tirar o produto à loja que está mesmo a vender. O que funcionou
+foi localizar o elemento pela descrição e clicar pela referência, e escolher a opção **com
+o teclado** em vez do rato. Em painéis de faturação, coordenadas não servem.
+
+### O que fica por fazer aqui
+
+O produto `lifetime` da Test Store **continua ligado ao entitlement `premium`**. Já não está
+em nenhuma offering, portanto a app não lhe chega — mas a ligação existe e devia sair. Não
+foi tocada porque a autorização era só para a offering.
