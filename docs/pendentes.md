@@ -4551,3 +4551,52 @@ Troca-se um preço errado por preço nenhum.
 Mas anunciar 12,99 dólares com 14,99 euros no App Store Connect é uma discrepância que eles
 podem apanhar — e essa conversa acaba pior do que «o preço ainda não carrega em sandbox».
 Se não aparecer preço na regravação, isso explica-se por escrito na resposta.
+
+### O painel da RevenueCat confirmou tudo, e mostrou o que falta limpar
+
+Projeto `1e67f8b5`, com **três apps** no catálogo:
+
+| App | Produto | Estado | Criado |
+|---|---|---|---|
+| **RideTune** (Play) | `ridetune_premium_lifetime` | **Published** | 5/7/2026 |
+| **RiideTune** (App Store) | `ridetune_premium_lifetime` | **In Review** | 8/8/2026 |
+| **Test Store** | `lifetime`, `yearly`, `monthly` | — | 26/6/2026 |
+
+**O produto da App Store está «In Review».** É por isso que não é resolúvel e o SDK o deita
+fora — exactamente como o comentário no `purchases.ts` supunha, agora verificado.
+
+**A offering `default` tem três pacotes**, e é aqui que estava o estrago:
+
+- `$rc_monthly` → produto `monthly` (Test Store)
+- `$rc_annual` → produto `yearly` (Test Store)
+- `$rc_lifetime` → produto `lifetime` (Test Store) **e** `ridetune_premium_lifetime`
+
+O pacote vitalício tem **os dois** produtos. No iPhone, sem o da App Store resolúvel, sobrou
+o `lifetime` da Test Store — que tem identificador `lifetime`, não bate com o `PRODUCT_ID`,
+e era servido pela rede `?? [0]`. Daí os **US$ 12,99**.
+
+**Nota preocupante:** o `lifetime` da Test Store tem **2 entitlements** ligados. Ou seja, um
+produto de teste dá acesso premium.
+
+### Limpeza a fazer no painel, quando houver mão
+
+1. Apagar os pacotes **Monthly** e **Yearly** da offering `default` — só têm produtos de teste.
+2. No pacote **Lifetime**, retirar o produto `lifetime` da Test Store, deixando só o
+   `ridetune_premium_lifetime`.
+3. Desligar o `lifetime` do entitlement `premium`.
+
+Não foi feito aqui de propósito: mexer numa offering ao vivo, com quatro clientes pagantes
+e a app da Play a vender, é alteração que se faz com o dono à frente e não de repente.
+
+### Vendas reais confirmadas
+
+Quatro compras, todas Play Store, todas `ridetune_premium_lifetime`, sem expiração, entre
+$13,74 e $17,52. **Zero na App Store**, coerente com o iOS nunca ter estado vivo. Todos os
+`App User ID` são anónimos, porque a app não tem contas — a recuperação depende da conta da
+loja, que é o que o `restorePurchases()` usa.
+
+### Pormenor de higiene
+
+A app da App Store está registada na RevenueCat como **«RiideTune»**, com dois ii. É nome
+interno, não chega ao utilizador, mas convém corrigir antes que alguém o copie para sítio
+visível.
