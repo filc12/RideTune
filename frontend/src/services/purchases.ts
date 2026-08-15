@@ -36,15 +36,31 @@ export const PRODUCT_ID = "ridetune_premium_lifetime";
  * errado, e é o pior sítio possível para descobrir um bug. Procurar pelo identificador do
  * produto custa uma linha e não depende de ordem nenhuma.
  *
- * O `?? [0]` fica como rede: se um dia o identificador mudar de um lado e não do outro, a
- * app continua a vender alguma coisa em vez de dizer "unavailable" a toda a gente.
+ * PORQUE É QUE NÃO HÁ REDE `?? [0]`. Houve, entre 8 e 15 de agosto de 2026, escrita com a
+ * intenção de a app "continuar a vender alguma coisa em vez de dizer unavailable a toda a
+ * gente". Fazia o contrário do que pretendia.
+ *
+ * Em 15 de agosto o paywall no TestFlight mostrou **US$ 12,99**, quando o produto na App
+ * Store está a 14,99 €. O preço não estava fixo em lado nenhum do código: vinha do
+ * `priceString` de um pacote da Test Store. O produto da App Store ainda não é resolúvel
+ * porque a app nunca foi aprovada, o SDK deitou-o fora, e a rede serviu o primeiro pacote
+ * que sobrou. A app anunciava um preço que não existe — e teria tentado cobrar o produto
+ * errado a quem tocasse. Isto ia dentro do vídeo que seguia para a revisão da Apple.
+ *
+ * Sem rede, quando o produto certo falta o preço não aparece e a compra devolve
+ * "unavailable". É o comportamento honesto: mais vale não vender nada do que vender outra
+ * coisa.
+ *
+ * Tirar a rede é seguro porque o identificador é mesmo igual nas duas lojas — confirmado no
+ * relatório de vendas de julho de 2026, onde a coluna `Sku Id` das quatro vendas reais na
+ * Google Play diz `ridetune_premium_lifetime`, e não por leitura de documentação.
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function pacoteVitalicio(offerings: any): any {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const pacotes: any[] | undefined = offerings?.current?.availablePackages;
   if (!pacotes?.length) return null;
-  return pacotes.find(p => p?.product?.identifier === PRODUCT_ID) ?? pacotes[0];
+  return pacotes.find(p => p?.product?.identifier === PRODUCT_ID) ?? null;
 }
 
 /**
