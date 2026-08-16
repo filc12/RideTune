@@ -1,0 +1,28 @@
+RideTune gives riders the factory suspension settings and tyre pressures for their bike, adjusted for their real weight and load. Answers follow your numbering.
+
+2. DEVICES TESTED
+iPhone 17 Pro Max, iOS 26.6.1 (physical device) - full manual pass through every screen, including the purchase sheet. iPhone 17 Pro simulator, iOS 26, in development. The attached recording was captured on the iPhone 17 Pro Max.
+
+3. WHAT IT DOES AND WHO IT IS FOR
+Manufacturers publish these settings for a single reference case: one rider of an assumed weight, no luggage, no passenger. Most riders do not match it. The rider picks their motorcycle, enters their weight in full riding gear and what they carry, and the app returns the adjuster positions and tyre pressures for that real situation, expressed the way the bike's adjusters are marked: clicks, turns, millimetres or scale positions. It is for owners of adventure, touring, sport and off-road motorcycles setting up their own bike without a workshop visit. All data comes from manufacturer owner's manuals; every motorcycle carries the source of its numbers, and values not confirmed against a manual are labelled as unconfirmed in the app.
+
+4. SETUP AND MAIN FEATURES
+No account, login or credentials needed; fully usable from first launch. Launch the app (a short onboarding appears once), tap "Choose bike" and pick any motorcycle, then enter rider weight including gear - the suspension values recalculate immediately. "Tyre Pressure" shows pressures for that bike and load, "Sag guide" walks through measuring sag, and "How it works" explains each adjuster.
+
+5. EXTERNAL SERVICES
+Supabase: motorcycle database and community setups API. RevenueCat: purchase entitlement; payment is handled entirely by Apple. Sentry: crash reporting. PostHog: anonymous analytics. Expo/EAS: build tooling and over-the-air updates. No AI services, no third-party authentication, no payment processor other than Apple.
+
+6. REGIONAL DIFFERENCES
+None. Identical behaviour in every region; every motorcycle available everywhere. Localised into English, Portuguese, Spanish, French, German and Italian, following the device setting. Units switch between metric and imperial by user choice.
+
+7. REGULATED INDUSTRY / THIRD-PARTY MATERIAL
+Not a regulated industry. The app publishes factory specification values from publicly available owner's manuals, citing the source document for each motorcycle. No manual text, images, diagrams, logos or trademarks are reproduced. It is not affiliated with or endorsed by any manufacturer; manufacturer names appear only to identify which motorcycle the values belong to.
+
+8. IN-APP PURCHASE
+One product: RideTune Premium, identifier ridetune_premium_lifetime. Non-consumable, one-time purchase granting lifetime access. Not a subscription, does not auto-renew. Without it the app is fully functional for one motorcycle and a solo rider: suspension settings, tyre pressures, sag guide and explanations are free. Premium unlocks multiple motorcycles, passenger and luggage load modes, saved setups, diagnostics, unlimited diary entries and manual language selection. To reach it: add a second motorcycle; or switch load mode to Passenger or Luggage; or try to save a setup; or tap the locked card in Diagnostics. Each opens the purchase sheet showing the title, the one-time price and the restore option.
+
+USER-GENERATED CONTENT
+Riders can optionally share their own setup with a short note. There are no accounts or profiles; the only identifier is an anonymous device ID stored locally, with no personal data attached. Every submission is held for moderation until approved, and is checked against manufacturer values and rate-limited. Community setups are not shown inside the app: it links out to ridetune.app/setups. Removal can be requested at support@ridetune.app.
+
+PERMISSIONS
+No sensitive permissions are requested: no prompts for location, camera, microphone, contacts, photos, notifications or App Tracking Transparency.
