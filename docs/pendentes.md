@@ -4704,3 +4704,44 @@ A versão 1.1.5 aparece agora como **«Rejeitada»**, motivo *2.1.0 Performance:
 Completeness* — é a forma como o App Store Connect regista a carta de «Information Needed».
 Não é problema novo. Mas implica que, depois de responder, é preciso **voltar a submeter**,
 e não apenas responder e esperar.
+
+### Conformidade europeia: havia uma segunda obrigação que ninguém tinha visto
+
+Ao ir confirmar o estado do **DSA** apareceu, na mesma página (Negócios → Acordos), uma
+segunda linha em Conformidade:
+
+| Regulamento | Estado antes | Estado depois |
+|---|---|---|
+| Regulamento Serviços Digitais (DSA) | Em revisão | Em revisão — está do lado da Apple |
+| **Diretiva Cooperação Administrativa 7.ª (DAC7)** | **Informação em falta** | **Ativas** (16/08/2026) |
+
+**A DAC7 não estava em revisão — estava por preencher.** É a diretiva que obriga as
+plataformas a recolher e reportar dados dos vendedores às autoridades fiscais europeias.
+Quem não a preenche acaba com **pagamentos retidos** e, no limite, sem poder vender na UE.
+Não houve email nem aviso: só aparece nesta página, por baixo do DSA.
+
+O formulário é uma pergunta: *«Alguma das apps presta serviços pessoais em algum país ou
+região?»* Resposta **Não**. Na DAC7 «serviços pessoais» são trabalhos prestados por uma
+pessoa a pedido de um utilizador, medidos em tempo ou tarefa — explicações, consultoria,
+boleias, freelancing. As quatro atividades abrangidas são arrendamento de imóveis, serviços
+pessoais, venda de bens e aluguer de meios de transporte. **Vender uma licença de software
+não é nenhuma delas.**
+
+**Lição:** quando se for confirmar um estado numa página de administração, ler a página
+inteira e não só a linha que se foi procurar. O DSA estava bem; ao lado dele estava o que
+não estava.
+
+### A verificar: moeda de pagamento
+
+Uma única conta bancária registada, e a atribuição é esta:
+
+| Conta | País | Moeda bancária | Moedas de royalties |
+|---|---|---|---|
+| Banco Santander Totta (3020) | Portugal | **EUR** | **USD** |
+
+Conta em euros a receber royalties em dólares. Se for mesmo assim que está a funcionar,
+cada pagamento leva uma conversão feita pelo banco, e os bancos cobram bem por isso — numa
+app que vende sobretudo na Europa, é dinheiro a sair sem razão.
+
+**Não foi alterado.** Mexer em contas e moedas de pagamento é decisão do dono, e convém
+perceber primeiro que moedas a Apple deixa atribuir a uma conta portuguesa.
