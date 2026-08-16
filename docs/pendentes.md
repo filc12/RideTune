@@ -4745,3 +4745,36 @@ app que vende sobretudo na Europa, é dinheiro a sair sem razão.
 
 **Não foi alterado.** Mexer em contas e moedas de pagamento é decisão do dono, e convém
 perceber primeiro que moedas a Apple deixa atribuir a uma conta portuguesa.
+
+### O produto da Test Store: verificado, inofensivo — e ilibado do preço em dólares
+
+Antes de o destacar da entitlement `premium`, a RevenueCat avisa: *«Production purchases use
+this entitlement — detaching could revoke customer access to paid features»*, e obriga a
+escrever «premium» para confirmar. O aviso é **genérico**: dispara sempre que a entitlement
+tem compras de produção, seja qual for o produto que se está a destacar.
+
+**Verificação feita na página do produto `lifetime` (Test Store):**
+
+- **Recent Transactions: «No transactions yet»** — ninguém o comprou, nem em sandbox.
+  Destacá-lo não revoga acesso a ninguém.
+- **Preço base: USD 99,99.**
+
+Esse segundo dado **fecha de vez a discussão dos US$ 12,99**. O produto da Test Store custa
+99,99 — nunca poderia ter mostrado 12,99 no paywall. Logo aquele preço foi **sempre** o
+produto real da App Store, cotado para a loja americana, exactamente como o calendário de
+preços do App Store Connect indica.
+
+**Correção ao registo:** o diagnóstico inicial, que atribuía os dólares à Test Store, estava
+errado, e a limpeza da offering não mudou o preço porque não era daí que ele vinha. A
+remoção do `?? pacotes[0]` continua a ser uma boa defesa — impede a app de vender um produto
+que não é o seu — mas não foi ela que corrigiu coisa nenhuma.
+
+**Estado:** o produto continua ligado à entitlement. Fica por destacar, à mão, quando
+apetecer. Não é urgente: já não está em nenhuma offering, ninguém lhe chega, e ninguém o
+comprou.
+
+### Também por arrumar
+
+Existe uma segunda entitlement, **`RiideTune Pro`** (`entl8c4d346e01`), com 3 produtos, do
+modelo original de 26 de junho. **A app não a usa** — o código refere só `premium`. Candidata
+a apagar, depois de confirmar que nenhum cliente a tem ativa.
