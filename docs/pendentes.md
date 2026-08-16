@@ -4665,3 +4665,42 @@ estava à vista no primeiro fotograma e refutava a segunda teoria sozinha.
 Fechar a app por completo e abrir **duas vezes**. Em Definições, a linha da versão no fundo
 deve passar a mostrar `ota` com data. Aí o paywall lê a offering nova, e o preço em dólares
 tem de desaparecer.
+
+### Os US$ 12,99 estão certos — resolvido no App Store Connect
+
+Fim do assunto, com o calendário de preços do produto à frente. País base **Portugal (EUR)**,
+ajuste automático para 175 países:
+
+| País | Preço | Receita |
+|---|---|---|
+| Portugal (EUR) | **14,99 €** | 10,36 € |
+| Espanha (EUR) | 14,99 € | 10,51 € |
+| **Estados Unidos (USD)** | **12,99 $** | 11,04 $ |
+| Brasil (BRL) | 79,90 R$ | 59,34 R$ |
+
+**Os 12,99 dólares são o preço oficial do produto na loja americana.** Não é a Test Store,
+não é valor de recurso, não é bug. O dispositivo de teste está numa loja dos EUA — apesar da
+conta ter sido criada no Brasil e transferida para Portugal, o que mostra que a origem da
+conta não determina a loja em uso.
+
+**Duas consequências boas:**
+
+1. **O vídeo pode seguir como está.** O preço que a Apple vê no vídeo existe no calendário
+   de preços deles. Não há discrepância nenhuma para apanhar.
+2. **A compra em iOS está viva.** Com o `?? pacotes[0]` removido, a app só mostra preço se
+   encontrar um pacote com o identificador certo. Mostra — logo a StoreKit resolve o produto
+   real. É a primeira prova de que um revisor consegue chegar ao pagamento, coisa que estava
+   por confirmar desde o início.
+
+**Autocrítica.** Esta hipótese foi levantada, abandonada por um raciocínio errado — «a conta
+é brasileira ou portuguesa, logo não mostra dólares» — e depois confirmada. O erro foi tratar
+a origem da conta como se determinasse a loja. **Havia uma tabela com a resposta a dois
+cliques de distância e gastaram-se três teorias antes de a abrir.** Quando existe uma fonte
+autoritativa acessível, vai-se lá primeiro.
+
+### Estado da submissão mudou
+
+A versão 1.1.5 aparece agora como **«Rejeitada»**, motivo *2.1.0 Performance: App
+Completeness* — é a forma como o App Store Connect regista a carta de «Information Needed».
+Não é problema novo. Mas implica que, depois de responder, é preciso **voltar a submeter**,
+e não apenas responder e esperar.
