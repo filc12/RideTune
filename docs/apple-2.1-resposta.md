@@ -22,11 +22,12 @@ numbering of your message.
 
 **2. Devices and operating systems tested**
 
-<!-- PREENCHER antes de enviar. Exemplo do formato esperado:
-- iPhone 14 Pro, iOS 26.0 (physical device)
-- iPhone SE (3rd generation), iOS 26.0 (physical device)
-- iPhone 17 Pro simulator, iOS 26.0 (Xcode 26)
-Listar apenas o que foi mesmo testado. -->
+- iPhone 17 Pro Max, iOS 26.6.1 (physical device) — full manual pass through every screen,
+  including the in-app purchase sheet
+- iPhone 17 Pro simulator, iOS 26 (Xcode) — used during development only
+
+The screen recording accompanying this reply was captured on the iPhone 17 Pro Max listed
+above.
 
 **3. What the app does, and who it is for**
 

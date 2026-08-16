@@ -4636,3 +4636,32 @@ o teclado** em vez do rato. Em painéis de faturação, coordenadas não servem.
 O produto `lifetime` da Test Store **continua ligado ao entitlement `premium`**. Já não está
 em nenhuma offering, portanto a app não lhe chega — mas a ligação existe e devia sair. Não
 foi tocada porque a autorização era só para a offering.
+
+### 16 de agosto — a segunda gravação, e um ziguezague de diagnóstico que fica registado
+
+Gravação nova: **1320 × 2868, HEVC, 94 s**, qualidade original. Chegou por **link iCloud** —
+o WhatsApp tinha esmagado a primeira para 384 px. Os três defeitos foram corrigidos: começa
+no ecrã inicial do iOS com o toque no ícone, o Foco está ligado e não entra nenhuma
+notificação, e não há ecrã de email nem dados pessoais de ninguém.
+
+**O paywall continuava a mostrar US$ 12,99, já depois da offering estar limpa.** Isso levou
+a uma segunda hipótese — que fosse o preço legítimo da App Store numa loja americana, já que
+os escalões da Apple emparelham 12,99 $ com 14,99 €.
+
+**A hipótese caiu por uma pergunta simples:** a conta Apple do dispositivo foi criada no
+Brasil e transferida para Portugal. Reais ou euros — **nenhuma loja Apple mostra dólares
+americanos**. Bastava olhar para a moeda para descartar a teoria antes de a enunciar.
+
+Fica então confirmado o diagnóstico original: o preço vem do produto da **Test Store**, que
+a RevenueCat cota em USD. A gravação correu com o **pacote antigo e a offering em cache**,
+anterior à limpeza — o `expo-updates` só aplica a atualização no arranque seguinte ao
+download, e o SDK guarda a offering em disco.
+
+**Lição de método:** antes de construir uma explicação, verificar o que já se tem. A moeda
+estava à vista no primeiro fotograma e refutava a segunda teoria sozinha.
+
+### Como confirmar que ficou resolvido
+
+Fechar a app por completo e abrir **duas vezes**. Em Definições, a linha da versão no fundo
+deve passar a mostrar `ota` com data. Aí o paywall lê a offering nova, e o preço em dólares
+tem de desaparecer.
