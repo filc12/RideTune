@@ -4778,3 +4778,57 @@ comprou.
 Existe uma segunda entitlement, **`RiideTune Pro`** (`entl8c4d346e01`), com 3 produtos, do
 modelo original de 26 de junho. **A app não a usa** — o código refere só `premium`. Candidata
 a apagar, depois de confirmar que nenhum cliente a tem ativa.
+
+## 19 de agosto de 2026 — segunda ronda com a Apple: Guideline 2.1(b)
+
+A Apple começou a rever e parou: *«we cannot locate the In-App Purchases, such as "RideTune
+Premium Lifetime", within the app»*. Pediram os passos para lá chegar.
+
+**Ambiente da revisão, e é o dado que interessa:** `Review Device: iPad Air 11-inch (M3)`,
+versão 1.1.5 (1), 19 de agosto. A app é só para iPhone (`supportsTablet: false`), portanto
+correu em modo de compatibilidade.
+
+### Duas hipóteses levantadas e descartadas por verificação
+
+1. **Build sem a chave do RevenueCat.** O `eas.json` teve o marcador `POR_PREENCHER_appl_xxx`
+   até ao commit `414e15d`, de **7/08 às 23:47**. A build e a submissão são de **8/08**.
+   Logo a build tem a chave real. Descartada pelo histórico do git, não por intuição.
+2. **Paid Apps Agreement por aceitar** — a Apple lembra isso na mensagem. Verificado em
+   Negócios: **Ativo**, 07/08/2026 a 07/08/2027.
+
+### O teste que faltava, feito sem iPad nenhum
+
+Correu-se a app no **simulador de iPad** (`npx expo run:ios --device`). O `Pods` estava
+vazio — vítima da limpeza de disco de 8 de agosto — e bastou `pod install` para recuperar.
+
+**Resultado: o paywall aparece em iPad, completo.** Título, «Buy once. Ride forever.», a
+lista de funcionalidades, botão de compra, «Restore purchases» e «Maybe later». Apareceu
+pelo caminho documentado, a partir do ecrã **Load**.
+
+**Não há bug.** O revisor não encontrou o caminho.
+
+### Terceira e última confirmação dos US$ 12,99
+
+O simulador mostrou **«Unlock for $12.99»**. A loja por defeito de um simulador é a
+americana, e 12,99 é exactamente o preço dos Estados Unidos na tabela do App Store Connect.
+Três confirmações independentes: a tabela de preços, o iPhone do amigo e o simulador.
+**Assunto encerrado.**
+
+### O que se respondeu
+
+Resposta curta, com os **rótulos exactos em inglês** tirados do `i18n` — «Choose bike», as
+fichas «Solo / With luggage / 2 riders», o separador «Load», «Saved setups», «Diagnostics» —
+cinco passos numerados para o caminho mais curto e quatro caminhos alternativos. Mais a
+declaração de que não há restrição por loja, região ou dispositivo, e o estado do Paid Apps
+Agreement. Anexou-se um screenshot do paywall no simulador de iPad.
+
+**Lição sobre a primeira resposta:** os passos já lá estavam, mas enterrados no ponto 8 de
+um texto de 4000 caracteres. Quando a Apple pede passos, o que quer é uma lista curta e
+literal, com os nomes dos botões tal como aparecem no ecrã do revisor.
+
+### Nota de procedimento, para a próxima
+
+Depois de responder, o botão **«Enviar novamente para a equipa de revisão de apps»**, na
+página de envio, **fica desativado** enquanto a versão estiver marcada como rejeitada. O que
+repõe a app na fila é o botão **«Atualizar revisão»**, no canto superior direito da página
+da versão. Aconteceu nas duas rondas.

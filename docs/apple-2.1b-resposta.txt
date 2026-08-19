@@ -1,0 +1,41 @@
+Hello,
+
+Thank you. Below are the exact steps to reach the in-app purchase.
+
+There is no restriction by storefront, region or device configuration, and no account or
+login is required. The app is iPhone-only and does not declare iPad support, so on an iPad
+it runs in iPhone compatibility mode; the flow below is identical on both.
+
+FASTEST ROUTE
+
+1. Launch the app. Complete the short onboarding: type any name, tap Next, set any rider
+   weight, tap Next.
+2. On the Home screen, tap the blue button "Choose bike" and select any motorcycle
+   (for example: BMW, then R 1250 GS).
+3. Stay on the Home screen and scroll to the row of load chips labelled
+   "Solo", "With luggage", "2 riders", "2 riders + luggage".
+4. Tap "With luggage" or "2 riders".
+5. The purchase sheet opens immediately, showing the title "RideTune Premium Lifetime",
+   the price, "Restore purchases" and "Maybe later".
+
+ALTERNATIVE ROUTES — each opens the same purchase sheet
+
+- Bottom tab "Load": set "Passenger" or "Luggage" above 0 kg.
+- Home screen, "Saved setups": try to save a setup.
+- Bottom tab "Diagnostics": tap the locked card.
+- "Choose bike": try to add a second motorcycle.
+
+PRODUCT DETAILS
+
+Identifier: ridetune_premium_lifetime. Non-consumable, one-time purchase granting lifetime
+access; not a subscription. It was submitted together with this version and appears as
+"Ready for Review" in App Store Connect. The Paid Apps Agreement is active in the Business
+section (effective 07/08/2026).
+
+If the sheet still does not appear on your device, please tell us what you see on the Home
+screen after step 4 — whether the load chips are visible, and what happens when they are
+tapped. That will let us identify the cause immediately.
+
+Thank you for your time.
+
+Filipe Carvalho
