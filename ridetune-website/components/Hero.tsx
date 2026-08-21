@@ -4,8 +4,9 @@ import Image from "next/image";
 import { useRef } from "react";
 import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
 import { useI18n } from "@/i18n/LanguageProvider";
+import { PLAY_URL, APP_STORE_URL } from "@/site.config";
 
-const PLAY_URL = "https://play.google.com/store/apps/details?id=com.ridetune.app";
+
 
 const line = {
   hidden: { opacity: 0, y: 40, filter: "blur(10px)" },
@@ -98,17 +99,20 @@ export default function Hero() {
                 <span className="block text-base font-bold">Google Play</span>
               </span>
             </a>
-            <span className="inline-flex items-center gap-3 rounded-full border border-white/15 bg-black/20 px-7 py-3.5 text-slate-400 backdrop-blur-md">
-              <svg viewBox="0 0 24 24" className="h-6 w-6" fill="currentColor" aria-hidden>
+            <a
+              href={APP_STORE_URL}
+              className="group inline-flex items-center gap-3 rounded-full bg-white px-7 py-3.5 text-black shadow-[0_8px_30px_rgba(0,0,0,0.4)] transition-all duration-300 hover:scale-[1.04] hover:shadow-[0_8px_40px_rgba(74,158,255,0.35)]"
+            >
+              <svg viewBox="0 0 24 24" className="h-6 w-6 transition-transform duration-300 group-hover:scale-110" fill="currentColor" aria-hidden>
                 <path d="M16.4 12.9c0-2.7 2.2-4 2.3-4.1-1.3-1.8-3.2-2.1-3.9-2.1-1.6-.2-3.2 1-4 1s-2.1-1-3.5-1c-1.8 0-3.4 1-4.3 2.6-1.9 3.2-.5 8 1.3 10.6.9 1.3 1.9 2.7 3.3 2.6 1.3-.1 1.8-.8 3.4-.8s2 .8 3.5.8c1.4 0 2.3-1.3 3.2-2.6a11 11 0 0 0 1.4-3c-.1 0-2.7-1-2.7-4Zm-2.6-7.5c.7-.9 1.2-2.1 1.1-3.4-1 .1-2.3.7-3 1.6-.7.8-1.3 2-1.1 3.3 1.1.1 2.3-.6 3-1.5Z" />
               </svg>
               <span className="text-left leading-tight">
                 <span className="block text-[10px] font-semibold uppercase tracking-widest opacity-60">
-                  {h.comingSoon}
+                  {h.getItOn}
                 </span>
-                <span className="block text-base font-bold text-white/60">{h.forIphone}</span>
+                <span className="block text-base font-bold">App Store</span>
               </span>
-            </span>
+            </a>
           </motion.div>
         </motion.div>
       </div>
