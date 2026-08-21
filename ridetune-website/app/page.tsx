@@ -7,8 +7,16 @@ import PhoneTour from "@/components/PhoneTour";
 import { Reveal, RevealGroup, RevealItem } from "@/components/Reveal";
 import { useI18n } from "@/i18n/LanguageProvider";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
+import { PLAY_URL, APP_STORE_URL } from "@/site.config";
 
-const PLAY_URL = "https://play.google.com/store/apps/details?id=com.ridetune.app";
+/*
+ * Os links das lojas vêm do site.config.ts e não daqui.
+ *
+ * Até 19 de agosto de 2026 esta página declarava o seu próprio PLAY_URL, uma cópia
+ * do que já estava no site.config. Duas fontes de verdade para o mesmo link: no dia
+ * em que uma mudasse, metade do site apontava para o sítio errado sem ninguém dar
+ * por isso. Descobriu-se ao acrescentar a App Store.
+ */
 
 /* ── tiny building blocks ────────────────────────────────────────────────── */
 
@@ -38,6 +46,36 @@ function PlayButton() {
         <span className="block text-base font-bold">Google Play</span>
       </span>
     </a>
+  );
+}
+
+function AppStoreButton() {
+  const { t } = useI18n();
+  return (
+    <a
+      href={APP_STORE_URL}
+      className="group inline-flex items-center gap-3 rounded-full bg-white px-7 py-3.5 text-black transition-all duration-300 hover:scale-[1.04] hover:shadow-[0_8px_40px_rgba(74,158,255,0.35)]"
+    >
+      <svg viewBox="0 0 24 24" className="h-6 w-6 transition-transform duration-300 group-hover:scale-110" fill="currentColor" aria-hidden>
+        <path d="M16.4 12.7c0-2.2 1.8-3.3 1.9-3.4-1-1.5-2.6-1.7-3.2-1.7-1.4-.1-2.7.8-3.3.8-.7 0-1.7-.8-2.8-.8-1.5 0-2.8.8-3.6 2.1-1.5 2.7-.4 6.6 1.1 8.8.7 1.1 1.6 2.2 2.7 2.2 1.1 0 1.5-.7 2.8-.7s1.6.7 2.8.7c1.2 0 1.9-1.1 2.6-2.1.8-1.2 1.2-2.4 1.2-2.4-.1 0-2.2-.9-2.2-3.5ZM14.2 5.9c.6-.7 1-1.7.9-2.7-.9 0-2 .6-2.6 1.3-.6.6-1.1 1.7-.9 2.6 1 .1 2-.5 2.6-1.2Z" />
+      </svg>
+      <span className="text-left leading-tight">
+        <span className="block text-[10px] font-semibold uppercase tracking-widest opacity-60">
+          {t.home.getItOn}
+        </span>
+        <span className="block text-base font-bold">App Store</span>
+      </span>
+    </a>
+  );
+}
+
+/** As duas lojas lado a lado. Quebra para duas linhas em ecrãs estreitos. */
+function StoreButtons() {
+  return (
+    <div className="flex flex-wrap items-center justify-center gap-4">
+      <AppStoreButton />
+      <PlayButton />
+    </div>
   );
 }
 
@@ -124,7 +162,7 @@ export default function Home() {
           <div className="flex shrink-0 items-center gap-1.5 md:gap-3">
             <LanguageSwitcher />
             <a
-              href={PLAY_URL}
+              href="#download"
               className="whitespace-nowrap rounded-full bg-brand-accent px-3 py-2 text-[12.5px] font-semibold text-[#04111e] transition-all duration-300 hover:scale-105 hover:shadow-[0_4px_24px_rgba(74,158,255,0.5)] md:px-5 md:text-sm"
             >
               {t.nav.download}
@@ -264,11 +302,11 @@ export default function Home() {
       </section>
 
       {/* CTA after the tour */}
-      <section className="mx-auto max-w-4xl px-6 pb-32 text-center">
+      <section id="download" className="mx-auto max-w-4xl px-6 pb-32 text-center">
         <Reveal>
           <p className="text-2xl font-semibold text-slate-200">{h.readyWhenYouAre}</p>
           <div className="mt-8 flex justify-center">
-            <PlayButton />
+            <StoreButtons />
           </div>
         </Reveal>
       </section>
@@ -328,7 +366,7 @@ export default function Home() {
                 ))}
               </ul>
               <a
-                href={PLAY_URL}
+                href="#download"
                 className="mt-9 block rounded-full border border-brand-border py-3 text-center text-sm font-semibold text-white transition-all duration-300 hover:border-brand-accent hover:shadow-[0_4px_24px_rgba(74,158,255,0.25)]"
               >
                 {h.startFree}
@@ -355,7 +393,7 @@ export default function Home() {
                 ))}
               </ul>
               <a
-                href={PLAY_URL}
+                href="#download"
                 className="mt-9 block rounded-full bg-brand-accent py-3 text-center text-sm font-bold text-[#04111e] transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_4px_30px_rgba(74,158,255,0.5)]"
               >
                 {h.getPremium}
@@ -392,7 +430,7 @@ export default function Home() {
             {h.trustedBody}
           </p>
           <a
-            href={PLAY_URL}
+            href="#download"
             className="mt-8 inline-block rounded-full border border-brand-border px-8 py-3 text-sm font-semibold text-white transition-all duration-300 hover:border-brand-accent hover:shadow-[0_4px_24px_rgba(74,158,255,0.25)]"
           >
             {h.rateIt}
@@ -413,7 +451,7 @@ export default function Home() {
           </Reveal>
           <Reveal delay={0.15}>
             <div className="mt-14 flex justify-center">
-              <PlayButton />
+              <StoreButtons />
             </div>
             <p className="mx-auto mt-10 max-w-md text-sm leading-relaxed text-brand-muted">
               {h.finalBody}

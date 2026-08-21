@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SETUP_MODELS, getModel, USE_LABEL, type Clicks } from "@/data/setups";
 import { getCommunitySetups } from "@/data/community";
-import { SITE_URL, PLAY_URL } from "@/site.config";
+import { SITE_URL } from "@/site.config";
 import { SetupsNav, SetupsFooter } from "@/components/SetupsChrome";
 import FadeIn from "@/components/FadeIn";
 
@@ -168,7 +168,7 @@ export default async function ModelSetups({
             </div>
           </div>
           <a
-            href={PLAY_URL}
+            href="/#download"
             className="whitespace-nowrap rounded-full bg-brand-accent px-4 py-2.5 text-sm font-bold text-[#04111e] transition-transform duration-200 hover:scale-[1.03]"
           >
             Unlock in the app →
@@ -218,7 +218,7 @@ export default async function ModelSetups({
             )}
           </h2>
           <a
-            href={PLAY_URL}
+            href="/#download"
             className="hidden rounded-full border border-brand-border px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:border-brand-accent sm:inline-block"
           >
             Share yours in the app
@@ -233,7 +233,7 @@ export default async function ModelSetups({
               Be one of the first.
             </p>
             <a
-              href={PLAY_URL}
+              href="/#download"
               className="mt-7 inline-block rounded-full border border-brand-border px-7 py-3 text-[15px] font-semibold text-white transition-colors duration-300 hover:border-brand-accent"
             >
               Share your setup in the app

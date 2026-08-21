@@ -3,7 +3,6 @@
 import { useSearchParams, useRouter } from "next/navigation";
 import { Suspense, useEffect, useState } from "react";
 import Link from "next/link";
-import { PLAY_URL } from "@/site.config";
 import { useI18n } from "@/i18n/LanguageProvider";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 
@@ -112,7 +111,7 @@ export default function SetupsPage() {
         </nav>
         <div style={{ display: "flex", alignItems: "center", gap: "8px", flexShrink: 0 }}>
           <LanguageSwitcher />
-          <a href={PLAY_URL} target="_blank" rel="noopener noreferrer" style={{ backgroundColor: "#38bdf8", color: "#020617", padding: "7px 13px", borderRadius: "20px", fontWeight: "700", border: "none", fontSize: "12.5px", cursor: "pointer", textDecoration: "none", whiteSpace: "nowrap" }}>{t.nav.download}</a>
+          <a href="/#download" style={{ backgroundColor: "#38bdf8", color: "#020617", padding: "7px 13px", borderRadius: "20px", fontWeight: "700", border: "none", fontSize: "12.5px", cursor: "pointer", textDecoration: "none", whiteSpace: "nowrap" }}>{t.nav.download}</a>
         </div>
       </header>
 

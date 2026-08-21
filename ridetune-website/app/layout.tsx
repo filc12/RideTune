@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { SITE_URL, SITE_NAME, SITE_DESCRIPTION, PLAY_URL } from "@/site.config";
+import { SITE_URL, SITE_NAME, SITE_DESCRIPTION, PLAY_URL, APP_STORE_URL } from "@/site.config";
 import { LanguageProvider } from "@/i18n/LanguageProvider";
 
 const geistSans = Geist({
@@ -76,12 +76,13 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@type": "MobileApplication",
   name: "RideTune",
-  operatingSystem: "Android",
+  operatingSystem: "Android, iOS",
   applicationCategory: "UtilitiesApplication",
   description: SITE_DESCRIPTION,
   url: SITE_URL,
   image: `${SITE_URL}/img/hero.jpg`,
-  installUrl: PLAY_URL,
+  // schema.org aceita vários installUrl. Dizia só Android desde que o site existe.
+  installUrl: [APP_STORE_URL, PLAY_URL],
   offers: {
     "@type": "Offer",
     price: "14.99",

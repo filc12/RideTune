@@ -9,6 +9,12 @@ export const SITE_URL =
 export const PLAY_URL =
   "https://play.google.com/store/apps/details?id=com.ridetune.app";
 
+/**
+ * App Store. Sem código de país de propósito: a Apple reencaminha cada visitante
+ * para a loja do país dele. Pôr /pt/ aqui mandava um alemão para a loja portuguesa.
+ */
+export const APP_STORE_URL = "https://apps.apple.com/app/id6799268422";
+
 /** Support email shown on the contact page and footers. */
 export const SUPPORT_EMAIL = "support@ridetune.app";
 
