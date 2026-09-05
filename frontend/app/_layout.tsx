@@ -10,6 +10,7 @@ import * as Sentry from '@sentry/react-native';
 import { initOemData } from "@/src/services/oem-data";
 import { initAnalytics } from "@/src/services/analytics";
 import { initPurchases } from "@/src/services/purchases";
+import { loadHapticsPref } from "@/src/utils/haptics";
 
 Sentry.init({
   dsn: process.env.EXPO_PUBLIC_SENTRY_DSN ?? "",
@@ -33,6 +34,9 @@ initAnalytics();
 
 // Compras in-app (RevenueCat) — sincroniza entitlement premium em background
 initPurchases();
+
+// Preferência de retorno tátil (haptics) do utilizador
+loadHapticsPref().catch(() => {/* default: ligado */});
 
 const RideTuneTheme = {
   ...DarkTheme,

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, ScrollView, Linking, SafeAreaView, Modal, Share } from 'react-native';
+import { View, Text, TouchableOpacity, ScrollView, Linking, SafeAreaView, Modal, Share, Switch } from 'react-native';
 import { useRouter } from 'expo-router';
 import Constants from 'expo-constants';
 import {
@@ -22,6 +22,7 @@ import { useUnits } from "@/src/units";
 import { Analytics } from "@/src/services/analytics";
 import { useScreenView } from '@/src/hooks/useScreenView';
 import { refreshOemData } from '@/src/services/oem-data';
+import { isHapticsEnabled, setHapticsEnabled } from '@/src/utils/haptics';
 
 /**
  * Marca de OTA na linha da versão. Devolve null quando a app está a correr
@@ -54,6 +55,12 @@ export default function SettingsScreen() {
   // 'idle' | 'loading' | 'ok' | 'fail' — o estado fica visível na própria linha,
   // sem alertas, porque isto é uma ação de manutenção e não deve interromper.
   const [refreshState, setRefreshState] = useState<'idle' | 'loading' | 'ok' | 'fail'>('idle');
+  const [haptics, setHaptics] = useState(isHapticsEnabled());
+
+  const toggleHaptics = (value: boolean) => {
+    setHaptics(value);           // atualiza a UI já
+    setHapticsEnabled(value);    // persiste + flag em memória (async, não bloqueia)
+  };
 
   const handleRefreshData = async () => {
     if (refreshState === 'loading') return;
@@ -143,6 +150,25 @@ export default function SettingsScreen() {
                 );
               })}
             </View>
+          </View>
+
+          {/* Section: Preferências */}
+          <Text style={{ color: '#38bdf8', fontSize: 12, fontWeight: '700', textTransform: 'uppercase', letterSpacing: 1, marginBottom: 12, marginLeft: 4 }}>
+            {t('settings.sec.prefs')}
+          </Text>
+
+          <View style={{ backgroundColor: '#111827', borderRadius: 16, padding: 16, borderWidth: 1, borderColor: 'rgba(255, 255, 255, 0.05)', marginBottom: 24, flexDirection: 'row', alignItems: 'center' }}>
+            <View style={{ flex: 1, marginRight: 12 }}>
+              <Text style={{ color: '#ffffff', fontSize: 15, fontWeight: '600' }}>{t('settings.haptics')}</Text>
+              <Text style={{ color: '#94a3b8', fontSize: 12, marginTop: 2 }}>{t('settings.haptics.sub')}</Text>
+            </View>
+            <Switch
+              value={haptics}
+              onValueChange={toggleHaptics}
+              trackColor={{ false: 'rgba(255,255,255,0.15)', true: '#38bdf8' }}
+              thumbColor="#ffffff"
+              testID="haptics-toggle"
+            />
           </View>
 
           {/* Section: Comunidade & Setups */}
