@@ -2,7 +2,7 @@
   "expo": {
     "name": "RideTune",
     "slug": "ridetune",
-    "version": "1.1.5",
+    "version": "1.1.6",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "ridetune",
@@ -18,7 +18,7 @@
     },
     "android": {
       "package": "com.ridetune.app",
-      "versionCode": 22,
+      "versionCode": 23,
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#070A0F"

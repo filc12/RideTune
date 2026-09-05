@@ -253,6 +253,12 @@ export const BIKES: Bike[] = [
   { id: "honda-africa-as",   brand: "Honda", model: "Africa Twin Adventure Sports", cc: "1084cc", category: "adventure", adj: "full",  mfzProfileId: "honda_at_1100l_advsports_eera" }, // Showa EERA electronic
   { id: "honda-africa",      brand: "Honda", model: "Africa Twin",                  cc: "1084cc", category: "adventure", adj: "full",  mfzProfileId: "honda_at_1100l_2020_manual" },
   { id: "honda-africa-dct",  brand: "Honda", model: "Africa Twin DCT",              cc: "1084cc", category: "adventure", adj: "full",  mfzProfileId: "honda_at_1100l_2020_dct" },
+  // CRF1000L Africa Twin (geração anterior, pedido no Reddit). Showa: frente
+  // pré-carga+comp+ressalto; trás pré-carga(botão 35 pos.)+ressalto, sem comp.
+  // Fonte oficial: Honda CRF1000 Owner's Manual (also A/D/A II/D II) p.148-152.
+  // DCT/manual partilham suspensão. Sem mfzProfileId → heurística de categoria.
+  { id: "honda-crf1000",     brand: "Honda", model: "CRF1000L Africa Twin (2016-2019)",                cc: "998cc", category: "adventure", adj: "full", adjusters: { fPre: true, fComp: true, fReb: true, rPre: true, rComp: false, rReb: true } },
+  { id: "honda-crf1000-as",  brand: "Honda", model: "CRF1000L Africa Twin Adventure Sports (2018-2019)", cc: "998cc", category: "adventure", adj: "full", adjusters: { fPre: true, fComp: true, fReb: true, rPre: true, rComp: false, rReb: true } },
   // Transalp XL750: Showa SFF front + Showa rear — preload only both ends, no rebound/compression
   { id: "honda-transalp",      brand: "Honda", model: "XL750 Transalp (2023-2024)", cc: "755cc",  category: "adventure", adj: "fixed",mfzProfileId: "honda_transalp_2023" },
   { id: "honda-transalp-2025", brand: "Honda", model: "XL750 Transalp (2025)",      cc: "755cc",  category: "adventure", adj: "fixed",mfzProfileId: "honda_transalp_2025" },
