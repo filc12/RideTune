@@ -73,18 +73,19 @@ export default function SetupsPage() {
   // Setups de referência (mesma forma que a app produz).
   // front/rear.comp fica a null nas motos sem compressão ajustável (adj "partial").
   const mockSetups = [
-    { id: 1, bike: "Honda XL750 Transalp", cc: "755cc", category: "Adventure", rating: 4, front: { pre: 6, reb: 1, comp: 11 }, rear: { pre: 2.25, reb: 1.25, comp: 2.5 }, notes: "Estável em autoestrada, absorve bem o piso partido.", author: "Filipe C.", date: "Agora mesmo", isNew: true },
-    { id: 2, bike: "BMW R 1250 GS", cc: "1254cc", category: "Adventure", rating: 5, front: { pre: 5, reb: 10, comp: 12 }, rear: { pre: 7, reb: 9, comp: 11 }, notes: "Confortável a dois com malas, estável a alta velocidade.", author: "João Silva", date: "Hoje", isNew: false },
-    { id: 3, bike: "Yamaha Ténéré 700 World Raid", cc: "689cc", category: "Adventure", rating: 5, front: { pre: 4, reb: 12, comp: 14 }, rear: { pre: 6, reb: 10, comp: 12 }, notes: "Vocação off-road, absorve bem terreno técnico.", author: "Marta Costa", date: "Ontem", isNew: false },
-    { id: 4, bike: "KTM 890 Adventure", cc: "889cc", category: "Adventure", rating: 4, front: { pre: 5, reb: 12, comp: null }, rear: { pre: 8, reb: 10, comp: null }, notes: "Ideal para viagem com bagagem e piso misto.", author: "Rui Almeida", date: "há 2 dias", isNew: false },
-    { id: 5, bike: "Triumph Street Triple RS", cc: "765cc", category: "Naked", rating: 5, front: { pre: 6, reb: 8, comp: 9 }, rear: { pre: 5, reb: 7, comp: 8 }, notes: "Preciso e ágil em estrada de montanha.", author: "Pedro M.", date: "há 3 dias", isNew: false },
-    { id: 6, bike: "Yamaha MT-09", cc: "890cc", category: "Naked", rating: 4, front: { pre: 5, reb: 9, comp: null }, rear: { pre: 4, reb: 8, comp: null }, notes: "Menos mergulho na travagem, mais confiança.", author: "Ana R.", date: "há 4 dias", isNew: false },
-    { id: 7, bike: "BMW S 1000 RR", cc: "999cc", category: "Sport", rating: 5, front: { pre: 4, reb: 10, comp: 8 }, rear: { pre: 6, reb: 9, comp: 10 }, notes: "Setup track-day, firme e preciso.", author: "Tiago F.", date: "há 5 dias", isNew: false },
-    { id: 8, bike: "Ducati Hypermotard 950", cc: "937cc", category: "Supermoto", rating: 4, front: { pre: 5, reb: 7, comp: 9 }, rear: { pre: 7, reb: 8, comp: 10 }, notes: "Divertida e leve na frente, boa para curvas apertadas.", author: "Sofia L.", date: "há 1 semana", isNew: false }
+    { id: 1, bike: "Honda XL750 Transalp", year: "2023+", cc: "755cc", category: "Adventure", rating: 4, front: { pre: 6, reb: 1, comp: 11 }, rear: { pre: 2.25, reb: 1.25, comp: 2.5 }, notes: "Estável em autoestrada, absorve bem o piso partido.", author: "Filipe C.", date: "Agora mesmo", isNew: true },
+    { id: 2, bike: "BMW R 1250 GS", year: "2019-2023", cc: "1254cc", category: "Adventure", rating: 5, front: { pre: 5, reb: 10, comp: 12 }, rear: { pre: 7, reb: 9, comp: 11 }, notes: "Confortável a dois com malas, estável a alta velocidade.", author: "João Silva", date: "Hoje", isNew: false },
+    { id: 3, bike: "Yamaha Ténéré 700 World Raid", year: "2022+", cc: "689cc", category: "Adventure", rating: 5, front: { pre: 4, reb: 12, comp: 14 }, rear: { pre: 6, reb: 10, comp: 12 }, notes: "Vocação off-road, absorve bem terreno técnico.", author: "Marta Costa", date: "Ontem", isNew: false },
+    { id: 4, bike: "KTM 890 Adventure", year: "2021+", cc: "889cc", category: "Adventure", rating: 4, front: { pre: 5, reb: 12, comp: null }, rear: { pre: 8, reb: 10, comp: null }, notes: "Ideal para viagem com bagagem e piso misto.", author: "Rui Almeida", date: "há 2 dias", isNew: false },
+    { id: 5, bike: "Triumph Street Triple RS", year: "2023+", cc: "765cc", category: "Naked", rating: 5, front: { pre: 6, reb: 8, comp: 9 }, rear: { pre: 5, reb: 7, comp: 8 }, notes: "Preciso e ágil em estrada de montanha.", author: "Pedro M.", date: "há 3 dias", isNew: false },
+    { id: 6, bike: "Yamaha MT-09", year: "2024+", cc: "890cc", category: "Naked", rating: 4, front: { pre: 5, reb: 9, comp: null }, rear: { pre: 4, reb: 8, comp: null }, notes: "Menos mergulho na travagem, mais confiança.", author: "Ana R.", date: "há 4 dias", isNew: false },
+    { id: 7, bike: "BMW S 1000 RR", year: "2023+", cc: "999cc", category: "Sport", rating: 5, front: { pre: 4, reb: 10, comp: 8 }, rear: { pre: 6, reb: 9, comp: 10 }, notes: "Setup track-day, firme e preciso.", author: "Tiago F.", date: "há 5 dias", isNew: false },
+    { id: 8, bike: "Ducati Hypermotard 950", year: "2019-2024", cc: "937cc", category: "Supermoto", rating: 4, front: { pre: 5, reb: 7, comp: 9 }, rear: { pre: 7, reb: 8, comp: 10 }, notes: "Divertida e leve na frente, boa para curvas apertadas.", author: "Sofia L.", date: "há 1 semana", isNew: false }
   ];
 
   const filteredSetups = mockSetups.filter(item => {
-    const matchesSearch = item.bike.toLowerCase().includes(search.toLowerCase());
+    const q = search.toLowerCase();
+    const matchesSearch = item.bike.toLowerCase().includes(q) || item.year.toLowerCase().includes(q);
     const matchesCategory = selectedCategory === "All" || item.category === selectedCategory;
     return matchesSearch && matchesCategory;
   });
@@ -208,7 +209,7 @@ export default function SetupsPage() {
                     <h3 style={{ fontSize: "20px", fontWeight: "800", color: "#ffffff", margin: "10px 0 2px" }}>
                       {item.bike}
                     </h3>
-                    <span style={{ fontSize: "12px", color: "#64748b" }}>{item.cc}</span>
+                    <span style={{ fontSize: "12px", color: "#64748b" }}>{item.year} · {item.cc}</span>
                   </div>
                   {item.isNew && (
                     <span style={{ backgroundColor: "#38bdf8", color: "#020617", fontSize: "10px", fontWeight: "800", padding: "4px 10px", borderRadius: "12px", letterSpacing: "0.5px" }}>
