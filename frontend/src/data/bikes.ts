@@ -450,7 +450,14 @@ export const BIKES: Bike[] = [
   { id: "suzuki-vstrom-800de",  brand: "Suzuki", model: "V-Strom 800 DE",   cc: "776cc",  category: "adventure", adj: "full",  mfzProfileId: "suzuki_vstrom_800de"  },
   // V-Strom 650 XT: front non-adjustable, rear preload only
   // V-Strom 650 XT (2017+): frente sem qualquer ajuste externo; atrás precarga + extensão
-  { id: "suzuki-vstrom-650",    brand: "Suzuki", model: "V-Strom 650 XT",   cc: "645cc",  category: "adventure", adj: "fixed",   adjusters: { fPre: false, fComp: false, fReb: false, rPre: true, rComp: false, rReb: true } },
+  // V-Strom 650 base e XT partilham a MESMA suspensão (só mudam rodas/acessórios),
+  // por isso uma só entrada cobre as duas — pedido no Reddit pela versão não-XT.
+  { id: "suzuki-vstrom-650",    brand: "Suzuki", model: "V-Strom 650 / XT (2017+)", cc: "645cc",  category: "adventure", adj: "fixed",   adjusters: { fPre: false, fComp: false, fReb: false, rPre: true, rComp: false, rReb: true } },
+  // DR-Z400S clássica (2000-2024, pedido no Reddit; a DR-Z4S nova já está acima).
+  // Manual oficial Suzuki DR-Z400S p.37-41: frente compressão+ressalto (SEM
+  // pré-carga externa); trás pré-carga+compressão+ressalto. Sem mfzProfileId
+  // (sem tabela por carga no manual) → heurística.
+  { id: "suzuki-drz400s",       brand: "Suzuki", model: "DR-Z400S (2000-2024)", cc: "398cc",  category: "adventure", adj: "full",   adjusters: { fPre: false, fComp: true, fReb: true, rPre: true, rComp: true, rReb: true } },
   // GSX-S1000 (2015-2020): manual do proprietário Suzuki (o mesmo cobre a F/FA). Frente
   // KYB com precarga por posições (2,5 de 5 de fábrica), compressão e extensão 8 cliques
   // cada a abrir do duro. Atrás precarga por anel de 7 posições (4 de fábrica na versão
