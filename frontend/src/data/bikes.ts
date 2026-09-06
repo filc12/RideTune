@@ -152,6 +152,13 @@ export const BIKE_CATEGORIES: BikeCategory[] = [
 export const BIKES: Bike[] = [
   // ===== Aprilia =====
   { id: "aprilia-tuareg",    brand: "Aprilia", model: "Tuareg 660",    cc: "659cc",  category: "adventure", adj: "full",mfzProfileId: "aprilia_tuareg660_2021" },
+  // Tuareg 660 Rally (pedido no Reddit): mesma suspensão KYB e mesmos 6
+  // afinadores da standard (garfo 43mm, 240mm curso) — só muda a MOLA (linear
+  // vs progressiva). Sem mfzProfileId de propósito: a mola diferente dá
+  // regulações de fábrica diferentes e não temos o manual específico da Rally,
+  // por isso cai na heurística (badge de estimativa) em vez de clonar os
+  // cliques oficiais da standard. Fonte: specs oficiais Aprilia + reviews.
+  { id: "aprilia-tuareg-rally", brand: "Aprilia", model: "Tuareg 660 Rally (2025+)", cc: "659cc", category: "adventure", adj: "full", adjusters: { fPre: true, fComp: true, fReb: true, rPre: true, rComp: true, rReb: true } },
   { id: "macbor-montana-xr5", brand: "Macbor", model: "Montana XR5", cc: "498cc", category: "adventure", adj: "full",mfzProfileId: "macbor_xr5" },
   { id: "aprilia-rsv4",      brand: "Aprilia", model: "RSV4",          cc: "1099cc", category: "sport",     adj: "full",mfzProfileId: "aprilia_rsv4_1100_2021" },
   { id: "aprilia-tuono-v4",  brand: "Aprilia", model: "Tuono V4",      cc: "1077cc", category: "naked",     adj: "full",mfzProfileId: "aprilia_tuono_v4_1100_rr" },
@@ -173,6 +180,10 @@ export const BIKES: Bike[] = [
   // F 900 GS (2024+): forquilha 43 mm precarga+comp+ext; atrás precarga hidráulica +
   // extensão (sem compressão). bmwmotorcycles.com
   { id: "bmw-f900-gs",       brand: "BMW", model: "F 900 GS (2024+)",      cc: "895cc",  category: "adventure",     adj: "full", adjusters: { fPre: true, fComp: true, fReb: true, rPre: true, rComp: false, rReb: true } },
+  // F 900 GS Adventure (2024+, pedido no Reddit): mesma Showa 43mm totalmente
+  // ajustável da standard — frente pré-carga+comp+ressalto, trás pré-carga+
+  // ressalto (sem comp). Mesmos afinadores; difere em depósito/ergonomia.
+  { id: "bmw-f900-gs-adv",   brand: "BMW", model: "F 900 GS Adventure (2024+)", cc: "895cc", category: "adventure",     adj: "full", adjusters: { fPre: true, fComp: true, fReb: true, rPre: true, rComp: false, rReb: true } },
   // G 450 X (2008-2011) e G 650 Xchallenge (2007-2009): pedidas por um utilizador, ambas
   // do manual oficial. À frente as duas têm compressão e extensão mas o manual não indica
   // precarga. Atrás são mundos diferentes: a G 450 X tem Öhlins com mola, cliques de
